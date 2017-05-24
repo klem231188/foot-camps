@@ -1,12 +1,15 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
-import {MdToolbarModule, MdSlideToggleModule, MdIconModule, MdButtonModule} from '@angular/material';
-import {AppComponent} from './app.component';
-import {AgmCoreModule} from 'angular2-google-maps/core';
+import {BrowserModule} from "@angular/platform-browser";
+import {NgModule} from "@angular/core";
+import {FormsModule} from "@angular/forms";
+import {HttpModule} from "@angular/http";
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {MdToolbarModule, MdSlideToggleModule, MdIconModule, MdButtonModule, MaterialModule} from "@angular/material";
+import {AppComponent} from "./app.component";
+import {AgmCoreModule} from "angular2-google-maps/core";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import 'hammerjs';
+import "hammerjs";
+import {FootballCampOverviewModule} from "./football-camp-overview/football-camp-overview.module";
+import {AppMaterialModule} from "./app.material.module";
 
 @NgModule({
   imports: [
@@ -14,15 +17,20 @@ import 'hammerjs';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    FlexLayoutModule,
 
-    AgmCoreModule.forRoot({
-    }),
+    // Google Map
+    AgmCoreModule.forRoot({}),
 
     // Material Design
-    MdButtonModule,
-    MdIconModule,
-    MdSlideToggleModule,
-    MdToolbarModule
+    AppMaterialModule,
+    // MdButtonModule,
+    // MdIconModule,
+    // MdSlideToggleModule,
+    // MdToolbarModule,
+
+    // My Module
+    FootballCampOverviewModule
   ],
   declarations: [
     AppComponent
