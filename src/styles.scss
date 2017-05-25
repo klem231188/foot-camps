@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+@import '~@angular/material/theming';
+@import 'theme.scss';
+
+html,
+body {
+  min-height: 100%;
+  width: 100%;
+  font-family: "Roboto","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+#wrapper {
+  padding: 64px 0px 100px 0px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#content {
+  height: 100%;
+  background-color: green;
+}
+
+header {
+  margin-top: -64px;
+  height: 64px;
+}
+
+footer {
+  margin-bottom: -100px;
+  height: 100px;
+  background-color: mat-color($foot-camps-primary);
+}
+
+.title-spacer {
+  -webkit-box-flex: 1;
+  flex: 1 1 auto
+}
