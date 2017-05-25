@@ -6,16 +6,39 @@
       <button md-button>Organiser un stage</button>
     </md-toolbar>
   </header>
-  <div id="content" fxLayout="row" fxLayoutAlign="start center">
-      <football-camp-overview class="football-camp-overview"></football-camp-overview>
 
-      <sebm-google-map [latitude]="46.7307497" [longitude]="2.1" [zoom]="7" fxFill>
-        <sebm-google-map-marker [latitude]="46.7307497" [longitude]="3.5123698"></sebm-google-map-marker>
-        <sebm-google-map-marker [latitude]="48.7307497" [longitude]="4.5123698"></sebm-google-map-marker>
-        <sebm-google-map-marker [latitude]="44.7307497" [longitude]="2.5123698"></sebm-google-map-marker>
-        <sebm-google-map-marker [latitude]="47.7307497" [longitude]="1.5123698"></sebm-google-map-marker>
-        <sebm-google-map-marker [latitude]="45.7307497" [longitude]="0.5123698"></sebm-google-map-marker>
-      </sebm-google-map>
-  </div>
+
+    <div id="content" fxLayout="column">
+      <md-toolbar fxLayout="row" fxLayoutAlign="srart center" color="accent">
+        <button md-button><md-icon>build</md-icon></button>
+
+        <span fxFlex="10"></span>
+
+        <md-input-container>
+          <input mdInput placeholder="Prix">
+        </md-input-container>
+
+        <span fxFlex="10"></span>
+
+        <md-input-container>
+          <input mdInput [mdDatepicker]="picker" placeholder="Choisissez une date">
+          <button mdSuffix [mdDatepickerToggle]="picker"></button>
+        </md-input-container>
+        <md-datepicker #picker></md-datepicker>
+      </md-toolbar>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxFill>
+        <football-camp-overview class="football-camp-overview"></football-camp-overview>
+
+        <sebm-google-map [latitude]="46.7307497" [longitude]="2.1" [zoom]="7" fxFill>
+          <sebm-google-map-marker [latitude]="46.7307497" [longitude]="3.5123698"></sebm-google-map-marker>
+          <sebm-google-map-marker [latitude]="48.7307497" [longitude]="4.5123698"></sebm-google-map-marker>
+          <sebm-google-map-marker [latitude]="44.7307497" [longitude]="2.5123698"></sebm-google-map-marker>
+          <sebm-google-map-marker [latitude]="47.7307497" [longitude]="1.5123698"></sebm-google-map-marker>
+          <sebm-google-map-marker [latitude]="45.7307497" [longitude]="0.5123698"></sebm-google-map-marker>
+        </sebm-google-map>
+      </div>
+    </div>
+
   <footer>The Footer</footer>
 </div>

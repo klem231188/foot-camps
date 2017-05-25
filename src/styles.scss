@@ -27,6 +27,12 @@ body {
   overflow: hidden;
 }
 
+.search-criteria {
+  height: 64px;
+  width: 100%;
+  background-color: mat-color($foot-camps-accent);
+}
+
 header {
   margin-top: -64px;
   height: 64px;

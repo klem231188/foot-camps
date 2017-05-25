@@ -17,7 +17,9 @@ import {
   MdSlideToggleModule,
   MdRadioModule,
   MdRippleModule,
-  MdSnackBarModule
+  MdSnackBarModule,
+  MdDatepickerModule,
+  MdNativeDateModule
 } from "@angular/material";
 
 @NgModule({
@@ -40,7 +42,9 @@ import {
     MdSlideToggleModule,
     MdRadioModule,
     MdRippleModule,
-    MdSnackBarModule
+    MdSnackBarModule,
+    MdDatepickerModule,
+    MdNativeDateModule
   ],
   declarations: [],
   providers: [],
