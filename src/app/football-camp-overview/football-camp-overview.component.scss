@@ -1,0 +1,19 @@
+@mixin football-camp-overview-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .football-camp-overview-toolbar {
+    height: 64px;
+    width: 100%;
+    background-color: mat-color($primary, lighter);
+  }
+
+  .football-camp-overview-avatar {
+    background: center;
+    background-image: url('assets/img/examples/logo.jpg');
+    background-size: cover;
+  }
+}
