@@ -1,7 +1,7 @@
 import {FootballCampMarker} from "./football-camp-marker";
+import {FOOTBAL_CAMPS} from "../football-camp/football-camps-mock";
 
 export const FOOTBAL_CAMP_MARKERS: FootballCampMarker[] = [
-  {id: 1, latitude: 46.7307497, longitude: 3.5123698},
-  {id: 2, latitude: 48.7307497, longitude: 4.5123698},
-  {id: 3, latitude: 44.7307497, longitude: 2.5123698},
+  {id: FOOTBAL_CAMPS[0].id, latitude: FOOTBAL_CAMPS[0].latitude, longitude: FOOTBAL_CAMPS[0].longitude},
+  {id: FOOTBAL_CAMPS[1].id, latitude: FOOTBAL_CAMPS[1].latitude, longitude: FOOTBAL_CAMPS[1].longitude},
 ];

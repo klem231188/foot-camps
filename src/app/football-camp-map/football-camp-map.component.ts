@@ -1,31 +1,33 @@
 import {Component, OnInit} from "@angular/core";
 import {FootballCampMarkerService} from "./football-camp-marker.service";
 import {FootballCampMarker} from "./football-camp-marker";
+import {FootballCampService} from "../football-camp/football-camp.service";
+import {FootballCamp} from "../football-camp/football-camp";
 
 @Component({
   selector: 'football-camp-map',
   templateUrl: 'football-camp-map.component.html',
   styleUrls: ['football-camp-map.component.scss'],
-  providers: [FootballCampMarkerService]
+  providers: [FootballCampService]
 })
 export class FootballCampMapComponent implements OnInit {
 
-  footballCampMarkerSelected: FootballCampMarker;
+  footballCampIdSelected: FootballCampMarker;
 
-  footballCampMarkers: FootballCampMarker[];
+  footballCamps: FootballCamp[];
 
-  constructor(private footballCampMarkerService: FootballCampMarkerService) {
-    this.footballCampMarkerSelected = null;
+  constructor(private footballCampService: FootballCampService) {
+    this.footballCampIdSelected = null;
   }
 
   ngOnInit(): void {
-    this.footballCampMarkerService
-      .getFootballCampMarkers()
-      .then(footballCampMarkers => this.footballCampMarkers = footballCampMarkers);
+    this.footballCampService
+      .getFootballCamps()
+      .then(footballCamps => this.footballCamps = footballCamps);
   }
 
-  onFootballCampMarkerClicked(footballCampMarker: FootballCampMarker) {
-    this.footballCampMarkerSelected = footballCampMarker;
-    console.log(this.footballCampMarkerSelected);
+  onFootballCampMarkerClicked(id: number) {
+    this.footballCampIdSelected = this.footballCamps[id];
+    console.log(this.footballCampIdSelected);
   }
 }
