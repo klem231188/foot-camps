@@ -1,5 +1,6 @@
 @import '~@angular/material/theming';
 @import '../src/app/football-camp-overview/football-camp-overview.component.scss';
+@import '../src/app/football-camp-map/football-camp-map.component.scss';
 
 @include mat-core();
 
@@ -10,6 +11,7 @@ $football-camp-theme: mat-light-theme($primary, $accent, $warn);
 
 @mixin football-camp-theme($theme) {
   @include football-camp-overview-theme($theme);
+  @include football-camp-map-theme($theme);
 }
 
 @include angular-material-theme($football-camp-theme);

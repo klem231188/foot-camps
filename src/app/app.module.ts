@@ -10,6 +10,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import "hammerjs";
 import {FootballCampOverviewModule} from "./football-camp-overview/football-camp-overview.module";
 import {AppMaterialModule} from "./app.material.module";
+import {FootballCampMapModule} from "./football-camp-map/football-camp-map.module";
 
 @NgModule({
   imports: [
@@ -19,18 +20,12 @@ import {AppMaterialModule} from "./app.material.module";
     HttpModule,
     FlexLayoutModule,
 
-    // Google Map
-    AgmCoreModule.forRoot({}),
-
     // Material Design
     AppMaterialModule,
-    // MdButtonModule,
-    // MdIconModule,
-    // MdSlideToggleModule,
-    // MdToolbarModule,
 
     // My Module
-    FootballCampOverviewModule
+    FootballCampOverviewModule,
+    FootballCampMapModule
   ],
   declarations: [
     AppComponent
