@@ -6,5 +6,13 @@ import {Component} from "@angular/core";
   styleUrls: ['football-camp-map.component.scss']
 })
 export class FootballCampMapComponent {
+  name: string;
 
+  constructor() {
+    this.name = 'Max'
+  }
+
+  onMarkerClicked() {
+    console.log('My name is', this.name)
+  }
 }
