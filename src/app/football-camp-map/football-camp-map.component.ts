@@ -1,6 +1,4 @@
-import {Component, OnInit} from "@angular/core";
-import {FootballCampMarkerService} from "./football-camp-marker.service";
-import {FootballCampMarker} from "./football-camp-marker";
+import {Component, OnInit, Output} from "@angular/core";
 import {FootballCampService} from "../football-camp/football-camp.service";
 import {FootballCamp} from "../football-camp/football-camp";
 
@@ -12,12 +10,12 @@ import {FootballCamp} from "../football-camp/football-camp";
 })
 export class FootballCampMapComponent implements OnInit {
 
-  footballCampIdSelected: FootballCampMarker;
+  footballCampSelected: FootballCamp;
 
   footballCamps: FootballCamp[];
 
   constructor(private footballCampService: FootballCampService) {
-    this.footballCampIdSelected = null;
+    this.footballCampSelected = null;
   }
 
   ngOnInit(): void {
@@ -27,7 +25,7 @@ export class FootballCampMapComponent implements OnInit {
   }
 
   onFootballCampMarkerClicked(id: number) {
-    this.footballCampIdSelected = this.footballCamps[id];
-    console.log(this.footballCampIdSelected);
+    this.footballCampSelected = this.footballCamps[id];
+    console.log(this.footballCampSelected);
   }
 }

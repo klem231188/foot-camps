@@ -11,8 +11,8 @@
   <div id="content" fxLayout="column" fxFlex fxFlexFill>
 
     <div fxLayout="row" fxLayoutAlign="start start" fxFlexFill>
-      <football-camp-overview></football-camp-overview>
-      <football-camp-map fxFlexFill></football-camp-map>
+      <football-camp-overview [footballCamp]="map.footballCampSelected"></football-camp-overview>
+      <football-camp-map #map fxFlexFill></football-camp-map>
     </div>
   </div>
 

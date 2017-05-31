@@ -6,12 +6,12 @@ import {AppMaterialModule} from "../app.material.module";
 @NgModule({
   imports: [
     CommonModule,
-    AppMaterialModule,
+    AppMaterialModule
   ],
   declarations: [
     FootballCampOverviewComponent
   ],
-  exports: [FootballCampOverviewComponent]
+  exports: [FootballCampOverviewComponent],
 })
 export class FootballCampOverviewModule {
 
