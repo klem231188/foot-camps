@@ -1,18 +1,31 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
+import {FootballCampMarkerService} from "./football-camp-marker.service";
+import {FootballCampMarker} from "./football-camp-marker";
 
 @Component({
   selector: 'football-camp-map',
   templateUrl: 'football-camp-map.component.html',
-  styleUrls: ['football-camp-map.component.scss']
+  styleUrls: ['football-camp-map.component.scss'],
+  providers: [FootballCampMarkerService]
 })
-export class FootballCampMapComponent {
-  name: string;
+export class FootballCampMapComponent implements OnInit {
 
-  constructor() {
-    this.name = 'Max'
+  footballCampMarkerSelected: FootballCampMarker;
+
+  footballCampMarkers: FootballCampMarker[];
+
+  constructor(private footballCampMarkerService: FootballCampMarkerService) {
+    this.footballCampMarkerSelected = null;
   }
 
-  onMarkerClicked() {
-    console.log('My name is', this.name)
+  ngOnInit(): void {
+    this.footballCampMarkerService
+      .getFootballCampMarkers()
+      .then(footballCampMarkers => this.footballCampMarkers = footballCampMarkers);
+  }
+
+  onFootballCampMarkerClicked(footballCampMarker: FootballCampMarker) {
+    this.footballCampMarkerSelected = footballCampMarker;
+    console.log(this.footballCampMarkerSelected);
   }
 }
