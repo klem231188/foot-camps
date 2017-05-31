@@ -2,7 +2,11 @@
 
   <header fxFlex="64px">
     <md-toolbar color="primary">
-      <span class="title-spacer">FootCamps</span>
+      <!--<span class="title-spacer">FootCamps</span>-->
+      <button md-icon-button *ngIf="map.footballCampSelected">
+        <md-icon class="md-24">arrow_back</md-icon>
+      </button>
+      <span class="title-spacer">{{map.footballCampSelected ? 'FootCamps de ' + map.footballCampSelected.ville : 'FootCamps'}}</span>
       <button md-button>Trouver un stage</button>
       <button md-button>Organiser un stage</button>
     </md-toolbar>

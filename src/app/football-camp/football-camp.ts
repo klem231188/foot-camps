@@ -5,6 +5,7 @@ export class FootballCamp {
   //- GPS positioning
   latitude: number;
   longitude: number;
+  ville: string;
 
   //- Overview data
   pathToImage: string;
