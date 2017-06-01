@@ -1,21 +1,20 @@
-<div fxLayout="column" fxFlexFill>
+<div fxLayout="column" fxFill>
 
   <header fxFlex="64px">
     <football-camp-header></football-camp-header>
   </header>
 
-  <div id="content" fxLayout="column" fxFlex fxFlexFill>
-
-    <div fxLayout="row" fxLayoutAlign="start start" fxFlexFill>
-      <football-camp-overview [hidden]="!footballCamp"></football-camp-overview>
-      <football-camp-map fxFlexFill></football-camp-map>
+  <div fxLayout="column" fxFlex="auto" fxFill>
+    <div fxLayout="row" fxFlex="auto" >
+      <football-camp-overview [fxHide]="!footballCamp" fxFlex="30%" fxLayoutAlign="center center"></football-camp-overview>
+      <football-camp-map fxFlex="auto" fxLayoutAlign="center center"></football-camp-map>
     </div>
   </div>
 
-  <!--<footer fxFlex="64px">-->
-  <!--<md-toolbar color="primary">-->
-  <!--<span>The Footer</span>-->
-  <!--</md-toolbar>-->
-  <!--</footer>-->
+  <footer fxFlex="64px">
+    <md-toolbar color="primary">
+      <span>The Footer</span>
+    </md-toolbar>
+  </footer>
 
 </div>
