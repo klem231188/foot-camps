@@ -16,19 +16,6 @@ body {
   overflow: hidden;
 }
 
-.header-toolbar {
-  background-color: mat-color($primary,  darker);
-}
-
 footer {
   background-color: mat-color($primary, darker);
-}
-
-.search-toolbar {
-  background-color: mat-color($primary);
-}
-
-.title-spacer {
-  -webkit-box-flex: 1;
-  flex: 1 1 auto
 }

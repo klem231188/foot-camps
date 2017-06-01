@@ -1,29 +1,21 @@
 <div fxLayout="column" fxFlexFill>
 
   <header fxFlex="64px">
-    <md-toolbar color="primary">
-      <!--<span class="title-spacer">FootCamps</span>-->
-      <button md-icon-button *ngIf="map.footballCampSelected">
-        <md-icon class="md-24">arrow_back</md-icon>
-      </button>
-      <span class="title-spacer">{{map.footballCampSelected ? 'FootCamps de ' + map.footballCampSelected.ville : 'FootCamps'}}</span>
-      <button md-button>Trouver un stage</button>
-      <button md-button>Organiser un stage</button>
-    </md-toolbar>
+    <football-camp-header></football-camp-header>
   </header>
 
   <div id="content" fxLayout="column" fxFlex fxFlexFill>
 
     <div fxLayout="row" fxLayoutAlign="start start" fxFlexFill>
-      <football-camp-overview [footballCamp]="map.footballCampSelected"></football-camp-overview>
-      <football-camp-map #map fxFlexFill></football-camp-map>
+      <football-camp-overview [hidden]="!footballCamp"></football-camp-overview>
+      <football-camp-map fxFlexFill></football-camp-map>
     </div>
   </div>
 
-  <footer fxFlex="64px">
-    <md-toolbar color="primary">
-      <span>The Footer</span>
-    </md-toolbar>
-  </footer>
+  <!--<footer fxFlex="64px">-->
+  <!--<md-toolbar color="primary">-->
+  <!--<span>The Footer</span>-->
+  <!--</md-toolbar>-->
+  <!--</footer>-->
 
 </div>

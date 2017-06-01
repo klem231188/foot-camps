@@ -1,14 +1,13 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {FootballCamp} from "../football-camp/football-camp";
-import {FOOTBAL_CAMPS} from "../football-camp/football-camps-mock";
 import {FootballCampService} from "../football-camp/football-camp.service";
 
 @Component({
-  selector: 'football-camp-overview',
-  templateUrl: 'football-camp-overview.component.html',
-  styleUrls: ['football-camp-overview.component.scss']
+  selector: 'football-camp-header',
+  templateUrl: 'football-camp-header.component.html',
+  styleUrls: ['football-camp-header.component.scss']
 })
-export class FootballCampOverviewComponent implements OnInit {
+export class FootballCampHeaderComponent implements OnInit {
 
   private footballCamp: FootballCamp = null;
 
@@ -20,5 +19,9 @@ export class FootballCampOverviewComponent implements OnInit {
       footballCamp => {
         this.footballCamp = footballCamp;
       });
+  }
+
+  onBackButtonClicked(): void {
+    this.footballCampService.unSelectFootballCamp();
   }
 }

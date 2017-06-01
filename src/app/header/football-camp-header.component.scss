@@ -1,8 +1,12 @@
-@mixin football-camp-overview-theme($theme) {
+@mixin football-camp-header-theme($theme) {
 
   $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
+  .title-spacer {
+    -webkit-box-flex: 1;
+    flex: 1 1 auto
+  }
 }

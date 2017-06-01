@@ -1,0 +1,8 @@
+<md-toolbar color="primary">
+  <button md-icon-button (click)="onBackButtonClicked()" *ngIf="footballCamp">
+    <md-icon class="md-24">arrow_back</md-icon>
+  </button>
+  <span class="title-spacer">{{footballCamp ? 'FootCamps de ' + footballCamp.ville : 'FootCamps'}}</span>
+  <button md-button>Trouver un stage</button>
+  <button md-button>Organiser un stage</button>
+</md-toolbar>
