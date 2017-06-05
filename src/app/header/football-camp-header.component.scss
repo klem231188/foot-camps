@@ -5,8 +5,4 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  .title-spacer {
-    -webkit-box-flex: 1;
-    flex: 1 1 auto
-  }
 }

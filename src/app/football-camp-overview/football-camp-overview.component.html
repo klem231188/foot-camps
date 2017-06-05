@@ -1,12 +1,15 @@
-<md-card *ngIf="footballCamp">
-  <img md-card-image src="{{footballCamp.pathToImage}}">
-  <md-card-title>{{footballCamp.title}}</md-card-title>
-  <md-card-content>
-    {{footballCamp.content}}
-  </md-card-content>
-  <md-card-actions align="end">
-    <button md-fab color="accent">
-      <md-icon class="md-24">favorite</md-icon>
-    </button>
-  </md-card-actions>
-</md-card>
+<div *ngIf="footballCamp">
+  <md-toolbar color="accent">{{footballCamp.title}}</md-toolbar>
+  <md-card>
+    <img md-card-image src="{{footballCamp.pathToImage}}">
+    <md-card-title>{{footballCamp.title}}</md-card-title>
+    <md-card-content>
+      {{footballCamp.content}}
+    </md-card-content>
+    <md-card-actions align="end">
+      <button md-fab color="accent">
+        <md-icon class="md-24">add</md-icon>
+      </button>
+    </md-card-actions>
+  </md-card>
+</div>

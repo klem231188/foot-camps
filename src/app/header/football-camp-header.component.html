@@ -2,7 +2,30 @@
   <button md-icon-button (click)="onBackButtonClicked()" *ngIf="footballCamp">
     <md-icon class="md-24">arrow_back</md-icon>
   </button>
-  <span class="title-spacer">{{footballCamp ? 'FootCamps de ' + footballCamp.ville : 'FootCamps'}}</span>
-  <button md-button>Trouver un stage</button>
-  <button md-button>Organiser un stage</button>
+  <span fxFlex>{{footballCamp ? 'FootCamps de ' + footballCamp.ville : 'FootCamps'}}</span>
+  <div fxHide fxShow.gt-sm>
+    <button md-button>
+      <md-icon>location_on</md-icon>
+      <span>Trouver un stage</span>
+    </button>
+    <button md-button>
+      <md-icon>add</md-icon>
+      <span>Organiser un stage</span>
+    </button>
+  </div>
+
+  <button md-icon-button [mdMenuTriggerFor]="menu" fxShow fxHide.gt-sm>
+    <md-icon>more_vert</md-icon>
+  </button>
+
+  <md-menu #menu="mdMenu">
+    <button md-menu-item>
+      <md-icon>location_on</md-icon>
+      <span>Trouver un stage</span>
+    </button>
+    <button md-menu-item>
+      <md-icon>add</md-icon>
+      <span>Organiser un stage</span>
+    </button>
+  </md-menu>
 </md-toolbar>

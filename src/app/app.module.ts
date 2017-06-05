@@ -9,7 +9,7 @@ import "hammerjs";
 import {FootballCampOverviewModule} from "./football-camp-overview/football-camp-overview.module";
 import {AppMaterialModule} from "./app.material.module";
 import {FootballCampMapModule} from "./football-camp-map/football-camp-map.module";
-import {FootballCampHeaderModule} from "./header/football-camp-header.module";
+import {FootballCampHeaderComponent} from "./header/football-camp-header.component";
 
 @NgModule({
   imports: [
@@ -23,12 +23,13 @@ import {FootballCampHeaderModule} from "./header/football-camp-header.module";
     AppMaterialModule,
 
     // FootballCampModules
-    FootballCampHeaderModule,
+    // FootballCampHeaderModule,
     FootballCampOverviewModule,
     FootballCampMapModule
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    FootballCampHeaderComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

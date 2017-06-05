@@ -1,0 +1,19 @@
+@mixin football-camp-app-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .app {
+    overflow-x: hidden;
+  }
+
+  football-camp-header {
+    z-index: 1;
+  }
+
+  football-camp-overview {
+    overflow-y: scroll;
+  }
+}
