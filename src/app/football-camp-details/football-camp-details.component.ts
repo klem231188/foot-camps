@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {FootballCamp} from "../football-camp/football-camp";
-import {FOOTBAL_CAMPS} from "../football-camp/football-camps-mock";
 import {FootballCampService} from "../football-camp/football-camp.service";
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'football-camp-details',
@@ -12,14 +12,18 @@ export class FootballCampDetailsComponent implements OnInit {
 
   private footballCamp: FootballCamp = null;
 
-  constructor(private footballCampService: FootballCampService) {
+  constructor(private route: ActivatedRoute,
+              private footballCampService: FootballCampService) {
   }
 
   ngOnInit(): void {
-    this.footballCampService.footballCampSelectedSource.asObservable().subscribe(
-      footballCamp => {
-        this.footballCamp = footballCamp;
+    this.route
+      .params
+      .switchMap((params: Params) => {
+        return this.footballCampService.getFootballCamp(+params['id'])
+      })
+      .subscribe((footballCamp: FootballCamp) => {
+        this.footballCamp = footballCamp
       });
   }
-
 }

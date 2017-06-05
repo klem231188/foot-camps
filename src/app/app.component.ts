@@ -8,16 +8,7 @@ import {FootballCamp} from "./football-camp/football-camp";
   styleUrls: ['app.component.scss'],
   providers: [FootballCampService]
 })
-export class AppComponent implements OnInit {
-  private footballCamp: FootballCamp = null;
-
+export class AppComponent {
   constructor(private footballCampService: FootballCampService) {
-  }
-
-  ngOnInit(): void {
-    this.footballCampService.footballCampSelectedSource.asObservable().subscribe(
-      footballCamp => {
-        this.footballCamp = footballCamp;
-      });
   }
 }

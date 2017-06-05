@@ -1,6 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {FootballCamp} from "../football-camp/football-camp";
-import {FootballCampService} from "../football-camp/football-camp.service";
+import {Router, NavigationStart} from "@angular/router";
 
 @Component({
   selector: 'football-camp-header',
@@ -9,19 +8,26 @@ import {FootballCampService} from "../football-camp/football-camp.service";
 })
 export class FootballCampHeaderComponent implements OnInit {
 
-  private footballCamp: FootballCamp = null;
+  private backUrl: string = null;
 
-  constructor(private footballCampService: FootballCampService) {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
-    this.footballCampService.footballCampSelectedSource.asObservable().subscribe(
-      footballCamp => {
-        this.footballCamp = footballCamp;
+    this.router.events
+      .filter(event => event instanceof NavigationStart)
+      .subscribe((event: NavigationStart) => {
+        if (/^\/locate\/\d+$/i.test(event.url)) {
+          // locate/:id
+          this.backUrl = 'locate';
+        } else if (/^\/locate$/i.test(event.url)) {
+          // locate
+          this.backUrl = null;
+        }
       });
   }
 
-  onBackButtonClicked(): void {
-    this.footballCampService.unSelectFootballCamp();
+  onBackClicked(): void {
+    this.router.navigate([this.backUrl]);
   }
 }

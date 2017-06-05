@@ -1,8 +1,9 @@
 <md-toolbar color="primary">
-  <button md-icon-button (click)="onBackButtonClicked()" *ngIf="footballCamp">
+  <button md-icon-button (click)="onBackClicked()" *ngIf="backUrl">
     <md-icon class="md-24">arrow_back</md-icon>
   </button>
   <span fxFlex>{{footballCamp ? 'FootCamps de ' + footballCamp.ville : 'FootCamps'}}</span>
+
   <div fxHide fxShow.gt-sm>
     <button md-button>
       <md-icon>location_on</md-icon>

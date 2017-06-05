@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {FootballCampService} from "../football-camp/football-camp.service";
 import {FootballCamp} from "../football-camp/football-camp";
+import {ActivatedRoute, Router, Params} from "@angular/router";
 
 @Component({
   selector: 'football-camp-locator',
@@ -9,13 +10,18 @@ import {FootballCamp} from "../football-camp/football-camp";
 export class FootballCampLocatorComponent implements OnInit {
   private footballCamp: FootballCamp = null;
 
-  constructor(private footballCampService: FootballCampService) {
+  constructor(private route: ActivatedRoute,
+              private footballCampService: FootballCampService) {
   }
 
   ngOnInit(): void {
-    this.footballCampService.footballCampSelectedSource.asObservable().subscribe(
-      footballCamp => {
-        this.footballCamp = footballCamp;
+    this.route
+      .params
+      .switchMap((params: Params) => {
+        return this.footballCampService.getFootballCamp(+params['id'])
+      })
+      .subscribe((footballCamp: FootballCamp) => {
+        this.footballCamp = footballCamp
       });
   }
 }

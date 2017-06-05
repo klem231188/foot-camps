@@ -4,8 +4,10 @@ import {FootballCampDetailsComponent} from "./football-camp-details/football-cam
 import {FootballCampLocatorComponent} from "./football-camp-locator/football-camp-locator.component";
 
 const routes: Routes = [
-  {path: '', redirectTo: '/locate-camp', pathMatch: 'full'},
-  {path: 'locate-camp', component: FootballCampLocatorComponent},
+  {path: '', redirectTo: '/locate', pathMatch: 'full'},
+  {path: 'locate/:id/details', component: FootballCampDetailsComponent},
+  {path: 'locate/:id', component: FootballCampLocatorComponent},
+  {path: 'locate', component: FootballCampLocatorComponent},
   {path: 'details/:id', component: FootballCampDetailsComponent},
 ];
 

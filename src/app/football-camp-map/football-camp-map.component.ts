@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {FootballCampService} from "../football-camp/football-camp.service";
 import {FootballCamp} from "../football-camp/football-camp";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'football-camp-map',
@@ -11,7 +12,8 @@ export class FootballCampMapComponent implements OnInit {
 
   footballCamps: FootballCamp[];
 
-  constructor(private footballCampService: FootballCampService) {
+  constructor(private router: Router,
+              private footballCampService: FootballCampService) {
   }
 
   ngOnInit(): void {
@@ -21,7 +23,6 @@ export class FootballCampMapComponent implements OnInit {
   }
 
   onMarkerClicked(footballCampId: number) {
-    let footballCampSelected : FootballCamp = this.footballCamps[footballCampId];
-    this.footballCampService.selectFootballCamp(footballCampSelected);
+    this.router.navigate(['/locate', footballCampId]);
   }
 }
