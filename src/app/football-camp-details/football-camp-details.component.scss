@@ -1,15 +1,8 @@
-@mixin football-camp-app-theme($theme) {
+@mixin football-camp-details-theme($theme) {
 
   $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  .app {
-    overflow-x: hidden;
-  }
-
-  .content {
-    overflow: hidden;
-  }
 }
