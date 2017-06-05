@@ -10,7 +10,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {AppMaterialModule} from "./app.material.module";
 import {AgmCoreModule} from "angular2-google-maps/core";
 import {FootballCampLocatorComponent} from "./football-camp-locator/football-camp-locator.component";
-import {FootballCampHeaderComponent} from "./header/football-camp-header.component";
+import {FootballCampHeaderComponent} from "./football-camp-header/football-camp-header.component";
 import {FootballCampDetailsComponent} from "./football-camp-details/football-camp-details.component";
 import {FootballCampMapComponent} from "./football-camp-map/football-camp-map.component";
 import {FootballCampOverviewComponent} from "./football-camp-overview/football-camp-overview.component";
