@@ -1,6 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {FootballCampService} from "./football-camp/football-camp.service";
-import {FootballCamp} from "./football-camp/football-camp";
+import {Component} from "@angular/core";
+import {FootballCampService} from "./services/football-camp/football-camp.service";
 
 @Component({
   selector: 'app-root',

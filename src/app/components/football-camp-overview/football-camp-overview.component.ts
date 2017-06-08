@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {FootballCamp} from "../football-camp/football-camp";
-import {FootballCampService} from "../football-camp/football-camp.service";
+import {FootballCamp} from "../../services/football-camp/football-camp";
+import {FootballCampService} from "../../services/football-camp/football-camp.service";
 import {Router, ActivatedRoute, Params} from "@angular/router";
 import 'rxjs/add/operator/switchMap';
 

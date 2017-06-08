@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {FootballCampService} from "../football-camp/football-camp.service";
-import {FootballCamp} from "../football-camp/football-camp";
+import {FootballCampService} from "../../services/football-camp/football-camp.service";
+import {FootballCamp} from "../../services/football-camp/football-camp";
 import {Router} from "@angular/router";
 
 @Component({

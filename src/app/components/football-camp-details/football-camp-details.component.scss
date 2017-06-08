@@ -5,4 +5,7 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
+  football-camp-details > div {
+    overflow-y: auto;
+  }
 }

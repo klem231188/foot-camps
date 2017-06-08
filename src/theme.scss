@@ -1,9 +1,9 @@
 @import '~@angular/material/theming';
 @import '../src/app/app.component.scss';
-@import '../src/app/football-camp-overview/football-camp-overview.component.scss';
-@import '../src/app/football-camp-details/football-camp-details.component.scss';
-@import '../src/app/football-camp-map/football-camp-map.component.scss';
-@import '../src/app/football-camp-header/football-camp-header.component.scss';
+@import 'app/components/football-camp-overview/football-camp-overview.component.scss';
+@import 'app/components/football-camp-details/football-camp-details.component.scss';
+@import 'app/components/football-camp-map/football-camp-map.component.scss';
+@import 'app/components/football-camp-header/football-camp-header.component.scss';
 
 @include mat-core();
 
