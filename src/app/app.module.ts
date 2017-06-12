@@ -14,6 +14,7 @@ import {FootballCampHeaderComponent} from "./components/football-camp-header/foo
 import {FootballCampDetailsComponent} from "./components/football-camp-details/football-camp-details.component";
 import {FootballCampMapComponent} from "./components/football-camp-map/football-camp-map.component";
 import {FootballCampOverviewComponent} from "./components/football-camp-overview/football-camp-overview.component";
+import {CarouselModule} from 'ngx-bootstrap/carousel';
 
 @NgModule({
   imports: [
@@ -25,6 +26,8 @@ import {FootballCampOverviewComponent} from "./components/football-camp-overview
     FlexLayoutModule,
     // @MaterialDesign
     AppMaterialModule,
+    // @Bootstrap
+    CarouselModule.forRoot(),
     // @GoogleMaps
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBMLCtOUXk0d4w6GDtPOMujTMU6zeV_YVA'
