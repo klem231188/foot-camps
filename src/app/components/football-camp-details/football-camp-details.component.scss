@@ -7,5 +7,19 @@
 
   football-camp-details > div {
     overflow-y: auto;
+    background: url('assets/img/examples/football_pitch_background.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  .toolbar-title {
+    color: mat-color($primary);
+  }
+
+  .avatar {
+    border-radius: 50%;
+    height: 150px;
   }
 }
