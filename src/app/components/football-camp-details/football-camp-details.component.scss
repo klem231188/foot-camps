@@ -20,6 +20,11 @@
 
   .avatar {
     border-radius: 50%;
-    height: 150px;
+    height: 128px;
+    background-color: mat-color($primary);
+  }
+
+  .avatar:hover {
+    filter: brightness(80%);
   }
 }
