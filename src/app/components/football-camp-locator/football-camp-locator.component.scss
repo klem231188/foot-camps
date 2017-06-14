@@ -1,0 +1,12 @@
+@mixin football-camp-locator-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  football-camp-locator {
+    flex: 1 1 100%;
+    display: flex;
+  }
+}
