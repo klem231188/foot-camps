@@ -15,6 +15,7 @@ import {FootballCampDetailsComponent} from "./components/football-camp-details/f
 import {FootballCampMapComponent} from "./components/football-camp-map/football-camp-map.component";
 import {FootballCampOverviewComponent} from "./components/football-camp-overview/football-camp-overview.component";
 import {CarouselModule} from 'ngx-bootstrap/carousel';
+import {Angular2ImageGalleryModule} from 'angular2-image-gallery';
 
 @NgModule({
   imports: [
@@ -26,6 +27,8 @@ import {CarouselModule} from 'ngx-bootstrap/carousel';
     FlexLayoutModule,
     // @MaterialDesign
     AppMaterialModule,
+    // ImageGallery
+    Angular2ImageGalleryModule,
     // @Bootstrap
     CarouselModule.forRoot(),
     // @GoogleMaps

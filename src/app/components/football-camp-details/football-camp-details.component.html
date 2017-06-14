@@ -19,6 +19,9 @@
               Lorient</b>, de côtoyer les joueurs professionnels et le staff technique. <br>
               Ils pourront ainsi découvrir la vie d’un club professionnel.
             </p>
+            <p>
+              <a href="javascript:void(0)">Télécharger le programme de la semaine au format PDF</a>
+            </p>
           </md-card-content>
         </md-card>
       </div>
@@ -88,30 +91,60 @@
             niveau de jeu dans un climat de convivialité et de respect.<br>
             Les stages sont encadrés par une <b>équipe d’animateurs diplômés</b> (animation et encadrement sportif).
           </p>
-          <img class="avatar" src="assets/img/examples/zidane.png">
-          <img class="avatar" src="assets/img/examples/ronaldo.png">
-          <img class="avatar" src="assets/img/examples/griezmann.png">
+          <div fxLayout="row" fxLayoutAlign="space-around center" class="quote">
+            <img class="avatar" src="assets/img/examples/zidane.png">
+            <!--<span fxFlex="25px"></span>-->
+            <blockquote>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id
+              nisl mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae! Lorem
+              ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id nisl
+              mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae!
+              <cite>Z. Zidane</cite>
+            </blockquote>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-around center" class="quote">
+            <img class="avatar" src="assets/img/examples/ronaldo.png">
+            <!--<span fxFlex="25px"></span>-->
+            <blockquote>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id
+              nisl mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae! Lorem
+              ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id nisl
+              mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae!
+              <cite>C. Ronaldo</cite>
+            </blockquote>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-around center" class="quote">
+            <img class="avatar" src="assets/img/examples/griezmann.png">
+            <!--<span fxFlex="25px"></span>-->
+            <blockquote>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id
+              nisl mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae! Lorem
+              ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id nisl
+              mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae!
+              <cite>A. Griezmann</cite>
+            </blockquote>
+          </div>
         </md-card-content>
       </md-card>
     </div>
 
     <span fxFlex="25px"></span>
 
-    <!-- Le programme -->
+    <!-- Galerie photo -->
     <div fxFlex>
       <md-toolbar fxLayout="row" fxLayoutAlign="start center">
-        <md-icon color="primary" class="md-24">face</md-icon>
+        <md-icon color="primary" class="md-24">photo</md-icon>
         <span fxFlex="10px"></span>
-        <span class="toolbar-title">Le programme</span>
+        <span class="toolbar-title">La galerie photo</span>
       </md-toolbar>
       <md-card>
         <md-card-content>
-          <p>
-            Le centre de vie du FC Lorient, l’Espace FCL, permet d’accueillir les stagiaires dans des conditions
-            optimales. <br>
-            Aménagé spécialement pour la pratique du football dans un cadre exceptionnel en bord de mer, le site permet
-            aux jeunes stagiaires de profiter de leurs vacances en alliant découverte, progression et plaisir.
-          </p>
+          <gallery
+            [flexBorderSize]="3"
+            [flexImageSize]="7"
+            [galleryName]="'gallery-lorient'"
+            (viewerChange)="yourNotificationFunction($event)">
+          </gallery>
         </md-card-content>
       </md-card>
     </div>
@@ -127,12 +160,42 @@
       </md-toolbar>
       <md-card>
         <md-card-content>
-          <p>
-            Le centre de vie du FC Lorient, l’Espace FCL, permet d’accueillir les stagiaires dans des conditions
-            optimales. <br>
-            Aménagé spécialement pour la pratique du football dans un cadre exceptionnel en bord de mer, le site permet
-            aux jeunes stagiaires de profiter de leurs vacances en alliant découverte, progression et plaisir.
-          </p>
+          <table>
+            <thead>
+            <tr>
+              <th scope="col">Sessions</th>
+              <th scope="col">Dates</th>
+              <th scope="col">Tarifs en Pension complète</th>
+              <th scope="col">Tarifs en Demi-pension</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td data-label="Sessions">Session 1</td>
+              <td data-label="Dates">Du 10 au 14 juillet 2017</td>
+              <td data-label="Tarifs en Pension complète">549€</td>
+              <td data-label="Tarifs en Demi-pension">349€</td>
+            </tr>
+            <tr>
+              <td scope="row" data-label="Sessions">Session 2</td>
+              <td data-label="Dates">Du 17 au 21 juillet 2017</td>
+              <td data-label="Tarifs en Pension complète">549€</td>
+              <td data-label="Tarifs en Demi-pension">349€</td>
+            </tr>
+            <tr>
+              <td scope="row" data-label="Sessions">Session 3</td>
+              <td data-label="Dates">Du 24 au 28 juillet 2017</td>
+              <td data-label="Tarifs en Pension complète">549€</td>
+              <td data-label="Tarifs en Demi-pension">349€</td>
+            </tr>
+            <tr>
+              <td scope="row" data-label="Sessions">Session 4</td>
+              <td data-label="Dates">Du 31 juillet au 4 août 2017</td>
+              <td data-label="Tarifs en Pension complète">549€</td>
+              <td data-label="Tarifs en Demi-pension">349€</td>
+            </tr>
+            </tbody>
+          </table>
         </md-card-content>
       </md-card>
     </div>
