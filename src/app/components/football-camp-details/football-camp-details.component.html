@@ -4,6 +4,7 @@
     <span fxFlex="25px"></span>
 
     <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="space-around stretch">
+      <!-- Description -->
       <div fxFlex>
         <md-toolbar fxLayout="row" fxLayoutAlign="start center">
           <md-icon color="primary" color="primary" class="md-24">description</md-icon>
@@ -28,6 +29,7 @@
 
       <span fxFlex="25px"></span>
 
+      <!-- Localisation -->
       <div fxFlex>
         <md-toolbar fxLayout="row" fxLayoutAlign="start center">
           <md-icon color="primary" class="md-24">location_on</md-icon>
@@ -131,7 +133,7 @@
     <span fxFlex="25px"></span>
 
     <!-- Galerie photo -->
-    <div fxFlex>
+    <div fxFlex style="z-index:1">
       <md-toolbar fxLayout="row" fxLayoutAlign="start center">
         <md-icon color="primary" class="md-24">photo</md-icon>
         <span fxFlex="10px"></span>
@@ -143,7 +145,7 @@
             [flexBorderSize]="3"
             [flexImageSize]="7"
             [galleryName]="'gallery-lorient'"
-            (viewerChange)="yourNotificationFunction($event)">
+            (viewerChange)="onViewerChange($event)">
           </gallery>
         </md-card-content>
       </md-card>
