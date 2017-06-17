@@ -1,15 +1,19 @@
 <div *ngIf="footballCamp">
-  <md-toolbar color="accent">{{footballCamp.title}}</md-toolbar>
+  <md-toolbar class="toolbar-title">{{footballCamp.title}}</md-toolbar>
   <md-card>
-    <img md-card-image src="{{footballCamp.pathToImage}}">
-    <md-card-title>{{footballCamp.title}}</md-card-title>
+    <div class="fab-button-wrapper">
+      <img md-card-image src="{{footballCamp.pathToImage}}">
+      <button (click)="onDetailsClicked()" md-fab color="accent" class="fab-button">
+        <md-icon class="md-24">add</md-icon>
+      </button>
+    </div>
     <md-card-content>
       {{footballCamp.content}}
     </md-card-content>
-    <md-card-actions align="end">
-      <button (click)="onDetailsClicked()" md-fab color="accent">
-        <md-icon class="md-24">add</md-icon>
-      </button>
-    </md-card-actions>
+    <!--<md-card-actions align="end">-->
+      <!--<button (click)="onDetailsClicked()" md-fab color="accent">-->
+        <!--<md-icon class="md-24">add</md-icon>-->
+      <!--</button>-->
+    <!--</md-card-actions>-->
   </md-card>
 </div>
