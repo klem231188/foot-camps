@@ -11,7 +11,7 @@ import {GalleryComponent} from "angular2-image-gallery";
 })
 export class FootballCampDetailsComponent implements OnInit, AfterViewInit {
 
-  private footballCamp: FootballCamp = null;
+  footballCamp: FootballCamp = null;
 
   constructor(private route: ActivatedRoute,
               private footballCampService: FootballCampService,) {

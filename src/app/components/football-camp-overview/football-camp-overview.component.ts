@@ -11,7 +11,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class FootballCampOverviewComponent implements OnInit {
 
-  private footballCamp: FootballCamp = null;
+  footballCamp: FootballCamp = null;
 
   constructor(private route: ActivatedRoute,
               private router: Router,

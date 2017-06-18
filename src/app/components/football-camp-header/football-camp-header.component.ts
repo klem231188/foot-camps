@@ -8,7 +8,7 @@ import {Router, NavigationStart} from "@angular/router";
 })
 export class FootballCampHeaderComponent implements OnInit {
 
-  private backUrl: string = null;
+  backUrl: string = null;
 
   constructor(private router: Router) {
   }

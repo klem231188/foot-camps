@@ -8,7 +8,7 @@ import {ActivatedRoute, Router, Params} from "@angular/router";
   templateUrl: 'football-camp-locator.component.html'
 })
 export class FootballCampLocatorComponent implements OnInit {
-  private footballCamp: FootballCamp = null;
+  footballCamp: FootballCamp = null;
 
   constructor(private route: ActivatedRoute,
               private footballCampService: FootballCampService) {
