@@ -16,11 +16,15 @@ import {FootballCampMapComponent} from "./components/football-camp-map/football-
 import {FootballCampOverviewComponent} from "./components/football-camp-overview/football-camp-overview.component";
 import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {Angular2ImageGalleryModule} from 'angular2-image-gallery';
+import {AngularFireModule} from 'angularfire2';
+import {environment} from "../environments/environment";
+
 
 @NgModule({
   imports: [
     // @Angular
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
@@ -33,7 +37,7 @@ import {Angular2ImageGalleryModule} from 'angular2-image-gallery';
     CarouselModule.forRoot(),
     // @GoogleMaps
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBMLCtOUXk0d4w6GDtPOMujTMU6zeV_YVA'
+      apiKey: environment.googlemaps.apiKey
     }),
     // @Routing
     AppRoutingModule
