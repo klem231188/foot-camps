@@ -11,4 +11,7 @@ export class FootballCamp {
   pathToImage: string;
   title: string;
   content: string;
+
+  //- Details data
+  pathToLogo : string;
 }
