@@ -15,4 +15,21 @@ export class FootballCamp {
   //- Details data
   pathToLogo : string;
   pathToGallery: string;
+
+  sessions: Session[];
+}
+
+
+export class Session {
+  name: string;
+  fromDateToDate: string;
+  fullBoardRates: number;
+  halfBoardRates: number;
+
+  constructor(name: string, fromDateToDate: string, fullBoardRates: number, halfBoardRates: number) {
+    this.name = name;
+    this.fromDateToDate = fromDateToDate;
+    this.fullBoardRates = fullBoardRates;
+    this.halfBoardRates = halfBoardRates;
+  }
 }

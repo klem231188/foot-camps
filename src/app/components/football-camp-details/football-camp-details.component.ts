@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewChild, AfterViewInit} from "@angular/core";
-import {FootballCamp} from "../../services/football-camp/football-camp";
+import {FootballCamp, Session} from "../../services/football-camp/football-camp";
 import {FootballCampService} from "../../services/football-camp/football-camp.service";
 import {ActivatedRoute, Params} from "@angular/router";
 import {GalleryComponent} from "angular2-image-gallery";
+import * as _ from "lodash";
 
 @Component({
   selector: 'football-camp-details',
@@ -31,6 +32,14 @@ export class FootballCampDetailsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+  }
+
+  getHalfBoardRatesSessions(): Session[] {
+    return _.reject(this.footballCamp.sessions, ['halfBoardRates', null]);
+  }
+
+  hasHalfBoardRatesSessions(): boolean {
+    return !_.isEmpty(this.getHalfBoardRatesSessions());
   }
 
   onViewerChange(event) {

@@ -169,33 +169,15 @@
               <th scope="col">Sessions</th>
               <th scope="col">Dates</th>
               <th scope="col">Tarifs en Pension complète</th>
-              <th scope="col">Tarifs en Demi-pension</th>
+              <th scope="col" *ngIf="hasHalfBoardRatesSessions()">Tarifs en Demi-pension</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td data-label="Sessions">Session 1</td>
-              <td data-label="Dates">Du 10 au 14 juillet 2017</td>
-              <td data-label="Tarifs en Pension complète">549€</td>
-              <td data-label="Tarifs en Demi-pension">349€</td>
-            </tr>
-            <tr>
-              <td scope="row" data-label="Sessions">Session 2</td>
-              <td data-label="Dates">Du 17 au 21 juillet 2017</td>
-              <td data-label="Tarifs en Pension complète">549€</td>
-              <td data-label="Tarifs en Demi-pension">349€</td>
-            </tr>
-            <tr>
-              <td scope="row" data-label="Sessions">Session 3</td>
-              <td data-label="Dates">Du 24 au 28 juillet 2017</td>
-              <td data-label="Tarifs en Pension complète">549€</td>
-              <td data-label="Tarifs en Demi-pension">349€</td>
-            </tr>
-            <tr>
-              <td scope="row" data-label="Sessions">Session 4</td>
-              <td data-label="Dates">Du 31 juillet au 4 août 2017</td>
-              <td data-label="Tarifs en Pension complète">549€</td>
-              <td data-label="Tarifs en Demi-pension">349€</td>
+            <tr *ngFor="let session of footballCamp.sessions">
+              <td data-label="Sessions">{{session.name}}</td>
+              <td data-label="Dates">{{session.fromDateToDate}}</td>
+              <td data-label="Tarifs en Pension complète">{{session.fullBoardRates}} €</td>
+              <td data-label="Tarifs en Demi-pension" *ngIf="hasHalfBoardRatesSessions()">{{session.halfBoardRates}} €</td>
             </tr>
             </tbody>
           </table>
