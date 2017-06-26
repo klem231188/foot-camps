@@ -9,13 +9,13 @@
 
     <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="space-around stretch">
       <!-- Description -->
-      <div fxFlex>
+      <div fxLayout="column" fxFlex>
         <md-toolbar fxLayout="row" fxLayoutAlign="start center">
           <md-icon color="primary"  class="md-24">description</md-icon>
           <span fxFlex="10px"></span>
           <span class="toolbar-title">Description</span>
         </md-toolbar>
-        <md-card>
+        <md-card fxFlex="grow">
           <md-card-content [innerHTML]="footballCamp.details.description">
           </md-card-content>
         </md-card>
@@ -24,13 +24,13 @@
       <span fxFlex="25px"></span>
 
       <!-- Localisation -->
-      <div fxFlex>
+      <div fxLayout="column" fxFlex>
         <md-toolbar fxLayout="row" fxLayoutAlign="start center">
           <md-icon color="primary" class="md-24">location_on</md-icon>
           <span fxFlex="10px"></span>
           <span class="toolbar-title">Localisation</span>
         </md-toolbar>
-        <md-card>
+        <md-card fxFlex="grow">
           <md-card-content>
             <p>
               Le centre de vie du FC Lorient, l’Espace FCL, permet d’accueillir les stagiaires dans <b>des conditions
@@ -41,7 +41,7 @@
               aux jeunes stagiaires de profiter de leurs vacances en alliant découverte, progression et plaisir.
             </p>
             <p>
-              <b>Adresse complète</b> : <a href="https://goo.gl/maps/jHxskd6txuK2">FC LORIENT - Kerlir - CS 30 131 -
+              <b>Adresse</b> : <a href="https://goo.gl/maps/jHxskd6txuK2">FC LORIENT - Kerlir - CS 30 131 -
               56271
               PLOEMEUR Cedex</a>
             </p>
