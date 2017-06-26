@@ -5,10 +5,28 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
+  football-camp-details {
+    //overflow: auto;
+  }
+
   football-camp-details > div {
     overflow-y: auto;
     background: url('assets/img/examples/football_pitch_background_2.jpg') no-repeat center center fixed;
     background-size: cover;
+  }
+
+  football-camp-details md-card {
+    border-radius: 0px 0px 2px 2px !important;
+  }
+
+  football-camp-details md-toolbar {
+    @include mat-elevation(2);
+    position: relative;
+    z-index: 1;
+  }
+
+  football-camp-details md-card-content {
+    font-size: 15px !important;
   }
 
   .toolbar-title {

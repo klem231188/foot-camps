@@ -5,11 +5,4 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  .app {
-    //overflow-x: hidden;
-  }
-
-  .content {
-    overflow: hidden;
-  }
 }

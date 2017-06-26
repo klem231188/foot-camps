@@ -35,7 +35,7 @@ export class FootballCampDetailsComponent implements OnInit, AfterViewInit {
   }
 
   getHalfBoardRatesSessions(): Session[] {
-    return _.reject(this.footballCamp.sessions, ['halfBoardRates', null]);
+    return _.reject(this.footballCamp.details.sessions, ['halfBoardRates', null]);
   }
 
   hasHalfBoardRatesSessions(): boolean {

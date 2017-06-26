@@ -5,20 +5,68 @@ export class FootballCamp {
   //- GPS positioning
   latitude: number;
   longitude: number;
-  ville: string;
+  city: string;
 
   //- Overview data
+  overview: Overview;
+
+  //- Details data
+  details: Details;
+}
+
+export class Overview {
   pathToImage: string;
   title: string;
   content: string;
 
-  //- Details data
-  pathToLogo : string;
-  pathToGallery: string;
+  constructor() {
+  }
 
-  sessions: Session[];
+  withPathToImage(value: string) {
+    this.pathToImage = value;
+    return this;
+  }
+
+  withTitle(value: string) {
+    this.title = value;
+    return this;
+  }
+
+  withContent(value: string) {
+    this.content = value;
+    return this;
+  }
 }
 
+export class Details {
+  description : string;
+  pathToLogo: string;
+  pathToGallery: string;
+  sessions: Session[];
+
+  constructor() {
+  }
+
+  withDescription(value: string) {
+    this.description = value;
+    return this;
+  }
+
+  withPathToLogo(value: string) {
+    this.pathToLogo = value;
+    return this;
+  }
+
+  withPathToGallery(value: string) {
+    this.pathToGallery = value;
+    return this;
+  }
+
+  withSessions(value: Session[]) {
+    this.sessions = value;
+    return this;
+  }
+}
 
 export class Session {
   name: string;
@@ -26,10 +74,26 @@ export class Session {
   fullBoardRates: number;
   halfBoardRates: number;
 
-  constructor(name: string, fromDateToDate: string, fullBoardRates: number, halfBoardRates: number) {
-    this.name = name;
-    this.fromDateToDate = fromDateToDate;
-    this.fullBoardRates = fullBoardRates;
-    this.halfBoardRates = halfBoardRates;
+  constructor() {
+  }
+
+  withName(value: string): Session {
+    this.name = value;
+    return this;
+  }
+
+  withFromDateToDate(value: string): Session {
+    this.fromDateToDate = value;
+    return this;
+  }
+
+  withFullBoardRates(value: number): Session {
+    this.fullBoardRates = value;
+    return this;
+  }
+
+  withHalfBoardRates(value: number): Session {
+    this.halfBoardRates = value;
+    return this;
   }
 }
