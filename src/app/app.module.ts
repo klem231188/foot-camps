@@ -18,6 +18,7 @@ import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {Angular2ImageGalleryModule} from 'angular2-image-gallery';
 import {AngularFireModule} from 'angularfire2';
 import {environment} from "../environments/environment";
+import {SafeHtmlPipe} from "./pipes/safe-html-pipe";
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import {environment} from "../environments/environment";
     AppRoutingModule
   ],
   declarations: [
+    SafeHtmlPipe,
     AppComponent,
     FootballCampLocatorComponent,
     FootballCampMapComponent,

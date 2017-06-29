@@ -17,13 +17,10 @@ lorient.overview = new Overview()
 //- Details
 
 lorient.details = new Details()
-  .withDescription('<p>' +
-    'Pendant une semaine, les jeunes stagiaires auront la chance de vivre au sein du <b>centre d’entraînement du FC Lorient</b>, de côtoyer les joueurs professionnels et le staff technique. <br> ' +
-    'Ils pourront ainsi découvrir la vie d’un club professionnel.' +
-    '</p>' +
-    '<p>' +
-    '<a href="javascript:void(0)">Télécharger le programme de la semaine au format PDF</a>' +
-    '</p>')
+  .withDescription(`
+    Pendant une semaine, les jeunes stagiaires auront la chance de vivre au sein du <b>centre d’entraînement du FC Lorient</b>, de côtoyer les joueurs professionnels et le staff technique. <br>
+    Ils pourront ainsi découvrir la vie d’un club professionnel.
+    `)
   .withPathToLogo('./assets/img/lorient/logo.png')
   .withPathToGallery('./assets/img/lorient/gallery/data.json')
   .withSessions([
@@ -51,14 +48,15 @@ plouzane.overview = new Overview()
 //- Details
 plouzane.details = new Details()
   .withDescription(
-    '<p>' +
-    'Pendant une semaine, les jeunes stagiaires pourront <b>perfectionner la pratique du football</b>. Au programme également ' +
-    'visite des belles plages bretonnes, kayak, parc des trois curées... ' +
-    'Le tout encadré par <b>une équipe de passionés</b>, joueurs du PAC et bénévoles.<br><br>' +
-    'Infrastructures sportives: <ul><li>1 Terrain synthétique</li><li>2 Terrains en herbe</li><li>2 Gymnases</li></ul>' +
-    'Infrastructures générales: <ul><li>Chambres de 2 à 6 couchages</li><li>Foyer (TV-jeux)</li><li>Salle de restauration</li></ul>' +
-    '<a href="javascript:void(0)">Télécharger le programme de la semaine</a>' +
-    '</p>')
+    `
+    Pendant une semaine, les jeunes stagiaires pourront <b>perfectionner la pratique du football</b>. Au programme également  
+    visite des belles plages bretonnes, kayak, parc des trois curées...  
+    Le tout encadré par <b>une équipe de passionés</b>, joueurs du PAC et bénévoles.<br><br> 
+    Infrastructures sportives: <ul><li>1 Terrain synthétique</li><li>2 Terrains en herbe</li><li>2 Gymnases</li></ul> 
+    Infrastructures générales: <ul><li>Chambres de 2 à 6 couchages</li><li>Foyer (TV-jeux)</li><li>Salle de restauration</li></ul> 
+    `
+  )
+  .withLinkToPlanning('javascript:void(0)')
   .withPathToLogo('./assets/img/plouzane/logo.png')
   .withPathToGallery('./assets/img/plouzane/gallery/data.json')
   .withSessions([

@@ -7,5 +7,15 @@
 
   football-camp-header {
     z-index: 1;
+
+    .logo {
+      height: 40%;
+      margin-right: 10px;
+    }
+
+    .brand {
+      font-family: 'Milkshake';
+      font-size: 30px;
+    }
   }
 }

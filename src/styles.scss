@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-
 @import '~@angular/material/theming';
 @import 'theme.scss';
+
+@font-face {
+  font-family: "Milkshake";
+  src: url("./assets/font/Milkshake.woff") format("woff")
+}
 
 html,
 body {

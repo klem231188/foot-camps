@@ -16,7 +16,9 @@
           <span class="toolbar-title">Description</span>
         </md-toolbar>
         <md-card fxFlex="grow">
-          <md-card-content [innerHTML]="footballCamp.details.description">
+          <md-card-content>
+            <p [innerHTML]="footballCamp.details.description | safeHtml"></p>
+            <a href="javascript:void(0)" md-button color="primary">Télécharger le programme de la semaine</a>
           </md-card-content>
         </md-card>
       </div>
@@ -41,9 +43,7 @@
               aux jeunes stagiaires de profiter de leurs vacances en alliant découverte, progression et plaisir.
             </p>
             <p>
-              <b>Adresse</b> : <a href="https://goo.gl/maps/jHxskd6txuK2">FC LORIENT - Kerlir - CS 30 131 -
-              56271
-              PLOEMEUR Cedex</a>
+              <b>Adresse</b> : <a href="https://goo.gl/maps/jHxskd6txuK2" md-button color="primary">FC LORIENT - Kerlir - CS 30 131 - 56271 PLOEMEUR Cedex</a>
             </p>
           </md-card-content>
         </md-card>

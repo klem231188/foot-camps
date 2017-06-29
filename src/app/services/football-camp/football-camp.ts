@@ -40,6 +40,7 @@ export class Overview {
 
 export class Details {
   description : string;
+  linkToPlanning: string;
   pathToLogo: string;
   pathToGallery: string;
   sessions: Session[];
@@ -49,6 +50,11 @@ export class Details {
 
   withDescription(value: string) {
     this.description = value;
+    return this;
+  }
+
+  withLinkToPlanning(value: string) {
+    this.linkToPlanning = value;
     return this;
   }
 
