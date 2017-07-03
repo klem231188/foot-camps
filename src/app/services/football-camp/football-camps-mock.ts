@@ -21,6 +21,8 @@ lorient.details = new Details()
     Pendant une semaine, les jeunes stagiaires auront la chance de vivre au sein du <b>centre d’entraînement du FC Lorient</b>, de côtoyer les joueurs professionnels et le staff technique. <br>
     Ils pourront ainsi découvrir la vie d’un club professionnel.
     `)
+  .withAddress('FC LORIENT - Kerlir - CS 30 131 - 56271 PLOEMEUR Cedex')
+  .withGmapsUrl('https://goo.gl/maps/jHxskd6txuK2')
   .withPathToLogo('./assets/img/lorient/logo.png')
   .withPathToGallery('./assets/img/lorient/gallery/data.json')
   .withSessions([
@@ -56,7 +58,16 @@ plouzane.details = new Details()
     Infrastructures générales: <ul><li>Chambres de 2 à 6 couchages</li><li>Foyer (TV-jeux)</li><li>Salle de restauration</li></ul> 
     `
   )
-  .withLinkToPlanning('javascript:void(0)')
+  .withLocation(
+    `
+    Le stage se déroule à Plouzané dans le Finistère (29).<br>
+    Vous pouvez y accéder de plusieurs manière: voiture, bus ou encore tram.<br>
+    Situé au bord de mer, le site bénéficie d'un cadre naturel exceptionnel.<br>
+    `
+  )
+  .withAddress('Plouzané A.C Football Stade de Trémaidic, 29280 Plouzané')
+  .withGmapsUrl('https://goo.gl/maps/6m6qTizWjKs')
+  .withPlanningUrl('javascript:void(0)')
   .withPathToLogo('./assets/img/plouzane/logo.png')
   .withPathToGallery('./assets/img/plouzane/gallery/data.json')
   .withSessions([

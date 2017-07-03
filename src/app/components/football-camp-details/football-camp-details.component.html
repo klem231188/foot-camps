@@ -7,69 +7,39 @@
 
     <span fxFlex="25px"></span>
 
-    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="space-around stretch">
-      <!-- Description -->
-      <div fxLayout="column" fxFlex="50%">
-        <md-toolbar fxLayout="row" fxLayoutAlign="start center">
-          <md-icon color="primary"  class="md-24">description</md-icon>
-          <span fxFlex="10px"></span>
-          <span class="toolbar-title">Description</span>
-        </md-toolbar>
-        <md-card fxFlex="grow">
-          <md-card-content>
-            <p [innerHTML]="footballCamp.details.description | safeHtml"></p>
-            <a href="javascript:void(0)" md-button color="primary">Télécharger le programme de la semaine</a>
-          </md-card-content>
-        </md-card>
-      </div>
-
-      <span fxFlex="25px"></span>
-
-      <!-- Localisation -->
-      <div fxLayout="column" fxFlex="50%">
-        <md-toolbar fxLayout="row" fxLayoutAlign="start center">
-          <md-icon color="primary" class="md-24">location_on</md-icon>
-          <span fxFlex="10px"></span>
-          <span class="toolbar-title">Localisation</span>
-        </md-toolbar>
-        <md-card fxFlex="grow">
-          <md-card-content>
-            <p>
-              Le centre de vie du FC Lorient, l’Espace FCL, permet d’accueillir les stagiaires dans <b>des conditions
-              optimales</b>. <br>
-              Aménagé spécialement pour la pratique du football dans <b>un cadre exceptionnel en bord de mer</b>, le
-              site
-              permet
-              aux jeunes stagiaires de profiter de leurs vacances en alliant découverte, progression et plaisir.
-            </p>
-            <p>
-              <b>Adresse</b> : <a href="https://goo.gl/maps/jHxskd6txuK2" md-button color="primary">FC LORIENT - Kerlir - CS 30 131 - 56271 PLOEMEUR Cedex</a>
-            </p>
-          </md-card-content>
-        </md-card>
-      </div>
+    <!-- Description -->
+    <div fxLayout="column" fxFlex>
+      <md-toolbar fxLayout="row" fxLayoutAlign="start center">
+        <md-icon color="primary" class="md-24">description</md-icon>
+        <span fxFlex="10px"></span>
+        <span class="toolbar-title">Description</span>
+      </md-toolbar>
+      <md-card>
+        <md-card-content>
+          <p [innerHTML]="footballCamp.details.description | safeHtml"></p>
+          <a href="javascript:void(0)" md-button color="primary">Télécharger le programme de la semaine</a>
+        </md-card-content>
+      </md-card>
     </div>
 
     <span fxFlex="25px"></span>
 
-    <!--&lt;!&ndash; Les équipements &ndash;&gt;-->
-    <!--<md-toolbar fxLayout="row" fxLayoutAlign="start center">-->
-    <!--<img src="/assets/img/ball.png" class="md-24 material-icons mat-icon"/>-->
-    <!--<span fxFlex="10px"></span>-->
-    <!--<span class="toolbar-title">Les équipements</span>-->
-    <!--</md-toolbar>-->
-    <!--<md-card>-->
-    <!--<md-card-content>-->
-    <!--<p>-->
-    <!--Le centre de vie du FC Lorient, l’Espace FCL, permet d’accueillir les stagiaires dans des conditions-->
-    <!--optimales. <br>-->
-    <!--Aménagé spécialement pour la pratique du football dans un cadre exceptionnel en bord de mer, le site permet-->
-    <!--aux jeunes stagiaires de profiter de leurs vacances en alliant découverte, progression et plaisir.-->
-    <!--</p>-->
-    <!--</md-card-content>-->
-    <!--</md-card>-->
+    <!-- Localisation -->
+    <div fxLayout="column" fxFlex>
+      <md-toolbar fxLayout="row" fxLayoutAlign="start center">
+        <md-icon color="primary" class="md-24">location_on</md-icon>
+        <span fxFlex="10px"></span>
+        <span class="toolbar-title">Localisation</span>
+      </md-toolbar>
+      <md-card>
+        <md-card-content>
+          <p [innerHTML]="footballCamp.details.location | safeHtml"></p>
+          <b>Adresse: </b> <a [href]="footballCamp.details.gmapsUrl" md-button color="primary">{{footballCamp.details.address | truncate : 50 }}</a>
+        </md-card-content>
+      </md-card>
+    </div>
 
-    <!--<span fxFlex="25px"></span>-->
+    <span fxFlex="25px"></span>
 
     <!-- Les organisateurs et les parrains -->
     <div fxFlex>

@@ -39,8 +39,15 @@ export class Overview {
 }
 
 export class Details {
+  //- Descritpion
   description : string;
-  linkToPlanning: string;
+  planningUrl: string;
+
+  //- Location
+  address: string;
+  location: string;
+  gmapsUrl: string;
+
   pathToLogo: string;
   pathToGallery: string;
   sessions: Session[];
@@ -53,8 +60,23 @@ export class Details {
     return this;
   }
 
-  withLinkToPlanning(value: string) {
-    this.linkToPlanning = value;
+  withPlanningUrl(value: string) {
+    this.planningUrl = value;
+    return this;
+  }
+
+  withLocation(value: string) {
+    this.location = value;
+    return this;
+  }
+
+  withAddress(value: string) {
+    this.address = value;
+    return this;
+  }
+
+  withGmapsUrl(value: string) {
+    this.gmapsUrl = value;
     return this;
   }
 

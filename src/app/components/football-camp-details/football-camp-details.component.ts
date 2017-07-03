@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, AfterViewInit} from "@angular/core";
+import {Component, OnInit, ViewChild, AfterViewInit, ViewEncapsulation} from "@angular/core";
 import {FootballCamp, Session} from "../../services/football-camp/football-camp";
 import {FootballCampService} from "../../services/football-camp/football-camp.service";
 import {ActivatedRoute, Params} from "@angular/router";
@@ -8,7 +8,8 @@ import * as _ from "lodash";
 @Component({
   selector: 'football-camp-details',
   templateUrl: 'football-camp-details.component.html',
-  styleUrls: ['football-camp-details.component.scss']
+  styleUrls: ['football-camp-details.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FootballCampDetailsComponent implements OnInit, AfterViewInit {
 

@@ -19,6 +19,7 @@ import {Angular2ImageGalleryModule} from 'angular2-image-gallery';
 import {AngularFireModule} from 'angularfire2';
 import {environment} from "../environments/environment";
 import {SafeHtmlPipe} from "./pipes/safe-html-pipe";
+import {TruncatePipe} from "./pipes/truncate-pipe";
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import {SafeHtmlPipe} from "./pipes/safe-html-pipe";
   ],
   declarations: [
     SafeHtmlPipe,
+    TruncatePipe,
     AppComponent,
     FootballCampLocatorComponent,
     FootballCampMapComponent,

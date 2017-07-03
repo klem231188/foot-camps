@@ -15,6 +15,10 @@
     -moz-box-direction: normal;
 
     overflow: auto;
-    margin-top: 64px;
+    margin-top: 56px;
+
+    @media (min-width: 960px) {
+      margin-top: 64px;
+    }
   }
 }
