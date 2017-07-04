@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="center center" *ngIf="footballCamp">
-  <div fxLayout="column" fxFlex.gt-sm="66%">
+  <div fxLayout="column" fxFlex="100%" fxFlex.gt-sm="66%">
 
     <span fxFlex="25px"></span>
 
@@ -8,7 +8,7 @@
     <span fxFlex="25px"></span>
 
     <!-- Description -->
-    <div fxLayout="column" fxFlex>
+    <div fxLayout="column">
       <md-toolbar fxLayout="row" fxLayoutAlign="start center">
         <md-icon color="primary" class="md-24">description</md-icon>
         <span fxFlex="10px"></span>
@@ -25,7 +25,7 @@
     <span fxFlex="25px"></span>
 
     <!-- Localisation -->
-    <div fxLayout="column" fxFlex>
+    <div fxLayout="column">
       <md-toolbar fxLayout="row" fxLayoutAlign="start center">
         <md-icon color="primary" class="md-24">location_on</md-icon>
         <span fxFlex="10px"></span>
@@ -34,7 +34,7 @@
       <md-card>
         <md-card-content>
           <p [innerHTML]="footballCamp.details.location | safeHtml"></p>
-          <b>Adresse: </b> <a [href]="footballCamp.details.gmapsUrl" md-button color="primary">{{footballCamp.details.address | truncate : 50 }}</a>
+          <b>Adresse: </b> <a [href]="footballCamp.details.gmapsUrl" md-button color="primary">{{footballCamp.details.address}}</a>
         </md-card-content>
       </md-card>
     </div>
