@@ -65,7 +65,12 @@ plouzane.details = new Details()
     Situé au bord de mer, le site bénéficie d'un cadre naturel exceptionnel.<br>
     `
   )
-  .withAddress('Plouzané A.C Football Stade de Trémaidic, 29280 Plouzané')
+  .withAddress(
+   `
+   Plouzané A.C Football Stade de Trémaidic, <br> 
+   29280 Plouzané<br> 
+   `
+  )
   .withGmapsUrl('https://goo.gl/maps/6m6qTizWjKs')
   .withPlanningUrl('javascript:void(0)')
   .withPathToLogo('./assets/img/plouzane/logo.png')

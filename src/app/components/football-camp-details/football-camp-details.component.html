@@ -34,7 +34,8 @@
       <md-card>
         <md-card-content>
           <p [innerHTML]="footballCamp.details.location | safeHtml"></p>
-          <b>Adresse: </b> <a [href]="footballCamp.details.gmapsUrl" md-button color="primary">{{footballCamp.details.address}}</a>
+          <b>Adresse: </b> <span [innerHTML]="footballCamp.details.address | safeHtml"></span>
+          <a [href]="footballCamp.details.gmapsUrl" md-button color="primary">Voir sur Google maps</a>
         </md-card-content>
       </md-card>
     </div>
