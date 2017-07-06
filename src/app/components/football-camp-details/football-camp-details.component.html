@@ -17,7 +17,8 @@
       <md-card>
         <md-card-content>
           <p [innerHTML]="footballCamp.details.description | safeHtml"></p>
-          <a href="javascript:void(0)" md-button color="primary">Télécharger le programme de la semaine</a>
+          <b>Programme:</b><a href="javascript:void(0)" md-button color="primary">Télécharger le programme de la
+          semaine</a>
         </md-card-content>
       </md-card>
     </div>
@@ -32,10 +33,13 @@
         <span class="toolbar-title">Localisation</span>
       </md-toolbar>
       <md-card>
-        <md-card-content>
+        <md-card-content class="location-md-card-content">
           <p [innerHTML]="footballCamp.details.location | safeHtml"></p>
-          <b>Adresse: </b> <span [innerHTML]="footballCamp.details.address | safeHtml"></span>
-          <a [href]="footballCamp.details.gmapsUrl" md-button color="primary">Voir sur Google maps</a>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <b>Adresse: </b>
+            <span fxFlex="10px"></span>
+            <a [href]="footballCamp.details.gmapsUrl" md-button color="primary">{{footballCamp.details.address}}</a>
+          </div>
         </md-card-content>
       </md-card>
     </div>
@@ -44,37 +48,28 @@
 
     <!-- Les organisateurs et les parrains -->
     <div fxFlex>
-      <md-toolbar fxLayout="row" fxLayoutAlign="start center">
+      <md-toolbar fxLayout="row" fxLayoutAlign="center start">
         <md-icon color="primary" class="md-24">face</md-icon>
         <span fxFlex="10px"></span>
         <span class="toolbar-title">Les organisateurs et les parrains</span>
       </md-toolbar>
       <md-card>
         <md-card-content>
-          <p>
-            Votre enfant bénéficiera d’un programme technique digne des plus grands pour une expérience unique et
-            inoubliable.<br>
-            Adaptés au niveau de chacun, les stages Expérience FCL permettront à votre enfant d’améliorer son
-            niveau de jeu dans un climat de convivialité et de respect.<br>
-            Les stages sont encadrés par une <b>équipe d’animateurs diplômés</b> (animation et encadrement sportif).
-          </p>
+          <p [innerHTML]="footballCamp.details.organizerDescription | safeHtml"></p>
           <div fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-around center" class="quote">
             <img class="avatar" src="assets/img/examples/zidane.png">
             <blockquote>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id
               nisl mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae! Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id nisl
-              mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae!
+              ipsum dolor sit amet, consectetur adipiscing elit.
               <cite>Z. Zidane</cite>
             </blockquote>
           </div>
           <div fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-around center" class="quote">
             <img class="avatar" src="assets/img/examples/ronaldo.png">
             <blockquote>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id
-              nisl mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae! Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id nisl
-              mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae!
+              Mauris eget leo nunc, nec tempus mi? Curabitur id nisl mi, ut vulputate urna. Quisque porta facilisis
+              tortor, vitae bibendum velit fringilla vitae!
               <cite>C. Ronaldo</cite>
             </blockquote>
           </div>
@@ -82,9 +77,7 @@
             <img class="avatar" src="assets/img/examples/griezmann.png">
             <blockquote>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id
-              nisl mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae! Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id nisl
-              mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae!
+              nisl mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae!
               <cite>A. Griezmann</cite>
             </blockquote>
           </div>
@@ -158,10 +151,11 @@
       </md-toolbar>
       <md-card>
         <md-card-content>
-          <p>
-            <a href="https://fclweb.fr/le-club/experience-fcl/#formulaire-dinscription">Rendez-vous sur le site web de
-              l'organisateur pour vous inscrire </a>
-          </p>
+          Pour le moment les inscriptions sont uniquement possibles via le site de l'organisateur.<br><br>
+          <div fxLayout="column" fxLayoutAlign="none center">
+            <a [href]="footballCamp.details.subscribeUrl" md-button color="primary" class="link-to-maps">Je m'inscris
+              sans attendre !</a>
+          </div>
         </md-card-content>
       </md-card>
     </div>

@@ -39,8 +39,11 @@ export class Overview {
 }
 
 export class Details {
+  //- Logo
+  pathToLogo: string;
+
   //- Descritpion
-  description : string;
+  description: string;
   planningUrl: string;
 
   //- Location
@@ -48,11 +51,25 @@ export class Details {
   location: string;
   gmapsUrl: string;
 
-  pathToLogo: string;
+  //- Organizers and sponsors
+  organizerDescription: string;
+  organizers: Organizer[];
+
+  //- Gallery
   pathToGallery: string;
+
+  //- Date and prices
   sessions: Session[];
 
+  //- Subscribe
+  subscribeUrl: string;
+
   constructor() {
+  }
+
+  withPathToLogo(value: string) {
+    this.pathToLogo = value;
+    return this;
   }
 
   withDescription(value: string) {
@@ -80,8 +97,13 @@ export class Details {
     return this;
   }
 
-  withPathToLogo(value: string) {
-    this.pathToLogo = value;
+  withOrganizerDescription(value: string) {
+    this.organizerDescription = value;
+    return this;
+  }
+
+  withOrganizers(value: Organizer[]) {
+    this.organizers = value;
     return this;
   }
 
@@ -92,6 +114,35 @@ export class Details {
 
   withSessions(value: Session[]) {
     this.sessions = value;
+    return this;
+  }
+
+  withSubscribeUrl(value: string) {
+    this.subscribeUrl = value;
+    return this;
+  }
+}
+
+export class Organizer {
+  name: string;
+  pictureUrl: string;
+  speech: string;
+
+  constructor() {
+  }
+
+  withName(value: string): Organizer {
+    this.name = value;
+    return this;
+  }
+
+  withPictureUrl(value: string): Organizer {
+    this.pictureUrl = value;
+    return this;
+  }
+
+  withSpeech(value: string): Organizer {
+    this.speech = value;
     return this;
   }
 }

@@ -11,12 +11,17 @@
     @media (min-width: 960px) {
       margin-top: 64px;
     }
+
+    .location-md-card-content {
+      overflow-x: auto;
+    }
   }
 
   football-camp-details > div {
     overflow-y: auto;
     background: url('assets/img/examples/cover-teal.jpg') no-repeat center center fixed;
     background-size: cover;
+    padding: 10px;
   }
 
   football-camp-details md-card {
