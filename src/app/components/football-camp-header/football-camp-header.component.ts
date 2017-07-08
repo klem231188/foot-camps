@@ -36,4 +36,8 @@ export class FootballCampHeaderComponent implements OnInit {
   onBackClicked(): void {
     this.router.navigate([this.backUrl]);
   }
+
+  onFindFootballCampsClicked(): void {
+    this.router.navigate(['/locate']);
+  }
 }

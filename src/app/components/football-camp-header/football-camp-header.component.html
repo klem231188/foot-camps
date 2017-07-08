@@ -6,7 +6,7 @@
   <span class="brand" fxFlex>Footcamps</span>
 
   <div fxHide fxShow.gt-sm>
-    <button md-button>
+    <button (click)="onFindFootballCampsClicked()" md-button>
       <md-icon>location_on</md-icon>
       <span>Trouver un stage</span>
     </button>
@@ -21,7 +21,7 @@
   </button>
 
   <md-menu #menu="mdMenu">
-    <button md-menu-item>
+    <button (click)="onFindFootballCampsClicked()" md-menu-item>
       <md-icon>location_on</md-icon>
       <span>Trouver un stage</span>
     </button>
