@@ -14,13 +14,12 @@ import {FootballCampHeaderComponent} from "./components/football-camp-header/foo
 import {FootballCampDetailsComponent} from "./components/football-camp-details/football-camp-details.component";
 import {FootballCampMapComponent} from "./components/football-camp-map/football-camp-map.component";
 import {FootballCampOverviewComponent} from "./components/football-camp-overview/football-camp-overview.component";
-import {CarouselModule} from 'ngx-bootstrap/carousel';
-import {Angular2ImageGalleryModule} from 'angular2-image-gallery';
-import {AngularFireModule} from 'angularfire2';
+import {CarouselModule} from "ngx-bootstrap/carousel";
+import {Angular2ImageGalleryModule} from "angular2-image-gallery";
+import {AngularFireModule} from "angularfire2";
 import {environment} from "../environments/environment";
 import {SafeHtmlPipe} from "./pipes/safe-html-pipe";
 import {TruncatePipe} from "./pipes/truncate-pipe";
-
 
 @NgModule({
   imports: [

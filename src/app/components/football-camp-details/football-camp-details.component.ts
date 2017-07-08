@@ -15,6 +15,8 @@ export class FootballCampDetailsComponent implements OnInit, AfterViewInit {
 
   footballCamp: FootballCamp = null;
 
+  viewerOpened: boolean = false;
+
   constructor(private route: ActivatedRoute,
               private footballCampService: FootballCampService,) {
   }
@@ -43,7 +45,12 @@ export class FootballCampDetailsComponent implements OnInit, AfterViewInit {
     return !_.isEmpty(this.getHalfBoardRatesSessions());
   }
 
-  onViewerChange(event) {
-    console.log(event);
+  isViewerOpened(): boolean {
+    return this.viewerOpened;
+  }
+
+  onViewerChange(viewerOpened: boolean) {
+    console.log("Viewer isOpened = " + viewerOpened);
+    this.viewerOpened = viewerOpened;
   }
 }

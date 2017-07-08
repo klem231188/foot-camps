@@ -6,39 +6,52 @@
   $foreground: map-get($theme, foreground);
 
   football-camp-details {
-    margin-top: 56px;
-
-    @media (min-width: 960px) {
-      margin-top: 64px;
-    }
-
-    .location-md-card-content {
-      overflow-x: auto;
-    }
-  }
-
-  football-camp-details > div {
-    overflow-y: auto;
     background-image: url('assets/img/examples/cover-teal.jpg');
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     padding: 10px;
-  }
 
-  football-camp-details md-card {
-    border-radius: 0px 0px 2px 2px !important;
-  }
+    .container {
+      width: 100%;
+      overflow-x: hidden;
+    }
 
-  football-camp-details md-toolbar {
-    @include mat-elevation(2);
-    position: relative;
-    z-index: 1;
-  }
+    md-card {
+      border-radius: 0px 0px 2px 2px !important;
+    }
 
-  football-camp-details md-card-content {
-    font-size: 15px !important;
+    md-toolbar {
+      @include mat-elevation(2);
+      position: relative;
+      z-index: 1;
+    }
+
+    md-card-content {
+      font-size: 15px !important;
+    }
+
+    .background-white {
+      background-color: white;
+    }
+
+    blockquote {
+      padding: 10px 20px;
+      font-size: 17.5px;
+      border-left: 5px solid #eee;
+    }
+
+    blockquote cite {
+      color: #999999;
+      font-size: 14px;
+      display: block;
+      margin-top: 5px;
+    }
+
+    blockquote cite:before {
+      content: "\2014 \2009";
+    }
   }
 
   .toolbar-title {
@@ -59,23 +72,6 @@
     background-color: mat-color($primary);
   }
 
-  blockquote {
-    padding: 10px 20px;
-    //margin: 0 0 20px;
-    font-size: 17.5px;
-    border-left: 5px solid #eee;
-  }
-
-  blockquote cite {
-    color: #999999;
-    font-size: 14px;
-    display: block;
-    margin-top: 5px;
-  }
-
-  blockquote cite:before {
-    content: "\2014 \2009";
-  }
 
   table {
     border: 1px solid #ccc;
@@ -133,10 +129,6 @@
       text-align: right;
     }
     table td:before {
-      /*
-      * aria-label has no advantage, it won't be read inside a table
-      content: attr(aria-label);
-      */
       content: attr(data-label);
       float: left;
       font-weight: bold;

@@ -5,4 +5,23 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
+  app-root {
+    display: flex;
+    flex-direction: column;
+
+    router-outlet + * {
+      flex: 1 1 auto;
+      position: relative;
+      margin-top: 56px;
+
+      @media (min-width: 960px) {
+        margin-top: 64px;
+      }
+    }
+
+    footer {
+      flex: 0 0 auto;
+      background-color: mat-color($primary, darker);
+    }
+  }
 }
