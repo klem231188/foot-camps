@@ -104,7 +104,79 @@ plouzane.details = new Details()
   .withSubscribeUrl('http://www.plouzane-ac-football.org/inscription-contact.php')
 ;
 
+//------------------------------------
+let plabennec: FootballCamp = new FootballCamp();
+//- Main view
+plabennec.id = 2;
+plabennec.latitude = 48.4999551;
+plabennec.longitude = -4.4484149;
+plabennec.city = 'Plabennec';
+
+//- Overview
+plabennec.overview = new Overview()
+  .withPathToImage('./assets/img/plabennec/cover.jpg')
+  .withContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
+  .withTitle('Bienvenue au Foot Camps de Plabennec');
+
+//- Details
+plabennec.details = new Details()
+  .withDescription(
+    `
+    <p>
+      Ce stage s'adresse à la fois à ceux voulant s'initier au football, ainsi qu'à ceux voulant se perfectionner.  
+      <ul>
+       <li>Des <b>ateliers découvertes</b> sont proposés pour les plus jeunes et les non pratiquants souhaitant s'initier</li>
+       <li>Des <b>ateliers techniques</b> pour les plus expérimenté(e)s</li>
+       <li>Des <b>ateliers spécifiques gardiens de but</b></li>
+      </ul>
+      L'ensemble des ateliers se déroulent sous différents formats (jeux, défis, ...)
+    </p>
+
+    <p>
+      Ce stage propose aux enfants d'autres activités extra-sportives : 
+      <ul>
+       <li>Soccer de Guipavas, pour un tournoi disputé et inoubliable</li>
+       <li>La Récré des curés, pour quitter les terrains, se détendre et s’amuser dans le parc de loisir de Milizac</li>
+       <li>Un Laser Game, pour une bataille virtuelle entre l’équipe des Rouges et celle des Bleus</li>
+      </ul>
+    </p>
+    
+    <b>Infrastructures sportives:</b> <ul><li>A faire</li></ul> 
+    <b>Infrastructures générales:</b> <ul><li>A faire</li></ul> 
+    `
+  )
+  .withLocation(
+    `
+    Situé à l'extrémité de la Bretagne, le stage se déroule à Plabennec dans le Finistère (29).     
+    `
+  )
+  .withAddress(
+    `
+   Stade Plabennecois Football, Complexe de Kerveguen, 29860 Plabennec
+   `
+  )
+  .withGmapsUrl('https://goo.gl/maps/5GMh35CKxnv')
+  .withOrganizerDescription(
+    `
+    Les stages sont encadrés par une une équipe technique de <b>qualité</b>, <b>expérimentée</b> et <b>motivée</b> <br>
+    Cinq joueurs du Stade Plabennecois, sont présents pour encadrer et proposer un programme de qualité.<br> 
+    Depuis 4 ans ce stage connait un succès grandissant.
+    `
+  )
+  .withPlanningUrl('javascript:void(0)')
+  .withPathToLogo('./assets/img/plabennec/logo.png')
+  .withPathToGallery('./assets/img/plabennec/gallery/data.json')
+  .withSessions([
+      new Session().withName('Session 1').withFromDateToDate('Du 10 au 14 juillet 2017').withFullBoardRates(230).withHalfBoardRates(null),
+      new Session().withName('Session 2').withFromDateToDate('Du 17 au 21 juillet 2017').withFullBoardRates(230).withHalfBoardRates(null),
+      new Session().withName('Session 3').withFromDateToDate('Du 24 au 28 juillet 2017').withFullBoardRates(230).withHalfBoardRates(null),
+    ]
+  )
+  .withSubscribeUrl('http://www.plab29.com/plabete')
+;
+
 export const FOOTBAL_CAMPS: FootballCamp[] = [
   lorient,
-  plouzane
+  plouzane,
+  plabennec
 ];
