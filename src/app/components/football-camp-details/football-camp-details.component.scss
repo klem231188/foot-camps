@@ -58,6 +58,10 @@
     color: mat-color($primary);
   }
 
+  .quote {
+    margin-bottom: 5px;
+  }
+
   .quote:hover * {
     filter: brightness(80%);
   }

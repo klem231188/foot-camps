@@ -42,9 +42,9 @@ export class Details {
   //- Logo
   pathToLogo: string;
 
-  //- Descritpion
+  //- Description
   description: string;
-  planningUrl: string;
+  pathToSchedule: string;
 
   //- Location
   address: string;
@@ -77,8 +77,8 @@ export class Details {
     return this;
   }
 
-  withPlanningUrl(value: string) {
-    this.planningUrl = value;
+  withPathToSchedule(value: string) {
+    this.pathToSchedule = value;
     return this;
   }
 

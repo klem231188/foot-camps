@@ -16,8 +16,8 @@
       <md-card>
         <md-card-content>
           <p [innerHTML]="footballCamp.details.description | safeHtml"></p>
-          <b>Programme:</b><a href="javascript:void(0)" md-button color="primary">Télécharger le programme de la
-          semaine</a>
+          <b>Programme:</b>
+          <a href="{{footballCamp.details.pathToSchedule}}" download md-button color="primary">Télécharger le programme de la semaine</a>
         </md-card-content>
       </md-card>
     </div>

@@ -21,6 +21,7 @@ lorient.details = new Details()
     Pendant une semaine, les jeunes stagiaires auront la chance de vivre au sein du <b>centre d’entraînement du FC Lorient</b>, de côtoyer les joueurs professionnels et le staff technique. <br>
     Ils pourront ainsi découvrir la vie d’un club professionnel.
     `)
+  .withPathToSchedule('./assets/img/lorient/programme.jpg')
   .withLocation(
     `
    TODO
@@ -72,6 +73,7 @@ plouzane.details = new Details()
     <b>Infrastructures générales:</b> <ul><li>Chambres de 2 à 6 couchages</li><li>Foyer (TV-jeux)</li><li>Salle de restauration</li></ul> 
     `
   )
+  .withPathToSchedule('./assets/img/plouzane/programme.jpg')
   .withLocation(
     `
     Le stage se déroule à Plouzané dans le Finistère (29). Les moyens d'accès sont mutiples : voiture, bus ou encore tram.<br>
@@ -91,7 +93,6 @@ plouzane.details = new Details()
     Les stages sont encadrés par une <b>équipe d’animateurs diplômés</b> ainsi qu'un <b>ensemble de bénévoles</b>.
     `
   )
-  .withPlanningUrl('javascript:void(0)')
   .withPathToLogo('./assets/img/plouzane/logo.png')
   .withPathToGallery('./assets/img/plouzane/gallery/data.json')
   .withSessions([
@@ -145,6 +146,7 @@ plabennec.details = new Details()
     <b>Infrastructures générales:</b> <ul><li>A faire</li></ul> 
     `
   )
+  .withPathToSchedule('./assets/img/plabennec/programme.jpg')
   .withLocation(
     `
     Situé à l'extrémité de la Bretagne, le stage se déroule à Plabennec dans le Finistère (29).     
@@ -163,7 +165,6 @@ plabennec.details = new Details()
     Depuis 4 ans ce stage connait un succès grandissant.
     `
   )
-  .withPlanningUrl('javascript:void(0)')
   .withPathToLogo('./assets/img/plabennec/logo.png')
   .withPathToGallery('./assets/img/plabennec/gallery/data.json')
   .withSessions([
