@@ -125,7 +125,7 @@ export class Details {
 
 export class Organizer {
   name: string;
-  pictureUrl: string;
+  pathToPicture: string;
   speech: string;
 
   constructor() {
@@ -136,8 +136,8 @@ export class Organizer {
     return this;
   }
 
-  withPictureUrl(value: string): Organizer {
-    this.pictureUrl = value;
+  withPathToPicture(value: string): Organizer {
+    this.pathToPicture = value;
     return this;
   }
 

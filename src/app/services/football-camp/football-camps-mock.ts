@@ -1,4 +1,4 @@
-import {FootballCamp, Session, Overview, Details} from "./football-camp";
+import {FootballCamp, Session, Overview, Details, Organizer} from "./football-camp";
 
 //------------------------------------
 let lorient: FootballCamp = new FootballCamp();
@@ -35,6 +35,12 @@ lorient.details = new Details()
     Adaptés au niveau de chacun, les stages Expérience FCL permettront à votre enfant d’améliorer son niveau de jeu dans un climat de convivialité et de respect.<br>
     Les stages sont encadrés par une <b>équipe d’animateurs diplômés</b> (animation et encadrement sportif).
     `
+  )
+  .withOrganizers([
+      new Organizer().withName('Z. ZIDANE').withPathToPicture('./assets/img/examples/zidane.png'),
+      new Organizer().withName('C. RONALDO').withPathToPicture('./assets/img/examples/ronaldo.png'),
+      new Organizer().withName('A. GRIEZMANN').withPathToPicture('./assets/img/examples/griezmann.png'),
+    ]
   )
   .withPathToLogo('./assets/img/lorient/logo.png')
   .withPathToGallery('./assets/img/lorient/gallery/data.json')
@@ -92,6 +98,12 @@ plouzane.details = new Details()
     Adaptés au niveau de chacun, les stages du PAC permettront à votre enfant d’améliorer son niveau de jeu dans un climat de convivialité et de respect.<br>
     Les stages sont encadrés par une <b>équipe d’animateurs diplômés</b> ainsi qu'un <b>ensemble de bénévoles</b>.
     `
+  )
+  .withOrganizers([
+      new Organizer().withName('Z. ZIDANE').withPathToPicture('./assets/img/examples/zidane.png'),
+      new Organizer().withName('C. RONALDO').withPathToPicture('./assets/img/examples/ronaldo.png'),
+      new Organizer().withName('A. GRIEZMANN').withPathToPicture('./assets/img/examples/griezmann.png'),
+    ]
   )
   .withPathToLogo('./assets/img/plouzane/logo.png')
   .withPathToGallery('./assets/img/plouzane/gallery/data.json')
@@ -164,6 +176,13 @@ plabennec.details = new Details()
     Cinq joueurs du Stade Plabennecois, sont présents pour encadrer et proposer un programme de qualité.<br> 
     Depuis 4 ans ce stage connait un succès grandissant.
     `
+  )
+  .withOrganizers([
+      new Organizer().withName('Steven COAT').withPathToPicture('./assets/img/plabennec/organizers/avatar/Steven-COAT.jpg'),
+      new Organizer().withName('Florian GUILLOU').withPathToPicture('./assets/img/plabennec/organizers/avatar/Florian-GUILLOU.jpg'),
+      new Organizer().withName('Matthieu TANGUY').withPathToPicture('./assets/img/plabennec/organizers/avatar/Matthieu-TANGUY.jpg'),
+      new Organizer().withName('Christophe LE ROUX').withPathToPicture('./assets/img/plabennec/organizers/avatar/Christophe-LE-ROUX.jpg'),
+    ]
   )
   .withPathToLogo('./assets/img/plabennec/logo.png')
   .withPathToGallery('./assets/img/plabennec/gallery/data.json')

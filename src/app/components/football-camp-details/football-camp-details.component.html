@@ -17,7 +17,8 @@
         <md-card-content>
           <p [innerHTML]="footballCamp.details.description | safeHtml"></p>
           <b>Programme:</b>
-          <a href="{{footballCamp.details.pathToSchedule}}" download md-button color="primary">Télécharger le programme de la semaine</a>
+          <a href="{{footballCamp.details.pathToSchedule}}" download md-button color="primary">Télécharger le programme
+            de la semaine</a>
         </md-card-content>
       </md-card>
     </div>
@@ -55,30 +56,19 @@
       <md-card>
         <md-card-content>
           <p [innerHTML]="footballCamp.details.organizerDescription | safeHtml"></p>
-          <div fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-around center" class="quote">
-            <img class="avatar" src="assets/img/examples/zidane.png">
-            <blockquote>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id
-              nisl mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae! Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit.
-              <cite>Z. Zidane</cite>
-            </blockquote>
-          </div>
-          <div fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-around center" class="quote">
-            <img class="avatar" src="assets/img/examples/ronaldo.png">
-            <blockquote>
-              Mauris eget leo nunc, nec tempus mi? Curabitur id nisl mi, ut vulputate urna. Quisque porta facilisis
-              tortor, vitae bibendum velit fringilla vitae!
-              <cite>C. Ronaldo</cite>
-            </blockquote>
-          </div>
-          <div fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-around center" class="quote">
-            <img class="avatar" src="assets/img/examples/griezmann.png">
-            <blockquote>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id
-              nisl mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae!
-              <cite>A. Griezmann</cite>
-            </blockquote>
+          <div *ngIf="footballCamp.details.organizers != null">
+            <div fxLayout.gt-sm="row" fxLayout="column"
+                 fxLayoutAlign="space-around center" class="quote"
+                 *ngFor="let organizer of footballCamp.details.organizers">
+              <img class="avatar" src="{{organizer.pathToPicture}}">
+              <blockquote>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur
+                id
+                nisl mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae! Lorem
+                ipsum dolor sit amet, consectetur adipiscing elit.
+                <cite>{{organizer.name}}</cite>
+              </blockquote>
+            </div>
           </div>
         </md-card-content>
       </md-card>

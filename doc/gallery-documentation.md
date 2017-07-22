@@ -9,3 +9,7 @@ cd ~/workspace/foot-camps/
 node node_modules/angular2-image-gallery/convert.js src/assets/img/**club**/gallery --outputDir=src/assets/img/**club**/gallery --remoteBaseUrl=assets/img/**club**/gallery
 # Ex : node node_modules/angular2-image-gallery/convert.js src/assets/img/lorient/gallery --outputDir=src/assets/img/lorient/gallery --remoteBaseUrl=assets/img/lorient/gallery
 ```
+
+
+
+node node_modules/angular2-image-gallery/convert.js src/assets/img/plabennec/gallery --outputDir=src/assets/img/plabennec/gallery --remoteBaseUrl=assets/img/plabennec/gallery
