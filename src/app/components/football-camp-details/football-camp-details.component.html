@@ -34,7 +34,7 @@
       <md-card>
         <md-card-content>
           <p [innerHTML]="footballCamp.details.location | safeHtml"></p>
-          <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="row" fxLayoutAlign="start center" class="details-location-address">
             <b>Adresse: </b>
             <span fxFlex="10px"></span>
             <a [href]="footballCamp.details.gmapsUrl" md-button color="primary">{{footballCamp.details.address}}</a>
