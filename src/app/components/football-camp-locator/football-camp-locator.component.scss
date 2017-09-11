@@ -13,7 +13,19 @@
     flex-direction: row;
     -moz-box-orient: horizontal;
     -moz-box-direction: normal;
-
     overflow: auto;
+
+    .search-bar {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      z-index: 2;
+      padding: 10px;
+      width: 30%;
+
+      md-form-field {
+        width: 100%;
+      }
+    }
   }
 }
