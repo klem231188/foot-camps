@@ -4,8 +4,14 @@
   >
     <form>
       <md-form-field>
-        <input mdInput placeholder="Rechercher un stage de football">
+        <input type="text" mdInput placeholder="Rechercher un stage de football" [formControl]="searchFootballCampInput" [mdAutocomplete]="auto">
       </md-form-field>
+
+      <md-autocomplete #auto="mdAutocomplete">
+        <md-option *ngFor="let footballCamp of footballCamps" [value]="footballCamp.city">
+          {{ footballCamp.city }}
+        </md-option>
+      </md-autocomplete>
     </form>
   </md-card>
 
