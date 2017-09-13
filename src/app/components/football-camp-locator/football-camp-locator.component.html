@@ -1,19 +1,21 @@
-  <md-card
-    class="search-bar"
-    [fxHide]="footballCamp"
-  >
-    <form>
-      <md-form-field>
-        <input type="text" mdInput placeholder="Rechercher un stage de football" [formControl]="searchFootballCampInput" [mdAutocomplete]="auto">
-      </md-form-field>
+<md-card
+  class="search-bar"
+  [fxHide]="footballCamp"
+>
+  <form>
+    <md-form-field>
+      <input type="text" mdInput placeholder="Rechercher un stage de football" [formControl]="searchInput"
+             [mdAutocomplete]="auto">
+      <md-icon mdSuffix>search</md-icon>
+    </md-form-field>
 
-      <md-autocomplete #auto="mdAutocomplete">
-        <md-option *ngFor="let footballCamp of footballCamps" [value]="footballCamp.city">
-          {{ footballCamp.city }}
-        </md-option>
-      </md-autocomplete>
-    </form>
-  </md-card>
+    <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+      <md-option *ngFor="let footballCamp of filteredFootballCamps | async" [value]="footballCamp">
+        {{ footballCamp.city }}
+      </md-option>
+    </md-autocomplete>
+  </form>
+</md-card>
 
 <div fxLayout.gt-sm="row" fxLayout="column" fxFlex="grow">
 

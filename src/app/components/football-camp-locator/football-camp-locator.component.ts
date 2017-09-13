@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {FootballCampService} from "../../services/football-camp/football-camp.service";
 import {FootballCamp} from "../../services/football-camp/football-camp";
-import {ActivatedRoute, Router, Params} from "@angular/router";
+import {ActivatedRoute, Params} from "@angular/router";
 import {FormControl} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/startWith';
@@ -15,8 +15,8 @@ export class FootballCampLocatorComponent implements OnInit {
 
   footballCamp: FootballCamp = null;
   footballCamps: FootballCamp[];
-  //observableFootballCamps: Observable<FootballCamp[]>;
-  searchFootballCampInput: FormControl = new FormControl();
+  filteredFootballCamps: Observable<FootballCamp[]>;
+  searchInput: FormControl = new FormControl();
 
   constructor(private route: ActivatedRoute,
               private footballCampService: FootballCampService) {
@@ -34,15 +34,24 @@ export class FootballCampLocatorComponent implements OnInit {
 
     this.footballCampService
       .getFootballCamps()
-      .then(footballCamps => this.footballCamps = footballCamps);
+      .then(
+        footballCamps => {
+          this.footballCamps = footballCamps;
 
-    // this.observableFootballCamps = this.searchFootballCampInput.valueChanges
-    //   .startWith(null)
-    //   .map(value => value ? this.filter(value) : this.footballCamps.slice());
+          this.filteredFootballCamps = this.searchInput.valueChanges
+            .startWith(this.footballCamps)
+            .map(footballCamp => footballCamp && typeof footballCamp === 'object' ? footballCamp.city : footballCamp)
+            .map(city => city ? this.filter(city) : this.footballCamps.slice());
+        }
+      );
   }
 
-  // filter(val: string): FootballCamp[] {
-  //   return this.footballCamps.filter(footballCamp => footballCamp.city.toLowerCase().indexOf(val.toLowerCase()) === 0);
-  // }
+  filter(city: string): FootballCamp[] {
+    return this.footballCamps.filter(footballCamp =>
+      footballCamp.city.toLowerCase().indexOf(city.toLowerCase()) === 0);
+  }
 
+  displayFn(footballCamp: FootballCamp): string {
+    return footballCamp ? footballCamp.city : '';
+  }
 }
