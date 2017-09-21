@@ -1,11 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import {FootballCampService} from "../../services/football-camp/football-camp.service";
 import {FootballCamp} from "../../services/football-camp/football-camp";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {FormControl} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import * as _ from "lodash";
 
 @Component({
   selector: 'football-camp-locator',
@@ -18,7 +19,8 @@ export class FootballCampLocatorComponent implements OnInit {
   filteredFootballCamps: Observable<FootballCamp[]>;
   searchInput: FormControl = new FormControl();
 
-  constructor(private route: ActivatedRoute,
+  constructor(private router: Router,
+              private route: ActivatedRoute,
               private footballCampService: FootballCampService) {
   }
 
@@ -40,8 +42,16 @@ export class FootballCampLocatorComponent implements OnInit {
 
           this.filteredFootballCamps = this.searchInput.valueChanges
             .startWith(this.footballCamps)
-            .map(footballCamp => footballCamp && typeof footballCamp === 'object' ? footballCamp.city : footballCamp)
+            .map(footballCamp => (footballCamp && typeof footballCamp === 'object') ? footballCamp.city : footballCamp)
             .map(city => city ? this.filter(city) : this.footballCamps.slice());
+
+          this.searchInput.valueChanges.subscribe(
+            footballCamp => {
+              if (footballCamp && _.includes(this.footballCamps, footballCamp)) {
+                this.router.navigate(['/locate', footballCamp.id]);
+              }
+            }
+          );
         }
       );
   }
