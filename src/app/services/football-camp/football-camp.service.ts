@@ -11,7 +11,7 @@ export class FootballCampService {
 
   getFootballCamp(id: number): Promise<FootballCamp> {
     return this.getFootballCamps().then(footballCamps => {
-      return footballCamps[id]
+      return footballCamps[id];
     });
   }
 }

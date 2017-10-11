@@ -22,7 +22,7 @@ export class FootballCampOverviewComponent implements OnInit {
     this.route
       .params
       .switchMap((params: Params) => {
-        return this.footballCampService.getFootballCamp(+params['id'])
+        return this.footballCampService.getFootballCamp(+params['id']);
       })
       .subscribe((footballCamp: FootballCamp) => {
         this.footballCamp = footballCamp;
