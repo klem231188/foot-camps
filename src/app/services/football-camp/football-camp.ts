@@ -1,16 +1,16 @@
 export class FootballCamp {
-  //- id
+  // - id
   id: number;
 
-  //- GPS positioning
+  // - GPS positioning
   latitude: number;
   longitude: number;
   city: string;
 
-  //- Overview data
+  // - Overview data
   overview: Overview;
 
-  //- Details data
+  // - Details data
   details: Details;
 }
 
@@ -39,29 +39,29 @@ export class Overview {
 }
 
 export class Details {
-  //- Logo
+  // - Logo
   pathToLogo: string;
 
-  //- Description
+  // - Description
   description: string;
   pathToSchedule: string;
 
-  //- Location
+  // - Location
   address: string;
   location: string;
   gmapsUrl: string;
 
-  //- Organizers and sponsors
+  // - Organizers and sponsors
   organizerDescription: string;
   organizers: Organizer[];
 
-  //- Gallery
+  // - Gallery
   pathToGallery: string;
 
-  //- Date and prices
+  // - Date and prices
   sessions: Session[];
 
-  //- Subscribe
+  // - Subscribe
   subscribeUrl: string;
 
   constructor() {

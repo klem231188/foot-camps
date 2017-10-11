@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {FootballCampService} from "../../services/football-camp/football-camp.service";
-import {FootballCamp} from "../../services/football-camp/football-camp";
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {FootballCampService} from '../../services/football-camp/football-camp.service';
+import {FootballCamp} from '../../services/football-camp/football-camp';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'football-camp-map',
@@ -12,7 +12,7 @@ export class FootballCampMapComponent implements OnInit {
 
   footballCamps: FootballCamp[];
 
-  zoom : number;
+  zoom: number;
 
   constructor(private router: Router,
               private footballCampService: FootballCampService) {

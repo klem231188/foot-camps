@@ -1,12 +1,12 @@
-import {Component, OnInit} from "@angular/core";
-import {FootballCampService} from "../../services/football-camp/football-camp.service";
-import {FootballCamp} from "../../services/football-camp/football-camp";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {FormControl} from "@angular/forms";
-import {Observable} from "rxjs/Observable";
+import {Component, OnInit} from '@angular/core';
+import {FootballCampService} from '../../services/football-camp/football-camp.service';
+import {FootballCamp} from '../../services/football-camp/football-camp';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
-import * as _ from "lodash";
+import * as _ from 'lodash';
 
 @Component({
   selector: 'football-camp-locator',

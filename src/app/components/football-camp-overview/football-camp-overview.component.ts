@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {FootballCamp} from "../../services/football-camp/football-camp";
-import {FootballCampService} from "../../services/football-camp/football-camp.service";
-import {Router, ActivatedRoute, Params} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {FootballCamp} from '../../services/football-camp/football-camp';
+import {FootballCampService} from '../../services/football-camp/football-camp.service';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -25,7 +25,7 @@ export class FootballCampOverviewComponent implements OnInit {
         return this.footballCampService.getFootballCamp(+params['id'])
       })
       .subscribe((footballCamp: FootballCamp) => {
-        this.footballCamp = footballCamp
+        this.footballCamp = footballCamp;
       });
   }
 

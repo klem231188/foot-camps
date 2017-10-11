@@ -1,5 +1,5 @@
-import {Component, ViewEncapsulation} from "@angular/core";
-import {FootballCampService} from "./services/football-camp/football-camp.service";
+import {Component, ViewEncapsulation} from '@angular/core';
+import {FootballCampService} from './services/football-camp/football-camp.service';
 
 @Component({
   selector: 'app-root',

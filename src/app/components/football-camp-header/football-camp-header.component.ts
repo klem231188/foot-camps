@@ -1,5 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {Router, NavigationStart} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {Router, NavigationStart} from '@angular/router';
 
 @Component({
   selector: 'football-camp-header',

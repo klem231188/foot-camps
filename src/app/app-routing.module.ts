@@ -1,7 +1,7 @@
-import {NgModule} from "@angular/core";
-import {RouterModule, Routes} from "@angular/router";
-import {FootballCampDetailsComponent} from "./components/football-camp-details/football-camp-details.component";
-import {FootballCampLocatorComponent} from "./components/football-camp-locator/football-camp-locator.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {FootballCampDetailsComponent} from './components/football-camp-details/football-camp-details.component';
+import {FootballCampLocatorComponent} from './components/football-camp-locator/football-camp-locator.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/locate', pathMatch: 'full'},

@@ -1,20 +1,20 @@
-import {FootballCamp, Session, Overview, Details, Organizer} from "./football-camp";
+import {FootballCamp, Session, Overview, Details, Organizer} from './football-camp';
 
-//------------------------------------
-let lorient: FootballCamp = new FootballCamp();
-//- Main view
+// ------------------------------------
+const lorient: FootballCamp = new FootballCamp();
+// - Main view
 lorient.id = 0;
 lorient.latitude = 47.7482524;
 lorient.longitude = -3.3702449;
 lorient.city = 'Lorient';
 
-//- Overview
+// - Overview
 lorient.overview = new Overview()
   .withPathToImage('./assets/img/lorient/cover.jpg')
   .withContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
   .withTitle('Bienvenue au Foot Camps de Lorient');
 
-//- Details
+// - Details
 
 lorient.details = new Details()
   .withDescription(`
@@ -54,21 +54,21 @@ lorient.details = new Details()
   .withSubscribeUrl('https://fclweb.fr/le-club/experience-fcl/#formulaire-dinscription')
 ;
 
-//------------------------------------
-let plouzane: FootballCamp = new FootballCamp();
-//- Main view
+// ------------------------------------
+const plouzane: FootballCamp = new FootballCamp();
+// - Main view
 plouzane.id = 1;
 plouzane.latitude = 48.3814380;
 plouzane.longitude = -4.6204040;
 plouzane.city = 'Plouzané';
 
-//- Overview
+// - Overview
 plouzane.overview = new Overview()
   .withPathToImage('./assets/img/plouzane/cover.jpg')
   .withContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
   .withTitle('Bienvenue au Foot Camps de Plouzané');
 
-//- Details
+// - Details
 plouzane.details = new Details()
   .withDescription(
     `
@@ -117,21 +117,21 @@ plouzane.details = new Details()
   .withSubscribeUrl('http://www.plouzane-ac-football.org/inscription-contact.php')
 ;
 
-//------------------------------------
-let plabennec: FootballCamp = new FootballCamp();
-//- Main view
+// ------------------------------------
+const plabennec: FootballCamp = new FootballCamp();
+// - Main view
 plabennec.id = 2;
 plabennec.latitude = 48.4999551;
 plabennec.longitude = -4.4484149;
 plabennec.city = 'Plabennec';
 
-//- Overview
+// - Overview
 plabennec.overview = new Overview()
   .withPathToImage('./assets/img/plabennec/overview.jpg')
   .withContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
   .withTitle('Bienvenue au Foot Camps de Plabennec');
 
-//- Details
+// - Details
 plabennec.details = new Details()
   .withDescription(
     `

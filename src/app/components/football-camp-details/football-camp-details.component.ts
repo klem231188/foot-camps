@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild, AfterViewInit, ViewEncapsulation} from "@angular/core";
-import {FootballCamp, Session} from "../../services/football-camp/football-camp";
-import {FootballCampService} from "../../services/football-camp/football-camp.service";
-import {ActivatedRoute, Params} from "@angular/router";
-import {GalleryComponent} from "angular2-image-gallery";
-import * as _ from "lodash";
+import {Component, OnInit, ViewChild, AfterViewInit, ViewEncapsulation} from '@angular/core';
+import {FootballCamp, Session} from '../../services/football-camp/football-camp';
+import {FootballCampService} from '../../services/football-camp/football-camp.service';
+import {ActivatedRoute, Params} from '@angular/router';
+import {GalleryComponent} from 'angular2-image-gallery';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'football-camp-details',
@@ -13,24 +13,24 @@ import * as _ from "lodash";
 })
 export class FootballCampDetailsComponent implements OnInit, AfterViewInit {
 
+  @ViewChild(GalleryComponent) gallery: GalleryComponent;
+
   footballCamp: FootballCamp = null;
 
-  viewerOpened: boolean = false;
+  viewerOpened = false;
 
   constructor(private route: ActivatedRoute,
-              private footballCampService: FootballCampService,) {
+              private footballCampService: FootballCampService) {
   }
-
-  @ViewChild(GalleryComponent) gallery: GalleryComponent;
 
   ngOnInit(): void {
     this.route
       .params
       .switchMap((params: Params) => {
-        return this.footballCampService.getFootballCamp(+params['id'])
+        return this.footballCampService.getFootballCamp(+params['id']);
       })
       .subscribe((footballCamp: FootballCamp) => {
-        this.footballCamp = footballCamp
+        this.footballCamp = footballCamp;
       });
   }
 
@@ -50,7 +50,7 @@ export class FootballCampDetailsComponent implements OnInit, AfterViewInit {
   }
 
   onViewerChange(viewerOpened: boolean) {
-    console.log("Viewer isOpened = " + viewerOpened);
+    console.log('Viewer isOpened = ' + viewerOpened);
     this.viewerOpened = viewerOpened;
   }
 }
