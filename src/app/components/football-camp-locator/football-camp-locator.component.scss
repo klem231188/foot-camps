@@ -17,11 +17,11 @@
 
     .search-bar {
       position: absolute;
-      left: 15px;
+      left: 25px;
+      right: 25px;
       top: 15px;
       z-index: 2;
       padding: 2px 10px 2px 10px;
-      width: 30%;
 
       md-form-field {
         width: 100%;

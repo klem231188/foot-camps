@@ -5,31 +5,31 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  md-toolbar {
-    @include mat-elevation(1);
-    z-index: 1;
-  }
-
-  .toolbar-title {
-    color: mat-color($primary);
-  }
-
-  .fab-button-wrapper {
-    position: relative !important;
-    margin-bottom: 10px;
-  }
-
-  .fab-button {
-    position: absolute !important;
-    right: 5px;
-    bottom: -5px;
-  }
-
-  md-card {
-    z-index: 0;
-  }
-
   football-camp-overview {
     overflow: auto;
+
+    md-toolbar {
+      @include mat-elevation(1);
+      z-index: 1;
+    }
+  
+    .toolbar-title {
+      color: mat-color($primary);
+    }
+  
+    .fab-button-wrapper {
+      position: relative !important;
+      margin-bottom: 10px;
+    }
+  
+    .fab-button {
+      position: absolute !important;
+      right: 5px;
+      bottom: -5px;
+    }
+  
+    md-card {
+      z-index: 0;
+    }
   }
 }
