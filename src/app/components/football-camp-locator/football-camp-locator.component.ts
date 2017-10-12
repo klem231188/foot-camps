@@ -32,6 +32,7 @@ export class FootballCampLocatorComponent implements OnInit {
       })
       .subscribe((footballCamp: FootballCamp) => {
         this.footballCamp = footballCamp;
+        this.searchInput.setValue(this.footballCamp);
       });
 
     this.footballCampService
