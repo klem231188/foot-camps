@@ -1,4 +1,4 @@
-<md-card class="search-bar" fxFlex.gt-sm="450px">
+<md-card class="search-bar" fxFlex.gt-sm="580px" fxFlex="grow">
   <form>
     <md-form-field>
       <input type="text" mdInput placeholder="Rechercher un stage de football" [formControl]="searchInput" [mdAutocomplete]="auto">
@@ -14,7 +14,7 @@
 </md-card>
 
 <div fxLayout.gt-sm="row" fxLayout="column" fxFlex="grow">
-  <football-camp-overview [fxHide]="!footballCamp" fxFlex.gt-sm="500px" fxFlex="grow">
+  <football-camp-overview [fxHide]="!footballCamp" fxFlex.gt-sm="600px" fxFlex="grow">
   </football-camp-overview>
 
   <football-camp-map [fxHide]="footballCamp" fxShow.gt-sm fxFlex.gt-sm="auto" fxFlex="100%">
