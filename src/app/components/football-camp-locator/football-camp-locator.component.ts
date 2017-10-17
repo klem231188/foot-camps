@@ -65,4 +65,8 @@ export class FootballCampLocatorComponent implements OnInit {
   displayFn(footballCamp: FootballCamp): string {
     return footballCamp ? footballCamp.city : '';
   }
+
+  onCloseClicked(): void {
+    this.router.navigate(['/locate']);
+  }
 }

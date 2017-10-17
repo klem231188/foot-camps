@@ -1,8 +1,13 @@
 <md-card class="search-bar" fxFlex.gt-sm="580px" fxFlex="grow">
   <form>
     <md-form-field>
-      <input type="text" mdInput placeholder="Rechercher un stage de football" [formControl]="searchInput" [mdAutocomplete]="auto">
-      <md-icon mdSuffix>search</md-icon>
+      <button md-icon-button (click)="onCloseClicked()" mdPrefix>
+        <md-icon>clear</md-icon>
+      </button>
+      <input fxFlex type="text" mdInput placeholder="Rechercher un stage de football" [formControl]="searchInput" [mdAutocomplete]="auto">
+      <button md-icon-button mdSuffix>
+        <md-icon>search</md-icon>
+      </button>
     </md-form-field>
 
     <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
