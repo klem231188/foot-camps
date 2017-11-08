@@ -195,8 +195,81 @@ plabennec.details = new Details()
   .withSubscribeUrl('http://www.plab29.com/plabete')
 ;
 
+// ------------------------------------
+const bourgBlanc: FootballCamp = new FootballCamp();
+// - Main view
+bourgBlanc.id = 3;
+bourgBlanc.latitude = 48.4926696;
+bourgBlanc.longitude = -4.508196;
+bourgBlanc.city = 'Bourg-Blanc';
+
+// - Overview
+bourgBlanc.overview = new Overview()
+  .withPathToImage('./assets/img/bourg-blanc/overview.jpg')
+  .withContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
+  .withTitle('Bienvenue au Foot Camps de Bourg-Blanc');
+
+// - Details
+bourgBlanc.details = new Details()
+  .withDescription(
+    `
+    <p>
+      Ce stage s'adresse à la fois à ceux voulant s'initier au football, ainsi qu'à ceux voulant se perfectionner.  
+      <ul>
+       <li>Des <b>ateliers découvertes</b> sont proposés pour les plus jeunes et les non pratiquants souhaitant s'initier</li>
+       <li>Des <b>ateliers techniques</b> pour les plus expérimenté(e)s</li>
+       <li>Des <b>ateliers spécifiques gardiens de but</b></li>
+      </ul>
+      L'ensemble des ateliers se déroulent sous différents formats (jeux, défis, ...)
+    </p>
+
+    <p>
+      Ce stage propose aux enfants d'autres activités extra-sportives : 
+      <ul>
+       <li>Soccer de Guipavas, pour un tournoi disputé et inoubliable</li>
+       <li>La Récré des curés, pour quitter les terrains, se détendre et s’amuser dans le parc de loisir de Milizac</li>
+       <li>Un Laser Game, pour une bataille virtuelle entre l’équipe des Rouges et celle des Bleus</li>
+      </ul>
+    </p>
+    
+    <b>Infrastructures sportives:</b> <ul><li>A faire</li></ul> 
+    <b>Infrastructures générales:</b> <ul><li>A faire</li></ul> 
+    `
+  )
+  .withPathToSchedule('./assets/img/bourg-blanc/programme.jpg')
+  .withLocation(
+    `
+    Situé à l'extrémité de la Bretagne, le stage se déroule à Bourg-Blanc dans le Finistère (29).     
+    `
+  )
+  .withAddress(
+    `
+   Stade Touroussel, 29860 Bourg-Blanc
+   `
+  )
+  .withGmapsUrl('https://goo.gl/maps/ZVkCSWFT4fs')
+  .withOrganizerDescription(
+    `
+    Les stages sont encadrés par une une équipe technique de <b>qualité</b>, <b>expérimentée</b> et <b>motivée</b> <br>
+    TODO
+    `
+  )
+  .withOrganizers([
+      new Organizer().withName('Stéphane LE HIR').withPathToPicture('./assets/img/bourg-blanc/organizers/avatar/Stephane-LE-HIR.jpg'),
+    ]
+  )
+  .withPathToLogo('./assets/img/bourg-blanc/logo.png')
+  .withPathToGallery('./assets/img/bourg-blanc/gallery/data.json')
+  .withSessions([
+      new Session().withName('Session 1').withFromDateToDate('Du 10 au 14 juillet 2017').withFullBoardRates(125).withHalfBoardRates(null),
+    ]
+  )
+  .withSubscribeUrl('http://www.google/fr')
+;
+
 export const FOOTBAL_CAMPS: FootballCamp[] = [
   lorient,
   plouzane,
-  plabennec
+  plabennec,
+  bourgBlanc
 ];
