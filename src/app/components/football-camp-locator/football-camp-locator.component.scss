@@ -1,10 +1,8 @@
 @mixin football-camp-locator-theme($theme) {
-
   $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
-
   football-camp-locator {
     flex: 1 1 100%;
     box-sizing: border-box;
@@ -14,7 +12,6 @@
     -moz-box-orient: horizontal;
     -moz-box-direction: normal;
     overflow: auto;
-
     .search-bar {
       position: absolute;
       left: 10px;
@@ -22,12 +19,10 @@
       top: 15px;
       z-index: 2;
       padding: 15px 15px 0px 15px;
-
       md-form-field {
         width: 100%;
-        
         md-icon {
-         font-size: 150% !important; 
+          font-size: 150% !important;
         }
       }
     }

@@ -1,16 +1,7 @@
-<sebm-google-map
-  [latitude]="46.43"
-  [longitude]="2.74"
-  [zoom]="zoom"
-  [styles]="[{featureType: 'road', stylers: [{ visibility: 'off' }]}]"
->
+<sebm-google-map [latitude]="46.43" [longitude]="2.74" [zoom]="zoom" [styles]="[{featureType: 'road', stylers: [{ visibility: 'off' }]}]">
 
-  <sebm-google-map-marker
-    *ngFor="let footballCamp of footballCamps"
-    (markerClick)="onMarkerClicked(footballCamp.id)"
-    [latitude]="footballCamp.latitude"
-    [longitude]="footballCamp.longitude"
-  >
+  <sebm-google-map-marker *ngFor="let footballCamp of footballCamps" (markerClick)="onMarkerClicked(footballCamp.id)" [latitude]="footballCamp.latitude"
+    [longitude]="footballCamp.longitude">
   </sebm-google-map-marker>
 
 </sebm-google-map>

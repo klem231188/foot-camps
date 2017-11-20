@@ -1,0 +1,31 @@
+@mixin football-camp-registration-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  football-camp-registration {
+    // background-image: url('assets/img/examples/wallpaper3.jpg');
+    // background-attachment: fixed;
+    // background-repeat: no-repeat; //background-position: center center;
+    // background-size: cover;
+    // -webkit-background-size: cover;
+    padding: 10px;
+
+    .avatar {
+        border-radius: 50%;
+        width: 250px;
+        height: 250px;
+        background-color: mat-color($primary);
+        
+        background-image: url('./assets/img/registration/avatar.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        -webkit-background-size: cover;
+      }
+
+      .avatar:hover {
+        filter: brightness(80%);
+        // background-image: url('./assets/img/registration/avatar-with-camera.svg');
+      }
+  }
+}

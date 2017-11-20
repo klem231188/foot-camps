@@ -1,3 +1,96 @@
-<p>
-  football-camp-registration works!
-</p>
+<div fxLayout="row" fxLayoutAlign="center start">
+  <form fxLayout="column" fxFlex="100%" fxFlex.gt-sm="66%">
+
+    <span fxFlex="20px"></span>
+
+    <!-- Photo -->
+    <div class="avatar" fxFlexAlign="center"></div>
+
+    <!-- Nom & Prénom -->
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="20px">
+      <div fxFlex>
+        <md-form-field fxFlex="grow">
+          <input mdInput type="text" placeholder="Prénom">
+        </md-form-field>
+      </div>
+
+      <div fxFlex>
+        <md-form-field fxFlex="grow">
+          <input mdInput type="text" placeholder="Nom">
+        </md-form-field>
+      </div>
+    </div>
+
+    <!-- Date de naissance -->
+
+    <!-- Sexe -->
+
+    <!-- Email -->
+    <div>
+      <md-form-field fxFlex="grow">
+        <input mdInput type="email" placeholder="Email" email>
+      </md-form-field>
+    </div>
+
+     <!-- Adresse -->
+
+     <!-- Poste préféré Gardien / Défenseur / Milieu / Attaquant -->
+
+     <!-- Pied Gauche / Droit -->
+     
+     <!-- Zone de saisie libre (informations complémentaires) -->
+
+  </form>
+</div>
+<!-- 
+
+<form class="example-form">
+  <md-form-field class="example-full-width">
+    <input mdInput placeholder="Company (disabled)" disabled value="Google">
+  </md-form-field>
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="First name">
+        </md-form-field>
+      </td>
+      <td>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="Long Last Name That Will Be Truncated">
+        </md-form-field>
+      </td>
+    </tr>
+  </table>
+
+  <p>
+    <md-form-field class="example-full-width">
+      <textarea mdInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
+    </md-form-field>
+    <md-form-field class="example-full-width">
+      <textarea mdInput placeholder="Address 2"></textarea>
+    </md-form-field>
+  </p>
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="City">
+        </md-form-field>
+      </td>
+      <td>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="State">
+        </md-form-field>
+      </td>
+      <td>
+        <md-form-field class="example-full-width">
+          <input mdInput #postalCode maxlength="5" placeholder="Postal Code" value="94043">
+          <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
+        </md-form-field>
+      </td>
+    </tr>
+  </table>
+</form> -->

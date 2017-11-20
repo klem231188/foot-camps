@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {FootballCamp} from './football-camp';
-import {FOOTBAL_CAMPS} from './football-camps-mock';
+import { Injectable } from '@angular/core';
+import { FootballCamp } from './football-camp';
+import { FOOTBAL_CAMPS } from './football-camps-mock';
 
 @Injectable()
 export class FootballCampService {

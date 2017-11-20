@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import {
   MdAutocompleteModule,
   MdButtonModule, MdButtonToggle, MdButtonToggleModule,
@@ -23,7 +23,7 @@ import {
   MdToolbarModule,
   MdTooltipModule
 } from '@angular/material';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [],

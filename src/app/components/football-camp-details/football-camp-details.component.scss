@@ -1,87 +1,68 @@
 @mixin football-camp-details-theme($theme) {
-
   $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
-
   football-camp-details {
     background-image: url('assets/img/examples/wallpaper3.jpg');
     background-attachment: fixed;
-    background-repeat: no-repeat;
-    //background-position: center center;
+    background-repeat: no-repeat; //background-position: center center;
     background-size: cover;
     -webkit-background-size: cover;
     padding: 10px;
-
     .container {
       width: 100%;
       overflow-x: hidden;
     }
-
     md-card {
       border-radius: 0px 0px 2px 2px !important;
     }
-
     md-toolbar {
       @include mat-elevation(2);
       position: relative;
       z-index: 1;
     }
-
     md-card-content {
       font-size: 15px !important;
     }
-
     .details-location-address {
       overflow-x: auto;
     }
-
     .background-white {
       background-color: white;
     }
-
     blockquote {
       padding: 10px 20px;
       font-size: 17.5px;
       border-left: 5px solid #eee;
     }
-
     blockquote cite {
       color: #999999;
       font-size: 14px;
       display: block;
       margin-top: 5px;
     }
-
     blockquote cite:before {
       content: "\2014 \2009";
     }
   }
-
   .toolbar-title {
     color: mat-color($primary);
   }
-
   .quote {
     margin-bottom: 5px;
   }
-
   .quote:hover * {
     filter: brightness(80%);
   }
-
   .logo {
     height: 220px;
   }
-
   .avatar {
     border-radius: 50%;
     height: 128px;
     background-color: mat-color($primary);
   }
-
-
   table {
     border: 1px solid #ccc;
     border-collapse: collapse;

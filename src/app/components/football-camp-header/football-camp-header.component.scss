@@ -1,23 +1,19 @@
 @mixin football-camp-header-theme($theme) {
-
   $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
-
   football-camp-header {
     @include mat-elevation(2);
     z-index: 10;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%  !important;
-
+    width: 100% !important;
     .logo {
       height: 40%;
       margin-right: 10px;
     }
-
     .brand {
       font-family: 'Milkshake';
       font-size: 30px;

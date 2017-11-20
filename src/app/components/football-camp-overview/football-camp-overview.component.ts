@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FootballCamp} from '../../services/football-camp/football-camp';
-import {FootballCampService} from '../../services/football-camp/football-camp.service';
-import {Router, ActivatedRoute, Params} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FootballCamp } from '../../services/football-camp/football-camp';
+import { FootballCampService } from '../../services/football-camp/football-camp.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -14,8 +14,8 @@ export class FootballCampOverviewComponent implements OnInit {
   footballCamp: FootballCamp = null;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private footballCampService: FootballCampService) {
+    private router: Router,
+    private footballCampService: FootballCampService) {
   }
 
   ngOnInit(): void {

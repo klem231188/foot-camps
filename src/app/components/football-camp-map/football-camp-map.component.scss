@@ -1,12 +1,10 @@
 @mixin football-camp-map-theme($theme) {
-
-  $primary: map-get($theme, primary);
-  $warn: map-get($theme, warn);
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
-
-  sebm-google-map {
-    height: 100%;
-    width: 100%;
-  }
+    $primary: map-get($theme, primary);
+    $warn: map-get($theme, warn);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+    sebm-google-map {
+        height: 100%;
+        width: 100%;
+    }
 }

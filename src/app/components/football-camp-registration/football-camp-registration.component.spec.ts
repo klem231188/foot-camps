@@ -8,9 +8,9 @@ describe('FootballCampRegistrationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FootballCampRegistrationComponent ]
+      declarations: [FootballCampRegistrationComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

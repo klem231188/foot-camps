@@ -17,8 +17,7 @@
         <md-card-content>
           <p [innerHTML]="footballCamp.details.description | safeHtml"></p>
           <b>Programme:</b>
-          <a href="{{footballCamp.details.pathToSchedule}}" download md-button color="primary">Télécharger le programme
-            de la semaine</a>
+          <a href="{{footballCamp.details.pathToSchedule}}" download md-button color="primary">Télécharger le programme de la semaine</a>
         </md-card-content>
       </md-card>
     </div>
@@ -57,15 +56,12 @@
         <md-card-content>
           <p [innerHTML]="footballCamp.details.organizerDescription | safeHtml"></p>
           <div *ngIf="footballCamp.details.organizers != null">
-            <div fxLayout.gt-sm="row" fxLayout="column"
-                 fxLayoutAlign="space-around center" class="quote"
-                 *ngFor="let organizer of footballCamp.details.organizers">
+            <div fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-around center" class="quote" *ngFor="let organizer of footballCamp.details.organizers">
               <img class="avatar" src="{{organizer.pathToPicture}}">
               <blockquote>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur
-                id
-                nisl mi, ut vulputate urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae! Lorem
-                ipsum dolor sit amet, consectetur adipiscing elit.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur id nisl mi, ut vulputate
+                urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae! Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit.
                 <cite>{{organizer.name}}</cite>
               </blockquote>
             </div>
@@ -86,11 +82,7 @@
       <span fxFlex="3px" class="background-white"></span>
       <md-card [ngClass]="isViewerOpened() ? 'z-index11' : 'z-index2'">
         <md-card-content>
-          <gallery
-            [flexBorderSize]="3"
-            [flexImageSize]="7"
-            [metadataUri]="footballCamp.details.pathToGallery"
-            (viewerChange)="onViewerChange($event)">
+          <gallery [flexBorderSize]="3" [flexImageSize]="7" [metadataUri]="footballCamp.details.pathToGallery" (viewerChange)="onViewerChange($event)">
           </gallery>
         </md-card-content>
       </md-card>
@@ -109,21 +101,21 @@
         <md-card-content>
           <table>
             <thead>
-            <tr>
-              <th scope="col">Sessions</th>
-              <th scope="col">Dates</th>
-              <th scope="col">Tarifs en Pension complète</th>
-              <th scope="col" *ngIf="hasHalfBoardRatesSessions()">Tarifs en Demi-pension</th>
-            </tr>
+              <tr>
+                <th scope="col">Sessions</th>
+                <th scope="col">Dates</th>
+                <th scope="col">Tarifs en Pension complète</th>
+                <th scope="col" *ngIf="hasHalfBoardRatesSessions()">Tarifs en Demi-pension</th>
+              </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let session of footballCamp.details.sessions">
-              <td data-label="Sessions">{{session.name}}</td>
-              <td data-label="Dates">{{session.fromDateToDate}}</td>
-              <td data-label="Tarifs en Pension complète">{{session.fullBoardRates}} €</td>
-              <td data-label="Tarifs en Demi-pension" *ngIf="hasHalfBoardRatesSessions()">{{session.halfBoardRates}} €
-              </td>
-            </tr>
+              <tr *ngFor="let session of footballCamp.details.sessions">
+                <td data-label="Sessions">{{session.name}}</td>
+                <td data-label="Dates">{{session.fromDateToDate}}</td>
+                <td data-label="Tarifs en Pension complète">{{session.fullBoardRates}} €</td>
+                <td data-label="Tarifs en Demi-pension" *ngIf="hasHalfBoardRatesSessions()">{{session.halfBoardRates}} €
+                </td>
+              </tr>
             </tbody>
           </table>
         </md-card-content>
@@ -141,24 +133,26 @@
       </md-toolbar>
       <md-card>
         <md-card-content>
-            <div *ngIf="footballCamp.details.useOnlineRegistration; then redirectToRegistrationPage; else redirectToWebsite">
+          <div *ngIf="footballCamp.details.useOnlineRegistration; then redirectToRegistrationPage; else redirectToWebsite">
+          </div>
+
+          <ng-template #redirectToRegistrationPage>
+            Ls inscriptions se font sur FootballCamps !
+            <br>
+            <br>
+            <div fxLayout="column" fxLayoutAlign="none center">
+              <a [routerLink]="[ '/registration' ]" md-button color="primary" class="link-to-maps">Je m'inscris sans attendre !</a>
             </div>
-            
-            <ng-template #redirectToRegistrationPage>
-                Ls inscriptions se font sur FootballCamps !<br><br>
-                <div fxLayout="column" fxLayoutAlign="none center">
-                  <a [routerLink]="[ '/registration' ]" md-button color="primary" class="link-to-maps">Je m'inscris
-                    sans attendre !</a>
-                </div>
-            </ng-template>
-            
-            <ng-template #redirectToWebsite>
-                Pour le moment les inscriptions sont uniquement possibles via le site de l'organisateur.<br><br>
-                <div fxLayout="column" fxLayoutAlign="none center">
-                  <a [href]="footballCamp.details.registrationUrl" md-button color="primary" class="link-to-maps">Je m'inscris
-                    sans attendre !</a>
-                </div>
-            </ng-template>  
+          </ng-template>
+
+          <ng-template #redirectToWebsite>
+            Pour le moment les inscriptions sont uniquement possibles via le site de l'organisateur.
+            <br>
+            <br>
+            <div fxLayout="column" fxLayoutAlign="none center">
+              <a [href]="footballCamp.details.registrationUrl" md-button color="primary" class="link-to-maps">Je m'inscris sans attendre !</a>
+            </div>
+          </ng-template>
         </md-card-content>
       </md-card>
     </div>

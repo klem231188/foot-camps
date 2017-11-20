@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild, AfterViewInit, ViewEncapsulation} from '@angular/core';
-import {FootballCamp, Session} from '../../services/football-camp/football-camp';
-import {FootballCampService} from '../../services/football-camp/football-camp.service';
-import {ActivatedRoute, Params} from '@angular/router';
-import {GalleryComponent} from 'angular2-image-gallery';
+import { Component, OnInit, ViewChild, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { FootballCamp, Session } from '../../services/football-camp/football-camp';
+import { FootballCampService } from '../../services/football-camp/football-camp.service';
+import { ActivatedRoute, Params } from '@angular/router';
+import { GalleryComponent } from 'angular2-image-gallery';
 import * as _ from 'lodash';
 
 @Component({
@@ -20,7 +20,7 @@ export class FootballCampDetailsComponent implements OnInit, AfterViewInit {
   viewerOpened = false;
 
   constructor(private route: ActivatedRoute,
-              private footballCampService: FootballCampService) {
+    private footballCampService: FootballCampService) {
   }
 
   ngOnInit(): void {
