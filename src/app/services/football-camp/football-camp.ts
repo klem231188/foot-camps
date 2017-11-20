@@ -61,64 +61,70 @@ export class Details {
   // - Date and prices
   sessions: Session[];
 
-  // - Subscribe
-  subscribeUrl: string;
+  // - Registration
+  useOnlineRegistration: boolean;
+  registrationUrl: string;
 
   constructor() {
   }
 
-  withPathToLogo(value: string) {
+  withPathToLogo(value: string): Details {
     this.pathToLogo = value;
     return this;
   }
 
-  withDescription(value: string) {
+  withDescription(value: string): Details {
     this.description = value;
     return this;
   }
 
-  withPathToSchedule(value: string) {
+  withPathToSchedule(value: string): Details {
     this.pathToSchedule = value;
     return this;
   }
 
-  withLocation(value: string) {
+  withLocation(value: string): Details {
     this.location = value;
     return this;
   }
 
-  withAddress(value: string) {
+  withAddress(value: string): Details {
     this.address = value;
     return this;
   }
 
-  withGmapsUrl(value: string) {
+  withGmapsUrl(value: string): Details {
     this.gmapsUrl = value;
     return this;
   }
 
-  withOrganizerDescription(value: string) {
+  withOrganizerDescription(value: string): Details {
     this.organizerDescription = value;
     return this;
   }
 
-  withOrganizers(value: Organizer[]) {
+  withOrganizers(value: Organizer[]): Details {
     this.organizers = value;
     return this;
   }
 
-  withPathToGallery(value: string) {
+  withPathToGallery(value: string): Details {
     this.pathToGallery = value;
     return this;
   }
 
-  withSessions(value: Session[]) {
+  withSessions(value: Session[]): Details {
     this.sessions = value;
     return this;
   }
 
-  withSubscribeUrl(value: string) {
-    this.subscribeUrl = value;
+  withUseOnlineRegistration(value: boolean): Details {
+    this.useOnlineRegistration = value;
+    return this;
+  }
+
+  withRegistrationUrl(value: string): Details {
+    this.registrationUrl = value;
     return this;
   }
 }

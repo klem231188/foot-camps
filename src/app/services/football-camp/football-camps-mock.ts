@@ -51,7 +51,8 @@ lorient.details = new Details()
       new Session().withName('Session 4').withFromDateToDate('Du 31 juillet au 4 août 2017').withFullBoardRates(549).withHalfBoardRates(349)
     ]
   )
-  .withSubscribeUrl('https://fclweb.fr/le-club/experience-fcl/#formulaire-dinscription')
+  .withRegistrationUrl('https://fclweb.fr/le-club/experience-fcl/#formulaire-dinscription')
+  .withUseOnlineRegistration(false);
 ;
 
 // ------------------------------------
@@ -114,7 +115,8 @@ plouzane.details = new Details()
       new Session().withName('Session 4').withFromDateToDate('Du 31 juillet au 4 août 2017').withFullBoardRates(350).withHalfBoardRates(null)
     ]
   )
-  .withSubscribeUrl('http://www.plouzane-ac-football.org/inscription-contact.php')
+  .withRegistrationUrl('http://www.plouzane-ac-football.org/inscription-contact.php')
+  .withUseOnlineRegistration(false);
 ;
 
 // ------------------------------------
@@ -192,7 +194,8 @@ plabennec.details = new Details()
       new Session().withName('Session 3').withFromDateToDate('Du 24 au 28 juillet 2017').withFullBoardRates(230).withHalfBoardRates(null),
     ]
   )
-  .withSubscribeUrl('http://www.plab29.com/plabete')
+  .withRegistrationUrl('http://www.plab29.com/plabete')
+  .withUseOnlineRegistration(false);
 ;
 
 // ------------------------------------
@@ -264,7 +267,8 @@ bourgBlanc.details = new Details()
       new Session().withName('Session 1').withFromDateToDate('Du 10 au 14 juillet 2017').withFullBoardRates(125).withHalfBoardRates(null),
     ]
   )
-  .withSubscribeUrl('http://www.google/fr')
+  .withRegistrationUrl('')
+  .withUseOnlineRegistration(true);
 ;
 
 export const FOOTBAL_CAMPS: FootballCamp[] = [

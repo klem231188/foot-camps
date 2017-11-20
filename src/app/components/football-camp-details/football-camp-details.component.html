@@ -141,11 +141,24 @@
       </md-toolbar>
       <md-card>
         <md-card-content>
-          Pour le moment les inscriptions sont uniquement possibles via le site de l'organisateur.<br><br>
-          <div fxLayout="column" fxLayoutAlign="none center">
-            <a [href]="footballCamp.details.subscribeUrl" md-button color="primary" class="link-to-maps">Je m'inscris
-              sans attendre !</a>
-          </div>
+            <div *ngIf="footballCamp.details.useOnlineRegistration; then redirectToRegistrationPage; else redirectToWebsite">
+            </div>
+            
+            <ng-template #redirectToRegistrationPage>
+                Ls inscriptions se font sur FootballCamps !<br><br>
+                <div fxLayout="column" fxLayoutAlign="none center">
+                  <a [routerLink]="[ '/registration' ]" md-button color="primary" class="link-to-maps">Je m'inscris
+                    sans attendre !</a>
+                </div>
+            </ng-template>
+            
+            <ng-template #redirectToWebsite>
+                Pour le moment les inscriptions sont uniquement possibles via le site de l'organisateur.<br><br>
+                <div fxLayout="column" fxLayoutAlign="none center">
+                  <a [href]="footballCamp.details.registrationUrl" md-button color="primary" class="link-to-maps">Je m'inscris
+                    sans attendre !</a>
+                </div>
+            </ng-template>  
         </md-card-content>
       </md-card>
     </div>

@@ -41,7 +41,11 @@ Pourquoi les jeunes stagiaires viendraient plus faire un stage dans mon club plu
 //- Parti business plan
 Cette offre existe t'elle déjà sur le marché ?
 ----------------------------------------------
-Non, par contre certains clubs ont déjà un site en ligne permettant de s'inscire au stage.
+www.ertheo.com --> Stage de football de haut niveau (Réal madrid, Barcelone, PSG, Arsenal)
+www.sportselitejeunes.fr --> Football + Anglais (Plusieurs offre Sport / Sport + Langue vivante)
+www.evasion2000.org/stages-foot --> Bretagne + Jura
+
+ contre certains clubs ont déjà un site en ligne permettant de s'inscire au stage.
 Etude à pousser
 
 Combien de club proposent des stages actuellement en Finistère ? En Bretagne ? En France ?
@@ -63,6 +67,9 @@ TODO
 Quels sont les pistes d'évolutions du produits ?
 ------------------------------------------------
 Augmenter le nombre d'organisateurs à intégrer à football-camps
+Ouvrir football-camps à l'international
+Diversifier l'offre sur d'autres sports (basket, tennis, ...)
+Mixer Sport + Etude langue vivante
 
 Combien de temps ça prend de référencer un nouvel organisateur ?
 ----------------------------------------------------------------
@@ -76,7 +83,3 @@ Comment démarcher des nouveaux organisateurs de stage ?
 --> Liste exhaustive des stages
 -->
 --> Déplacement
-
-Vision macro : 
-1) Ouvrir football-camps à l'international
-2) Diversifier l'offre sur d'autres sports (basket, tennis, ...)

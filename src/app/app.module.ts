@@ -20,6 +20,7 @@ import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import {SafeHtmlPipe} from './pipes/safe-html-pipe';
 import {TruncatePipe} from './pipes/truncate-pipe';
+import { FootballCampRegistrationComponent } from './components/football-camp-registration/football-camp-registration.component';
 
 @NgModule({
   imports: [
@@ -52,7 +53,8 @@ import {TruncatePipe} from './pipes/truncate-pipe';
     FootballCampMapComponent,
     FootballCampOverviewComponent,
     FootballCampDetailsComponent,
-    FootballCampHeaderComponent
+    FootballCampHeaderComponent,
+    FootballCampRegistrationComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
