@@ -12,6 +12,16 @@
     -webkit-background-size: cover;
     padding: 10px;
 
+    md-card {
+      border-radius: 0px 0px 2px 2px !important;
+    }
+    
+    md-toolbar {
+      @include mat-elevation(2);
+      position: relative;
+      z-index: 1;
+    }
+
     .avatar {
         border-radius: 50%;
         width: 200px;
@@ -26,7 +36,7 @@
 
       .avatar:hover {
         filter: brightness(80%);
-        // background-image: url('./assets/img/registration/avatar-with-camera.svg');
+        // todo background-image: url('./assets/img/registration/avatar-with-camera.svg');
       }
   }
 }
