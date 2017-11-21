@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FootballCampRegistrationComponent implements OnInit {
 
+  startDate: Date = new Date(2000, 0, 1);
+
   constructor() { }
 
   ngOnInit() {

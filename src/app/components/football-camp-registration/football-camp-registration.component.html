@@ -1,39 +1,52 @@
 <div fxLayout="row" fxLayoutAlign="center start">
-  <form fxLayout="column" fxFlex="100%" fxFlex.gt-sm="66%">
+  <form fxFlex="100%" fxFlex.gt-sm="66%">
+    <md-card>
+      <md-card-content fxLayout="column">
+        <span fxFlex="20px"></span>
 
-    <span fxFlex="20px"></span>
+        <!-- Photo -->
+        <div class="avatar" fxFlexAlign="center"></div>
 
-    <!-- Photo -->
-    <div class="avatar" fxFlexAlign="center"></div>
+        <span fxFlex="10px"></span>
 
-    <!-- Nom & Prénom -->
-    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="20px">
-      <md-form-field fxFlex="50%" fxFlexFill>
-        <input mdInput type="text" placeholder="Prénom">
-      </md-form-field>
+        <!-- Nom & Prénom -->
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="20px">
+          <md-form-field fxFlex="50%" fxFlexFill>
+            <input mdInput type="text" placeholder="Prénom">
+          </md-form-field>
 
-      <md-form-field fxFlex="50%" fxFlexFill>
-        <input mdInput type="text" placeholder="Nom">
-      </md-form-field>
-    </div>
+          <md-form-field fxFlex="50%" fxFlexFill>
+            <input mdInput type="text" placeholder="Nom">
+          </md-form-field>
+        </div>
 
-    <!-- Date de naissance -->
+        <!-- Date de naissance -->
+        <md-form-field fxFlexFill>
+          <input mdInput [mdDatepicker]="picker" placeholder="Date de naissance" disabled>
+          <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+          <md-datepicker #picker startView="year" [startAt]="startDate" disabled="false"></md-datepicker>
+        </md-form-field>
 
-    <!-- Sexe -->
+        <!-- Sexe -->
 
-    <!-- Email -->
-    <md-form-field fxFlexFill>
-      <input mdInput type="email" placeholder="Email" email>
-    </md-form-field>
+        <!-- Email -->
+        <md-form-field fxFlexFill>
+          <input mdInput type="email" placeholder="Email" email>
+        </md-form-field>
 
-    <!-- Adresse -->
+        <!-- Adresse -->
 
-    <!-- Poste préféré Gardien / Défenseur / Milieu / Attaquant -->
+        <!-- Poste préféré : Gardien / Défenseur / Milieu / Attaquant -->
 
-    <!-- Pied Gauche / Droit -->
+        <!-- Pied Gauche / Droit -->
 
-    <!-- Zone de saisie libre (informations complémentaires) -->
+        <!-- Zone de saisie libre (informations complémentaires) -->
 
+        <!-- Confirmer inscription -->
+        <a [routerLink]="[ '/registration/confirmation' ]" md-button color="primary">Confirmer</a>
+
+      </md-card-content>
+    </md-card>
   </form>
 </div>
 <!-- 
