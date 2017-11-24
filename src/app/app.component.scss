@@ -17,6 +17,12 @@
     footer {
       flex: 0 0 auto;
       background-color: mat-color($primary, darker);
+      .brand {
+        font-family: 'Milkshake';
+        font-size: 30px;
+        width: 100%;
+        text-align: right;
+      }
     }
   }
 }
