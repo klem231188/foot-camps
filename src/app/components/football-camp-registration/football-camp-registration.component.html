@@ -1,5 +1,8 @@
 <div fxLayout="row" fxLayoutAlign="center start">
-  <form fxFlex="100%" fxFlex.gt-sm="66%">
+  <div fxFlex="100%" fxFlex.gt-sm="66%">
+    <md-toolbar color="primary">
+      <span>Inscription</span>
+    </md-toolbar>
     <md-card>
       <md-card-content fxLayout="column">
         <span fxFlex="20px"></span>
@@ -12,27 +15,31 @@
         <!-- Nom & Prénom -->
         <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="20px">
           <md-form-field fxFlex="50%" fxFlexFill>
-            <input mdInput type="text" placeholder="Prénom">
+            <input mdInput type="text" placeholder="Prénom" [(ngModel)]="registration.firstname">
           </md-form-field>
 
           <md-form-field fxFlex="50%" fxFlexFill>
-            <input mdInput type="text" placeholder="Nom">
+            <input mdInput type="text" placeholder="Nom" [(ngModel)]="registration.lastname">
           </md-form-field>
         </div>
 
         <!-- Date de naissance -->
         <md-form-field fxFlexFill>
-          <input mdInput [mdDatepicker]="picker" placeholder="Date de naissance" disabled>
+          <input mdInput [mdDatepicker]="picker" placeholder="Date de naissance" disabled [(ngModel)]="registration.birthdate">
           <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
           <md-datepicker #picker startView="year" [startAt]="startDate" disabled="false"></md-datepicker>
         </md-form-field>
 
-        <!-- Sexe -->
-
         <!-- Email -->
         <md-form-field fxFlexFill>
-          <input mdInput type="email" placeholder="Email" email>
+          <input mdInput type="email" placeholder="Email" email [(ngModel)]="registration.email">
         </md-form-field>
+
+        <!-- Sexe -->
+        <md-radio-group [(ngModel)]="registration.gender">
+          <md-radio-button value="Male">Garçon</md-radio-button>
+          <md-radio-button value="Female">Fille</md-radio-button>
+        </md-radio-group>
 
         <!-- Adresse -->
 
@@ -43,11 +50,12 @@
         <!-- Zone de saisie libre (informations complémentaires) -->
 
         <!-- Confirmer inscription -->
-        <a [routerLink]="[ '/registration/confirmation' ]" md-button color="primary">Confirmer</a>
+        <a (click)="onConfirmRegistration()" md-button color="primary">Confirmer</a>
+        <!-- <a [routerLink]="[ '/registration/confiration' ]" md-button color="primary">Confirmer</a> -->
 
       </md-card-content>
     </md-card>
-  </form>
+  </div>
 </div>
 <!-- 
 
