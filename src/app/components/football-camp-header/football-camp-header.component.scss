@@ -11,12 +11,18 @@
     left: 0;
     width: 100% !important;
     .logo {
-      height: 40%;
-      margin-right: 10px;
+      height: 15px;
+      margin-right: 1px;
     }
     .brand {
       font-family: 'Milkshake';
       font-size: 30px;
+    }
+    md-icon {
+      font-size: 35px !important;
+      height: 35px !important;
+      width: 35px !important;
+      line-height: 35px !important;
     }
   }
 }

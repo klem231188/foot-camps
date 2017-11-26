@@ -6,13 +6,33 @@
   app-root {
     display: flex;
     flex-direction: column;
-    router-outlet+* {
+    md-sidenav-container {
+      display: flex;
       flex: 1 1 auto;
-      position: relative;
       margin-top: 56px;
       @include greater-small-screen {
         margin-top: 64px;
       }
+      md-sidenav {
+        display: flex !important;
+        flex-direction: column;
+        // justify-content: start;
+        // align-items: start;
+        width: 250px;
+        background-color: #19212b !important;
+        color: white !important;
+        button {
+          padding: 10px !important;
+          width: 100% !important;
+          text-align: left !important;
+        }
+      }
+    }
+    router-outlet+* {
+      display: flex;
+      flex: 1 1 auto;
+      position: relative;
+      min-height: 100%;
     }
     footer {
       flex: 0 1 auto;

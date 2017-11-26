@@ -1,6 +1,20 @@
-<football-camp-header></football-camp-header>
+<football-camp-header (onMenuClickedEvent)="sidenav.toggle()"></football-camp-header>
 
-<router-outlet></router-outlet>
+<md-sidenav-container>
+  <md-sidenav #sidenav>
+    <button (click)="onFindFootballCampsClicked()" md-button>
+      <md-icon>location_on</md-icon>
+      <span>Trouver un stage</span>
+    </button>
+    <button md-button>
+      <md-icon>add</md-icon>
+      <span>Organiser un stage</span>
+    </button>
+  </md-sidenav>
+
+  <router-outlet></router-outlet>
+</md-sidenav-container>
+
 
 <footer>
   <md-toolbar color="primary">

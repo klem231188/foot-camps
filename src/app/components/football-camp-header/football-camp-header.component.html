@@ -1,33 +1,16 @@
 <md-toolbar color="primary">
+  <button md-icon-button (click)="onMenuClicked()" *ngIf="!backUrl">
+    <md-icon>menu</md-icon>
+  </button>
+
   <button md-icon-button (click)="onBackClicked()" *ngIf="backUrl">
-    <md-icon class="md-24">arrow_back</md-icon>
+    <md-icon>arrow_back</md-icon>
   </button>
-  <img src='assets/img/examples/ball-white.png' class="logo">
-  <span class="brand" fxFlex>Footcamps</span>
+  <span fxFlex=5px></span>
+  <span class="brand" fxFlex>F<img src='assets/img/examples/ball-white-2.png' class="logo"><img src='assets/img/examples/ball-white-2.png' class="logo">tcamps</span>
 
-  <div fxHide fxShow.gt-sm>
-    <button (click)="onFindFootballCampsClicked()" md-button>
-      <md-icon>location_on</md-icon>
-      <span>Trouver un stage</span>
-    </button>
-    <button md-button>
-      <md-icon>add</md-icon>
-      <span>Organiser un stage</span>
-    </button>
-  </div>
-
-  <button md-icon-button [mdMenuTriggerFor]="menu" fxShow fxHide.gt-sm>
-    <md-icon>more_vert</md-icon>
+  <button md-icon-button (click)="onFindFootballCampsClicked()" md-button>
+    <md-icon>account_circle</md-icon>
   </button>
 
-  <md-menu #menu="mdMenu">
-    <button (click)="onFindFootballCampsClicked()" md-menu-item>
-      <md-icon>location_on</md-icon>
-      <span>Trouver un stage</span>
-    </button>
-    <button md-menu-item>
-      <md-icon>add</md-icon>
-      <span>Organiser un stage</span>
-    </button>
-  </md-menu>
 </md-toolbar>

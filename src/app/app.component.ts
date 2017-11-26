@@ -1,5 +1,7 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { FootballCampService } from './services/football-camp/football-camp.service';
+import { MdSidenav } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +11,15 @@ import { FootballCampService } from './services/football-camp/football-camp.serv
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  constructor(private footballCampService: FootballCampService) {
+
+  @ViewChild(MdSidenav)
+  private sidenav: MdSidenav;
+
+  constructor(private footballCampService: FootballCampService, private router: Router) {
+  }
+
+  onFindFootballCampsClicked(): void {
+    this.sidenav.toggle();
+    this.router.navigate(['/locate']);
   }
 }

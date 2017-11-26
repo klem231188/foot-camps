@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 
 @Component({
@@ -10,6 +10,8 @@ export class FootballCampHeaderComponent implements OnInit {
 
   backUrl: string = null;
 
+  @Output() onMenuClickedEvent = new EventEmitter<any>();
+  
   constructor(private router: Router) {
   }
 
@@ -37,7 +39,7 @@ export class FootballCampHeaderComponent implements OnInit {
     this.router.navigate([this.backUrl]);
   }
 
-  onFindFootballCampsClicked(): void {
-    this.router.navigate(['/locate']);
+  onMenuClicked(): void {
+    this.onMenuClickedEvent.emit();
   }
 }
