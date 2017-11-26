@@ -4,13 +4,6 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
   football-camp-locator {
-    flex: 1 1 100%;
-    box-sizing: border-box;
-    -moz-box-flex: 1;
-    display: flex;
-    flex-direction: row;
-    -moz-box-orient: horizontal;
-    -moz-box-direction: normal;
     overflow: auto;
     .search-bar {
       position: absolute;
@@ -19,6 +12,7 @@
       top: 15px;
       z-index: 2;
       padding: 15px 15px 0px 15px;
+
       md-form-field {
         width: 100%;
         md-icon {

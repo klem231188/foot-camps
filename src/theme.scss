@@ -1,4 +1,6 @@
 @import '~@angular/material/theming';
+@import 'flex-mixin.scss';
+@import 'media-queries.scss';
 @import '../src/app/app.component.scss';
 @import 'app/components/football-camp-overview/football-camp-overview.component.scss';
 @import 'app/components/football-camp-details/football-camp-details.component.scss';
