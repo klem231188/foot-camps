@@ -17,6 +17,7 @@
     footer {
       flex: 0 0 auto;
       background-color: mat-color($primary, darker);
+      overflow: auto;
       .brand {
         font-family: 'Milkshake';
         font-size: 30px;
