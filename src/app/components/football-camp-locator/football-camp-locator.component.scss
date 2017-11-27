@@ -13,10 +13,32 @@
       z-index: 2;
       padding: 15px 15px 0px 15px;
 
+      @include greater-small-screen {
+        width: 560px;
+      }
+
       md-form-field {
         width: 100%;
         md-icon {
           font-size: 150% !important;
+        }
+      }
+    }
+    .overview-and-map {
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      football-camp-overview {
+        width: 610px;
+        @include smaller-or-equal-small-screen {
+          width: 100%;
+        }
+      }
+      football-camp-map {
+        flex: 1;
+        height: 100%;
+        @include greater-small-screen {
+          display: block !important;
         }
       }
     }
