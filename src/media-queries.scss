@@ -225,14 +225,14 @@
   }
  
     
-@mixin greater-small-screen() {
-    @include min-screen(960px) {
+@mixin big-screen() {
+    @include min-screen(700px) {
         @content;
     }
 }
 
-@mixin smaller-or-equal-small-screen() {
-  @include max-screen(960px) {
+@mixin small-screen() {
+  @include max-screen(700px) {
       @content;
   }
 }

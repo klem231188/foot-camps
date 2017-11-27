@@ -13,7 +13,7 @@
       z-index: 2;
       padding: 15px 15px 0px 15px;
 
-      @include greater-small-screen {
+      @include big-screen {
         width: 560px;
       }
 
@@ -30,14 +30,14 @@
       flex: 1;
       football-camp-overview {
         width: 610px;
-        @include smaller-or-equal-small-screen {
+        @include small-screen {
           width: 100%;
         }
       }
       football-camp-map {
         flex: 1;
         height: 100%;
-        @include greater-small-screen {
+        @include big-screen {
           display: block !important;
         }
       }

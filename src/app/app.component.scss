@@ -10,7 +10,7 @@
       flex: 1;
       margin-top: 56px;
       overflow: auto;
-      @include greater-small-screen {
+      @include big-screen {
         margin-top: 64px;
       }
       md-sidenav {
