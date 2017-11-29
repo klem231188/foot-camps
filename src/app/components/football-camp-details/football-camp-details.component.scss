@@ -5,51 +5,61 @@
   $foreground: map-get($theme, foreground);
   football-camp-details {
     .main-container {
-      // Flex
+      display: flex;
+      flex-direction: row;
+      padding: 10px;
+      background-color: #19212b;
+      overflow: auto;
+    }
+    .logo-container {
+      @include small-screen {
+        display: none;
+        flex: 0 !important;
+      }
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      overflow: auto;
-
       .details-logo {
-        min-height: 220px;
+        position: fixed;
+        top: 40px;
+        height: 250px;
       }
-
-      // Padding
-      padding: 10px;
-
-      // Background
-      background-image: url('assets/img/examples/wallpaper5.jpg');
-      background-attachment: fixed;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      -webkit-background-size: cover;
-      
+      .soccer-ball {
+        position: fixed;
+        bottom: 25px;
+        height: 150px;
+      }
+    }
+    .details-container {
+      flex: 3 1 0;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      @include big-screen {
+        margin-left: 10px;
+      }
       .separator {
         min-height: 15px;
       }
-
       .container {
-        @include big-screen {
-          width: 66%;
-        }
-        flex: 1 0 auto;
+        flex: 1 1 auto;
         display: flex;
         flex-direction: column;
+        @include big-screen {
+          width: 80%;
+        }
         md-toolbar {
           @include mat-elevation(2);
           position: relative;
           z-index: 1;
         }
-
         md-card {
           border-radius: 0px 0px 2px 2px !important;
           md-card-content {
             font-size: 15px !important;
           }
         }
-
         .details-location-address {
           overflow-x: auto;
         }
