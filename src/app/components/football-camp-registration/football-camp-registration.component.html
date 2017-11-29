@@ -1,61 +1,56 @@
-<div fxLayout="row" fxLayoutAlign="center start">
-  <div fxFlex="100%" fxFlex.gt-sm="66%">
-    <md-toolbar color="primary">
-      <span>Inscription</span>
-    </md-toolbar>
-    <md-card>
-      <md-card-content fxLayout="column">
-        <span fxFlex="20px"></span>
+<div class="container">
+  <md-toolbar color="primary">
+    <span>Inscription</span>
+  </md-toolbar>
+  <md-card>
+    <md-card-content>
+      <!-- Photo -->
+      <div class="avatar" fxFlexAlign="center"></div>
 
-        <!-- Photo -->
-        <div class="avatar" fxFlexAlign="center"></div>
-
-        <span fxFlex="10px"></span>
-
-        <!-- Nom & Prénom -->
-        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="20px">
-          <md-form-field fxFlex="50%" fxFlexFill>
-            <input mdInput type="text" placeholder="Prénom" [(ngModel)]="registration.firstname">
-          </md-form-field>
-
-          <md-form-field fxFlex="50%" fxFlexFill>
-            <input mdInput type="text" placeholder="Nom" [(ngModel)]="registration.lastname">
-          </md-form-field>
-        </div>
-
-        <!-- Date de naissance -->
-        <md-form-field fxFlexFill>
-          <input mdInput [mdDatepicker]="picker" placeholder="Date de naissance" disabled [(ngModel)]="registration.birthdate">
-          <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-          <md-datepicker #picker startView="year" [startAt]="startDate" disabled="false"></md-datepicker>
+      <!-- Nom & Prénom -->
+      <span class="separator"></span>
+      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="20px">
+        <md-form-field fxFlex="50%" fxFlexFill>
+          <input mdInput type="text" placeholder="Prénom" [(ngModel)]="registration.firstname">
         </md-form-field>
 
-        <!-- Email -->
-        <md-form-field fxFlexFill>
-          <input mdInput type="email" placeholder="Email" email [(ngModel)]="registration.email">
+        <md-form-field fxFlex="50%" fxFlexFill>
+          <input mdInput type="text" placeholder="Nom" [(ngModel)]="registration.lastname">
         </md-form-field>
+      </div>
 
-        <!-- Sexe -->
-        <md-radio-group [(ngModel)]="registration.gender">
-          <md-radio-button value="Male">Garçon</md-radio-button>
-          <md-radio-button value="Female">Fille</md-radio-button>
-        </md-radio-group>
+      <!-- Date de naissance -->
+      <md-form-field fxFlexFill>
+        <input mdInput [mdDatepicker]="picker" placeholder="Date de naissance" disabled [(ngModel)]="registration.birthdate">
+        <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+        <md-datepicker #picker startView="year" [startAt]="startDate" disabled="false"></md-datepicker>
+      </md-form-field>
 
-        <!-- Adresse -->
+      <!-- Email -->
+      <md-form-field fxFlexFill>
+        <input mdInput type="email" placeholder="Email" email [(ngModel)]="registration.email">
+      </md-form-field>
 
-        <!-- Poste préféré : Gardien / Défenseur / Milieu / Attaquant -->
+      <!-- Sexe -->
+      <md-radio-group [(ngModel)]="registration.gender">
+        <md-radio-button value="Male">Garçon</md-radio-button>
+        <md-radio-button value="Female">Fille</md-radio-button>
+      </md-radio-group>
 
-        <!-- Pied Gauche / Droit -->
+      <!-- Adresse -->
 
-        <!-- Zone de saisie libre (informations complémentaires) -->
+      <!-- Poste préféré : Gardien / Défenseur / Milieu / Attaquant -->
 
-        <!-- Confirmer inscription -->
-        <a (click)="onConfirmRegistration()" md-button color="primary">Confirmer</a>
-        <!-- <a [routerLink]="[ '/registration/confiration' ]" md-button color="primary">Confirmer</a> -->
+      <!-- Pied Gauche / Droit -->
 
-      </md-card-content>
-    </md-card>
-  </div>
+      <!-- Zone de saisie libre (informations complémentaires) -->
+
+      <!-- Confirmer inscription -->
+      <a (click)="onConfirmRegistration()" md-button color="primary">Confirmer</a>
+      <!-- <a [routerLink]="[ '/registration/confiration' ]" md-button color="primary">Confirmer</a> -->
+
+    </md-card-content>
+  </md-card>
 </div>
 <!-- 
 

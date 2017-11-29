@@ -226,13 +226,13 @@
  
     
 @mixin big-screen() {
-    @include min-screen(700px) {
+    @include min-screen(800px) {
         @content;
     }
 }
 
 @mixin small-screen() {
-  @include max-screen(700px) {
+  @include max-screen(800px) {
       @content;
   }
 }
