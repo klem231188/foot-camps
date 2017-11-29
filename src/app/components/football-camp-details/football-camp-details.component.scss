@@ -34,6 +34,7 @@
         @include big-screen {
           width: 66%;
         }
+        flex: 1 0 auto;
         display: flex;
         flex-direction: column;
         md-toolbar {

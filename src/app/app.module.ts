@@ -15,7 +15,7 @@ import { FootballCampDetailsComponent } from './components/football-camp-details
 import { FootballCampMapComponent } from './components/football-camp-map/football-camp-map.component';
 import { FootballCampOverviewComponent } from './components/football-camp-overview/football-camp-overview.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-import { Angular2ImageGalleryModule } from 'angular2-image-gallery';
+import { Angular2ImageGalleryModule } from './components/angular2-image-gallery';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { SafeHtmlPipe } from './pipes/safe-html-pipe';
