@@ -21,6 +21,8 @@ import { environment } from '../environments/environment';
 import { SafeHtmlPipe } from './pipes/safe-html-pipe';
 import { TruncatePipe } from './pipes/truncate-pipe';
 import { FootballCampRegistrationComponent } from './components/football-camp-registration/football-camp-registration.component';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { FootballCampLoginComponent } from './components/football-camp-login/football-camp-login.component';
 
 @NgModule({
   imports: [
@@ -54,9 +56,13 @@ import { FootballCampRegistrationComponent } from './components/football-camp-re
     FootballCampOverviewComponent,
     FootballCampDetailsComponent,
     FootballCampHeaderComponent,
-    FootballCampRegistrationComponent
+    FootballCampRegistrationComponent,
+    FootballCampLoginComponent,
   ],
-  providers: [],
+  entryComponents: [
+    FootballCampLoginComponent
+  ],
+  providers: [AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

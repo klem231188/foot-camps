@@ -11,7 +11,7 @@
       overflow: auto;
     }
     .vertical-line {
-      color: mat-color($primary);
+      border-color: mat-color($primary);
       margin-bottom: 40px;
       margin-top: 40px;
       @include small-screen {
@@ -50,6 +50,7 @@
         min-height: 15px;
       }
       .container {
+        flex: 1 0 auto;
         display: flex;
         flex-direction: column;
         width: 100%;

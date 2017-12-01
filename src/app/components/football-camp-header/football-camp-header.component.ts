@@ -1,5 +1,7 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
+import { FootballCampLoginComponent } from 'app/components/football-camp-login/football-camp-login.component';
+import { MdDialog } from '@angular/material';
 
 @Component({
   selector: 'football-camp-header',
@@ -10,9 +12,13 @@ export class FootballCampHeaderComponent implements OnInit {
 
   backUrl: string = null;
 
+  hideLoginComponent: boolean = true;
+
   @Output() onMenuClickedEvent = new EventEmitter<any>();
   
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private dialog: MdDialog) {
   }
 
   ngOnInit(): void {
@@ -41,5 +47,9 @@ export class FootballCampHeaderComponent implements OnInit {
 
   onMenuClicked(): void {
     this.onMenuClickedEvent.emit();
+  }
+
+  onAccountClicked(): void {
+    this.dialog.open(FootballCampLoginComponent);
   }
 }
