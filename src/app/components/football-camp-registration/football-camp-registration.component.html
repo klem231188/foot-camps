@@ -1,106 +1,80 @@
-<div class="container">
-  <md-toolbar color="primary">
-    <span>Inscription</span>
-  </md-toolbar>
-  <md-card>
-    <md-card-content>
-      <!-- Photo -->
-      <div class="avatar" fxFlexAlign="center"></div>
+<div class="main-container">
+  <div class="logo-container">
+    <!-- <img [src]="footballCamp.details.pathToLogo" class="details-logo"> -->
+    <img src="./assets/img/soccer-sketch.png" class="soccer-ball">
+  </div>
 
-      <!-- Nom & Prénom -->
-      <span class="separator"></span>
-      <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="20px">
-        <md-form-field fxFlex="50%" fxFlexFill>
-          <input mdInput type="text" placeholder="Prénom" [(ngModel)]="registration.firstname">
-        </md-form-field>
+  <hr class="vertical-line">
 
-        <md-form-field fxFlex="50%" fxFlexFill>
-          <input mdInput type="text" placeholder="Nom" [(ngModel)]="registration.lastname">
-        </md-form-field>
-      </div>
+  <div class="content-container">
+    <span class="separator"></span>
+    <span class="separator"></span>
 
-      <!-- Date de naissance -->
-      <md-form-field fxFlexFill>
-        <input mdInput [mdDatepicker]="picker" placeholder="Date de naissance" disabled [(ngModel)]="registration.birthdate">
-        <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-        <md-datepicker #picker startView="year" [startAt]="startDate" disabled="false"></md-datepicker>
-      </md-form-field>
+    <!-- Description -->
+    <div class="container">
+      <md-toolbar color="primary">
+        <md-icon>description</md-icon>
+        <span>Fiche d'inscription</span>
+      </md-toolbar>
+      <md-card>
+        <md-card-content>
+          <h4>Informations générales</h4>
+          <div class="registration-global-informations">
+            <div class="registration-global-informations-left">
+              <!-- Photo -->
+              <img src="./assets/img/registration/avatar2.png" class="registration-avatar">
+            </div>
 
-      <!-- Email -->
-      <md-form-field fxFlexFill>
-        <input mdInput type="email" placeholder="Email" email [(ngModel)]="registration.email">
-      </md-form-field>
+            <div class="registration-global-informations-right">
+              <!-- Sexe -->
+              <md-radio-group [(ngModel)]="registration.gender">
+                <md-radio-button value="Male">Garçon</md-radio-button>
+                <md-radio-button value="Female">Fille</md-radio-button>
+              </md-radio-group>
 
-      <!-- Sexe -->
-      <md-radio-group [(ngModel)]="registration.gender">
-        <md-radio-button value="Male">Garçon</md-radio-button>
-        <md-radio-button value="Female">Fille</md-radio-button>
-      </md-radio-group>
+              <!-- Nom & Prénom -->
+              <md-form-field>
+                <input mdInput type="text" placeholder="Prénom" [(ngModel)]="registration.firstname">
+              </md-form-field>
 
-      <!-- Adresse -->
+              <md-form-field>
+                <input mdInput type="text" placeholder="Nom" [(ngModel)]="registration.lastname">
+              </md-form-field>
 
-      <!-- Poste préféré : Gardien / Défenseur / Milieu / Attaquant -->
+              <!-- Date de naissance -->
+              <md-form-field>
+                <input mdInput [mdDatepicker]="picker" placeholder="Date de naissance" disabled [(ngModel)]="registration.birthdate">
+                <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                <md-datepicker #picker startView="year" [startAt]="startDate" disabled="false"></md-datepicker>
+              </md-form-field>
 
-      <!-- Pied Gauche / Droit -->
+              <!-- Email -->
+              <md-form-field>
+                <input mdInput type="email" placeholder="Email" email [(ngModel)]="registration.email">
+              </md-form-field>
 
-      <!-- Zone de saisie libre (informations complémentaires) -->
+              <!-- Adresse -->
+              <md-form-field>
+                <input mdInput type="text" placeholder="Adresse" address>
+              </md-form-field>
+            </div>
+          </div>
 
-      <!-- Confirmer inscription -->
-      <a (click)="onConfirmRegistration()" md-button color="primary">Confirmer</a>
-      <!-- <a [routerLink]="[ '/registration/confiration' ]" md-button color="primary">Confirmer</a> -->
+          <h4>Caractéristiques sportives</h4>
 
-    </md-card-content>
-  </md-card>
+          todo
+          <!-- Poste préféré : Gardien / Défenseur / Milieu / Attaquant -->
+
+          <!-- Pied Gauche / Droit -->
+
+          <!-- Zone de saisie libre (informations complémentaires) -->
+
+          <!-- Confirmer inscription -->
+          <a (click)="onConfirmRegistration()" md-button color="primary">Confirmer</a>
+          <!-- <a [routerLink]="[ '/registration/confiration' ]" md-button color="primary">Confirmer</a> -->
+
+        </md-card-content>
+      </md-card>
+    </div>
+  </div>
 </div>
-<!-- 
-
-<form class="example-form">
-  <md-form-field class="example-full-width">
-    <input mdInput placeholder="Company (disabled)" disabled value="Google">
-  </md-form-field>
-
-  <table class="example-full-width" cellspacing="0">
-    <tr>
-      <td>
-        <md-form-field class="example-full-width">
-          <input mdInput placeholder="First name">
-        </md-form-field>
-      </td>
-      <td>
-        <md-form-field class="example-full-width">
-          <input mdInput placeholder="Long Last Name That Will Be Truncated">
-        </md-form-field>
-      </td>
-    </tr>
-  </table>
-
-  <p>
-    <md-form-field class="example-full-width">
-      <textarea mdInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
-    </md-form-field>
-    <md-form-field class="example-full-width">
-      <textarea mdInput placeholder="Address 2"></textarea>
-    </md-form-field>
-  </p>
-
-  <table class="example-full-width" cellspacing="0">
-    <tr>
-      <td>
-        <md-form-field class="example-full-width">
-          <input mdInput placeholder="City">
-        </md-form-field>
-      </td>
-      <td>
-        <md-form-field class="example-full-width">
-          <input mdInput placeholder="State">
-        </md-form-field>
-      </td>
-      <td>
-        <md-form-field class="example-full-width">
-          <input mdInput #postalCode maxlength="5" placeholder="Postal Code" value="94043">
-          <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
-        </md-form-field>
-      </td>
-    </tr>
-  </table>
-</form> -->

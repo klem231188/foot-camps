@@ -4,49 +4,106 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
   football-camp-registration {
-    background-image: url('assets/img/examples/wallpaper5.jpg');
-    background-attachment: fixed;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .separator {
-      width: 100%;
-      height: 10px;
+    .main-container {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      background-color: #19212b;
+      overflow: auto;
     }
-    .container {
-      flex: 0 0 auto;
-      width: 100%;
-      @include big-screen {
-        width: 800px;
+    .vertical-line {
+      color: mat-color($primary);
+      margin-bottom: 40px;
+      margin-top: 40px;
+      @include small-screen {
+        display: none;
       }
-      md-toolbar {
-        @include mat-elevation(2);
-        position: relative;
-        z-index: 1;
+    }
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      padding: 10px;
+      @include small-screen {
+        display: none;
       }
-      md-card {
-        border-radius: 0px 0px 2px 2px !important;
-        border: 2px solid mat-color($primary);
-        md-card-content {
-          display: flex;
-          flex-direction: column;
-          .avatar {
-            border-radius: 50%;
-            width: 200px;
-            height: 200px;
-            border: 2px solid mat-color($primary);
-            background-color: mat-color($primary);
-            background-image: url('./assets/img/registration/avatar.svg');
-            background-repeat: no-repeat;
-            background-size: cover;
-            -webkit-background-size: cover;
+      .details-logo {
+        position: fixed;
+        top: 40px;
+        height: 250px;
+      }
+      .soccer-ball {
+        position: fixed;
+        bottom: 25px;
+        height: 150px;
+      }
+    }
+    .content-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 4;
+      overflow: auto;
+      padding: 10px;
+      .separator {
+        width: 100%;
+        min-height: 15px;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        @include big-screen {
+          width: 70%;
+        }
+        md-toolbar {
+          @include mat-elevation(2);
+          position: relative;
+          z-index: 1;
+          md-icon {
+            margin-right: 10px;
           }
-          .avatar:hover {
-            filter: brightness(80%); // todo background-image: url('./assets/img/registration/avatar-with-camera.svg');
+        }
+        md-card {
+          border-radius: 0px 0px 2px 2px !important;
+          md-card-content {
+            display: flex;
+            flex-direction: column;
+            font-size: 15px !important;
+            h4 {
+              color: mat-color($primary);
+            }
+            .registration-global-informations {
+              display: flex;
+              flex-direction: row;
+              @include small-screen {
+                flex-direction: column;
+              }
+              .registration-global-informations-left {
+                flex: 1;
+                @include small-screen {
+                  align-self: center;
+                  margin-bottom: 10px;
+                }
+                .registration-avatar {
+                  width: 180px;
+                  border: 2px solid mat-color($primary);
+                }
+                .registration-avatar:hover {
+                  filter: brightness(80%); // todo background-image: url('./assets/img/registration/avatar-with-camera.svg');
+                }
+              }
+              .registration-global-informations-right {
+                flex: 3;
+                display: flex;
+                flex-direction: column;
+                margin-left: 10px;
+                md-form-field {
+                  width: 100%;
+                }
+              }
+            }
           }
         }
       }
