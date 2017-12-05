@@ -46,6 +46,9 @@
       flex: 4;
       overflow: auto;
       padding: 10px;
+      @include big-screen {
+        margin-top: 30px;
+      }
       .separator {
         width: 100%;
         min-height: 15px;
@@ -67,6 +70,10 @@
         }
         md-card {
           border-radius: 0px 0px 2px 2px !important;
+          margin-bottom: 40px;
+          @include small-screen {
+            margin-bottom: 10px;
+          }
           md-card-content {
             display: flex;
             flex-direction: column;
@@ -76,32 +83,17 @@
             }
             .registration-global-informations {
               display: flex;
-              flex-direction: row;
-              @include small-screen {
-                flex-direction: column;
+              flex-direction: column;
+              .registration-avatar {
+                width: 180px;
+                border: 2px solid mat-color($primary);
+                align-self: center;
               }
-              .registration-global-informations-left {
-                flex: 1;
-                @include small-screen {
-                  align-self: center;
-                  margin-bottom: 10px;
-                }
-                .registration-avatar {
-                  width: 180px;
-                  border: 2px solid mat-color($primary);
-                }
-                .registration-avatar:hover {
-                  filter: brightness(80%); // todo background-image: url('./assets/img/registration/avatar-with-camera.svg');
-                }
+              .registration-avatar:hover {
+                filter: brightness(80%); // todo background-image: url('./assets/img/registration/avatar-with-camera.svg');
               }
-              .registration-global-informations-right {
-                flex: 3;
-                display: flex;
-                flex-direction: column;
-                margin-left: 10px;
-                md-form-field {
-                  width: 100%;
-                }
+              md-form-field {
+                width: 100%;
               }
             }
           }
