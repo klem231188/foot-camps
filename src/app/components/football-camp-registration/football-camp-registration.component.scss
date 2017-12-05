@@ -46,9 +46,6 @@
       flex: 4;
       overflow: auto;
       padding: 10px;
-      @include big-screen {
-        margin-top: 30px;
-      }
       .separator {
         width: 100%;
         min-height: 15px;
@@ -58,6 +55,7 @@
         flex-direction: column;
         width: 100%;
         @include big-screen {
+          margin-top: 30px;
           width: 70%;
         }
         md-toolbar {
