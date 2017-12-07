@@ -1,14 +1,14 @@
 <div *ngIf="footballCamp">
-  <!-- <md-toolbar class="toolbar-title">{{footballCamp.overview.title}}</md-toolbar> -->
-  <md-card>
+  <!-- <mat-toolbar class="toolbar-title">{{footballCamp.overview.title}}</mat-toolbar> -->
+  <mat-card>
     <div class="fab-button-wrapper">
       <div class="overview-image" [ngStyle]="{'background-image': 'url(' + footballCamp.overview.pathToImage + ')'}"></div>
-      <button (click)="onDetailsClicked()" md-fab color="primary" class="fab-button">
-        <md-icon class="md-24">add</md-icon>
+      <button (click)="onDetailsClicked()" mat-fab color="primary" class="fab-button">
+        <mat-icon class="mat-24">add</mat-icon>
       </button>
     </div>
-    <md-card-content>
+    <mat-card-content>
       {{footballCamp.overview.content}}
-    </md-card-content>
-  </md-card>
+    </mat-card-content>
+  </mat-card>
 </div>

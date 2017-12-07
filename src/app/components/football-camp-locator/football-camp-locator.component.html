@@ -1,22 +1,22 @@
-<md-card class="search-bar">
+<mat-card class="search-bar">
   <form>
-    <md-form-field>
-      <button md-icon-button (click)="onCloseClicked()" mdPrefix>
-        <md-icon>clear</md-icon>
+    <mat-form-field>
+      <button mat-icon-button (click)="onCloseClicked()" matPrefix>
+        <mat-icon>clear</mat-icon>
       </button>
-      <input type="text" mdInput placeholder="Rechercher un stage de football" [formControl]="searchInput" [mdAutocomplete]="auto">
-      <button md-icon-button mdSuffix>
-        <md-icon>search</md-icon>
+      <input type="text" matInput placeholder="Rechercher un stage de football" [formControl]="searchInput" [matAutocomplete]="auto">
+      <button mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
       </button>
-    </md-form-field>
+    </mat-form-field>
 
-    <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
-      <md-option *ngFor="let footballCamp of filteredFootballCamps | async" [value]="footballCamp">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let footballCamp of filteredFootballCamps | async" [value]="footballCamp">
         {{ footballCamp.city }}
-      </md-option>
-    </md-autocomplete>
+      </mat-option>
+    </mat-autocomplete>
   </form>
-</md-card>
+</mat-card>
 
 <div class="overview-and-map">
   <football-camp-overview [hidden]="!footballCamp">

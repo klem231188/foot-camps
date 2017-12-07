@@ -105,7 +105,7 @@
     height: 26px;
 }
 
-md-button-toggle-group {
+mat-button-toggle-group {
     display: table;
     top: 70px;
     margin: 0 auto;
@@ -113,7 +113,7 @@ md-button-toggle-group {
     z-index: 500;
 }
 
-md-button-toggle.checked {
+mat-button-toggle.checked {
     background-color: #a0a0a0;
 }
 
@@ -127,7 +127,7 @@ md-button-toggle.checked {
     transition: all ease-out 0.5s;
 }
 
-[md-fab], [md-mini-fab] {
+[mat-fab], [mat-mini-fab] {
     background-color: #aaaaaa;
 }
 

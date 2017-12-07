@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppMaterialModule } from './app.material.module';
-import { AgmCoreModule } from 'angular2-google-maps/core';
+import { AgmCoreModule } from '@agm/core';
 import { FootballCampLocatorComponent } from './components/football-camp-locator/football-camp-locator.component';
 import { FootballCampHeaderComponent } from './components/football-camp-header/football-camp-header.component';
 import { FootballCampDetailsComponent } from './components/football-camp-details/football-camp-details.component';

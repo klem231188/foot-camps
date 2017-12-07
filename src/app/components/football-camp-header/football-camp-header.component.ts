@@ -1,7 +1,8 @@
 import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { FootballCampLoginComponent } from 'app/components/football-camp-login/football-camp-login.component';
-import { MdDialog } from '@angular/material';
+import 'rxjs/add/operator/filter';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'football-camp-header',
@@ -18,7 +19,7 @@ export class FootballCampHeaderComponent implements OnInit {
   
   constructor(
     private router: Router,
-    private dialog: MdDialog) {
+    private dialog: MatDialog) {
   }
 
   ngOnInit(): void {

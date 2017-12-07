@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
 import { FootballCampService } from './services/football-camp/football-camp.service';
-import { MdSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import * as firebaseui from 'firebaseui';
@@ -15,8 +15,8 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  @ViewChild(MdSidenav)
-  private sidenav: MdSidenav;
+  @ViewChild(MatSidenav)
+  private sidenav: MatSidenav;
 
   constructor(
     private footballCampService: FootballCampService,

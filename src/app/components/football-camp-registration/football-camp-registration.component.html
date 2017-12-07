@@ -9,80 +9,80 @@
   <div class="registration-content-container">
     <!-- Description -->
     <div class="registration-content-container-inner">
-      <md-toolbar color="primary">
-        <md-icon>description</md-icon>
+      <mat-toolbar color="primary">
+        <mat-icon>description</mat-icon>
         <span>Fiche d'inscription</span>
-      </md-toolbar>
-      <md-card>
-        <md-card-content>
+      </mat-toolbar>
+      <mat-card>
+        <mat-card-content>
           <h4>Informations générales</h4>
           <div class="registration-global-informations">
             <!-- Photo -->
             <img src="./assets/img/registration/avatar2.png" class="registration-avatar">
 
             <!-- Nom & Prénom -->
-            <md-form-field>
-              <input mdInput type="text" placeholder="Prénom" [(ngModel)]="registration.firstname">
-            </md-form-field>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Prénom" [(ngModel)]="registration.firstname">
+            </mat-form-field>
 
-            <md-form-field>
-              <input mdInput type="text" placeholder="Nom" [(ngModel)]="registration.lastname">
-            </md-form-field>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Nom" [(ngModel)]="registration.lastname">
+            </mat-form-field>
 
             <!-- Sexe -->
-            <md-radio-group [(ngModel)]="registration.gender">
-              <md-radio-button value="Male">Garçon</md-radio-button>
-              <md-radio-button value="Female">Fille</md-radio-button>
-            </md-radio-group>
+            <mat-radio-group [(ngModel)]="registration.gender">
+              <mat-radio-button value="Male">Garçon</mat-radio-button>
+              <mat-radio-button value="Female">Fille</mat-radio-button>
+            </mat-radio-group>
 
             <!-- Date de naissance -->
-            <md-form-field>
-              <input mdInput [mdDatepicker]="picker" placeholder="Date de naissance" disabled [(ngModel)]="registration.birthdate">
-              <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-              <md-datepicker #picker startView="year" [startAt]="startDate" disabled="false"></md-datepicker>
-            </md-form-field>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Date de naissance" disabled [(ngModel)]="registration.birthdate">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker startView="year" [startAt]="startDate" disabled="false"></mat-datepicker>
+            </mat-form-field>
 
             <!-- Email -->
-            <md-form-field>
-              <input mdInput type="email" placeholder="Email" email [(ngModel)]="registration.email">
-            </md-form-field>
+            <mat-form-field>
+              <input matInput type="email" placeholder="Email" email [(ngModel)]="registration.email">
+            </mat-form-field>
 
             <!-- Adresse -->
-            <md-form-field>
-              <input mdInput type="text" placeholder="Adresse" address>
-            </md-form-field>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Adresse" address>
+            </mat-form-field>
           </div>
 
           <h4>Caractéristiques sportives</h4>
           <div class="registration-global-informations">
             <!-- Club -->
-            <md-form-field>
-              <input mdInput type="text" placeholder="Club actuel" address>
-            </md-form-field>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Club actuel" address>
+            </mat-form-field>
             <!-- Poste préféré : Gardien / Défenseur / Milieu / Attaquant -->
-            <md-radio-group>
-              <md-radio-button value="1">Gardien</md-radio-button>
-              <md-radio-button value="2">Défenseur</md-radio-button>
-              <md-radio-button value="3">Milieu</md-radio-button>
-              <md-radio-button value="4">Attaquant</md-radio-button>
-            </md-radio-group>
+            <mat-radio-group>
+              <mat-radio-button value="1">Gardien</mat-radio-button>
+              <mat-radio-button value="2">Défenseur</mat-radio-button>
+              <mat-radio-button value="3">Milieu</mat-radio-button>
+              <mat-radio-button value="4">Attaquant</mat-radio-button>
+            </mat-radio-group>
             <span class="separator"></span>
             <!-- Pied Gauche / Droit -->
-            <md-radio-group>
-              <md-radio-button value="1">Droitier</md-radio-button>
-              <md-radio-button value="2">Gaucher</md-radio-button>
-            </md-radio-group>
+            <mat-radio-group>
+              <mat-radio-button value="1">Droitier</mat-radio-button>
+              <mat-radio-button value="2">Gaucher</mat-radio-button>
+            </mat-radio-group>
           </div>
 
           <!-- Zone de saisie libre (informations complémentaires) -->
           <span class="separator"></span>
 
           <!-- Confirmer inscription -->
-          <a (click)="onConfirmRegistration()" md-button color="primary">Suivant</a>
-          <!-- <a [routerLink]="[ '/registration/confiration' ]" md-button color="primary">Confirmer</a> -->
+          <a (click)="onConfirmRegistration()" mat-button color="primary">Suivant</a>
+          <!-- <a [routerLink]="[ '/registration/confiration' ]" mat-button color="primary">Confirmer</a> -->
 
-        </md-card-content>
-      </md-card>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>

@@ -3,7 +3,7 @@
   $warn: map-get($theme, warn);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
-  sebm-google-map {
+  agm-map {
     height: 100%;
     width: 100%;
   }

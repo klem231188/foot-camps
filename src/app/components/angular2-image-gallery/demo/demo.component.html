@@ -7,9 +7,9 @@
        data-count-aria-label="# stargazers on GitHub"
        aria-label="Star benjaminbrandmeier/angular2-image-gallery on GitHub">Star</a>
   </div>
-  <input mdInput [(ngModel)]="flexBorderSize" type="number" min="1" max="50" placeholder="Space between images">
-  <input mdInput [(ngModel)]="flexImageSize" type="number" min="0" max="50" placeholder="Image size">
-  <input mdInput [(ngModel)]="galleryName" placeholder="Gallery name">
+  <input matInput [(ngModel)]="flexBorderSize" type="number" min="1" max="50" placeholder="Space between images">
+  <input matInput [(ngModel)]="flexImageSize" type="number" min="0" max="50" placeholder="Image size">
+  <input matInput [(ngModel)]="galleryName" placeholder="Gallery name">
 
   <gallery (viewerChange)="onViewerVisibilityChanged($event)"
            [flexBorderSize]="flexBorderSize"

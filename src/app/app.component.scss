@@ -6,14 +6,14 @@
   app-root {
     display: flex;
     flex-direction: column;
-    md-sidenav-container {
+    mat-sidenav-container {
       flex: 1;
       margin-top: 56px;
       overflow: auto;
       @include big-screen {
         margin-top: 64px;
       }
-      md-sidenav {
+      mat-sidenav {
         display: flex !important;
         flex-direction: column;
         width: 250px;
