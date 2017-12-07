@@ -8,6 +8,7 @@
 @import 'app/components/football-camp-map/football-camp-map.component.scss';
 @import 'app/components/football-camp-header/football-camp-header.component.scss';
 @import 'app/components/football-camp-registration/football-camp-registration.component.scss';
+@import url('https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css');
 @include mat-core();
 $primary: mat-palette($mat-teal);
 $accent: mat-palette($mat-amber, A200, A100, A400);

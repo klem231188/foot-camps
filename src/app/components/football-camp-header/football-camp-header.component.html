@@ -9,8 +9,11 @@
   <span fxFlex=5px></span>
   <span class="brand" fxFlex>F<img src='assets/img/examples/ball-white-2.png' class="logo"><img src='assets/img/examples/ball-white-2.png' class="logo">tcamps</span>
 
-  <button mat-icon-button mat-button (click)="onAccountClicked()">
+  <button *ngIf="!isUserLogged" mat-icon-button mat-button (click)="login()">
     <mat-icon>account_circle</mat-icon>
   </button>
 
+  <button *ngIf="isUserLogged" mat-icon-button mat-button (click)="logout()">
+    <mat-icon>power_settings_new</mat-icon>
+  </button>
 </mat-toolbar>

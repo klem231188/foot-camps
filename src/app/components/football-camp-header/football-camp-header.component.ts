@@ -3,6 +3,7 @@ import { Router, NavigationStart } from '@angular/router';
 import { FootballCampLoginComponent } from 'app/components/football-camp-login/football-camp-login.component';
 import 'rxjs/add/operator/filter';
 import { MatDialog } from '@angular/material';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'football-camp-header',
@@ -13,13 +14,14 @@ export class FootballCampHeaderComponent implements OnInit {
 
   backUrl: string = null;
 
-  hideLoginComponent: boolean = true;
+  isUserLogged: boolean = false;
 
   @Output() onMenuClickedEvent = new EventEmitter<any>();
-  
+
   constructor(
     private router: Router,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private angularFireAuth: AngularFireAuth) {
   }
 
   ngOnInit(): void {
@@ -40,6 +42,12 @@ export class FootballCampHeaderComponent implements OnInit {
           console.log(this.backUrl);
         }
       });
+
+      this.angularFireAuth.authState.subscribe((firebaseUser) => {
+        console.log("before this.isUserLogged : " +  this.isUserLogged);
+        this.isUserLogged = (firebaseUser  && firebaseUser.uid) ? true : false;
+        console.log("after this.isUserLogged : " + this.isUserLogged);
+      });
   }
 
   onBackClicked(): void {
@@ -50,7 +58,11 @@ export class FootballCampHeaderComponent implements OnInit {
     this.onMenuClickedEvent.emit();
   }
 
-  onAccountClicked(): void {
-    this.dialog.open(FootballCampLoginComponent);
+  login(): void {
+    this.router.navigateByUrl('/login');
+  }
+
+  logout(): void {
+    this.angularFireAuth.auth.signOut();
   }
 }

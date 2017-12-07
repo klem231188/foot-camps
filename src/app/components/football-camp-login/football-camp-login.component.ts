@@ -1,8 +1,9 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Location } from '@angular/common';
 import * as firebase from 'firebase';
 import * as firebaseui from 'firebaseui';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-football-camp-login',
@@ -14,40 +15,50 @@ export class FootballCampLoginComponent implements OnInit, AfterViewInit, OnDest
   private authUI: firebaseui.auth.AuthUI = null;
 
   constructor(
-    private afAuth: AngularFireAuth
+    private angularFireAuth: AngularFireAuth,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.afAuth.authState.subscribe((firebaseUser) => {
-      if (firebaseUser) {
-        console.log("logged !")
+    this.angularFireAuth.authState.subscribe((firebaseUser) => {
+      if (firebaseUser && firebaseUser.uid) {
+        // Logged
+        console.log('Logged');
         console.log(firebaseUser);
+        this.router.navigateByUrl('/locate');
       } else {
-        console.log("not logged");
+        // Not yet logged
+        console.log('Not yet logged');
+        if (!this.authUI) {
+          // FirebaseUI config.
+          const uiConfig = {
+            signInSuccessUrl: this.router.navigateByUrl('/locate'),
+            signInOptions: [
+              firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+              firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+              firebase.auth.EmailAuthProvider.PROVIDER_ID
+            ],
+            signInFlow: 'popup',
+            // Terms of service url.
+            tosUrl: '/tos.html'
+          };
+          // Initialize the FirebaseUI Widget using Firebase.
+          this.authUI = new firebaseui.auth.AuthUI(this.angularFireAuth.auth);
+          // The start method will wait until the DOM is loaded.
+          setTimeout(() => { this.authUI.start('#firebaseui-auth-container', uiConfig); }, 1000);
+        }
       }
     });
   }
 
   ngAfterViewInit(): void {
-    if (!this.authUI) {
-      // FirebaseUI config.
-      const uiConfig = {
-        //signInSuccessUrl: '/locate',
-        signInOptions: [
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        ],
-        signInFlow: 'popup',
-        // Terms of service url.
-        tosUrl: '/tos.html'
-      };
-      // Initialize the FirebaseUI Widget using Firebase.
-      this.authUI = new firebaseui.auth.AuthUI(this.afAuth.auth);
-      // The start method will wait until the DOM is loaded.
-      setTimeout(() => { this.authUI.start('#firebaseui-auth-container', uiConfig); }, 1000);
-    }
+
   }
 
   ngOnDestroy(): void {
-    this.authUI.delete();
+    if (this.authUI) {
+      this.authUI.delete();
+      this.authUI = null;
+    }
   }
 }
