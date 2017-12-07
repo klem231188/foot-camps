@@ -32,7 +32,7 @@ export class FootballCampLoginComponent implements OnInit, AfterViewInit, OnDest
         if (!this.authUI) {
           // FirebaseUI config.
           const uiConfig = {
-            signInSuccessUrl: this.router.navigateByUrl('/locate'),
+            signInSuccessUrl: 'locate',
             signInOptions: [
               firebase.auth.GoogleAuthProvider.PROVIDER_ID,
               firebase.auth.FacebookAuthProvider.PROVIDER_ID,
