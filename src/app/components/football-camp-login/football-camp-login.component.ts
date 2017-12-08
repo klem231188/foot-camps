@@ -32,7 +32,13 @@ export class FootballCampLoginComponent implements OnInit, AfterViewInit, OnDest
         if (!this.authUI) {
           // FirebaseUI config.
           const uiConfig = {
-            signInSuccessUrl: 'locate',
+            'callbacks': {
+              signInSuccess: function (currentUser, credential, redirectUrl) {
+                this.router.navigateByUrl('locate');
+                // Do not redirect.
+                return false;
+              }.bind(this),
+            },
             signInOptions: [
               firebase.auth.GoogleAuthProvider.PROVIDER_ID,
               firebase.auth.FacebookAuthProvider.PROVIDER_ID,
@@ -41,24 +47,24 @@ export class FootballCampLoginComponent implements OnInit, AfterViewInit, OnDest
             signInFlow: 'popup',
             // Terms of service url.
             tosUrl: '/tos.html'
-          };
-          // Initialize the FirebaseUI Widget using Firebase.
-          this.authUI = new firebaseui.auth.AuthUI(this.angularFireAuth.auth);
-          // The start method will wait until the DOM is loaded.
-          setTimeout(() => { this.authUI.start('#firebaseui-auth-container', uiConfig); }, 1000);
-        }
+        };
+        // Initialize the FirebaseUI Widget using Firebase.
+        this.authUI = new firebaseui.auth.AuthUI(this.angularFireAuth.auth);
+        // The start method will wait until the DOM is loaded.
+        setTimeout(() => { this.authUI.start('#firebaseui-auth-container', uiConfig); }, 1000);
       }
-    });
-  }
-
-  ngAfterViewInit(): void {
-
-  }
-
-  ngOnDestroy(): void {
-    if (this.authUI) {
-      this.authUI.delete();
-      this.authUI = null;
     }
+    });
+}
+
+ngAfterViewInit(): void {
+
+}
+
+ngOnDestroy(): void {
+  if(this.authUI) {
+    this.authUI.delete();
+    this.authUI = null;
   }
+}
 }

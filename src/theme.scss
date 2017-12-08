@@ -7,6 +7,7 @@
 @import 'app/components/football-camp-locator/football-camp-locator.component.scss';
 @import 'app/components/football-camp-map/football-camp-map.component.scss';
 @import 'app/components/football-camp-header/football-camp-header.component.scss';
+@import 'app/components/football-camp-login/football-camp-login.component.scss';
 @import 'app/components/football-camp-registration/football-camp-registration.component.scss';
 @import url('https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css');
 @include mat-core();
@@ -15,6 +16,7 @@ $accent: mat-palette($mat-amber, A200, A100, A400);
 $warn: mat-palette($mat-red);
 $football-camp-theme: mat-light-theme($primary, $accent, $warn);
 @mixin football-camp-theme($theme) {
+  @include football-camp-login-theme($theme);
   @include football-camp-registration-theme($theme);
   @include football-camp-overview-theme($theme);
   @include football-camp-details-theme($theme);
