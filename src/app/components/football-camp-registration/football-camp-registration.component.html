@@ -19,7 +19,7 @@
 
           <!-- Nom & Prénom -->
           <mat-form-field>
-            <input matInput type="text" placeholder="Prénom">
+            <input matInput type="text" placeholder="Prénom" formControlName="registrationController" required>
           </mat-form-field>
 
           <mat-form-field>
@@ -31,10 +31,11 @@
             <mat-radio-button value="Male">Garçon</mat-radio-button>
             <mat-radio-button value="Female">Fille</mat-radio-button>
           </mat-radio-group>
+          <span class="separator"></span>
 
           <!-- Date de naissance -->
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Date de naissance" disabled>
+            <input matInput [matDatepicker]="picker" placeholder="Date de naissance">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker startView="year" [startAt]="startDate" disabled="false"></mat-datepicker>
           </mat-form-field>
@@ -69,7 +70,7 @@
           </mat-radio-group>
           <span class="separator"></span>
           <div class="next-button">
-            <button mat-button matStepperNext mat-raised-button color="primary">Suivant</button>
+            <button mat-button matStepperNext mat-raised-button color="primary">Suivant<mat-icon>chevron_right</mat-icon></button>
           </div>
         </form>
       </mat-step>

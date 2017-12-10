@@ -64,6 +64,14 @@
           @include big-screen {
             width: 70%;
           }
+          mat-radio-button {
+            margin-left: 5px;
+            margin-bottom: 5px;
+          }
+          .mat-step-icon, .mat-step-icon-not-touched {
+            width: 30px;
+            height: 30px;
+          }
           .registration-form-group-container {
             display: flex;
             flex-direction: column;
@@ -74,7 +82,7 @@
             .registration-avatar {
               width: 180px;
               border: 2px solid mat-color($primary);
-              align-self: center;
+              //align-self: center;
             }
             .registration-avatar:hover {
               filter: brightness(80%); // todo background-image: url('./assets/img/registration/avatar-with-camera.svg');
@@ -84,6 +92,9 @@
             }
             .next-button {
               align-self: center;
+              mat-icon {
+                height: 25px;
+              }
             }
           }
         }

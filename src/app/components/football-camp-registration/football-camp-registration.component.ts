@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FootballCampRegistrationComponent implements OnInit {
   startDate: Date = new Date(2000, 0, 1);
   registration: Registration = new Registration();
-  isLinear = false;
+  isLinear = true;
   registrationFormGroup: FormGroup;
   paymentFormGroup: FormGroup;
 
