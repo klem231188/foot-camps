@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Registration } from './registration';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'football-camp-registration',
@@ -7,14 +8,21 @@ import { Registration } from './registration';
   styleUrls: ['./football-camp-registration.component.scss']
 })
 export class FootballCampRegistrationComponent implements OnInit {
-
   startDate: Date = new Date(2000, 0, 1);
-
   registration: Registration = new Registration();
+  isLinear = false;
+  registrationFormGroup: FormGroup;
+  paymentFormGroup: FormGroup;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.registrationFormGroup = this.formBuilder.group({
+      registrationController: ['', Validators.required]
+    });
+    this.paymentFormGroup = this.formBuilder.group({
+      paymentController: ['', Validators.required]
+    });
   }
 
   onConfirmRegistration(): void {

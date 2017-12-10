@@ -2,87 +2,99 @@
   <div class="registration-logo-container">
     <!-- <img [src]="footballCamp.details.pathToLogo" class="details-logo"> -->
     <img src="./assets/img/soccer-sketch.png" class="soccer-ball">
+    <hr class="vertical-line">
   </div>
 
-  <hr class="vertical-line">
 
-  <div class="registration-content-container">
-    <!-- Description -->
-    <div class="registration-content-container-inner">
-      <mat-toolbar color="primary">
-        <mat-icon>description</mat-icon>
-        <span>Fiche d'inscription</span>
-      </mat-toolbar>
-      <mat-card>
-        <mat-card-content>
+  <!-- Stepper -->
+  <div class="registration-stepper-container">
+    <mat-horizontal-stepper [linear]="isLinear">
+      <!--Etape : Renseigner les informations -->
+      <mat-step [stepControl]="registrationFormGroup">
+        <form [formGroup]="registrationFormGroup" class="registration-form-group-container">
+          <ng-template matStepLabel>Inscription</ng-template>
           <h4>Informations générales</h4>
-          <div class="registration-global-informations">
-            <!-- Photo -->
-            <img src="./assets/img/registration/avatar2.png" class="registration-avatar">
+          <!-- Photo -->
+          <img src="./assets/img/registration/avatar2.png" class="registration-avatar">
 
-            <!-- Nom & Prénom -->
-            <mat-form-field>
-              <input matInput type="text" placeholder="Prénom" [(ngModel)]="registration.firstname">
-            </mat-form-field>
+          <!-- Nom & Prénom -->
+          <mat-form-field>
+            <input matInput type="text" placeholder="Prénom">
+          </mat-form-field>
 
-            <mat-form-field>
-              <input matInput type="text" placeholder="Nom" [(ngModel)]="registration.lastname">
-            </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Nom">
+          </mat-form-field>
 
-            <!-- Sexe -->
-            <mat-radio-group [(ngModel)]="registration.gender">
-              <mat-radio-button value="Male">Garçon</mat-radio-button>
-              <mat-radio-button value="Female">Fille</mat-radio-button>
-            </mat-radio-group>
+          <!-- Sexe -->
+          <mat-radio-group>
+            <mat-radio-button value="Male">Garçon</mat-radio-button>
+            <mat-radio-button value="Female">Fille</mat-radio-button>
+          </mat-radio-group>
 
-            <!-- Date de naissance -->
-            <mat-form-field>
-              <input matInput [matDatepicker]="picker" placeholder="Date de naissance" disabled [(ngModel)]="registration.birthdate">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker startView="year" [startAt]="startDate" disabled="false"></mat-datepicker>
-            </mat-form-field>
+          <!-- Date de naissance -->
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Date de naissance" disabled>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="year" [startAt]="startDate" disabled="false"></mat-datepicker>
+          </mat-form-field>
 
-            <!-- Email -->
-            <mat-form-field>
-              <input matInput type="email" placeholder="Email" email [(ngModel)]="registration.email">
-            </mat-form-field>
+          <!-- Email -->
+          <mat-form-field>
+            <input matInput type="email" placeholder="Email" email>
+          </mat-form-field>
 
-            <!-- Adresse -->
-            <mat-form-field>
-              <input matInput type="text" placeholder="Adresse" address>
-            </mat-form-field>
-          </div>
+          <!-- Adresse -->
+          <mat-form-field>
+            <input matInput type="text" placeholder="Adresse" address>
+          </mat-form-field>
 
           <h4>Caractéristiques sportives</h4>
-          <div class="registration-global-informations">
-            <!-- Club -->
-            <mat-form-field>
-              <input matInput type="text" placeholder="Club actuel" address>
-            </mat-form-field>
-            <!-- Poste préféré : Gardien / Défenseur / Milieu / Attaquant -->
-            <mat-radio-group>
-              <mat-radio-button value="1">Gardien</mat-radio-button>
-              <mat-radio-button value="2">Défenseur</mat-radio-button>
-              <mat-radio-button value="3">Milieu</mat-radio-button>
-              <mat-radio-button value="4">Attaquant</mat-radio-button>
-            </mat-radio-group>
-            <span class="separator"></span>
-            <!-- Pied Gauche / Droit -->
-            <mat-radio-group>
-              <mat-radio-button value="1">Droitier</mat-radio-button>
-              <mat-radio-button value="2">Gaucher</mat-radio-button>
-            </mat-radio-group>
-          </div>
-
-          <!-- Zone de saisie libre (informations complémentaires) -->
+          <!-- Club -->
+          <mat-form-field>
+            <input matInput type="text" placeholder="Club actuel" address>
+          </mat-form-field>
+          <!-- Poste préféré : Gardien / Défenseur / Milieu / Attaquant -->
+          <mat-radio-group>
+            <mat-radio-button value="1">Gardien</mat-radio-button>
+            <mat-radio-button value="2">Défenseur</mat-radio-button>
+            <mat-radio-button value="3">Milieu</mat-radio-button>
+            <mat-radio-button value="4">Attaquant</mat-radio-button>
+          </mat-radio-group>
           <span class="separator"></span>
-
-          <!-- Confirmer inscription -->
-          <a (click)="onConfirmRegistration()" mat-button color="primary">Suivant</a>
-          <!-- <a [routerLink]="[ '/registration/confiration' ]" mat-button color="primary">Confirmer</a> -->
-
-        </mat-card-content>
-      </mat-card>
-    </div>
+          <!-- Pied Gauche / Droit -->
+          <mat-radio-group>
+            <mat-radio-button value="1">Droitier</mat-radio-button>
+            <mat-radio-button value="2">Gaucher</mat-radio-button>
+          </mat-radio-group>
+          <span class="separator"></span>
+          <div class="next-button">
+            <button mat-button matStepperNext mat-raised-button color="primary">Suivant</button>
+          </div>
+        </form>
+      </mat-step>
+      <!--Etape : Payer -->
+      <mat-step [stepControl]="paymentFormGroup">
+        <form [formGroup]="paymentFormGroup">
+          <ng-template matStepLabel>Paiement</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="Address" formControlName="paymentController" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Retour</button>
+            <button mat-button matStepperNext>Suivant</button>
+          </div>
+        </form>
+      </mat-step>
+      <!--Etape : Récapitulatif -->
+      <mat-step>
+        <ng-template matStepLabel>Récapitulatif</ng-template>
+        Vous avez terminé.
+        <div>
+          <button mat-button matStepperPrevious>Retour</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+    <span class="stepper-margin"></span>
   </div>
 </div>
