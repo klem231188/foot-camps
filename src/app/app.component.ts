@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
 import { FootballCampService } from './services/football-camp/football-camp.service';
+import { FirebaseAuthUiService } from './services/firebase-auth-ui/firebase-auth-ui.service';
 import { MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
@@ -11,7 +12,7 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['app.component.scss'],
-  providers: [FootballCampService, AngularFireAuth],
+  providers: [FootballCampService, AngularFireAuth, FirebaseAuthUiService],
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {

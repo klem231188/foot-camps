@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 import * as firebaseui from 'firebaseui';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
+import { FirebaseAuthUiService } from 'app/services/firebase-auth-ui/firebase-auth-ui.service';
 
 @Component({
   selector: 'app-football-camp-login',
@@ -11,11 +12,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./football-camp-login.component.scss']
 })
 export class FootballCampLoginComponent implements OnInit, AfterViewInit, OnDestroy {
-
-  private authUI: firebaseui.auth.AuthUI = null;
-
   constructor(
     private angularFireAuth: AngularFireAuth,
+    private firebaseAuthUiService: FirebaseAuthUiService,
     private router: Router
   ) { }
 
@@ -29,42 +28,39 @@ export class FootballCampLoginComponent implements OnInit, AfterViewInit, OnDest
       } else {
         // Not yet logged
         console.log('Not yet logged');
-        if (!this.authUI) {
-          // FirebaseUI config.
-          const uiConfig = {
-            'callbacks': {
-              signInSuccess: function (currentUser, credential, redirectUrl) {
-                this.router.navigateByUrl('locate');
-                // Do not redirect.
-                return false;
-              }.bind(this),
-            },
-            signInOptions: [
-              firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-              firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-              firebase.auth.EmailAuthProvider.PROVIDER_ID
-            ],
-            signInFlow: 'popup',
-            // Terms of service url.
-            tosUrl: '/tos.html'
+        // FirebaseUI config.
+        const uiConfig = {
+          'callbacks': {
+            signInSuccess: function (currentUser, credential, redirectUrl) {
+              this.router.navigateByUrl('locate');
+              // Do not redirect.
+              return false;
+            }.bind(this),
+          },
+          signInOptions: [
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID
+          ],
+          signInFlow: 'popup',
+          // Terms of service url.
+          tosUrl: '/tos.html'
         };
         // Initialize the FirebaseUI Widget using Firebase.
-        this.authUI = new firebaseui.auth.AuthUI(this.angularFireAuth.auth);
+        const authUI = this.firebaseAuthUiService.getAuthUi();
         // The start method will wait until the DOM is loaded.
-        setTimeout(() => { this.authUI.start('#firebaseui-auth-container', uiConfig); }, 1000);
+        setTimeout(() => {
+          authUI.reset();
+          authUI.start('#firebaseui-auth-container', uiConfig);
+        }, 1000);
       }
-    }
     });
-}
-
-ngAfterViewInit(): void {
-
-}
-
-ngOnDestroy(): void {
-  if(this.authUI) {
-    this.authUI.delete();
-    this.authUI = null;
   }
-}
+
+  ngAfterViewInit(): void {
+
+  }
+
+  ngOnDestroy(): void {
+  }
 }
