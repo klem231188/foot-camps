@@ -1,6 +1,6 @@
-<div class="registration-main-container">
+<div *ngIf="footballCamp" class="registration-main-container">
   <div class="registration-logo-container">
-    <!-- <img [src]="footballCamp.details.pathToLogo" class="details-logo"> -->
+     <img [src]="footballCamp.details.pathToLogo" class="details-logo">
     <img src="./assets/img/soccer-sketch.png" class="soccer-ball">
     <hr class="vertical-line">
   </div>

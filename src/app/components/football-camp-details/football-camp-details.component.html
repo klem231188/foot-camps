@@ -9,7 +9,7 @@
   <div *ngIf="footballCamp" class="details-container">
       <span class="separator"></span>
       <span class="separator"></span>
-    
+
       <!-- Description -->
       <div class="container">
         <mat-toolbar>
@@ -25,9 +25,9 @@
           </mat-card-content>
         </mat-card>
       </div>
-    
+
       <span class="separator"></span>
-    
+
       <!-- Localisation -->
       <div class="container">
         <mat-toolbar>
@@ -46,9 +46,9 @@
           </mat-card-content>
         </mat-card>
       </div>
-    
+
       <span class="separator"></span>
-    
+
       <!-- Les organisateurs et les parrains -->
       <div class="container">
         <mat-toolbar>
@@ -73,9 +73,9 @@
           </mat-card-content>
         </mat-card>
       </div>
-    
+
       <span class="separator"></span>
-    
+
       <!-- Galerie photo -->
       <div class="container">
         <mat-toolbar>
@@ -91,9 +91,9 @@
           </mat-card-content>
         </mat-card>
       </div>
-    
+
       <span class="separator"></span>
-    
+
       <!-- Les dates et tarifs -->
       <div class="container">
         <mat-toolbar>
@@ -125,9 +125,9 @@
           </mat-card-content>
         </mat-card>
       </div>
-    
+
       <span class="separator"></span>
-    
+
       <!-- Les inscriptions -->
       <div class="container">
         <mat-toolbar>
@@ -139,16 +139,16 @@
           <mat-card-content>
             <div *ngIf="footballCamp.details.useOnlineRegistration; then redirectToRegistrationPage; else redirectToWebsite">
             </div>
-    
+
             <ng-template #redirectToRegistrationPage>
               Ls inscriptions se font sur FootballCamps !
               <br>
               <br>
               <div fxLayout="column" fxLayoutAlign="none center">
-                <a [routerLink]="[ '/registration' ]" mat-button color="primary" class="link-to-maps">Je m'inscris sans attendre !</a>
+                <a [routerLink]="[ '/registration/', footballCamp.id ]" mat-button color="primary" class="link-to-maps">Je m'inscris sans attendre !</a>
               </div>
             </ng-template>
-    
+
             <ng-template #redirectToWebsite>
               Pour le moment les inscriptions sont uniquement possibles via le site de l'organisateur.
               <br>
@@ -160,7 +160,7 @@
           </mat-card-content>
         </mat-card>
       </div>
-    
+
       <span class="separator"></span>
     </div>
 </div>

@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'locate/:id', component: FootballCampLocatorComponent },
   { path: 'locate', component: FootballCampLocatorComponent },
   { path: 'details/:id', component: FootballCampDetailsComponent },
-  { path: 'registration', component: FootballCampRegistrationComponent },
+  { path: 'registration/:id', component: FootballCampRegistrationComponent },
   { path: 'login', component: FootballCampLoginComponent },
 ];
 
