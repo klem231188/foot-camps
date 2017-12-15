@@ -1,104 +1,124 @@
-  @mixin football-camp-registration-theme($theme) {
-    $primary: map-get($theme, primary);
-    $warn: map-get($theme, warn);
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
-    football-camp-registration {
-      .registration-main-container {
-        flex: 1;
-        display: flex;
-        flex-direction: row;
-        background-color: #19212b;
-        overflow: auto;
-        @include big-screen {
-          padding-top: 40px;
-          padding-bottom: 40px;
-        }
+@mixin football-camp-registration-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  football-camp-registration {
+    .registration-main-container {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      background-color: #19212b;
+      overflow: auto;
+      @include big-screen {
+        padding-top: 40px;
+        padding-bottom: 40px;
       }
-      .registration-logo-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex: 1;
+    }
+    .registration-logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      @include small-screen {
+        display: none;
+      }
+      .details-logo {
+        position: absolute;
+        top: 40px;
+        height: 150px;
+      }
+      .soccer-ball {
+        position: absolute;
+        bottom: 25px;
+        height: 150px;
+      }
+      .vertical-line {
+        align-self: flex-end;
+        color: mat-color($primary);
+        position: absolute;
+        top: 40px;
+        bottom: 40px;
         @include small-screen {
           display: none;
         }
-        .details-logo {
-          position: absolute;
-          top: 40px;
-          height: 150px;
-        }
-        .soccer-ball {
-          position: absolute;
-          bottom: 25px;
-          height: 150px;
-        }
-        .vertical-line {
-          align-self: flex-end;
-          color: mat-color($primary);
-          position: absolute;
-          top: 40px;
-          bottom: 40px;
-          @include small-screen {
-            display: none;
-          }
+      }
+    }
+    .registration-stepper-container {
+      min-width: 360px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 4;
+      .separator {
+        width: 100%;
+        min-height: 15px;
+      }
+      .stepper-margin {
+        @include big-screen {
+          width: 100%;
+          min-height: 40px;
         }
       }
-      .registration-stepper-container {
-        min-width: 360px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex: 4;
-        .separator {
-          width: 100%;
-          min-height: 15px;
+      mat-horizontal-stepper {
+        width: 100%;
+        @include big-screen {
+          width: 70%;
         }
-        .stepper-margin {
-          @include big-screen {
+        mat-radio-button {
+          margin-left: 5px;
+          margin-bottom: 5px;
+        }
+        .mat-step-icon, .mat-step-icon-not-touched {
+          width: 30px;
+          height: 30px;
+        }
+        .registration-form-group-container {
+          display: flex;
+          flex-direction: column;
+          overflow: auto;
+          h4 {
+            color: mat-color($primary);
+          }
+          .registration-avatar {
+            width: 180px;
+            border: 2px solid mat-color($primary);
+            //align-self: center;
+          }
+          .registration-avatar:hover {
+            filter: brightness(80%); // todo background-image: url('./assets/img/registration/avatar-with-camera.svg');
+          }
+          mat-form-field {
             width: 100%;
-            min-height: 40px;
+          }
+          .next-button {
+            align-self: center;
+            mat-icon {
+              height: 25px;
+            }
           }
         }
-        mat-horizontal-stepper {
-          width: 100%;
-          @include big-screen {
-            width: 70%;
+
+        .payment-form-group-container {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          flex: 1;
+          //mat-list-item:hover {
+          //  background-color: rgba(255, 255, 255, 0.5);
+          //}
+          .contact-avatar {
+            height: 60px;
+            width: 60px;
           }
-          mat-radio-button {
-            margin-left: 5px;
-            margin-bottom: 5px;
-          }
-          .mat-step-icon, .mat-step-icon-not-touched {
-            width: 30px;
-            height: 30px;
-          }
-          .registration-form-group-container {
-            display: flex;
-            flex-direction: column;
-            overflow: auto;
-            h4 {
-              color: mat-color($primary);
-            }
-            .registration-avatar {
-              width: 180px;
-              border: 2px solid mat-color($primary);
-              //align-self: center;
-            }
-            .registration-avatar:hover {
-              filter: brightness(80%); // todo background-image: url('./assets/img/registration/avatar-with-camera.svg');
-            }
-            mat-form-field {
-              width: 100%;
-            }
-            .next-button {
-              align-self: center;
-              mat-icon {
-                height: 25px;
-              }
+          .next-button {
+            align-self: center;
+            mat-icon {
+              height: 25px;
             }
           }
         }
       }
     }
   }
+}

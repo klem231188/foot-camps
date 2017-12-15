@@ -26,7 +26,7 @@ export class FootballCampRegistrationComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.registrationFormGroup = this.formBuilder.group({
-      registrationController: ['', Validators.required]
+      registrationController: ['', Validators.minLength(0)]
     });
     this.paymentFormGroup = this.formBuilder.group({
       paymentController: ['', Validators.required]

@@ -1,6 +1,6 @@
 <div *ngIf="footballCamp" class="registration-main-container">
   <div class="registration-logo-container">
-     <img [src]="footballCamp.details.pathToLogo" class="details-logo">
+    <img [src]="footballCamp.details.pathToLogo" class="details-logo">
     <img src="./assets/img/soccer-sketch.png" class="soccer-ball">
     <hr class="vertical-line">
   </div>
@@ -19,7 +19,7 @@
 
           <!-- Nom & Prénom -->
           <mat-form-field>
-            <input matInput type="text" placeholder="Prénom" formControlName="registrationController" required>
+            <input matInput type="text" placeholder="Prénom" formControlName="registrationController">
           </mat-form-field>
 
           <mat-form-field>
@@ -70,20 +70,47 @@
           </mat-radio-group>
           <span class="separator"></span>
           <div class="next-button">
-            <button mat-button matStepperNext mat-raised-button color="primary">Suivant<mat-icon>chevron_right</mat-icon></button>
+            <button mat-button matStepperNext mat-raised-button color="primary">Suivant
+              <mat-icon>chevron_right</mat-icon>
+            </button>
           </div>
         </form>
       </mat-step>
       <!--Etape : Payer -->
       <mat-step [stepControl]="paymentFormGroup">
-        <form [formGroup]="paymentFormGroup">
+        <form [formGroup]="paymentFormGroup" class="payment-form-group-container">
           <ng-template matStepLabel>Paiement</ng-template>
-          <mat-form-field>
-            <input matInput placeholder="Address" formControlName="paymentController" required>
-          </mat-form-field>
           <div>
-            <button mat-button matStepperPrevious>Retour</button>
-            <button mat-button matStepperNext>Suivant</button>
+            La fonctionnalité de paiement en ligne n'est pas encore disponible.
+            <br>
+            Pour confirmer votre inscription, <b>veuillez contacter une des personnes suivantes:</b>
+            <br>
+            <mat-list>
+              <mat-list-item *ngFor="let contact of footballCamp.contacts">
+                <img matListAvatar [src]="contact.pathToPicture" class="contact-avatar">
+                <h3 matLine> {{contact.firstname}} {{contact.lastname}} </h3>
+                <p matLine>
+                  <span> {{contact.phoneNumber}} </span>
+                </p>
+              </mat-list-item>
+            </mat-list>
+          </div>
+          <!--<ul>-->
+          <!--<li *ngFor="let contact of footballCamp.contacts">-->
+          <!--<strong><img class="payment-contact-avatar" [src]="contact.pathToPicture">-->
+          <!--{{contact.firstname}}-->
+          <!--{{contact.lastname}}</strong> au {{contact.phoneNumber}}-->
+          <!--</li>-->
+          <!--</ul>-->
+          <div class="next-button">
+            <button mat-button matStepperPrevious mat-raised-button color="primary">
+              <mat-icon>chevron_left</mat-icon>
+              Précédent
+            </button>
+            <button mat-button matStepperNext mat-raised-button color="primary">
+              Suivant
+              <mat-icon>chevron_right</mat-icon>
+            </button>
           </div>
         </form>
       </mat-step>

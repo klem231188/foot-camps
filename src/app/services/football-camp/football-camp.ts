@@ -12,6 +12,9 @@ export class FootballCamp {
 
   // - Details data
   details: Details;
+
+  // - Contacts data
+  contacts: Contact[];
 }
 
 export class Overview {
@@ -179,6 +182,36 @@ export class Session {
 
   withHalfBoardRates(value: number): Session {
     this.halfBoardRates = value;
+    return this;
+  }
+}
+
+export class Contact {
+  firstname: string;
+  lastname: string;
+  pathToPicture: string;
+  phoneNumber: string;
+
+  constructor() {
+  }
+
+  withFirstname(value: string): Contact {
+    this.firstname = value;
+    return this;
+  }
+
+  withLastname(value: string): Contact {
+    this.lastname = value;
+    return this;
+  }
+
+  withPathToPicture(value: string): Contact {
+    this.pathToPicture = value;
+    return this;
+  }
+
+  withPhoneNumber(value: string): Contact {
+    this.phoneNumber = value;
     return this;
   }
 }
