@@ -60,8 +60,9 @@
           min-height: 40px;
         }
       }
-      mat-horizontal-stepper {
+      mat-vertical-stepper {
         width: 100%;
+        flex: 1;
         @include big-screen {
           width: 70%;
         }
@@ -81,8 +82,8 @@
             color: mat-color($primary);
           }
           .registration-avatar {
-            width: 180px;
-            border: 2px solid mat-color($primary);
+            width: 125px;
+            //border: 2px solid mat-color($primary);
             //align-self: center;
           }
           .registration-avatar:hover {
@@ -92,7 +93,6 @@
             width: 100%;
           }
           .next-button {
-            align-self: center;
             mat-icon {
               height: 25px;
             }
@@ -112,7 +112,6 @@
             width: 60px;
           }
           .next-button {
-            align-self: center;
             mat-icon {
               height: 25px;
             }

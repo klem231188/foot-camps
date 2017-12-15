@@ -8,7 +8,7 @@
 
   <!-- Stepper -->
   <div class="registration-stepper-container">
-    <mat-horizontal-stepper [linear]="isLinear">
+    <mat-vertical-stepper [linear]="true" #stepper>
       <!--Etape : Renseigner les informations -->
       <mat-step [stepControl]="registrationFormGroup">
         <form [formGroup]="registrationFormGroup" class="registration-form-group-container">
@@ -81,9 +81,13 @@
         <form [formGroup]="paymentFormGroup" class="payment-form-group-container">
           <ng-template matStepLabel>Paiement</ng-template>
           <div>
-            La fonctionnalité de paiement en ligne n'est pas encore disponible.
+            <b>La fonctionnalité de paiement en ligne n'est pas encore disponible.</b>
             <br>
-            Pour confirmer votre inscription, <b>veuillez contacter une des personnes suivantes:</b>
+            En cliquant sur suivant, votre pré-inscription sera active pour le stage de {{footballCamp.city}}.
+            <br>
+            Vous devrez verser la somme de <b>{{footballCamp.details.sessions[0].fullBoardRates}} €</b> pour confirmer votre inscription.
+            <br>
+            Pour confirmer votre inscription, veuillez contacter une des personnes suivantes:
             <br>
             <mat-list>
               <mat-list-item *ngFor="let contact of footballCamp.contacts">
@@ -95,18 +99,8 @@
               </mat-list-item>
             </mat-list>
           </div>
-          <!--<ul>-->
-          <!--<li *ngFor="let contact of footballCamp.contacts">-->
-          <!--<strong><img class="payment-contact-avatar" [src]="contact.pathToPicture">-->
-          <!--{{contact.firstname}}-->
-          <!--{{contact.lastname}}</strong> au {{contact.phoneNumber}}-->
-          <!--</li>-->
-          <!--</ul>-->
+          <span class="separator"></span>
           <div class="next-button">
-            <button mat-button matStepperPrevious mat-raised-button color="primary">
-              <mat-icon>chevron_left</mat-icon>
-              Précédent
-            </button>
             <button mat-button matStepperNext mat-raised-button color="primary">
               Suivant
               <mat-icon>chevron_right</mat-icon>
@@ -117,12 +111,11 @@
       <!--Etape : Récapitulatif -->
       <mat-step>
         <ng-template matStepLabel>Récapitulatif</ng-template>
-        Vous avez terminé.
-        <div>
-          <button mat-button matStepperPrevious>Retour</button>
-        </div>
+        Félicitations vous êtes <b>pré-inscrit</b> pour le stage de {{footballCamp.city}} !
+        <br>
+        Vous avez du recevoir un mail de confirmation.
       </mat-step>
-    </mat-horizontal-stepper>
-    <span class="stepper-margin"></span>
+    </mat-vertical-stepper>
+    <!--<span class="stepper-margin"></span>-->
   </div>
 </div>

@@ -26,7 +26,7 @@
         }
       }
     }
-    router-outlet+* {
+    router-outlet + * {
       display: flex;
       margin: 0;
       width: 100%;
@@ -35,11 +35,14 @@
     footer {
       background-color: mat-color($primary, darker);
       overflow: auto;
-      .brand {
-        font-family: 'Milkshake';
-        font-size: 30px;
-        width: 100%;
-        text-align: right;
+      mat-toolbar {
+        height: 20px !important;
+        .brand {
+          font-family: 'Milkshake';
+          font-size: 19px;
+          width: 100%;
+          text-align: right;
+        }
       }
     }
   }
