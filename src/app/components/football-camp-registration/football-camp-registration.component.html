@@ -10,8 +10,8 @@
   <div class="registration-stepper-container">
     <mat-horizontal-stepper [linear]="isLinear">
       <!--Etape : Renseigner les informations -->
-      <mat-step [stepControl]="registrationFormGroup">
-        <form [formGroup]="registrationFormGroup" class="registration-form-group-container">
+      <mat-step [stepControl]="registrationForm">
+        <form [formGroup]="registrationForm" class="registration-form-group-container">
           <ng-template matStepLabel>Inscription</ng-template>
           <h4>Informations générales</h4>
           <!-- Photo -->
@@ -19,11 +19,13 @@
 
           <!-- Nom & Prénom -->
           <mat-form-field>
-            <input matInput type="text" placeholder="Prénom" formControlName="registrationController">
+            <input matInput type="text" placeholder="Prénom" formControlName="firstname" required>
+            <mat-error *ngIf="registrationForm.get('firstname').invalid">{{getFirstnameError()}}</mat-error>
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput type="text" placeholder="Nom">
+            <input matInput type="text" placeholder="Nom" formControlName="lastname" required>
+            <mat-error *ngIf="registrationForm.get('lastname').invalid">{{getLastnameError()}}</mat-error>
           </mat-form-field>
 
           <!-- Sexe -->

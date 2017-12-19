@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Registration} from './registration';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {FootballCamp} from '../../services/football-camp/football-camp';
 import {ActivatedRoute, Params} from '@angular/router';
@@ -11,10 +11,13 @@ import {ActivatedRoute, Params} from '@angular/router';
   styleUrls: ['./football-camp-registration.component.scss']
 })
 export class FootballCampRegistrationComponent implements OnInit, OnDestroy {
-  startDate: Date = new Date(2000, 0, 1);
   registration: Registration = new Registration();
-  isLinear = true;
-  registrationFormGroup: FormGroup;
+
+  // Registration Form & Controls
+  registrationForm: FormGroup;
+  firstname: FormControl;
+  lastname: FormControl;
+
   paymentFormGroup: FormGroup;
 
   footballCamp: FootballCamp;
@@ -25,8 +28,12 @@ export class FootballCampRegistrationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.registrationFormGroup = this.formBuilder.group({
-      registrationController: ['', Validators.minLength(0)]
+    this.firstname = new FormControl('', [Validators.required, Validators.minLength(2)]);
+    this.lastname = new FormControl('', [Validators.required, Validators.minLength(2)]);
+
+    this.registrationForm = new FormGroup({
+      'firstname': this.firstname,
+      'lastname': this.lastname
     });
     this.paymentFormGroup = this.formBuilder.group({
       paymentController: ['', Validators.required]
@@ -41,6 +48,18 @@ export class FootballCampRegistrationComponent implements OnInit, OnDestroy {
       .subscribe((footballCamp: FootballCamp) => {
         this.footballCamp = footballCamp;
       });
+  }
+
+  getFirstnameError() {
+    return this.firstname.hasError('required') ? 'Le prénom est obligatoire' :
+      this.firstname.hasError('minlength') ? 'Le prénom doit avoir 2 caractères minimum' :
+        '';
+  }
+
+  getLastnameError() {
+    return this.firstname.hasError('required') ? 'Le nom est obligatoire' :
+      this.firstname.hasError('minlength') ? 'Le nom doit avoir 2 caractères minimum' :
+        '';
   }
 
   ngOnDestroy(): void {
