@@ -11,13 +11,16 @@ import {ActivatedRoute, Params} from '@angular/router';
   styleUrls: ['./football-camp-registration.component.scss']
 })
 export class FootballCampRegistrationComponent implements OnInit, OnDestroy {
+  // Model to save data
   registration: Registration = new Registration();
 
   // Registration Form & Controls
   registrationForm: FormGroup;
   firstname: FormControl;
   lastname: FormControl;
+  gender: FormControl;
 
+  // Payment From & Controls
   paymentFormGroup: FormGroup;
 
   footballCamp: FootballCamp;
@@ -30,10 +33,12 @@ export class FootballCampRegistrationComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.firstname = new FormControl('', [Validators.required, Validators.minLength(2)]);
     this.lastname = new FormControl('', [Validators.required, Validators.minLength(2)]);
+    this.gender = new FormControl('', [Validators.required]);
 
     this.registrationForm = new FormGroup({
       'firstname': this.firstname,
-      'lastname': this.lastname
+      'lastname': this.lastname,
+      'gender' : this.gender
     });
     this.paymentFormGroup = this.formBuilder.group({
       paymentController: ['', Validators.required]
@@ -59,6 +64,11 @@ export class FootballCampRegistrationComponent implements OnInit, OnDestroy {
   getLastnameError() {
     return this.firstname.hasError('required') ? 'Le nom est obligatoire' :
       this.firstname.hasError('minlength') ? 'Le nom doit avoir 2 caractères minimum' :
+        '';
+  }
+
+  getGenderError() {
+    return this.gender.hasError('required') ? 'Le genre est obligatoire' :
         '';
   }
 

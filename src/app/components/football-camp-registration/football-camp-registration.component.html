@@ -8,10 +8,10 @@
 
   <!-- Stepper -->
   <div class="registration-stepper-container">
-    <mat-horizontal-stepper [linear]="isLinear">
+    <mat-horizontal-stepper [linear]="true">
       <!--Etape : Renseigner les informations -->
       <mat-step [stepControl]="registrationForm">
-        <form [formGroup]="registrationForm" class="registration-form-group-container">
+        <form [formGroup]="registrationForm" #registrationFormRef="ngForm" class="registration-form-group-container">
           <ng-template matStepLabel>Inscription</ng-template>
           <h4>Informations générales</h4>
           <!-- Photo -->
@@ -29,9 +29,10 @@
           </mat-form-field>
 
           <!-- Sexe -->
-          <mat-radio-group>
+          <mat-radio-group formControlName="gender">
             <mat-radio-button value="Male">Garçon</mat-radio-button>
             <mat-radio-button value="Female">Fille</mat-radio-button>
+            <mat-error *ngIf="registrationForm.get('gender').invalid && registrationFormRef.submitted">{{getGenderError()}}</mat-error>
           </mat-radio-group>
           <span class="separator"></span>
 
