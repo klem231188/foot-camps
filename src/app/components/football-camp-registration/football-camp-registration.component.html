@@ -8,7 +8,7 @@
 
   <!-- Stepper -->
   <div class="registration-stepper-container">
-    <mat-horizontal-stepper [linear]="true">
+    <mat-vertical-stepper [linear]="true">
       <!--Etape : Renseigner les informations -->
       <mat-step [stepControl]="registrationForm">
         <form [formGroup]="registrationForm" #registrationFormRef="ngForm" class="registration-form-group-container">
@@ -45,7 +45,8 @@
 
           <!-- Email -->
           <mat-form-field>
-            <input matInput type="email" placeholder="Email" email>
+            <input matInput type="email" placeholder="Email" formControlName="email" required>
+            <mat-error *ngIf="registrationForm.get('email').invalid">{{getEmailError()}}</mat-error>
           </mat-form-field>
 
           <!-- Adresse -->
@@ -125,7 +126,7 @@
           <button mat-button matStepperPrevious>Retour</button>
         </div>
       </mat-step>
-    </mat-horizontal-stepper>
+    </mat-vertical-stepper>
     <span class="stepper-margin"></span>
   </div>
 </div>

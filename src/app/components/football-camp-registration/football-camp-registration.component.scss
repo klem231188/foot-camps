@@ -60,8 +60,9 @@
           min-height: 40px;
         }
       }
-      mat-horizontal-stepper {
+      mat-vertical-stepper {
         width: 100%;
+        flex: 1;
         @include big-screen {
           width: 70%;
         }
