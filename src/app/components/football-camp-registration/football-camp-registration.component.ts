@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy, ViewChild, AfterViewInit} from '@angular/core';
 import {Registration} from './registration';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {FootballCamp} from '../../services/football-camp/football-camp';
 import {ActivatedRoute, Params} from '@angular/router';
@@ -12,9 +12,17 @@ import {MatVerticalStepper} from '@angular/material';
   styleUrls: ['./football-camp-registration.component.scss']
 })
 export class FootballCampRegistrationComponent implements OnInit, AfterViewInit, OnDestroy {
-  startDate: Date = new Date(2000, 0, 1);
+  // Model to save data
   registration: Registration = new Registration();
-  registrationFormGroup: FormGroup;
+
+  // Registration Form & Controls
+  registrationForm: FormGroup;
+  firstname: FormControl;
+  lastname: FormControl;
+  gender: FormControl;
+  email: FormControl;
+
+  // Payment From & Controls
   paymentFormGroup: FormGroup;
 
   footballCamp: FootballCamp;
@@ -27,8 +35,16 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   }
 
   ngOnInit(): void {
-    this.registrationFormGroup = this.formBuilder.group({
-      registrationController: ['', Validators.minLength(0)]
+    this.firstname = new FormControl('', [Validators.required, Validators.minLength(2)]);
+    this.lastname = new FormControl('', [Validators.required, Validators.minLength(2)]);
+    this.gender = new FormControl('', [Validators.required]);
+    this.email = new FormControl('', [Validators.required, Validators.email]);
+
+    this.registrationForm = new FormGroup({
+      'firstname': this.firstname,
+      'lastname': this.lastname,
+      'gender' : this.gender,
+      'email' : this.email
     });
     this.paymentFormGroup = this.formBuilder.group({
       paymentController: ['', Validators.minLength(0)]
@@ -55,6 +71,29 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   ngAfterViewInit(): void {
     // console.log(this.theStepper)
     // this.theStepper.selectionChange.asObservable().subscribe(event => {console.log(event)})
+  }
+
+  getFirstnameError() {
+    return this.firstname.hasError('required') ? 'Le prénom est obligatoire' :
+      this.firstname.hasError('minlength') ? 'Le prénom doit avoir 2 caractères minimum' :
+        '';
+  }
+
+  getLastnameError() {
+    return this.firstname.hasError('required') ? 'Le nom est obligatoire' :
+      this.firstname.hasError('minlength') ? 'Le nom doit avoir 2 caractères minimum' :
+        '';
+  }
+
+  getGenderError() {
+    return this.gender.hasError('required') ? 'Le genre est obligatoire' :
+        '';
+  }
+
+  getEmailError() {
+    return this.email.hasError('required') ? 'L\'email est obligatoire' :
+      this.email.hasError('email') ? 'L\'email est incorrect' :
+        '';
   }
 
   ngOnDestroy(): void {

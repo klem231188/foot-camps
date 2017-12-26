@@ -10,8 +10,8 @@
   <div class="registration-stepper-container">
     <mat-vertical-stepper [linear]="true" #stepper>
       <!--Etape : Renseigner les informations -->
-      <mat-step [stepControl]="registrationFormGroup">
-        <form [formGroup]="registrationFormGroup" class="registration-form-group-container">
+      <mat-step [stepControl]="registrationForm">
+        <form [formGroup]="registrationForm" #registrationFormRef="ngForm" class="registration-form-group-container">
           <ng-template matStepLabel>Inscription</ng-template>
           <h4>Informations générales</h4>
           <!-- Photo -->
@@ -19,17 +19,20 @@
 
           <!-- Nom & Prénom -->
           <mat-form-field>
-            <input matInput type="text" placeholder="Prénom" formControlName="registrationController">
+            <input matInput type="text" placeholder="Prénom" formControlName="firstname" required>
+            <mat-error *ngIf="registrationForm.get('firstname').invalid">{{getFirstnameError()}}</mat-error>
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput type="text" placeholder="Nom">
+            <input matInput type="text" placeholder="Nom" formControlName="lastname" required>
+            <mat-error *ngIf="registrationForm.get('lastname').invalid">{{getLastnameError()}}</mat-error>
           </mat-form-field>
 
           <!-- Sexe -->
-          <mat-radio-group>
+          <mat-radio-group formControlName="gender">
             <mat-radio-button value="Male">Garçon</mat-radio-button>
             <mat-radio-button value="Female">Fille</mat-radio-button>
+            <mat-error *ngIf="registrationForm.get('gender').invalid && registrationFormRef.submitted">{{getGenderError()}}</mat-error>
           </mat-radio-group>
           <span class="separator"></span>
 
@@ -42,7 +45,8 @@
 
           <!-- Email -->
           <mat-form-field>
-            <input matInput type="email" placeholder="Email" email>
+            <input matInput type="email" placeholder="Email" formControlName="email" required>
+            <mat-error *ngIf="registrationForm.get('email').invalid">{{getEmailError()}}</mat-error>
           </mat-form-field>
 
           <!-- Adresse -->
@@ -116,6 +120,6 @@
         Vous avez du recevoir un mail de confirmation.
       </mat-step>
     </mat-vertical-stepper>
-    <!--<span class="stepper-margin"></span>-->
+    <span class="stepper-margin"></span>
   </div>
 </div>
