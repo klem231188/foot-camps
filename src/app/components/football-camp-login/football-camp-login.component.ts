@@ -1,21 +1,22 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
-import { Location } from '@angular/common';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import * as firebase from 'firebase';
-import * as firebaseui from 'firebaseui';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { Router } from '@angular/router';
-import { FirebaseAuthUiService } from 'app/services/firebase-auth-ui/firebase-auth-ui.service';
+import {AngularFireAuth} from 'angularfire2/auth';
+import {Router} from '@angular/router';
+import {FirebaseAuthUiService} from 'app/services/firebase-auth-ui/firebase-auth-ui.service';
+import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
 @Component({
   selector: 'app-football-camp-login',
   templateUrl: './football-camp-login.component.html',
-  styleUrls: ['./football-camp-login.component.scss']
+  styleUrls: ['./football-camp-login.component.scss'],
+  providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}]
 })
 export class FootballCampLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private angularFireAuth: AngularFireAuth,
     private firebaseAuthUiService: FirebaseAuthUiService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -32,14 +33,14 @@ export class FootballCampLoginComponent implements OnInit, AfterViewInit, OnDest
         const uiConfig = {
           'callbacks': {
             signInSuccess: function (currentUser, credential, redirectUrl) {
-              this.router.navigateByUrl('locate');
+              // this.router.navigateByUrl('locate');
+              this.location.back();
               // Do not redirect.
               return false;
             }.bind(this),
           },
           signInOptions: [
             firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
             firebase.auth.EmailAuthProvider.PROVIDER_ID
           ],
           signInFlow: 'popup',

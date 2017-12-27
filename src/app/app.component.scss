@@ -34,7 +34,7 @@
     }
     footer {
       background-color: mat-color($primary, darker);
-      overflow: auto;
+      overflow: hidden;
       mat-toolbar {
         height: 20px !important;
         .brand {

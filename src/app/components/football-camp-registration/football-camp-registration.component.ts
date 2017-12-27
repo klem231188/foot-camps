@@ -1,10 +1,12 @@
-import {Component, OnInit, OnDestroy, ViewChild, AfterViewInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Registration} from './registration';
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {FootballCamp} from '../../services/football-camp/football-camp';
-import {ActivatedRoute, Params} from '@angular/router';
-import {MatVerticalStepper} from '@angular/material';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {MatDialog, MatVerticalStepper} from '@angular/material';
+import {AngularFireAuth} from 'angularfire2/auth';
+import {FootballCampShouldConnectDialogComponent} from '../football-camp-should-connect-dialog/football-camp-should-connect-dialog.component';
 
 @Component({
   selector: 'football-camp-registration',
@@ -27,11 +29,26 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   footballCamp: FootballCamp;
 
-  @ViewChild('stepper') stepper: MatVerticalStepper;
+  private _stepper: MatVerticalStepper;
+
+  @ViewChild('stepper') set stepper(stepper: MatVerticalStepper) {
+    this._stepper = stepper;
+    if (this._stepper) {
+      console.log('stepper is not undefined');
+      this._stepper.selectionChange.asObservable().subscribe((selection) => {
+        if (selection.selectedIndex === 2) {
+          this._stepper._steps.forEach((step) => step.editable = false);
+        }
+      })
+    }
+  }
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
-              private footballCampService: FootballCampService) {
+              private footballCampService: FootballCampService,
+              public angularFireAuth: AngularFireAuth,
+              public dialog: MatDialog,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -43,8 +60,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     this.registrationForm = new FormGroup({
       'firstname': this.firstname,
       'lastname': this.lastname,
-      'gender' : this.gender,
-      'email' : this.email
+      'gender': this.gender,
+      'email': this.email
     });
     this.paymentFormGroup = this.formBuilder.group({
       paymentController: ['', Validators.minLength(0)]
@@ -58,14 +75,18 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       })
       .subscribe((footballCamp: FootballCamp) => {
         this.footballCamp = footballCamp;
-        setTimeout(() => {
-          this.stepper.selectionChange.asObservable().subscribe((selection) => {
-            if (selection.selectedIndex === 2) {
-              this.stepper._steps.forEach((step) => step.editable = false);
-            }
-          })
-        }, 10);
       });
+
+    this.angularFireAuth.authState.subscribe((firebaseUser) => {
+      if (firebaseUser && firebaseUser.uid) {
+        // Logged
+        console.log('Logged');
+      } else {
+        // Not yet logged
+        console.log('Not yet logged');
+        this.openDialog();
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -87,7 +108,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   getGenderError() {
     return this.gender.hasError('required') ? 'Le genre est obligatoire' :
-        '';
+      '';
   }
 
   getEmailError() {
@@ -98,6 +119,21 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   ngOnDestroy(): void {
 
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(FootballCampShouldConnectDialogComponent, {
+      disableClose: true,
+      width: '310px'
+    });
+
+    dialogRef.afterClosed().subscribe(shouldConnect => {
+      if (shouldConnect) {
+        this.router.navigateByUrl('login');
+      } else {
+        this.router.navigateByUrl('locate');
+      }
+    });
   }
 
   onConfirmRegistration(): void {

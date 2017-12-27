@@ -14,7 +14,7 @@ export class FootballCampHeaderComponent implements OnInit {
 
   backUrl: string = null;
 
-  isUserLogged: boolean = false;
+  isUserLogged = false;
 
   @Output() onMenuClickedEvent = new EventEmitter<any>();
 
@@ -28,7 +28,12 @@ export class FootballCampHeaderComponent implements OnInit {
     this.router.events
       .filter(event => event instanceof NavigationStart)
       .subscribe((event: NavigationStart) => {
-        if (/^\/locate\/\d+\/details$/i.test(event.url)) {
+        if (/^\/registration\/\d+$/i.test(event.url)) {
+          // registration/:id
+          this.backUrl = event.url.replace('registration', 'locate');
+          this.backUrl += '/details';
+          console.log(this.backUrl);
+        } else if (/^\/locate\/\d+\/details$/i.test(event.url)) {
           // locate/:id/details
           this.backUrl = event.url.replace('/details', '');
           console.log(this.backUrl);
@@ -44,9 +49,9 @@ export class FootballCampHeaderComponent implements OnInit {
       });
 
       this.angularFireAuth.authState.subscribe((firebaseUser) => {
-        console.log("before this.isUserLogged : " +  this.isUserLogged);
+        console.log('before this.isUserLogged : ' +  this.isUserLogged);
         this.isUserLogged = (firebaseUser  && firebaseUser.uid) ? true : false;
-        console.log("after this.isUserLogged : " + this.isUserLogged);
+        console.log('after this.isUserLogged : ' + this.isUserLogged);
       });
   }
 

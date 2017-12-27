@@ -23,6 +23,7 @@ import { TruncatePipe } from './pipes/truncate-pipe';
 import { FootballCampRegistrationComponent } from './components/football-camp-registration/football-camp-registration.component';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FootballCampLoginComponent } from './components/football-camp-login/football-camp-login.component';
+import { FootballCampShouldConnectDialogComponent } from './components/football-camp-should-connect-dialog/football-camp-should-connect-dialog.component';
 
 @NgModule({
   imports: [
@@ -58,9 +59,11 @@ import { FootballCampLoginComponent } from './components/football-camp-login/foo
     FootballCampHeaderComponent,
     FootballCampRegistrationComponent,
     FootballCampLoginComponent,
+    FootballCampShouldConnectDialogComponent,
   ],
   entryComponents: [
-    FootballCampLoginComponent
+    FootballCampLoginComponent,
+    FootballCampShouldConnectDialogComponent
   ],
   providers: [AngularFireAuth],
   bootstrap: [AppComponent]

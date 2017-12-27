@@ -32,7 +32,9 @@
           <mat-radio-group formControlName="gender">
             <mat-radio-button value="Male">Garçon</mat-radio-button>
             <mat-radio-button value="Female">Fille</mat-radio-button>
-            <mat-error *ngIf="registrationForm.get('gender').invalid && registrationFormRef.submitted">{{getGenderError()}}</mat-error>
+            <mat-error *ngIf="registrationForm.get('gender').invalid && registrationFormRef.submitted">
+              {{getGenderError()}}
+            </mat-error>
           </mat-radio-group>
           <span class="separator"></span>
 
@@ -89,7 +91,8 @@
             <br>
             En cliquant sur suivant, votre pré-inscription sera active pour le stage de {{footballCamp.city}}.
             <br>
-            Vous devrez verser la somme de <b>{{footballCamp.details.sessions[0].fullBoardRates}} €</b> pour confirmer votre inscription.
+            Vous devrez verser la somme de <b>{{footballCamp.details.sessions[0].fullBoardRates}} €</b> pour confirmer
+            votre inscription.
             <br>
             Pour confirmer votre inscription, veuillez contacter une des personnes suivantes:
             <br>
@@ -120,6 +123,7 @@
         Vous avez du recevoir un mail de confirmation.
       </mat-step>
     </mat-vertical-stepper>
-    <span class="stepper-margin"></span>
+    <!--<span class="stepper-margin"></span>-->
   </div>
 </div>
+
