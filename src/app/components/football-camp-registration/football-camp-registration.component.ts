@@ -7,6 +7,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {MatDialog, MatVerticalStepper} from '@angular/material';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {FootballCampShouldConnectDialogComponent} from '../football-camp-should-connect-dialog/football-camp-should-connect-dialog.component';
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'football-camp-registration',
@@ -31,6 +32,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   private _stepper: MatVerticalStepper;
 
+  private _subscriptions: Subscription[];
+
   @ViewChild('stepper') set stepper(stepper: MatVerticalStepper) {
     this._stepper = stepper;
     if (this._stepper) {
@@ -49,6 +52,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
               public angularFireAuth: AngularFireAuth,
               public dialog: MatDialog,
               private router: Router) {
+
+    this._subscriptions = [];
   }
 
   ngOnInit(): void {
@@ -67,7 +72,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       paymentController: ['', Validators.minLength(0)]
     });
 
-    this.route
+    const routeSubscription = this.route
       .params
       .switchMap((params: Params) => {
         const id: number = +params['id'];
@@ -77,7 +82,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
         this.footballCamp = footballCamp;
       });
 
-    this.angularFireAuth.authState.subscribe((firebaseUser) => {
+    const authStateSubscription = this.angularFireAuth.authState.subscribe((firebaseUser) => {
       if (firebaseUser && firebaseUser.uid) {
         // Logged
         console.log('Logged');
@@ -87,11 +92,20 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
         this.openDialog();
       }
     });
+
+    this._subscriptions.push(routeSubscription);
+    this._subscriptions.push(authStateSubscription);
   }
 
   ngAfterViewInit(): void {
     // console.log(this.theStepper)
     // this.theStepper.selectionChange.asObservable().subscribe(event => {console.log(event)})
+  }
+
+  ngOnDestroy(): void {
+    for (const subscription of this._subscriptions) {
+      subscription.unsubscribe();
+    }
   }
 
   getFirstnameError() {
@@ -115,10 +129,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     return this.email.hasError('required') ? 'L\'email est obligatoire' :
       this.email.hasError('email') ? 'L\'email est incorrect' :
         '';
-  }
-
-  ngOnDestroy(): void {
-
   }
 
   openDialog(): void {
