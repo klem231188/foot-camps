@@ -24,12 +24,14 @@ import { FootballCampRegistrationComponent } from './components/football-camp-re
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FootballCampLoginComponent } from './components/football-camp-login/football-camp-login.component';
 import { FootballCampShouldConnectDialogComponent } from './components/football-camp-should-connect-dialog/football-camp-should-connect-dialog.component';
+import {AngularFirestoreModule} from "angularfire2/firestore";
 
 @NgModule({
   imports: [
     // @Angular
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,

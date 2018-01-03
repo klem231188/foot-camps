@@ -11,4 +11,25 @@
       {{footballCamp.overview.content}}
     </mat-card-content>
   </mat-card>
+
+  <div *ngIf="session">
+    camp.id: {{session.camp.id}}<br>
+    enable: {{session.enable}}<br>
+    end: {{session.end}}<br>
+    fullBoardRates: {{session.fullBoardRates}}<br>
+    halfBoardRates: {{session.halfBoardRates}}<br>
+    maximumNumberOfRegistrations: {{session.maximumNumberOfRegistrations}}<br>
+    registrations.ids:
+    <li *ngFor="let registration of session.registrations">
+      {{ registration.id }}
+    </li>
+    start: {{session.start}}<br>
+  </div>
+
+  <div *ngIf="registrations">
+    <li *ngFor="let registration of registrations">
+      {{ registration.firstname }}
+      {{ registration.lastname }}
+    </li>
+  </div>
 </div>
