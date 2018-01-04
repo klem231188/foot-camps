@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FootballCamp} from '../../services/football-camp/football-camp';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
-import {Router, ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from "angularfire2/firestore";
-import {Observable} from "rxjs/Observable";
-import {Session} from "../../models/session";
-import {Registration} from "../../models/registration";
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
+import {Session} from '../../models/session';
+import {Registration} from '../../models/registration';
 
 @Component({
   selector: 'football-camp-overview',
@@ -25,17 +24,7 @@ export class FootballCampOverviewComponent implements OnInit {
               private router: Router,
               private footballCampService: FootballCampService,
               private afs: AngularFirestore) {
-    const sessionDoc: AngularFirestoreDocument<Session> = afs.doc<Session>('sessions/Lp4PUMsZrJznyssU0hpI');
-    //TODO unsubscribe
-    sessionDoc.valueChanges().subscribe(session => {
-        this.session = session;
-        // TODO : Modifier la query + unsubscribe
-        const registrationCol: AngularFirestoreCollection<Registration> = afs.collection<Registration>('registrations', ref => ref.where('id', '==', '8vojUPPmKy54w3lseTEe'));
-        registrationCol.valueChanges().subscribe(registrations => {
-          this.registrations = registrations;
-        })
-      }
-    );
+
   }
 
   ngOnInit(): void {
@@ -47,6 +36,19 @@ export class FootballCampOverviewComponent implements OnInit {
       .subscribe((footballCamp: FootballCamp) => {
         this.footballCamp = footballCamp;
       });
+
+    const sessionDoc: AngularFirestoreDocument<Session> = this.afs.doc<Session>('sessions/Lp4PUMsZrJznyssU0hpI');
+    //TODO unsubscribe
+    sessionDoc.snapshotChanges().subscribe(session => {
+        this.session = session.payload.data() as Session;
+        const sessionId: string = session.payload.id;
+        // TODO : unsubscribe
+        const registrationCol: AngularFirestoreCollection<Registration> = this.afs.collection<Registration>('registrations', ref => ref.where('sessionId', '==', sessionId));
+        registrationCol.valueChanges().subscribe(registrations => {
+          this.registrations = registrations;
+        });
+      }
+    );
   }
 
   onDetailsClicked(): void {

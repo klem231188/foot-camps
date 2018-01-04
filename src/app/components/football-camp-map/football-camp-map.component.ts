@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FootballCampService } from '../../services/football-camp/football-camp.service';
-import { FootballCamp } from '../../services/football-camp/football-camp';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AngularFirestore} from 'angularfire2/firestore';
+import {FootballCamp} from '../../models/football-camp';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'football-camp-map',
@@ -10,19 +12,28 @@ import { Router } from '@angular/router';
 })
 export class FootballCampMapComponent implements OnInit {
 
-  footballCamps: FootballCamp[];
+  footballCamps$: Observable<FootballCamp[]>;
 
   zoom: number;
 
   constructor(private router: Router,
-    private footballCampService: FootballCampService) {
+              private afs: AngularFirestore) {
     this.zoom = window.screen.width > 960 ? 6 : 5;
   }
 
   ngOnInit(): void {
-    this.footballCampService
-      .getFootballCamps()
-      .then(footballCamps => this.footballCamps = footballCamps);
+    this.footballCamps$ = this.afs
+      .collection<FootballCamp>('camps')
+      .snapshotChanges()
+      .map(documentChangeActions => {
+        // map on Observable here ! --> We 'map' each element/event of the observable
+        return documentChangeActions.map(documentChangeAction => {
+          // map on Array here ! --> We 'map' each element of the array
+            const footballCamp = documentChangeAction.payload.doc.data() as FootballCamp;
+            footballCamp.id = documentChangeAction.payload.doc.id;
+            return footballCamp;
+          });
+      });
   }
 
   onMarkerClicked(footballCampId: number) {

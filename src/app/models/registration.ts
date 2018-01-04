@@ -3,6 +3,8 @@ export class Registration {
   lastname: string;
   gender: string;
 
+  // TODO : continue
+
   constructor() {
   }
 

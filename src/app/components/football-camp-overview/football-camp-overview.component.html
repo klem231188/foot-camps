@@ -13,16 +13,12 @@
   </mat-card>
 
   <div *ngIf="session">
-    camp.id: {{session.camp.id}}<br>
-    enable: {{session.enable}}<br>
+    campId: {{session.campId}}<br>
+    enabled: {{session.enabled}}<br>
     end: {{session.end}}<br>
     fullBoardRates: {{session.fullBoardRates}}<br>
     halfBoardRates: {{session.halfBoardRates}}<br>
     maximumNumberOfRegistrations: {{session.maximumNumberOfRegistrations}}<br>
-    registrations.ids:
-    <li *ngFor="let registration of session.registrations">
-      {{ registration.id }}
-    </li>
     start: {{session.start}}<br>
   </div>
 
