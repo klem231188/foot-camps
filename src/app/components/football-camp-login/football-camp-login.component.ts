@@ -4,6 +4,9 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {Router} from '@angular/router';
 import {FirebaseAuthUiService} from 'app/services/firebase-auth-ui/firebase-auth-ui.service';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {AngularFirestore} from "angularfire2/firestore";
+import {User, UserInfo} from "firebase";
+import {userInfo} from "os";
 
 @Component({
   selector: 'app-football-camp-login',
@@ -12,12 +15,12 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
   providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}]
 })
 export class FootballCampLoginComponent implements OnInit, AfterViewInit, OnDestroy {
-  constructor(
-    private angularFireAuth: AngularFireAuth,
-    private firebaseAuthUiService: FirebaseAuthUiService,
-    private router: Router,
-    private location: Location
-  ) { }
+  constructor(private angularFireAuth: AngularFireAuth,
+              private firebaseAuthUiService: FirebaseAuthUiService,
+              private angularFirestore: AngularFirestore,
+              private router: Router,
+              private location: Location) {
+  }
 
   ngOnInit(): void {
     this.angularFireAuth.authState.subscribe((firebaseUser) => {
@@ -32,8 +35,28 @@ export class FootballCampLoginComponent implements OnInit, AfterViewInit, OnDest
         // FirebaseUI config.
         const uiConfig = {
           'callbacks': {
-            signInSuccess: function (currentUser, credential, redirectUrl) {
-              // this.router.navigateByUrl('locate');
+            signInSuccess: function (currentUser: User, credential, redirectUrl) {
+              // Store user in database
+              const currentUserInfo: UserInfo = {
+                displayName: currentUser.displayName,
+                email: currentUser.email,
+                phoneNumber: currentUser.phoneNumber,
+                photoURL: currentUser.photoURL,
+                providerId: currentUser.providerId,
+                uid: currentUser.uid
+              };
+
+              this.angularFirestore
+                .collection('users')
+                .doc(currentUser.uid)
+                .set(currentUserInfo)
+                .then(() => {
+                  console.log(currentUserInfo.toString() + ' has been saved to database');
+                })
+                .catch(error => {
+                  console.log('something goes wrong saving user in database ' + error)
+                });
+              // go back
               this.location.back();
               // Do not redirect.
               return false;
