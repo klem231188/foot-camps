@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FootballCampService } from '../../services/football-camp/football-camp.service';
-import { FootballCamp } from '../../services/football-camp/football-camp';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
+import {Component, OnInit} from '@angular/core';
+import {FootballCamp} from '../../services/football-camp/football-camp';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
-import * as _ from 'lodash';
+import {AngularFirestore} from 'angularfire2/firestore';
 
 @Component({
   selector: 'football-camp-locator',
@@ -14,56 +13,56 @@ import * as _ from 'lodash';
 })
 export class FootballCampLocatorComponent implements OnInit {
 
-  footballCamp: FootballCamp = null;
-  footballCamps: FootballCamp[];
-  filteredFootballCamps: Observable<FootballCamp[]>;
+  currentFootballCamp: FootballCamp = null;
+  footballCamp$: Observable<FootballCamp>;
+  filteredFootballCamps$: Observable<FootballCamp[]>;
   searchInput: FormControl = new FormControl();
 
   constructor(private router: Router,
-    private route: ActivatedRoute,
-    private footballCampService: FootballCampService) {
+              private route: ActivatedRoute,
+              private angularFirestore: AngularFirestore) {
   }
 
   ngOnInit(): void {
-    this.route
+    this.footballCamp$ = this.route
       .params
       .switchMap((params: Params) => {
-        return this.footballCampService.getFootballCamp(+params['id']);
-      })
-      .subscribe((footballCamp: FootballCamp) => {
-        this.footballCamp = footballCamp;
-        this.searchInput.setValue(this.footballCamp);
+        const campId: string = params['id'];
+        return this.angularFirestore.doc<FootballCamp>(`camps/${campId}`).valueChanges();
       });
 
-    this.footballCampService
-      .getFootballCamps()
-      .then(
-      footballCamps => {
-        this.footballCamps = footballCamps;
+    this.footballCamp$.subscribe((footballCamp: FootballCamp) => {
+      this.searchInput.setValue(footballCamp);
+    });
 
-        this.filteredFootballCamps = this.searchInput.valueChanges
-          .startWith(this.footballCamps)
-          .map(footballCamp => (footballCamp && typeof footballCamp === 'object') ? footballCamp.city : footballCamp)
-          .map(city => city ? this.filter(city) : this.footballCamps.slice());
-
-        this.searchInput.valueChanges.subscribe(
-          footballCamp => {
-            if (footballCamp && _.includes(this.footballCamps, footballCamp)) {
-              this.router.navigate(['/locate', footballCamp.id]);
-            }
-          }
-        );
-      }
-      );
-  }
-
-  filter(city: string): FootballCamp[] {
-    return this.footballCamps.filter(footballCamp =>
-      footballCamp.city.toLowerCase().indexOf(city.toLowerCase()) === 0);
+    this.filteredFootballCamps$ = this.searchInput.valueChanges
+      .switchMap(value => {
+        return this.angularFirestore
+          .collection<FootballCamp>('camps')
+          .snapshotChanges()
+          .map(actions => {
+            return actions.map(action => {
+              const data = action.payload.doc.data() as FootballCamp;
+              data.id = action.payload.doc.id;
+              return data;
+            });
+          })
+          .map((footballCamps: FootballCamp[]) => {
+            return footballCamps.filter((footballCamp) => {
+              value = value ? value : '';
+              return footballCamp.city.toLowerCase().startsWith(value.toLowerCase());
+            });
+          })
+      })
   }
 
   displayFn(footballCamp: FootballCamp): string {
     return footballCamp ? footballCamp.city : '';
+  }
+
+  onFootballCampSelected(footballCamp: FootballCamp): void {
+    console.log(footballCamp);
+    this.router.navigate([`/locate/${footballCamp.id}`]);
   }
 
   onCloseClicked(): void {

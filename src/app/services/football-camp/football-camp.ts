@@ -1,6 +1,6 @@
 export class FootballCamp {
   // - id
-  id: number;
+  id: string;
 
   // - GPS positioning
   latitude: number;

@@ -1,12 +1,11 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import * as firebase from 'firebase';
+import {User, UserInfo} from 'firebase';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Router} from '@angular/router';
 import {FirebaseAuthUiService} from 'app/services/firebase-auth-ui/firebase-auth-ui.service';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
-import {AngularFirestore} from "angularfire2/firestore";
-import {User, UserInfo} from "firebase";
-import {userInfo} from "os";
+import {AngularFirestore} from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-football-camp-login',
@@ -56,6 +55,7 @@ export class FootballCampLoginComponent implements OnInit, AfterViewInit, OnDest
                 .catch(error => {
                   console.log('something goes wrong saving user in database ' + error)
                 });
+
               // go back
               this.location.back();
               // Do not redirect.
