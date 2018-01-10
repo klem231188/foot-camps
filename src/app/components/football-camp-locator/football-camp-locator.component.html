@@ -11,14 +11,14 @@
     </mat-form-field>
 
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onFootballCampSelected($event.option.value)">
-      <mat-option *ngFor="let footballCamp of filteredFootballCamps$ | async" [value]="footballCamp">
+      <mat-option *ngFor="let footballCamp of filteredFootballCamps" [value]="footballCamp">
         {{ footballCamp.city }}
       </mat-option>
     </mat-autocomplete>
   </form>
 </mat-card>
 
-<div class="overview-and-map" *ngIf="footballCamp$ | async; let footballCamp">
+<div class="overview-and-map">
   <football-camp-overview [hidden]="!footballCamp">
   </football-camp-overview>
 
