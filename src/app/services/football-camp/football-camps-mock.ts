@@ -3,7 +3,7 @@ import {FootballCamp, Session, Overview, Details, Organizer, Contact} from './fo
 // ------------------------------------
 const lorient: FootballCamp = new FootballCamp();
 // - Main view
-lorient.id = 0;
+lorient.id = '0';
 lorient.latitude = 47.7482524;
 lorient.longitude = -3.3702449;
 lorient.city = 'Lorient';
@@ -58,7 +58,7 @@ lorient.details = new Details()
 // ------------------------------------
 const plouzane: FootballCamp = new FootballCamp();
 // - Main view
-plouzane.id = 1;
+plouzane.id = '1';
 plouzane.latitude = 48.3814380;
 plouzane.longitude = -4.6204040;
 plouzane.city = 'Plouzané';
@@ -122,7 +122,7 @@ plouzane.details = new Details()
 // ------------------------------------
 const plabennec: FootballCamp = new FootballCamp();
 // - Main view
-plabennec.id = 2;
+plabennec.id = '2';
 plabennec.latitude = 48.4999551;
 plabennec.longitude = -4.4484149;
 plabennec.city = 'Plabennec';
@@ -201,7 +201,7 @@ plabennec.details = new Details()
 // ------------------------------------
 const bourgBlanc: FootballCamp = new FootballCamp();
 // - Main view
-bourgBlanc.id = 3;
+bourgBlanc.id = '3';
 bourgBlanc.latitude = 48.4926696;
 bourgBlanc.longitude = -4.508196;
 bourgBlanc.city = 'Bourg-Blanc';

@@ -5,7 +5,8 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
-import {AngularFirestore} from 'angularfire2/firestore';
+import 'rxjs/add/operator/share';
+import {AngularFirestore, DocumentChangeAction} from 'angularfire2/firestore';
 
 @Component({
   selector: 'football-camp-locator',
@@ -15,6 +16,7 @@ export class FootballCampLocatorComponent implements OnInit {
 
   currentFootballCamp: FootballCamp = null;
   footballCamp$: Observable<FootballCamp>;
+  footballCamps: FootballCamp[] = null;
   filteredFootballCamps$: Observable<FootballCamp[]>;
   searchInput: FormControl = new FormControl();
 
@@ -35,25 +37,31 @@ export class FootballCampLocatorComponent implements OnInit {
       this.searchInput.setValue(footballCamp);
     });
 
+    this.angularFirestore
+      .collection<FootballCamp>('camps')
+      .snapshotChanges()
+      .map<DocumentChangeAction[], FootballCamp[]>(actions => {
+        return actions.map(action => {
+          const data = action.payload.doc.data() as FootballCamp;
+          data.id = action.payload.doc.id;
+          return data as FootballCamp;
+        });
+      }).subscribe((footballCamps: FootballCamp[]) => {
+      this.footballCamps = footballCamps;
+    });
+
     this.filteredFootballCamps$ = this.searchInput.valueChanges
-      .switchMap(value => {
-        return this.angularFirestore
-          .collection<FootballCamp>('camps')
-          .snapshotChanges()
-          .map(actions => {
-            return actions.map(action => {
-              const data = action.payload.doc.data() as FootballCamp;
-              data.id = action.payload.doc.id;
-              return data;
-            });
-          })
-          .map((footballCamps: FootballCamp[]) => {
-            return footballCamps.filter((footballCamp) => {
-              value = value ? value : '';
-              return footballCamp.city.toLowerCase().startsWith(value.toLowerCase());
-            });
-          })
-      })
+      .map<any, FootballCamp[]>(value => {
+        console.log('this.footballCamps' + this.footballCamps);
+        if (this.footballCamps) {
+          return this.footballCamps.filter((footballCamp) => {
+            value = ((typeof value === 'string') && value) ? value : '';
+            return footballCamp.city.toLowerCase().startsWith(value.toLowerCase());
+          });
+        } else {
+          return [];
+        }
+      });
   }
 
   displayFn(footballCamp: FootballCamp): string {
