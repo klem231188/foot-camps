@@ -72,15 +72,15 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       paymentController: ['', Validators.minLength(0)]
     });
 
-    const routeSubscription = this.route
-      .params
-      .switchMap((params: Params) => {
-        const id: number = +params['id'];
-        return this.footballCampService.getFootballCamp(id);
-      })
-      .subscribe((footballCamp: FootballCamp) => {
-        this.footballCamp = footballCamp;
-      });
+    // const routeSubscription = this.route
+    //   .params
+    //   .switchMap((params: Params) => {
+    //     const id: number = +params['id'];
+    //     return this.footballCampService.getFootballCamp(id);
+    //   })
+    //   .subscribe((footballCamp: FootballCamp) => {
+    //     this.footballCamp = footballCamp;
+    //   });
 
     const authStateSubscription = this.angularFireAuth.authState.subscribe((firebaseUser) => {
       if (firebaseUser && firebaseUser.uid) {
@@ -93,7 +93,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       }
     });
 
-    this._subscriptions.push(routeSubscription);
+    //this._subscriptions.push(routeSubscription);
     this._subscriptions.push(authStateSubscription);
   }
 

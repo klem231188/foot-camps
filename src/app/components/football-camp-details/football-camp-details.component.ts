@@ -21,14 +21,14 @@ export class FootballCampDetailsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.route
-      .params
-      .switchMap((params: Params) => {
-        return this.footballCampService.getFootballCamp(+params['id']);
-      })
-      .subscribe((footballCamp: FootballCamp) => {
-        this.footballCamp = footballCamp;
-      });
+    // this.route
+    //   .params
+    //   .switchMap((params: Params) => {
+    //     return this.footballCampService.getFootballCamp(+params['id']);
+    //   })
+    //   .subscribe((footballCamp: FootballCamp) => {
+    //     this.footballCamp = footballCamp;
+    //   });
   }
 
   ngAfterViewInit() {
