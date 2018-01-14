@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/share';
 import {AngularFirestore, DocumentChangeAction} from 'angularfire2/firestore';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
@@ -13,11 +14,11 @@ import {FootballCamp} from '../../models/football-camp';
   selector: 'football-camp-locator',
   templateUrl: 'football-camp-locator.component.html'
 })
-export class FootballCampLocatorComponent implements OnInit {
+export class FootballCampLocatorComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  footballCamp: FootballCamp = null;
-  footballCamps: FootballCamp[] = [];
-  filteredFootballCamps: FootballCamp[] = [];
+  footballCamp$: Observable<FootballCamp>;
+  footballCamps$: Observable<FootballCamp[]>;
+  filteredFootballCamps$: Observable<FootballCamp[]>;
   searchInput: FormControl = new FormControl();
 
   constructor(private router: Router,
@@ -26,59 +27,53 @@ export class FootballCampLocatorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // TODO faire du switchMap
-    this.searchInput.valueChanges
-      .map<any, FootballCamp[]>(value => {
-        return this.footballCamps.filter((footballCamp) => {
-          value = ((typeof value === 'string') && value) ? value : '';
-          return footballCamp.city.toLowerCase().startsWith(value.toLowerCase());
-        });
-      })
-      .subscribe(filteredFootballCamps => {
-        console.log('this.filteredFootballCamps : ' + filteredFootballCamps);
-        this.filteredFootballCamps = filteredFootballCamps;
-      });
+    console.log('FootballCampLocatorComponent.ngOnInit()');
+    this.footballCamps$ = this.footballCampService.getFootballCamps();
 
-    this.route.params
-      .map<Params, string>((params: Params) => {
-        console.log(params['id'])
-        return params['id'];
-      })
-      .subscribe(campId => {
-        // Find footballCamp
-        this.footballCampService
-          .getFootballCamp(campId)
-          .subscribe((footballCamp: FootballCamp) => {
-            this.footballCamp = footballCamp;
-
-            // Update searchInput
-            if (this.footballCamp) {
-              this.searchInput.setValue(this.footballCamp.city);
-            }
+    this.filteredFootballCamps$ = this.searchInput.valueChanges
+      .switchMap<any, FootballCamp[]>(value => {
+        return this.footballCamps$
+          .map<FootballCamp[], FootballCamp[]>(footballCamps => {
+            console.log(`value : ${value}`);
+            const city: string = (value != null) ? ((value instanceof FootballCamp) ? value.city : value) : '';
+            console.log(`city : ${city}`);
+            return footballCamps.filter((footballCamp) => {
+              return footballCamp.city.toLowerCase().startsWith(city.toLowerCase());
+            });
           })
-          .unsubscribe();
       });
 
-    this.footballCampService
-      .getFootballCamps()
-      .subscribe((footballCamps: FootballCamp[]) => {
-        console.log(footballCamps);
-        // Save footballCamps
-        this.footballCamps = footballCamps;
-
-        // Reset searchInput if needed
-        if (this.searchInput.value == null) {
-          this.searchInput.reset();
-        }
+    this.footballCamp$ = this.route.params
+      .switchMap<Params, FootballCamp>((params: Params) => {
+        return this.footballCampService.getFootballCamp(params['id']);
       });
   }
 
+  ngAfterViewInit(): void {
+    console.log('FootballCampLocatorComponent.ngAfterViewInit()');
+
+    this.footballCamp$.subscribe(footballCamp => {
+        console.log(footballCamp);
+        if (footballCamp) {
+          this.searchInput.setValue(footballCamp);
+        } else {
+          this.searchInput.setValue(null);
+        }
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    console.log('FootballCampLocatorComponent.ngOnDestroy()');
+  }
+
   displayFn(footballCamp: FootballCamp): string {
+    console.log('displayFn');
     return footballCamp ? footballCamp.city : '';
   }
 
   onFootballCampSelected(footballCamp: FootballCamp): void {
-    console.log(footballCamp);
+    console.log('onFootballCampSelected');
     this.router.navigate([`/locate/${footballCamp.id}`]);
   }
 

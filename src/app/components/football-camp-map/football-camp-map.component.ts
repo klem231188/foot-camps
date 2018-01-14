@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {FootballCamp} from '../../models/football-camp';
@@ -10,33 +10,25 @@ import 'rxjs/add/operator/map';
   templateUrl: 'football-camp-map.component.html',
   styleUrls: ['football-camp-map.component.scss']
 })
-export class FootballCampMapComponent implements OnInit {
+export class FootballCampMapComponent implements OnInit, OnDestroy {
 
-  footballCamps$: Observable<FootballCamp[]>;
+  @Input() footballCamps: FootballCamp[];
 
   zoom: number;
 
-  constructor(private router: Router,
-              private afs: AngularFirestore) {
+  constructor(private router: Router) {
     this.zoom = window.screen.width > 960 ? 6 : 5;
   }
 
   ngOnInit(): void {
-    this.footballCamps$ = this.afs
-      .collection<FootballCamp>('camps')
-      .snapshotChanges()
-      .map(documentChangeActions => {
-        // map on Observable here ! --> We 'map' each element/event of the observable
-        return documentChangeActions.map(documentChangeAction => {
-          // map on Array here ! --> We 'map' each element of the array
-            const footballCamp = documentChangeAction.payload.doc.data() as FootballCamp;
-            footballCamp.id = documentChangeAction.payload.doc.id;
-            return footballCamp;
-          });
-      });
+    console.log('FootballCampMapComponent.ngOnInit()');
   }
 
-  onMarkerClicked(footballCampId: number) {
+  ngOnDestroy(): void {
+    console.log('FootballCampMapComponent.ngOnDestroy()');
+  }
+
+  onMarkerClicked(footballCampId: string) {
     this.router.navigate(['/locate', footballCampId]);
   }
 }
