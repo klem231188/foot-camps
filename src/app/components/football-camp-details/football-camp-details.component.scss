@@ -136,6 +136,9 @@
     padding: .625em;
     text-align: center;
   }
+  table td * {
+    margin: auto;
+  }
   table th {
     font-size: .85em;
     letter-spacing: .1em;
