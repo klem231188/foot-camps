@@ -13,7 +13,7 @@ import {Session} from '../../models/session';
 })
 export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  numberOfRegitrations = 10;
+  numberOfRegistrations = 10;
 
   footballCamp: FootballCamp = null;
 
@@ -61,7 +61,7 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
   }
 
   percentageOfRegistrations(session: Session): number {
-    return (this.numberOfRegitrations / session.maximumNumberOfRegistrations) * 100;
+    return (this.numberOfRegistrations / session.maximumNumberOfRegistrations) * 100;
   }
 
   isViewerOpened(): boolean {
