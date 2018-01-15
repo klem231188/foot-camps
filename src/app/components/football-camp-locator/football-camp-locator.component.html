@@ -19,7 +19,7 @@
 </mat-card>
 
 <div class="overview-and-map">
-  <football-camp-overview [footballCamp]="footballCamp$ | async" [hidden]="!(footballCamp$ | async)">
+  <football-camp-overview [footballCamp]="footballCamp$ | async" *ngIf="(footballCamp$ | async)">
   </football-camp-overview>
 
   <football-camp-map [footballCamps]="footballCamps$ | async">

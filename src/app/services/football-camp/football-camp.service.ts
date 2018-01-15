@@ -13,16 +13,6 @@ export class FootballCampService {
   constructor(private angularFirestore: AngularFirestore) {
   }
 
-  // getFootballCampsToRemove(): Promise<FootballCamp[]> {
-  //   return Promise.resolve(FOOTBAL_CAMPS);
-  // }
-  //
-  // getFootballCamp(id: number): Promise<FootballCamp> {
-  //   return this.getFootballCampsToRemove().then(footballCamps => {
-  //     return footballCamps[id];
-  //   });
-  // }
-
   getFootballCamps(): Observable<FootballCamp[]> {
     if (this.footballCamps$ == null) {
       this.footballCamps$ = this.angularFirestore

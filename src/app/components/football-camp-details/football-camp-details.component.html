@@ -108,17 +108,18 @@
                 <tr>
                   <th scope="col">Sessions</th>
                   <th scope="col">Dates</th>
-                  <th scope="col">Tarifs en Pension complète</th>
+                  <th scope="col" *ngIf="hasFullBoardRatesSessions()">Tarifs en Pension complète</th>
                   <th scope="col" *ngIf="hasHalfBoardRatesSessions()">Tarifs en Demi-pension</th>
+                  <th scope="col">Inscriptions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let session of footballCamp.details.sessions">
-                  <td data-label="Sessions">{{session.name}}</td>
-                  <td data-label="Dates">{{session.fromDateToDate}}</td>
-                  <td data-label="Tarifs en Pension complète">{{session.fullBoardRates}} €</td>
-                  <td data-label="Tarifs en Demi-pension" *ngIf="hasHalfBoardRatesSessions()">{{session.halfBoardRates}} €
-                  </td>
+                <tr *ngFor="let session of footballCamp.details.sessions; let i = index">
+                  <td data-label="Sessions">Session n°{{i}}</td>
+                  <td data-label="Dates">A partir du {{session.start | date : 'longDate'}} jusqu'au {{session.end | date : 'longDate'}}</td>
+                  <td data-label="Tarifs en Pension complète" *ngIf="hasFullBoardRatesSessions()">{{session.fullBoardRates}} €</td>
+                  <td data-label="Tarifs en Demi-pension" *ngIf="hasHalfBoardRatesSessions()">{{session.halfBoardRates}} €</td>
+                  <td data-label="Inscriptions"><mat-progress-spinner [value]="percentageOfRegistrations(session)"></mat-progress-spinner></td>
                 </tr>
               </tbody>
             </table>

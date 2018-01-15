@@ -28,18 +28,18 @@ export class FootballCampHeaderComponent implements OnInit {
     this.router.events
       .filter(event => event instanceof NavigationStart)
       .subscribe((event: NavigationStart) => {
-        if (/^\/registration\/\d+$/i.test(event.url)) {
+        if (/^\/registration\/\w+$/i.test(event.url)) {
           // registration/:id
           this.backUrl = event.url.replace('registration', 'locate');
           this.backUrl += '/details';
           console.log(this.backUrl);
-        } else if (/^\/locate\/\d+\/details$/i.test(event.url)) {
+        } else if (/^\/locate\/\w+\/details$/i.test(event.url)) {
           // locate/:id/details
           this.backUrl = event.url.replace('/details', '');
           console.log(this.backUrl);
-        } else if (/^\/locate\/\d+$/i.test(event.url)) {
+        } else if (/^\/locate\/\w+$/i.test(event.url)) {
           // locate/:id
-          this.backUrl = event.url.replace(/(\d+)/, '');
+          this.backUrl = '/locate';
           console.log(this.backUrl);
         } else if (/^\/locate$/i.test(event.url)) {
           // locate
