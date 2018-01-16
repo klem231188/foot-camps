@@ -1,13 +1,14 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Registration} from './registration';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
-import {FootballCamp} from '../../services/football-camp/football-camp';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {MatDialog, MatVerticalStepper} from '@angular/material';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {FootballCampShouldConnectDialogComponent} from '../football-camp-should-connect-dialog/football-camp-should-connect-dialog.component';
-import {Subscription} from "rxjs/Subscription";
+import {Subscription} from 'rxjs/Subscription';
+import {FootballCamp} from '../../models/football-camp';
+import {RegistrationService} from '../../services/registration/registration.service';
+import {Registration} from '../../models/registration';
 
 @Component({
   selector: 'football-camp-registration',
@@ -49,6 +50,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private footballCampService: FootballCampService,
+              private registrationService: RegistrationService,
               public angularFireAuth: AngularFireAuth,
               public dialog: MatDialog,
               private router: Router) {
@@ -72,15 +74,15 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       paymentController: ['', Validators.minLength(0)]
     });
 
-    // const routeSubscription = this.route
-    //   .params
-    //   .switchMap((params: Params) => {
-    //     const id: number = +params['id'];
-    //     return this.footballCampService.getFootballCamp(id);
-    //   })
-    //   .subscribe((footballCamp: FootballCamp) => {
-    //     this.footballCamp = footballCamp;
-    //   });
+    const routeSubscription = this.route
+      .params
+      .switchMap<Params, FootballCamp>((params) => {
+        const id: string = params['id'];
+        return this.footballCampService.getFootballCamp(id);
+      })
+      .subscribe((footballCamp: FootballCamp) => {
+        this.footballCamp = footballCamp;
+      });
 
     const authStateSubscription = this.angularFireAuth.authState.subscribe((firebaseUser) => {
       if (firebaseUser && firebaseUser.uid) {
@@ -93,7 +95,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       }
     });
 
-    //this._subscriptions.push(routeSubscription);
+    this._subscriptions.push(routeSubscription);
     this._subscriptions.push(authStateSubscription);
   }
 
@@ -148,5 +150,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   onConfirmRegistration(): void {
     console.log(this.registration);
+    this.registrationService.save(this.registration);
   }
 }
