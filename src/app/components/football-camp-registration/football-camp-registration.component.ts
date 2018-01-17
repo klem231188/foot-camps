@@ -24,6 +24,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   registrationForm: FormGroup;
   firstname: FormControl;
   lastname: FormControl;
+  birthdate: FormControl;
   gender: FormControl;
   email: FormControl;
 
@@ -45,8 +46,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
         .subscribe((selection) => {
         if (selection.selectedIndex === 2) {
           this._stepper._steps.forEach((step) => step.editable = false);
-          // HACK here --> https://github.com/firebase/firebase-js-sdk/issues/311
-          this.registrationService.save(this.getRegistrationData());
         }
       })
     }
@@ -67,12 +66,14 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     console.log('FootballCampRegistrationComponent.ngOnInit()');
     this.firstname = new FormControl('Clément', [Validators.required, Validators.minLength(2)]);
     this.lastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
+    this.birthdate = new FormControl('23/11/1988', [Validators.required]);
     this.gender = new FormControl('Male', [Validators.required]);
     this.email = new FormControl('clemtreguer@gmail.com', [Validators.required, Validators.email]);
 
     this.registrationForm = new FormGroup({
       'firstname': this.firstname,
       'lastname': this.lastname,
+      'birthdate': this.birthdate,
       'gender': this.gender,
       'email': this.email
     });
@@ -154,9 +155,14 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     });
   }
 
-  getRegistrationData(): object {
-    const result = {};
-    Object.keys(this.registration).map(key => result[key] = this[key]);
-    return result;
+  onPaymentDone(): void {
+    this.registration.firstname = this.registrationForm.get('firstname').value;
+    this.registration.lastname = this.registrationForm.get('lastname').value;
+    this.registration.birthdate = this.registrationForm.get('birthdate').value;
+    this.registration.email = this.registrationForm.get('email').value;
+    this.registration.gender = this.registrationForm.get('gender').value;
+
+    this.registrationService.save(this.registration);
   }
+
 }

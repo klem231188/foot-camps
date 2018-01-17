@@ -1,13 +1,12 @@
 import {Gender} from './gender.enum';
 
 export class Registration {
-  birthdate: Date;
+  birthdate: string;
   email: string;
   firstname: string;
-  gender: Gender;
+  gender: string;
   lastname: string;
 
   constructor() {
   }
-
 }

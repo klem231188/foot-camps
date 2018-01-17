@@ -40,7 +40,7 @@
 
           <!-- Date de naissance -->
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Date de naissance">
+            <input matInput [matDatepicker]="picker" placeholder="Date de naissance" formControlName="birthdate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker startView="year" [startAt]="startDate" disabled="false"></mat-datepicker>
           </mat-form-field>
@@ -108,7 +108,7 @@
           </div>
           <span class="separator"></span>
           <div class="next-button">
-            <button mat-button matStepperNext mat-raised-button color="primary">
+            <button mat-button matStepperNext mat-raised-button color="primary" (click)="onPaymentDone()">
               Suivant
               <mat-icon>chevron_right</mat-icon>
             </button>

@@ -8,9 +8,16 @@ export class RegistrationService {
   constructor(private angularFirestore: AngularFirestore) {
   }
 
-  save(registration) {
-      this.angularFirestore
-        .collection<Registration>('registrations')
-        .add(registration);
+  save(registration: Registration) {
+    // HACK here --> https://github.com/firebase/firebase-js-sdk/issues/311
+    this.angularFirestore
+      .collection('registrations')
+      .add(this.getData(registration));
+  }
+
+  getData(clazz: any): object {
+    const result = {};
+    Object.keys(clazz).map(key => result[key] = clazz[key]);
+    return result;
   }
 }
