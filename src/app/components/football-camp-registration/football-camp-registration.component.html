@@ -11,7 +11,7 @@
     <mat-vertical-stepper [linear]="true" #stepper>
       <!--Etape : Renseigner les informations -->
       <mat-step [stepControl]="registrationForm">
-        <form [formGroup]="registrationForm" #registrationFormRef="ngForm" class="registration-form-group-container">
+        <form [formGroup]="registrationForm" #registrationFormRef="ngForm" class="registration-form-group-container" novalidate>
           <ng-template matStepLabel>Inscription</ng-template>
           <h4>Informations générales</h4>
           <!-- Photo -->

@@ -1,9 +1,11 @@
-export class Registration {
-  firstname: string;
-  lastname: string;
-  gender: string;
+import {Gender} from './gender.enum';
 
-  // TODO : continue
+export class Registration {
+  birthdate: Date;
+  email: string;
+  firstname: string;
+  gender: Gender;
+  lastname: string;
 
   constructor() {
   }

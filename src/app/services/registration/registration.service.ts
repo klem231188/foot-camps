@@ -8,7 +8,7 @@ export class RegistrationService {
   constructor(private angularFirestore: AngularFirestore) {
   }
 
-  save(registration: Registration) {
+  save(registration) {
       this.angularFirestore
         .collection<Registration>('registrations')
         .add(registration);

@@ -9,6 +9,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {FootballCamp} from '../../models/football-camp';
 import {RegistrationService} from '../../services/registration/registration.service';
 import {Registration} from '../../models/registration';
+import {Gender} from '../../models/gender.enum';
 
 @Component({
   selector: 'football-camp-registration',
@@ -35,13 +36,17 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   private _subscriptions: Subscription[];
 
-  @ViewChild('stepper') set stepper(stepper: MatVerticalStepper) {
+  @ViewChild('stepper')
+  set stepper(stepper: MatVerticalStepper) {
     this._stepper = stepper;
     if (this._stepper) {
       console.log('stepper is not undefined');
-      this._stepper.selectionChange.asObservable().subscribe((selection) => {
+      this._stepper.selectionChange.asObservable()
+        .subscribe((selection) => {
         if (selection.selectedIndex === 2) {
           this._stepper._steps.forEach((step) => step.editable = false);
+          // HACK here --> https://github.com/firebase/firebase-js-sdk/issues/311
+          this.registrationService.save(this.getRegistrationData());
         }
       })
     }
@@ -59,10 +64,11 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   }
 
   ngOnInit(): void {
-    this.firstname = new FormControl('', [Validators.required, Validators.minLength(2)]);
-    this.lastname = new FormControl('', [Validators.required, Validators.minLength(2)]);
-    this.gender = new FormControl('', [Validators.required]);
-    this.email = new FormControl('', [Validators.required, Validators.email]);
+    console.log('FootballCampRegistrationComponent.ngOnInit()');
+    this.firstname = new FormControl('Clément', [Validators.required, Validators.minLength(2)]);
+    this.lastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
+    this.gender = new FormControl('Male', [Validators.required]);
+    this.email = new FormControl('clemtreguer@gmail.com', [Validators.required, Validators.email]);
 
     this.registrationForm = new FormGroup({
       'firstname': this.firstname,
@@ -100,11 +106,11 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   }
 
   ngAfterViewInit(): void {
-    // console.log(this.theStepper)
-    // this.theStepper.selectionChange.asObservable().subscribe(event => {console.log(event)})
+    console.log('FootballCampRegistrationComponent.ngAfterViewInit()');
   }
 
   ngOnDestroy(): void {
+    console.log('FootballCampRegistrationComponent.ngOnDestroy()');
     for (const subscription of this._subscriptions) {
       subscription.unsubscribe();
     }
@@ -148,8 +154,9 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     });
   }
 
-  onConfirmRegistration(): void {
-    console.log(this.registration);
-    this.registrationService.save(this.registration);
+  getRegistrationData(): object {
+    const result = {};
+    Object.keys(this.registration).map(key => result[key] = this[key]);
+    return result;
   }
 }
