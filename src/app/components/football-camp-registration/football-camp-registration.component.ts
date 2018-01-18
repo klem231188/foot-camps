@@ -20,6 +20,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   // Model to save data
   registration: Registration = new Registration();
 
+  private genderEnum = Gender;
+
   // Registration Form & Controls
   registrationForm: FormGroup;
   firstname: FormControl;
@@ -27,6 +29,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   birthdate: FormControl;
   gender: FormControl;
   email: FormControl;
+  address: FormControl;
+  club: FormControl;
 
   // Payment From & Controls
   paymentFormGroup: FormGroup;
@@ -44,10 +48,10 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       console.log('stepper is not undefined');
       this._stepper.selectionChange.asObservable()
         .subscribe((selection) => {
-        if (selection.selectedIndex === 2) {
-          this._stepper._steps.forEach((step) => step.editable = false);
-        }
-      })
+          if (selection.selectedIndex === 2) {
+            this._stepper._steps.forEach((step) => step.editable = false);
+          }
+        })
     }
   }
 
@@ -66,17 +70,22 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     console.log('FootballCampRegistrationComponent.ngOnInit()');
     this.firstname = new FormControl('Clément', [Validators.required, Validators.minLength(2)]);
     this.lastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
-    this.birthdate = new FormControl('23/11/1988', [Validators.required]);
-    this.gender = new FormControl('Male', [Validators.required]);
-    this.email = new FormControl('clemtreguer@gmail.com', [Validators.required, Validators.email]);
+    this.birthdate = new FormControl('23/11/1988');
+    this.gender = new FormControl(Gender.FEMALE, [Validators.required]);
+    this.email = new FormControl('monemail@gmail.com', [Validators.required, Validators.email]);
+    this.address = new FormControl('221 rue de la palourde, 12345 Plouvien', [Validators.required]);
+    this.club = new FormControl('GSY', [Validators.required]);
 
     this.registrationForm = new FormGroup({
       'firstname': this.firstname,
       'lastname': this.lastname,
       'birthdate': this.birthdate,
       'gender': this.gender,
-      'email': this.email
+      'email': this.email,
+      'address': this.address,
+      'club': this.club
     });
+
     this.paymentFormGroup = this.formBuilder.group({
       paymentController: ['', Validators.minLength(0)]
     });
@@ -160,7 +169,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     this.registration.lastname = this.registrationForm.get('lastname').value;
     this.registration.birthdate = this.registrationForm.get('birthdate').value;
     this.registration.email = this.registrationForm.get('email').value;
-    this.registration.gender = this.registrationForm.get('gender').value;
+    this.registration.gender = Gender[this.registrationForm.get('gender').value as string];
 
     this.registrationService.save(this.registration);
   }

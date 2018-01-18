@@ -19,19 +19,19 @@
 
           <!-- Nom & Prénom -->
           <mat-form-field>
-            <input matInput type="text" placeholder="Prénom" formControlName="firstname" required>
+            <input matInput placeholder="Prénom" formControlName="firstname" required>
             <mat-error *ngIf="registrationForm.get('firstname').invalid">{{getFirstnameError()}}</mat-error>
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput type="text" placeholder="Nom" formControlName="lastname" required>
+            <input matInput placeholder="Nom" formControlName="lastname" required>
             <mat-error *ngIf="registrationForm.get('lastname').invalid">{{getLastnameError()}}</mat-error>
           </mat-form-field>
 
           <!-- Sexe -->
           <mat-radio-group formControlName="gender">
-            <mat-radio-button value="Male">Garçon</mat-radio-button>
-            <mat-radio-button value="Female">Fille</mat-radio-button>
+            <mat-radio-button value="MALE">Garçon</mat-radio-button>
+            <mat-radio-button value="FEMALE">Fille</mat-radio-button>
             <mat-error *ngIf="registrationForm.get('gender').invalid && registrationFormRef.submitted">
               {{getGenderError()}}
             </mat-error>
@@ -53,13 +53,13 @@
 
           <!-- Adresse -->
           <mat-form-field>
-            <input matInput type="text" placeholder="Adresse" address>
+            <input matInput placeholder="Adresse" formControlName="address">
           </mat-form-field>
 
           <h4>Caractéristiques sportives</h4>
           <!-- Club -->
           <mat-form-field>
-            <input matInput type="text" placeholder="Club actuel" address>
+            <input matInput placeholder="Club actuel" formControlName="club">
           </mat-form-field>
           <!-- Poste préféré : Gardien / Défenseur / Milieu / Attaquant -->
           <mat-radio-group>
