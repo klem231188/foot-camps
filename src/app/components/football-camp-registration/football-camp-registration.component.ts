@@ -10,6 +10,7 @@ import {FootballCamp} from '../../models/football-camp';
 import {RegistrationService} from '../../services/registration/registration.service';
 import {Registration} from '../../models/registration';
 import {Gender} from '../../models/gender.enum';
+import * as moment from 'moment';
 
 @Component({
   selector: 'football-camp-registration',
@@ -70,7 +71,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     console.log('FootballCampRegistrationComponent.ngOnInit()');
     this.firstname = new FormControl('Clément', [Validators.required, Validators.minLength(2)]);
     this.lastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
-    this.birthdate = new FormControl('23/11/1988');
+    this.birthdate = new FormControl(moment());
     this.gender = new FormControl(Gender.FEMALE, [Validators.required]);
     this.email = new FormControl('monemail@gmail.com', [Validators.required, Validators.email]);
     this.address = new FormControl('221 rue de la palourde, 12345 Plouvien', [Validators.required]);
@@ -167,7 +168,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   onPaymentDone(): void {
     this.registration.firstname = this.registrationForm.get('firstname').value;
     this.registration.lastname = this.registrationForm.get('lastname').value;
-    this.registration.birthdate = this.registrationForm.get('birthdate').value;
+    this.registration.birthdate = (this.registrationForm.get('birthdate').value as moment.Moment).toDate();
     this.registration.email = this.registrationForm.get('email').value;
     this.registration.gender = Gender[this.registrationForm.get('gender').value as string];
 

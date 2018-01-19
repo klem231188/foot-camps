@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule, LOCALE_ID} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -27,6 +27,8 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {FootballCampLoginComponent} from './components/football-camp-login/football-camp-login.component';
 import {FootballCampShouldConnectDialogComponent} from './components/football-camp-should-connect-dialog/football-camp-should-connect-dialog.component';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -71,7 +73,13 @@ registerLocaleData(localeFr, 'fr');
     FootballCampLoginComponent,
     FootballCampShouldConnectDialogComponent
   ],
-  providers: [AngularFireAuth, {provide: LOCALE_ID, useValue: 'fr'}],
+  providers: [
+    AngularFireAuth,
+    {provide: LOCALE_ID, useValue: 'fr'},
+    {provide: MAT_DATE_LOCALE, useValue: 'fr'},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

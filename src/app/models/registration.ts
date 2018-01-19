@@ -1,4 +1,6 @@
 import {Gender} from './gender.enum';
+import {Feet} from './feet.enum';
+import {FieldPosition} from './field-position.enum';
 
 export class Registration {
   birthdate: Date = null;
@@ -8,8 +10,8 @@ export class Registration {
   lastname = '';
   address = '';
   club = '';
-  // fieldPosition: FieldPosition;
-  // feet: Feet;
+  fieldPosition: FieldPosition = null;
+  feet: Feet = null;
 
   constructor() {
   }
