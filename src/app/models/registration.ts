@@ -3,13 +3,14 @@ import {Feet} from './feet.enum';
 import {FieldPosition} from './field-position.enum';
 
 export class Registration {
+  sessionId: string = null;
   birthdate: Date = null;
-  email = '';
-  firstname = '';
+  email: string = null;
+  firstname: string = null;
   gender: Gender = null;
-  lastname = '';
-  address = '';
-  club = '';
+  lastname: string = null;
+  address: string = null;
+  club: string = null;
   fieldPosition: FieldPosition = null;
   feet: Feet = null;
 

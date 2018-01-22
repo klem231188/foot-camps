@@ -12,6 +12,7 @@ import {Registration} from '../../models/registration';
 import {Gender} from '../../models/gender.enum';
 import * as moment from 'moment';
 import {Session} from '../../models/session';
+import {SessionService} from '../../services/session/session.service';
 
 @Component({
   selector: 'football-camp-registration',
@@ -42,6 +43,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   paymentFormGroup: FormGroup;
 
   footballCamp: FootballCamp;
+  sessions: Session[];
 
   private _stepper: MatVerticalStepper;
 
@@ -64,6 +66,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private footballCampService: FootballCampService,
+              private sessionService: SessionService,
               private registrationService: RegistrationService,
               public angularFireAuth: AngularFireAuth,
               public dialog: MatDialog,
@@ -106,7 +109,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       paymentController: ['', Validators.minLength(0)]
     });
 
-    const routeSubscription = this.route
+    const footballCampSub = this.route
       .params
       .switchMap<Params, FootballCamp>((params) => {
         const id: string = params['id'];
@@ -115,6 +118,21 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       .subscribe((footballCamp: FootballCamp) => {
         this.footballCamp = footballCamp;
       });
+
+    const sessionSub = this.route
+      .params
+      .switchMap<Params, Session[]>((params) => {
+        const id: string = params['id'];
+        //return this.sessionService.getSessionsFromCampId(id);
+        return this.sessionService.getSessions();
+      })
+      .subscribe((sessions: Session[]) => {
+        this.sessions = sessions;
+        console.log('----------- sessions :');
+        console.log(this.sessions);
+      });
+
+
 
     const authStateSubscription = this.angularFireAuth.authState.subscribe((firebaseUser) => {
       if (firebaseUser && firebaseUser.uid) {
@@ -127,7 +145,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       }
     });
 
-    this._subscriptions.push(routeSubscription);
+    this._subscriptions.push(footballCampSub);
+    this._subscriptions.push(sessionSub);
     this._subscriptions.push(authStateSubscription);
   }
 

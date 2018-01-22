@@ -30,12 +30,17 @@ export class FootballCampLocatorComponent implements OnInit, OnDestroy, AfterVie
     console.log('FootballCampLocatorComponent.ngOnInit()');
     this.footballCamps$ = this.footballCampService.getFootballCamps();
 
+    this.footballCamps$.subscribe(
+      x => {console.log(x)}
+    );
+
     this.filteredFootballCamps$ = this.searchInput.valueChanges
       .switchMap<any, FootballCamp[]>(value => {
         return this.footballCamps$
           .map<FootballCamp[], FootballCamp[]>(footballCamps => {
-            console.log(`value : ${value}`);
-            const city: string = (value != null) ? ((value instanceof FootballCamp) ? value.city : value) : '';
+            console.log(`value : `);
+            console.log(value);
+            const city: string = (value != null && value.city) ? value.city : '';
             console.log(`city : ${city}`);
             return footballCamps.filter((footballCamp) => {
               return footballCamp.city.toLowerCase().startsWith(city.toLowerCase());

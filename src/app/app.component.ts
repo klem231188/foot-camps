@@ -5,12 +5,13 @@ import {MatSidenav} from '@angular/material';
 import {Router} from '@angular/router';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {RegistrationService} from './services/registration/registration.service';
+import {SessionService} from './services/session/session.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['app.component.scss'],
-  providers: [FootballCampService, RegistrationService, AngularFireAuth, FirebaseAuthUiService],
+  providers: [FootballCampService, RegistrationService, SessionService, AngularFireAuth, FirebaseAuthUiService],
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
