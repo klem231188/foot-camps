@@ -11,6 +11,7 @@ import {RegistrationService} from '../../services/registration/registration.serv
 import {Registration} from '../../models/registration';
 import {Gender} from '../../models/gender.enum';
 import * as moment from 'moment';
+import {Session} from '../../models/session';
 
 @Component({
   selector: 'football-camp-registration',
@@ -25,6 +26,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   // Session Form & Controls
   sessionForm: FormGroup;
+  session: FormControl;
 
   // Registration Form & Controls
   registrationForm: FormGroup;
@@ -74,7 +76,11 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     console.log('FootballCampRegistrationComponent.ngOnInit()');
 
     // Session Form & Controls
-    this.sessionForm = new FormGroup({});
+    this.session = new FormControl('', [Validators.required]);
+
+    this.sessionForm = new FormGroup({
+      'session': this.session
+    });
 
     // Registration Form & Controls
     this.firstname = new FormControl('Clément', [Validators.required, Validators.minLength(2)]);
@@ -172,6 +178,12 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
         this.router.navigateByUrl('locate');
       }
     });
+  }
+
+  onChooseSession(session: Session): void {
+    console.log(session);
+    this.session.setValue(session);
+    this._stepper.next();
   }
 
   onPaymentDone(): void {

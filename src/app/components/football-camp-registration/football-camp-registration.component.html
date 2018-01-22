@@ -13,19 +13,27 @@
       <mat-step [stepControl]="sessionForm">
         <form [formGroup]="sessionForm" class="session-form-group-container" novalidate>
           <ng-template matStepLabel>Session</ng-template>
-          <mat-card class="session-card">
+          <mat-card class="session-card" *ngFor="let session of footballCamp.details.sessions; let i = index">
+            <!-- TODO : sélectionner la session -->
             <mat-card-header>
-              <mat-card-title>Session n°1</mat-card-title>
-              <mat-card-subtitle>Du 10 Juillet au 17 Juillet 2017</mat-card-subtitle>
+              <mat-card-title>Session n°{{i}}</mat-card-title>
+              <mat-card-subtitle>Du {{session.start | date : 'longDate'}} au {{session.end | date : 'longDate'}}
+              </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-              <div>Prix : 150€</div><br>
+              <div *ngIf="session.halfBoardRates">Prix demi-pension : {{session.halfBoardRates}} € <br></div>
+              <div *ngIf="session.fullBoardRates">Prix pension complète: {{session.fullBoardRates}} € <br></div>
+              <!-- TODO nb places restantes-->
               <div>Disponibilité : 10 place(s) restante(s)</div>
             </mat-card-content>
             <mat-card-actions align="start">
-              <button mat-raised-button color="primary" (click)="onAction1">Choisir</button>
+              <!-- TODO nb places restantes-->
+              <button mat-raised-button color="primary" (click)="onChooseSession(session)">Choisir</button>
             </mat-card-actions>
           </mat-card>
+          <mat-form-field class="hidden-input">
+            <input matInput formControlName="session">
+          </mat-form-field>
         </form>
       </mat-step>
       <!--Etape : Renseigner les informations -->
