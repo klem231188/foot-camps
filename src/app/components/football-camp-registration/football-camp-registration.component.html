@@ -9,9 +9,29 @@
   <!-- Stepper -->
   <div class="registration-stepper-container">
     <mat-vertical-stepper [linear]="true" #stepper>
+      <!--Etape : Choisir la session -->
+      <mat-step [stepControl]="sessionForm">
+        <form [formGroup]="sessionForm" class="session-form-group-container" novalidate>
+          <ng-template matStepLabel>Session</ng-template>
+          <mat-card class="session-card">
+            <mat-card-header>
+              <mat-card-title>Session n°1</mat-card-title>
+              <mat-card-subtitle>Du 10 Juillet au 17 Juillet 2017</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <div>Prix : 150€</div><br>
+              <div>Disponibilité : 10 place(s) restante(s)</div>
+            </mat-card-content>
+            <mat-card-actions align="start">
+              <button mat-raised-button color="primary" (click)="onAction1">Choisir</button>
+            </mat-card-actions>
+          </mat-card>
+        </form>
+      </mat-step>
       <!--Etape : Renseigner les informations -->
       <mat-step [stepControl]="registrationForm">
-        <form [formGroup]="registrationForm" #registrationFormRef="ngForm" class="registration-form-group-container" novalidate>
+        <form [formGroup]="registrationForm" #registrationFormRef="ngForm" class="registration-form-group-container"
+              novalidate>
           <ng-template matStepLabel>Inscription</ng-template>
           <h4>Informations générales</h4>
           <!-- Photo -->

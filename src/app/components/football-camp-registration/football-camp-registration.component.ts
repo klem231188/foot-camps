@@ -23,6 +23,9 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   private genderEnum = Gender;
 
+  // Session Form & Controls
+  sessionForm: FormGroup;
+
   // Registration Form & Controls
   registrationForm: FormGroup;
   firstname: FormControl;
@@ -49,7 +52,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       console.log('stepper is not undefined');
       this._stepper.selectionChange.asObservable()
         .subscribe((selection) => {
-          if (selection.selectedIndex === 2) {
+          if (selection.selectedIndex === 3) {
             this._stepper._steps.forEach((step) => step.editable = false);
           }
         })
@@ -69,6 +72,11 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   ngOnInit(): void {
     console.log('FootballCampRegistrationComponent.ngOnInit()');
+
+    // Session Form & Controls
+    this.sessionForm = new FormGroup({});
+
+    // Registration Form & Controls
     this.firstname = new FormControl('Clément', [Validators.required, Validators.minLength(2)]);
     this.lastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
     this.birthdate = new FormControl(moment());
@@ -87,6 +95,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       'club': this.club
     });
 
+    // Payment From & Controls
     this.paymentFormGroup = this.formBuilder.group({
       paymentController: ['', Validators.minLength(0)]
     });
