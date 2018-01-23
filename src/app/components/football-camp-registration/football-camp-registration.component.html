@@ -1,4 +1,4 @@
-<div *ngIf="footballCamp" class="registration-main-container">
+<div *ngIf="footballCamp && sessions" class="registration-main-container">
   <div class="registration-logo-container">
     <img [src]="footballCamp.details.pathToLogo" class="details-logo">
     <img src="./assets/img/soccer-sketch.png" class="soccer-ball">
@@ -13,7 +13,7 @@
       <mat-step [stepControl]="sessionForm">
         <form [formGroup]="sessionForm" class="session-form-group-container" novalidate>
           <ng-template matStepLabel>Session</ng-template>
-          <mat-card class="session-card" *ngFor="let session of footballCamp.details.sessions; let i = index">
+          <mat-card class="session-card" *ngFor="let session of sessions; let i = index">
             <!-- TODO : sélectionner la session -->
             <mat-card-header>
               <mat-card-title>Session n°{{i}}</mat-card-title>
@@ -23,11 +23,10 @@
             <mat-card-content>
               <div *ngIf="session.halfBoardRates">Prix demi-pension : {{session.halfBoardRates}} € <br></div>
               <div *ngIf="session.fullBoardRates">Prix pension complète: {{session.fullBoardRates}} € <br></div>
-              <!-- TODO nb places restantes-->
-              <div>Disponibilité : 10 place(s) restante(s)</div>
+              <div>Disponibilité : {{session.maximumNumberOfRegistrations - session.currentNumberOfRegistrations}} place(s) restante(s)</div>
             </mat-card-content>
             <mat-card-actions align="start">
-              <button mat-raised-button color="primary" (click)="onChooseSession(session)">Choisir</button>
+              <button [disabled]="session.currentNumberOfRegistrations >= session.maximumNumberOfRegistrations" mat-raised-button color="primary" (click)="onSessionSelected(session)">Choisir</button>
             </mat-card-actions>
           </mat-card>
           <mat-form-field class="hidden-input">

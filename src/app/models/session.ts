@@ -5,6 +5,7 @@ export class Session {
   end: string;
   fullBoardRates: number;
   halfBoardRates: number;
+  currentNumberOfRegistrations: number;
   maximumNumberOfRegistrations: number;
   start: string;
 

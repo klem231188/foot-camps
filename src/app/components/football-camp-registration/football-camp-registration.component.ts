@@ -109,6 +109,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       paymentController: ['', Validators.minLength(0)]
     });
 
+    // Listnening to events
     const footballCampSub = this.route
       .params
       .switchMap<Params, FootballCamp>((params) => {
@@ -123,16 +124,13 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       .params
       .switchMap<Params, Session[]>((params) => {
         const id: string = params['id'];
-        //return this.sessionService.getSessionsFromCampId(id);
-        return this.sessionService.getSessions();
+        return this.sessionService.getSessionsFromCampId(id);
       })
       .subscribe((sessions: Session[]) => {
         this.sessions = sessions;
         console.log('----------- sessions :');
         console.log(this.sessions);
       });
-
-
 
     const authStateSubscription = this.angularFireAuth.authState.subscribe((firebaseUser) => {
       if (firebaseUser && firebaseUser.uid) {
@@ -199,7 +197,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     });
   }
 
-  onChooseSession(session: Session): void {
+  onSessionSelected(session: Session): void {
     console.log(session);
     this.session.setValue(session);
     this._stepper.next();

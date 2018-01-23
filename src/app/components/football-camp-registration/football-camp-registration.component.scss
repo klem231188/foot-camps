@@ -35,7 +35,7 @@
       }
       .vertical-line {
         align-self: flex-end;
-        color: mat-color($primary);
+        border-color: mat-color($primary);
         position: absolute;
         top: 40px;
         bottom: 40px;
