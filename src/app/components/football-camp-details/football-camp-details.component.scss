@@ -18,6 +18,16 @@
         display: none;
       }
     }
+    .fab-button-registration {
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      @include small-screen {
+        bottom: 10px;
+        right: 10px;
+      }
+      z-index: 10;
+    }
     .logo-container {
       padding: 10px;
       @include small-screen {

@@ -1,4 +1,7 @@
 <div *ngIf="footballCamp" class="main-container">
+
+  <button class="fab-button-registration" mat-fab color="primary" [routerLink]="[ '/registration/', footballCamp.id ]"><mat-icon class="mat-24">create</mat-icon></button>
+
   <div class="logo-container">
     <img [src]="footballCamp.details.pathToLogo" class="details-logo">
     <img src="./assets/img/soccer-sketch.png" class="soccer-ball">
@@ -130,7 +133,8 @@
               <td data-label="Tarifs en Demi-pension" *ngIf="hasHalfBoardRatesSessions()">{{session.halfBoardRates}} €
               </td>
               <td data-label="Inscriptions">
-                <mat-progress-spinner [value]="percentageOfRegistrations(session)"></mat-progress-spinner>
+                <!--<mat-progress-spinner [value]="percentageOfRegistrations(session)"></mat-progress-spinner>-->
+                <mat-progress-bar mode="determinate" [value]="percentageOfRegistrations(session)" color="primary"></mat-progress-bar>
                 {{numberOfRegistrations}}/{{session.maximumNumberOfRegistrations}}
               </td>
             </tr>
@@ -178,6 +182,7 @@
       </mat-card>
     </div>
 
+    <span class="separator"></span>
     <span class="separator"></span>
   </div>
 </div>
