@@ -14,7 +14,7 @@
         <form [formGroup]="sessionForm" class="session-form-group-container" novalidate>
           <ng-template matStepLabel>Session</ng-template>
           <mat-card class="session-card" *ngFor="let session of sessions; let i = index">
-            <!-- TODO : sélectionner la session -->
+            <mat-icon class="icon-selected-session" color="primary" *ngIf="sessionForm.get('session').value == session">check</mat-icon>
             <mat-card-header>
               <mat-card-title>Session n°{{i}}</mat-card-title>
               <mat-card-subtitle>Du {{session.start | date : 'longDate'}} au {{session.end | date : 'longDate'}}
