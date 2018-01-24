@@ -1,6 +1,6 @@
 <div *ngIf="footballCamp" class="main-container">
 
-  <button class="fab-button-registration" mat-fab color="primary" [routerLink]="[ '/registration/', footballCamp.id ]"><mat-icon class="mat-24">create</mat-icon></button>
+  <button class="fab-button-registration" mat-fab color="accent" [routerLink]="[ '/registration/', footballCamp.id ]"><mat-icon class="mat-24">create</mat-icon></button>
 
   <div class="logo-container">
     <img [src]="footballCamp.details.pathToLogo" class="details-logo">
