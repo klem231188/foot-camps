@@ -8,9 +8,9 @@ export class RegistrationService {
   constructor(private angularFirestore: AngularFirestore) {
   }
 
-  save(registration: Registration) {
+  save(registration: Registration): Promise<any> {
     // HACK here --> https://github.com/firebase/firebase-js-sdk/issues/311
-    this.angularFirestore
+    return this.angularFirestore
       .collection('registrations')
       .add(this.getData(registration));
   }

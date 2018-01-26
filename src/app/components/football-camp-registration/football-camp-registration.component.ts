@@ -20,6 +20,8 @@ import {SessionService} from '../../services/session/session.service';
   styleUrls: ['./football-camp-registration.component.scss']
 })
 export class FootballCampRegistrationComponent implements OnInit, AfterViewInit, OnDestroy {
+  isLinear = true;
+
   // Model to save data
   registration: Registration = new Registration();
 
@@ -41,6 +43,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   // Payment From & Controls
   paymentFormGroup: FormGroup;
+  payment: FormControl;
 
   footballCamp: FootballCamp;
   sessions: Session[];
@@ -105,8 +108,9 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     });
 
     // Payment From & Controls
+    this.payment = new FormControl('', [Validators.required]);
     this.paymentFormGroup = this.formBuilder.group({
-      paymentController: ['', Validators.minLength(0)]
+      'payment': this.payment
     });
 
     // Listnening to events
@@ -210,7 +214,10 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     this.registration.email = this.registrationForm.get('email').value;
     this.registration.gender = Gender[this.registrationForm.get('gender').value as string];
 
-    this.registrationService.save(this.registration);
+    this.registrationService.save(this.registration).then(() => {
+      this.payment.setValue('done');
+      this._stepper.next();
+    })
   }
 
 }

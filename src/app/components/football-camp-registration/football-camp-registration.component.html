@@ -8,7 +8,7 @@
 
   <!-- Stepper -->
   <div class="registration-stepper-container">
-    <mat-vertical-stepper [linear]="true" #stepper>
+    <mat-vertical-stepper [linear]="isLinear" #stepper>
       <!--Etape : Choisir la session -->
       <mat-step [stepControl]="sessionForm">
         <form [formGroup]="sessionForm" class="session-form-group-container" novalidate>
@@ -139,10 +139,13 @@
               <mat-icon>chevron_right</mat-icon>
             </button>
           </div>
+          <mat-form-field class="hidden-input">
+            <input matInput formControlName="payment">
+          </mat-form-field>
         </form>
       </mat-step>
       <!--Etape : Récapitulatif -->
-      <mat-step>
+      <mat-step [editable]="false">
         <ng-template matStepLabel>Récapitulatif</ng-template>
         Félicitations vous êtes <b>pré-inscrit</b> pour le stage de {{footballCamp.city}} !
         <br>
