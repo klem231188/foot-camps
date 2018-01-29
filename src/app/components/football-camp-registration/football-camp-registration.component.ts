@@ -21,6 +21,7 @@ import {SessionService} from '../../services/session/session.service';
 })
 export class FootballCampRegistrationComponent implements OnInit, AfterViewInit, OnDestroy {
   isLinear = true;
+  isLoading = true;
 
   // Model to save data
   registration: Registration = new Registration();
@@ -122,6 +123,11 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       })
       .subscribe((footballCamp: FootballCamp) => {
         this.footballCamp = footballCamp;
+        console.log('----------- footballCamp :');
+        console.log(this.footballCamp);
+        if (this.footballCamp && this.sessions) {
+          this.isLoading = false;
+        }
       });
 
     const sessionSub = this.route
@@ -134,6 +140,9 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
         this.sessions = sessions;
         console.log('----------- sessions :');
         console.log(this.sessions);
+        if (this.footballCamp && this.sessions) {
+          this.isLoading = false;
+        }
       });
 
     const authStateSubscription = this.angularFireAuth.authState.subscribe((firebaseUser) => {
@@ -207,7 +216,9 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     this._stepper.next();
   }
 
-  onPaymentDone(): void {
+  onNextPayment(): void {
+    this.isLoading = true;
+
     this.registration.firstname = this.registrationForm.get('firstname').value;
     this.registration.lastname = this.registrationForm.get('lastname').value;
     this.registration.birthdate = (this.registrationForm.get('birthdate').value as moment.Moment).toDate();
@@ -215,6 +226,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     this.registration.gender = Gender[this.registrationForm.get('gender').value as string];
 
     this.registrationService.save(this.registration).then(() => {
+      this.isLoading = false;
       this.payment.setValue('done');
       this._stepper.next();
     })

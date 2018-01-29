@@ -14,7 +14,9 @@
         <form [formGroup]="sessionForm" class="session-form-group-container" novalidate>
           <ng-template matStepLabel>Session</ng-template>
           <mat-card class="session-card" *ngFor="let session of sessions; let i = index">
-            <mat-icon class="icon-selected-session" color="primary" *ngIf="sessionForm.get('session').value == session">check</mat-icon>
+            <mat-icon class="icon-selected-session" color="primary" *ngIf="sessionForm.get('session').value == session">
+              check
+            </mat-icon>
             <mat-card-header>
               <mat-card-title>Session n°{{i}}</mat-card-title>
               <mat-card-subtitle>Du {{session.start | date : 'longDate'}} au {{session.end | date : 'longDate'}}
@@ -23,10 +25,14 @@
             <mat-card-content>
               <div *ngIf="session.halfBoardRates">Prix demi-pension : {{session.halfBoardRates}} € <br></div>
               <div *ngIf="session.fullBoardRates">Prix pension complète: {{session.fullBoardRates}} € <br></div>
-              <div>Disponibilité : {{session.maximumNumberOfRegistrations - session.currentNumberOfRegistrations}} place(s) restante(s)</div>
+              <div>Disponibilité : {{session.maximumNumberOfRegistrations - session.currentNumberOfRegistrations}}
+                place(s) restante(s)
+              </div>
             </mat-card-content>
             <mat-card-actions align="start">
-              <button [disabled]="session.currentNumberOfRegistrations >= session.maximumNumberOfRegistrations" mat-raised-button color="primary" (click)="onSessionSelected(session)">Choisir</button>
+              <button [disabled]="session.currentNumberOfRegistrations >= session.maximumNumberOfRegistrations"
+                      mat-raised-button color="primary" (click)="onSessionSelected(session)">Choisir
+              </button>
             </mat-card-actions>
           </mat-card>
           <mat-form-field class="hidden-input">
@@ -117,7 +123,7 @@
             <br>
             En cliquant sur suivant, votre pré-inscription sera active pour le stage de {{footballCamp.city}}.
             <br>
-            Vous devrez verser la somme de <b>{{footballCamp.details.sessions[0].fullBoardRates}} €</b> pour confirmer
+            Vous devrez verser la somme de <b>{{session.value.fullBoardRates}} €</b> pour confirmer
             votre inscription.
             <br>
             Pour confirmer votre inscription, veuillez contacter une des personnes suivantes:
@@ -134,7 +140,7 @@
           </div>
           <span class="separator"></span>
           <div class="next-button">
-            <button mat-button matStepperNext mat-raised-button color="primary" (click)="onPaymentDone()">
+            <button mat-button matStepperNext mat-raised-button color="primary" (click)="onNextPayment()">
               Suivant
               <mat-icon>chevron_right</mat-icon>
             </button>
@@ -155,4 +161,6 @@
     <!--<span class="stepper-margin"></span>-->
   </div>
 </div>
-
+<div *ngIf="isLoading" class="loading-spinner-container">
+  <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+</div>
