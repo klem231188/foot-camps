@@ -129,12 +129,14 @@
             Pour confirmer votre inscription, veuillez contacter une des personnes suivantes:
             <br>
             <mat-list>
-              <mat-list-item *ngFor="let contact of footballCamp.contacts">
-                <img matListAvatar [src]="contact.pathToPicture" class="contact-avatar">
-                <h3 matLine> {{contact.firstname}} {{contact.lastname}} </h3>
-                <p matLine>
-                  <span> {{contact.phoneNumber}} </span>
-                </p>
+              <mat-list-item *ngFor="let organizer of footballCamp.details.organizers">
+                <div *ngIf="organizer.manageRegistration">
+                  <img matListAvatar [src]="organizer.pathToPicture" class="contact-avatar">
+                  <h3 matLine> {{organizer.firstname}} {{organizer.lastname}} </h3>
+                  <p matLine>
+                    <span> {{organizer.phoneNumber}} </span>
+                  </p>
+                </div>
               </mat-list-item>
             </mat-list>
           </div>
