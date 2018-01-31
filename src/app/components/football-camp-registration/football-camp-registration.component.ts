@@ -229,6 +229,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       this.isLoading = false;
       this.payment.setValue('done');
       this._stepper.next();
+      // TODO : increment session.currentNumberOfRegistrations value
+      // TODO: try to do it in one call instead of callback..
     })
   }
 
