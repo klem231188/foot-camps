@@ -7,13 +7,24 @@
     <mat-icon>arrow_back</mat-icon>
   </button>
   <span fxFlex=5px></span>
-  <span class="brand" fxFlex>F<img src='assets/img/examples/ball-white-2.png' class="logo"><img src='assets/img/examples/ball-white-2.png' class="logo">tcamps</span>
+  <span class="brand" fxFlex>F<img src='assets/img/examples/ball-white-2.png' class="logo"><img
+    src='assets/img/examples/ball-white-2.png' class="logo">tcamps</span>
 
-  <button *ngIf="!isUserLogged" mat-icon-button mat-button (click)="login()">
-    <mat-icon>account_circle</mat-icon>
+  <!-- CONNEXION  -->
+  <button *ngIf="!(userInfo  && userInfo.uid)" mat-raised-button (click)="login()">
+    <span style="color:#00796b;">Connexion</span>
   </button>
 
-  <button *ngIf="isUserLogged" mat-icon-button mat-button (click)="logout()">
-    <mat-icon>power_settings_new</mat-icon>
+  <!-- DECONNEXION  -->
+  <button *ngIf="(userInfo  && userInfo.uid)" mat-icon-button mat-button [matMenuTriggerFor]="menuLogout">
+    <img *ngIf="(userInfo  && userInfo.photoURL)" src="{{userInfo.photoURL}}" class="user-avatar"
+         alt="Photo du profil"/>
+    <mat-icon *ngIf="!(userInfo  && userInfo.photoURL)">account_circle</mat-icon>
   </button>
+  <mat-menu #menuLogout="matMenu" [overlapTrigger]="false">
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>power_settings_new</mat-icon>
+      <span style="color:#00796b;">Déconnexion</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>

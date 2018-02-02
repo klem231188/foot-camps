@@ -1,20 +1,18 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
-import { FootballCampLoginComponent } from 'app/components/football-camp-login/football-camp-login.component';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {NavigationStart, Router} from '@angular/router';
 import 'rxjs/add/operator/filter';
-import { MatDialog } from '@angular/material';
-import { AngularFireAuth } from 'angularfire2/auth';
+import {MatDialog} from '@angular/material';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
   selector: 'football-camp-header',
   templateUrl: 'football-camp-header.component.html',
-  styleUrls: ['football-camp-header.component.scss']
-})
+  styleUrls: ['football-camp-header.component.scss']})
 export class FootballCampHeaderComponent implements OnInit {
 
   backUrl: string = null;
 
-  isUserLogged = false;
+  userInfo: firebase.UserInfo = null;
 
   @Output() onMenuClickedEvent = new EventEmitter<any>();
 
@@ -49,9 +47,8 @@ export class FootballCampHeaderComponent implements OnInit {
       });
 
       this.angularFireAuth.authState.subscribe((firebaseUser) => {
-        console.log('before this.isUserLogged : ' +  this.isUserLogged);
-        this.isUserLogged = (firebaseUser  && firebaseUser.uid) ? true : false;
-        console.log('after this.isUserLogged : ' + this.isUserLogged);
+        this.userInfo = firebaseUser;
+        console.log('firebase.userInfo : ' + JSON.stringify(this.userInfo));
       });
   }
 
