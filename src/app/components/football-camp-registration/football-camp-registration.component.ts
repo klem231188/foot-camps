@@ -225,13 +225,18 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     this.registration.email = this.registrationForm.get('email').value;
     this.registration.gender = Gender[this.registrationForm.get('gender').value as string];
 
-    this.registrationService.save(this.registration).then(() => {
-      this.isLoading = false;
-      this.payment.setValue('done');
-      this._stepper.next();
-      // TODO : increment session.currentNumberOfRegistrations value
-      // TODO: try to do it in one call instead of callback..
-    })
+    // TODO: try to do it in one call instead of callback..
+    this.registrationService
+      .save(this.registration)
+      .then(() => {
+        // Promise-returning async function !
+        return this.sessionService.updateCurrentNumberOfRegistrations(this.session.value);
+      })
+      .then(() => {
+        this.isLoading = false;
+        this.payment.setValue('done');
+        this._stepper.next();
+      })
   }
 
 }

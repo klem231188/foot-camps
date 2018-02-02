@@ -12,6 +12,14 @@ export class SessionService {
   constructor(private angularFirestore: AngularFirestore) {
   }
 
+  updateCurrentNumberOfRegistrations(session: Session): Promise<void> {
+    return this.angularFirestore
+      .doc(`sessions/${session.id}`)
+      .update({
+        'currentNumberOfRegistrations': (session.currentNumberOfRegistrations + 1)
+      });
+  }
+
   getSessions(): Observable<Session[]> {
     if (this.sessions$ == null) {
       this.sessions$ = this.angularFirestore
