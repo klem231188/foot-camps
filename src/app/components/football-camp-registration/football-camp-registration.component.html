@@ -130,13 +130,13 @@
             <br>
             <mat-list>
               <mat-list-item *ngFor="let organizer of footballCamp.details.organizers">
-                <div *ngIf="organizer.manageRegistration">
-                  <img matListAvatar [src]="organizer.pathToPicture" class="contact-avatar">
-                  <h3 matLine> {{organizer.firstname}} {{organizer.lastname}} </h3>
-                  <p matLine>
-                    <span> {{organizer.phoneNumber}} </span>
-                  </p>
-                </div>
+                <!-- TODO : CSS -->
+                <img matListAvatar [src]="organizer.pathToPicture" class="contact-avatar"
+                     *ngIf="organizer.manageRegistration">
+                <h3 matLine *ngIf="organizer.manageRegistration"> {{organizer.firstname}} {{organizer.lastname}} </h3>
+                <p matLine *ngIf="organizer.manageRegistration">
+                  <span> {{organizer.phoneNumber}} </span>
+                </p>
               </mat-list-item>
             </mat-list>
           </div>
