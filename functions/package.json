@@ -1,0 +1,14 @@
+{
+  "name": "email-confirmation-functions",
+  "description": "Send Email confirmation upon sign up to a Mailing list Firebase Functions sample",
+  "dependencies": {
+    "firebase-admin": "latest",
+    "firebase-functions": "latest"
+  },
+  "devDependencies": {
+    "ts-loader": "latest",
+    "webpack": "latest",
+    "webpack-node-externals": "latest",
+    "typescript": "~2.4.2"
+  }
+}
