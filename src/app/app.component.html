@@ -6,12 +6,11 @@
       <mat-icon>location_on</mat-icon>
       <span>Trouver un stage</span>
     </button>
-    <button mat-button>
-      <mat-icon>add</mat-icon>
-      <span>Organiser un stage</span>
+    <button mat-button *ngIf="user && user.admin" (click)="onViewRegistrationsClicked()">
+      <mat-icon>visibility</mat-icon>
+      <span>Voir les inscrits</span>
     </button>
   </mat-sidenav>
-
   <router-outlet></router-outlet>
 </mat-sidenav-container>
 

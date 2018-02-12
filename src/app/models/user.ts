@@ -1,6 +1,12 @@
 export class User {
 
-
+  admin: boolean;
+  displayName: string;
+  email: string;
+  phoneNumber: string;
+  photoURL: string;
+  providerId: string;
+  uid: string;
 
   constructor() {
   }

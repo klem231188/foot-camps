@@ -4,6 +4,7 @@ import { FootballCampDetailsComponent } from './components/football-camp-details
 import { FootballCampLocatorComponent } from './components/football-camp-locator/football-camp-locator.component';
 import { FootballCampRegistrationComponent } from 'app/components/football-camp-registration/football-camp-registration.component';
 import { FootballCampLoginComponent } from './components/football-camp-login/football-camp-login.component';
+import {FootballCampRegistrationsViewerComponent} from './components/football-camp-registrations-viewer/football-camp-registrations-viewer.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/locate', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'details/:id', component: FootballCampDetailsComponent },
   { path: 'registration/:id', component: FootballCampRegistrationComponent },
   { path: 'login', component: FootballCampLoginComponent },
+  { path: 'view-registrations', component: FootballCampRegistrationsViewerComponent },
 ];
 
 @NgModule({
