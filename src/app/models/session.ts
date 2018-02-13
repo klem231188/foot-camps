@@ -1,15 +1,11 @@
-export class Session {
-  id: string;
+export interface Session {
+  id?: string;
   campId: string;
   enable: boolean;
-  end: string;
+  end: Date;
   fullBoardRates: number;
   halfBoardRates: number;
   currentNumberOfRegistrations: number;
   maximumNumberOfRegistrations: number;
-  start: string;
-
-  constructor() {
-  }
-
+  start: Date;
 }

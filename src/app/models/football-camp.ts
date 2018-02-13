@@ -2,9 +2,9 @@ import {Overview} from './overview';
 import {Details} from './details';
 import {Contact} from './contact';
 
-export class FootballCamp {
+export interface FootballCamp {
   // - id
-  id: string;
+  id?: string;
 
   // - GPS positioning
   latitude: number;
@@ -18,5 +18,5 @@ export class FootballCamp {
   details: Details;
 
   // - Contacts data
-  contacts: Contact[];
+  //contacts: Contact[];
 }
