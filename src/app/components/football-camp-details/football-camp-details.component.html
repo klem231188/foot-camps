@@ -102,7 +102,6 @@
 
     <span class="separator"></span>
 
-    <!-- TODO : use sessions instead of footballCamp.sessions  !! -->
     <!-- Les dates et tarifs -->
     <div class="container">
       <mat-toolbar>
@@ -123,7 +122,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let session of footballCamp.details.sessions; let i = index">
+            <tr *ngFor="let session of sessions; let i = index">
               <td data-label="Sessions">Session n°{{i}}</td>
               <td data-label="Dates">A partir du {{session.start | date : 'longDate'}} jusqu'au {{session.end | date :
                 'longDate'}}

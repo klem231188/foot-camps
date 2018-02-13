@@ -4,6 +4,7 @@ import {ActivatedRoute, Params} from '@angular/router';
 import * as _ from 'lodash';
 import {FootballCamp} from '../../models/football-camp';
 import {Session} from '../../models/session';
+import {SessionService} from '../../services/session/session.service';
 
 @Component({
   selector: 'football-camp-details',
@@ -17,10 +18,13 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
 
   footballCamp: FootballCamp = null;
 
+  sessions: Session[] = [];
+
   viewerOpened = false;
 
   constructor(private route: ActivatedRoute,
-              private footballCampService: FootballCampService) {
+              private footballCampService: FootballCampService,
+              private sessionService: SessionService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +38,17 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
         console.log(footballCamp);
         this.footballCamp = footballCamp;
       });
+
+    this.route
+      .params
+      .switchMap((params: Params) => {
+        return this.sessionService.getSessionsFromCampId(params['id']);
+      })
+      .subscribe((sessions: Session[]) => {
+        console.log(sessions);
+        this.sessions = sessions;
+      });
+
   }
 
   ngAfterViewInit() {
@@ -45,7 +60,7 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
   }
 
   getHalfBoardRatesSessions(): Session[] {
-    return _.reject(this.footballCamp.details.sessions, ['halfBoardRates', null]);
+    return _.reject(this.sessions, ['halfBoardRates', null]);
   }
 
   hasHalfBoardRatesSessions(): boolean {
@@ -53,7 +68,7 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
   }
 
   getFullBoardRatesSessions(): Session[] {
-    return _.reject(this.footballCamp.details.sessions, ['fullBoardRates', null]);
+    return _.reject(this.sessions, ['fullBoardRates', null]);
   }
 
   hasFullBoardRatesSessions(): boolean {
