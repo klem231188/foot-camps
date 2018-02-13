@@ -1,30 +1,12 @@
-/**
- * Copyright 2017 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-
-'use strict';
-
 import * as admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
 import {FootballCamp} from '../../src/app/models/football-camp';
 import {Organizer} from '../../src/app/models/organizer';
+import {Session} from '../../src/app/models/session';
 
 admin.initializeApp(functions.config().firebase);
 
-export const helloWorld = functions.https.onRequest((request, response) => {
+export const addCamps = functions.https.onRequest((request, response) => {
   const db = admin.firestore();
   const camps = db.collection('camps');
 
@@ -68,11 +50,43 @@ export const helloWorld = functions.https.onRequest((request, response) => {
     }
   };
 
-
-  // const result = {};
-  // Object.keys(bourgBlancCamp).map(key => result[key] = bourgBlancCamp[key]);
-
   camps.add(bourgBlancCamp);
-  response.send('Hello from Firebase!\n\n');
+  response.send('Camps added!\n\n');
+});
+
+export const addSessions = functions.https.onRequest((request, response) => {
+  const db = admin.firestore();
+  const sessions = db.collection('sessions');
+
+  const session1: Session = {
+    campId: 'AOo2tZ1h36kd7c5gRGIY',
+    currentNumberOfRegistrations: 0,
+    enable: true,
+    end: new Date('2018-08-18T00:00:00'),
+    fullBoardRates: null,
+    halfBoardRates: 125,
+    maximumNumberOfRegistrations: 15,
+    start: new Date('2018-08-13T00:00:00')
+  };
+
+  const session2: Session = {
+    campId: 'AOo2tZ1h36kd7c5gRGIY',
+    currentNumberOfRegistrations: 0,
+    enable: true,
+    end: new Date('2018-08-20T00:00:00'),
+    fullBoardRates: null,
+    halfBoardRates: 125,
+    maximumNumberOfRegistrations: 15,
+    start: new Date('2018-08-25T00:00:00')
+  };
+
+  sessions.add(session1);
+
+  // Workaround : https://stackoverflow.com/questions/46655344/firebase-cloud-function-with-firestore-returning-deadline-exceeded
+  setTimeout(() => {
+    sessions.add(session2);
+  }, 2000);
+
+  response.send('Sessions added!\n\n');
 });
 
