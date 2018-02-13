@@ -5,6 +5,12 @@
 /tmp
 /out-tsc
 
+## ignore generated JavaScript files
+/functions/**/*.js
+/functions/**/*.js.map
+/functions/node_modules
+/functions/lib
+
 # dependencies
 /node_modules
 
