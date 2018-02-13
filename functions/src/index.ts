@@ -20,9 +20,7 @@
 import * as admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
 import {FootballCamp} from '../../src/app/models/football-camp';
-import {Details} from '../../src/app/models/details';
 import {Organizer} from '../../src/app/models/organizer';
-import {Overview} from '../../src/app/models/overview';
 
 admin.initializeApp(functions.config().firebase);
 
