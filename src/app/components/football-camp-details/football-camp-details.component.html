@@ -135,7 +135,7 @@
               <td data-label="Inscriptions">
                 <!--<mat-progress-spinner [value]="percentageOfRegistrations(session)"></mat-progress-spinner>-->
                 <mat-progress-bar mode="determinate" [value]="percentageOfRegistrations(session)" color="primary"></mat-progress-bar>
-                {{numberOfRegistrations}}/{{session.maximumNumberOfRegistrations}}
+                {{session.currentNumberOfRegistrations}}/{{session.maximumNumberOfRegistrations}}
               </td>
             </tr>
             </tbody>
