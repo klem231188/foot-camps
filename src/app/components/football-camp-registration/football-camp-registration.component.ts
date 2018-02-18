@@ -28,8 +28,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   // Model to save data
   registration: Registration;
 
-  private genderEnum = Gender;
-
   // Session Form & Controls
   sessionForm: FormGroup;
   session: FormControl;
