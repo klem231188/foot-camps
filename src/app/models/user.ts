@@ -1,5 +1,4 @@
-export class User {
-
+export interface User {
   admin: boolean;
   displayName: string;
   email: string;
@@ -7,8 +6,4 @@ export class User {
   photoURL: string;
   providerId: string;
   uid: string;
-
-  constructor() {
-  }
-
 }

@@ -94,17 +94,17 @@
             <input matInput placeholder="Club actuel" formControlName="club">
           </mat-form-field>
           <!-- Poste préféré : Gardien / Défenseur / Milieu / Attaquant -->
-          <mat-radio-group>
-            <mat-radio-button value="1">Gardien</mat-radio-button>
-            <mat-radio-button value="2">Défenseur</mat-radio-button>
-            <mat-radio-button value="3">Milieu</mat-radio-button>
-            <mat-radio-button value="4">Attaquant</mat-radio-button>
+          <mat-radio-group formControlName="fieldPosition">
+            <mat-radio-button value="GOALKEEPER">Gardien</mat-radio-button>
+            <mat-radio-button value="DEFENDER">Défenseur</mat-radio-button>
+            <mat-radio-button value="MIDFIELDER">Milieu</mat-radio-button>
+            <mat-radio-button value="STRIKER">Attaquant</mat-radio-button>
           </mat-radio-group>
           <span class="separator"></span>
           <!-- Pied Gauche / Droit -->
-          <mat-radio-group>
-            <mat-radio-button value="1">Droitier</mat-radio-button>
-            <mat-radio-button value="2">Gaucher</mat-radio-button>
+          <mat-radio-group formControlName="feet">
+            <mat-radio-button value="LEFT_FOOTED">Droitier</mat-radio-button>
+            <mat-radio-button value="RIGHT_FOOTED">Gaucher</mat-radio-button>
           </mat-radio-group>
           <span class="separator"></span>
           <div class="next-button">

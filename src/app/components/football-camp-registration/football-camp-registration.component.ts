@@ -13,6 +13,8 @@ import {Gender} from '../../models/gender.enum';
 import * as moment from 'moment';
 import {Session} from '../../models/session';
 import {SessionService} from '../../services/session/session.service';
+import {FieldPosition} from '../../models/field-position.enum';
+import {Feet} from '../../models/feet.enum';
 
 @Component({
   selector: 'football-camp-registration',
@@ -24,7 +26,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   isLoading = true;
 
   // Model to save data
-  registration: Registration = new Registration();
+  registration: Registration;
 
   private genderEnum = Gender;
 
@@ -34,13 +36,15 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   // Registration Form & Controls
   registrationForm: FormGroup;
-  firstname: FormControl;
-  lastname: FormControl;
-  birthdate: FormControl;
-  gender: FormControl;
-  email: FormControl;
   address: FormControl;
+  birthdate: FormControl;
   club: FormControl;
+  email: FormControl;
+  feet: FormControl;
+  fieldPosition: FormControl;
+  firstname: FormControl;
+  gender: FormControl;
+  lastname: FormControl;
 
   // Payment From & Controls
   paymentFormGroup: FormGroup;
@@ -90,22 +94,26 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     });
 
     // Registration Form & Controls
-    this.firstname = new FormControl('Clément', [Validators.required, Validators.minLength(2)]);
-    this.lastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
-    this.birthdate = new FormControl(moment());
-    this.gender = new FormControl(Gender.FEMALE, [Validators.required]);
-    this.email = new FormControl('monemail@gmail.com', [Validators.required, Validators.email]);
     this.address = new FormControl('221 rue de la palourde, 12345 Plouvien', [Validators.required]);
+    this.birthdate = new FormControl(moment());
     this.club = new FormControl('GSY', [Validators.required]);
+    this.email = new FormControl('monemail@gmail.com', [Validators.required, Validators.email]);
+    this.feet = new FormControl(Feet.RIGHT_FOOTED, [Validators.required]);
+    this.fieldPosition = new FormControl(FieldPosition.MIDFIELDER, [Validators.required]);
+    this.firstname = new FormControl('Clément', [Validators.required, Validators.minLength(2)]);
+    this.gender = new FormControl(Gender.MALE, [Validators.required]);
+    this.lastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
 
     this.registrationForm = new FormGroup({
-      'firstname': this.firstname,
-      'lastname': this.lastname,
-      'birthdate': this.birthdate,
-      'gender': this.gender,
-      'email': this.email,
       'address': this.address,
-      'club': this.club
+      'birthdate': this.birthdate,
+      'club': this.club,
+      'email': this.email,
+      'feet': this.feet,
+      'fieldPosition': this.fieldPosition,
+      'firstname': this.firstname,
+      'gender': this.gender,
+      'lastname': this.lastname
     });
 
     // Payment From & Controls
@@ -219,11 +227,18 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   onNextPayment(): void {
     this.isLoading = true;
 
-    this.registration.firstname = this.registrationForm.get('firstname').value;
-    this.registration.lastname = this.registrationForm.get('lastname').value;
-    this.registration.birthdate = (this.registrationForm.get('birthdate').value as moment.Moment).toDate();
-    this.registration.email = this.registrationForm.get('email').value;
-    this.registration.gender = Gender[this.registrationForm.get('gender').value as string];
+    this.registration = {
+      address: (this.registrationForm.get('address').value as string),
+      birthdate: (this.registrationForm.get('birthdate').value as moment.Moment).toDate(),
+      club: (this.registrationForm.get('club').value as string),
+      email: (this.registrationForm.get('email').value as string),
+      fieldPosition: FieldPosition[this.registrationForm.get('fieldPosition').value as string],
+      feet: Feet[this.registrationForm.get('feet').value as string],
+      firstname: (this.registrationForm.get('firstname').value as string),
+      gender: Gender[this.registrationForm.get('gender').value as string],
+      lastname: (this.registrationForm.get('lastname').value as string),
+      sessionId: (this.session.value as Session).id
+    };
 
     // TODO: try to do it in one call instead of callback..
     this.registrationService

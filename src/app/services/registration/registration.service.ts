@@ -12,12 +12,12 @@ export class RegistrationService {
     // HACK here --> https://github.com/firebase/firebase-js-sdk/issues/311
     return this.angularFirestore
       .collection('registrations')
-      .add(this.getData(registration));
+      .add(registration);
   }
 
-  getData(clazz: any): object {
-    const result = {};
-    Object.keys(clazz).map(key => result[key] = clazz[key]);
-    return result;
-  }
+  // getData(clazz: any): object {
+  //   const result = {};
+  //   Object.keys(clazz).map(key => result[key] = clazz[key]);
+  //   return result;
+  // }
 }
