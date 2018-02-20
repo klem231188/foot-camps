@@ -1,3 +1,5 @@
+import {Role} from './role.enum';
+
 export interface User {
   admin: boolean;
   displayName: string;
@@ -5,5 +7,7 @@ export interface User {
   phoneNumber: string;
   photoURL: string;
   providerId: string;
+  role: Role;
+  campId?: string;
   uid: string;
 }

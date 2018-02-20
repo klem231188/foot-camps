@@ -6,7 +6,7 @@
       <mat-icon>location_on</mat-icon>
       <span>Trouver un stage</span>
     </button>
-    <button mat-button *ngIf="user && user.admin" (click)="onViewRegistrationsClicked()">
+    <button mat-button *ngIf="user && ((user.role === 'ADMIN') || (user.role === 'ORGANIZER'))" (click)="onViewRegistrationsClicked()">
       <mat-icon>visibility</mat-icon>
       <span>Voir les inscrits</span>
     </button>
