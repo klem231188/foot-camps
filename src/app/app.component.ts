@@ -32,7 +32,7 @@ export class AppComponent {
         return userService.getUser(firebaseUser.uid);
       })
       .subscribe((user) => {
-        console.log('user = ' + user);
+        console.log('user = ' + JSON.stringify(user));
         console.log(user);
         this.user = user;
       })

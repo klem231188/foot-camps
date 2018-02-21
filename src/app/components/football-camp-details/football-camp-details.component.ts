@@ -14,8 +14,6 @@ import {SessionService} from '../../services/session/session.service';
 })
 export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  numberOfRegistrations = 10;
-
   footballCamp: FootballCamp = null;
 
   sessions: Session[] = [];

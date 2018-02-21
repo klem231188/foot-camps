@@ -9,6 +9,7 @@
 @import 'app/components/football-camp-header/football-camp-header.component.scss';
 @import 'app/components/football-camp-login/football-camp-login.component.scss';
 @import 'app/components/football-camp-registration/football-camp-registration.component.scss';
+@import 'app/components/football-camp-registrations-viewer/football-camp-registrations-viewer.component.scss';
 @import url('https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css');
 @include mat-core();
 $primary: mat-palette($mat-teal);
@@ -18,6 +19,7 @@ $football-camp-theme: mat-light-theme($primary, $accent, $warn);
 @mixin football-camp-theme($theme) {
   @include football-camp-login-theme($theme);
   @include football-camp-registration-theme($theme);
+  @include app-football-camp-registrations-viewer-theme($theme);
   @include football-camp-overview-theme($theme);
   @include football-camp-details-theme($theme);
   @include football-camp-locator-theme($theme);

@@ -1,0 +1,20 @@
+@mixin app-football-camp-registrations-viewer-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-football-camp-registrations-viewer {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    mat-card {
+      margin-top : 15px !important;
+      width: 300px;
+    }
+  }
+}
