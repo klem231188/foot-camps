@@ -23,4 +23,17 @@ export class UserService {
     return this.user$;
   }
 
+  addUser(user: User): Promise<void> {
+    return this.angularFirestore
+      .collection('users')
+      .doc(user.uid)
+      .set(user)
+      .then(() => {
+        console.log(user.toString() + ' has been saved to database');
+      })
+      .catch(error => {
+        console.log('something goes wrong saving user in database ' + error)
+      });
+  }
+
 }
