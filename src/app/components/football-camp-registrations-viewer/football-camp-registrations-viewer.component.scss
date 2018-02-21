@@ -12,8 +12,20 @@
     justify-content: space-between;
     align-items: flex-start;
     mat-card {
-      margin-top : 15px !important;
+      margin-top: 15px !important;
       width: 300px;
+
+      .warn {
+        background-color: mat-color($warn);
+        padding: 7px;
+        border-radius: 5px;
+      }
+
+      .primary {
+        background-color: mat-color($primary);
+        padding: 7px;
+        border-radius: 5px;
+      }
     }
   }
 }
