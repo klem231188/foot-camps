@@ -25,162 +25,35 @@
     <mat-card-header>
       <img matCardAvatar
            src="https://lh3.googleusercontent.com/-XlV8qhXgMbs/AAAAAAAAAAI/AAAAAAAAABI/fsluBBoN5gY/photo.jpg">
-      <mat-card-title>Clément Tréguer</mat-card-title>
-      <mat-card-subtitle>12 ans</mat-card-subtitle>
+      <mat-card-title>{{registration.firstname}} {{registration.lastname}}</mat-card-title>
+      <mat-card-subtitle>{{registration.birthdate | age}} ans</mat-card-subtitle>
     </mat-card-header>
 
     <mat-divider></mat-divider>
-
-    <!--<img matCardImage src="https://lh3.googleusercontent.com/-XlV8qhXgMbs/AAAAAAAAAAI/AAAAAAAAABI/fsluBBoN5gY/photo.jpg">-->
     <mat-card-content>
       <br>
       Etat inscription: <span class="warn"><b>Pré-inscrit</b></span><br>
 
       <h2>Caractéristiques générales </h2>
-      Nom: Clément <br>
-      Prénom: Tréguer <br>
-      Sexe: Garçon <br>
-      Email: monemail@gmail.com <br>
-      Age: 12 ans <br>
+      Nom: {{registration.firstname}} <br>
+      Prénom: {{registration.lastname}} <br>
+      Sexe: {{registration.gender}} <br>
+      Email: {{registration.email}} <br>
+      Age: {{registration.birthdate | age}} ans <br>
 
       <h2>Caractéristiques sportives</h2>
-      Club: GSY Bourg-blanc<br>
-      Poste: Milieu de terrain<br>
-      Pied: Droitier<br>
+      Club: {{registration.club}}<br>
+      <!-- TODO : pipe fieldPosition-->
+      Poste: {{registration.fieldPosition}}<br>
+      <!-- TODO : pipe feet-->
+      Pied: {{registration.feet}}<br>
 
     </mat-card-content>
     <mat-card-actions align="center">
+      <!-- TODO : plug button-->
       <button mat-button (click)="onAction1" color="primary">Valider inscription</button>
+      <!-- TODO : plug button-->
       <button mat-button (click)="onAction1" color="warn">Annuler inscription</button>
     </mat-card-actions>
   </mat-card>
-
-  <!--<mat-card>-->
-    <!--<mat-card-header>-->
-      <!--<img matCardAvatar-->
-           <!--src="https://lh3.googleusercontent.com/-XlV8qhXgMbs/AAAAAAAAAAI/AAAAAAAAABI/fsluBBoN5gY/photo.jpg">-->
-      <!--<mat-card-title>Clément Tréguer</mat-card-title>-->
-      <!--<mat-card-subtitle>12 ans</mat-card-subtitle>-->
-    <!--</mat-card-header>-->
-
-    <!--<mat-divider></mat-divider>-->
-
-    <!--&lt;!&ndash;<img matCardImage src="https://lh3.googleusercontent.com/-XlV8qhXgMbs/AAAAAAAAAAI/AAAAAAAAABI/fsluBBoN5gY/photo.jpg">&ndash;&gt;-->
-    <!--<mat-card-content>-->
-      <!--<br>-->
-      <!--Etat inscription: <span class="warn"><b>Pré-inscrit</b></span><br>-->
-
-      <!--<h2>Caractéristiques générales </h2>-->
-      <!--Nom: Clément <br>-->
-      <!--Prénom: Tréguer <br>-->
-      <!--Sexe: Garçon <br>-->
-      <!--Email: monemail@gmail.com <br>-->
-      <!--Age: 12 ans <br>-->
-
-      <!--<h2>Caractéristiques sportives</h2>-->
-      <!--Club: GSY Bourg-blanc<br>-->
-      <!--Poste: Milieu de terrain<br>-->
-      <!--Pied: Droitier<br>-->
-
-    <!--</mat-card-content>-->
-    <!--<mat-card-actions align="center">-->
-      <!--<button mat-button (click)="onAction1" color="primary">Valider inscription</button>-->
-      <!--<button mat-button (click)="onAction1" color="warn">Annuler inscription</button>-->
-    <!--</mat-card-actions>-->
-  <!--</mat-card>-->
-  <!--<mat-card>-->
-    <!--<mat-card-header>-->
-      <!--<img matCardAvatar-->
-           <!--src="https://lh3.googleusercontent.com/-XlV8qhXgMbs/AAAAAAAAAAI/AAAAAAAAABI/fsluBBoN5gY/photo.jpg">-->
-      <!--<mat-card-title>Clément Tréguer</mat-card-title>-->
-      <!--<mat-card-subtitle>12 ans</mat-card-subtitle>-->
-    <!--</mat-card-header>-->
-
-    <!--<mat-divider></mat-divider>-->
-    <!--&lt;!&ndash;<img matCardImage src="https://lh3.googleusercontent.com/-XlV8qhXgMbs/AAAAAAAAAAI/AAAAAAAAABI/fsluBBoN5gY/photo.jpg">&ndash;&gt;-->
-    <!--<mat-card-content>-->
-      <!--<br>-->
-      <!--Etat inscription: <span class="primary"><b>Inscrit</b></span><br>-->
-
-      <!--<h2>Caractéristiques générales </h2>-->
-      <!--Nom: Clément <br>-->
-      <!--Prénom: Tréguer <br>-->
-      <!--Sexe: Garçon <br>-->
-      <!--Email: monemail@gmail.com <br>-->
-      <!--Age: 12 ans <br>-->
-
-      <!--<h2>Caractéristiques sportives</h2>-->
-      <!--Club: GSY Bourg-blanc<br>-->
-      <!--Poste: Milieu de terrain<br>-->
-      <!--Pied: Droitier<br>-->
-
-    <!--</mat-card-content>-->
-    <!--<mat-card-actions align="center">-->
-      <!--<button mat-button (click)="onAction1" color="warn">Annuler inscription</button>-->
-    <!--</mat-card-actions>-->
-  <!--</mat-card>-->
-  <!--<mat-card>-->
-    <!--<mat-card-header>-->
-      <!--<img matCardAvatar-->
-           <!--src="https://lh3.googleusercontent.com/-XlV8qhXgMbs/AAAAAAAAAAI/AAAAAAAAABI/fsluBBoN5gY/photo.jpg">-->
-      <!--<mat-card-title>Clément Tréguer</mat-card-title>-->
-      <!--<mat-card-subtitle>12 ans</mat-card-subtitle>-->
-    <!--</mat-card-header>-->
-
-    <!--<mat-divider></mat-divider>-->
-    <!--&lt;!&ndash;<img matCardImage src="https://lh3.googleusercontent.com/-XlV8qhXgMbs/AAAAAAAAAAI/AAAAAAAAABI/fsluBBoN5gY/photo.jpg">&ndash;&gt;-->
-    <!--<mat-card-content>-->
-      <!--<br>-->
-      <!--Etat inscription: <span class="warn"><b>Pré-inscrit</b></span><br>-->
-
-      <!--<h2>Caractéristiques générales </h2>-->
-      <!--Nom: Clément <br>-->
-      <!--Prénom: Tréguer <br>-->
-      <!--Sexe: Garçon <br>-->
-      <!--Email: monemail@gmail.com <br>-->
-      <!--Age: 12 ans <br>-->
-
-      <!--<h2>Caractéristiques sportives</h2>-->
-      <!--Club: GSY Bourg-blanc<br>-->
-      <!--Poste: Milieu de terrain<br>-->
-      <!--Pied: Droitier<br>-->
-
-    <!--</mat-card-content>-->
-    <!--<mat-card-actions align="center">-->
-      <!--<button mat-button (click)="onAction1" color="primary">Valider inscription</button>-->
-      <!--<button mat-button (click)="onAction1" color="warn">Annuler inscription</button>-->
-    <!--</mat-card-actions>-->
-  <!--</mat-card>-->
-  <!--<mat-card>-->
-    <!--<mat-card-header>-->
-      <!--<img matCardAvatar-->
-           <!--src="https://lh3.googleusercontent.com/-XlV8qhXgMbs/AAAAAAAAAAI/AAAAAAAAABI/fsluBBoN5gY/photo.jpg">-->
-      <!--<mat-card-title>Clément Tréguer</mat-card-title>-->
-      <!--<mat-card-subtitle>12 ans</mat-card-subtitle>-->
-    <!--</mat-card-header>-->
-
-    <!--<mat-divider></mat-divider>-->
-    <!--&lt;!&ndash;<img matCardImage src="https://lh3.googleusercontent.com/-XlV8qhXgMbs/AAAAAAAAAAI/AAAAAAAAABI/fsluBBoN5gY/photo.jpg">&ndash;&gt;-->
-    <!--<mat-card-content>-->
-      <!--<br>-->
-      <!--Etat inscription: <span class="warn"><b>Pré-inscrit</b></span><br>-->
-
-      <!--<h2>Caractéristiques générales </h2>-->
-      <!--Nom: Clément <br>-->
-      <!--Prénom: Tréguer <br>-->
-      <!--Sexe: Garçon <br>-->
-      <!--Email: monemail@gmail.com <br>-->
-      <!--Age: 12 ans <br>-->
-
-      <!--<h2>Caractéristiques sportives</h2>-->
-      <!--Club: GSY Bourg-blanc<br>-->
-      <!--Poste: Milieu de terrain<br>-->
-      <!--Pied: Droitier<br>-->
-
-    <!--</mat-card-content>-->
-    <!--<mat-card-actions align="center">-->
-      <!--<button mat-button (click)="onAction1" color="primary">Valider inscription</button>-->
-      <!--<button mat-button (click)="onAction1" color="warn">Annuler inscription</button>-->
-    <!--</mat-card-actions>-->
-  <!--</mat-card>-->
 </div>

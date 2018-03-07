@@ -32,7 +32,7 @@ export class FootballCampRegistrationsViewerComponent implements OnInit {
   }
 
   ngOnInit() {
-    //TODO : améliorer en utilisant des Observable comme dans les services.
+    // TODO : improve code using Observable
     this.angularFireAuth.authState
       .switchMap<firebase.User, User>((firebaseUser) => {
         return this.userService.getUser(firebaseUser.uid);
