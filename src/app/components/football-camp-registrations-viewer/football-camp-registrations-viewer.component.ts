@@ -6,6 +6,8 @@ import {FootballCampService} from '../../services/football-camp/football-camp.se
 import {UserService} from '../../services/user/user.service';
 import {User} from '../../models/user';
 import {Session} from '../../models/session';
+import {Role} from '../../models/role.enum';
+import {Registration} from '../../models/registration';
 
 @Component({
   selector: 'app-football-camp-registrations-viewer',
@@ -14,9 +16,13 @@ import {Session} from '../../models/session';
 })
 export class FootballCampRegistrationsViewerComponent implements OnInit {
 
-  user: User = null;
+  registrations: Registration[] = null;
 
   sessions: Session[] = null;
+
+  selectedSession: Session = null;
+
+  user: User = null;
 
   constructor(private angularFireAuth: AngularFireAuth,
               private footballCampService: FootballCampService,
@@ -26,18 +32,40 @@ export class FootballCampRegistrationsViewerComponent implements OnInit {
   }
 
   ngOnInit() {
+    //TODO : améliorer en utilisant des Observable comme dans les services.
     this.angularFireAuth.authState
       .switchMap<firebase.User, User>((firebaseUser) => {
         return this.userService.getUser(firebaseUser.uid);
       })
       .switchMap<User, Session[]>((user) => {
         this.user = user;
-        // role == ADMIN
-        return this.sessionService.getSessions();
+        if (user.role === Role.ADMIN) {
+          return this.sessionService.getSessions();
+        } else {
+          return this.sessionService.getSessionsFromCampId(user.campId);
+        }
       })
-      .subscribe((sessions) => {
-        this.sessions = sessions
+      .switchMap<Session[], Registration[]>((sessions) => {
+        this.sessions = sessions;
+        this.selectedSession = (sessions != null && sessions.length > 0) ? sessions[0] : null;
+        if (this.selectedSession != null) {
+          return this.registrationService.getRegistrations(this.selectedSession.id);
+        } else {
+          return null;
+        }
+      })
+      .subscribe((registrations) => {
+        this.registrations = registrations;
       });
   }
 
+  updateSelectedSession(session): void {
+    this.selectedSession = session;
+
+    this.registrationService
+      .getRegistrations(this.selectedSession.id)
+      .subscribe((registrations) => {
+        this.registrations = registrations;
+      });
+  }
 }

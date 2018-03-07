@@ -5,26 +5,60 @@
   $foreground: map-get($theme, foreground);
 
   app-football-camp-registrations-viewer {
+    flex-direction: column;
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    mat-card {
+    @include big-screen {
+      flex-direction: row;
+    }
+
+    .role {
+      position: fixed;
+      bottom: 20px;
+      left: 15px;
+      z-index: -1;
+    }
+
+    .sessions {
       margin-top: 15px !important;
-      width: 300px;
+      @include big-screen {
+        margin-right:15px;
+        margin-left: 15px;
 
-      .warn {
-        background-color: mat-color($accent);
-        padding: 7px;
-        border-radius: 5px;
+        min-width: 375px;
+        max-width: 375px;
+      }
+    }
+
+    .registrations {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 15px !important;
+      @include big-screen {
+        margin-right: 15px;
       }
 
-      .primary {
-        background-color: mat-color($primary);
-        padding: 7px;
-        border-radius: 5px;
+      mat-card {
+        width: 100%;
+
+        @include big-screen {
+          width: 300px;
+          margin-bottom: 10px;
+        }
+
+        .warn {
+          background-color: mat-color($accent);
+          padding: 7px;
+          border-radius: 5px;
+        }
+
+        .primary {
+          background-color: mat-color($primary);
+          padding: 7px;
+          border-radius: 5px;
+        }
       }
     }
   }

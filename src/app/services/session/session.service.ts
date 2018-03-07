@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, DocumentChangeAction} from 'angularfire2/firestore';
 import {Observable} from 'rxjs/Observable';
-import {FootballCamp} from '../../models/football-camp';
 import {Session} from '../../models/session';
 
 @Injectable()

@@ -3,6 +3,7 @@ import {Feet} from './feet.enum';
 import {FieldPosition} from './field-position.enum';
 
 export interface Registration {
+  id?: string;
   sessionId: string;
   birthdate: Date;
   email: string;
