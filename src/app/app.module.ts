@@ -20,9 +20,11 @@ import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {Angular2ImageGalleryModule} from './components/angular2-image-gallery';
 import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
-import {SafeHtmlPipe} from './pipes/safe-html-pipe';
-import {TruncatePipe} from './pipes/truncate-pipe';
-import {AgePipe} from './pipes/age';
+import {AgePipe} from './pipes/age.pipe';
+import {FieldPositionPipe} from './pipes/fieldPosition.pipe';
+import {FeetPipe} from './pipes/feet.pipe';
+import {SafeHtmlPipe} from './pipes/safe-html.pipe';
+import {TruncatePipe} from './pipes/truncate.pipe';
 import {FootballCampRegistrationComponent} from './components/football-camp-registration/football-camp-registration.component';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {FootballCampLoginComponent} from './components/football-camp-login/football-camp-login.component';
@@ -31,6 +33,7 @@ import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {FootballCampRegistrationsViewerComponent} from './components/football-camp-registrations-viewer/football-camp-registrations-viewer.component';
+
 
 
 registerLocaleData(localeFr, 'fr');
@@ -61,6 +64,8 @@ registerLocaleData(localeFr, 'fr');
   ],
   declarations: [
     AgePipe,
+    FieldPositionPipe,
+    FeetPipe,
     SafeHtmlPipe,
     TruncatePipe,
     AppComponent,

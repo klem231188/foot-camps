@@ -43,10 +43,8 @@
 
       <h2>Caractéristiques sportives</h2>
       Club: {{registration.club}}<br>
-      <!-- TODO : pipe fieldPosition-->
-      Poste: {{registration.fieldPosition}}<br>
-      <!-- TODO : pipe feet-->
-      Pied: {{registration.feet}}<br>
+      Poste: {{registration.fieldPosition | fieldPosition}}<br>
+      Pied: {{registration.feet | feet}}<br>
 
     </mat-card-content>
     <mat-card-actions align="center">
