@@ -23,6 +23,7 @@ import {environment} from '../environments/environment';
 import {AgePipe} from './pipes/age.pipe';
 import {FieldPositionPipe} from './pipes/fieldPosition.pipe';
 import {FeetPipe} from './pipes/feet.pipe';
+import {GenderPipe} from './pipes/gender.pipe';
 import {SafeHtmlPipe} from './pipes/safe-html.pipe';
 import {TruncatePipe} from './pipes/truncate.pipe';
 import {FootballCampRegistrationComponent} from './components/football-camp-registration/football-camp-registration.component';
@@ -66,6 +67,7 @@ registerLocaleData(localeFr, 'fr');
     AgePipe,
     FieldPositionPipe,
     FeetPipe,
+    GenderPipe,
     SafeHtmlPipe,
     TruncatePipe,
     AppComponent,
