@@ -1,6 +1,8 @@
 <div *ngIf="footballCamp" class="main-container">
 
-  <button class="fab-button-registration" mat-fab color="accent" [routerLink]="[ '/registration/', footballCamp.id ]"><mat-icon class="mat-24">create</mat-icon></button>
+  <button class="fab-button-registration" mat-fab color="accent" [routerLink]="[ '/registration/', footballCamp.id ]">
+    <mat-icon class="mat-24">create</mat-icon>
+  </button>
 
   <div class="logo-container">
     <img [src]="footballCamp.details.pathToLogo" class="details-logo">
@@ -64,15 +66,10 @@
         <mat-card-content>
           <p [innerHTML]="footballCamp.details.organizerDescription | safeHtml"></p>
           <div *ngIf="footballCamp.details.organizers != null">
-            <div fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-around center" class="quote"
-                 *ngFor="let organizer of footballCamp.details.organizers">
+            <div class="quote" *ngFor="let organizer of footballCamp.details.organizers">
               <img class="avatar" src="{{organizer.pathToPicture}}">
               <blockquote>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget leo nunc, nec tempus mi? Curabitur
-                id nisl mi, ut vulputate
-                urna. Quisque porta facilisis tortor, vitae bibendum velit fringilla vitae! Lorem ipsum dolor sit amet,
-                consectetur
-                adipiscing elit.
+                <div [innerHTML]="organizer.quote | safeHtml"></div>
                 <cite>{{organizer.firstname}} {{organizer.lastname}}</cite>
               </blockquote>
             </div>
@@ -134,7 +131,8 @@
               </td>
               <td data-label="Inscriptions">
                 <!--<mat-progress-spinner [value]="percentageOfRegistrations(session)"></mat-progress-spinner>-->
-                <mat-progress-bar mode="determinate" [value]="percentageOfRegistrations(session)" color="primary"></mat-progress-bar>
+                <mat-progress-bar mode="determinate" [value]="percentageOfRegistrations(session)"
+                                  color="primary"></mat-progress-bar>
                 {{session.currentNumberOfRegistrations}}/{{session.maximumNumberOfRegistrations}}
               </td>
             </tr>
@@ -160,7 +158,7 @@
           </div>
 
           <ng-template #redirectToRegistrationPage>
-            Ls inscriptions se font sur FootballCamps !
+            Les inscriptions se font sur FootballCamps !
             <br>
             <br>
             <div fxLayout="column" fxLayoutAlign="none center">

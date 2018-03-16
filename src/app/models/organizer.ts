@@ -4,4 +4,5 @@ export interface Organizer {
   manageRegistration: boolean;
   pathToPicture: string;
   phoneNumber: string;
+  quote: string;
 }

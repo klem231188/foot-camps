@@ -8,7 +8,7 @@
       </button>
     </div>
     <mat-card-content>
-      {{footballCamp.overview.content}}
+      <p [innerHTML]="footballCamp.details.description | safeHtml"></p>
     </mat-card-content>
   </mat-card>
 

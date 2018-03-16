@@ -115,6 +115,9 @@
   }
   .quote {
     margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
   }
   .quote:hover * {
     filter: brightness(80%);

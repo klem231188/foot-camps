@@ -10,6 +10,7 @@
       height: 400px;
       background-repeat: no-repeat;
       background-position: center;
+      background-size: cover;
     }
     mat-toolbar {
       @include mat-elevation(1);
@@ -28,6 +29,7 @@
       bottom: -25px;
     }
     mat-card {
+      padding-top: 100px !important;
       z-index: 0;
     }
   }

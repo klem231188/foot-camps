@@ -3,6 +3,7 @@ export interface Session {
   campId: string;
   enable: boolean;
   end: Date;
+  endRegistrationDate: Date;
   fullBoardRates: number;
   halfBoardRates: number;
   currentNumberOfRegistrations: number;

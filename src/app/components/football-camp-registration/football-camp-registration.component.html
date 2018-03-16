@@ -124,11 +124,17 @@
             En cliquant sur suivant, votre pré-inscription sera active pour le stage de {{footballCamp.city}}.
             <br>
             <!-- TODO : Gérer les prix halfBoardRates/fullBoardRates-->
-            Vous devrez verser la somme de <b>{{session.value.halfBoardRates}} €</b> pour confirmer
-            votre inscription.
+            Pour confirmer votre inscription, vous devez verser la somme de <b> {{session.value.halfBoardRates}} € avant le {{session.value.endRegistrationDate | date : 'longDate'}}.</b><br>
+            <!-- TODO : Gérer le mode de paiement de manière dynamique-->
+            <ul>
+              <li>Par chèque à l'ordre de "AS Coat Méal"</li>
+              <li>Par chèques vacances</li>
+            </ul>
             <br>
-            Pour confirmer votre inscription, veuillez contacter une des personnes suivantes:
+            en l'envoyant à l'adresse suivante: <b>...</b><br>
+            Si vous rencontrez un problème, veuillez contacter une des personnes suivantes:
             <br>
+
             <mat-list>
               <mat-list-item *ngFor="let organizer of footballCamp.details.organizers">
                 <!-- TODO : CSS -->
@@ -159,6 +165,8 @@
         Félicitations vous êtes <b>pré-inscrit</b> pour le stage de {{footballCamp.city}} !
         <br>
         Vous avez du recevoir un mail de confirmation à l'adresse suivante: <b>{{registration?.email}}</b>
+        <br>
+        Un autre mail vous sera envoyé lorsque votre inscription aura été réglée.
       </mat-step>
     </mat-vertical-stepper>
     <!--<span class="stepper-margin"></span>-->
