@@ -15,5 +15,3 @@ export interface Registration {
   lastname: string;
   sessionId: string;
 }
-
-
