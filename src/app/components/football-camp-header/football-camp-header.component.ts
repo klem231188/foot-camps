@@ -3,11 +3,13 @@ import {NavigationStart, Router} from '@angular/router';
 import 'rxjs/add/operator/filter';
 import {MatDialog} from '@angular/material';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'football-camp-header',
   templateUrl: 'football-camp-header.component.html',
-  styleUrls: ['football-camp-header.component.scss']})
+  styleUrls: ['football-camp-header.component.scss']
+})
 export class FootballCampHeaderComponent implements OnInit {
 
   backUrl: string = null;
@@ -16,10 +18,14 @@ export class FootballCampHeaderComponent implements OnInit {
 
   @Output() onMenuClickedEvent = new EventEmitter<any>();
 
-  constructor(
-    private router: Router,
-    private dialog: MatDialog,
-    private angularFireAuth: AngularFireAuth) {
+  environment: any = null;
+
+  constructor(private router: Router,
+              private dialog: MatDialog,
+              private angularFireAuth: AngularFireAuth) {
+
+    this.environment = environment;
+    console.log(`environment : ${JSON.stringify(this.environment)}`)
   }
 
   ngOnInit(): void {
@@ -46,10 +52,10 @@ export class FootballCampHeaderComponent implements OnInit {
         }
       });
 
-      this.angularFireAuth.authState.subscribe((firebaseUser) => {
-        this.userInfo = firebaseUser;
-        console.log('firebase.userInfo : ' + JSON.stringify(this.userInfo));
-      });
+    this.angularFireAuth.authState.subscribe((firebaseUser) => {
+      this.userInfo = firebaseUser;
+      console.log('firebase.userInfo : ' + JSON.stringify(this.userInfo));
+    });
   }
 
   onBackClicked(): void {

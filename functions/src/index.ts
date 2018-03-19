@@ -6,10 +6,7 @@ import {Session} from '../../src/app/models/session';
 
 admin.initializeApp(functions.config().firebase);
 
-export const addCamps = functions.https.onRequest((request, response) => {
-  const db = admin.firestore();
-  const camps = db.collection('camps');
-
+export const addAberCamp = functions.https.onRequest((request, response) => {
   const organizer1: Organizer = {
     firstname: 'Stéphane',
     lastname: 'LE HIR',
@@ -37,7 +34,7 @@ export const addCamps = functions.https.onRequest((request, response) => {
     quote: 'N/A'
   };
 
-  const bourgBlancCamp: FootballCamp = {
+  const camp: FootballCamp = {
     city: 'Abers Foot',
     latitude: 48.514941,
     longitude: -4.546849,
@@ -100,16 +97,8 @@ export const addCamps = functions.https.onRequest((request, response) => {
     }
   };
 
-  camps.add(bourgBlancCamp);
-  response.send('Camps added!\n\n');
-});
-
-export const addSessions = functions.https.onRequest((request, response) => {
-  const db = admin.firestore();
-  const sessions = db.collection('sessions');
-
-  const session1: Session = {
-    campId: '0u0kkOAwhLwmhtMKZI9t',
+  const session: Session = {
+    campId: '',
     currentNumberOfRegistrations: 0,
     enable: true,
     end: new Date('2018-07-13T12:00:00'),
@@ -120,24 +109,167 @@ export const addSessions = functions.https.onRequest((request, response) => {
     start: new Date('2018-07-09T08:30:00')
   };
 
-  // const session2: Session = {
-  //   campId: 'AOo2tZ1h36kd7c5gRGIY',
-  //   currentNumberOfRegistrations: 0,
-  //   enable: true,
-  //   end: new Date('2018-08-20T00:00:00'),
-  //   fullBoardRates: null,
-  //   halfBoardRates: 125,
-  //   maximumNumberOfRegistrations: 15,
-  //   start: new Date('2018-08-25T00:00:00')
-  // };
+  const session2: Session = {
+    campId: '',
+    currentNumberOfRegistrations: 0,
+    enable: true,
+    end: new Date('2018-07-24T12:00:00'),
+    endRegistrationDate: new Date('2018-06-009T00:00:00'),
+    fullBoardRates: null,
+    halfBoardRates: 130,
+    maximumNumberOfRegistrations: 30,
+    start: new Date('2018-07-20T08:30:00')
+  };
 
-  sessions.add(session1);
-
-  // Workaround : https://stackoverflow.com/questions/46655344/firebase-cloud-function-with-firestore-returning-deadline-exceeded
-  // setTimeout(() => {
-  //   sessions.add(session2);
-  // }, 2000);
-
-  response.send('Sessions added!\n\n');
+  addCamp(request, response, camp, [session, session2]);
 });
 
+export const addPlabennecCamp = functions.https.onRequest((request, response) => {
+  const organizer1: Organizer = {
+    firstname: 'Steven',
+    lastname: 'COAT',
+    manageRegistration: true,
+    pathToPicture: './assets/img/plabennec/organizers/avatar/Steven-COAT.jpg',
+    phoneNumber: '0625253636',
+    quote: 'Je suis très heureux de participer à cette 2<sup>ème</sup> édition.<br>Cette année on va redoubler d\'activités pour le bonheur du plus grand nombre d\'enfants'
+  };
+
+  const organizer2: Organizer = {
+    firstname: 'Florian',
+    lastname: 'GUILLOU',
+    manageRegistration: true,
+    pathToPicture: './assets/img/plabennec/organizers/avatar/Florian-GUILLOU.jpg',
+    phoneNumber: '0625253637',
+    quote: 'N/A'
+  };
+
+  const organizer3: Organizer = {
+    firstname: 'Matthieu',
+    lastname: 'TANGUY',
+    manageRegistration: true,
+    pathToPicture: './assets/img/plabennec/organizers/avatar/Matthieu-TANGUY.jpg',
+    phoneNumber: '0625253638',
+    quote: 'N/A'
+  };
+
+  const camp: FootballCamp = {
+    city: 'Plabennec Stage d\'été',
+    latitude: 48.4999551,
+    longitude: -4.4484149,
+    details: {
+      address: 'Stade Plabennecois Football, Complexe de Kerveguen, 29860 Plabennec',
+      description: '<p>\n' +
+      '      Ce stage s\'adresse à la fois à ceux voulant s\'initier au football, ainsi qu\'à ceux voulant se perfectionner.\n' +
+      '      <ul>\n' +
+      '       <li>Des <b>ateliers découvertes</b> sont proposés pour les plus jeunes et les non pratiquants souhaitant s\'initier</li>\n' +
+      '       <li>Des <b>ateliers techniques</b> pour les plus expérimenté(e)s</li>\n' +
+      '       <li>Des <b>ateliers spécifiques gardiens de but</b></li>\n' +
+      '      </ul>\n' +
+      '      L\'ensemble des ateliers se déroulent sous différents formats (jeux, défis, ...)\n' +
+      '    </p>\n' +
+      '\n' +
+      '    <p>\n' +
+      '      Ce stage propose aux enfants d\'autres activités extra-sportives :\n' +
+      '      <ul>\n' +
+      '       <li>Soccer de Guipavas, pour un tournoi disputé et inoubliable</li>\n' +
+      '       <li>La Récré des curés, pour quitter les terrains, se détendre et s’amuser dans le parc de loisir de Milizac</li>\n' +
+      '       <li>Un Laser Game, pour une bataille virtuelle entre l’équipe des Rouges et celle des Bleus</li>\n' +
+      '      </ul>\n' +
+      '    </p>\n' +
+      '\n' +
+      '    <b>Infrastructures sportives:</b> <ul><li>A faire</li></ul>\n' +
+      '    <b>Infrastructures générales:</b> <ul><li>A faire</li></ul>',
+      gmapsUrl: 'https://goo.gl/maps/5GMh35CKxnv',
+      location: 'Situé à l\'extrémité de la Bretagne, le stage se déroule à Plabennec dans le Finistère (29).',
+      organizerDescription: '    Les stages sont encadrés par une une équipe technique de <b>qualité</b>, <b>expérimentée</b> et <b>motivée</b> <br>\n' +
+      '    Cinq joueurs du Stade Plabennecois, sont présents pour encadrer et proposer un programme de qualité.<br>\n' +
+      '    Depuis 4 ans ce stage connait un succès grandissant.',
+      organizers: [organizer1, organizer2, organizer3],
+      pathToGallery: './assets/img/plabennec/gallery/data.json',
+      pathToLogo: './assets/img/plabennec/logo.png',
+      pathToSchedule: './assets/img/plabennec/programme.jpg',
+      useOnlineRegistration: false,
+      registrationUrl: 'http://www.plab29.com/plabete',
+    },
+    overview: {
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      pathToImage: './assets/img/plabennec/overview.jpg',
+      title: 'Bienvenue au Foot Camps de Plabennec'
+    }
+  };
+
+  const session1: Session = {
+    campId: '',
+    currentNumberOfRegistrations: 0,
+    enable: true,
+    end: new Date('2018-07-10T12:00:00'),
+    endRegistrationDate: new Date('2018-06-009T00:00:00'),
+    fullBoardRates: null,
+    halfBoardRates: 230,
+    maximumNumberOfRegistrations: 30,
+    start: new Date('2018-07-14T08:30:00')
+  };
+
+  const session2: Session = {
+    campId: '',
+    currentNumberOfRegistrations: 0,
+    enable: true,
+    end: new Date('2018-07-17T12:00:00'),
+    endRegistrationDate: new Date('2018-06-009T00:00:00'),
+    fullBoardRates: null,
+    halfBoardRates: 230,
+    maximumNumberOfRegistrations: 30,
+    start: new Date('2018-07-21T08:30:00')
+  };
+
+  const session3: Session = {
+    campId: '',
+    currentNumberOfRegistrations: 0,
+    enable: true,
+    end: new Date('2018-07-24T12:00:00'),
+    endRegistrationDate: new Date('2018-06-009T00:00:00'),
+    fullBoardRates: null,
+    halfBoardRates: 230,
+    maximumNumberOfRegistrations: 30,
+    start: new Date('2018-07-28T08:30:00')
+  };
+
+  addCamp(request, response, camp, [session1, session2, session3]);
+});
+
+function addCamp(request, response, camp: FootballCamp, sessions: Session[]): void {
+  const db = admin.firestore();
+  db.collection('camps')
+    .add(camp)
+    .then(function (campAdded) {
+      console.log('Camp added with ID: ', campAdded.id);
+
+      const sessionsColRef = db.collection('sessions');
+
+      // Begin a new batch
+      const batch = db.batch();
+
+      // Set each document, as part of the batch
+      sessions.forEach(session => {
+        session.campId = campAdded.id;
+        const sessionDocRef = sessionsColRef.doc();
+        batch.set(sessionDocRef, session);
+      })
+
+      // Commit the entire batch
+      batch
+        .commit()
+        .then(function () {
+          console.log('Sessions added successfully');
+          response.send('Camp and sessions added successfully\n\n');
+        })
+        .catch(function (error) {
+          console.error('Error adding document: ', error);
+          response.send('An error occured adding session\n\n');
+        });
+    })
+    .catch(function (error) {
+      console.error('Error adding document: ', error);
+      response.send('An error occured adding camp\n\n');
+    });
+}

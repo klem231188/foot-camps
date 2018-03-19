@@ -7,8 +7,10 @@
     <mat-icon>arrow_back</mat-icon>
   </button>
   <span fxFlex=5px></span>
-  <span class="brand" fxFlex>F<img src='assets/img/examples/ball-white-2.png' class="logo"><img
+  <span class="brand">F<img src='assets/img/examples/ball-white-2.png' class="logo"><img
     src='assets/img/examples/ball-white-2.png' class="logo">tcamps</span>
+  <span *ngIf="!environment.production">&nbsp;(devmode)</span>
+  <span fxFlex></span>
 
   <!-- CONNEXION  -->
   <button *ngIf="!(userInfo  && userInfo.uid)" mat-raised-button (click)="login()">

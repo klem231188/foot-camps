@@ -1,9 +1,8 @@
-Fonctionnalités en cours de développement
------------------------
-- Faire un environnement de recette et un environnement de production
+## Fonctionnalités en cours de développement
+- Faire un environnement de développement et un environnement de production
 
-Fonctionnalités à développer (triées par priorité)
------------------------
+## Fonctionnalités à développer (triées par priorité)
+- Envoyer par mail les informations manquantes pour Aber Foot
 - [Ecran Voir les inscrits] Pouvoir modifier le statut de pré-inscrit vers inscrit
 - [Ecran Voir les inscrits] Pouvoir modifier annulé une pré-inscription
 - [Ecran Détails] Mettre d'equerre le contenu du stage de bourg-blanc
@@ -28,9 +27,7 @@ Fonctionnalités à développer (triées par priorité)
 - [Ecran Vue d'ensemble] Mettre en avant les dates / prix / indicateur nombre d'inscription
 - [Ecran Mes Stages] Visualiser les stages auxquels je me suis inscris
 
-
-Fonctionnalités développées
------------------------
+## Fonctionnalités développées
 - [Header] Afficher la photo de la personne connectée (image par défaut si connexion sans google)
 - [Header] Mettre en place un sous-menu pour se déconnecter
 - [Ecran Inscription] Enregistrer en base de données l'inscription (ou pré-inscription)

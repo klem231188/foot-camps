@@ -7,15 +7,15 @@ export const environment = {
   production: false,
 
   firebase: {
-    apiKey: "AIzaSyC3-PHV_djUew_Uy2vqZ6UPejW0YKlHRt4",
-    authDomain: "footcamps-production.firebaseapp.com",
-    databaseURL: "https://footcamps-production.firebaseio.com",
-    projectId: "footcamps-production",
-    storageBucket: "footcamps-production.appspot.com",
-    messagingSenderId: "881714365127"
+    apiKey: 'AIzaSyAnpsARLy9iqTxXifvc3Y6105WIr-hRGUY',
+    authDomain: 'footcamps-development.firebaseapp.com',
+    databaseURL: 'https://footcamps-development.firebaseio.com',
+    projectId: 'footcamps-development',
+    storageBucket: 'footcamps-development.appspot.com',
+    messagingSenderId: '774401230958'
   },
 
   googlemaps: {
-    apiKey: "AIzaSyDBIatd6GAUzKDzVabQGNp8WKZ8OgsuRic"
+    apiKey: 'AIzaSyB0IXClx4bDQAXDVQRvLP84nJNbWCt4PyA'
   }
 };

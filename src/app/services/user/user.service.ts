@@ -30,6 +30,7 @@ export class UserService {
       .set(user)
       .then(() => {
         console.log(user.toString() + ' has been saved to database');
+        //TODO : Trigger mail when user subscribe
       })
       .catch(error => {
         console.log('something goes wrong saving user in database ' + error)
