@@ -1,6 +1,14 @@
-## Deploy website
+## Deploy website dev
+```
+ng build --aot
+firebase use footcamps-development
+firebase deploy
+```
+
+## Deploy website prod
 ```
 ng build --prod --aot
+firebase use footcamps-production
 firebase deploy
 ```
 
