@@ -48,7 +48,7 @@ export class FootballCampLocatorComponent implements OnInit, OnDestroy, AfterVie
               city = value;
             }
             return footballCamps.filter((footballCamp) => {
-              return footballCamp.city.toLowerCase().startsWith(city.toLowerCase());
+              return footballCamp.city.toLowerCase().includes(city.toLowerCase());
             });
           })
       });
