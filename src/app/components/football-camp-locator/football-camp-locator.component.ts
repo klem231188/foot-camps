@@ -6,7 +6,6 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/share';
-import {AngularFirestore, DocumentChangeAction} from 'angularfire2/firestore';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {FootballCamp} from '../../models/football-camp';
 
@@ -31,17 +30,23 @@ export class FootballCampLocatorComponent implements OnInit, OnDestroy, AfterVie
     this.footballCamps$ = this.footballCampService.getFootballCamps();
 
     this.footballCamps$.subscribe(
-      x => {console.log(x)}
+      x => {
+        console.log(x)
+      }
     );
 
     this.filteredFootballCamps$ = this.searchInput.valueChanges
       .switchMap<any, FootballCamp[]>(value => {
         return this.footballCamps$
           .map<FootballCamp[], FootballCamp[]>(footballCamps => {
-            console.log(`value : `);
-            console.log(value);
-            const city: string = (value != null && value.city) ? value.city : '';
-            console.log(`city : ${city}`);
+            let city: string = '';
+            if (!value) {
+              city = '';
+            } else if (value.city) {
+              city = value.city;
+            } else {
+              city = value;
+            }
             return footballCamps.filter((footballCamp) => {
               return footballCamp.city.toLowerCase().startsWith(city.toLowerCase());
             });
@@ -73,7 +78,7 @@ export class FootballCampLocatorComponent implements OnInit, OnDestroy, AfterVie
   }
 
   displayFn(footballCamp: FootballCamp): string {
-    console.log('displayFn');
+    console.log(`displayFn: ${JSON.stringify(footballCamp)}`);
     return footballCamp ? footballCamp.city : '';
   }
 

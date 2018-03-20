@@ -8,6 +8,7 @@ import {RegistrationService} from './services/registration/registration.service'
 import {SessionService} from './services/session/session.service';
 import {User} from './models/user';
 import {UserService} from './services/user/user.service';
+import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,11 @@ export class AppComponent {
 
     this.angularFireAuth.authState
       .switchMap<firebase.User, User>((firebaseUser) => {
-        return userService.getUser(firebaseUser.uid);
+        if (firebaseUser) {
+          return userService.getUser(firebaseUser.uid);
+        } else {
+          return new EmptyObservable<User>();
+        }
       })
       .subscribe((user) => {
         console.log('user = ' + JSON.stringify(user));

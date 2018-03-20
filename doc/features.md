@@ -1,5 +1,4 @@
 ## Fonctionnalités en cours de développement
-- Faire un environnement de développement et un environnement de production
 
 ## Fonctionnalités à développer (triées par priorité)
 - Envoyer par mail les informations manquantes pour Aber Foot
@@ -34,3 +33,5 @@
 - [Ecran Connexion] Différencier les connexions stagiaires / organisateurs / admin
 - [Ecran Voir les inscrits] Avoir accès aux inscrits
 - [Ecran Détails] Indicateur avec le nombre d'inscrit / pré-inscrit par session par stage
+- Faire un environnement de développement et un environnement de production
+- [Ecran Recherche] Corriger bug auto-complete
