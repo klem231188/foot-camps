@@ -1,8 +1,10 @@
 import * as admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
+import * as nodemailer from 'nodemailer'
 import {FootballCamp} from '../../src/app/models/football-camp';
 import {Organizer} from '../../src/app/models/organizer';
 import {Session} from '../../src/app/models/session';
+import {SendMailOptions, Transporter} from 'nodemailer';
 
 admin.initializeApp(functions.config().firebase);
 
@@ -273,3 +275,65 @@ function addCamp(request, response, camp: FootballCamp, sessions: Session[]): vo
       response.send('An error occured adding camp\n\n');
     });
 }
+
+
+// Configure the email transport using the default SMTP transport and a GMail account.
+// For other types of transports such as Sendgrid see https://nodemailer.com/transports/
+// TODO: Configure the `gmail.email` and `gmail.password` Google Cloud environment variables.
+const gmailEmail = functions.config().gmail.email;
+const gmailPassword = functions.config().gmail.password;
+const mailTransport: Transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: gmailEmail,
+    pass: gmailPassword
+  }
+});
+
+
+functions.firestore
+  .document('users/{userId}')
+  .onUpdate(event => {
+    // Get an object representing the document
+    // e.g. {'name': 'Marie', 'age': 66}
+    const newValue = event.data.data();
+
+    // ...or the previous value before this update
+    const previousValue = event.data.previous.data();
+
+    // access a particular field as you would any JS property
+    const name = newValue.name;
+
+    // perform desired operations ...
+  });
+
+export const sendEmailOnRegistrationStateChanged = functions.firestore
+  .document('registrations/{rid}')
+  .onUpdate(event => {
+    console.log(event)
+    const registration = event.data.data();
+
+    const mailOptions: SendMailOptions = {
+      from: '"Footcamps" <noreply@firebase.com>',
+      to: registration.email
+    };
+
+    // Building Email message.
+    if (registration.state === 'IN_PROGRESS') {
+      mailOptions.subject = 'Inscription à AbersFoot en cours';
+      mailOptions.html = `Bonjour ${registration.firstname} ${registration.lastname},<br> Votre inscription au stage de football AbersFoot a bien été prise en compte.<br> Pour la valider, il faut <b>payer la somme de 130€ à Stéphane le HIR </b> par chèque ou chèque vacance avant le 09 Juin 2018.`;
+    } else if (registration.state === 'ACCEPTED') {
+      mailOptions.subject = 'Inscription à AbersFoot validée';
+      mailOptions.html = `Bonjour ${registration.firstname} ${registration.lastname},<br> Félicitations, votre inscription au stage de football AbersFoot a été validée.<br> Bon stage !`;
+    } else {
+      mailOptions.subject = 'Inscription à AbersFoot rejetée';
+      mailOptions.html = `Bonjour ${registration.firstname} ${registration.lastname},<br> Hélas votre inscription au stage de football AbersFoot a été rejetée!`;
+    }
+
+    return mailTransport.sendMail(mailOptions)
+      .then(() => console.log(`A mail has been sent to ${registration.email} with state ${registration.state}`))
+      .catch(error => console.error('There was an error while sending the email:', error));
+  });
+
+
+

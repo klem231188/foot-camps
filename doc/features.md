@@ -1,4 +1,5 @@
 ## Fonctionnalités en cours de développement
+- [Ecran Inscription] Envoyer un mail au stagiaire après pré-inscription
 
 ## Fonctionnalités à développer (triées par priorité)
 - Envoyer par mail les informations manquantes pour Aber Foot
@@ -6,7 +7,6 @@
 - [Ecran Voir les inscrits] Pouvoir modifier annulé une pré-inscription
 - [Ecran Détails] Mettre d'equerre le contenu du stage de bourg-blanc
 - [Ecran Inscription] Ajouter les données du responsable légal
-- [Ecran Inscription] Envoyer un mail au stagiaire après pré-inscription
 - [Ecran Inscription] Envoyer un mail au stagiaire après validation de la pré-inscription
 - [Ecran Inscription] Envoyer un mail au stagiaire après annulation de la pré-inscription
 - [Ecran Inscription] Gérer le retour arrière vers le détails
