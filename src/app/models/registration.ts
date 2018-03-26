@@ -1,6 +1,7 @@
 import {Gender} from './gender.enum';
 import {Feet} from './feet.enum';
 import {FieldPosition} from './field-position.enum';
+import {RegistrationState} from './registration-state.enum';
 
 export interface Registration {
   address: string;
@@ -14,4 +15,5 @@ export interface Registration {
   id?: string;
   lastname: string;
   sessionId: string;
+  state: RegistrationState
 }

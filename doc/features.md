@@ -1,14 +1,13 @@
 ## Fonctionnalités en cours de développement
-1. [Ecran Inscription] Envoyer un mail au stagiaire après pré1.inscription
-1. [Ecran Inscription] Envoyer un mail au stagiaire après validation de la pré1.inscription
-1. [Ecran Inscription] Envoyer un mail au stagiaire après annulation de la pré1.inscription
+1. [Ecran Inscription] Envoyer un mail au stagiaire après validation de la pré-inscription
+1. [Ecran Inscription] Envoyer un mail au stagiaire après annulation de la pré-inscription
 
 ## Fonctionnalités à développer (triées par priorité)
 ##### Obligatoire pour mise en prod
-1. [Ecran Voir les inscrits] Pouvoir modifier le statut de pré1.inscrit vers inscrit
-1. [Ecran Voir les inscrits] Pouvoir modifier annulé une pré1.inscription
+1. [Ecran Voir les inscrits] Pouvoir modifier le statut de pré-inscrit vers inscrit
+1. [Ecran Voir les inscrits] Pouvoir modifier annulé une pré-inscription
 1. [Ecran Inscription] Ajouter les données du responsable légal
-1. [Ecran Détails] Mettre d'equerre le contenu du stage de bourg1.blanc 
+1. [Ecran Détails] Mettre d'equerre le contenu du stage de bourg-blanc 
 
 ##### Facultative pour mise en prod
 1. [Ecran Inscription] Gérer le retour arrière vers le détails
@@ -30,11 +29,12 @@
 
 ## Fonctionnalités développées (La plus récente en bas de la liste)
 1. [Header] Afficher la photo de la personne connectée (image par défaut si connexion sans google)
-1. [Header] Mettre en place un sous1.menu pour se déconnecter
-1. [Ecran Inscription] Enregistrer en base de données l'inscription (ou pré1.inscription)
+1. [Header] Mettre en place un sous-menu pour se déconnecter
+1. [Ecran Inscription] Enregistrer en base de données l'inscription (ou pré-inscription)
 1. [Ecran Connexion] Différencier les connexions stagiaires / organisateurs / admin
 1. [Ecran Voir les inscrits] Avoir accès aux inscrits
-1. [Ecran Détails] Indicateur avec le nombre d'inscrit / pré1.inscrit par session par stage
+1. [Ecran Détails] Indicateur avec le nombre d'inscrit / pré-inscrit par session par stage
 1. Faire un environnement de développement et un environnement de production
-1. [Ecran Recherche] Corriger bug auto1.complete
+1. [Ecran Recherche] Corriger bug auto-complete
 1. Envoyer par mail les informations manquantes pour Aber Foot
+1. [Ecran Inscription] Envoyer un mail au stagiaire après pré-inscription

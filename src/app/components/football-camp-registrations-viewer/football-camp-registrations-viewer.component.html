@@ -23,6 +23,7 @@
 <div *ngIf="registrations" class="registrations">
   <mat-card *ngFor="let registration of registrations; let i = index">
     <mat-card-header>
+      <!-- TODO picture -->
       <img matCardAvatar
            src="https://lh3.googleusercontent.com/-XlV8qhXgMbs/AAAAAAAAAAI/AAAAAAAAABI/fsluBBoN5gY/photo.jpg">
       <mat-card-title>{{registration.firstname}} {{registration.lastname}}</mat-card-title>

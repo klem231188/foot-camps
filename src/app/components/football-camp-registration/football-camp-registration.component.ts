@@ -15,6 +15,7 @@ import {Session} from '../../models/session';
 import {SessionService} from '../../services/session/session.service';
 import {FieldPosition} from '../../models/field-position.enum';
 import {Feet} from '../../models/feet.enum';
+import {RegistrationState} from '../../models/registration-state.enum';
 
 @Component({
   selector: 'football-camp-registration',
@@ -95,7 +96,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     this.address = new FormControl('221 rue de la palourde, 12345 Plouvien', [Validators.required]);
     this.birthdate = new FormControl(moment());
     this.club = new FormControl('GSY', [Validators.required]);
-    this.email = new FormControl('monemail@gmail.com', [Validators.required, Validators.email]);
+    this.email = new FormControl('clemtreguer@gmail.com', [Validators.required, Validators.email]);
     this.feet = new FormControl(Feet.RIGHT_FOOTED, [Validators.required]);
     this.fieldPosition = new FormControl(FieldPosition.MIDFIELDER, [Validators.required]);
     this.firstname = new FormControl('Clément', [Validators.required, Validators.minLength(2)]);
@@ -235,7 +236,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       firstname: (this.registrationForm.get('firstname').value as string),
       gender: Gender[this.registrationForm.get('gender').value as string],
       lastname: (this.registrationForm.get('lastname').value as string),
-      sessionId: (this.session.value as Session).id
+      sessionId: (this.session.value as Session).id,
+      state: RegistrationState.IN_PROGRESS
     };
 
     // TODO: try to do it in one call instead of callback..
