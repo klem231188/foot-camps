@@ -1,6 +1,4 @@
 ## Fonctionnalités en cours de développement
-1. [Ecran Inscription] Envoyer un mail au stagiaire après validation de la pré-inscription
-1. [Ecran Inscription] Envoyer un mail au stagiaire après annulation de la pré-inscription
 
 ## Fonctionnalités à développer (triées par priorité)
 ##### Obligatoire pour mise en prod
@@ -38,3 +36,5 @@
 1. [Ecran Recherche] Corriger bug auto-complete
 1. Envoyer par mail les informations manquantes pour Aber Foot
 1. [Ecran Inscription] Envoyer un mail au stagiaire après pré-inscription
+1. [Ecran Inscription] Envoyer un mail au stagiaire après validation de la pré-inscription
+1. [Ecran Inscription] Envoyer un mail au stagiaire après annulation de la pré-inscription

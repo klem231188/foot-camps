@@ -8,6 +8,7 @@ import {User} from '../../models/user';
 import {Session} from '../../models/session';
 import {Role} from '../../models/role.enum';
 import {Registration} from '../../models/registration';
+import {RegistrationState} from '../../models/registration-state.enum';
 
 @Component({
   selector: 'app-football-camp-registrations-viewer',
@@ -67,5 +68,17 @@ export class FootballCampRegistrationsViewerComponent implements OnInit {
       .subscribe((registrations) => {
         this.registrations = registrations;
       });
+  }
+
+  accept(registration: Registration): void {
+    this.registrationService
+        .update(registration, {state: RegistrationState.ACCEPTED})
+        .then(() => console.log('Registration updated with success'));
+  }
+
+  reject(registration: Registration): void {
+    this.registrationService
+        .update(registration, {state: RegistrationState.REJECTED})
+        .then(() => console.log('Registration updated with success'));
   }
 }

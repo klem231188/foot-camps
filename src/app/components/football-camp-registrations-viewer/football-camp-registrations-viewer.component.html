@@ -3,7 +3,8 @@
 </div>
 <div *ngIf="sessions" class="sessions">
   <mat-accordion>
-    <mat-expansion-panel *ngFor="let session of sessions; let i = index" [expanded]="session == selectedSession" (opened)="updateSelectedSession(session)">
+    <mat-expansion-panel *ngFor="let session of sessions; let i = index" [expanded]="session == selectedSession"
+                         (opened)="updateSelectedSession(session)">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Session n°{{i}}
@@ -33,7 +34,12 @@
     <mat-divider></mat-divider>
     <mat-card-content>
       <br>
-      Etat inscription: <span class="warn"><b>Pré-inscrit</b></span><br>
+      Etat inscription: <span [ngClass]="{'primary': registration.state === 'ACCEPTED',
+                                          'accent': registration.state === 'IN_PROGRESS',
+                                          'warn': registration.state === 'REJECTED'
+                                          }">
+                          <b>{{registration.state | state}}</b>
+                        </span><br>
 
       <h2>Caractéristiques générales </h2>
       Nom: {{registration.firstname}} <br>
@@ -48,11 +54,9 @@
       Pied: {{registration.feet | feet}}<br>
 
     </mat-card-content>
-    <mat-card-actions align="center">
-      <!-- TODO : plug button-->
-      <button mat-button (click)="onAction1" color="primary">Valider inscription</button>
-      <!-- TODO : plug button-->
-      <button mat-button (click)="onAction1" color="warn">Annuler inscription</button>
+    <mat-card-actions align="center" *ngIf="registration.state === 'IN_PROGRESS'">
+      <button mat-button (click)="accept(registration)" color="primary">Accepter inscription</button>
+      <button mat-button (click)="reject(registration)" color="warn">Refuser inscription</button>
     </mat-card-actions>
   </mat-card>
 </div>

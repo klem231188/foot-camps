@@ -17,12 +17,11 @@ export class RegistrationService {
       .add(registration);
   }
 
-  // HACK here --> https://github.com/firebase/firebase-js-sdk/issues/311
-  // getData(clazz: any): object {
-  //   const result = {};
-  //   Object.keys(clazz).map(key => result[key] = clazz[key]);
-  //   return result;
-  // }
+  update(registration: Registration, data: Partial<Registration>): Promise<any> {
+    return this.angularFirestore
+      .doc(`registrations/${registration.id}`)
+      .update(data);
+  }
 
   getRegistrations(sessionId: string): Observable<Registration[]> {
     return this.angularFirestore

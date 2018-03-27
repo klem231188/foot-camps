@@ -34,6 +34,7 @@ import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {FootballCampRegistrationsViewerComponent} from './components/football-camp-registrations-viewer/football-camp-registrations-viewer.component';
+import {StatePipe} from './pipes/state.pipe';
 
 
 
@@ -69,6 +70,7 @@ registerLocaleData(localeFr, 'fr');
     FeetPipe,
     GenderPipe,
     SafeHtmlPipe,
+    StatePipe,
     TruncatePipe,
     AppComponent,
     FootballCampLocatorComponent,

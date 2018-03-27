@@ -48,7 +48,7 @@
           margin-bottom: 10px;
         }
 
-        .warn {
+        .accent {
           background-color: mat-color($accent);
           padding: 7px;
           border-radius: 5px;
@@ -56,6 +56,12 @@
 
         .primary {
           background-color: mat-color($primary);
+          padding: 7px;
+          border-radius: 5px;
+        }
+
+        .warn {
+          background-color: mat-color($warn);
           padding: 7px;
           border-radius: 5px;
         }
