@@ -1,4 +1,5 @@
 ## Fonctionnalités en cours de développement
+1. [Ecran Inscription Management] BUG : mise à jour nombre d'inscription acceptées/refusées/en cours 
 
 ## Fonctionnalités à développer (triées par priorité)
 ##### Obligatoire pour mise en prod

@@ -25,12 +25,12 @@
             <mat-card-content>
               <div *ngIf="session.halfBoardRates">Prix demi-pension : {{session.halfBoardRates}} € <br></div>
               <div *ngIf="session.fullBoardRates">Prix pension complète: {{session.fullBoardRates}} € <br></div>
-              <div>Disponibilité : {{session.maximumNumberOfRegistrations - session.currentNumberOfRegistrations}}
+              <div>Disponibilité : {{session.maximumNumberOfRegistrations - (session.numberOfRegistrationsInProgress + session.numberOfRegistrationsAccepted)}}
                 place(s) restante(s)
               </div>
             </mat-card-content>
             <mat-card-actions align="start">
-              <button [disabled]="session.currentNumberOfRegistrations >= session.maximumNumberOfRegistrations"
+              <button [disabled]="(session.numberOfRegistrationsInProgress + session.numberOfRegistrationsAccepted) >= session.maximumNumberOfRegistrations"
                       mat-raised-button color="primary" (click)="onSessionSelected(session)">Choisir
               </button>
             </mat-card-actions>

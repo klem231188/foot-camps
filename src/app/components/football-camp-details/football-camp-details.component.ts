@@ -74,7 +74,7 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
   }
 
   percentageOfRegistrations(session: Session): number {
-    return (session.currentNumberOfRegistrations / session.maximumNumberOfRegistrations) * 100;
+    return ((session.numberOfRegistrationsInProgress + session.numberOfRegistrationsAccepted) / session.maximumNumberOfRegistrations) * 100;
   }
 
   isViewerOpened(): boolean {

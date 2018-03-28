@@ -251,3 +251,8 @@ Comment démarcher des nouveaux organisateurs de stage ?
 ##### 93 | Seine-Saint-Denis | Bobigny | Ile-de-France
 ##### 94 | Val-de-Marne | Créteil | Ile-de-France
 ##### 95 | Val-d'Oise | Pontoise | Ile-de-France
+
+
+## Coût
+Hébergement footcamps.fr = 10€ / an
+Hébergement firebase gratuit avec l'offre 'Spark Plan'. Prix = 25$/mois si utilisation de l'offre 'Flame Plan'

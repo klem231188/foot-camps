@@ -133,7 +133,7 @@
                 <!--<mat-progress-spinner [value]="percentageOfRegistrations(session)"></mat-progress-spinner>-->
                 <mat-progress-bar mode="determinate" [value]="percentageOfRegistrations(session)"
                                   color="primary"></mat-progress-bar>
-                {{session.currentNumberOfRegistrations}}/{{session.maximumNumberOfRegistrations}}
+                {{(session.numberOfRegistrationsInProgress + session.numberOfRegistrationsAccepted)}}/{{session.maximumNumberOfRegistrations}}
               </td>
             </tr>
             </tbody>

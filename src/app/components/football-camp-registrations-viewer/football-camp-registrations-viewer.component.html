@@ -14,8 +14,9 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p>Nombre de place disponibles: {{session.maximumNumberOfRegistrations}}</p>
-      <p>Nombre de pré-inscriptions: {{session.currentNumberOfRegistrations}}</p>
-      <p>Nombre d'inscriptions complètes: TODO</p>
+      <p>Nombre de pré-inscriptions: {{session.numberOfRegistrationsInProgress}}</p>
+      <p>Nombre d'inscriptions acceptées: {{session.numberOfRegistrationsAccepted}}</p>
+      <p>Nombre d'inscriptions refusées: {{session.numberOfRegistrationsRejected}}</p>
       <p *ngIf="session.halfBoardRates">Tarifs demi pension: {{session.halfBoardRates}} €</p>
       <p *ngIf="session.fullBoardRates">Tarifs pension complète: {{session.fullBoardRates}} €</p>
     </mat-expansion-panel>

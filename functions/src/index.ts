@@ -101,7 +101,9 @@ export const addAberCamp = functions.https.onRequest((request, response) => {
 
   const session: Session = {
     campId: '',
-    currentNumberOfRegistrations: 0,
+    numberOfRegistrationsAccepted: 0,
+    numberOfRegistrationsInProgress: 0,
+    numberOfRegistrationsRejected: 0,
     enable: true,
     end: new Date('2018-07-13T12:00:00'),
     endRegistrationDate: new Date('2018-06-009T00:00:00'),
@@ -111,19 +113,21 @@ export const addAberCamp = functions.https.onRequest((request, response) => {
     start: new Date('2018-07-09T08:30:00')
   };
 
-  const session2: Session = {
-    campId: '',
-    currentNumberOfRegistrations: 0,
-    enable: true,
-    end: new Date('2018-07-24T12:00:00'),
-    endRegistrationDate: new Date('2018-06-009T00:00:00'),
-    fullBoardRates: null,
-    halfBoardRates: 130,
-    maximumNumberOfRegistrations: 30,
-    start: new Date('2018-07-20T08:30:00')
-  };
+  // const session2: Session = {
+  //   campId: '',
+  //   numberOfRegistrationsAccepted: 0,
+  //   numberOfRegistrationsInProgress: 0,
+  //   numberOfRegistrationsRejected: 0,
+  //   enable: true,
+  //   end: new Date('2018-07-24T12:00:00'),
+  //   endRegistrationDate: new Date('2018-06-009T00:00:00'),
+  //   fullBoardRates: null,
+  //   halfBoardRates: 130,
+  //   maximumNumberOfRegistrations: 30,
+  //   start: new Date('2018-07-20T08:30:00')
+  // };
 
-  addCamp(request, response, camp, [session, session2]);
+  addCamp(request, response, camp, [session]);
 });
 
 export const addPlabennecCamp = functions.https.onRequest((request, response) => {
@@ -202,7 +206,9 @@ export const addPlabennecCamp = functions.https.onRequest((request, response) =>
 
   const session1: Session = {
     campId: '',
-    currentNumberOfRegistrations: 0,
+    numberOfRegistrationsAccepted: 0,
+    numberOfRegistrationsInProgress: 0,
+    numberOfRegistrationsRejected: 0,
     enable: true,
     end: new Date('2018-07-10T12:00:00'),
     endRegistrationDate: new Date('2018-06-009T00:00:00'),
@@ -214,7 +220,9 @@ export const addPlabennecCamp = functions.https.onRequest((request, response) =>
 
   const session2: Session = {
     campId: '',
-    currentNumberOfRegistrations: 0,
+    numberOfRegistrationsAccepted: 0,
+    numberOfRegistrationsInProgress: 0,
+    numberOfRegistrationsRejected: 0,
     enable: true,
     end: new Date('2018-07-17T12:00:00'),
     endRegistrationDate: new Date('2018-06-009T00:00:00'),
@@ -226,7 +234,9 @@ export const addPlabennecCamp = functions.https.onRequest((request, response) =>
 
   const session3: Session = {
     campId: '',
-    currentNumberOfRegistrations: 0,
+    numberOfRegistrationsAccepted: 0,
+    numberOfRegistrationsInProgress: 0,
+    numberOfRegistrationsRejected: 0,
     enable: true,
     end: new Date('2018-07-24T12:00:00'),
     endRegistrationDate: new Date('2018-06-009T00:00:00'),

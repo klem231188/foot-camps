@@ -6,7 +6,9 @@ export interface Session {
   endRegistrationDate: Date;
   fullBoardRates: number;
   halfBoardRates: number;
-  currentNumberOfRegistrations: number;
+  numberOfRegistrationsInProgress: number;
+  numberOfRegistrationsAccepted: number;
+  numberOfRegistrationsRejected: number;
   maximumNumberOfRegistrations: number;
   start: Date;
 }
