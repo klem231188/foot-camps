@@ -11,7 +11,6 @@
 1. [Ecran Voir les inscrits] Pouvoir ajouter des inscriptions manuellement
 1. [Ecran Connexion] Envoyer un mail au stagiaire lorsqu'il se connecte pour la première fois
 1. Ajout des règles de sécurité pour la base de données
-1. Publier le site sur un vrai nom de domaine. (Ex: www.footcamps.com) 
 
 1. Contacter Milizac / Stade Brestois / Plabennec / Plouzané
 1. Faire une fiche standard de demande d'informations aux clubs
@@ -39,3 +38,4 @@
 1. [Ecran Inscription] Envoyer un mail au stagiaire après annulation de la pré-inscription
 1. [Ecran Voir les inscrits] Pouvoir modifier le statut de pré-inscrit vers inscrit
 1. [Ecran Voir les inscrits] Pouvoir modifier annulé une pré-inscription
+1. Publier le site sur un vrai nom de domaine. (Ex: www.footcamps.fr) 

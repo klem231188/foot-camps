@@ -348,5 +348,11 @@ function sendMail(registration: Registration): Promise<SentMessageInfo> {
     .catch(error => console.error('There was an error while sending the email:', error));
 }
 
-
-
+//TODO : BUG - mise à jour nombre d'inscription acceptées/refusées/en cours
+// export const onUpdateRegistration = functions.firestore
+//   .document('registrations/{rid}')
+//   .onCreate(event => {
+//     console.log(event);
+//     const registration: Registration = event.data.data();
+//     return sendMail(registration);
+//   });

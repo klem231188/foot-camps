@@ -75,8 +75,9 @@ export class FootballCampRegistrationsViewerComponent implements OnInit {
         .update(registration, {state: RegistrationState.ACCEPTED})
         .then(() => console.log('Registration updated with success'));
 
-    // TODO : incrémenter le nombre d'inscription complète
-    // TODO : décrémenter le nombre de pré-inscription
+    // TODO : in functions :
+    // TODO : increment number of registration accepted
+    // TODO : decrement number of registration in_progress
   }
 
   reject(registration: Registration): void {
@@ -84,6 +85,8 @@ export class FootballCampRegistrationsViewerComponent implements OnInit {
         .update(registration, {state: RegistrationState.REJECTED})
         .then(() => console.log('Registration updated with success'));
 
-    // TODO : décrémenter le nombre de pré-inscription
+    // TODO : in functions :
+    // TODO : increment number of registration rejected
+    // TODO : decrement number of registration in_progress
   }
 }
