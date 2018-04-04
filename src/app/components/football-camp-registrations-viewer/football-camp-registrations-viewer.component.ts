@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {RegistrationService} from '../../services/registration/registration.service';
 import {SessionService} from '../../services/session/session.service';
@@ -9,6 +9,7 @@ import {Session} from '../../models/session';
 import {Role} from '../../models/role.enum';
 import {Registration} from '../../models/registration';
 import {RegistrationState} from '../../models/registration-state.enum';
+import * as html2pdf from 'assets/js/html2pdf.bundle.min.js';
 
 @Component({
   selector: 'app-football-camp-registrations-viewer',
@@ -16,6 +17,9 @@ import {RegistrationState} from '../../models/registration-state.enum';
   styleUrls: ['./football-camp-registrations-viewer.component.scss']
 })
 export class FootballCampRegistrationsViewerComponent implements OnInit {
+
+  @ViewChild('htmlElementRegistrations')
+  private htmlElementRegistrations: ElementRef;
 
   registrations: Registration[] = null;
 
@@ -88,5 +92,15 @@ export class FootballCampRegistrationsViewerComponent implements OnInit {
     // TODO : in functions :
     // TODO : increment number of registration rejected
     // TODO : decrement number of registration in_progress
+  }
+
+  print(): void {
+    html2pdf(this.htmlElementRegistrations.nativeElement, {
+      margin:       1,
+      filename:     'inscriptions.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { dpi: 192, letterRendering: true, useCORS: true },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    });
   }
 }

@@ -39,3 +39,4 @@
 1. [Ecran Voir les inscrits] Pouvoir modifier le statut de pré-inscrit vers inscrit
 1. [Ecran Voir les inscrits] Pouvoir modifier annulé une pré-inscription
 1. Publier le site sur un vrai nom de domaine. (Ex: www.footcamps.fr) 
+1. [Ecran Voir les inscrits] Imprimer les inscriptions
