@@ -45,7 +45,7 @@
         <form [formGroup]="registrationForm" #registrationFormRef="ngForm" class="registration-form-group-container"
               novalidate>
           <ng-template matStepLabel>Inscription</ng-template>
-          <h4>Informations générales</h4>
+          <h4>Informations générales du stagiaire</h4>
           <!-- Photo -->
           <img src="./assets/img/registration/avatar2.png" class="registration-avatar">
 
@@ -88,7 +88,7 @@
             <input matInput placeholder="Adresse" formControlName="address">
           </mat-form-field>
 
-          <h4>Caractéristiques sportives</h4>
+          <h4>Caractéristiques sportives du stagiaire</h4>
           <!-- Club -->
           <mat-form-field>
             <input matInput placeholder="Club actuel" formControlName="club">
@@ -106,6 +106,38 @@
             <mat-radio-button value="LEFT_FOOTED">Droitier</mat-radio-button>
             <mat-radio-button value="RIGHT_FOOTED">Gaucher</mat-radio-button>
           </mat-radio-group>
+          <span class="separator"></span>
+
+          <h4>Informations représentant légal</h4>
+          <!-- Nom & Prénom -->
+          <mat-form-field>
+            <input matInput placeholder="Prénom" formControlName="legalRepresentativeFirstname" required>
+            <mat-error *ngIf="registrationForm.get('legalRepresentativeFirstname').invalid">{{getFirstnameError()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Nom" formControlName="legalRepresentativeLastname" required>
+            <mat-error *ngIf="registrationForm.get('legalRepresentativeLastname').invalid">{{getLastnameError()}}</mat-error>
+          </mat-form-field>
+
+          <!-- Téléphone -->
+          <mat-form-field>
+            <input matInput placeholder="Téléphone" formControlName="legalRepresentativePhoneNumber" required>
+          </mat-form-field>
+
+          <!-- Adresse -->
+          <div class="address">
+            <mat-form-field>
+              <input matInput placeholder="Rue" formControlName="legalRepresentativeStreetAddress" required>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Code Postal" formControlName="legalRepresentativeZipCode" required>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Ville" formControlName="legalRepresentativeCity" required>
+            </mat-form-field>
+          </div>
+
           <span class="separator"></span>
           <div class="next-button">
             <button mat-button matStepperNext mat-raised-button color="primary">Suivant

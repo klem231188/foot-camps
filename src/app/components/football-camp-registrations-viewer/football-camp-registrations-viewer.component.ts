@@ -18,8 +18,8 @@ import * as html2pdf from 'assets/js/html2pdf.bundle.min.js';
 })
 export class FootballCampRegistrationsViewerComponent implements OnInit {
 
-  @ViewChild('htmlElementRegistrations')
-  private htmlElementRegistrations: ElementRef;
+  @ViewChild('elementRegistrations')
+  private elementRegistrations: ElementRef;
 
   registrations: Registration[] = null;
 
@@ -95,7 +95,7 @@ export class FootballCampRegistrationsViewerComponent implements OnInit {
   }
 
   print(): void {
-    html2pdf(this.htmlElementRegistrations.nativeElement, {
+    html2pdf(this.elementRegistrations.nativeElement, {
       margin:       1,
       filename:     'inscriptions.pdf',
       image:        { type: 'jpeg', quality: 0.98 },

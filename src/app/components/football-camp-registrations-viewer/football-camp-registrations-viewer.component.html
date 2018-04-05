@@ -25,7 +25,7 @@
   <br>
   <button mat-raised-button (click)="print()" color="primary">Imprimer</button>
 </div>
-<div *ngIf="registrations" class="registrations" #htmlElementRegistrations>
+<div *ngIf="registrations" class="registrations" #elementRegistrations>
   <mat-card *ngFor="let registration of registrations; let i = index">
     <mat-card-header>
       <!-- TODO picture -->

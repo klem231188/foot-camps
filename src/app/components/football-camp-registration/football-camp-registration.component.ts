@@ -45,6 +45,13 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   gender: FormControl;
   lastname: FormControl;
 
+  legalRepresentativeFirstname: FormControl;
+  legalRepresentativeLastname: FormControl;
+  legalRepresentativeStreetAddress: FormControl;
+  legalRepresentativeZipCode: FormControl;
+  legalRepresentativeCity: FormControl;
+  legalRepresentativePhoneNumber: FormControl;
+
   // Payment From & Controls
   paymentFormGroup: FormGroup;
   payment: FormControl;
@@ -99,9 +106,33 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     this.email = new FormControl('clemtreguer@gmail.com', [Validators.required, Validators.email]);
     this.feet = new FormControl(Feet.RIGHT_FOOTED, [Validators.required]);
     this.fieldPosition = new FormControl(FieldPosition.MIDFIELDER, [Validators.required]);
-    this.firstname = new FormControl('Clément', [Validators.required, Validators.minLength(2)]);
+    this.firstname = new FormControl('Raphaël', [Validators.required, Validators.minLength(2)]);
     this.gender = new FormControl(Gender.MALE, [Validators.required]);
     this.lastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
+
+    this.legalRepresentativeFirstname = new FormControl('Clément', [Validators.required, Validators.minLength(2)]);
+    this.legalRepresentativeLastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
+    this.legalRepresentativePhoneNumber = new FormControl('0666322222', [Validators.required]);
+    this.legalRepresentativeStreetAddress = new FormControl('221 rue de la palourde', [Validators.required]);
+    this.legalRepresentativeZipCode = new FormControl('29860', [Validators.required]);
+    this.legalRepresentativeCity = new FormControl('Plouvien', [Validators.required]);
+
+    // this.address = new FormControl(null, [Validators.required]);
+    // this.birthdate = new FormControl();
+    // this.club = new FormControl(null, [Validators.required]);
+    // this.email = new FormControl(null, [Validators.required, Validators.email]);
+    // this.feet = new FormControl(null, [Validators.required]);
+    // this.fieldPosition = new FormControl(null, [Validators.required]);
+    // this.firstname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
+    // this.gender = new FormControl(null, [Validators.required]);
+    // this.lastname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
+    //
+    // this.legalRepresentativeCity = new FormControl(null, [Validators.required]);
+    // this.legalRepresentativeFirstname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
+    // this.legalRepresentativeLastname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
+    // this.legalRepresentativePhoneNumber = new FormControl(null, [Validators.required]);
+    // this.legalRepresentativeStreetAddress = new FormControl(null, [Validators.required]);
+    // this.legalRepresentativeZipCode = new FormControl(null, [Validators.required]);
 
     this.registrationForm = new FormGroup({
       'address': this.address,
@@ -112,7 +143,14 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       'fieldPosition': this.fieldPosition,
       'firstname': this.firstname,
       'gender': this.gender,
-      'lastname': this.lastname
+      'lastname': this.lastname,
+
+      'legalRepresentativeCity': this.legalRepresentativeCity,
+      'legalRepresentativeFirstname': this.legalRepresentativeFirstname,
+      'legalRepresentativeLastname': this.legalRepresentativeLastname,
+      'legalRepresentativePhoneNumber': this.legalRepresentativePhoneNumber,
+      'legalRepresentativeStreetAddress': this.legalRepresentativeStreetAddress,
+      'legalRepresentativeZipCode': this.legalRepresentativeZipCode
     });
 
     // Payment From & Controls
@@ -236,6 +274,17 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       firstname: (this.registrationForm.get('firstname').value as string),
       gender: Gender[this.registrationForm.get('gender').value as string],
       lastname: (this.registrationForm.get('lastname').value as string),
+      legalRepresentative: {
+        address: {
+          city: this.legalRepresentativeCity.value,
+          state: 'FRANCE',
+          streetAddress: this.legalRepresentativeStreetAddress.value,
+          zipCode: this.legalRepresentativeZipCode.value
+        },
+        firstname: this.legalRepresentativeFirstname.value,
+        lastname: this.legalRepresentativeLastname.value,
+        phoneNumber: this.legalRepresentativePhoneNumber.value
+      },
       sessionId: (this.session.value as Session).id,
       state: RegistrationState.IN_PROGRESS
     };
