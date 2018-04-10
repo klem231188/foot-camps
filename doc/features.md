@@ -7,7 +7,8 @@
 1. [Ecran Inscription] Ajouter les données de la mutuelle
 1. [Ecran Voir les inscrits] Ajouter les données du responsable légal
 1. [Ecran Voir les inscrits] Ajouter les données de la mutuelle
-1. [Ecran Détails] Mettre d'equerre le contenu du stage de bourg-blanc 
+1. [Ecran Inscription] Uploader une photo
+1. [Ecran Détails] Mettre d'équerre le contenu du stage de bourg-blanc 
 
 ##### Facultative pour mise en prod
 1. [Ecran Inscription] Gérer le retour arrière vers le détails

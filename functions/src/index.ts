@@ -4,7 +4,8 @@ import {FootballCamp} from '../../src/app/models/football-camp';
 import {Organizer} from '../../src/app/models/organizer';
 import {Session} from '../../src/app/models/session';
 import {Registration} from '../../src/app/models/registration';
-import {createTransport, SendMailOptions, SentMessageInfo, Transporter} from 'nodemailer';
+import {createTransport, SendMailOptions, Transporter} from 'nodemailer';
+import UpdateData = firebase.firestore.UpdateData;
 
 admin.initializeApp(functions.config().firebase);
 
@@ -291,7 +292,10 @@ export const sendEmailOnCreateRegistration = functions.firestore
   .onCreate(event => {
     console.log(event);
     const registration: Registration = event.data.data();
-    return sendMail(registration);
+    return updateNumberOfRegistrations(null, registration)
+      .then(() => {
+        sendMail(registration);
+      });
   });
 
 export const sendEmailOnUpdateRegistrationState = functions.firestore
@@ -302,14 +306,72 @@ export const sendEmailOnUpdateRegistrationState = functions.firestore
     const previousRegistration: Registration = event.data.previous.data();
 
     if (newRegistration.state !== previousRegistration.state) {
-      return sendMail(newRegistration);
+      return updateNumberOfRegistrations(previousRegistration, newRegistration)
+        .then(() => {
+          sendMail(newRegistration);
+        });
     } else {
       console.log('RegistrationState has not changed');
       return null;
     }
   });
 
-function sendMail(registration: Registration): Promise<SentMessageInfo> {
+function updateNumberOfRegistrations(
+  previousRegistration: Registration,
+  newRegistration: Registration) {
+  // TODO : assign a return type Promise<WriteResult> (error on import)
+  return admin.firestore()
+    .doc(`sessions/${newRegistration.sessionId}`)
+    .get()
+    .then((snapshot) => {
+      // TODO : assign a return type Promise<WriteResult> (error on import)
+      const session = snapshot.data();
+      const patch: UpdateData = {};
+
+      if (previousRegistration && previousRegistration.state) {
+        switch (previousRegistration.state) {
+          case 'ACCEPTED': {
+            patch['numberOfRegistrationsAccepted'] = session.numberOfRegistrationsAccepted - 1;
+            break;
+          }
+          case 'IN_PROGRESS': {
+            patch['numberOfRegistrationsInProgress'] = session.numberOfRegistrationsInProgress - 1;
+            break;
+          }
+          case 'REJECTED': {
+            patch['numberOfRegistrationsRejected'] = session.numberOfRegistrationsRejected - 1;
+            break;
+          }
+        }
+      }
+
+      if (newRegistration && newRegistration.state) {
+        switch (newRegistration.state) {
+          case 'ACCEPTED': {
+            patch['numberOfRegistrationsAccepted'] = session.numberOfRegistrationsAccepted + 1;
+            break;
+          }
+          case 'IN_PROGRESS': {
+            patch['numberOfRegistrationsInProgress'] = session.numberOfRegistrationsInProgress + 1;
+            break;
+          }
+          case 'REJECTED': {
+            patch['numberOfRegistrationsRejected'] = session.numberOfRegistrationsRejected + 1;
+            break;
+          }
+        }
+      }
+
+      console.log(`patch : ${patch}`);
+      console.log(patch);
+
+      return admin.firestore()
+        .doc(`sessions/${newRegistration.sessionId}`)
+        .update(patch)
+    });
+}
+
+function sendMail(registration: Registration): void {
   // Configure the email transport using the default SMTP transport and a GMail account.
   // For other types of transports such as Sendgrid see https://nodemailer.com/transports/
   // TODO: Configure the `gmail.email` and `gmail.password` Google Cloud environment variables.
@@ -342,17 +404,8 @@ function sendMail(registration: Registration): Promise<SentMessageInfo> {
     mailOptions.html = `Bonjour ${registration.firstname} ${registration.lastname},<br> Hélas votre inscription au stage de football AbersFoot a été rejetée!`;
   }
 
-  return mailTransport
+  mailTransport
     .sendMail(mailOptions)
-    .then(() => console.log(`A mail has been sent to ${registration.email} with state ${registration.state}`))
-    .catch(error => console.error('There was an error while sending the email:', error));
+    .then((info) => console.log(`A mail has been sent to ${registration.email} with state ${registration.state}`))
+    .catch((error) => console.error('There was an error while sending the email:', error));
 }
-
-//TODO : BUG - mise à jour nombre d'inscription acceptées/refusées/en cours
-// export const onUpdateRegistration = functions.firestore
-//   .document('registrations/{rid}')
-//   .onCreate(event => {
-//     console.log(event);
-//     const registration: Registration = event.data.data();
-//     return sendMail(registration);
-//   });
