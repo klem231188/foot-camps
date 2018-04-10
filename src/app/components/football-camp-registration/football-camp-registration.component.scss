@@ -10,14 +10,16 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #19212b;
+      //background-color: #19212b;
+      background-color: #ffffff;
       z-index: 10;
     }
     .registration-main-container {
       flex: 1;
       display: flex;
       flex-direction: row;
-      background-color: #19212b;
+      //background-color: #19212b;
+      background-color: #ffffff;
       overflow: auto;
       @include big-screen {
         padding-top: 40px;
