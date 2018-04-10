@@ -293,14 +293,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     this.registrationService
       .save(this.registration)
       .then(() => {
-        // Promise-returning async function !
-        // TODO : in functions :
-        // TODO : increment number of registration in_progress
-        // TODO : remove this piece of code
-        const currentNumberOfRegistrationsInProgress = this.session.value.numberOfRegistrationsInProgress + 1;
-        return this.sessionService.update(this.session.value, {numberOfRegistrationsInProgress: currentNumberOfRegistrationsInProgress});
-      })
-      .then(() => {
         this.isLoading = false;
         this.payment.setValue('done');
         this._stepper.next();
