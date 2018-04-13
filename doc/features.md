@@ -1,20 +1,17 @@
 ## Fonctionnalités en cours de développement
-1. [Ecran Voir les inscrits] BUG : mise à jour nombre d'inscription acceptées/refusées/en cours 
-1. [Ecran Inscription] Ajouter les données du responsable légal
 
 ## Fonctionnalités à développer (triées par priorité)
 ##### Obligatoire pour mise en prod
-1. [Ecran Inscription] Ajouter les données de la mutuelle
+1. [Ecran Inscription] Uploader une photo
 1. [Ecran Voir les inscrits] Ajouter les données du responsable légal
 1. [Ecran Voir les inscrits] Ajouter les données de la mutuelle
-1. [Ecran Inscription] Uploader une photo
 1. [Ecran Détails] Mettre d'équerre le contenu du stage de bourg-blanc 
 
 ##### Facultative pour mise en prod
+1. Ajout des règles de sécurité pour la base de données
 1. [Ecran Inscription] Gérer le retour arrière vers le détails
 1. [Ecran Voir les inscrits] Pouvoir ajouter des inscriptions manuellement
 1. [Ecran Connexion] Envoyer un mail au stagiaire lorsqu'il se connecte pour la première fois
-1. Ajout des règles de sécurité pour la base de données
 
 1. Contacter Milizac / Stade Brestois / Plabennec / Plouzané
 1. Faire une fiche standard de demande d'informations aux clubs
@@ -44,3 +41,6 @@
 1. [Ecran Voir les inscrits] Pouvoir modifier annulé une pré-inscription
 1. Publier le site sur un vrai nom de domaine. (Ex: www.footcamps.fr) 
 1. [Ecran Voir les inscrits] Imprimer les inscriptions
+1. [Ecran Voir les inscrits] BUG : mise à jour nombre d'inscription acceptées/refusées/en cours 
+1. [Ecran Inscription] Ajouter les données du responsable légal
+1. [Ecran Inscription] Ajouter les données de la mutuelle

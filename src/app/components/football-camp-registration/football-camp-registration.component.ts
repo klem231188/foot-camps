@@ -51,6 +51,11 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   legalRepresentativeZipCode: FormControl;
   legalRepresentativeCity: FormControl;
   legalRepresentativePhoneNumber: FormControl;
+  legalRepresentativeSocialSecurityNumber: FormControl;
+  legalRepresentativeHealthInsuranceName: FormControl;
+  legalRepresentativeHealthInsuranceMemberNumber: FormControl;
+
+  authorization: FormControl;
 
   // Payment From & Controls
   paymentFormGroup: FormGroup;
@@ -101,7 +106,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
     // Registration Form & Controls
     this.address = new FormControl('221 rue de la palourde, 12345 Plouvien', [Validators.required]);
-    this.birthdate = new FormControl(moment());
+    this.birthdate = new FormControl(moment('2010-11-21'));
     this.club = new FormControl('GSY', [Validators.required]);
     this.email = new FormControl('clemtreguer@gmail.com', [Validators.required, Validators.email]);
     this.feet = new FormControl(Feet.RIGHT_FOOTED, [Validators.required]);
@@ -116,7 +121,11 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     this.legalRepresentativeStreetAddress = new FormControl('221 rue de la palourde', [Validators.required]);
     this.legalRepresentativeZipCode = new FormControl('29860', [Validators.required]);
     this.legalRepresentativeCity = new FormControl('Plouvien', [Validators.required]);
+    this.legalRepresentativeSocialSecurityNumber = new FormControl('1881129019', [Validators.required]);
+    this.legalRepresentativeHealthInsuranceName = new FormControl('Pro BTP', []);
+    this.legalRepresentativeHealthInsuranceMemberNumber = new FormControl('45602205', []);
 
+    this.authorization = new FormControl(false, [Validators.required]);
     // this.address = new FormControl(null, [Validators.required]);
     // this.birthdate = new FormControl();
     // this.club = new FormControl(null, [Validators.required]);
@@ -133,6 +142,9 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     // this.legalRepresentativePhoneNumber = new FormControl(null, [Validators.required]);
     // this.legalRepresentativeStreetAddress = new FormControl(null, [Validators.required]);
     // this.legalRepresentativeZipCode = new FormControl(null, [Validators.required]);
+    // this.legalRepresentativeSocialSecurityNumber = new FormControl('', [Validators.required]);
+    // this.legalRepresentativeHealthInsuranceName = new FormControl('', []);
+    // this.legalRepresentativeHealthInsuranceMemberNumber = new FormControl('', []);
 
     this.registrationForm = new FormGroup({
       'address': this.address,
@@ -150,7 +162,12 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       'legalRepresentativeLastname': this.legalRepresentativeLastname,
       'legalRepresentativePhoneNumber': this.legalRepresentativePhoneNumber,
       'legalRepresentativeStreetAddress': this.legalRepresentativeStreetAddress,
-      'legalRepresentativeZipCode': this.legalRepresentativeZipCode
+      'legalRepresentativeZipCode': this.legalRepresentativeZipCode,
+      'legalRepresentativeSocialSecurityNumber': this.legalRepresentativeSocialSecurityNumber,
+      'legalRepresentativeHealthInsuranceName': this.legalRepresentativeHealthInsuranceName,
+      'legalRepresentativeHealthInsuranceMemberNumber': this.legalRepresentativeHealthInsuranceMemberNumber,
+
+      'authorization': this.authorization
     });
 
     // Payment From & Controls
@@ -282,6 +299,11 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
           zipCode: this.legalRepresentativeZipCode.value
         },
         firstname: this.legalRepresentativeFirstname.value,
+        healthInsurance: {
+          memberNumber: this.legalRepresentativeHealthInsuranceMemberNumber.value,
+          name: this.legalRepresentativeHealthInsuranceName.value,
+          socialSecurityNumber: this.legalRepresentativeSocialSecurityNumber.value
+        },
         lastname: this.legalRepresentativeLastname.value,
         phoneNumber: this.legalRepresentativePhoneNumber.value
       },
