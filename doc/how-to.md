@@ -11,6 +11,7 @@ ng build --prod --aot
 firebase use footcamps-production
 firebase deploy
 ```
+After each production deployment: Update sitemap.xml and upload it again on Google Search Console. 
 
 ## Rename all files in a directory 1.jpg, 2.jpg, ..., n.jpg
 ```
