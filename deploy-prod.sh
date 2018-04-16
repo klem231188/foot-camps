@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 ng build --prod --aot
 firebase use footcamps-production
-firebase deploy
+firebase deploy --only hosting

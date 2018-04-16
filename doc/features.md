@@ -6,7 +6,6 @@
 1. [Ecran Voir les inscrits] Ajouter les données du responsable légal
 1. [Ecran Voir les inscrits] Ajouter les données de la mutuelle
 1. [Ecran Détails] Mettre d'équerre le contenu du stage de bourg-blanc 
-1. [Indexation] Ajouter un sitemap.xml + upload sur Search Console Google
 
 ##### Facultative pour mise en prod
 1. Ajout des règles de sécurité pour la base de données
@@ -45,3 +44,4 @@
 1. [Ecran Voir les inscrits] BUG : mise à jour nombre d'inscription acceptées/refusées/en cours 
 1. [Ecran Inscription] Ajouter les données du responsable légal
 1. [Ecran Inscription] Ajouter les données de la mutuelle
+1. [Indexation] Ajouter un sitemap.xml + upload sur Search Console Google

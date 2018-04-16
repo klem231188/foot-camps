@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.footcamps.fr</loc>
+    <lastmod>2018-04-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.footcamps.fr/locate</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.footcamps.fr/locate/MHCiUHoTcuf5jelWArbi</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.footcamps.fr/locate/MHCiUHoTcuf5jelWArbi/details</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://www.footcamps.fr/registration/MHCiUHoTcuf5jelWArbi</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.footcamps.fr/view-registrations</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+
+</urlset>
