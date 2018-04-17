@@ -1,15 +1,11 @@
 ## Deploy website dev
 ```
-ng build --aot
-firebase use footcamps-development
-firebase deploy
+./deploy-dev.sh
 ```
 
 ## Deploy website prod
 ```
-ng build --prod --aot
-firebase use footcamps-production
-firebase deploy
+./deploy-prod.sh
 ```
 After each production deployment: Update sitemap.xml and upload it again on Google Search Console. 
 

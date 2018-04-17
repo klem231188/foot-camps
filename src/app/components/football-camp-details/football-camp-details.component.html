@@ -9,7 +9,7 @@
     <img src="./assets/img/soccer-sketch.png" class="soccer-ball">
   </div>
 
-  <hr class="vertical-line">
+  <div class="vertical-line"></div>
 
   <div *ngIf="footballCamp" class="details-container">
     <span class="separator"></span>
@@ -17,7 +17,7 @@
 
     <!-- Description -->
     <div class="container">
-      <mat-toolbar color="primary">
+      <mat-toolbar>
         <mat-icon class="mat-24">description</mat-icon>
         <span fxFlex="10px"></span>
         <span>Description</span>
@@ -26,7 +26,8 @@
         <mat-card-content>
           <p [innerHTML]="footballCamp.details.description | safeHtml"></p>
           <b>Programme:</b>
-          <a href="{{footballCamp.details.pathToSchedule}}" download mat-raised-button color="primary">Télécharger le programme
+          <a href="{{footballCamp.details.pathToSchedule}}" download mat-raised-button color="primary">Télécharger le
+            programme
             de la semaine</a>
         </mat-card-content>
       </mat-card>
@@ -36,7 +37,7 @@
 
     <!-- Localisation -->
     <div class="container">
-      <mat-toolbar color="primary">
+      <mat-toolbar>
         <mat-icon class="mat-24">location_on</mat-icon>
         <span fxFlex="10px"></span>
         <span>Localisation</span>
@@ -47,7 +48,8 @@
           <div fxLayout="row" fxLayoutAlign="start center" class="details-location-address">
             <b>Adresse: </b>
             <span fxFlex="10px"></span>
-            <a [href]="footballCamp.details.gmapsUrl" mat-raised-button color="primary">{{footballCamp.details.address}}</a>
+            <a [href]="footballCamp.details.gmapsUrl" mat-raised-button
+               color="primary">{{footballCamp.details.address}}</a>
           </div>
         </mat-card-content>
       </mat-card>
@@ -57,7 +59,7 @@
 
     <!-- Les organisateurs et les parrains -->
     <div class="container">
-      <mat-toolbar color="primary">
+      <mat-toolbar>
         <mat-icon class="mat-24">face</mat-icon>
         <span fxFlex="10px"></span>
         <span>Les organisateurs et les parrains</span>
@@ -82,12 +84,12 @@
 
     <!-- Galerie photo -->
     <div class="container">
-      <mat-toolbar color="primary">
+      <mat-toolbar>
         <mat-icon class="mat-24">photo</mat-icon>
         <span fxFlex="10px"></span>
         <span>La galerie photo</span>
       </mat-toolbar>
-      <span fxFlex="3px" class="background-white"></span>
+      <!--<span fxFlex="3px" class="background-white"></span>-->
       <mat-card [ngClass]="isViewerOpened() ? 'z-index11' : 'z-index2'">
         <mat-card-content>
           <gallery [flexBorderSize]="3" [flexImageSize]="7" [metadataUri]="footballCamp.details.pathToGallery"
@@ -101,7 +103,7 @@
 
     <!-- Les dates et tarifs -->
     <div class="container">
-      <mat-toolbar color="primary">
+      <mat-toolbar>
         <mat-icon class="mat-24">date_range</mat-icon>
         <span fxFlex="10px"></span>
         <span>Les dates et tarifs</span>
@@ -147,7 +149,7 @@
 
     <!-- Les inscriptions -->
     <div class="container">
-      <mat-toolbar color="primary">
+      <mat-toolbar>
         <mat-icon class="mat-24">create</mat-icon>
         <span fxFlex="10px"></span>
         <span>Les inscriptions</span>
@@ -159,11 +161,12 @@
           </div>
 
           <ng-template #redirectToRegistrationPage>
-            Les inscriptions se font sur FootballCamps !
+            Les inscriptions se font sur FootCamps !
             <br>
             <br>
             <div fxLayout="column" fxLayoutAlign="none center">
-              <a [routerLink]="[ '/registration/', footballCamp.id ]" mat-raised-button color="primary" class="link-to-maps">Je
+              <a [routerLink]="[ '/registration/', footballCamp.id ]" mat-raised-button color="primary"
+                 class="link-to-maps">Je
                 m'inscris sans attendre !</a>
             </div>
           </ng-template>
