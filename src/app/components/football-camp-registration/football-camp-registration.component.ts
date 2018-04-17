@@ -16,6 +16,7 @@ import {SessionService} from '../../services/session/session.service';
 import {FieldPosition} from '../../models/field-position.enum';
 import {Feet} from '../../models/feet.enum';
 import {RegistrationState} from '../../models/registration-state.enum';
+import {UploadService} from '../../services/upload/upload.service';
 
 @Component({
   selector: 'football-camp-registration',
@@ -32,6 +33,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   // Session Form & Controls
   sessionForm: FormGroup;
   session: FormControl;
+
+  downloadURL: string;
 
   // Registration Form & Controls
   registrationForm: FormGroup;
@@ -87,6 +90,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
               private footballCampService: FootballCampService,
               private sessionService: SessionService,
               private registrationService: RegistrationService,
+              private uploadService: UploadService,
               public angularFireAuth: AngularFireAuth,
               public dialog: MatDialog,
               private router: Router) {
@@ -307,6 +311,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
         lastname: this.legalRepresentativeLastname.value,
         phoneNumber: this.legalRepresentativePhoneNumber.value
       },
+      photoURL: this.downloadURL,
       sessionId: (this.session.value as Session).id,
       state: RegistrationState.IN_PROGRESS
     };
@@ -319,6 +324,14 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
         this.payment.setValue('done');
         this._stepper.next();
       })
+  }
+
+  uploadFile(event): void {
+    const file = event.target.files[0];
+    const filePath = '/uploads/trainee/titi.png';
+    const task = this.uploadService.uploadFile(filePath, file);
+
+    task.downloadURL().subscribe(url => this.downloadURL = url);
   }
 
 }

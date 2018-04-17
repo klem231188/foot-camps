@@ -9,12 +9,13 @@ import {SessionService} from './services/session/session.service';
 import {User} from './models/user';
 import {UserService} from './services/user/user.service';
 import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
+import {UploadService} from './services/upload/upload.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['app.component.scss'],
-  providers: [FootballCampService, RegistrationService, SessionService, UserService, AngularFireAuth, FirebaseAuthUiService],
+  providers: [FootballCampService, RegistrationService, UploadService, SessionService, UserService, AngularFireAuth, FirebaseAuthUiService],
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {

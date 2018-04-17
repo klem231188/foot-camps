@@ -16,6 +16,7 @@ export interface Registration {
   id?: string;
   lastname: string;
   legalRepresentative: LegalRepresentative;
+  photoURL: string;
   sessionId: string;
   state: RegistrationState
 }

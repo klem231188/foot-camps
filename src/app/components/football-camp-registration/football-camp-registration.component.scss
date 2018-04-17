@@ -116,6 +116,14 @@
           h4 {
             color: mat-color($primary);
           }
+          .image-upload {
+            label {
+              cursor: pointer;
+            }
+            input {
+              display: none;
+            }
+          }
           .registration-avatar {
             width: 125px;
             //border: 2px solid mat-color($primary);

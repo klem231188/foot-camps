@@ -31,11 +31,11 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {FootballCampLoginComponent} from './components/football-camp-login/football-camp-login.component';
 import {FootballCampShouldConnectDialogComponent} from './components/football-camp-should-connect-dialog/football-camp-should-connect-dialog.component';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
+import {AngularFireStorageModule} from 'angularfire2/storage';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {FootballCampRegistrationsViewerComponent} from './components/football-camp-registrations-viewer/football-camp-registrations-viewer.component';
 import {StatePipe} from './pipes/state.pipe';
-
 
 
 registerLocaleData(localeFr, 'fr');
@@ -46,6 +46,7 @@ registerLocaleData(localeFr, 'fr');
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
