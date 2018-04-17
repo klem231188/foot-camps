@@ -23,6 +23,7 @@
 1. [Ecran Vue d'ensemble] Améliorer la vue d'ensemble globalement (supprimer lorem ipsum)
 1. [Ecran Vue d'ensemble] Mettre en avant les dates / prix / indicateur nombre d'inscription
 1. [Ecran Mes Stages] Visualiser les stages auxquels je me suis inscris
+1. [Ecran Inscription] Crop une photo uploadée
 
 ## Fonctionnalités développées (La plus récente en bas de la liste)
 1. [Header] Afficher la photo de la personne connectée (image par défaut si connexion sans google)

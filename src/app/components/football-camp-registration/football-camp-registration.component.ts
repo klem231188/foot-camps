@@ -35,6 +35,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   session: FormControl;
 
   downloadURL: string;
+  percentageUploaded: number;
 
   // Registration Form & Controls
   registrationForm: FormGroup;
@@ -332,6 +333,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     const task = this.uploadService.uploadFile(filePath, file);
 
     task.downloadURL().subscribe(url => this.downloadURL = url);
+    task.percentageChanges().subscribe(percentage => this.percentageUploaded = percentage);
   }
 
 }

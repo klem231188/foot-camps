@@ -117,20 +117,25 @@
             color: mat-color($primary);
           }
           .image-upload {
+            width: 125px;
             label {
-              cursor: pointer;
+              height: 100%;
+              .registration-avatar {
+                width: 125px;
+                cursor: pointer;
+              }
             }
             input {
               display: none;
             }
           }
-          .registration-avatar {
-            width: 125px;
-            //border: 2px solid mat-color($primary);
-            //align-self: center;
+          .image-upload:hover {
+            .registration-avatar {
+              filter: brightness(50%);
+            }
           }
-          .registration-avatar:hover {
-            filter: brightness(80%); // todo background-image: url('./assets/img/registration/avatar-with-camera.svg');
+          .image-upload-progress-bar {
+            width: 125px;
           }
           mat-form-field {
             width: 100%;

@@ -49,13 +49,14 @@
           <ng-template matStepLabel>Inscription</ng-template>
           <h4>Informations générales du stagiaire</h4>
           <!-- Photo -->
-          <div class="image-upload">
+          <div class="image-upload" title="Ma photo">
             <label for="file-input">
               <img *ngIf="!downloadURL" src="./assets/img/registration/avatar2.png" class="registration-avatar"/>
               <img *ngIf="downloadURL" [src]="downloadURL" class="registration-avatar"/>
             </label>
             <input id="file-input" type="file" accept="image/*" (change)="uploadFile($event)">
           </div>
+          <mat-progress-bar class="image-upload-progress-bar" *ngIf="percentageUploaded && percentageUploaded !== 0 && percentageUploaded !== 100" mode="determinate" [value]="percentageUploaded" color="primary"></mat-progress-bar>
 
           <!-- Nom & Prénom -->
           <mat-form-field>
