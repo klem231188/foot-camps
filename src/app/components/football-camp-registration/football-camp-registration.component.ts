@@ -329,6 +329,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   uploadFile(event): void {
     const file = event.target.files[0];
+    // TODO rename file
     const filePath = '/uploads/trainee/titi.png';
     const task = this.uploadService.uploadFile(filePath, file);
 
