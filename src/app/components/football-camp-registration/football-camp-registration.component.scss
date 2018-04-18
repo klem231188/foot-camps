@@ -116,8 +116,14 @@
           h4 {
             color: mat-color($primary);
           }
+          .image-upload-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
           .image-upload {
             width: 125px;
+            margin-right: 10px;
             label {
               height: 100%;
               .registration-avatar {

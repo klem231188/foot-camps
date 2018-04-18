@@ -34,20 +34,23 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   sessionForm: FormGroup;
   session: FormControl;
 
+  filename: string;
   downloadURL: string;
   percentageUploaded: number;
 
   // Registration Form & Controls
   registrationForm: FormGroup;
-  address: FormControl;
   birthdate: FormControl;
   club: FormControl;
+  city: FormControl;
   email: FormControl;
   feet: FormControl;
   fieldPosition: FormControl;
   firstname: FormControl;
   gender: FormControl;
   lastname: FormControl;
+  streetAddress: FormControl;
+  zipCode: FormControl;
 
   legalRepresentativeFirstname: FormControl;
   legalRepresentativeLastname: FormControl;
@@ -97,6 +100,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
               private router: Router) {
 
     this._subscriptions = [];
+    this.filename = this.uuidv4();
+    this.downloadURL = '';
   }
 
   ngOnInit(): void {
@@ -110,15 +115,17 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     });
 
     // Registration Form & Controls
-    this.address = new FormControl('221 rue de la palourde, 12345 Plouvien', [Validators.required]);
     this.birthdate = new FormControl(moment('2010-11-21'));
     this.club = new FormControl('GSY', [Validators.required]);
+    this.city = new FormControl('Plouvien', [Validators.required]);
     this.email = new FormControl('clemtreguer@gmail.com', [Validators.required, Validators.email]);
     this.feet = new FormControl(Feet.RIGHT_FOOTED, [Validators.required]);
     this.fieldPosition = new FormControl(FieldPosition.MIDFIELDER, [Validators.required]);
     this.firstname = new FormControl('Raphaël', [Validators.required, Validators.minLength(2)]);
     this.gender = new FormControl(Gender.MALE, [Validators.required]);
     this.lastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
+    this.streetAddress = new FormControl('221 rue de la palourde', [Validators.required]);
+    this.zipCode = new FormControl('29860', [Validators.required]);
 
     this.legalRepresentativeFirstname = new FormControl('Clément', [Validators.required, Validators.minLength(2)]);
     this.legalRepresentativeLastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
@@ -131,15 +138,18 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     this.legalRepresentativeHealthInsuranceMemberNumber = new FormControl('45602205', []);
 
     this.authorization = new FormControl(false, [Validators.required]);
-    // this.address = new FormControl(null, [Validators.required]);
+
     // this.birthdate = new FormControl();
     // this.club = new FormControl(null, [Validators.required]);
+    // this.city = new FormControl(null, [Validators.required]);
     // this.email = new FormControl(null, [Validators.required, Validators.email]);
     // this.feet = new FormControl(null, [Validators.required]);
     // this.fieldPosition = new FormControl(null, [Validators.required]);
     // this.firstname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
     // this.gender = new FormControl(null, [Validators.required]);
     // this.lastname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
+    // this.streetAddress = new FormControl(null, [Validators.required]);
+    // this.zipCode = new FormControl(null, [Validators.required]);
     //
     // this.legalRepresentativeCity = new FormControl(null, [Validators.required]);
     // this.legalRepresentativeFirstname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
@@ -151,9 +161,11 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     // this.legalRepresentativeHealthInsuranceName = new FormControl('', []);
     // this.legalRepresentativeHealthInsuranceMemberNumber = new FormControl('', []);
 
+    this.authorization = new FormControl(false, [Validators.required]);
+
     this.registrationForm = new FormGroup({
-      'address': this.address,
       'birthdate': this.birthdate,
+      'city': this.city,
       'club': this.club,
       'email': this.email,
       'feet': this.feet,
@@ -161,6 +173,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       'firstname': this.firstname,
       'gender': this.gender,
       'lastname': this.lastname,
+      'streetAddress': this.streetAddress,
+      'zipCode': this.zipCode,
 
       'legalRepresentativeCity': this.legalRepresentativeCity,
       'legalRepresentativeFirstname': this.legalRepresentativeFirstname,
@@ -287,7 +301,12 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     this.isLoading = true;
 
     this.registration = {
-      address: (this.registrationForm.get('address').value as string),
+      address: {
+        city: this.city.value,
+        state: 'FRANCE',
+        streetAddress: this.streetAddress.value,
+        zipCode: this.zipCode.value
+      },
       birthdate: (this.registrationForm.get('birthdate').value as moment.Moment).toDate(),
       club: (this.registrationForm.get('club').value as string),
       email: (this.registrationForm.get('email').value as string),
@@ -329,12 +348,18 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   uploadFile(event): void {
     const file = event.target.files[0];
-    // TODO rename file
-    const filePath = '/uploads/trainee/titi.png';
-    const task = this.uploadService.uploadFile(filePath, file);
+    const extension = file.name.split('.').pop();
+    const filepath = `/uploads/sessions/${(this.session.value as Session).id}/trainees/${this.filename}.${extension}`;
+    const task = this.uploadService.uploadFile(filepath, file);
 
     task.downloadURL().subscribe(url => this.downloadURL = url);
     task.percentageChanges().subscribe(percentage => this.percentageUploaded = percentage);
   }
 
+  uuidv4(): string {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
 }

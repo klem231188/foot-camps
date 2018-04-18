@@ -47,16 +47,24 @@
         <form [formGroup]="registrationForm" #registrationFormRef="ngForm" class="registration-form-group-container"
               novalidate>
           <ng-template matStepLabel>Inscription</ng-template>
-          <h4>Informations générales du stagiaire</h4>
+          <h4>Informations du stagiaire</h4>
           <!-- Photo -->
-          <div class="image-upload" title="Ma photo">
-            <label for="file-input">
-              <img *ngIf="!downloadURL" src="./assets/img/registration/avatar2.png" class="registration-avatar"/>
-              <img *ngIf="downloadURL" [src]="downloadURL" class="registration-avatar"/>
-            </label>
-            <input id="file-input" type="file" accept="image/*" (change)="uploadFile($event)">
+          <!-- TODO: utiliser https://github.com/angular/material2/issues/3262 -->
+          <!-- TODO: utiliser http://plnkr.co/edit/VGCSprNVT1pobOxjWwmT?p=preview -->
+          <div class="image-upload-container">
+            <div class="image-upload" title="Ma photo">
+              <label for="file-input">
+                <img *ngIf="!downloadURL" src="./assets/img/registration/avatar2.png" class="registration-avatar"/>
+                <img *ngIf="downloadURL" [src]="downloadURL" class="registration-avatar"/>
+              </label>
+              <input id="file-input" type="file" accept="image/*" (change)="uploadFile($event)">
+            </div>
+            <span *ngIf="!downloadURL">Le photo est obligatoire *</span>
+
+            <mat-progress-bar class="image-upload-progress-bar"
+                              *ngIf="percentageUploaded && percentageUploaded !== 0 && percentageUploaded !== 100"
+                              mode="determinate" [value]="percentageUploaded" color="primary"></mat-progress-bar>
           </div>
-          <mat-progress-bar class="image-upload-progress-bar" *ngIf="percentageUploaded && percentageUploaded !== 0 && percentageUploaded !== 100" mode="determinate" [value]="percentageUploaded" color="primary"></mat-progress-bar>
 
           <!-- Nom & Prénom -->
           <mat-form-field>
@@ -93,9 +101,17 @@
           </mat-form-field>
 
           <!-- Adresse -->
-          <mat-form-field>
-            <input matInput placeholder="Adresse" formControlName="address">
-          </mat-form-field>
+          <div class="address">
+            <mat-form-field>
+              <input matInput placeholder="Rue" formControlName="streetAddress" required>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Code Postal" formControlName="zipCode" required>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Ville" formControlName="city" required>
+            </mat-form-field>
+          </div>
 
           <h4>Caractéristiques sportives du stagiaire</h4>
           <!-- Club -->
@@ -117,7 +133,7 @@
           </mat-radio-group>
           <span class="separator"></span>
 
-          <h4>Informations représentant légal</h4>
+          <h4>Informations du représentant légal</h4>
           <!-- Nom & Prénom -->
           <mat-form-field>
             <input matInput placeholder="Prénom" formControlName="legalRepresentativeFirstname" required>
@@ -182,7 +198,8 @@
 
           <span class="separator"></span>
           <div class="next-button">
-            <button mat-button matStepperNext mat-raised-button color="primary" [disabled]="registrationForm.invalid">Suivant
+            <button mat-button matStepperNext mat-raised-button color="primary"
+                    [disabled]="registrationForm.invalid || !downloadURL">Suivant
               <mat-icon>chevron_right</mat-icon>
             </button>
           </div>

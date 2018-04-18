@@ -3,9 +3,10 @@ import {Feet} from './feet.enum';
 import {FieldPosition} from './field-position.enum';
 import {RegistrationState} from './registration-state.enum';
 import {LegalRepresentative} from './legal-representative.model';
+import {Address} from './address.model';
 
 export interface Registration {
-  address: string;
+  address: Address;
   birthdate: Date;
   club: string;
   email: string;

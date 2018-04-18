@@ -1,5 +1,4 @@
 ## Fonctionnalités en cours de développement
-1. [Ecran Inscription] Uploader une photo
 
 ## Fonctionnalités à développer (triées par priorité)
 ##### Obligatoire pour mise en prod
@@ -24,6 +23,9 @@
 1. [Ecran Vue d'ensemble] Mettre en avant les dates / prix / indicateur nombre d'inscription
 1. [Ecran Mes Stages] Visualiser les stages auxquels je me suis inscris
 1. [Ecran Inscription] Crop une photo uploadée
+1. [Mail pré-inscription] Envoyer la fiche sanitaire en p-j du mail
+1. [Ecran Inscription] Ajouter les propriétés Taille (cm), pointure et catégorie
+1. [Ecran Inscription] Uploader une photo avec http://plnkr.co/edit/VGCSprNVT1pobOxjWwmT?p=preview
 
 ## Fonctionnalités développées (La plus récente en bas de la liste)
 1. [Header] Afficher la photo de la personne connectée (image par défaut si connexion sans google)
@@ -46,3 +48,5 @@
 1. [Ecran Inscription] Ajouter les données du responsable légal
 1. [Ecran Inscription] Ajouter les données de la mutuelle
 1. [Indexation] Ajouter un sitemap.xml + upload sur Search Console Google
+1. [Ecran Inscription] BUG : Modifier le type de l'addresse de 'string' en 'Address'
+1. [Ecran Inscription] Uploader une photo
