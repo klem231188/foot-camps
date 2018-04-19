@@ -10,6 +10,7 @@ import {Role} from '../../models/role.enum';
 import {Registration} from '../../models/registration';
 import {RegistrationState} from '../../models/registration-state.enum';
 import * as html2pdf from 'assets/js/html2pdf.bundle.min.js';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-football-camp-registrations-viewer',
@@ -33,10 +34,14 @@ export class FootballCampRegistrationsViewerComponent implements OnInit {
               private footballCampService: FootballCampService,
               private userService: UserService,
               private sessionService: SessionService,
-              private registrationService: RegistrationService) {
+              private registrationService: RegistrationService,
+              private titleService: Title) {
   }
 
   ngOnInit() {
+
+    this.titleService.setTitle('Footcamps - Visualisation des inscriptions au stage de football');
+
     // TODO : improve code using Observable
     this.angularFireAuth.authState
       .switchMap<firebase.User, User>((firebaseUser) => {
