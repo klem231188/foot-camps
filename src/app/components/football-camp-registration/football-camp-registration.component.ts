@@ -115,51 +115,52 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     });
 
     // Registration Form & Controls
-    this.birthdate = new FormControl(moment('2010-11-21'));
-    this.club = new FormControl('GSY', [Validators.required]);
-    this.city = new FormControl('Plouvien', [Validators.required]);
-    this.email = new FormControl('clemtreguer@gmail.com', [Validators.required, Validators.email]);
-    this.feet = new FormControl(Feet.RIGHT_FOOTED, [Validators.required]);
-    this.fieldPosition = new FormControl(FieldPosition.MIDFIELDER, [Validators.required]);
-    this.firstname = new FormControl('Raphaël', [Validators.required, Validators.minLength(2)]);
-    this.gender = new FormControl(Gender.MALE, [Validators.required]);
-    this.lastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
-    this.streetAddress = new FormControl('221 rue de la palourde', [Validators.required]);
-    this.zipCode = new FormControl('29860', [Validators.required]);
-
-    this.legalRepresentativeFirstname = new FormControl('Clément', [Validators.required, Validators.minLength(2)]);
-    this.legalRepresentativeLastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
-    this.legalRepresentativePhoneNumber = new FormControl('0666322222', [Validators.required]);
-    this.legalRepresentativeStreetAddress = new FormControl('221 rue de la palourde', [Validators.required]);
-    this.legalRepresentativeZipCode = new FormControl('29860', [Validators.required]);
-    this.legalRepresentativeCity = new FormControl('Plouvien', [Validators.required]);
-    this.legalRepresentativeSocialSecurityNumber = new FormControl('1881129019', [Validators.required]);
-    this.legalRepresentativeHealthInsuranceName = new FormControl('Pro BTP', []);
-    this.legalRepresentativeHealthInsuranceMemberNumber = new FormControl('45602205', []);
-
-    this.authorization = new FormControl(false, [Validators.required]);
-
-    // this.birthdate = new FormControl();
-    // this.club = new FormControl(null, [Validators.required]);
-    // this.city = new FormControl(null, [Validators.required]);
-    // this.email = new FormControl(null, [Validators.required, Validators.email]);
-    // this.feet = new FormControl(null, [Validators.required]);
-    // this.fieldPosition = new FormControl(null, [Validators.required]);
-    // this.firstname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
-    // this.gender = new FormControl(null, [Validators.required]);
-    // this.lastname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
-    // this.streetAddress = new FormControl(null, [Validators.required]);
-    // this.zipCode = new FormControl(null, [Validators.required]);
+    // Mock for development purpose
+    // this.birthdate = new FormControl(moment('2010-11-21'));
+    // this.club = new FormControl('GSY', [Validators.required]);
+    // this.city = new FormControl('Plouvien', [Validators.required]);
+    // this.email = new FormControl('clemtreguer@gmail.com', [Validators.required, Validators.email]);
+    // this.feet = new FormControl(Feet.RIGHT_FOOTED, [Validators.required]);
+    // this.fieldPosition = new FormControl(FieldPosition.MIDFIELDER, [Validators.required]);
+    // this.firstname = new FormControl('Raphaël', [Validators.required, Validators.minLength(2)]);
+    // this.gender = new FormControl(Gender.MALE, [Validators.required]);
+    // this.lastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
+    // this.streetAddress = new FormControl('221 rue de la palourde', [Validators.required]);
+    // this.zipCode = new FormControl('29860', [Validators.required]);
     //
-    // this.legalRepresentativeCity = new FormControl(null, [Validators.required]);
-    // this.legalRepresentativeFirstname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
-    // this.legalRepresentativeLastname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
-    // this.legalRepresentativePhoneNumber = new FormControl(null, [Validators.required]);
-    // this.legalRepresentativeStreetAddress = new FormControl(null, [Validators.required]);
-    // this.legalRepresentativeZipCode = new FormControl(null, [Validators.required]);
-    // this.legalRepresentativeSocialSecurityNumber = new FormControl('', [Validators.required]);
-    // this.legalRepresentativeHealthInsuranceName = new FormControl('', []);
-    // this.legalRepresentativeHealthInsuranceMemberNumber = new FormControl('', []);
+    // this.legalRepresentativeFirstname = new FormControl('Clément', [Validators.required, Validators.minLength(2)]);
+    // this.legalRepresentativeLastname = new FormControl('Tréguer', [Validators.required, Validators.minLength(2)]);
+    // this.legalRepresentativePhoneNumber = new FormControl('0666322222', [Validators.required]);
+    // this.legalRepresentativeStreetAddress = new FormControl('221 rue de la palourde', [Validators.required]);
+    // this.legalRepresentativeZipCode = new FormControl('29860', [Validators.required]);
+    // this.legalRepresentativeCity = new FormControl('Plouvien', [Validators.required]);
+    // this.legalRepresentativeSocialSecurityNumber = new FormControl('1881129019', [Validators.required]);
+    // this.legalRepresentativeHealthInsuranceName = new FormControl('Pro BTP', []);
+    // this.legalRepresentativeHealthInsuranceMemberNumber = new FormControl('45602205', []);
+    //
+    // this.authorization = new FormControl(false, [Validators.required]);
+
+    this.birthdate = new FormControl();
+    this.club = new FormControl(null, [Validators.required]);
+    this.city = new FormControl(null, [Validators.required]);
+    this.email = new FormControl(null, [Validators.required, Validators.email]);
+    this.feet = new FormControl(null, [Validators.required]);
+    this.fieldPosition = new FormControl(null, [Validators.required]);
+    this.firstname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
+    this.gender = new FormControl(null, [Validators.required]);
+    this.lastname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
+    this.streetAddress = new FormControl(null, [Validators.required]);
+    this.zipCode = new FormControl(null, [Validators.required]);
+
+    this.legalRepresentativeCity = new FormControl(null, [Validators.required]);
+    this.legalRepresentativeFirstname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
+    this.legalRepresentativeLastname = new FormControl(null, [Validators.required, Validators.minLength(2)]);
+    this.legalRepresentativePhoneNumber = new FormControl(null, [Validators.required]);
+    this.legalRepresentativeStreetAddress = new FormControl(null, [Validators.required]);
+    this.legalRepresentativeZipCode = new FormControl(null, [Validators.required]);
+    this.legalRepresentativeSocialSecurityNumber = new FormControl('', [Validators.required]);
+    this.legalRepresentativeHealthInsuranceName = new FormControl('', []);
+    this.legalRepresentativeHealthInsuranceMemberNumber = new FormControl('', []);
 
     this.authorization = new FormControl(false, [Validators.required]);
 
