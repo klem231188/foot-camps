@@ -1,10 +1,11 @@
-import {AfterViewInit, Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import * as _ from 'lodash';
 import {FootballCamp} from '../../models/football-camp';
 import {Session} from '../../models/session';
 import {SessionService} from '../../services/session/session.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'football-camp-details',
@@ -22,7 +23,8 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
 
   constructor(private route: ActivatedRoute,
               private footballCampService: FootballCampService,
-              private sessionService: SessionService) {
+              private sessionService: SessionService,
+              private titleService: Title) {
   }
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
       .subscribe((footballCamp: FootballCamp) => {
         console.log(footballCamp);
         this.footballCamp = footballCamp;
+        this.titleService.setTitle('Footcamps - Détails du stage de football ' + this.footballCamp.city);
       });
 
     this.route

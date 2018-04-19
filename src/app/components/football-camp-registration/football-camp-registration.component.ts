@@ -17,6 +17,7 @@ import {FieldPosition} from '../../models/field-position.enum';
 import {Feet} from '../../models/feet.enum';
 import {RegistrationState} from '../../models/registration-state.enum';
 import {UploadService} from '../../services/upload/upload.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'football-camp-registration',
@@ -97,7 +98,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
               private uploadService: UploadService,
               public angularFireAuth: AngularFireAuth,
               public dialog: MatDialog,
-              private router: Router) {
+              private router: Router,
+              private titleService: Title) {
 
     this._subscriptions = [];
     this.filename = this.uuidv4();
@@ -106,7 +108,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   ngOnInit(): void {
     console.log('FootballCampRegistrationComponent.ngOnInit()');
-
     // Session Form & Controls
     this.session = new FormControl('', [Validators.required]);
 
@@ -205,6 +206,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       })
       .subscribe((footballCamp: FootballCamp) => {
         this.footballCamp = footballCamp;
+        this.titleService.setTitle('Footcamps - Inscription au stage de football ' + this.footballCamp.city);
         console.log('----------- footballCamp :');
         console.log(this.footballCamp);
         if (this.footballCamp && this.sessions) {
@@ -358,7 +360,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   }
 
   uuidv4(): string {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });

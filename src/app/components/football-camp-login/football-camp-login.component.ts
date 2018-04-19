@@ -7,6 +7,7 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
 import {UserService} from '../../services/user/user.service';
 import {User} from '../../models/user';
 import {Role} from '../../models/role.enum';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-football-camp-login',
@@ -19,10 +20,12 @@ export class FootballCampLoginComponent implements OnInit, AfterViewInit, OnDest
               private firebaseAuthUiService: FirebaseAuthUiService,
               private userService: UserService,
               private router: Router,
-              private location: Location) {
+              private location: Location,
+              private titleService: Title) {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Footcamps - Connectez-vous');
     this.angularFireAuth.authState.subscribe((firebaseUser) => {
       if (firebaseUser && firebaseUser.uid) {
         // Logged

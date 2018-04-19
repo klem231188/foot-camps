@@ -1,4 +1,4 @@
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, Title} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
@@ -89,6 +89,7 @@ registerLocaleData(localeFr, 'fr');
     FootballCampShouldConnectDialogComponent
   ],
   providers: [
+    Title,
     AngularFireAuth,
     {provide: LOCALE_ID, useValue: 'fr'},
     {provide: MAT_DATE_LOCALE, useValue: 'fr'},

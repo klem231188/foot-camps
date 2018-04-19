@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import {FootballCamp} from '../../models/football-camp';
 import 'rxjs/add/operator/map';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'football-camp-overview',
@@ -14,11 +15,13 @@ export class FootballCampOverviewComponent implements OnInit, OnDestroy {
   @Input() footballCamp: FootballCamp = null;
 
   constructor(private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private titleService: Title) {
   }
 
   ngOnInit(): void {
     console.log('FootballCampOverviewComponent.ngOnInit()');
+    this.titleService.setTitle('Footcamps - Aperçu du stage de football ' + this.footballCamp.city);
   }
 
   ngOnDestroy(): void {
