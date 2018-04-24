@@ -14,7 +14,7 @@ export const addAberCamp = functions.https.onRequest((request, response) => {
     firstname: 'Stéphane',
     lastname: 'LE HIR',
     manageRegistration: true,
-    pathToPicture: './assets/img/bourg-blanc/organizers/avatar/Stephane-LE-HIR.jpg',
+    pathToPicture: './assets/img/aber/organizers/avatar/Stephane-LE-HIR.jpg',
     phoneNumber: '0625253636',
     quote: 'Je suis très heureux de participer à cette 2<sup>ème</sup> édition.<br>Cette année on va redoubler d\'activités pour le bonheur du plus grand nombre d\'enfants'
   };
@@ -23,7 +23,7 @@ export const addAberCamp = functions.https.onRequest((request, response) => {
     firstname: 'Olivier',
     lastname: 'SENELLE',
     manageRegistration: true,
-    pathToPicture: './assets/img/bourg-blanc/organizers/avatar/Olivier-SENELLE.jpg',
+    pathToPicture: './assets/img/aber/organizers/avatar/Olivier-SENELLE.jpg',
     phoneNumber: '0625253637',
     quote: 'N/A'
   };
@@ -32,7 +32,7 @@ export const addAberCamp = functions.https.onRequest((request, response) => {
     firstname: 'Ronan',
     lastname: 'ACH',
     manageRegistration: true,
-    pathToPicture: './assets/img/bourg-blanc/organizers/avatar/Ronan-ACH.jpg',
+    pathToPicture: './assets/img/aber/organizers/avatar/Ronan-ACH.jpg',
     phoneNumber: '0625253638',
     quote: 'N/A'
   };
@@ -87,15 +87,15 @@ export const addAberCamp = functions.https.onRequest((request, response) => {
       location: 'Situé à l\'extrémité de la Bretagne, le stage se déroule à Coat-Méal dans le Finistère (29)',
       organizerDescription: 'Les stages sont encadrés par une une équipe technique de <b>qualité</b>, <b>expérimentée</b> et <b>motivée</b>',
       organizers: [organizer1, organizer2, organizer3],
-      pathToGallery: './assets/img/bourg-blanc/gallery/data.json',
-      pathToLogo: './assets/img/bourg-blanc/logo.png',
-      pathToSchedule: './assets/img/bourg-blanc/programme.jpg',
+      pathToGallery: './assets/img/aber/gallery/data.json',
+      pathToLogo: './assets/img/aber/logo.png',
+      pathToSchedule: './assets/img/aber/programme.jpg',
       useOnlineRegistration: true,
       registrationUrl: null,
     },
     overview: {
       content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      pathToImage: './assets/img/bourg-blanc/overview.jpg',
+      pathToImage: './assets/img/aber/overview.jpg',
       title: 'Bienvenue au Foot Camps de ABERS FOOT'
     }
   };

@@ -1,10 +1,10 @@
 ## Fonctionnalités en cours de développement
+1. [Ecran Détails] Mettre d'équerre le contenu du stage de bourg-blanc 
 
 ## Fonctionnalités à développer (triées par priorité)
 ##### Obligatoire pour mise en prod
 1. [Ecran Voir les inscrits] Ajouter les données du responsable légal
 1. [Ecran Voir les inscrits] Ajouter les données de la mutuelle
-1. [Ecran Détails] Mettre d'équerre le contenu du stage de bourg-blanc 
 
 ##### Facultative pour mise en prod
 1. Ajout des règles de sécurité pour la base de données
