@@ -120,6 +120,10 @@
             display: flex;
             flex-direction: row;
             align-items: center;
+
+            .red {
+              color: mat-color($warn);
+            }
           }
           .image-upload {
             width: 125px;

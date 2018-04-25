@@ -59,7 +59,7 @@
               </label>
               <input id="file-input" type="file" accept="image/*" (change)="uploadFile($event)">
             </div>
-            <span *ngIf="!downloadURL">Le photo est obligatoire *</span>
+            <span *ngIf="!downloadURL" class="red">Le photo est obligatoire *</span>
 
             <mat-progress-bar class="image-upload-progress-bar"
                               *ngIf="percentageUploaded && percentageUploaded !== 0 && percentageUploaded !== 100"
@@ -224,7 +224,7 @@
             </ul>
             <br>
             En le rendant en main propre à <span *ngFor="let organizer of footballCamp.details.organizers"><b>{{organizer.firstname}} {{organizer.lastname}}</b>, </span>
-            ou en l'envoyant l'adresse suivante: <b>...</b><br>
+            ou en l'envoyant l'adresse suivante: <b>Stéphane Le HIR, 11 Kergongar 29860 Bourg-blanc</b><br>
             Si vous rencontrez un problème, veuillez contacter une des personnes suivantes:
             <br>
 

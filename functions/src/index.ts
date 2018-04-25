@@ -15,7 +15,7 @@ export const addAberCamp = functions.https.onRequest((request, response) => {
     manageRegistration: true,
     pathToPicture: './assets/img/aber/organizers/avatar/Stephane-LE-HIR.jpg',
     phoneNumber: '0675839337',
-    quote: 'Je suis très heureux de participer à cette 2<sup>ème</sup> édition.<br>Cette année on va redoubler d\'activités pour le bonheur du plus grand nombre d\'enfants'
+    quote: 'Je suis très heureux de participer à cette 4<sup>ème</sup> édition.<br>Cette année on va redoubler d\'activités pour le bonheur du plus grand nombre d\'enfants'
   };
 
   const organizer2: Organizer = {
@@ -109,7 +109,7 @@ export const addAberCamp = functions.https.onRequest((request, response) => {
     endRegistrationDate: new Date('2018-06-09T00:00:00'),
     fullBoardRates: null,
     halfBoardRates: 130,
-    maximumNumberOfRegistrations: 30,
+    maximumNumberOfRegistrations: 40,
     start: new Date('2018-07-09T08:30:00')
   };
 
