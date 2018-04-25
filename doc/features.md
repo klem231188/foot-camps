@@ -25,7 +25,9 @@
 1. [Ecran Inscription] Crop une photo uploadée
 1. [Mail pré-inscription] Envoyer la fiche sanitaire en p-j du mail
 1. [Ecran Inscription] Ajouter les propriétés Taille (cm), pointure et catégorie
-1. [Ecran Inscription] Uploader une photo avec http://plnkr.co/edit/VGCSprNVT1pobOxjWwmT?p=preview
+1. [Ecran Inscription] Uploader une photo avec un input angular material cd : http://plnkr.co/edit/VGCSprNVT1pobOxjWwmT?p=preview
+1. [Ecran Inscription] Ajouter un toast après pré-inscription
+
 
 ## Fonctionnalités développées (La plus récente en bas de la liste)
 1. [Header] Afficher la photo de la personne connectée (image par défaut si connexion sans google)

@@ -294,7 +294,7 @@ export const sendEmailOnCreateRegistration = functions.firestore
     const registration: Registration = event.data.data();
     return updateNumberOfRegistrations(null, registration)
       .then(() => {
-        sendMail(registration);
+        return sendMail(registration);
       });
   });
 
@@ -308,7 +308,7 @@ export const sendEmailOnUpdateRegistrationState = functions.firestore
     if (newRegistration.state !== previousRegistration.state) {
       return updateNumberOfRegistrations(previousRegistration, newRegistration)
         .then(() => {
-          sendMail(newRegistration);
+          return sendMail(newRegistration);
         });
     } else {
       console.log('RegistrationState has not changed');
@@ -316,9 +316,8 @@ export const sendEmailOnUpdateRegistrationState = functions.firestore
     }
   });
 
-function updateNumberOfRegistrations(
-  previousRegistration: Registration,
-  newRegistration: Registration) {
+function updateNumberOfRegistrations(previousRegistration: Registration,
+                                     newRegistration: Registration) {
   console.log(`updateNumberOfRegistrations(${JSON.stringify(previousRegistration)}, ${JSON.stringify(newRegistration)})`);
 
   // TODO : assign a return type Promise<WriteResult> (error on import)
@@ -373,7 +372,7 @@ function updateNumberOfRegistrations(
     });
 }
 
-function sendMail(registration: Registration): void {
+function sendMail(registration: Registration) {
   // Configure the email transport using the default SMTP transport and a GMail account.
   // For other types of transports such as Sendgrid see https://nodemailer.com/transports/
   // TODO: Configure the `gmail.email` and `gmail.password` Google Cloud environment variables.
@@ -408,7 +407,7 @@ function sendMail(registration: Registration): void {
     mailOptions.html = `Bonjour ${registration.firstname} ${registration.lastname},<br> Hélas votre inscription au stage de football AbersFoot a été rejetée!`;
   }
 
-  mailTransport
+  return mailTransport
     .sendMail(mailOptions)
     .then((info) => console.log(`A mail has been sent to ${registration.email} with state ${registration.state}`))
     .catch((error) => console.error('There was an error while sending the email:', error));
