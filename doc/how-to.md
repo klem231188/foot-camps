@@ -15,9 +15,22 @@ ls | cat -n | while read n f; do mv "$f" "$n.jpg"; done
 ```
 
 ## Create a gallery from a directory containing the images
+
 ```
+# Installation of graphicsmagick
+sudo apt-get install python-software-properties
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:rwky/graphicsmagick
+sudo apt-get update
+sudo apt-get install graphicsmagick
+
+# Installation of angular2-image-gallery
+npm install -g angular2-image-gallery
+npm install -g mkdirp
+
+# Launch the command to create a gallery
 cd ~/workspace/foot-camps/
-node node_modules/angular2-image-gallery/convert.js src/assets/img/**club**/gallery --outputDir=src/assets/img/**club**/gallery --remoteBaseUrl=assets/img/**club**/gallery
+node /home/Clement.Treguer/.nvm/versions/node/v7.5.0/lib/node_modules/angular2-image-gallery/convert.js src/assets/img/**club**/gallery --outputDir=src/assets/img/**club**/gallery --remoteBaseUrl=assets/img/**club**/gallery
 
 # Example: node node_modules/angular2-image-gallery/convert.js src/assets/img/lorient/gallery --outputDir=src/assets/img/lorient/gallery --remoteBaseUrl=assets/img/lorient/gallery
 ```
