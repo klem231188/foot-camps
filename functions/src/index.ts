@@ -319,6 +319,8 @@ export const sendEmailOnUpdateRegistrationState = functions.firestore
 function updateNumberOfRegistrations(
   previousRegistration: Registration,
   newRegistration: Registration) {
+  console.log(`updateNumberOfRegistrations(${JSON.stringify(previousRegistration)}, ${JSON.stringify(newRegistration)})`);
+
   // TODO : assign a return type Promise<WriteResult> (error on import)
   return admin.firestore()
     .doc(`sessions/${newRegistration.sessionId}`)
@@ -375,6 +377,8 @@ function sendMail(registration: Registration): void {
   // Configure the email transport using the default SMTP transport and a GMail account.
   // For other types of transports such as Sendgrid see https://nodemailer.com/transports/
   // TODO: Configure the `gmail.email` and `gmail.password` Google Cloud environment variables.
+  console.log(`sendMail(${JSON.stringify(registration)})`);
+
   const gmailEmail = functions.config().gmail.email;
   const gmailPassword = functions.config().gmail.password;
   const mailTransport: Transporter = createTransport({
@@ -399,7 +403,7 @@ function sendMail(registration: Registration): void {
     // TODO RegistrationState.ACCEPTED
     mailOptions.subject = 'Inscription à AbersFoot validée';
     mailOptions.html = `Bonjour ${registration.firstname} ${registration.lastname},<br> Félicitations, votre inscription au stage de football AbersFoot a été validée.<br> Bon stage !`;
-  } else {
+  } else if (registration.state === 'REJECTED') {
     mailOptions.subject = 'Inscription à AbersFoot rejetée';
     mailOptions.html = `Bonjour ${registration.firstname} ${registration.lastname},<br> Hélas votre inscription au stage de football AbersFoot a été rejetée!`;
   }
