@@ -1,4 +1,3 @@
-import * as firebase from 'firebase'
 import * as admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
 import {FootballCamp} from '../../src/app/models/football-camp';
@@ -6,7 +5,6 @@ import {Organizer} from '../../src/app/models/organizer';
 import {Session} from '../../src/app/models/session';
 import {Registration} from '../../src/app/models/registration';
 import {createTransport, SendMailOptions, Transporter} from 'nodemailer';
-import UpdateData = firebase.firestore.UpdateData;
 
 admin.initializeApp(functions.config().firebase);
 
@@ -328,7 +326,7 @@ function updateNumberOfRegistrations(previousRegistration: Registration,
     .then((snapshot) => {
       // TODO : assign a return type Promise<WriteResult> (error on import)
       const session = snapshot.data();
-      const patch: UpdateData = {};
+      const patch = {};
 
       if (previousRegistration && previousRegistration.state) {
         switch (previousRegistration.state) {
