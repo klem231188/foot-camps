@@ -215,7 +215,7 @@
             En cliquant sur suivant, votre pré-inscription sera active pour le stage de {{footballCamp.city}}.
             <br>
             <!-- TODO : Gérer les prix halfBoardRates/fullBoardRates-->
-            Pour confirmer votre inscription, vous devez verser la somme de <b> {{session.value.halfBoardRates}} € avant
+            Pour confirmer votre inscription, vous devez verser la somme de <b> {{session.value.halfBoardRates}} € (ou 105 € à partir du deuxième enfant) avant
             le {{session.value.endRegistrationDate | date : 'longDate'}}.</b><br>
             <!-- TODO : Gérer le mode de paiement de manière dynamique-->
             <ul>
@@ -223,7 +223,8 @@
               <li>Par chèques vacances</li>
             </ul>
             <br>
-            en l'envoyant à l'adresse suivante: <b>...</b><br>
+            En le rendant en main propre à <span *ngFor="let organizer of footballCamp.details.organizers"><b>{{organizer.firstname}} {{organizer.lastname}}</b>, </span>
+            ou en l'envoyant l'adresse suivante: <b>...</b><br>
             Si vous rencontrez un problème, veuillez contacter une des personnes suivantes:
             <br>
 

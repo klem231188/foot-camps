@@ -15,7 +15,7 @@ export const addAberCamp = functions.https.onRequest((request, response) => {
     lastname: 'LE HIR',
     manageRegistration: true,
     pathToPicture: './assets/img/aber/organizers/avatar/Stephane-LE-HIR.jpg',
-    phoneNumber: '0625253636',
+    phoneNumber: '0675839337',
     quote: 'Je suis très heureux de participer à cette 2<sup>ème</sup> édition.<br>Cette année on va redoubler d\'activités pour le bonheur du plus grand nombre d\'enfants'
   };
 
@@ -24,7 +24,7 @@ export const addAberCamp = functions.https.onRequest((request, response) => {
     lastname: 'SENELLE',
     manageRegistration: true,
     pathToPicture: './assets/img/aber/organizers/avatar/Olivier-SENELLE.jpg',
-    phoneNumber: '0625253637',
+    phoneNumber: '0660891235',
     quote: 'N/A'
   };
 
@@ -33,7 +33,7 @@ export const addAberCamp = functions.https.onRequest((request, response) => {
     lastname: 'ACH',
     manageRegistration: true,
     pathToPicture: './assets/img/aber/organizers/avatar/Ronan-ACH.jpg',
-    phoneNumber: '0625253638',
+    phoneNumber: '0662995150',
     quote: 'N/A'
   };
 
