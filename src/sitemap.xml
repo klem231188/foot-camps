@@ -5,7 +5,7 @@
     <loc>https://www.footcamps.fr</loc>
     <lastmod>2018-04-15</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>1.0</priority>
   </url>
 
   <url>
@@ -14,18 +14,17 @@
   </url>
 
   <url>
-    <loc>https://www.footcamps.fr/locate/MHCiUHoTcuf5jelWArbi</loc>
+    <loc>https://www.footcamps.fr/locate/S4pSRRdx4SiFgvLMqFbC</loc>
     <changefreq>weekly</changefreq>
   </url>
 
   <url>
-    <loc>https://www.footcamps.fr/locate/MHCiUHoTcuf5jelWArbi/details</loc>
+    <loc>https://www.footcamps.fr/locate/S4pSRRdx4SiFgvLMqFbC/details</loc>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://www.footcamps.fr/registration/MHCiUHoTcuf5jelWArbi</loc>
+    <loc>https://www.footcamps.fr/registration/S4pSRRdx4SiFgvLMqFbC</loc>
     <changefreq>weekly</changefreq>
   </url>
 

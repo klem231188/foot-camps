@@ -7,7 +7,7 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
 import {UserService} from '../../services/user/user.service';
 import {User} from '../../models/user';
 import {Role} from '../../models/role.enum';
-import {Title} from '@angular/platform-browser';
+import {Meta, Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-football-camp-login',
@@ -21,11 +21,15 @@ export class FootballCampLoginComponent implements OnInit, AfterViewInit, OnDest
               private userService: UserService,
               private router: Router,
               private location: Location,
-              private titleService: Title) {
+              private titleService: Title,
+              private meta: Meta) {
   }
 
   ngOnInit(): void {
     this.titleService.setTitle('Footcamps - Connectez-vous');
+    this.meta.updateTag({name: 'description', content: 'Se connecter à footcamps'});
+    this.meta.updateTag({name: 'keywords', content: 'footcamps, stage, football, connexion, se connecter'});
+
     this.angularFireAuth.authState.subscribe((firebaseUser) => {
       if (firebaseUser && firebaseUser.uid) {
         // Logged

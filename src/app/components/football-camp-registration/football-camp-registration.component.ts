@@ -17,7 +17,7 @@ import {FieldPosition} from '../../models/field-position.enum';
 import {Feet} from '../../models/feet.enum';
 import {RegistrationState} from '../../models/registration-state.enum';
 import {UploadService} from '../../services/upload/upload.service';
-import {Title} from '@angular/platform-browser';
+import {Meta, Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'football-camp-registration',
@@ -99,7 +99,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
               public angularFireAuth: AngularFireAuth,
               public dialog: MatDialog,
               private router: Router,
-              private titleService: Title) {
+              private titleService: Title,
+              private meta: Meta) {
 
     this._subscriptions = [];
     this.filename = this.uuidv4();
@@ -207,6 +208,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       .subscribe((footballCamp: FootballCamp) => {
         this.footballCamp = footballCamp;
         this.titleService.setTitle('Footcamps - Inscription au stage de football ' + this.footballCamp.city);
+        this.meta.updateTag({name: 'description', content: 'Inscription au stage de football ' + this.footballCamp.city});
+        this.meta.updateTag({name: 'keywords', content: 'footcamps, stage, football, inscription'});
         console.log('----------- footballCamp :');
         console.log(this.footballCamp);
         if (this.footballCamp && this.sessions) {

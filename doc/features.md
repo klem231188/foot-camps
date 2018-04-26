@@ -1,5 +1,6 @@
 ## Fonctionnalités en cours de développement
 1. [Ecran Détails] Mettre d'équerre le contenu du stage de bourg-blanc 
+1. [Indexation] Ajouter balises meta "description" et "keywords"
 
 ## Fonctionnalités à développer (triées par priorité)
 ##### Obligatoire pour mise en prod
