@@ -120,33 +120,25 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-
-            .red {
-              color: mat-color($warn);
-            }
-          }
-          .image-upload {
-            width: 125px;
-            margin-right: 10px;
             label {
-              height: 100%;
+              margin-top: 3px;
+              margin-bottom: 3px;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+            }
+            .image-upload {
+              width: 125px;
+              margin-right: 10px;
               .registration-avatar {
                 width: 125px;
-                cursor: pointer;
               }
             }
-            input {
-              display: none;
+            .image-upload-progress-bar {
+              width: 125px;
             }
           }
-          .image-upload:hover {
-            .registration-avatar {
-              filter: brightness(50%);
-            }
-          }
-          .image-upload-progress-bar {
-            width: 125px;
-          }
+
           mat-form-field {
             width: 100%;
           }

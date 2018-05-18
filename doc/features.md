@@ -26,7 +26,6 @@
 1. [Ecran Inscription] Crop une photo uploadée
 1. [Mail pré-inscription] Envoyer la fiche sanitaire en p-j du mail
 1. [Ecran Inscription] Ajouter les propriétés Taille (cm), pointure et catégorie
-1. [Ecran Inscription] Uploader une photo avec un input angular material cd : http://plnkr.co/edit/VGCSprNVT1pobOxjWwmT?p=preview
 1. [Ecran Inscription] Ajouter un toast après pré-inscription
 
 
@@ -53,3 +52,4 @@
 1. [Indexation] Ajouter un sitemap.xml + upload sur Search Console Google
 1. [Ecran Inscription] BUG : Modifier le type de l'addresse de 'string' en 'Address'
 1. [Ecran Inscription] Uploader une photo
+1. [Ecran Inscription] Uploader une photo avec un input angular material cd : http://plnkr.co/edit/VGCSprNVT1pobOxjWwmT?p=preview
