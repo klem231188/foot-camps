@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {ActivatedRoute, Params} from '@angular/router';
@@ -30,10 +32,10 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
   ngOnInit(): void {
     console.log('FootballCampDetailsComponent.ngOnInit()');
     this.route
-      .params
-      .switchMap((params: Params) => {
+      .params.pipe(
+      switchMap((params: Params) => {
         return this.footballCampService.getFootballCamp(params['id']);
-      })
+      }))
       .subscribe((footballCamp: FootballCamp) => {
         console.log(footballCamp);
         this.footballCamp = footballCamp;
@@ -41,10 +43,10 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
       });
 
     this.route
-      .params
-      .switchMap((params: Params) => {
+      .params.pipe(
+      switchMap((params: Params) => {
         return this.sessionService.getSessionsFromCampId(params['id']);
-      })
+      }))
       .subscribe((sessions: Session[]) => {
         console.log(sessions);
         this.sessions = sessions;

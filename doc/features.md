@@ -1,6 +1,6 @@
 ## Fonctionnalités en cours de développement
 1. [Ecran Détails] Mettre d'équerre le contenu du stage de bourg-blanc 
-
+1. [Update] Mise à jour vers angular 6
 ## Fonctionnalités à développer (triées par priorité)
 ##### Obligatoire pour mise en prod
 1. [Ecran Voir les inscrits] Ajouter les données du responsable légal

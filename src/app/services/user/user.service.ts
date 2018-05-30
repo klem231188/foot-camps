@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from 'angularfire2/firestore';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {User} from '../../models/user';
+import {publishReplay, refCount} from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
@@ -16,8 +17,10 @@ export class UserService {
       this.user$ = this.angularFirestore
         .doc<User>(`users/${uid}`)
         .valueChanges()
-        .publishReplay(1) // Latest event is buffered and will be emit to new subscriber
-        .refCount(); // Transform ConnectableObservable to Observable and handle multiple subscription / unsubscription
+        .pipe(
+          publishReplay(1), // Latest event is buffered and will be emit to new subscriber
+          refCount() // Transform ConnectableObservable to Observable and handle multiple subscription / unsubscription
+        )
     }
 
     return this.user$;

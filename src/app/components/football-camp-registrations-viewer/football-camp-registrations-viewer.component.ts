@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {RegistrationService} from '../../services/registration/registration.service';
@@ -11,6 +13,7 @@ import {Registration} from '../../models/registration';
 import {RegistrationState} from '../../models/registration-state.enum';
 import * as html2pdf from 'assets/js/html2pdf.bundle.min.js';
 import {Title} from '@angular/platform-browser';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-football-camp-registrations-viewer',
@@ -43,19 +46,19 @@ export class FootballCampRegistrationsViewerComponent implements OnInit {
     this.titleService.setTitle('Footcamps - Visualisation des inscriptions au stage de football');
 
     // TODO : improve code using Observable
-    this.angularFireAuth.authState
-      .switchMap<firebase.User, User>((firebaseUser) => {
+    this.angularFireAuth.authState.pipe(
+      switchMap<firebase.User, User>((firebaseUser) => {
         return this.userService.getUser(firebaseUser.uid);
-      })
-      .switchMap<User, Session[]>((user) => {
+      }),
+      switchMap<User, Session[]>((user) => {
         this.user = user;
         if (user.role === Role.ADMIN) {
           return this.sessionService.getSessions();
         } else {
           return this.sessionService.getSessionsFromCampId(user.campId);
         }
-      })
-      .switchMap<Session[], Registration[]>((sessions) => {
+      }),
+      switchMap<Session[], Registration[]>((sessions) => {
         this.sessions = sessions;
         this.selectedSession = (sessions != null && sessions.length > 0) ? sessions[0] : null;
         if (this.selectedSession != null) {
@@ -63,7 +66,7 @@ export class FootballCampRegistrationsViewerComponent implements OnInit {
         } else {
           return null;
         }
-      })
+      }),)
       .subscribe((registrations) => {
         this.registrations = registrations;
       });

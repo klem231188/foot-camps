@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
@@ -5,7 +7,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {MatDialog, MatVerticalStepper} from '@angular/material';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {FootballCampShouldConnectDialogComponent} from '../football-camp-should-connect-dialog/football-camp-should-connect-dialog.component';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {FootballCamp} from '../../models/football-camp';
 import {RegistrationService} from '../../services/registration/registration.service';
 import {Registration} from '../../models/registration';
@@ -199,11 +201,11 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
     // Listnening to events
     const footballCampSub = this.route
-      .params
-      .switchMap<Params, FootballCamp>((params) => {
+      .params.pipe(
+      switchMap<Params, FootballCamp>((params) => {
         const id: string = params['id'];
         return this.footballCampService.getFootballCamp(id);
-      })
+      }))
       .subscribe((footballCamp: FootballCamp) => {
         this.footballCamp = footballCamp;
         this.titleService.setTitle('Footcamps - Inscription au stage de football ' + this.footballCamp.city);
@@ -215,11 +217,11 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       });
 
     const sessionSub = this.route
-      .params
-      .switchMap<Params, Session[]>((params) => {
+      .params.pipe(
+      switchMap<Params, Session[]>((params) => {
         const id: string = params['id'];
         return this.sessionService.getSessionsFromCampId(id);
-      })
+      }))
       .subscribe((sessions: Session[]) => {
         this.sessions = sessions;
         console.log('----------- sessions :');

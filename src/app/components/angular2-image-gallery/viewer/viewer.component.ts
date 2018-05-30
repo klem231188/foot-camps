@@ -1,12 +1,12 @@
 import {
-    Component,
     trigger,
     state,
     style,
     transition,
     animate
-} from "@angular/core"
-import {ImageService} from "../services/image.service"
+} from '@angular/animations'
+import {ImageService} from '../services/image.service'
+import {Component} from '@angular/core';
 
 @Component({
     selector: 'viewer',

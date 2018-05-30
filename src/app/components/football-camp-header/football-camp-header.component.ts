@@ -1,9 +1,12 @@
+
+import {filter} from 'rxjs/operators';
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NavigationStart, Router} from '@angular/router';
-import 'rxjs/add/operator/filter';
+
 import {MatDialog} from '@angular/material';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {environment} from '../../../environments/environment';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'football-camp-header',
@@ -29,8 +32,8 @@ export class FootballCampHeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.router.events
-      .filter(event => event instanceof NavigationStart)
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationStart))
       .subscribe((event: NavigationStart) => {
         if (/^\/registration\/\w+$/i.test(event.url)) {
           // registration/:id

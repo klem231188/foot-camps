@@ -1,8 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import 'rxjs/add/operator/switchMap';
+
 import {FootballCamp} from '../../models/football-camp';
-import 'rxjs/add/operator/map';
+
 import {Title} from '@angular/platform-browser';
 
 @Component({

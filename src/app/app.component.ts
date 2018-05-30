@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FootballCampService} from './services/football-camp/football-camp.service';
 import {FirebaseAuthUiService} from './services/firebase-auth-ui/firebase-auth-ui.service';
@@ -10,6 +12,7 @@ import {User} from './models/user';
 import {UserService} from './services/user/user.service';
 import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
 import {UploadService} from './services/upload/upload.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-root',
@@ -29,14 +32,14 @@ export class AppComponent {
               private angularFireAuth: AngularFireAuth,
               private userService: UserService) {
 
-    this.angularFireAuth.authState
-      .switchMap<firebase.User, User>((firebaseUser) => {
+    this.angularFireAuth.authState.pipe(
+      switchMap<firebase.User, User>((firebaseUser) => {
         if (firebaseUser) {
           return userService.getUser(firebaseUser.uid);
         } else {
           return new EmptyObservable<User>();
         }
-      })
+      }))
       .subscribe((user) => {
         console.log('user = ' + JSON.stringify(user));
         console.log(user);

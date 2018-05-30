@@ -1,11 +1,13 @@
+
+import {switchMap, map} from 'rxjs/operators';
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/share';
+import {Observable} from 'rxjs';
+
+
+
+
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {FootballCamp} from '../../models/football-camp';
 
@@ -35,10 +37,10 @@ export class FootballCampLocatorComponent implements OnInit, OnDestroy, AfterVie
       }
     );
 
-    this.filteredFootballCamps$ = this.searchInput.valueChanges
-      .switchMap<any, FootballCamp[]>(value => {
-        return this.footballCamps$
-          .map<FootballCamp[], FootballCamp[]>(footballCamps => {
+    this.filteredFootballCamps$ = this.searchInput.valueChanges.pipe(
+      switchMap<any, FootballCamp[]>(value => {
+        return this.footballCamps$.pipe(
+          map<FootballCamp[], FootballCamp[]>(footballCamps => {
             let city: string = '';
             if (!value) {
               city = '';
@@ -50,13 +52,13 @@ export class FootballCampLocatorComponent implements OnInit, OnDestroy, AfterVie
             return footballCamps.filter((footballCamp) => {
               return footballCamp.city.toLowerCase().includes(city.toLowerCase());
             });
-          })
-      });
+          }))
+      }));
 
-    this.footballCamp$ = this.route.params
-      .switchMap<Params, FootballCamp>((params: Params) => {
+    this.footballCamp$ = this.route.params.pipe(
+      switchMap<Params, FootballCamp>((params: Params) => {
         return this.footballCampService.getFootballCamp(params['id']);
-      });
+      }));
   }
 
   ngAfterViewInit(): void {

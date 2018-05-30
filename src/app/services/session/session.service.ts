@@ -1,6 +1,7 @@
+import {map, publishReplay, refCount} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {AngularFirestore, DocumentChangeAction} from 'angularfire2/firestore';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {Session} from '../../models/session';
 
 @Injectable()
@@ -22,29 +23,30 @@ export class SessionService {
     if (this.sessions$ == null) {
       this.sessions$ = this.angularFirestore
         .collection<Session>('sessions')
-        .snapshotChanges()
-        .map<DocumentChangeAction[], Session[]>(actions => {
-          return actions.map(action => {
-            const data = action.payload.doc.data() as Session;
-            data.id = action.payload.doc.id;
-            return data as Session;
-          });
-        })
-        .publishReplay(1) // Latest event is buffered and will be emit to new subscriber
-        .refCount(); // Transform ConnectableObservable to Observable and handle multiple subscription / unsubscription
+        .snapshotChanges().pipe(
+          map<DocumentChangeAction[], Session[]>(actions => {
+            return actions.map(action => {
+              const data = action.payload.doc.data() as Session;
+              data.id = action.payload.doc.id;
+              return data as Session;
+            });
+          }),
+          publishReplay(1), // Latest event is buffered and will be emit to new subscriber
+          refCount() // Transform ConnectableObservable to Observable and handle multiple subscription / unsubscription
+        )
     }
 
     return this.sessions$;
   }
 
   getSessionsFromCampId(campId: string): Observable<Session[]> {
-    return this.getSessions()
-      .map<Session[], Session[]>((sessions: Session[]) => {
+    return this.getSessions().pipe(
+      map<Session[], Session[]>((sessions: Session[]) => {
           return sessions.filter(session => {
             return campId === session.campId;
           });
         }
-      );
+      ));
   }
 
 }

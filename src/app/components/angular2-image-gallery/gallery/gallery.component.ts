@@ -1,11 +1,13 @@
+
+import {map} from 'rxjs/operators';
 import {
     Component, ViewChild, ElementRef, HostListener, ViewChildren,
     ChangeDetectorRef, QueryList, OnInit, Input, SimpleChanges, OnChanges, Output, EventEmitter, OnDestroy
 } from "@angular/core"
 import {Http, Response} from "@angular/http"
 import {ImageService} from "../services/image.service"
-import {Subscription} from 'rxjs/Subscription'
-import 'rxjs/add/operator/map'
+import {Subscription} from 'rxjs'
+
 
 @Component({
     selector: 'gallery',
@@ -77,8 +79,8 @@ export class GalleryComponent implements OnInit, OnDestroy, OnChanges {
             this.imageDataStaticPath + this.dataFileName
         }
 
-        this.http.get(this.imageDataCompletePath)
-            .map((res: Response) => res.json())
+        this.http.get(this.imageDataCompletePath).pipe(
+            map((res: Response) => res.json()))
             .subscribe(
                 data => {
                     this.images = data
