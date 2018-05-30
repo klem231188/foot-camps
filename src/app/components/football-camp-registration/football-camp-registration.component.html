@@ -53,25 +53,31 @@
           <!-- TODO: utiliser http://plnkr.co/edit/VGCSprNVT1pobOxjWwmT?p=preview -->
           <div class="image-upload-container">
             <div class="image-upload" title="Ma photo">
-              <label for="file-input">
                 <img *ngIf="!downloadURL" src="./assets/img/registration/avatar2.png" class="registration-avatar"/>
                 <img *ngIf="downloadURL" [src]="downloadURL" class="registration-avatar"/>
-              </label>
-              <input id="file-input" type="file" accept="image/*" (change)="uploadFile($event)">
             </div>
-            <span *ngIf="!downloadURL" class="red">Le photo est obligatoire *</span>
+            <span *ngIf="!downloadURL">La photo est obligatoire <sup>*</sup> </span>
 
             <mat-progress-bar class="image-upload-progress-bar"
                               *ngIf="percentageUploaded && percentageUploaded !== 0 && percentageUploaded !== 100"
                               mode="determinate" [value]="percentageUploaded" color="primary"></mat-progress-bar>
           </div>
 
-          <!-- Nom & Prénom -->
+          <div class="image-upload-container">
+            <input [hidden]="true" id="input-file-id" type="file" accept="image/*" (change)="uploadFile($event)"/>
+            <label for="input-file-id" class="mat-button mat-raised-button mat-primary">
+              <mat-icon>attach_file</mat-icon>
+              &nbsp;&nbsp;Choisir une photo
+            </label>
+          </div>
+
+          <!-- Prénom -->
           <mat-form-field>
             <input matInput placeholder="Prénom" formControlName="firstname" required>
             <mat-error *ngIf="registrationForm.get('firstname').invalid">{{getFirstnameError()}}</mat-error>
           </mat-form-field>
 
+          <!-- Nom -->
           <mat-form-field>
             <input matInput placeholder="Nom" formControlName="lastname" required>
             <mat-error *ngIf="registrationForm.get('lastname').invalid">{{getLastnameError()}}</mat-error>
@@ -215,7 +221,8 @@
             En cliquant sur suivant, votre pré-inscription sera active pour le stage de {{footballCamp.city}}.
             <br>
             <!-- TODO : Gérer les prix halfBoardRates/fullBoardRates-->
-            Pour confirmer votre inscription, vous devez verser la somme de <b> {{session.value.halfBoardRates}} € (ou 105 € à partir du deuxième enfant) avant
+            Pour confirmer votre inscription, vous devez verser la somme de <b> {{session.value.halfBoardRates}} € (ou
+            105 € à partir du deuxième enfant) avant
             le {{session.value.endRegistrationDate | date : 'longDate'}}.</b><br>
             <!-- TODO : Gérer le mode de paiement de manière dynamique-->
             <ul>

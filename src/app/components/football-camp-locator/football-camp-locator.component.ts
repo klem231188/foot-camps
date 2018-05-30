@@ -10,6 +10,7 @@ import {Observable} from 'rxjs';
 
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {FootballCamp} from '../../models/football-camp';
+import {Meta, Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'football-camp-locator',
@@ -24,11 +25,17 @@ export class FootballCampLocatorComponent implements OnInit, OnDestroy, AfterVie
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private footballCampService: FootballCampService) {
+              private footballCampService: FootballCampService,
+              private titleService: Title,
+              private meta: Meta) {
   }
 
   ngOnInit(): void {
     console.log('FootballCampLocatorComponent.ngOnInit()');
+    this.titleService.setTitle('Footcamps - Localiser un stage de football');
+    this.meta.updateTag({name: 'description', content: 'Localiser un stage de football proche de chez vous.'});
+    this.meta.updateTag({name: 'keywords', content: 'footcamps, stage, football, localiser, trouver'});
+
     this.footballCamps$ = this.footballCampService.getFootballCamps();
 
     this.footballCamps$.subscribe(

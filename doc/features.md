@@ -1,32 +1,29 @@
 ## Fonctionnalités en cours de développement
 1. [Ecran Détails] Mettre d'équerre le contenu du stage de bourg-blanc 
-1. [Update] Mise à jour vers angular 6
+1. [Indexation] Ajouter balises meta "description" et "keywords"
+1. [Ecran Inscription] Ajouter les propriétés Taille, pointure et catégorie
+
 ## Fonctionnalités à développer (triées par priorité)
 ##### Obligatoire pour mise en prod
 1. [Ecran Voir les inscrits] Ajouter les données du responsable légal
 1. [Ecran Voir les inscrits] Ajouter les données de la mutuelle
 
 ##### Facultative pour mise en prod
+1. Upgrade to Angular 6
+1. [Ecran Inscription] Ajouter un toast après pré-inscription
+1. [Ecran Inscription] Gestion du paiement via l'API stripe
+1. [Ecran Vue d'ensemble] Mettre en avant les dates / prix / indicateur nombre d'inscription
 1. Ajout des règles de sécurité pour la base de données
 1. [Ecran Inscription] Gérer le retour arrière vers le détails
-1. [Ecran Voir les inscrits] Pouvoir ajouter des inscriptions manuellement
 1. [Ecran Connexion] Envoyer un mail au stagiaire lorsqu'il se connecte pour la première fois
-
+1. [Ecran Voir les inscrits] Pouvoir ajouter des inscriptions manuellement
 1. Contacter Milizac / Stade Brestois / Plabennec / Plouzané
 1. Faire une fiche standard de demande d'informations aux clubs
 1. Les organisateurs peuvent modifier les données du stage (à voir)
 1. Gérer les releases convenablement (Branches + Tag + Versioning)
 1. Gérer la librairie RxJS convenablement
-
-1. [Ecran Inscription] Gestion du paiement via l'API stripe
-1. [Ecran Vue d'ensemble] Améliorer la vue d'ensemble globalement (supprimer lorem ipsum)
-1. [Ecran Vue d'ensemble] Mettre en avant les dates / prix / indicateur nombre d'inscription
 1. [Ecran Mes Stages] Visualiser les stages auxquels je me suis inscris
-1. [Ecran Inscription] Crop une photo uploadée
 1. [Mail pré-inscription] Envoyer la fiche sanitaire en p-j du mail
-1. [Ecran Inscription] Ajouter les propriétés Taille (cm), pointure et catégorie
-1. [Ecran Inscription] Uploader une photo avec un input angular material cd : http://plnkr.co/edit/VGCSprNVT1pobOxjWwmT?p=preview
-1. [Ecran Inscription] Ajouter un toast après pré-inscription
 
 
 ## Fonctionnalités développées (La plus récente en bas de la liste)
@@ -52,3 +49,4 @@
 1. [Indexation] Ajouter un sitemap.xml + upload sur Search Console Google
 1. [Ecran Inscription] BUG : Modifier le type de l'addresse de 'string' en 'Address'
 1. [Ecran Inscription] Uploader une photo
+1. [Ecran Inscription] Uploader une photo avec un input angular material cd : http://plnkr.co/edit/VGCSprNVT1pobOxjWwmT?p=preview
