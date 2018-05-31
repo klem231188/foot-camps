@@ -1,5 +1,6 @@
 import * as admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
+import * as Stripe from 'stripe';
 import {FootballCamp} from '../../src/app/models/football-camp';
 import {Organizer} from '../../src/app/models/organizer';
 import {Session} from '../../src/app/models/session';
@@ -411,3 +412,12 @@ function sendMail(registration: Registration) {
     .then((info) => console.log(`A mail has been sent to ${registration.email} with state ${registration.state}`))
     .catch((error) => console.error('There was an error while sending the email:', error));
 }
+
+export const onPaymentInitialized = functions.firestore
+  .document('payments/{pid}')
+  .onCreate(event => {
+    console.log(event);
+    const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG);
+    const stripe = new Stripe(firebaseConfig.stripe.testkey);
+    //TODO call stripe backend
+  });
