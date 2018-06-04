@@ -1,7 +1,7 @@
 ## Fonctionnalités en cours de développement
 1. [Indexation] Ajouter balises meta "description" et "keywords"
 1. [Ecran Inscription] Ajouter les propriétés Taille, pointure et catégorie
-1. Upgrade to Angular 6
+1. [Ecran Inscription] Gestion du paiement via l'API stripe
 
 ## Fonctionnalités à développer (triées par priorité)
 ##### Obligatoire pour mise en prod
@@ -9,8 +9,8 @@
 1. [Ecran Voir les inscrits] Ajouter les données de la mutuelle
 
 ##### Facultative pour mise en prod
+1. Clean code
 1. [Ecran Inscription] Ajouter un toast après pré-inscription
-1. [Ecran Inscription] Gestion du paiement via l'API stripe
 1. [Ecran Vue d'ensemble] Mettre en avant les dates / prix / indicateur nombre d'inscription
 1. Ajout des règles de sécurité pour la base de données
 1. [Ecran Inscription] Gérer le retour arrière vers le détails
@@ -50,3 +50,4 @@
 1. [Ecran Inscription] Uploader une photo
 1. [Ecran Inscription] Uploader une photo avec un input angular material cd : http://plnkr.co/edit/VGCSprNVT1pobOxjWwmT?p=preview
 1. [Ecran Détails] Mettre d'équerre le contenu du stage de bourg-blanc
+1. Upgrade to Angular 6

@@ -8,7 +8,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "ngrok": "~/ngrok http 4200 --host-header=localhost:80"
   },
   "private": true,
   "dependencies": {
@@ -27,6 +28,7 @@
     "@angular/platform-browser-dynamic": "^6.0.0",
     "@angular/router": "^6.0.0",
     "@google-cloud/functions-emulator": "^1.0.0-alpha.29",
+    "@types/stripe-v3": "^3.0.7",
     "angularfire2": "^5.0.0-rc.5-next",
     "bootstrap": "3.3.7",
     "core-js": "^2.4.1",
@@ -50,6 +52,7 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/lodash": "latest",
     "@types/node": "~6.0.60",
+    "@types/stripe": "^5.0.11",
     "codelyzer": "^4.0.1",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",

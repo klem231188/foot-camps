@@ -1,4 +1,3 @@
-
 import {switchMap} from 'rxjs/operators';
 import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FootballCampService} from './services/football-camp/football-camp.service';
@@ -13,12 +12,13 @@ import {UserService} from './services/user/user.service';
 import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
 import {UploadService} from './services/upload/upload.service';
 import * as firebase from 'firebase';
+import {PaymentService} from './services/payment/payment.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['app.component.scss'],
-  providers: [FootballCampService, RegistrationService, UploadService, SessionService, UserService, AngularFireAuth, FirebaseAuthUiService],
+  providers: [FootballCampService, PaymentService, RegistrationService, UploadService, SessionService, UserService, AngularFireAuth, FirebaseAuthUiService],
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {

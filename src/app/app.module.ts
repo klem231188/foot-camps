@@ -36,6 +36,8 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {FootballCampRegistrationsViewerComponent} from './components/football-camp-registrations-viewer/football-camp-registrations-viewer.component';
 import {StatePipe} from './pipes/state.pipe';
+import {FootballCampPaymentComponent} from './components/football-camp-payment/football-camp-payment.component';
+import {PlaygroundComponent} from './components/playground/playground.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -83,6 +85,8 @@ registerLocaleData(localeFr, 'fr');
     FootballCampRegistrationsViewerComponent,
     FootballCampLoginComponent,
     FootballCampShouldConnectDialogComponent,
+    FootballCampPaymentComponent,
+    PlaygroundComponent,
   ],
   entryComponents: [
     FootballCampLoginComponent,
