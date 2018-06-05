@@ -8,66 +8,21 @@ import {PaymentService} from '../../services/payment/payment.service';
 })
 export class FootballCampPaymentComponent implements AfterViewInit, OnInit {
 
-  @Input() amount: number; // Total amount
-  @Input() label: string; // Label for product/purchase
-
-  elements: any;
-  paymentRequest: any;
-  prButton: any;
-
-  // Element used to mount the button
+  @Input() amount: number;
+  card: any;
   @ViewChild('payElement') payElement;
+  @ViewChild('payErrorElement') payErrorElement;
 
   constructor(private paymentService: PaymentService) {
     console.log('constructor');
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit');
+    console.log('FootballCampPaymentComponent.ngOnInit()');
   }
 
   ngAfterViewInit(): void {
-    console.log('ngAfterViewInit');
-
-    // 1. instantiate a paymentRequest object
-    this.paymentRequest = this.paymentService.stripe.paymentRequest({
-      country: 'FR',
-      currency: 'eur',
-      total: {
-        amount: this.amount,
-        label: this.label,
-      },
-    });
-
-    // 2. initalize elements
-    this.elements = this.paymentService.stripe.elements();
-
-
-    // 3. register listener
-    this.paymentRequest.on('source', async (event) => {
-      console.log(event)
-
-      // Fires when the user submits their card
-      // Make an HTTP call to charge on the backend (using a timeout to simulate the response)
-      setTimeout(() => {
-        event.complete('success')
-      }, 1000)
-    });
-
-
-    // // 4. create the button
-    // this.prButton = this.elements.create('paymentRequestButton', {
-    //   paymentRequest: this.paymentRequest,
-    //   style: {
-    //     paymentRequestButton: {
-    //       type: 'buy', // 'default' | 'donate' | 'buy',
-    //       theme: 'dark' // 'dark' | 'light' | 'light-outline',
-    //     },
-    //   }
-    // });
-    //
-    // // 5. mount the button asynchronously
-    // this.mountButton();
+    console.log('FootballCampPaymentComponent.ngAfterViewInit()');
 
     const style = {
       base: {
@@ -86,34 +41,33 @@ export class FootballCampPaymentComponent implements AfterViewInit, OnInit {
       }
     };
 
-    // Create an instance of the card Element.
-    const card = this.elements.create('card', {style});
+    this.card = this.paymentService.stripe.elements().create('card', {style});
+    this.card.mount(this.payElement.nativeElement);
 
-    // Add an instance of the card Element into the `card-element` <div>.
-    card.mount(this.payElement.nativeElement);
-
-    card.addEventListener('change', ({error}) => {
-      const displayError = document.getElementById('card-errors');
+    this.card.addEventListener('change', ({error}) => {
       if (error) {
-        displayError.textContent = error.message;
+        this.payErrorElement.nativeElement.textContent = error.message;
       } else {
-        displayError.textContent = '';
+        this.payErrorElement.nativeElement.textContent = '';
       }
     });
   }
 
-  mountButton(): void {
-    console.log('mountButton()');
-    this.paymentRequest.canMakePayment()
-      .then(result => {
-        if (result) {
-          this.prButton.mount(this.payElement.nativeElement);
+  onPay(): void {
+    console.log('FootballCampPaymentComponent.onPay()');
+    this.paymentService.stripe
+      .createToken(this.card)
+      .then((result) => {
+        if (result.error) {
+          this.payErrorElement.nativeElement.textContent = result.error.message;
         } else {
-          console.error('your browser is old school!');
+          this.stripeTokenHandler(result.token);
         }
-      })
-      .catch(error => {
-        console.log(error);
       });
+  }
+
+  stripeTokenHandler(token): void {
+    console.log(`FootballCampPaymentComponent.stripeTokenHandler(${JSON.stringify(token)})`);
+    // TODO call firebase
   }
 }

@@ -1,3 +1,7 @@
+<br>
 <div #payElement>
   <!-- A Stripe Element will be inserted here. -->
 </div>
+<span class="error" #payErrorElement></span>
+<br>
+<button mat-raised-button color="primary" (click)="onPay()">Payer {{amount}} €</button>
