@@ -1,4 +1,3 @@
-import {Session} from './session';
 import {Organizer} from './organizer';
 
 export interface Details {
@@ -22,7 +21,7 @@ export interface Details {
   pathToGallery: string;
 
   // - Date and prices
-  //sessions: Session[];
+  // sessions: Session[];
 
   // - Registration
   useOnlineRegistration: boolean;

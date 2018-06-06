@@ -1,6 +1,5 @@
 import {Overview} from './overview';
 import {Details} from './details';
-import {Contact} from './contact';
 
 export interface FootballCamp {
   // - id
@@ -18,5 +17,5 @@ export interface FootballCamp {
   details: Details;
 
   // - Contacts data
-  //contacts: Contact[];
+  // contacts: Contact[];
 }

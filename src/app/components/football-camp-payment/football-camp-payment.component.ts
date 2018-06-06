@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {PaymentService} from '../../services/payment/payment.service';
+import {Payment} from '../../models/payment';
 
 @Component({
   selector: 'app-football-camp-payment',
@@ -68,6 +69,11 @@ export class FootballCampPaymentComponent implements AfterViewInit, OnInit {
 
   stripeTokenHandler(token): void {
     console.log(`FootballCampPaymentComponent.stripeTokenHandler(${JSON.stringify(token)})`);
-    // TODO call firebase
+    const payment: Payment = {
+      registrationId: '123456879',
+      stripeToken: token
+    };
+
+    this.paymentService.save(payment);
   }
 }

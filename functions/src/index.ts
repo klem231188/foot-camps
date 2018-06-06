@@ -1,5 +1,5 @@
-import * as admin from 'firebase-admin'
-import * as functions from 'firebase-functions'
+import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
 import * as Stripe from 'stripe';
 import {FootballCamp} from '../../src/app/models/football-camp';
 import {Organizer} from '../../src/app/models/organizer';
@@ -7,7 +7,7 @@ import {Session} from '../../src/app/models/session';
 import {Registration} from '../../src/app/models/registration';
 import {createTransport, SendMailOptions, Transporter} from 'nodemailer';
 
-admin.initializeApp(functions.config().firebase);
+admin.initializeApp();
 
 export const addAberCamp = functions.https.onRequest((request, response) => {
   const organizer1: Organizer = {
@@ -413,11 +413,13 @@ function sendMail(registration: Registration) {
     .catch((error) => console.error('There was an error while sending the email:', error));
 }
 
-export const onPaymentInitialized = functions.firestore
+export const onCreatePayment = functions.firestore
   .document('payments/{pid}')
   .onCreate(event => {
+    console.log('onCreatePayment()');
     console.log(event);
     const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG);
     const stripe = new Stripe(firebaseConfig.stripe.testkey);
+    console.log(stripe);
     //TODO call stripe backend
   });
