@@ -6,6 +6,7 @@ import {Organizer} from '../../src/app/models/organizer';
 import {Session} from '../../src/app/models/session';
 import {Registration} from '../../src/app/models/registration';
 import {createTransport, SendMailOptions, Transporter} from 'nodemailer';
+import {Payment} from '../../src/app/models/payment';
 
 admin.initializeApp();
 
@@ -417,9 +418,22 @@ export const onCreatePayment = functions.firestore
   .document('payments/{pid}')
   .onCreate(event => {
     console.log('onCreatePayment()');
-    console.log(event);
-    const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG);
-    const stripe = new Stripe(firebaseConfig.stripe.testkey);
-    console.log(stripe);
-    //TODO call stripe backend
+    const paymentInProgress: Payment = event.data.data();
+
+    const stripe = new Stripe(functions.config().stripe.testkey);
+
+    // TODO get price from session from registration
+
+    // TODO add  idempotency_key = pid
+    // const idempotency_key = pid;
+
+    return stripe.charges.create(
+      {
+        amount: 1,
+        currency: 'eur',
+        description: 'Paiement stage de football',
+        source: paymentInProgress.stripeToken
+      },
+      {idempotency_key}
+    );
   });
