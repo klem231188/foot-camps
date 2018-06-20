@@ -38,7 +38,9 @@ import {FootballCampRegistrationsViewerComponent} from './components/football-ca
 import {StatePipe} from './pipes/state.pipe';
 import {FootballCampPaymentComponent} from './components/football-camp-payment/football-camp-payment.component';
 import {PlaygroundComponent} from './components/playground/playground.component';
-
+import {FootballCampFileUploadComponent} from './components/football-camp-file-upload/football-camp-file-upload.component';
+import {DropZoneDirective} from './directives/drop-zone.directive';
+import {FileSizePipe} from './pipes/file-size.pipe';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -70,11 +72,13 @@ registerLocaleData(localeFr, 'fr');
   declarations: [
     AgePipe,
     FieldPositionPipe,
+    FileSizePipe,
     FeetPipe,
     GenderPipe,
     SafeHtmlPipe,
     StatePipe,
     TruncatePipe,
+    DropZoneDirective,
     AppComponent,
     FootballCampLocatorComponent,
     FootballCampMapComponent,
@@ -87,6 +91,7 @@ registerLocaleData(localeFr, 'fr');
     FootballCampShouldConnectDialogComponent,
     FootballCampPaymentComponent,
     PlaygroundComponent,
+    FootballCampFileUploadComponent,
   ],
   entryComponents: [
     FootballCampLoginComponent,

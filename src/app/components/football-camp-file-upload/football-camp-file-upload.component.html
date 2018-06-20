@@ -1,0 +1,16 @@
+<div class="file-upload-item">
+  <mat-icon *ngIf="uploaded | async" class="mat-18 file-upload-status-icon" color="primary">check</mat-icon>
+  <mat-icon *ngIf="!(uploaded | async)" class="mat-18 file-upload-status-icon" color="warn">close</mat-icon>
+  <mat-progress-bar class="file-upload-progress-bar" mode="determinate" [value]="percentage | async"
+                    color="primary"></mat-progress-bar>
+  <a *ngIf="uploaded | async" mat-icon-button [href]="downloadURL" target="_blank" class="file-upload-download-button">
+    <mat-icon class="mat-18" color="primary">file_download</mat-icon>
+  </a>
+  <span [innerHTML]="title"></span>
+  <span class="space"> </span>
+  <input [hidden]="true" id="{{inputId}}" type="file" accept="image/*" (change)="startUpload($event.target.files)"/>
+  <label for="{{inputId}}" class="mat-raised-button mat-primary import">
+    <mat-icon class="mat-18">file_upload</mat-icon>
+    Importer
+  </label>
+</div>

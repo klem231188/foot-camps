@@ -1,0 +1,32 @@
+@mixin football-camp-file-upload-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  app-football-camp-file-upload {
+    width: 100%;
+    .file-upload-item {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      align-items: center;
+      .file-upload-status-icon {
+        margin-right: 10px;
+      }
+      .file-upload-download-button {
+        margin-right: 10px;
+      }
+      .file-upload-progress-bar {
+        width: 50px;
+        margin-right: 10px;
+      }
+      .space {
+        flex: 1;
+      }
+      .import {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}

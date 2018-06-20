@@ -418,10 +418,14 @@ export const onCreatePayment = functions.firestore
   .document('payments/{pid}')
   .onCreate(event => {
     console.log('onCreatePayment()');
+
     const paymentInProgress: Payment = event.data.data();
+    console.log('paymentInProgress ' + paymentInProgress);
+    console.log(paymentInProgress);
 
-    const stripe = new Stripe(functions.config().stripe.testkey);
 
+    console.log('key ' + functions.config().stripe.key);
+    const stripe = new Stripe(functions.config().stripe.key);
     // TODO get price from session from registration
 
     // TODO add  idempotency_key = pid
@@ -429,11 +433,10 @@ export const onCreatePayment = functions.firestore
 
     return stripe.charges.create(
       {
-        amount: 1,
+        amount: 50,
         currency: 'eur',
         description: 'Paiement stage de football',
-        source: paymentInProgress.stripeToken
+        source: paymentInProgress.stripeToken.id
       },
-      {idempotency_key}
     );
   });

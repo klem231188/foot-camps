@@ -24,7 +24,7 @@ export class SessionService {
       this.sessions$ = this.angularFirestore
         .collection<Session>('sessions')
         .snapshotChanges().pipe(
-          map<DocumentChangeAction[], Session[]>(actions => {
+          map<DocumentChangeAction<Session>[], Session[]>(actions => {
             return actions.map(action => {
               const data = action.payload.doc.data() as Session;
               data.id = action.payload.doc.id;

@@ -1,6 +1,6 @@
 export interface Payment {
   id?: string;
   registrationId: string;
-  stripeToken: string;
+  stripeTokenId: number;
   // TODO status
 }

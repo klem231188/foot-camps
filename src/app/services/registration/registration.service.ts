@@ -1,4 +1,4 @@
-import {publishReplay, map, refCount} from 'rxjs/operators';
+import {map, publishReplay, refCount} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {AngularFirestore, DocumentChangeAction} from 'angularfire2/firestore';
 import {Observable} from 'rxjs';
@@ -30,7 +30,7 @@ export class RegistrationService {
         return ref.where('sessionId', '==', sessionId)
       })
       .snapshotChanges().pipe(
-        map<DocumentChangeAction[], Registration[]>(actions => {
+        map<DocumentChangeAction<Registration>[], Registration[]>(actions => {
           return actions.map(action => {
             const data = action.payload.doc.data() as Registration;
             data.id = action.payload.doc.id;

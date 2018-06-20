@@ -62,16 +62,16 @@ export class FootballCampPaymentComponent implements AfterViewInit, OnInit {
         if (result.error) {
           this.payErrorElement.nativeElement.textContent = result.error.message;
         } else {
-          this.stripeTokenHandler(result.token);
+          this.stripeTokenHandler(result.token.id);
         }
       });
   }
 
-  stripeTokenHandler(token): void {
-    console.log(`FootballCampPaymentComponent.stripeTokenHandler(${JSON.stringify(token)})`);
+  stripeTokenHandler(stripeTokenId: number): void {
+    console.log(`FootballCampPaymentComponent.stripeTokenHandler(${stripeTokenId})`);
     const payment: Payment = {
       registrationId: '123456879',
-      stripeToken: token
+      stripeTokenId: stripeTokenId
     };
 
     this.paymentService.save(payment);

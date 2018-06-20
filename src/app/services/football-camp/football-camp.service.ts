@@ -1,5 +1,4 @@
-
-import {refCount, publishReplay, map} from 'rxjs/operators';
+import {map, publishReplay, refCount} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {AngularFirestore, DocumentChangeAction} from 'angularfire2/firestore';
@@ -20,7 +19,7 @@ export class FootballCampService {
       this.footballCamps$ = this.angularFirestore
         .collection<FootballCamp>('camps')
         .snapshotChanges().pipe(
-        map<DocumentChangeAction[], FootballCamp[]>(actions => {
+        map<DocumentChangeAction<FootballCamp>[], FootballCamp[]>(actions => {
           return actions.map(action => {
             const data = action.payload.doc.data() as FootballCamp;
             data.id = action.payload.doc.id;
