@@ -211,6 +211,18 @@
           </div>
         </form>
       </mat-step>
+      <!--Etape : Documents à fournir -->
+      <mat-step>
+        <ng-template matStepLabel>Documents à fournir</ng-template>
+        <app-football-camp-registration-documents #documents></app-football-camp-registration-documents>
+        <span class="separator"></span>
+        <div class="next-button">
+          <button mat-button matStepperNext mat-raised-button color="primary"
+                  [disabled]="!(documents.valid | async)">Suivant
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      </mat-step>
       <!--Etape : Payer -->
       <mat-step [stepControl]="paymentFormGroup">
         <form [formGroup]="paymentFormGroup" class="payment-form-group-container">

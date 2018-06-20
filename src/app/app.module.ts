@@ -41,6 +41,7 @@ import {PlaygroundComponent} from './components/playground/playground.component'
 import {FootballCampFileUploadComponent} from './components/football-camp-file-upload/football-camp-file-upload.component';
 import {DropZoneDirective} from './directives/drop-zone.directive';
 import {FileSizePipe} from './pipes/file-size.pipe';
+import {FootballCampRegistrationDocumentsComponent} from './components/football-camp-registration-documents/football-camp-registration-documents.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -92,6 +93,7 @@ registerLocaleData(localeFr, 'fr');
     FootballCampPaymentComponent,
     PlaygroundComponent,
     FootballCampFileUploadComponent,
+    FootballCampRegistrationDocumentsComponent,
   ],
   entryComponents: [
     FootballCampLoginComponent,

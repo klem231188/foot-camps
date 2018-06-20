@@ -84,7 +84,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       console.log('stepper is not undefined');
       this._stepper.selectionChange.asObservable()
         .subscribe((selection) => {
-          if (selection.selectedIndex === 3) {
+          if (selection.selectedIndex === 4) {
             this._stepper._steps.forEach((step) => step.editable = false);
           }
         })

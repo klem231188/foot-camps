@@ -2,6 +2,7 @@
 1. [Indexation] Ajouter balises meta "description" et "keywords"
 1. [Ecran Inscription] Ajouter les propriétés Taille, pointure et catégorie
 1. [Ecran Inscription] Gestion du paiement via l'API stripe
+1. [Ecran Inscription][Documents] Gestion des documents
 
 ## Fonctionnalités à développer (triées par priorité)
 ##### Obligatoire pour mise en prod
