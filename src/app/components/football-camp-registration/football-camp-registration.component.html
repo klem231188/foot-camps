@@ -19,7 +19,7 @@
             </mat-icon>
             <mat-card-header>
               <mat-card-title>Session n°{{i}}</mat-card-title>
-              <mat-card-subtitle>Du {{session.start | date : 'longDate'}} au {{session.end | date : 'longDate'}}
+              <mat-card-subtitle>Du {{session.start.toDate() | date : 'longDate'}} au {{session.end.toDate() | date : 'longDate'}}
               </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
@@ -240,7 +240,7 @@
                 <!-- TODO : Gérer les prix halfBoardRates/fullBoardRates-->
                 Pour confirmer votre inscription, vous devrez verser la somme de <b> {{session.value.halfBoardRates}} € (ou
                 105 € à partir du deuxième enfant) avant
-                le {{session.value.endRegistrationDate | date : 'longDate'}}.</b><br>
+                le {{session.value.endRegistrationDate?.toDate() | date : 'longDate'}}.</b><br>
                 <!-- TODO : Gérer le mode de paiement de manière dynamique-->
                 <ul>
                   <li>Par chèque à l'ordre de "AS Coat Méal"</li>

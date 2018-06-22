@@ -19,6 +19,7 @@ import {Feet} from '../../models/feet.enum';
 import {RegistrationState} from '../../models/registration-state.enum';
 import {UploadService} from '../../services/upload/upload.service';
 import {Meta, Title} from '@angular/platform-browser';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'football-camp-registration',
@@ -314,7 +315,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
         streetAddress: this.streetAddress.value,
         zipCode: this.zipCode.value
       },
-      birthdate: (this.registrationForm.get('birthdate').value as moment.Moment).toDate(),
+      birthdate: firebase.firestore.Timestamp.fromDate((this.registrationForm.get('birthdate').value as moment.Moment).toDate()),
       club: (this.registrationForm.get('club').value as string),
       email: (this.registrationForm.get('email').value as string),
       fieldPosition: FieldPosition[this.registrationForm.get('fieldPosition').value as string],

@@ -4,10 +4,11 @@ import {FieldPosition} from './field-position.enum';
 import {RegistrationState} from './registration-state.enum';
 import {LegalRepresentative} from './legal-representative.model';
 import {Address} from './address.model';
+import * as firebase from 'firebase';
 
 export interface Registration {
   address: Address;
-  birthdate: Date;
+  birthdate: firebase.firestore.Timestamp;
   club: string;
   email: string;
   feet: Feet;

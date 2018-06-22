@@ -1,3 +1,4 @@
+import * as firebase from 'firebase';
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as Stripe from 'stripe';
@@ -107,12 +108,12 @@ export const addAberCamp = functions.https.onRequest((request, response) => {
     numberOfRegistrationsInProgress: 0,
     numberOfRegistrationsRejected: 0,
     enable: true,
-    end: new Date('2018-07-13T12:00:00'),
-    endRegistrationDate: new Date('2018-06-09T00:00:00'),
+    end: firebase.firestore.Timestamp.fromDate(new Date('2018-07-13T12:00:00')),
+    endRegistrationDate: firebase.firestore.Timestamp.fromDate(new Date('2018-06-09T00:00:00')),
     fullBoardRates: null,
     halfBoardRates: 130,
     maximumNumberOfRegistrations: 40,
-    start: new Date('2018-07-09T08:30:00')
+    start: firebase.firestore.Timestamp.fromDate(new Date('2018-07-09T08:30:00'))
   };
 
   // const session2: Session = {
@@ -212,12 +213,12 @@ export const addPlabennecCamp = functions.https.onRequest((request, response) =>
     numberOfRegistrationsInProgress: 0,
     numberOfRegistrationsRejected: 0,
     enable: true,
-    end: new Date('2018-07-10T12:00:00'),
-    endRegistrationDate: new Date('2018-06-09T00:00:00'),
+    end: firebase.firestore.Timestamp.fromDate(new Date('2018-07-10T12:00:00')),
+    endRegistrationDate: firebase.firestore.Timestamp.fromDate(new Date('2018-06-09T00:00:00')),
     fullBoardRates: null,
     halfBoardRates: 230,
     maximumNumberOfRegistrations: 30,
-    start: new Date('2018-07-14T08:30:00')
+    start: firebase.firestore.Timestamp.fromDate(new Date('2018-07-14T08:30:00'))
   };
 
   const session2: Session = {
@@ -226,12 +227,12 @@ export const addPlabennecCamp = functions.https.onRequest((request, response) =>
     numberOfRegistrationsInProgress: 0,
     numberOfRegistrationsRejected: 0,
     enable: true,
-    end: new Date('2018-07-17T12:00:00'),
-    endRegistrationDate: new Date('2018-06-09T00:00:00'),
+    end: firebase.firestore.Timestamp.fromDate(new Date('2018-07-17T12:00:00')),
+    endRegistrationDate: firebase.firestore.Timestamp.fromDate(new Date('2018-06-09T00:00:00')),
     fullBoardRates: null,
     halfBoardRates: 230,
     maximumNumberOfRegistrations: 30,
-    start: new Date('2018-07-21T08:30:00')
+    start: firebase.firestore.Timestamp.fromDate(new Date('2018-07-21T08:30:00'))
   };
 
   const session3: Session = {
@@ -240,12 +241,12 @@ export const addPlabennecCamp = functions.https.onRequest((request, response) =>
     numberOfRegistrationsInProgress: 0,
     numberOfRegistrationsRejected: 0,
     enable: true,
-    end: new Date('2018-07-24T12:00:00'),
-    endRegistrationDate: new Date('2018-06-09T00:00:00'),
+    end: firebase.firestore.Timestamp.fromDate(new Date('2018-07-24T12:00:00')),
+    endRegistrationDate: firebase.firestore.Timestamp.fromDate(new Date('2018-06-09T00:00:00')),
     fullBoardRates: null,
     halfBoardRates: 230,
     maximumNumberOfRegistrations: 30,
-    start: new Date('2018-07-28T08:30:00')
+    start: firebase.firestore.Timestamp.fromDate(new Date('2018-07-28T08:30:00'))
   };
 
   addCamp(request, response, camp, [session1, session2, session3]);

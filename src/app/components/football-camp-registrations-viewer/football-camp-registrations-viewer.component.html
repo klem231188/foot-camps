@@ -10,7 +10,7 @@
           Session n°{{i}}
         </mat-panel-title>
         <mat-panel-description>
-          du {{session.start | date : 'shortDate'}} au {{session.end | date : 'shortDate'}}
+          du {{session.start.toDate() | date : 'shortDate'}} au {{session.end.toDate() | date : 'shortDate'}}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p>Nombre de place disponibles: {{session.maximumNumberOfRegistrations}}</p>

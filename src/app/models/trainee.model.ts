@@ -2,10 +2,11 @@ import {Address} from './address.model';
 import {Gender} from './gender.enum';
 import {Feet} from './feet.enum';
 import {FieldPosition} from './field-position.enum';
+import * as firebase from 'firebase';
 
 export interface Trainee {
   address: Address;
-  birthdate: Date;
+  birthdate: firebase.firestore.Timestamp;
   club: string;
   email: string;
   feet: Feet;

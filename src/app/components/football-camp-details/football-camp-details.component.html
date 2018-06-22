@@ -123,7 +123,7 @@
             <tbody>
             <tr *ngFor="let session of sessions; let i = index">
               <td data-label="Sessions">Session n°{{i}}</td>
-              <td data-label="Dates">A partir du {{session.start | date : 'longDate'}} jusqu'au {{session.end | date :
+              <td data-label="Dates">A partir du {{session.start.toDate() | date : 'longDate'}} jusqu'au {{session.end.toDate() | date :
                 'longDate'}}
               </td>
               <td data-label="Tarifs en Pension complète" *ngIf="hasFullBoardRatesSessions()">{{session.fullBoardRates}}
