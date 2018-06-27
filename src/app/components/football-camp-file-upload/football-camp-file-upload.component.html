@@ -8,7 +8,7 @@
   </a>
   <span [innerHTML]="title"></span>
   <span class="space"> </span>
-  <input [hidden]="true" id="{{inputId}}" type="file" accept="image/*" (change)="startUpload($event.target.files)"/>
+  <input [hidden]="true" id="{{inputId}}" type="file" accept="image/*,application/pdf" (change)="startUpload($event.target.files)"/>
   <label for="{{inputId}}" class="mat-raised-button mat-primary import">
     <mat-icon class="mat-18">file_upload</mat-icon>
     Importer
