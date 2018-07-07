@@ -12,14 +12,13 @@ import {RegistrationService} from '../../services/registration/registration.serv
 import {Registration} from '../../models/registration';
 import {Gender} from '../../models/gender.enum';
 import * as moment from 'moment';
-import {Session} from '../../models/session';
 import {FieldPosition} from '../../models/field-position.enum';
 import {Feet} from '../../models/feet.enum';
 import {RegistrationState} from '../../models/registration-state.enum';
 import {UploadService} from '../../services/upload/upload.service';
 import {Meta, Title} from '@angular/platform-browser';
 import * as firebase from 'firebase';
-import {FootballCampRegistrationSessionsComponent} from "../football-camp-registration-sessions/football-camp-registration-sessions.component";
+import {FootballCampRegistrationSessionsComponent} from '../football-camp-registration-sessions/football-camp-registration-sessions.component';
 
 @Component({
   selector: 'football-camp-registration',
@@ -32,6 +31,9 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   // Model to save data
   registration: Registration;
+
+  // Session
+  @ViewChild(FootballCampRegistrationSessionsComponent) sessionComponent: FootballCampRegistrationSessionsComponent;
 
   // Session Form & Controls
   sessionForm: FormGroup;
@@ -77,8 +79,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   private _subscriptions: Subscription[];
 
-  //@ViewChild() sessionComponent: FootballCampRegistrationSessionsComponent;
-
   @ViewChild('stepper')
   set stepper(stepper: MatVerticalStepper) {
     this._stepper = stepper;
@@ -111,12 +111,19 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   ngOnInit(): void {
     console.log('FootballCampRegistrationComponent.ngOnInit()');
-    // Session Form & Controls
-    this.session = new FormControl('', [Validators.required]);
+    // Session
+    this.sessionForm = new FormGroup({});
 
-    this.sessionForm = new FormGroup({
-      'session': this.session
-    });
+    // Trainee Information
+
+    // Document Upload
+
+    // Payment
+
+    // Summary
+
+    // Session Form & Controls
+
 
     // Registration Form & Controls
     // Mock for development purpose
@@ -237,6 +244,16 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   ngAfterViewInit(): void {
     console.log('FootballCampRegistrationComponent.ngAfterViewInit()');
+    // Session
+
+    // Trainee Information
+
+    // Document Upload
+
+    // Payment
+
+    // Summary
+
   }
 
   ngOnDestroy(): void {
@@ -284,12 +301,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     });
   }
 
-  onSessionSelected(session: Session): void {
-    console.log(session);
-    this.session.setValue(session);
-    this._stepper.next();
-  }
-
   onNextPayment(): void {
     this.isLoading = true;
 
@@ -325,7 +336,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
         phoneNumber: this.legalRepresentativePhoneNumber.value
       },
       photoURL: this.downloadURL,
-      sessionId: (this.session.value as Session).id,
+      sessionId: this.sessionComponent.selectedSession.getValue().id,
       state: RegistrationState.IN_PROGRESS
     };
 
@@ -342,7 +353,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   uploadFile(event): void {
     const file = event.target.files[0];
     const extension = file.name.split('.').pop();
-    const filepath = `/uploads/sessions/${(this.session.value as Session).id}/trainees/${this.filename}.${extension}`;
+    const filepath = `/uploads/sessions/${this.sessionComponent.selectedSession.getValue().id}/trainees/${this.filename}.${extension}`;
     const task = this.uploadService.uploadFile(filepath, file);
 
     //task.downloadURL().subscribe(url => this.downloadURL = url);
@@ -351,8 +362,13 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   uuidv4(): string {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });
+  }
+
+  nextStep(): void {
+    console.log('nextStep()')
+    this._stepper.next();
   }
 }

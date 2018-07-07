@@ -43,7 +43,9 @@ export class FootballCampRegistrationSessionsComponent implements OnInit, OnDest
     // React on session selected
     const sub2 = this.selectedSession
       .subscribe((session: Session) => {
-        this.isValid.next(true);
+        if (session != null) {
+          this.isValid.next(true);
+        }
       });
 
     // Store all subscriptions
