@@ -3,7 +3,6 @@
 1. [Ecran Inscription] Ajouter les propriétés Taille, pointure et catégorie
 1. [Ecran Inscription] Gestion du paiement via l'API stripe
 1. [Ecran Inscription][Documents] Gestion des documents
-1. [Ecran Inscription][Session] Gestion des sessions
 
 ## Fonctionnalités à développer (triées par priorité)
 ##### Obligatoire pour mise en prod
@@ -53,3 +52,4 @@
 1. [Ecran Inscription] Uploader une photo avec un input angular material cd : http://plnkr.co/edit/VGCSprNVT1pobOxjWwmT?p=preview
 1. [Ecran Détails] Mettre d'équerre le contenu du stage de bourg-blanc
 1. Upgrade to Angular 6
+1. [Ecran Inscription][Session] Gestion des sessions
