@@ -13,13 +13,13 @@ import {Registration} from '../../models/registration';
 import {Gender} from '../../models/gender.enum';
 import * as moment from 'moment';
 import {Session} from '../../models/session';
-import {SessionService} from '../../services/session/session.service';
 import {FieldPosition} from '../../models/field-position.enum';
 import {Feet} from '../../models/feet.enum';
 import {RegistrationState} from '../../models/registration-state.enum';
 import {UploadService} from '../../services/upload/upload.service';
 import {Meta, Title} from '@angular/platform-browser';
 import * as firebase from 'firebase';
+import {FootballCampRegistrationSessionsComponent} from "../football-camp-registration-sessions/football-camp-registration-sessions.component";
 
 @Component({
   selector: 'football-camp-registration',
@@ -72,11 +72,12 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   payment: FormControl;
 
   footballCamp: FootballCamp;
-  sessions: Session[];
 
   private _stepper: MatVerticalStepper;
 
   private _subscriptions: Subscription[];
+
+  //@ViewChild() sessionComponent: FootballCampRegistrationSessionsComponent;
 
   @ViewChild('stepper')
   set stepper(stepper: MatVerticalStepper) {
@@ -95,7 +96,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private footballCampService: FootballCampService,
-              private sessionService: SessionService,
               private registrationService: RegistrationService,
               private uploadService: UploadService,
               public angularFireAuth: AngularFireAuth,
@@ -203,35 +203,21 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     // Listnening to events
     const footballCampSub = this.route
       .params.pipe(
-      switchMap<Params, FootballCamp>((params) => {
-        const id: string = params['id'];
-        return this.footballCampService.getFootballCamp(id);
-      }))
+        switchMap<Params, FootballCamp>((params) => {
+          const id: string = params['id'];
+          return this.footballCampService.getFootballCamp(id);
+        }))
       .subscribe((footballCamp: FootballCamp) => {
         this.footballCamp = footballCamp;
         this.titleService.setTitle('Footcamps - Inscription au stage de football ' + this.footballCamp.city);
-        this.meta.updateTag({name: 'description', content: 'Inscription au stage de football ' + this.footballCamp.city});
+        this.meta.updateTag({
+          name: 'description',
+          content: 'Inscription au stage de football ' + this.footballCamp.city
+        });
         this.meta.updateTag({name: 'keywords', content: 'footcamps, stage, football, inscription'});
         console.log('----------- footballCamp :');
         console.log(this.footballCamp);
-        if (this.footballCamp && this.sessions) {
-          this.isLoading = false;
-        }
-      });
-
-    const sessionSub = this.route
-      .params.pipe(
-      switchMap<Params, Session[]>((params) => {
-        const id: string = params['id'];
-        return this.sessionService.getSessionsFromCampId(id);
-      }))
-      .subscribe((sessions: Session[]) => {
-        this.sessions = sessions;
-        console.log('----------- sessions :');
-        console.log(this.sessions);
-        if (this.footballCamp && this.sessions) {
-          this.isLoading = false;
-        }
+        this.isLoading = false;
       });
 
     const authStateSubscription = this.angularFireAuth.authState.subscribe((firebaseUser) => {
@@ -246,7 +232,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     });
 
     this._subscriptions.push(footballCampSub);
-    this._subscriptions.push(sessionSub);
     this._subscriptions.push(authStateSubscription);
   }
 

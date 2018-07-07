@@ -13,6 +13,7 @@ export class FootballCampRegistrationSessionsComponent implements OnInit, OnDest
 
   // Fields
   @Input() campId: string;
+  @Output() isValid: BehaviorSubject<boolean>;
   @Output() selectedSession: BehaviorSubject<Session>;
   sessions: Session[];
   isLoading: BehaviorSubject<boolean>;
@@ -24,19 +25,32 @@ export class FootballCampRegistrationSessionsComponent implements OnInit, OnDest
 
   // Lifecycle hooks
   ngOnInit() {
+    // Init fields
     this.sessions = [];
     this.subscriptions = [];
     this.isLoading = new BehaviorSubject<boolean>(true);
     this.selectedSession = new BehaviorSubject<Session>(null);
+    this.isValid = new BehaviorSubject<boolean>(false);
 
-    const sessionSub = this.sessionService
+    // React on sessions retrieved
+    const sub1 = this.sessionService
       .getSessionsFromCampId(this.campId)
       .subscribe((sessions: Session[]) => {
         this.sessions = sessions;
         this.isLoading.next(false);
       });
-    this.subscriptions.push(sessionSub);
+
+    // React on session selected
+    const sub2 = this.selectedSession
+      .subscribe((session: Session) => {
+        this.isValid.next(true);
+      });
+
+    // Store all subscriptions
+    this.subscriptions.push(sub1);
+    this.subscriptions.push(sub2);
   }
+
 
   ngOnDestroy(): void {
     for (const subscription of this.subscriptions) {
