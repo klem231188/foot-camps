@@ -1,28 +1,7 @@
 <form [formGroup]="registrationForm"
       class="registration-form-group-container"
       novalidate>
-  <ng-template matStepLabel>Inscription</ng-template>
   <h4>Informations du stagiaire</h4>
-  <!--&lt;!&ndash; Photo &ndash;&gt;-->
-  <!--<div class="image-upload-container">-->
-  <!--<div class="image-upload" title="Ma photo">-->
-  <!--<img *ngIf="!downloadURL" src="./assets/img/registration/avatar2.png" class="registration-avatar"/>-->
-  <!--<img *ngIf="downloadURL" [src]="downloadURL" class="registration-avatar"/>-->
-  <!--</div>-->
-  <!--<span *ngIf="!downloadURL">La photo est obligatoire <sup>*</sup> </span>-->
-
-  <!--<mat-progress-bar class="image-upload-progress-bar"-->
-  <!--*ngIf="percentageUploaded && percentageUploaded !== 0 && percentageUploaded !== 100"-->
-  <!--mode="determinate" [value]="percentageUploaded" color="primary"></mat-progress-bar>-->
-  <!--</div>-->
-
-  <!--<div class="image-upload-container">-->
-  <!--<input [hidden]="true" id="input-file-id" type="file" accept="image/*" (change)="uploadFile($event)"/>-->
-  <!--<label for="input-file-id" class="mat-button mat-raised-button mat-primary">-->
-  <!--<mat-icon>attach_file</mat-icon>-->
-  <!--&nbsp;&nbsp;Choisir une photo-->
-  <!--</label>-->
-  <!--</div>-->
 
   <!-- firstname -->
   <mat-form-field>
@@ -33,12 +12,12 @@
   <!-- lastname -->
   <mat-form-field>
     <input matInput placeholder="Nom" formControlName="lastname" required>
-    <mat-error *ngIf="lastname.invalid">{{getLastnameError()}}</mat-error>
+    <mat-error *ngIf="lastname.invalid && lastname.dirty">{{getLastnameError()}}</mat-error>
   </mat-form-field>
 
   <!-- gender -->
   <mat-radio-group formControlName="gender">
-    Sexe<sup>*</sup> :&nbsp;
+    Sexe <sup>*</sup> :&nbsp;
     <mat-radio-button value="MALE">Garçon</mat-radio-button>
     &nbsp;
     <mat-radio-button value="FEMALE">Fille</mat-radio-button>
@@ -53,49 +32,45 @@
     <mat-error *ngIf="birthdate.invalid">{{getBirthdateError()}}</mat-error>
   </mat-form-field>
 
+  <!-- Contact email -->
+  <mat-form-field>
+    <input matInput type="email" placeholder="Email de contact" formControlName="email" required>
+    <mat-error *ngIf="email.invalid">{{getEmailError()}}</mat-error>
+  </mat-form-field>
+
+  <h4>Caractéristiques sportives du stagiaire</h4>
+  <!-- Club -->
+  <mat-form-field>
+    <input matInput placeholder="Club actuel" formControlName="club">
+  </mat-form-field>
+
+  <!-- Poste préféré : Gardien / Défenseur / Milieu / Attaquant -->
+  <mat-radio-group formControlName="fieldPosition">
+    Poste préférentiel <sup>*</sup> :&nbsp;
+    <mat-radio-button value="GOALKEEPER">Gardien</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="DEFENDER">Défenseur</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="MIDFIELDER">Milieu</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="STRIKER">Attaquant</mat-radio-button>
+  </mat-radio-group>
+  <span class="separator"></span>
+
+  <!-- Pied Gauche / Droit -->
+  <mat-radio-group formControlName="feet">
+    Pied préférentiel <sup>*</sup> :&nbsp;
+    <mat-radio-button value="LEFT_FOOTED">Droitier</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="RIGHT_FOOTED">Gaucher</mat-radio-button>
+  </mat-radio-group>
+  <span class="separator"></span>
+
   <div>
     <br>
     registrationForm.valid = {{registrationForm.valid}}
   </div>
 
-  <!--&lt;!&ndash; Email &ndash;&gt;-->
-  <!--<mat-form-field>-->
-  <!--<input matInput type="email" placeholder="Email" formControlName="email" required>-->
-  <!--<mat-error *ngIf="registrationForm.get('email').invalid">{{getEmailError()}}</mat-error>-->
-  <!--</mat-form-field>-->
-
-  <!--&lt;!&ndash; Adresse &ndash;&gt;-->
-  <!--<div class="address">-->
-  <!--<mat-form-field>-->
-  <!--<input matInput placeholder="Rue" formControlName="streetAddress" required>-->
-  <!--</mat-form-field>-->
-  <!--<mat-form-field>-->
-  <!--<input matInput placeholder="Code Postal" formControlName="zipCode" required>-->
-  <!--</mat-form-field>-->
-  <!--<mat-form-field>-->
-  <!--<input matInput placeholder="Ville" formControlName="city" required>-->
-  <!--</mat-form-field>-->
-  <!--</div>-->
-
-  <!--<h4>Caractéristiques sportives du stagiaire</h4>-->
-  <!--&lt;!&ndash; Club &ndash;&gt;-->
-  <!--<mat-form-field>-->
-  <!--<input matInput placeholder="Club actuel" formControlName="club">-->
-  <!--</mat-form-field>-->
-  <!--&lt;!&ndash; Poste préféré : Gardien / Défenseur / Milieu / Attaquant &ndash;&gt;-->
-  <!--<mat-radio-group formControlName="fieldPosition">-->
-  <!--<mat-radio-button value="GOALKEEPER">Gardien</mat-radio-button>-->
-  <!--<mat-radio-button value="DEFENDER">Défenseur</mat-radio-button>-->
-  <!--<mat-radio-button value="MIDFIELDER">Milieu</mat-radio-button>-->
-  <!--<mat-radio-button value="STRIKER">Attaquant</mat-radio-button>-->
-  <!--</mat-radio-group>-->
-  <!--<span class="separator"></span>-->
-  <!--&lt;!&ndash; Pied Gauche / Droit &ndash;&gt;-->
-  <!--<mat-radio-group formControlName="feet">-->
-  <!--<mat-radio-button value="LEFT_FOOTED">Droitier</mat-radio-button>-->
-  <!--<mat-radio-button value="RIGHT_FOOTED">Gaucher</mat-radio-button>-->
-  <!--</mat-radio-group>-->
-  <!--<span class="separator"></span>-->
 
   <!--<h4>Informations du représentant légal</h4>-->
   <!--&lt;!&ndash; Nom & Prénom &ndash;&gt;-->

@@ -19,6 +19,7 @@ import {UploadService} from '../../services/upload/upload.service';
 import {Meta, Title} from '@angular/platform-browser';
 import * as firebase from 'firebase';
 import {FootballCampRegistrationSessionsComponent} from '../football-camp-registration-sessions/football-camp-registration-sessions.component';
+import {FootballCampRegistrationTraineeFormComponent} from '../football-camp-registration-trainee-form/football-camp-registration-trainee-form.component';
 
 @Component({
   selector: 'football-camp-registration',
@@ -32,8 +33,9 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   // Model to save data
   registration: Registration;
 
-  // Session
+  // View Childs
   @ViewChild(FootballCampRegistrationSessionsComponent) sessionComponent: FootballCampRegistrationSessionsComponent;
+  @ViewChild(FootballCampRegistrationTraineeFormComponent) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
 
   // Session Form & Controls
   sessionForm: FormGroup;
@@ -111,8 +113,13 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   ngOnInit(): void {
     console.log('FootballCampRegistrationComponent.ngOnInit()');
+
     // Session
-    this.sessionForm = new FormGroup({});
+    this.session = new FormControl(null, [Validators.required]);
+
+    this.sessionForm = this.formBuilder.group({
+      'session': this.session,
+    });
 
     // Trainee Information
 

@@ -11,9 +11,11 @@
     <mat-vertical-stepper [linear]="isLinear" #stepper>
       <!--Etape : Choisir la session -->
       <mat-step [stepControl]="sessionForm">
+        <ng-template matStepLabel>Session</ng-template>
         <form [formGroup]="sessionForm" class="session-form-group-container" novalidate>
-          <ng-template matStepLabel>Session</ng-template>
-          <app-football-camp-registration-sessions #sessionComponent [campId]="footballCamp.id"></app-football-camp-registration-sessions>
+          <app-football-camp-registration-sessions #sessionComponent
+                                                   [campId]="footballCamp.id"></app-football-camp-registration-sessions>
+          <input formControlName="session" [ngModel]="(sessionComponent.selectedSession | async)" [hidden]="true" required>
           <span class="separator"></span>
           <div class="next-button">
             <button mat-button matStepperNext mat-raised-button color="primary"
@@ -24,6 +26,21 @@
           </div>
         </form>
       </mat-step>
+      <!-- Step : fill in trainee form -->
+      <!--[stepControl]="traineeForm.registrationForm"-->
+      <mat-step [stepControl]="traineeFormComponent.registrationForm">
+        <ng-template matStepLabel>Inscription</ng-template>
+        <app-football-camp-registration-trainee-form #traineeFormComponent></app-football-camp-registration-trainee-form>
+
+        <span class="separator"></span>
+        <div class="next-button">
+          <button mat-button matStepperNext mat-raised-button color="primary"
+                  (click)="nextStep()"
+                  [disabled]="!(traineeFormComponent.isValid | async)">Suivant
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      </mat-step>
       <!--Etape : Renseigner les informations -->
       <mat-step [stepControl]="registrationForm">
         <form [formGroup]="registrationForm" #registrationFormRef="ngForm" class="registration-form-group-container"
@@ -33,8 +50,8 @@
           <!-- Photo -->
           <div class="image-upload-container">
             <div class="image-upload" title="Ma photo">
-                <img *ngIf="!downloadURL" src="./assets/img/registration/avatar2.png" class="registration-avatar"/>
-                <img *ngIf="downloadURL" [src]="downloadURL" class="registration-avatar"/>
+              <img *ngIf="!downloadURL" src="./assets/img/registration/avatar2.png" class="registration-avatar"/>
+              <img *ngIf="downloadURL" [src]="downloadURL" class="registration-avatar"/>
             </div>
             <span *ngIf="!downloadURL">La photo est obligatoire <sup>*</sup> </span>
 
@@ -220,9 +237,11 @@
                 En cliquant sur suivant, votre pré-inscription sera active pour le stage de {{footballCamp.city}}.
                 <br>
                 <!-- TODO : Gérer les prix halfBoardRates/fullBoardRates-->
-                Pour confirmer votre inscription, vous devrez verser la somme de <b> {{(sessionComponent.selectedSession | async)?.halfBoardRates}} € (ou
+                Pour confirmer votre inscription, vous devrez verser la somme de <b> {{(sessionComponent.selectedSession
+                | async)?.halfBoardRates}} € (ou
                 105 € à partir du deuxième enfant) avant
-                le {{(sessionComponent.selectedSession | async)?.endRegistrationDate?.toDate() | date : 'longDate'}}.</b><br>
+                le {{(sessionComponent.selectedSession | async)?.endRegistrationDate?.toDate() | date :
+                'longDate'}}.</b><br>
                 <!-- TODO : Gérer le mode de paiement de manière dynamique-->
                 <ul>
                   <li>Par chèque à l'ordre de "AS Coat Méal"</li>
@@ -238,7 +257,8 @@
                     <!-- TODO : CSS -->
                     <img matListAvatar [src]="organizer.pathToPicture" class="contact-avatar"
                          *ngIf="organizer.manageRegistration">
-                    <h3 matLine *ngIf="organizer.manageRegistration"> {{organizer.firstname}} {{organizer.lastname}} </h3>
+                    <h3 matLine *ngIf="organizer.manageRegistration"> {{organizer.firstname}}
+                      {{organizer.lastname}} </h3>
                     <p matLine *ngIf="organizer.manageRegistration">
                       <span> {{organizer.phoneNumber}} </span>
                     </p>
@@ -248,14 +268,14 @@
             </mat-tab>
           </mat-tab-group>
           <!--<div class="next-button">-->
-            <!--<button mat-button matStepperNext mat-raised-button color="primary" (click)="onNextPayment()">-->
-              <!--Payer par carte-->
-              <!--<mat-icon>chevron_right</mat-icon>-->
-            <!--</button>-->
-            <!--<button mat-button matStepperNext mat-button color="primary" (click)="onNextPayment()">-->
-              <!--Payer par chèque-->
-              <!--<mat-icon>chevron_right</mat-icon>-->
-            <!--</button>-->
+          <!--<button mat-button matStepperNext mat-raised-button color="primary" (click)="onNextPayment()">-->
+          <!--Payer par carte-->
+          <!--<mat-icon>chevron_right</mat-icon>-->
+          <!--</button>-->
+          <!--<button mat-button matStepperNext mat-button color="primary" (click)="onNextPayment()">-->
+          <!--Payer par chèque-->
+          <!--<mat-icon>chevron_right</mat-icon>-->
+          <!--</button>-->
           <!--</div>-->
           <mat-form-field class="hidden-input">
             <input matInput formControlName="payment">
