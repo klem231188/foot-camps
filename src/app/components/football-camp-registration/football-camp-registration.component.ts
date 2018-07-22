@@ -38,8 +38,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   @ViewChild(FootballCampRegistrationTraineeFormComponent) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
 
   // Session Form & Controls
-  sessionForm: FormGroup;
-  session: FormControl;
 
   filename: string;
   downloadURL: string;
@@ -115,11 +113,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     console.log('FootballCampRegistrationComponent.ngOnInit()');
 
     // Session
-    this.session = new FormControl(null, [Validators.required]);
-
-    this.sessionForm = this.formBuilder.group({
-      'session': this.session,
-    });
 
     // Trainee Information
 
@@ -372,10 +365,5 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });
-  }
-
-  nextStep(): void {
-    console.log('nextStep()')
-    this._stepper.next();
   }
 }

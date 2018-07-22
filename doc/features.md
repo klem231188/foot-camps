@@ -3,6 +3,7 @@
 1. [Ecran Inscription] Ajouter les propriétés Taille, pointure et catégorie
 1. [Ecran Inscription] Gestion du paiement via l'API stripe
 1. [Ecran Inscription][Documents] Gestion des documents
+1. [Ecran Inscription] Clean & split registration form in component
 
 ## Fonctionnalités à développer (triées par priorité)
 ##### Obligatoire pour mise en prod

@@ -1,8 +1,7 @@
 import {Component, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {map, tap} from "rxjs/operators";
-import {Observable} from "rxjs/Observable";
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-football-camp-registration-trainee-form',
@@ -32,6 +31,7 @@ export class FootballCampRegistrationTraineeFormComponent implements OnInit {
 
   // Lifecycle hooks
   ngOnInit() {
+    console.log('FootballCampRegistrationTraineeFormComponent.ngOnInit()')
     this.birthdate = new FormControl(null, [Validators.required]);
     this.club = new FormControl(null, []);
     this.email = new FormControl(null, [Validators.required, Validators.email]);
@@ -51,9 +51,12 @@ export class FootballCampRegistrationTraineeFormComponent implements OnInit {
       'lastname': this.lastname
     });
 
-    this.isValid = this.registrationForm.statusChanges.pipe(map(status => {
-      return status === 'VALID';
-    }));
+    this.isValid = this.registrationForm.statusChanges
+      .pipe(
+        map(status => {
+          return status === 'VALID';
+        })
+      );
   }
 
   // Methods
@@ -87,9 +90,9 @@ export class FootballCampRegistrationTraineeFormComponent implements OnInit {
 
   getEmailError() {
     if (this.email.hasError('required')) {
-      return 'L\'email est obligatoire';
+      return 'L\' email est obligatoire';
     } else if (this.email.hasError('email')) {
-      return 'L\'email est incorrect';
+      return 'L\' email est incorrect';
     } else {
       return '';
     }

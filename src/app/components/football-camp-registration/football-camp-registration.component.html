@@ -9,212 +9,42 @@
   <!-- Stepper -->
   <div class="registration-stepper-container">
     <mat-vertical-stepper [linear]="isLinear" #stepper>
-      <!--Etape : Choisir la session -->
-      <mat-step [stepControl]="sessionForm">
-        <ng-template matStepLabel>Session</ng-template>
-        <form [formGroup]="sessionForm" class="session-form-group-container" novalidate>
-          <app-football-camp-registration-sessions #sessionComponent
-                                                   [campId]="footballCamp.id"></app-football-camp-registration-sessions>
-          <input formControlName="session" [ngModel]="(sessionComponent.selectedSession | async)" [hidden]="true" required>
-          <span class="separator"></span>
-          <div class="next-button">
-            <button mat-button matStepperNext mat-raised-button color="primary"
-                    (click)="nextStep()"
-                    [disabled]="!(sessionComponent.isValid | async)">Suivant
-              <mat-icon>chevron_right</mat-icon>
-            </button>
-          </div>
-        </form>
-      </mat-step>
-      <!-- Step : fill in trainee form -->
-      <!--[stepControl]="traineeForm.registrationForm"-->
-      <mat-step [stepControl]="traineeFormComponent.registrationForm">
-        <ng-template matStepLabel>Inscription</ng-template>
-        <app-football-camp-registration-trainee-form #traineeFormComponent></app-football-camp-registration-trainee-form>
 
-        <span class="separator"></span>
+      <!-- Step 1 : Choose a session-->
+      <mat-step [completed]="(sessionComponent.isValid | async)">
+        <ng-template matStepLabel>Session</ng-template>
+        <app-football-camp-registration-sessions #sessionComponent
+                                                 [campId]="footballCamp.id"></app-football-camp-registration-sessions>
+        <div class="separator"></div>
         <div class="next-button">
           <button mat-button matStepperNext mat-raised-button color="primary"
-                  (click)="nextStep()"
+                  [disabled]="!(sessionComponent.isValid | async)">Suivant
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      </mat-step>
+
+      <!-- Step 2 : Fill in trainee form -->
+      <mat-step [completed]="(traineeFormComponent.isValid | async)">
+        <ng-template matStepLabel>Inscription</ng-template>
+        <app-football-camp-registration-trainee-form
+          #traineeFormComponent></app-football-camp-registration-trainee-form>
+
+        <div class="separator"></div>
+        <div class="next-button">
+          <button mat-button matStepperNext mat-raised-button color="primary"
                   [disabled]="!(traineeFormComponent.isValid | async)">Suivant
             <mat-icon>chevron_right</mat-icon>
           </button>
         </div>
       </mat-step>
-      <!--Etape : Renseigner les informations -->
-      <mat-step [stepControl]="registrationForm">
-        <form [formGroup]="registrationForm" #registrationFormRef="ngForm" class="registration-form-group-container"
-              novalidate>
-          <ng-template matStepLabel>Inscription</ng-template>
-          <h4>Informations du stagiaire</h4>
-          <!-- Photo -->
-          <div class="image-upload-container">
-            <div class="image-upload" title="Ma photo">
-              <img *ngIf="!downloadURL" src="./assets/img/registration/avatar2.png" class="registration-avatar"/>
-              <img *ngIf="downloadURL" [src]="downloadURL" class="registration-avatar"/>
-            </div>
-            <span *ngIf="!downloadURL">La photo est obligatoire <sup>*</sup> </span>
 
-            <mat-progress-bar class="image-upload-progress-bar"
-                              *ngIf="percentageUploaded && percentageUploaded !== 0 && percentageUploaded !== 100"
-                              mode="determinate" [value]="percentageUploaded" color="primary"></mat-progress-bar>
-          </div>
-
-          <div class="image-upload-container">
-            <input [hidden]="true" id="input-file-id" type="file" accept="image/*" (change)="uploadFile($event)"/>
-            <label for="input-file-id" class="mat-button mat-raised-button mat-primary">
-              <mat-icon>attach_file</mat-icon>
-              &nbsp;&nbsp;Choisir une photo
-            </label>
-          </div>
-
-          <!-- Prénom -->
-          <mat-form-field>
-            <input matInput placeholder="Prénom" formControlName="firstname" required>
-            <mat-error *ngIf="registrationForm.get('firstname').invalid">{{getFirstnameError()}}</mat-error>
-          </mat-form-field>
-
-          <!-- Nom -->
-          <mat-form-field>
-            <input matInput placeholder="Nom" formControlName="lastname" required>
-            <mat-error *ngIf="registrationForm.get('lastname').invalid">{{getLastnameError()}}</mat-error>
-          </mat-form-field>
-
-          <!-- Sexe -->
-          <mat-radio-group formControlName="gender">
-            <mat-radio-button value="MALE">Garçon</mat-radio-button>
-            <mat-radio-button value="FEMALE">Fille</mat-radio-button>
-            <mat-error *ngIf="registrationForm.get('gender').invalid && registrationFormRef.submitted">
-              {{getGenderError()}}
-            </mat-error>
-          </mat-radio-group>
-          <span class="separator"></span>
-
-          <!-- Date de naissance -->
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Date de naissance" formControlName="birthdate">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker disabled="false"></mat-datepicker>
-          </mat-form-field>
-
-          <!-- Email -->
-          <mat-form-field>
-            <input matInput type="email" placeholder="Email" formControlName="email" required>
-            <mat-error *ngIf="registrationForm.get('email').invalid">{{getEmailError()}}</mat-error>
-          </mat-form-field>
-
-          <!-- Adresse -->
-          <div class="address">
-            <mat-form-field>
-              <input matInput placeholder="Rue" formControlName="streetAddress" required>
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput placeholder="Code Postal" formControlName="zipCode" required>
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput placeholder="Ville" formControlName="city" required>
-            </mat-form-field>
-          </div>
-
-          <h4>Caractéristiques sportives du stagiaire</h4>
-          <!-- Club -->
-          <mat-form-field>
-            <input matInput placeholder="Club actuel" formControlName="club">
-          </mat-form-field>
-          <!-- Poste préféré : Gardien / Défenseur / Milieu / Attaquant -->
-          <mat-radio-group formControlName="fieldPosition">
-            <mat-radio-button value="GOALKEEPER">Gardien</mat-radio-button>
-            <mat-radio-button value="DEFENDER">Défenseur</mat-radio-button>
-            <mat-radio-button value="MIDFIELDER">Milieu</mat-radio-button>
-            <mat-radio-button value="STRIKER">Attaquant</mat-radio-button>
-          </mat-radio-group>
-          <span class="separator"></span>
-          <!-- Pied Gauche / Droit -->
-          <mat-radio-group formControlName="feet">
-            <mat-radio-button value="LEFT_FOOTED">Droitier</mat-radio-button>
-            <mat-radio-button value="RIGHT_FOOTED">Gaucher</mat-radio-button>
-          </mat-radio-group>
-          <span class="separator"></span>
-
-          <h4>Informations du représentant légal</h4>
-          <!-- Nom & Prénom -->
-          <mat-form-field>
-            <input matInput placeholder="Prénom" formControlName="legalRepresentativeFirstname" required>
-            <mat-error *ngIf="registrationForm.get('legalRepresentativeFirstname').invalid">{{getFirstnameError()}}
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field>
-            <input matInput placeholder="Nom" formControlName="legalRepresentativeLastname" required>
-            <mat-error *ngIf="registrationForm.get('legalRepresentativeLastname').invalid">{{getLastnameError()}}
-            </mat-error>
-          </mat-form-field>
-
-          <!-- Téléphone -->
-          <mat-form-field>
-            <input matInput placeholder="Téléphone" formControlName="legalRepresentativePhoneNumber" required>
-          </mat-form-field>
-
-          <!-- Adresse -->
-          <div class="address">
-            <mat-form-field>
-              <input matInput placeholder="Rue" formControlName="legalRepresentativeStreetAddress" required>
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput placeholder="Code Postal" formControlName="legalRepresentativeZipCode" required>
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput placeholder="Ville" formControlName="legalRepresentativeCity" required>
-            </mat-form-field>
-          </div>
-
-          <!-- Mutuelle -->
-          <mat-form-field>
-            <input matInput placeholder="Numéro Sécurité Sociale"
-                   formControlName="legalRepresentativeSocialSecurityNumber" required>
-          </mat-form-field>
-
-          <mat-form-field>
-            <input matInput placeholder="Nom mutuelle" formControlName="legalRepresentativeHealthInsuranceName">
-          </mat-form-field>
-
-          <mat-form-field>
-            <input matInput placeholder="Numéro adhérent mutuelle"
-                   formControlName="legalRepresentativeHealthInsuranceMemberNumber">
-          </mat-form-field>
-
-          <!-- Autorisation -->
-          <!-- TODO Paramétrer le nom et l'année du stage -->
-          <div class="authorization">
-            <mat-checkbox required formControlName="authorization"></mat-checkbox>
-            <div>
-              Je soussigné {{legalRepresentativeFirstname.value}} {{legalRepresentativeLastname.value}} responsable
-              légal
-              de l’enfant, autorise mon fils (ou ma fille) à participer à toutes les activités organisées dans le cadre
-              du stage de foot été 2018.
-              <br><br>
-              J’autorise en outre le Directeur du stage été 2018 à faire soigner mon enfant, à l’hospitaliser, et à
-              faire
-              pratiquer les interventions chirurgicales nécessaires en cas de nécessité.
-            </div>
-          </div>
-
-          <span class="separator"></span>
-          <div class="next-button">
-            <!-- TODO : remettre le code -->
-            <!--[disabled]="registrationForm.invalid || !downloadURL"-->
-            <button mat-button matStepperNext mat-raised-button color="primary"
-                    [disabled]="registrationForm.invalid">Suivant
-              <mat-icon>chevron_right</mat-icon>
-            </button>
-          </div>
-        </form>
-      </mat-step>
-      <!--Etape : Documents à fournir -->
-      <mat-step>
+      <!--Step 3 : Document to supply -->
+      <mat-step [completed]="(documents.valid | async)">
         <ng-template matStepLabel>Documents à fournir</ng-template>
         <app-football-camp-registration-documents #documents></app-football-camp-registration-documents>
-        <span class="separator"></span>
+
+        <div class="separator"></div>
         <div class="next-button">
           <button mat-button matStepperNext mat-raised-button color="primary"
                   [disabled]="!(documents.valid | async)">Suivant
@@ -222,7 +52,8 @@
           </button>
         </div>
       </mat-step>
-      <!--Etape : Payer -->
+
+      <!--Step 4 : Payment -->
       <mat-step [stepControl]="paymentFormGroup">
         <form [formGroup]="paymentFormGroup" class="payment-form-group-container">
           <ng-template matStepLabel>Paiement</ng-template>
@@ -267,22 +98,13 @@
               </div>
             </mat-tab>
           </mat-tab-group>
-          <!--<div class="next-button">-->
-          <!--<button mat-button matStepperNext mat-raised-button color="primary" (click)="onNextPayment()">-->
-          <!--Payer par carte-->
-          <!--<mat-icon>chevron_right</mat-icon>-->
-          <!--</button>-->
-          <!--<button mat-button matStepperNext mat-button color="primary" (click)="onNextPayment()">-->
-          <!--Payer par chèque-->
-          <!--<mat-icon>chevron_right</mat-icon>-->
-          <!--</button>-->
-          <!--</div>-->
           <mat-form-field class="hidden-input">
             <input matInput formControlName="payment">
           </mat-form-field>
         </form>
       </mat-step>
-      <!--Etape : Récapitulatif -->
+
+      <!-- Step 5 : Summary -->
       <mat-step [editable]="false">
         <ng-template matStepLabel>Récapitulatif</ng-template>
         Félicitations vous êtes <b>pré-inscrit</b> pour le stage de {{footballCamp.city}} !
@@ -292,7 +114,6 @@
         Un autre mail vous sera envoyé lorsque votre inscription aura été réglée.
       </mat-step>
     </mat-vertical-stepper>
-    <!--<span class="stepper-margin"></span>-->
   </div>
 </div>
 <div *ngIf="isLoading" class="loading-spinner-container">
