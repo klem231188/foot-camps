@@ -8,7 +8,7 @@
 
   <!-- Stepper -->
   <div class="registration-stepper-container">
-    <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-vertical-stepper [linear]="true" #stepper>
 
       <!-- Step 1 : Choose a session-->
       <mat-step [completed]="(sessionComponent.isValid | async)">

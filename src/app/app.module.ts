@@ -42,8 +42,8 @@ import {FootballCampFileUploadComponent} from './components/football-camp-file-u
 import {DropZoneDirective} from './directives/drop-zone.directive';
 import {FileSizePipe} from './pipes/file-size.pipe';
 import {FootballCampRegistrationDocumentsComponent} from './components/football-camp-registration-documents/football-camp-registration-documents.component';
-import { FootballCampRegistrationSessionsComponent } from './components/football-camp-registration-sessions/football-camp-registration-sessions.component';
-import { FootballCampRegistrationTraineeFormComponent } from './components/football-camp-registration-trainee-form/football-camp-registration-trainee-form.component';
+import {FootballCampRegistrationSessionsComponent} from './components/football-camp-registration-sessions/football-camp-registration-sessions.component';
+import {FootballCampRegistrationTraineeFormComponent} from './components/football-camp-registration-trainee-form/football-camp-registration-trainee-form.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -97,7 +97,7 @@ registerLocaleData(localeFr, 'fr');
     FootballCampFileUploadComponent,
     FootballCampRegistrationDocumentsComponent,
     FootballCampRegistrationSessionsComponent,
-    FootballCampRegistrationTraineeFormComponent,
+    FootballCampRegistrationTraineeFormComponent
   ],
   entryComponents: [
     FootballCampLoginComponent,

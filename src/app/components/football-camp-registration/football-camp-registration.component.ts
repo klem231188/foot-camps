@@ -20,6 +20,8 @@ import {Meta, Title} from '@angular/platform-browser';
 import * as firebase from 'firebase';
 import {FootballCampRegistrationSessionsComponent} from '../football-camp-registration-sessions/football-camp-registration-sessions.component';
 import {FootballCampRegistrationTraineeFormComponent} from '../football-camp-registration-trainee-form/football-camp-registration-trainee-form.component';
+import {FootballCampRegistrationDocumentsComponent} from '../football-camp-registration-documents/football-camp-registration-documents.component';
+import {FootballCampPaymentComponent} from '../football-camp-payment/football-camp-payment.component';
 
 @Component({
   selector: 'football-camp-registration',
@@ -27,7 +29,6 @@ import {FootballCampRegistrationTraineeFormComponent} from '../football-camp-reg
   styleUrls: ['./football-camp-registration.component.scss']
 })
 export class FootballCampRegistrationComponent implements OnInit, AfterViewInit, OnDestroy {
-  isLinear = true;
   isLoading = true;
 
   // Model to save data
@@ -36,9 +37,11 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   // View Childs
   @ViewChild(FootballCampRegistrationSessionsComponent) sessionComponent: FootballCampRegistrationSessionsComponent;
   @ViewChild(FootballCampRegistrationTraineeFormComponent) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
+  @ViewChild(FootballCampRegistrationDocumentsComponent) documentsComponent: FootballCampRegistrationDocumentsComponent;
+  @ViewChild(FootballCampPaymentComponent) paymentComponent: FootballCampPaymentComponent;
+  @ViewChild('stepper') stepper: MatVerticalStepper;
 
   // Session Form & Controls
-
   filename: string;
   downloadURL: string;
   percentageUploaded: number;
@@ -78,20 +81,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   private _stepper: MatVerticalStepper;
 
   private _subscriptions: Subscription[];
-
-  @ViewChild('stepper')
-  set stepper(stepper: MatVerticalStepper) {
-    this._stepper = stepper;
-    if (this._stepper) {
-      console.log('stepper is not undefined');
-      this._stepper.selectionChange.asObservable()
-        .subscribe((selection) => {
-          if (selection.selectedIndex === 4) {
-            this._stepper._steps.forEach((step) => step.editable = false);
-          }
-        })
-    }
-  }
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -244,16 +233,13 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   ngAfterViewInit(): void {
     console.log('FootballCampRegistrationComponent.ngAfterViewInit()');
-    // Session
 
-    // Trainee Information
-
-    // Document Upload
-
-    // Payment
-
-    // Summary
-
+    this._stepper.selectionChange.asObservable()
+      .subscribe((selection) => {
+        if (selection.selectedIndex === 4) {
+          this._stepper._steps.forEach((step) => step.editable = false);
+        }
+      })
   }
 
   ngOnDestroy(): void {
