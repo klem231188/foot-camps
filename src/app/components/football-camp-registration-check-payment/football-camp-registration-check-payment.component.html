@@ -1,3 +1,43 @@
-<p>
-  football-camp-registration-check-payment works!
-</p>
+<div *ngIf="footballCamp$ | async as footballCamp">
+  <div *ngIf="session$ | async as session">
+    <br>
+    En cliquant sur suivant, votre pré-inscription sera active pour le stage de {{footballCamp.city}}.
+    <br>
+    <!-- TODO : Gérer les prix halfBoardRates/fullBoardRates-->
+    Pour confirmer votre inscription, vous devrez verser la somme de <b> {{session.halfBoardRates}} € </b> (ou
+    105 € à partir du deuxième enfant) avant le <b>{{session.endRegistrationDate?.toDate() | date :
+    'longDate'}}.</b><br>
+
+    <mat-list>
+      <mat-list-item>
+        <mat-icon matListIcon>add</mat-icon>
+        <!-- TODO  parametrized -->
+        Par chèque à l'ordre de "AS Coat Méal"
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListIcon>add</mat-icon>
+        <!-- TODO  parametrized -->
+        Par chèques vacances
+      </mat-list-item>
+    </mat-list>
+    <br>
+
+    <!-- TODO  parametrized -->
+    En le rendant en main propre à <span *ngFor="let organizer of footballCamp.details.organizers"><b>{{organizer.firstname}} {{organizer.lastname}}</b>, </span>
+    ou en l'envoyant l'adresse suivante: <b>Stéphane Le HIR, 11 Kergongar 29860 Bourg-blanc</b><br>
+    Si vous rencontrez un problème, veuillez contacter une des personnes suivantes:
+    <br>
+    <mat-list>
+      <mat-list-item *ngFor="let organizer of footballCamp.details.organizers">
+        <!-- TODO : CSS -->
+        <img matListAvatar [src]="organizer.pathToPicture" class="contact-avatar"
+             *ngIf="organizer.manageRegistration">
+        <h3 matLine *ngIf="organizer.manageRegistration"> {{organizer.firstname}}
+          {{organizer.lastname}} </h3>
+        <p matLine *ngIf="organizer.manageRegistration">
+          <span> {{organizer.phoneNumber}} </span>
+        </p>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

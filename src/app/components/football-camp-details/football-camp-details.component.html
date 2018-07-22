@@ -123,7 +123,7 @@
             <tbody>
             <tr *ngFor="let session of sessions; let i = index">
               <td data-label="Sessions">Session n°{{i}}</td>
-              <td data-label="Dates">A partir du {{session.start.toDate() | date : 'longDate'}} jusqu'au {{session.end.toDate() | date :
+              <td data-label="Dates">A partir du {{session.start.toDate() | date : 'longDate'}} jusqu'au {{session$.end.toDate() | date :
                 'longDate'}}
               </td>
               <td data-label="Tarifs en Pension complète" *ngIf="hasFullBoardRatesSessions()">{{session.fullBoardRates}}
@@ -136,7 +136,7 @@
                 <mat-progress-bar mode="determinate" [value]="percentageOfRegistrations(session)"
                                   color="primary"></mat-progress-bar>
                 {{(session.numberOfRegistrationsInProgress +
-                session.numberOfRegistrationsAccepted)}}/{{session.maximumNumberOfRegistrations}}
+                session.numberOfRegistrationsAccepted)}}/{{session$.maximumNumberOfRegistrations}}
               </td>
             </tr>
             </tbody>
