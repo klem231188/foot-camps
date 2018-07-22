@@ -36,7 +36,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {FootballCampRegistrationsViewerComponent} from './components/football-camp-registrations-viewer/football-camp-registrations-viewer.component';
 import {StatePipe} from './pipes/state.pipe';
-import {FootballCampPaymentComponent} from './components/football-camp-payment/football-camp-payment.component';
+import {FootballCampRegistrationPaymentComponent} from './components/football-camp-registration-payment/football-camp-registration-payment.component';
 import {PlaygroundComponent} from './components/playground/playground.component';
 import {FootballCampFileUploadComponent} from './components/football-camp-file-upload/football-camp-file-upload.component';
 import {DropZoneDirective} from './directives/drop-zone.directive';
@@ -44,6 +44,7 @@ import {FileSizePipe} from './pipes/file-size.pipe';
 import {FootballCampRegistrationDocumentsComponent} from './components/football-camp-registration-documents/football-camp-registration-documents.component';
 import {FootballCampRegistrationSessionsComponent} from './components/football-camp-registration-sessions/football-camp-registration-sessions.component';
 import {FootballCampRegistrationTraineeFormComponent} from './components/football-camp-registration-trainee-form/football-camp-registration-trainee-form.component';
+import { FootballCampRegistrationCheckPaymentComponent } from './components/football-camp-registration-check-payment/football-camp-registration-check-payment.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -92,12 +93,13 @@ registerLocaleData(localeFr, 'fr');
     FootballCampRegistrationsViewerComponent,
     FootballCampLoginComponent,
     FootballCampShouldConnectDialogComponent,
-    FootballCampPaymentComponent,
+    FootballCampRegistrationPaymentComponent,
     PlaygroundComponent,
     FootballCampFileUploadComponent,
     FootballCampRegistrationDocumentsComponent,
     FootballCampRegistrationSessionsComponent,
-    FootballCampRegistrationTraineeFormComponent
+    FootballCampRegistrationTraineeFormComponent,
+    FootballCampRegistrationCheckPaymentComponent
   ],
   entryComponents: [
     FootballCampLoginComponent,

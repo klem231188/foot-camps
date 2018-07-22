@@ -21,7 +21,7 @@ import * as firebase from 'firebase';
 import {FootballCampRegistrationSessionsComponent} from '../football-camp-registration-sessions/football-camp-registration-sessions.component';
 import {FootballCampRegistrationTraineeFormComponent} from '../football-camp-registration-trainee-form/football-camp-registration-trainee-form.component';
 import {FootballCampRegistrationDocumentsComponent} from '../football-camp-registration-documents/football-camp-registration-documents.component';
-import {FootballCampPaymentComponent} from '../football-camp-payment/football-camp-payment.component';
+import {FootballCampRegistrationPaymentComponent} from '../football-camp-registration-payment/football-camp-registration-payment.component';
 
 @Component({
   selector: 'football-camp-registration',
@@ -38,7 +38,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   @ViewChild(FootballCampRegistrationSessionsComponent) sessionComponent: FootballCampRegistrationSessionsComponent;
   @ViewChild(FootballCampRegistrationTraineeFormComponent) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
   @ViewChild(FootballCampRegistrationDocumentsComponent) documentsComponent: FootballCampRegistrationDocumentsComponent;
-  @ViewChild(FootballCampPaymentComponent) paymentComponent: FootballCampPaymentComponent;
+  @ViewChild(FootballCampRegistrationPaymentComponent) paymentComponent: FootballCampRegistrationPaymentComponent;
   @ViewChild('stepper') stepper: MatVerticalStepper;
 
   // Session Form & Controls

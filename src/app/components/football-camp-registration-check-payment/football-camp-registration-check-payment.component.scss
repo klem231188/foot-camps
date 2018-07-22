@@ -1,0 +1,9 @@
+@mixin app-football-camp-registration-check-payment($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-football-camp-registration-check-payment {
+  }
+}

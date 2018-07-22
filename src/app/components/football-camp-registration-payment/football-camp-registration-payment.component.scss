@@ -1,10 +1,10 @@
-@mixin app-football-camp-payment-theme($theme) {
+@mixin app-football-camp-registration-payment-theme($theme) {
   $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  app-football-camp-payment {
+  app-football-camp-registration-payment {
     width: 100%;
 
     .StripeElement {

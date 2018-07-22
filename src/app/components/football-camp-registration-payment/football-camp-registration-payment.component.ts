@@ -3,11 +3,11 @@ import {PaymentService} from '../../services/payment/payment.service';
 import {Payment} from '../../models/payment';
 
 @Component({
-  selector: 'app-football-camp-payment',
-  templateUrl: './football-camp-payment.component.html',
-  styleUrls: ['./football-camp-payment.component.scss']
+  selector: 'app-football-camp-registration-payment',
+  templateUrl: './football-camp-registration-payment.component.html',
+  styleUrls: ['./football-camp-registration-payment.component.scss']
 })
-export class FootballCampPaymentComponent implements AfterViewInit, OnInit {
+export class FootballCampRegistrationPaymentComponent implements AfterViewInit, OnInit {
 
   @Input() amount: number;
   card: any;
@@ -19,11 +19,11 @@ export class FootballCampPaymentComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
-    console.log('FootballCampPaymentComponent.ngOnInit()');
+    console.log('FootballCampRegistrationPaymentComponent.ngOnInit()');
   }
 
   ngAfterViewInit(): void {
-    console.log('FootballCampPaymentComponent.ngAfterViewInit()');
+    console.log('FootballCampRegistrationPaymentComponent.ngAfterViewInit()');
 
     const style = {
       base: {
@@ -55,7 +55,7 @@ export class FootballCampPaymentComponent implements AfterViewInit, OnInit {
   }
 
   onPay(): void {
-    console.log('FootballCampPaymentComponent.onPay()');
+    console.log('FootballCampRegistrationPaymentComponent.onPay()');
     this.paymentService.stripe
       .createToken(this.card)
       .then((result) => {
