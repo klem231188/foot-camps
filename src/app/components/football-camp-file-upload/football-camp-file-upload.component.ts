@@ -1,7 +1,9 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {AngularFireStorage, AngularFireUploadTask} from 'angularfire2/storage';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Subscription} from 'rxjs/Subscription';
+import {DocumentType} from '../../models/document-type.enum'
+import {Document} from '../../models/document.model';
 
 @Component({
   selector: 'app-football-camp-file-upload',
@@ -13,12 +15,13 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
   // Fields
   // ----------------------------
   downloadURL: string;
+  @Output() document: BehaviorSubject<Document>;
   inputId: string;
   percentage: Observable<number>;
   subscriptions: Subscription[];
   task: AngularFireUploadTask;
   title: string;
-  @Input() type: FileUploadType;
+  @Input() type: DocumentType;
   uploaded: BehaviorSubject<boolean>;
 
   // ----------------------------
@@ -33,20 +36,22 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.uploaded = new BehaviorSubject(false);
 
+    this.document = new BehaviorSubject(null);
+
     switch (this.type) {
-      case FileUploadType.ASSURANCE_SCOLAIRE :
+      case DocumentType.ASSURANCE_SCOLAIRE :
         this.title = 'Attestation assurance scolaire';
         this.inputId = 'attestation_assurance_id';
         break;
-      case FileUploadType.CERTIFICAT_MEDICAL :
+      case DocumentType.CERTIFICAT_MEDICAL :
         this.title = 'Certificat médical de moins de 3 mois ou license';
         this.inputId = 'certificat_medical_id';
         break;
-      case FileUploadType.FICHE_SANITAIRE :
+      case DocumentType.FICHE_SANITAIRE :
         this.title = 'Fiche sanitaire <sup>(1)</sup>';
         this.inputId = 'fiche_sanitaire_id';
         break;
-      case FileUploadType.PHOTO_IDENTITE :
+      case DocumentType.PHOTO_IDENTITE :
         this.title = 'Photo d\'identité';
         this.inputId = 'photo_identite_id';
         break;
@@ -103,16 +108,14 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
             .getDownloadURL()
             .subscribe(url => {
               this.downloadURL = url;
+              this.document.next({
+                  url: this.downloadURL,
+                  type: this.type
+                }
+              );
             });
           this.subscriptions.push(subscription);
         }
       });
   }
-}
-
-export enum FileUploadType {
-  ASSURANCE_SCOLAIRE = 'ASSURANCE_SCOLAIRE',
-  CERTIFICAT_MEDICAL = 'CERTIFICAT_MEDICAL',
-  FICHE_SANITAIRE = 'FICHE_SANITAIRE',
-  PHOTO_IDENTITE = 'PHOTO_IDENTITE'
 }

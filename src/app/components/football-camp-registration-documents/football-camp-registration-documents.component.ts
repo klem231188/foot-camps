@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs/Rx';
 import {FootballCampFileUploadComponent} from '../football-camp-file-upload/football-camp-file-upload.component';
+import {Document} from '../../models/document.model';
 
 @Component({
   selector: 'app-football-camp-registration-documents',
@@ -10,7 +11,9 @@ import {FootballCampFileUploadComponent} from '../football-camp-file-upload/foot
 export class FootballCampRegistrationDocumentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Output() valid: BehaviorSubject<boolean>;
+  @Output() documents: BehaviorSubject<Document[]>;
   subscription: Subscription;
+  subscription2: Subscription;
 
   @ViewChild('ficheSanitaire') ficheSanitaire: FootballCampFileUploadComponent;
   @ViewChild('certificatMedical') certificatMedical: FootballCampFileUploadComponent;
@@ -18,12 +21,12 @@ export class FootballCampRegistrationDocumentsComponent implements OnInit, After
   @ViewChild('photoIdentite') photoIdentite: FootballCampFileUploadComponent;
 
   constructor() {
-    this.valid = new BehaviorSubject<boolean>(false);
   }
 
   // Lifecycle hooks
-
   ngOnInit(): void {
+    this.valid = new BehaviorSubject<boolean>(false);
+    this.documents = new BehaviorSubject<Document[]>(null);
   }
 
   ngAfterViewInit(): void {
@@ -40,9 +43,22 @@ export class FootballCampRegistrationDocumentsComponent implements OnInit, After
           return accumulator && currentValue;
         }));
       });
+
+
+    this.subscription2 = Observable
+      .combineLatest(
+        this.ficheSanitaire.document,
+        this.certificatMedical.document,
+        this.assuranceScolaire.document,
+        this.photoIdentite.document
+      )
+      .subscribe((documents) => {
+        this.documents.next(documents);
+      });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.subscription2.unsubscribe();
   }
 }

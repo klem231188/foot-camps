@@ -78,6 +78,8 @@
       mat-vertical-stepper {
         width: 100%;
         flex: 1;
+        border-top-color: mat-color($primary);
+        border-top-style: solid;
         @include big-screen {
           width: 70%;
         }
