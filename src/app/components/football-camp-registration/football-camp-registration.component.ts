@@ -78,8 +78,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   footballCamp: FootballCamp;
 
-  private _stepper: MatVerticalStepper;
-
   private _subscriptions: Subscription[];
 
   constructor(private formBuilder: FormBuilder,
@@ -234,10 +232,10 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   ngAfterViewInit(): void {
     console.log('FootballCampRegistrationComponent.ngAfterViewInit()');
 
-    this._stepper.selectionChange.asObservable()
+    this.stepper.selectionChange.asObservable()
       .subscribe((selection) => {
         if (selection.selectedIndex === 4) {
-          this._stepper._steps.forEach((step) => step.editable = false);
+          this.stepper._steps.forEach((step) => step.editable = false);
         }
       })
   }
@@ -332,7 +330,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
       .then(() => {
         this.isLoading = false;
         this.payment.setValue('done');
-        this._stepper.next();
+        this.stepper.next();
       })
   }
 

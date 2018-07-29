@@ -40,6 +40,7 @@ export class FootballCampLocatorComponent implements OnInit, OnDestroy, AfterVie
 
     this.footballCamps$.subscribe(
       x => {
+        console.log('miaoww');
         console.log(x)
       }
     );

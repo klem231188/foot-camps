@@ -61,6 +61,10 @@
       flex-direction: column;
       align-items: center;
       flex: 4;
+      h1 {
+        font-size: 1.5em;
+        color: mat-color($primary);
+      }
       .separator {
         width: 100%;
         min-height: 15px;

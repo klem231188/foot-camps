@@ -1,6 +1,6 @@
 <agm-map [latitude]="48" [longitude]="-3" [zoom]="zoom"
          [styles]="[{featureType: 'road', stylers: [{ visibility: 'off' }]}]">
-  <agm-marker *ngFor="let footballCamp of footballCamps" (markerClick)="onMarkerClicked(footballCamp$.id)"
+  <agm-marker *ngFor="let footballCamp of footballCamps" (markerClick)="onMarkerClicked(footballCamp.id)"
               [latitude]="footballCamp.latitude"
               [longitude]="footballCamp.longitude">
   </agm-marker>
