@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Subscription} from 'rxjs/Subscription';
 import {DocumentType} from '../../models/document-type.enum'
 import {Document} from '../../models/document.model';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-football-camp-file-upload',
@@ -69,6 +70,54 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
   // ----------------------------
   // Methods
   // ----------------------------
+  uploadFile(event: FileList) {
+    const file = event.item(0);
+
+    // No file has been selected
+    if (!file) {
+      return;
+    }
+
+    // Say to "uploaded" status observers that file is not yet uploaded
+    this.uploaded.next(false);
+
+    // Define file path
+    const filePath = `uploads/${new Date().getTime()}_${file.name}`;
+
+    // Create a task
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    // observe percentage changes
+    this.percentage = task.percentageChanges();
+
+    // get notified when the download URL is available
+    const taskSubscription = task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          // Say to "uploaded" status observers that file has been uploaded
+          this.uploaded.next(true);
+
+          // Get downloadURL
+          const downloadURLSubscription = fileRef
+            .getDownloadURL()
+            .subscribe(downloadURL => {
+              this.downloadURL = downloadURL;
+              this.document.next({
+                  url: this.downloadURL,
+                  type: this.type
+                }
+              );
+            });
+          this.subscriptions.push(downloadURLSubscription);
+        })
+      )
+      .subscribe();
+
+    this.subscriptions.push(taskSubscription);
+  }
+
   startUpload(event: FileList) {
     console.log('startUpload');
     const file = event.item(0);
