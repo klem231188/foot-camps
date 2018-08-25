@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Payment} from '../../models/payment';
 import {AngularFirestore} from 'angularfire2/firestore';
+import {DocumentReference} from 'angularfire2/firestore/interfaces';
 
 @Injectable()
 export class PaymentService {
@@ -11,7 +12,7 @@ export class PaymentService {
   constructor(private angularFirestore: AngularFirestore) {
   }
 
-  save(payment: Payment): Promise<any> {
+  save(payment: Payment): Promise<DocumentReference> {
     return this.angularFirestore
       .collection('payments')
       .add(payment);

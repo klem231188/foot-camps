@@ -1,6 +1,9 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {PaymentService} from '../../services/payment/payment.service';
 import {Payment} from '../../models/payment';
+import {Observable} from "rxjs/Observable";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {AngularFirestore} from "angularfire2/firestore";
 
 @Component({
   selector: 'app-football-camp-registration-payment',
@@ -9,17 +12,23 @@ import {Payment} from '../../models/payment';
 })
 export class FootballCampRegistrationPaymentComponent implements AfterViewInit, OnInit {
 
+  // Fields
+  @Output() isValid: BehaviorSubject<boolean>;
   @Input() amount: number;
   card: any;
   @ViewChild('payElement') payElement;
   @ViewChild('payErrorElement') payErrorElement;
 
-  constructor(private paymentService: PaymentService) {
+  payment: Observable<Payment>;
+
+  constructor(private paymentService: PaymentService,
+              private angularFirestore: AngularFirestore) {
     console.log('constructor');
   }
 
   ngOnInit(): void {
     console.log('FootballCampRegistrationPaymentComponent.ngOnInit()');
+    this.isValid = new BehaviorSubject<boolean>(false);
   }
 
   ngAfterViewInit(): void {
@@ -69,11 +78,28 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
 
   stripeTokenHandler(stripeTokenId: number): void {
     console.log(`FootballCampPaymentComponent.stripeTokenHandler(${stripeTokenId})`);
+    // TODO 1) Save registration in /registrations
+    // TODO 2) Save payment in /payments then get valueChanges of payment with paymentId
+    // if payment.state == PENDING isLoading.next(true)
+    // else if == FAILED isLoading.next(false) && isValid.next(false)
+    // else isLoading.next(false) &&  isValid.next(true)
+
     const payment: Payment = {
       registrationId: '123456879',
       stripeTokenId: stripeTokenId
     };
 
-    this.paymentService.save(payment);
+    this.paymentService
+      .save(payment)
+      .then(docRef => {
+        const paymentId: string = docRef.id;
+        this.payElement = this.angularFirestore
+          .doc(`/payments/${paymentId}`)
+          .valueChanges()
+          .subscribe((value) => console.log(value));
+      });
+
+    // TODO then call HTTP function to execute payment
+    // onSuccess --> this.isValid.next(false) && let user try again
   }
 }

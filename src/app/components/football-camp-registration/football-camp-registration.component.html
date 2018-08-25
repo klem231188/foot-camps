@@ -55,54 +55,16 @@
       </mat-step>
 
       <!--Step 4 : Payment -->
-      <mat-step [stepControl]="paymentFormGroup">
-        <form [formGroup]="paymentFormGroup" class="payment-form-group-container">
-          <ng-template matStepLabel>Paiement</ng-template>
-          <span class="separator"></span>
-          <mat-tab-group>
-            <mat-tab label="Payer par carte">
-              <app-football-camp-registration-payment [amount]="150"></app-football-camp-registration-payment>
-            </mat-tab>
-            <mat-tab label="Payer par chèque">
-              <div>
-                <br>
-                En cliquant sur suivant, votre pré-inscription sera active pour le stage de {{footballCamp.city}}.
-                <br>
-                <!-- TODO : Gérer les prix halfBoardRates/fullBoardRates-->
-                Pour confirmer votre inscription, vous devrez verser la somme de <b> {{(sessionComponent.selectedSession
-                | async)?.halfBoardRates}} € (ou
-                105 € à partir du deuxième enfant) avant
-                le {{(sessionComponent.selectedSession | async)?.endRegistrationDate?.toDate() | date :
-                'longDate'}}.</b><br>
-                <!-- TODO : Gérer le mode de paiement de manière dynamique-->
-                <ul>
-                  <li>Par chèque à l'ordre de "AS Coat Méal"</li>
-                  <li>Par chèques vacances</li>
-                </ul>
-                <br>
-                En le rendant en main propre à <span *ngFor="let organizer of footballCamp.details.organizers"><b>{{organizer.firstname}} {{organizer.lastname}}</b>, </span>
-                ou en l'envoyant l'adresse suivante: <b>Stéphane Le HIR, 11 Kergongar 29860 Bourg-blanc</b><br>
-                Si vous rencontrez un problème, veuillez contacter une des personnes suivantes:
-                <br>
-                <mat-list>
-                  <mat-list-item *ngFor="let organizer of footballCamp.details.organizers">
-                    <!-- TODO : CSS -->
-                    <img matListAvatar [src]="organizer.pathToPicture" class="contact-avatar"
-                         *ngIf="organizer.manageRegistration">
-                    <h3 matLine *ngIf="organizer.manageRegistration"> {{organizer.firstname}}
-                      {{organizer.lastname}} </h3>
-                    <p matLine *ngIf="organizer.manageRegistration">
-                      <span> {{organizer.phoneNumber}} </span>
-                    </p>
-                  </mat-list-item>
-                </mat-list>
-              </div>
-            </mat-tab>
-          </mat-tab-group>
-          <mat-form-field class="hidden-input">
-            <input matInput formControlName="payment">
-          </mat-form-field>
-        </form>
+      <mat-step [completed]="(cardPaymentComponent.isValid | async)">
+        <ng-template matStepLabel>Paiement</ng-template>
+        <mat-tab-group>
+          <mat-tab label="Payer par carte">
+            <app-football-camp-registration-payment #cardPaymentComponent [amount]="150"></app-football-camp-registration-payment>
+          </mat-tab>
+          <mat-tab label="Payer par chèque">
+              TODO
+          </mat-tab>
+        </mat-tab-group>
       </mat-step>
 
       <!-- Step 5 : Summary -->

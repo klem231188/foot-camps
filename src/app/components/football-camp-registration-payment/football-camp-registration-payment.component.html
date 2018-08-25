@@ -5,3 +5,5 @@
 <span class="error" #payErrorElement></span>
 <br>
 <button mat-raised-button color="primary" (click)="onPay()">Payer {{amount}} €</button>
+
+{{payment | async | json}}
