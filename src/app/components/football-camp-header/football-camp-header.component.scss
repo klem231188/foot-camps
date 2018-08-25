@@ -30,11 +30,24 @@
       height: 35px !important;
       width: 35px !important;
       line-height: 35px !important;
-      border-radius : 50%;
+      border-radius: 50%;
     }
 
     .connection-button {
-      color:#00796b !important;
+      color: #00796b !important;
+    }
+
+    .selected-football-camp {
+      display: flex;
+      flex-direction: row;
+      .selected-football-camp-logo {
+        height: 50px;
+      }
+      .selected-football-camp-name {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
     }
 
   }

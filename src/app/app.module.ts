@@ -8,7 +8,7 @@ import {registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'hammerjs';
-import {AppRoutingModule} from './app-routing.module';
+import {AppRoutes} from './app-routes';
 import {AppMaterialModule} from './app.material.module';
 import {AgmCoreModule} from '@agm/core';
 import {FootballCampLocatorComponent} from './components/football-camp-locator/football-camp-locator.component';
@@ -44,7 +44,8 @@ import {FileSizePipe} from './pipes/file-size.pipe';
 import {FootballCampRegistrationDocumentsComponent} from './components/football-camp-registration-documents/football-camp-registration-documents.component';
 import {FootballCampRegistrationSessionsComponent} from './components/football-camp-registration-sessions/football-camp-registration-sessions.component';
 import {FootballCampRegistrationTraineeFormComponent} from './components/football-camp-registration-trainee-form/football-camp-registration-trainee-form.component';
-import { FootballCampRegistrationCheckPaymentComponent } from './components/football-camp-registration-check-payment/football-camp-registration-check-payment.component';
+import {FootballCampRegistrationCheckPaymentComponent} from './components/football-camp-registration-check-payment/football-camp-registration-check-payment.component';
+import {RouterModule} from '@angular/router';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -71,7 +72,7 @@ registerLocaleData(localeFr, 'fr');
       apiKey: environment.googlemaps.apiKey
     }),
     // @Routing
-    AppRoutingModule
+    RouterModule.forRoot(AppRoutes)
   ],
   declarations: [
     AgePipe,
@@ -111,7 +112,7 @@ registerLocaleData(localeFr, 'fr');
     {provide: LOCALE_ID, useValue: 'fr'},
     {provide: MAT_DATE_LOCALE, useValue: 'fr'},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
   ],
   bootstrap: [AppComponent]
 })

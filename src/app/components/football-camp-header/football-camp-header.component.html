@@ -7,12 +7,23 @@
     <mat-icon>arrow_back</mat-icon>
   </button>
   <span fxFlex=5px></span>
-  <span class="brand">F<img src='assets/img/examples/ball-white-2.png' class="logo"><img
-    src='assets/img/examples/ball-white-2.png' class="logo">tcamps</span>
+  <span *ngIf="!(selectedFootballCamp | async)" class="brand">F
+    <img src='assets/img/examples/ball-white-2.png' class="logo">
+    <img src='assets/img/examples/ball-white-2.png' class="logo">
+    tcamps
+  </span>
+
+  <div *ngIf="(selectedFootballCamp | async)" class="selected-football-camp brand">
+    <img  class="selected-football-camp-logo" [src]="(selectedFootballCamp | async)?.details.pathToLogo">
+    <span fxFlex=5px></span>
+    <span class="selected-football-camp-name">{{(selectedFootballCamp | async)?.city}}</span>
+  </div>
+
   <span *ngIf="!environment.production">&nbsp;(dev)</span>
+
   <span fxFlex></span>
 
-  <!-- CONNEXION  -->
+
   <button *ngIf="!(userInfo  && userInfo.uid)" mat-raised-button (click)="login()">
     <span style="color:#00796b;">Connexion</span>
   </button>

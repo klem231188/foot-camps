@@ -1,5 +1,4 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {Routes} from '@angular/router';
 import {FootballCampDetailsComponent} from './components/football-camp-details/football-camp-details.component';
 import {FootballCampLocatorComponent} from './components/football-camp-locator/football-camp-locator.component';
 import {FootballCampRegistrationComponent} from 'app/components/football-camp-registration/football-camp-registration.component';
@@ -7,7 +6,7 @@ import {FootballCampLoginComponent} from './components/football-camp-login/footb
 import {FootballCampRegistrationsViewerComponent} from './components/football-camp-registrations-viewer/football-camp-registrations-viewer.component';
 import {PlaygroundComponent} from './components/playground/playground.component';
 
-const routes: Routes = [
+export const AppRoutes: Routes = [
   {path: '', redirectTo: '/locate', pathMatch: 'full'},
   {path: 'locate/:id/details', component: FootballCampDetailsComponent},
   {path: 'locate/:id', component: FootballCampLocatorComponent},
@@ -18,10 +17,3 @@ const routes: Routes = [
   {path: 'view-registrations', component: FootballCampRegistrationsViewerComponent},
   {path: 'playground', component: PlaygroundComponent},
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {
-}

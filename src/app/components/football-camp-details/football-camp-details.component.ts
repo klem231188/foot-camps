@@ -1,8 +1,7 @@
-
 import {switchMap} from 'rxjs/operators';
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Params, Router} from '@angular/router';
 import * as _ from 'lodash';
 import {FootballCamp} from '../../models/football-camp';
 import {Session} from '../../models/session';
@@ -23,7 +22,10 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
 
   viewerOpened = false;
 
-  constructor(private route: ActivatedRoute,
+  fragment = '';
+
+  constructor(private router: Router,
+              private route: ActivatedRoute,
               private footballCampService: FootballCampService,
               private sessionService: SessionService,
               private titleService: Title,
@@ -55,9 +57,20 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
         this.sessions = sessions;
       });
 
+    this.router.events.subscribe(s => {
+      if (s instanceof NavigationEnd) {
+        const tree = this.router.parseUrl(this.router.url);
+        if (tree.fragment) {
+          const element = document.querySelector('#' + tree.fragment);
+          if (element) {
+            element.scrollIntoView(true);
+          }
+        }
+      }
+    });
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     console.log('FootballCampDetailsComponent.ngAfterViewInit()');
   }
 
@@ -92,5 +105,9 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
   onViewerChange(viewerOpened: boolean) {
     console.log('Viewer isOpened = ' + viewerOpened);
     this.viewerOpened = viewerOpened;
+  }
+
+  private isAnchorActive(section: string): boolean {
+    return location.href.indexOf(section) !== -1;
   }
 }

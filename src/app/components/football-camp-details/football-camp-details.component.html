@@ -1,18 +1,31 @@
+<div *ngIf="!footballCamp" class="main-container">
+  Loading...
+</div>
 <div *ngIf="footballCamp" class="main-container">
 
+  <!-- Absolute positioned FAB button to register -->
   <button class="fab-button-registration" mat-fab color="accent" [routerLink]="[ '/registration/', footballCamp.id ]">
     <mat-icon class="mat-24">create</mat-icon>
   </button>
 
-  <div class="logo-container">
-    <img [src]="footballCamp.details.pathToLogo" class="details-logo">
-    <img src="./assets/img/soccer-sketch.png" class="soccer-ball">
+  <!-- menu on the left -->
+  <div class="menu-container">
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="[]" [class.active]="isAnchorActive('description')" fragment="description">Description</a>
+      <a mat-list-item [routerLink]="[]" [class.active]="isAnchorActive('location')"  fragment="location">Localisation</a>
+      <a mat-list-item [routerLink]="[]" [class.active]="isAnchorActive('organizers')"  fragment="organizers">Les organisateurs et les parrains</a>
+      <a mat-list-item [routerLink]="[]" [class.active]="isAnchorActive('gallery-photo')"  fragment="gallery-photo">Gallerie Photo</a>
+    </mat-nav-list>
   </div>
-
+  <!--<div class="logo-container">-->
+  <!--<img [src]="footballCamp.details.pathToLogo" class="details-logo">-->
+  <!--<img src="./assets/img/soccer-sketch.png" class="soccer-ball">-->
+  <!--</div>-->
   <div class="vertical-line"></div>
 
-  <div *ngIf="footballCamp" class="details-container">
-    <span class="separator"></span>
+  <!-- content on the right -->
+  <div class="content-container">
+    <span  id="description" class="separator"></span>
     <span class="separator"></span>
 
     <!-- Description -->
@@ -35,8 +48,8 @@
 
     <span class="separator"></span>
 
-    <!-- Localisation -->
-    <div class="container">
+    <!-- Location -->
+    <div class="container" id="location">
       <mat-toolbar>
         <mat-icon class="mat-24">location_on</mat-icon>
         <span fxFlex="10px"></span>
@@ -57,8 +70,8 @@
 
     <span class="separator"></span>
 
-    <!-- Les organisateurs et les parrains -->
-    <div class="container">
+    <!--Organizers -->
+    <div class="container" id="organizers">
       <mat-toolbar>
         <mat-icon class="mat-24">face</mat-icon>
         <span fxFlex="10px"></span>
@@ -82,8 +95,8 @@
 
     <span class="separator"></span>
 
-    <!-- Galerie photo -->
-    <div class="container">
+    <!-- Photo gallery -->
+    <div class="container" id="gallery-photo">
       <mat-toolbar>
         <mat-icon class="mat-24">photo</mat-icon>
         <span fxFlex="10px"></span>
@@ -101,7 +114,7 @@
 
     <span class="separator"></span>
 
-    <!-- Les dates et tarifs -->
+    <!-- Dates and prices -->
     <div class="container">
       <mat-toolbar>
         <mat-icon class="mat-24">date_range</mat-icon>
@@ -123,10 +136,12 @@
             <tbody>
             <tr *ngFor="let session of sessions; let i = index">
               <td data-label="Sessions">Session n°{{i}}</td>
-              <td data-label="Dates">A partir du {{session.start.toDate() | date : 'longDate'}} jusqu'au {{session.end.toDate() | date :
+              <td data-label="Dates">A partir du {{session.start.toDate() | date : 'longDate'}} jusqu'au
+                {{session.end.toDate() | date :
                 'longDate'}}
               </td>
-              <td data-label="Tarifs en Pension complète" *ngIf="hasFullBoardRatesSessions()">{{session.fullBoardRates}}
+              <td data-label="Tarifs en Pension complète" *ngIf="hasFullBoardRatesSessions()">
+                {{session.fullBoardRates}}
                 €
               </td>
               <td data-label="Tarifs en Demi-pension" *ngIf="hasHalfBoardRatesSessions()">{{session.halfBoardRates}} €
@@ -147,7 +162,7 @@
 
     <span class="separator"></span>
 
-    <!-- Les inscriptions -->
+    <!-- Registration link -->
     <div class="container">
       <mat-toolbar>
         <mat-icon class="mat-24">create</mat-icon>

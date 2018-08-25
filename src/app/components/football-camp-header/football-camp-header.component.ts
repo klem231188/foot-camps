@@ -1,19 +1,22 @@
-
-import {filter} from 'rxjs/operators';
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {NavigationStart, Router} from '@angular/router';
+import {filter, switchMap} from 'rxjs/operators';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {ActivatedRoute, NavigationStart, Router, RoutesRecognized} from '@angular/router';
 
 import {MatDialog} from '@angular/material';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {environment} from '../../../environments/environment';
 import * as firebase from 'firebase';
+import {FootballCampService} from '../../services/football-camp/football-camp.service';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {FootballCamp} from '../../models/football-camp';
+import {Event} from '@angular/router/src/events';
 
 @Component({
   selector: 'football-camp-header',
   templateUrl: 'football-camp-header.component.html',
   styleUrls: ['football-camp-header.component.scss']
 })
-export class FootballCampHeaderComponent implements OnInit {
+export class FootballCampHeaderComponent implements OnInit, OnDestroy {
 
   backUrl: string = null;
 
@@ -23,16 +26,24 @@ export class FootballCampHeaderComponent implements OnInit {
 
   environment: any = null;
 
+  subscriptions: Subscription[];
+
+  selectedFootballCamp: BehaviorSubject<FootballCamp>;
+
   constructor(private router: Router,
               private dialog: MatDialog,
-              private angularFireAuth: AngularFireAuth) {
+              private angularFireAuth: AngularFireAuth,
+              private activatedRoute: ActivatedRoute,
+              private footballCampService: FootballCampService) {
 
+    this.subscriptions = [];
+    this.selectedFootballCamp = new BehaviorSubject(null);
     this.environment = environment;
     console.log(`environment : ${JSON.stringify(this.environment)}`)
   }
 
   ngOnInit(): void {
-    this.router.events.pipe(
+    const subToRouter = this.router.events.pipe(
       filter(event => event instanceof NavigationStart))
       .subscribe((event: NavigationStart) => {
         if (/^\/registration\/\w+$/i.test(event.url)) {
@@ -55,10 +66,33 @@ export class FootballCampHeaderComponent implements OnInit {
         }
       });
 
-    this.angularFireAuth.authState.subscribe((firebaseUser) => {
-      this.userInfo = firebaseUser;
-      console.log('firebase.userInfo : ' + JSON.stringify(this.userInfo));
-    });
+    const subToAuthState = this.angularFireAuth.authState
+      .subscribe((firebaseUser) => {
+        this.userInfo = firebaseUser;
+        console.log('firebase.userInfo : ' + JSON.stringify(this.userInfo));
+      });
+
+    const subToSelectedFootballCamp = this.router.events
+      .pipe(
+        filter(event => event instanceof RoutesRecognized),
+        switchMap<RoutesRecognized, FootballCamp>((event) => {
+            if (event.state.root.firstChild.params.hasOwnProperty('id')) {
+              const campId: string = event.state.root.firstChild.params.id;
+              return this.footballCampService.getFootballCamp(campId);
+            } else {
+              return Observable.of(null);
+            }
+          }
+        ))
+      .subscribe(footballCamp => this.selectedFootballCamp.next(footballCamp));
+
+    this.subscriptions.push(subToRouter, subToAuthState, subToSelectedFootballCamp);
+  }
+
+  ngOnDestroy(): void {
+    for (const subscription of this.subscriptions) {
+      subscription.unsubscribe();
+    }
   }
 
   onBackClicked(): void {

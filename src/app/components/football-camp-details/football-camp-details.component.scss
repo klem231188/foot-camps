@@ -4,13 +4,20 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
   football-camp-details {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    background-color: #ffffff;
+
+    .active {
+      color: mat-color($primary) !important;
+    }
     .main-container {
       display: flex;
       flex: 1;
       flex-direction: row;
-      background-color: #ffffff;
-      overflow: auto;
     }
+
     .vertical-line {
       background-color: mat-color($primary);
       margin-bottom: 40px;
@@ -30,33 +37,19 @@
       }
       z-index: 10;
     }
-    .logo-container {
-      padding: 10px;
-      @include small-screen {
-        display: none;
-      }
+
+    .menu-container {
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .details-logo {
-        position: absolute;
-        top: 40px;
-        height: 170px;
-      }
-      .soccer-ball {
-        position: absolute;
-        bottom: 25px;
-        height: 150px;
-      }
     }
-    .details-container {
+
+    .content-container {
       flex: 4;
       display: flex;
       flex-direction: column;
       align-items: center;
       overflow: auto;
       padding: 4px;
+
       @include big-screen {
         padding: 10px;
       }
@@ -121,6 +114,7 @@
       }
     }
   }
+
   .quote {
     margin-bottom: 5px;
     display: flex;

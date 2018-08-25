@@ -13,7 +13,7 @@
 
       <!-- Step 1 : Choose a session-->
       <mat-step [completed]="(sessionComponent.isValid | async)">
-        <ng-template matStepLabel>Session</ng-template>
+        <ng-template matStepLabel>Choix session</ng-template>
         <app-football-camp-registration-sessions #sessionComponent
                                                  [campId]="footballCamp.id"></app-football-camp-registration-sessions>
         <div class="separator"></div>
@@ -25,44 +25,46 @@
         </div>
       </mat-step>
 
-      <!-- Step 2 : Fill in trainee form -->
-      <mat-step [completed]="(traineeFormComponent.isValid | async)">
-        <ng-template matStepLabel>Inscription</ng-template>
-        <app-football-camp-registration-trainee-form
-          #traineeFormComponent></app-football-camp-registration-trainee-form>
+      <!--&lt;!&ndash; Step 2 : Fill in trainee form &ndash;&gt;-->
+      <!--<mat-step [completed]="(traineeFormComponent.isValid | async)">-->
+      <!--<ng-template matStepLabel>Remplir formulaire</ng-template>-->
+      <!--<app-football-camp-registration-trainee-form-->
+      <!--#traineeFormComponent></app-football-camp-registration-trainee-form>-->
 
-        <div class="separator"></div>
-        <div class="next-button">
-          <button mat-button matStepperNext mat-raised-button color="primary"
-                  [disabled]="!(traineeFormComponent.isValid | async)">Suivant
-            <mat-icon>chevron_right</mat-icon>
-          </button>
-        </div>
-      </mat-step>
+      <!--<div class="separator"></div>-->
+      <!--<div class="next-button">-->
+      <!--<button mat-button matStepperNext mat-raised-button color="primary"-->
+      <!--[disabled]="!(traineeFormComponent.isValid | async)">Suivant-->
+      <!--<mat-icon>chevron_right</mat-icon>-->
+      <!--</button>-->
+      <!--</div>-->
+      <!--</mat-step>-->
 
-      <!--Step 3 : Document to supply -->
-      <mat-step [completed]="(documents.valid | async)">
-        <ng-template matStepLabel>Documents à fournir</ng-template>
-        <app-football-camp-registration-documents #documents></app-football-camp-registration-documents>
+      <!--&lt;!&ndash;Step 3 : Document to supply &ndash;&gt;-->
+      <!--<mat-step [completed]="(documents.valid | async)">-->
+      <!--<ng-template matStepLabel>Documents à fournir</ng-template>-->
+      <!--<app-football-camp-registration-documents #documents></app-football-camp-registration-documents>-->
 
-        <div class="separator"></div>
-        <div class="next-button">
-          <button mat-button matStepperNext mat-raised-button color="primary"
-                  [disabled]="!(documents.valid | async)">Suivant
-            <mat-icon>chevron_right</mat-icon>
-          </button>
-        </div>
-      </mat-step>
+      <!--<div class="separator"></div>-->
+      <!--<div class="next-button">-->
+      <!--<button mat-button matStepperNext mat-raised-button color="primary"-->
+      <!--[disabled]="!(documents.valid | async)">Suivant-->
+      <!--<mat-icon>chevron_right</mat-icon>-->
+      <!--</button>-->
+      <!--</div>-->
+      <!--</mat-step>-->
 
       <!--Step 4 : Payment -->
       <mat-step [completed]="(cardPaymentComponent.isValid | async)">
         <ng-template matStepLabel>Paiement</ng-template>
         <mat-tab-group>
           <mat-tab label="Payer par carte">
-            <app-football-camp-registration-payment #cardPaymentComponent [amount]="150"></app-football-camp-registration-payment>
+            <!-- TODO: handle fullBoardRates-->
+            <app-football-camp-registration-payment  #cardPaymentComponent [amount]="(sessionComponent.selectedSession | async)?.halfBoardRates"></app-football-camp-registration-payment>
           </mat-tab>
           <mat-tab label="Payer par chèque">
-              TODO
+            <!--<app-football-camp-registration-check-payment [campId]="'WCG80PBOCvPxVLTuorxc'" [sessionId]="'AJn0EUihD1BaUShuxM1M'"></app-football-camp-registration-check-payment>-->
+            Not yet implemented!
           </mat-tab>
         </mat-tab-group>
       </mat-step>
@@ -72,9 +74,9 @@
         <ng-template matStepLabel>Récapitulatif</ng-template>
         Félicitations vous êtes <b>pré-inscrit</b> pour le stage de {{footballCamp.city}} !
         <br>
-        Vous avez du recevoir un mail de confirmation à l'adresse suivante: <b>{{registration?.email}}</b>
+        Vous allez recevoir un mail de confirmation à l'adresse suivante: <b>{{registration?.email}}</b>
         <br>
-        Un autre mail vous sera envoyé lorsque votre inscription aura été réglée.
+        Un autre mail vous sera envoyé lorsque les documents envoyés ainsi que le paiement auront été vérifiés par l'organisateur.
       </mat-step>
     </mat-vertical-stepper>
   </div>
