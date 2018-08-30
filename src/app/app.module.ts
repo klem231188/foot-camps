@@ -72,7 +72,10 @@ registerLocaleData(localeFr, 'fr');
       apiKey: environment.googlemaps.apiKey
     }),
     // @Routing
-    RouterModule.forRoot(AppRoutes)
+    RouterModule.forRoot(AppRoutes, {
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
+    })
   ],
   declarations: [
     AgePipe,
