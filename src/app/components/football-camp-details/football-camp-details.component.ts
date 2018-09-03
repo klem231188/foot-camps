@@ -1,5 +1,14 @@
-import {filter, switchMap} from 'rxjs/operators';
-import {AfterViewInit, Component, HostListener, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {filter, switchMap, throttleTime} from 'rxjs/operators';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {ActivatedRoute, Params, Router, Scroll} from '@angular/router';
 import * as _ from 'lodash';
@@ -18,11 +27,6 @@ import {Observable} from 'rxjs';
 })
 export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @HostListener("window:scroll", [])
-  onWindowScroll() {
-    console.log("Scroll Event");
-  }
-
   footballCamp: FootballCamp = null;
 
   sessions: Session[] = [];
@@ -30,6 +34,21 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
   viewerOpened = false;
 
   fragment = '';
+
+  @ViewChild('miaow')
+  set fdp(miaow: ElementRef) {
+    Observable.fromEvent(miaow.nativeElement, 'scroll')
+      .pipe(throttleTime(1000))
+      .subscribe(e => {
+        const elements = document.querySelectorAll('.scrollable');
+        for (const element of elements) {
+          console.log(element);
+          console.log(element.offsetTop.offsetTop);
+        }
+        console.log('scroll contentContainer!');
+        console.log(e);
+      });
+  }
 
   constructor(private router: Router,
               private viewportScroller: ViewportScroller,
@@ -52,7 +71,10 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
         this.footballCamp = footballCamp;
         this.titleService.setTitle('Footcamps - Détails du stage de football ' + this.footballCamp.city);
         this.meta.updateTag({name: 'description', content: 'Détails du stage de football ' + this.footballCamp.city});
-        this.meta.updateTag({name: 'keywords', content: 'footcamps, stage, football, description, images, photos, détails, prix'});
+        this.meta.updateTag({
+          name: 'keywords',
+          content: 'footcamps, stage, football, description, images, photos, détails, prix'
+        });
       });
 
     this.route
@@ -87,15 +109,6 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
           element.scrollIntoView(true);
         }
       }
-    });
-
-    const eventOptions = {passive: true};
-    Observable.fromEvent(window, 'scroll', eventOptions).subscribe(e => {
-      console.log('scroll !');
-    });
-
-    Observable.fromEvent(window, 'click').subscribe(e => {
-      console.log('click !');
     });
   }
 
@@ -138,5 +151,9 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
 
   private isAnchorActive(section: string): boolean {
     return location.href.indexOf(section) !== -1;
+  }
+
+  onScroll() {
+    console.log('scroll');
   }
 }
