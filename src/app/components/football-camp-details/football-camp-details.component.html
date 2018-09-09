@@ -10,26 +10,29 @@
 
   <!-- menu on the left -->
   <div class="menu-container">
-    <mat-nav-list>
-      <a mat-list-item [routerLink]="[]" [class.active]="isAnchorActive('description')" fragment="description">Description</a>
-      <a mat-list-item [routerLink]="[]" [class.active]="isAnchorActive('location')"  fragment="location">Localisation</a>
-      <a mat-list-item [routerLink]="[]" [class.active]="isAnchorActive('organizers')"  fragment="organizers">Les organisateurs et les parrains</a>
-      <a mat-list-item [routerLink]="[]" [class.active]="isAnchorActive('gallery-photo')"  fragment="gallery-photo">Gallerie Photo</a>
-    </mat-nav-list>
+    <span class="separator"></span>
+    <span class="separator"></span>
+    <mat-list-item>
+      <mat-list>
+        <mat-list-item class="menu activated" id="description-menu">Description</mat-list-item>
+        <mat-list-item class="menu" id="location-menu">Localisation</mat-list-item>
+        <mat-list-item class="menu" id="organizers-menu">Les organisateurs et les parrains</mat-list-item>
+        <mat-list-item class="menu" id="gallery-photo-menu">Gallerie Photo</mat-list-item>
+        <mat-list-item class="menu" id="date-menu">Dates et Tarifs</mat-list-item>
+        <mat-list-item class="menu" id="registration-menu">Inscriptions</mat-list-item>
+      </mat-list>
+    </mat-list-item>
   </div>
-  <!--<div class="logo-container">-->
-  <!--<img [src]="footballCamp.details.pathToLogo" class="details-logo">-->
-  <!--<img src="./assets/img/soccer-sketch.png" class="soccer-ball">-->
   <!--</div>-->
   <div class="vertical-line"></div>
 
   <!-- content on the right -->
   <div class="content-container" #miaow>
-    <span  id="description" class="separator"></span>
+    <span class="separator"></span>
     <span class="separator"></span>
 
     <!-- Description -->
-    <div class="container scrollable">
+    <div class="container scrollable" id="description">
       <mat-toolbar>
         <mat-icon class="mat-24">description</mat-icon>
         <span fxFlex="10px"></span>
@@ -39,7 +42,8 @@
         <mat-card-content>
           <p [innerHTML]="footballCamp.details.description | safeHtml"></p>
           <b>Programme:</b>
-          <a href="{{footballCamp.details.pathToSchedule}}" download mat-raised-button color="primary">Télécharger le
+          <span fxFlex="2px"></span>
+          <a href="{{footballCamp.details.pathToSchedule}}" download mat-button color="primary">Télécharger le
             programme
             de la semaine</a>
         </mat-card-content>
@@ -60,8 +64,8 @@
           <p [innerHTML]="footballCamp.details.location | safeHtml"></p>
           <div fxLayout="row" fxLayoutAlign="start center" class="details-location-address">
             <b>Adresse: </b>
-            <span fxFlex="10px"></span>
-            <a [href]="footballCamp.details.gmapsUrl" mat-raised-button
+            <span fxFlex="2px"></span>
+            <a [href]="footballCamp.details.gmapsUrl" mat-button
                color="primary">{{footballCamp.details.address}}</a>
           </div>
         </mat-card-content>
@@ -71,7 +75,7 @@
     <span class="separator"></span>
 
     <!--Organizers -->
-    <div class="container" id="organizers">
+    <div class="container scrollable" id="organizers">
       <mat-toolbar>
         <mat-icon class="mat-24">face</mat-icon>
         <span fxFlex="10px"></span>
@@ -96,7 +100,7 @@
     <span class="separator"></span>
 
     <!-- Photo gallery -->
-    <div class="container" id="gallery-photo">
+    <div class="container scrollable" id="gallery-photo">
       <mat-toolbar>
         <mat-icon class="mat-24">photo</mat-icon>
         <span fxFlex="10px"></span>
@@ -115,7 +119,7 @@
     <span class="separator"></span>
 
     <!-- Dates and prices -->
-    <div class="container">
+    <div class="container scrollable" id="date">
       <mat-toolbar>
         <mat-icon class="mat-24">date_range</mat-icon>
         <span fxFlex="10px"></span>
@@ -163,7 +167,7 @@
     <span class="separator"></span>
 
     <!-- Registration link -->
-    <div class="container">
+    <div class="container scrollable" id="registration">
       <mat-toolbar>
         <mat-icon class="mat-24">create</mat-icon>
         <span fxFlex="10px"></span>
@@ -180,7 +184,7 @@
             <br>
             <br>
             <div fxLayout="column" fxLayoutAlign="none center">
-              <a [routerLink]="[ '/registration/', footballCamp.id ]" mat-raised-button color="primary"
+              <a [routerLink]="[ '/registration/', footballCamp.id ]" mat-button color="primary"
                  class="link-to-maps">Je
                 m'inscris sans attendre !</a>
             </div>
@@ -191,7 +195,7 @@
             <br>
             <br>
             <div fxLayout="column" fxLayoutAlign="none center">
-              <a [href]="footballCamp.details.registrationUrl" mat-raised-button color="primary" class="link-to-maps">Je
+              <a [href]="footballCamp.details.registrationUrl" mat-button color="primary" class="link-to-maps">Je
                 m'inscris sans attendre !</a>
             </div>
           </ng-template>

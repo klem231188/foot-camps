@@ -41,6 +41,13 @@
 
     .menu-container {
       flex: 1;
+      .separator {
+        width: 100%;
+        min-height: 15px;
+      }
+      .activated {
+        color: mat-color($primary);
+      }
     }
 
     .content-container {
@@ -63,6 +70,7 @@
         display: flex;
         flex-direction: column;
         width: 100%;
+        position: relative;
         @include big-screen {
           width: 80%;
         }

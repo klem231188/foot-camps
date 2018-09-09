@@ -1,16 +1,7 @@
-import {filter, switchMap, throttleTime} from 'rxjs/operators';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  HostListener,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation
-} from '@angular/core';
+import {switchMap, throttleTime} from 'rxjs/operators';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
-import {ActivatedRoute, Params, Router, Scroll} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import * as _ from 'lodash';
 import {FootballCamp} from '../../models/football-camp';
 import {Session} from '../../models/session';
@@ -36,17 +27,41 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
   fragment = '';
 
   @ViewChild('miaow')
-  set fdp(miaow: ElementRef) {
+  set onScrollContentContainer(miaow: ElementRef) {
     Observable.fromEvent(miaow.nativeElement, 'scroll')
-      .pipe(throttleTime(1000))
+      //.pipe(throttleTime(100))
       .subscribe(e => {
-        const elements = document.querySelectorAll('.scrollable');
-        for (const element of elements) {
-          console.log(element);
-          console.log(element.offsetTop.offsetTop);
+        const menuElements: NodeListOf<HTMLElement> = document.querySelectorAll('.menu');
+        for (let i = 0; i < menuElements.length; i++) {
+          const element: HTMLElement = menuElements.item(i);
+          element.classList.remove('activated');
         }
-        console.log('scroll contentContainer!');
-        console.log(e);
+
+        const elements: NodeListOf<HTMLElement> = document.querySelectorAll('.scrollable');
+        for (let i = 0; i < elements.length; i++) {
+          const element: HTMLElement = elements.item(i);
+          if (this.offsetTop(element) > 0) {
+            if (element.id === 'description') {
+              document.querySelector('#description-menu').classList.add('activated');
+            }
+            if (element.id === 'location') {
+              document.querySelector('#location-menu').classList.add('activated');
+            }
+            if (element.id === 'organizers') {
+              document.querySelector('#organizers-menu').classList.add('activated');
+            }
+            if (element.id === 'gallery-photo') {
+              document.querySelector('#gallery-photo-menu').classList.add('activated');
+            }
+            if (element.id === 'date') {
+              document.querySelector('#date-menu').classList.add('activated');
+            }
+            if (element.id === 'registration') {
+              document.querySelector('#registration-menu').classList.add('activated');
+            }
+            break;
+          }
+        }
       });
   }
 
@@ -57,6 +72,12 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
               private sessionService: SessionService,
               private titleService: Title,
               private meta: Meta) {
+  }
+
+  offsetTop(el) {
+    const rect = el.getBoundingClientRect();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return rect.top + scrollTop;
   }
 
   ngOnInit(): void {
@@ -100,16 +121,16 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
     // });
 
 
-    this.router.events.pipe(
-      filter(e => e instanceof Scroll)
-    ).subscribe((e: Scroll) => {
-      if (e.anchor) {
-        const element = document.querySelector('#' + e.anchor);
-        if (element) {
-          element.scrollIntoView(true);
-        }
-      }
-    });
+    // this.router.events.pipe(
+    //   filter(e => e instanceof Scroll)
+    // ).subscribe((e: Scroll) => {
+    //   if (e.anchor) {
+    //     const element = document.querySelector('#' + e.anchor);
+    //     if (element) {
+    //       element.scrollIntoView(true);
+    //     }
+    //   }
+    // });
   }
 
   ngAfterViewInit(): void {
