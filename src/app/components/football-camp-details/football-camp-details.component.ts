@@ -1,7 +1,7 @@
-import {switchMap, throttleTime} from 'rxjs/operators';
+import {filter, switchMap, throttleTime} from 'rxjs/operators';
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Params, Router, Scroll} from '@angular/router';
 import * as _ from 'lodash';
 import {FootballCamp} from '../../models/football-camp';
 import {Session} from '../../models/session';
@@ -26,10 +26,12 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
 
   fragment = '';
 
-  @ViewChild('miaow')
-  set onScrollContentContainer(miaow: ElementRef) {
-    Observable.fromEvent(miaow.nativeElement, 'scroll')
-      //.pipe(throttleTime(100))
+  @ViewChild('contentContainer')
+  set onScrollContentContainer(contentContainer: ElementRef) {
+    Observable.fromEvent(contentContainer.nativeElement, 'scroll')
+      .pipe(
+        throttleTime(50)
+      )
       .subscribe(e => {
         const menuElements: NodeListOf<HTMLElement> = document.querySelectorAll('.menu');
         for (let i = 0; i < menuElements.length; i++) {
@@ -41,27 +43,14 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
         for (let i = 0; i < elements.length; i++) {
           const element: HTMLElement = elements.item(i);
           if (this.offsetTop(element) > 0) {
-            if (element.id === 'description') {
-              document.querySelector('#description-menu').classList.add('activated');
-            }
-            if (element.id === 'location') {
-              document.querySelector('#location-menu').classList.add('activated');
-            }
-            if (element.id === 'organizers') {
-              document.querySelector('#organizers-menu').classList.add('activated');
-            }
-            if (element.id === 'gallery-photo') {
-              document.querySelector('#gallery-photo-menu').classList.add('activated');
-            }
-            if (element.id === 'date') {
-              document.querySelector('#date-menu').classList.add('activated');
-            }
-            if (element.id === 'registration') {
-              document.querySelector('#registration-menu').classList.add('activated');
-            }
+            document.querySelector('#' + element.id + '-menu').classList.add('activated');
+            // TODO get error : Throttling history state changes to prevent the browser from hanging
+           // history.replaceState(null, '', window.location.pathname + '#' + element.id);
             break;
           }
         }
+
+        // TODO hanlde bottom --> registration activated
       });
   }
 
@@ -107,30 +96,6 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
         console.log(sessions);
         this.sessions = sessions;
       });
-
-    // this.router.events.subscribe(s => {
-    //   if (s instanceof NavigationEnd) {
-    //     const tree = this.router.parseUrl(this.router.url);
-    //     if (tree.fragment) {
-    //       const element = document.querySelector('#' + tree.fragment);
-    //       if (element) {
-    //         element.scrollIntoView(true);
-    //       }
-    //     }
-    //   }
-    // });
-
-
-    // this.router.events.pipe(
-    //   filter(e => e instanceof Scroll)
-    // ).subscribe((e: Scroll) => {
-    //   if (e.anchor) {
-    //     const element = document.querySelector('#' + e.anchor);
-    //     if (element) {
-    //       element.scrollIntoView(true);
-    //     }
-    //   }
-    // });
   }
 
   ngAfterViewInit(): void {
@@ -174,7 +139,7 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
     return location.href.indexOf(section) !== -1;
   }
 
-  onScroll() {
-    console.log('scroll');
+  scrollTo(elementId: string) {
+    window.location.hash = elementId;
   }
 }
