@@ -46,6 +46,8 @@ import {FootballCampRegistrationSessionsComponent} from './components/football-c
 import {FootballCampRegistrationTraineeFormComponent} from './components/football-camp-registration-trainee-form/football-camp-registration-trainee-form.component';
 import {FootballCampRegistrationCheckPaymentComponent} from './components/football-camp-registration-check-payment/football-camp-registration-check-payment.component';
 import {RouterModule} from '@angular/router';
+import {TableOfContentsModule} from './components/table-of-contents/table-of-contents.module';
+import { FootballCampRegistrationsOverviewComponent } from './components/football-camp-registrations-overview/football-camp-registrations-overview.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -65,6 +67,7 @@ registerLocaleData(localeFr, 'fr');
     AppMaterialModule,
     // ImageGallery
     Angular2ImageGalleryModule,
+    TableOfContentsModule,
     // @Bootstrap
     CarouselModule.forRoot(),
     // @GoogleMaps
@@ -103,7 +106,8 @@ registerLocaleData(localeFr, 'fr');
     FootballCampRegistrationDocumentsComponent,
     FootballCampRegistrationSessionsComponent,
     FootballCampRegistrationTraineeFormComponent,
-    FootballCampRegistrationCheckPaymentComponent
+    FootballCampRegistrationCheckPaymentComponent,
+    FootballCampRegistrationsOverviewComponent
   ],
   entryComponents: [
     FootballCampLoginComponent,

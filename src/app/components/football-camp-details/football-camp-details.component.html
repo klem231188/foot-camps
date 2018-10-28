@@ -10,16 +10,13 @@
 
   <!-- menu on the left -->
   <div class="menu-container">
-    <span class="separator"></span>
-    <span class="separator"></span>
-      <mat-nav-list>
-        <a mat-list-item (click)="scrollTo('description')" class="menu activated" id="description-menu">Description</a>
-        <a mat-list-item (click)="scrollTo('location')" class="menu" id="location-menu">Localisation</a>
-        <mat-list-item (click)="scrollTo('organizers')" class="menu" id="organizers-menu">Les organisateurs et les parrains</mat-list-item>
-        <mat-list-item (click)="scrollTo('gallery-photo')" class="menu" id="gallery-photo-menu">Gallerie Photo</mat-list-item>
-        <mat-list-item (click)="scrollTo('date')" class="menu" id="date-menu">Dates et Tarifs</mat-list-item>
-        <mat-list-item (click)="scrollTo('registration')" class="menu" id="registration-menu">Inscriptions</mat-list-item>
-      </mat-nav-list>
+    <div class="separator"></div>
+    <div class="separator"></div>
+
+    <table-of-contents #toc
+                       *ngIf="showToc"
+                       headerSelectors=".header"
+                       container=".content-container"></table-of-contents>
   </div>
   <!--</div>-->
   <div class="vertical-line"></div>
@@ -30,11 +27,11 @@
     <span class="separator"></span>
 
     <!-- Description -->
-    <div class="container scrollable" id="description">
+    <div class="container scrollable">
       <mat-toolbar>
         <mat-icon class="mat-24">description</mat-icon>
         <span fxFlex="10px"></span>
-        <span>Description</span>
+        <span class="header" id="description">Description</span>
       </mat-toolbar>
       <mat-card>
         <mat-card-content>
@@ -51,11 +48,11 @@
     <span class="separator"></span>
 
     <!-- Location -->
-    <div class="container scrollable" id="location">
+    <div class="container scrollable">
       <mat-toolbar>
         <mat-icon class="mat-24">location_on</mat-icon>
         <span fxFlex="10px"></span>
-        <span>Localisation</span>
+        <span class="header" id="location">Localisation</span>
       </mat-toolbar>
       <mat-card>
         <mat-card-content>
@@ -73,11 +70,11 @@
     <span class="separator"></span>
 
     <!--Organizers -->
-    <div class="container scrollable" id="organizers">
+    <div class="container scrollable">
       <mat-toolbar>
         <mat-icon class="mat-24">face</mat-icon>
         <span fxFlex="10px"></span>
-        <span>Les organisateurs et les parrains</span>
+        <span class="header" id="organizers">Les organisateurs et les parrains</span>
       </mat-toolbar>
       <mat-card>
         <mat-card-content>
@@ -98,11 +95,11 @@
     <span class="separator"></span>
 
     <!-- Photo gallery -->
-    <div class="container scrollable" id="gallery-photo">
+    <div class="container scrollable">
       <mat-toolbar>
         <mat-icon class="mat-24">photo</mat-icon>
         <span fxFlex="10px"></span>
-        <span>La galerie photo</span>
+        <span class="header" id="gallery-photo">La galerie photo</span>
       </mat-toolbar>
       <!--<span fxFlex="3px" class="background-white"></span>-->
       <mat-card [ngClass]="isViewerOpened() ? 'z-index11' : 'z-index2'">
@@ -117,11 +114,11 @@
     <span class="separator"></span>
 
     <!-- Dates and prices -->
-    <div class="container scrollable" id="date">
+    <div class="container scrollable">
       <mat-toolbar>
         <mat-icon class="mat-24">date_range</mat-icon>
         <span fxFlex="10px"></span>
-        <span>Les dates et tarifs</span>
+        <span class="header" id="date">Les dates et tarifs</span>
       </mat-toolbar>
       <mat-card>
         <mat-card-content>
@@ -165,11 +162,11 @@
     <span class="separator"></span>
 
     <!-- Registration link -->
-    <div class="container scrollable" id="registration">
+    <div class="container scrollable">
       <mat-toolbar>
         <mat-icon class="mat-24">create</mat-icon>
         <span fxFlex="10px"></span>
-        <span>Les inscriptions</span>
+        <span class="header" id="registration">Les inscriptions</span>
       </mat-toolbar>
       <mat-card>
         <mat-card-content>

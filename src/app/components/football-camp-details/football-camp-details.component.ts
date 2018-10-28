@@ -26,33 +26,7 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
 
   fragment = '';
 
-  @ViewChild('contentContainer')
-  set onScrollContentContainer(contentContainer: ElementRef) {
-    Observable.fromEvent(contentContainer.nativeElement, 'scroll')
-      .pipe(
-        throttleTime(50)
-      )
-      .subscribe(e => {
-        const menuElements: NodeListOf<HTMLElement> = document.querySelectorAll('.menu');
-        for (let i = 0; i < menuElements.length; i++) {
-          const element: HTMLElement = menuElements.item(i);
-          element.classList.remove('activated');
-        }
-
-        const elements: NodeListOf<HTMLElement> = document.querySelectorAll('.scrollable');
-        for (let i = 0; i < elements.length; i++) {
-          const element: HTMLElement = elements.item(i);
-          if (this.offsetTop(element) > 0) {
-            document.querySelector('#' + element.id + '-menu').classList.add('activated');
-            // TODO get error : Throttling history state changes to prevent the browser from hanging
-           // history.replaceState(null, '', window.location.pathname + '#' + element.id);
-            break;
-          }
-        }
-
-        // TODO hanlde bottom --> registration activated
-      });
-  }
+  showToc = false;
 
   constructor(private router: Router,
               private viewportScroller: ViewportScroller,
@@ -61,12 +35,6 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
               private sessionService: SessionService,
               private titleService: Title,
               private meta: Meta) {
-  }
-
-  offsetTop(el) {
-    const rect = el.getBoundingClientRect();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    return rect.top + scrollTop;
   }
 
   ngOnInit(): void {
@@ -95,6 +63,7 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
       .subscribe((sessions: Session[]) => {
         console.log(sessions);
         this.sessions = sessions;
+        this.showToc = true;
       });
   }
 
@@ -133,13 +102,5 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
   onViewerChange(viewerOpened: boolean) {
     console.log('Viewer isOpened = ' + viewerOpened);
     this.viewerOpened = viewerOpened;
-  }
-
-  private isAnchorActive(section: string): boolean {
-    return location.href.indexOf(section) !== -1;
-  }
-
-  scrollTo(elementId: string) {
-    window.location.hash = elementId;
   }
 }
