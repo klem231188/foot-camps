@@ -1,7 +1,7 @@
 import {map, publishReplay, refCount} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AngularFirestore, DocumentChangeAction} from 'angularfire2/firestore';
+import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 
 
 import {FootballCamp} from '../../models/football-camp';

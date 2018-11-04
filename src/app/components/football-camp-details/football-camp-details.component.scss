@@ -41,6 +41,9 @@
 
     .menu-container {
       flex: 1;
+      @include small-screen {
+        display: none;
+      }
       .separator {
         width: 100%;
         min-height: 15px;
@@ -51,14 +54,17 @@
     }
 
     .content-container {
-      flex: 4;
       display: flex;
       flex-direction: column;
       align-items: center;
       overflow: auto;
       padding: 4px;
 
+      @include small-screen {
+        flex: 1;
+      }
       @include big-screen {
+        flex: 4;
         padding: 10px;
       }
       .separator {
@@ -88,11 +94,23 @@
           border-radius: 0px 0px 2px 2px !important;
           mat-card-content {
             font-size: 15px !important;
+            .program-container {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+            }
+            .address-container {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              a {
+                @include small-screen {
+                  text-overflow: ellipsis;
+                  //max-width: 230px;
+                }
+              }
+            }
           }
-        }
-        .details-location-address {
-          overflow-x: auto;
-          padding-bottom: 4px;
         }
         .background-white {
           background-color: white;
@@ -131,7 +149,7 @@
     align-items: flex-start;
     @include big-screen {
       flex-direction: row;
-      align-items: flex-start;
+      align-items: center;
     }
   }
   .quote:hover * {
@@ -142,6 +160,7 @@
     height: 128px;
     width: 128px;
     min-width: 128px;
+    margin-right: 10px;
     background-color: mat-color($primary);
   }
   table {

@@ -1,4 +1,4 @@
-import {AngularFireStorage, AngularFireUploadTask} from 'angularfire2/storage';
+import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import {Injectable} from '@angular/core';
 
 @Injectable()

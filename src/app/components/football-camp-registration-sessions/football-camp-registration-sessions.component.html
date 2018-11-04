@@ -18,7 +18,7 @@
   <mat-card-actions align="start">
     <button
       [disabled]="(session.numberOfRegistrationsInProgress + session.numberOfRegistrationsAccepted) >= session.maximumNumberOfRegistrations"
-      mat-raised-button
+      mat-stroked-button
       color="primary"
       (click)="selectedSession.next(session)">
       Choisir

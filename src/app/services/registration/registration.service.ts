@@ -1,6 +1,6 @@
 import {map, publishReplay, refCount} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {AngularFirestore, DocumentChangeAction} from 'angularfire2/firestore';
+import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {Registration} from '../../models/registration';
 

@@ -40,14 +40,15 @@
     .selected-football-camp {
       display: flex;
       flex-direction: row;
+      align-items: center;
       .selected-football-camp-logo {
         height: 50px;
       }
-      .selected-football-camp-name {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
+      //.selected-football-camp-name {
+      //  display: flex;
+      //  flex-direction: column;
+      //  justify-content: center;
+      //}
     }
 
   }

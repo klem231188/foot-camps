@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {AngularFireStorage, AngularFireUploadTask} from 'angularfire2/storage';
+import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Subscription} from 'rxjs/Subscription';
 import {DocumentType} from '../../models/document-type.enum'

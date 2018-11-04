@@ -1,7 +1,7 @@
 
 import {switchMap} from 'rxjs/operators';
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {AngularFireAuth} from 'angularfire2/auth';
+import {AngularFireAuth} from '@angular/fire/auth';
 import {RegistrationService} from '../../services/registration/registration.service';
 import {SessionService} from '../../services/session/session.service';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';

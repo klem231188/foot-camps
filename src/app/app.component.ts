@@ -4,7 +4,7 @@ import {FootballCampService} from './services/football-camp/football-camp.servic
 import {FirebaseAuthUiService} from './services/firebase-auth-ui/firebase-auth-ui.service';
 import {MatSidenav} from '@angular/material';
 import {Router} from '@angular/router';
-import {AngularFireAuth} from 'angularfire2/auth';
+import {AngularFireAuth} from '@angular/fire/auth';
 import {RegistrationService} from './services/registration/registration.service';
 import {SessionService} from './services/session/session.service';
 import {User} from './models/user';

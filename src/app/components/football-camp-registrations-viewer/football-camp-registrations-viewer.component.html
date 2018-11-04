@@ -23,7 +23,7 @@
   </mat-accordion>
 
   <br>
-  <button mat-raised-button (click)="print()" color="primary">Imprimer</button>
+  <button mat-stroked-button (click)="print()" color="primary">Imprimer</button>
 </div>
 
 <div>
@@ -66,8 +66,8 @@
 
       </mat-card-content>
       <mat-card-actions align="center" *ngIf="registration.state === 'IN_PROGRESS'">
-        <button mat-button (click)="accept(registration)" color="primary">Accepter inscription</button>
-        <button mat-button (click)="reject(registration)" color="warn">Refuser inscription</button>
+        <button mat-stroked-button (click)="accept(registration)" color="primary">Accepter inscription</button>
+        <button mat-stroked-button (click)="reject(registration)" color="warn">Refuser inscription</button>
       </mat-card-actions>
       <mat-card-footer></mat-card-footer>
       <div class="html2pdf__page-break" *ngIf="i !== (registrations.length - 1)"></div>

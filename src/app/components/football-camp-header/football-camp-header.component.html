@@ -28,7 +28,7 @@
     <span style="color:#00796b;">Connexion</span>
   </button>
 
-  <!-- DECONNEXION  -->
+  <!-- Disconnection  -->
   <button *ngIf="(userInfo  && userInfo.uid)" mat-icon-button mat-button [matMenuTriggerFor]="menuLogout">
     <img *ngIf="(userInfo  && userInfo.photoURL)" src="{{userInfo.photoURL}}" class="user-avatar"
          alt="Photo du profil"/>

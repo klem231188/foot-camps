@@ -4,6 +4,6 @@
 </div>
 <span class="error" #payErrorElement></span>
 <br>
-<button mat-raised-button color="primary" (click)="onPay()">Payer {{amount}} €</button>
+<button mat-stroked-button color="primary" (click)="onPay()">Payer {{amount}} €</button>
 
 {{payment | async | json}}

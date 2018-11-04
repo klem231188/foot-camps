@@ -3,7 +3,7 @@ import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core'
 import {ActivatedRoute, NavigationStart, Router, RoutesRecognized} from '@angular/router';
 
 import {MatDialog} from '@angular/material';
-import {AngularFireAuth} from 'angularfire2/auth';
+import {AngularFireAuth} from '@angular/fire/auth';
 import {environment} from '../../../environments/environment';
 import * as firebase from 'firebase';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';

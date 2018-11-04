@@ -3,7 +3,7 @@ import {PaymentService} from '../../services/payment/payment.service';
 import {Payment} from '../../models/payment';
 import {Observable} from "rxjs/Observable";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {AngularFirestore} from "angularfire2/firestore";
+import {AngularFirestore} from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-football-camp-registration-payment',

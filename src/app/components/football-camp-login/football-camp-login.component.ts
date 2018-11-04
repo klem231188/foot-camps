@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import * as firebase from 'firebase';
-import {AngularFireAuth} from 'angularfire2/auth';
+import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {FirebaseAuthUiService} from 'app/services/firebase-auth-ui/firebase-auth-ui.service';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';

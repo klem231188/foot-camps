@@ -7,8 +7,14 @@
   app-football-camp-registration-sessions {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+    flex-wrap: wrap;
+
+    mat-card {
+      margin-right: 10px;
+      margin-top: 10px;
+    }
 
     .loading {
       background-color: #ffffff;

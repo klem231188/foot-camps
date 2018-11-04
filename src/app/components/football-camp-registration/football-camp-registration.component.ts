@@ -4,7 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {MatDialog, MatVerticalStepper} from '@angular/material';
-import {AngularFireAuth} from 'angularfire2/auth';
+import {AngularFireAuth} from '@angular/fire/auth';
 import {FootballCampShouldConnectDialogComponent} from '../football-camp-should-connect-dialog/football-camp-should-connect-dialog.component';
 import {Subscription} from 'rxjs';
 import {FootballCamp} from '../../models/football-camp';

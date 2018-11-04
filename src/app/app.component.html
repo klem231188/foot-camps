@@ -3,11 +3,11 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
     <button (click)="onFindFootballCampsClicked()" mat-button>
-      <mat-icon>location_on</mat-icon>
+      <mat-icon>location_on</mat-icon>&nbsp;
       <span>Trouver un stage</span>
     </button>
     <button mat-button *ngIf="user && ((user.role === 'ADMIN') || (user.role === 'ORGANIZER'))" (click)="onViewRegistrationsClicked()">
-      <mat-icon>visibility</mat-icon>
+      <mat-icon>visibility</mat-icon>&nbsp;
       <span>Voir les inscrits</span>
     </button>
   </mat-sidenav>

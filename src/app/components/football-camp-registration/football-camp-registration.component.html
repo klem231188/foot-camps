@@ -1,10 +1,9 @@
 <div *ngIf="footballCamp" class="registration-main-container">
   <div class="registration-logo-container">
     <img [src]="footballCamp.details.pathToLogo" class="details-logo">
-    <img src="./assets/img/soccer-sketch.png" class="soccer-ball">
+    <!--<img src="./assets/img/soccer-sketch.png" class="soccer-ball">-->
     <hr class="vertical-line">
   </div>
-
 
   <!-- Stepper -->
   <div class="registration-stepper-container">
@@ -18,7 +17,7 @@
                                                  [campId]="footballCamp.id"></app-football-camp-registration-sessions>
         <div class="separator"></div>
         <div class="next-button">
-          <button mat-button matStepperNext mat-raised-button color="primary"
+          <button mat-stroked-button matStepperNext mat-stroked-button color="primary"
                   [disabled]="!(sessionComponent.isValid | async)">Suivant
             <mat-icon>chevron_right</mat-icon>
           </button>
@@ -33,26 +32,26 @@
 
       <!--<div class="separator"></div>-->
       <!--<div class="next-button">-->
-      <!--<button mat-button matStepperNext mat-raised-button color="primary"-->
+      <!--<button mat-stroked-button matStepperNext mat-stroked-button color="primary"-->
       <!--[disabled]="!(traineeFormComponent.isValid | async)">Suivant-->
       <!--<mat-icon>chevron_right</mat-icon>-->
       <!--</button>-->
       <!--</div>-->
       <!--</mat-step>-->
 
-      <!--&lt;!&ndash;Step 3 : Document to supply &ndash;&gt;-->
-      <!--<mat-step [completed]="(documents.valid | async)">-->
-      <!--<ng-template matStepLabel>Documents à fournir</ng-template>-->
-      <!--<app-football-camp-registration-documents #documents></app-football-camp-registration-documents>-->
+      <!--Step 3 : Document to supply -->
+      <mat-step [completed]="(documents.valid | async)">
+      <ng-template matStepLabel>Documents à fournir</ng-template>
+      <app-football-camp-registration-documents #documents></app-football-camp-registration-documents>
 
-      <!--<div class="separator"></div>-->
-      <!--<div class="next-button">-->
-      <!--<button mat-button matStepperNext mat-raised-button color="primary"-->
-      <!--[disabled]="!(documents.valid | async)">Suivant-->
-      <!--<mat-icon>chevron_right</mat-icon>-->
-      <!--</button>-->
-      <!--</div>-->
-      <!--</mat-step>-->
+      <div class="separator"></div>
+      <div class="next-button">
+      <button mat-stroked-button matStepperNext mat-stroked-button color="primary"
+      [disabled]="!(documents.valid | async)">Suivant
+      <mat-icon>chevron_right</mat-icon>
+      </button>
+      </div>
+      </mat-step>
 
       <!--Step 4 : Payment -->
       <mat-step [completed]="(cardPaymentComponent.isValid | async)">

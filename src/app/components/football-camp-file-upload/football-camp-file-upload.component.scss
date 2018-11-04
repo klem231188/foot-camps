@@ -20,7 +20,8 @@
         width: 50px;
         margin-right: 10px;
       }
-      .space {
+      .text {
+        text-overflow: ellipsis;
         flex: 1;
       }
       .import {

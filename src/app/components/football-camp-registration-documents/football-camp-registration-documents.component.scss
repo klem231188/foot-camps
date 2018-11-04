@@ -11,6 +11,16 @@
     }
     mat-list {
       width: 100%;
+      mat-list-item {
+        min-height: 48px;
+        height: unset !important;
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        .mat-list-item-content {
+          flex: 1;
+        }
+      }
     }
   }
 }

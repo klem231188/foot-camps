@@ -6,10 +6,9 @@
   <a *ngIf="uploaded | async" mat-icon-button [href]="downloadURL" target="_blank" class="file-upload-download-button">
     <mat-icon class="mat-18" color="primary">file_download</mat-icon>
   </a>
-  <span [innerHTML]="title"></span>
-  <span class="space"> </span>
+  <span class="text" [innerHTML]="title"></span>
   <input [hidden]="true" id="{{inputId}}" type="file" accept="image/*,application/pdf" (change)="uploadFile($event.target.files)"/>
-  <label for="{{inputId}}" class="mat-raised-button mat-primary import">
+  <label for="{{inputId}}" class="mat-stroked-button mat-primary import">
     <mat-icon class="mat-18">file_upload</mat-icon>
     Importer
   </label>
