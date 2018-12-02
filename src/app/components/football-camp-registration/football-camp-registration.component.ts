@@ -9,19 +9,14 @@ import {FootballCampShouldConnectDialogComponent} from '../football-camp-should-
 import {Subscription} from 'rxjs';
 import {FootballCamp} from '../../models/football-camp';
 import {RegistrationService} from '../../services/registration/registration.service';
-import {Registration} from '../../models/registration';
-import {Gender} from '../../models/gender.enum';
-import * as moment from 'moment';
-import {FieldPosition} from '../../models/field-position.enum';
-import {Feet} from '../../models/feet.enum';
 import {RegistrationState} from '../../models/registration-state.enum';
 import {UploadService} from '../../services/upload/upload.service';
 import {Meta, Title} from '@angular/platform-browser';
-import * as firebase from 'firebase';
 import {FootballCampRegistrationSessionsComponent} from '../football-camp-registration-sessions/football-camp-registration-sessions.component';
 import {FootballCampRegistrationTraineeFormComponent} from '../football-camp-registration-trainee-form/football-camp-registration-trainee-form.component';
 import {FootballCampRegistrationDocumentsComponent} from '../football-camp-registration-documents/football-camp-registration-documents.component';
 import {FootballCampRegistrationPaymentComponent} from '../football-camp-registration-payment/football-camp-registration-payment.component';
+import {RegistrationV2} from '../../models/registration-v2.model';
 
 @Component({
   selector: 'football-camp-registration',
@@ -32,7 +27,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   isLoading = true;
 
   // Model to save data
-  registration: Registration;
+  registration: RegistrationV2;
 
   // View Childs
   @ViewChild(FootballCampRegistrationSessionsComponent) sessionComponent: FootballCampRegistrationSessionsComponent;
@@ -140,52 +135,35 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     });
   }
 
-  onNextPayment(): void {
-    // this.isLoading = true;
-    //
-    // this.registration = {
-    //   address: {
-    //     city: this.city.value,
-    //     state: 'FRANCE',
-    //     streetAddress: this.streetAddress.value,
-    //     zipCode: this.zipCode.value
-    //   },
-    //   birthdate: firebase.firestore.Timestamp.fromDate((this.registrationForm.get('birthdate').value as moment.Moment).toDate()),
-    //   club: (this.registrationForm.get('club').value as string),
-    //   email: (this.registrationForm.get('email').value as string),
-    //   fieldPosition: FieldPosition[this.registrationForm.get('fieldPosition').value as string],
-    //   feet: Feet[this.registrationForm.get('feet').value as string],
-    //   firstname: (this.registrationForm.get('firstname').value as string),
-    //   gender: Gender[this.registrationForm.get('gender').value as string],
-    //   lastname: (this.registrationForm.get('lastname').value as string),
-    //   legalRepresentative: {
-    //     address: {
-    //       city: this.legalRepresentativeCity.value,
-    //       state: 'FRANCE',
-    //       streetAddress: this.legalRepresentativeStreetAddress.value,
-    //       zipCode: this.legalRepresentativeZipCode.value
-    //     },
-    //     firstname: this.legalRepresentativeFirstname.value,
-    //     healthInsurance: {
-    //       memberNumber: this.legalRepresentativeHealthInsuranceMemberNumber.value,
-    //       name: this.legalRepresentativeHealthInsuranceName.value,
-    //       socialSecurityNumber: this.legalRepresentativeSocialSecurityNumber.value
-    //     },
-    //     lastname: this.legalRepresentativeLastname.value,
-    //     phoneNumber: this.legalRepresentativePhoneNumber.value
-    //   },
-    //   photoURL: this.downloadURL,
-    //   sessionId: this.sessionComponent.selectedSession.getValue().id,
-    //   state: RegistrationState.IN_PROGRESS
-    // };
-    //
-    // // TODO: try to do it in one call instead of callback..
-    // this.registrationService
-    //   .save(this.registration)
-    //   .then(() => {
-    //     this.isLoading = false;
-    //     this.payment.setValue('done');
-    //     this.stepper.next();
-    //   })
+  saveRegistration(): void {
+    if (this.registration && this.registration.id) {
+      return;
+    }
+
+    this.registration = {
+      sessionId: this.sessionComponent.selectedSession.value.id,
+      trainee: {
+        firstname: this.traineeFormComponent.firstname.value,
+        lastname: this.traineeFormComponent.lastname.value,
+        gender: this.traineeFormComponent.gender.value,
+        birthdate: new Date(1988, 11, 23),
+        email: this.traineeFormComponent.email.value,
+        club: this.traineeFormComponent.club.value,
+        fieldPosition: this.traineeFormComponent.fieldPosition.value,
+        feet: this.traineeFormComponent.feet.value,
+      },
+
+      documents: this.documentsComponent.documents.value,
+
+      paymentId: null,
+
+      state: RegistrationState.WAITING_APPROVAL,
+    };
+
+    this.isLoading = true;
+    this.registrationService
+      .save2(this.registration)
+      .then(() => this.isLoading = false)
+      .catch(() => this.isLoading = false)
   }
 }

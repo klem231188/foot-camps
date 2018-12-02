@@ -1,34 +1,43 @@
-import {AfterViewInit, Component, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, OnChanges, Output, ViewChild, SimpleChanges, SimpleChange} from '@angular/core';
 import {PaymentService} from '../../services/payment/payment.service';
 import {Payment} from '../../models/payment';
-import {Observable} from "rxjs/Observable";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {AngularFirestore} from "@angular/fire/firestore";
+import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {PaymentState} from '../../models/payment-state.enum';
 
 @Component({
   selector: 'app-football-camp-registration-payment',
   templateUrl: './football-camp-registration-payment.component.html',
   styleUrls: ['./football-camp-registration-payment.component.scss']
 })
-export class FootballCampRegistrationPaymentComponent implements AfterViewInit, OnInit {
+export class FootballCampRegistrationPaymentComponent implements AfterViewInit, OnInit, OnChanges {
 
   // Fields
   @Output() isValid: BehaviorSubject<boolean>;
   @Input() amount: number;
+  @Input() registrationId: string;
   card: any;
   @ViewChild('payElement') payElement;
   @ViewChild('payErrorElement') payErrorElement;
 
   payment: Observable<Payment>;
 
-  constructor(private paymentService: PaymentService,
-              private angularFirestore: AngularFirestore) {
-    console.log('constructor');
+  constructor(private paymentService: PaymentService) {
+    console.log('FootballCampRegistrationPaymentComponent.constructor');
   }
 
   ngOnInit(): void {
     console.log('FootballCampRegistrationPaymentComponent.ngOnInit()');
     this.isValid = new BehaviorSubject<boolean>(false);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('FootballCampRegistrationPaymentComponent.ngOnChanges()');
+    // Handle @Input registrationId change
+    const registrationIdChange: SimpleChange = changes.registrationId;
+    if (registrationIdChange) {
+      this.registrationId = registrationIdChange.currentValue;
+    }
   }
 
   ngAfterViewInit(): void {
@@ -76,30 +85,32 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
       });
   }
 
-  stripeTokenHandler(stripeTokenId: number): void {
+  stripeTokenHandler(stripeTokenId: string): void {
     console.log(`FootballCampPaymentComponent.stripeTokenHandler(${stripeTokenId})`);
-    // TODO 1) Save registration in /registrations
-    // TODO 2) Save payment in /payments then get valueChanges of payment with paymentId
-    // if payment.state == PENDING isLoading.next(true)
-    // else if == FAILED isLoading.next(false) && isValid.next(false)
-    // else isLoading.next(false) &&  isValid.next(true)
-
     const payment: Payment = {
-      registrationId: '123456879',
-      stripeTokenId: stripeTokenId
+      registrationId: this.registrationId,
+      stripeTokenId: stripeTokenId,
+      state: PaymentState.IN_PROGRESS
     };
 
     this.paymentService
-      .save(payment)
-      .then(docRef => {
-        const paymentId: string = docRef.id;
-        this.payElement = this.angularFirestore
-          .doc(`/payments/${paymentId}`)
-          .valueChanges()
-          .subscribe((value) => console.log(value));
+      .makePaymentByCard(payment)
+      .subscribe((httpResponse) => {
+        this.isValid.next(true);
       });
 
-    // TODO then call HTTP function to execute payment
-    // onSuccess --> this.isValid.next(false) && let user try again
+    // this.paymentService
+    //   .save(payment)
+    //   .then(() => this.isValid.next(true))
+    // TODO not yet valid.
+    // We should wait payment is accepted or rejected
+
+    // TOO SLOW
+    // should
+    // 1) register payment in firestore with state in_progress
+    // 2) make http call to trigger payment with stripe (knowing payment id)
+    // --> on success update payment state to approved and registration state to in_progress
+    // --> on error update payment state to rejected and registration state to rejected
+    // --> return payment response state to front ui
   }
 }

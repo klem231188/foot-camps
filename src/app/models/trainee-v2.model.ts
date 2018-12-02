@@ -1,14 +1,13 @@
 import {Gender} from './gender.enum';
 import {Feet} from './feet.enum';
 import {FieldPosition} from './field-position.enum';
-import * as firebase from 'firebase';
 import {Category} from './category.enum';
 
 export interface TraineeV2 {
   firstname: string;
   lastname: string;
   gender: Gender;
-  birthdate: firebase.firestore.Timestamp;
+  birthdate: Date;
   email: string;
   club?: string;
   category?: Category;

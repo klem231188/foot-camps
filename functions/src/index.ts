@@ -1,6 +1,12 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as Stripe from 'stripe';
+import {Change, EventContext} from 'firebase-functions/lib/cloud-functions';
+import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
+// CORS Express middleware to enable CORS Requests.
+const cors = require('cors')({
+  origin: true,
+});
 
 admin.initializeApp();
 
@@ -408,30 +414,276 @@ admin.initializeApp();
 //     .catch((error) => console.error('There was an error while sending the email:', error));
 // }
 
-export const onCreatePayment = functions.firestore
-  .document('payments/{pid}')
-  .onCreate((snap, context) => {
-    console.log('onCreatePayment()');
+// export const onCreatePayment = functions.firestore
+//   .document('payments/{paymentId}')
+//   .onCreate((snap, context) => {
+//     console.log('onCreatePayment()');
+//
+//     const paymentInProgress = snap.data();
+//     console.log('paymentInProgress:', paymentInProgress);
+//
+//     const paymentId: string = context.params.paymentId;
+//     console.log('paymentId:', paymentId);
+//
+//     const registrationId: string = paymentInProgress.registrationId;
+//     console.log('registrationId:', registrationId);
+//
+//     return admin.firestore()
+//       .doc(`registrations/${registrationId}`)
+//       .get()
+//       .then((docRegistration: admin.firestore.DocumentData) => {
+//         const registration = docRegistration.data();
+//         console.log(`Retrieving registration: ${JSON.stringify(registration)}`);
+//
+//         return admin.firestore()
+//           .doc(`sessions/${registration.sessionId}`)
+//           .get();
+//         // TODO add id to session.id....
+//       })
+//       .then((docSession: admin.firestore.DocumentData) => {
+//         const session = docSession.data();
+//         console.log(`Retrieving session: ${JSON.stringify(session)}`);
+//
+//         const price: number = session.halfBoardRates;
+//         const idempotencyKey: string = paymentId;
+//         const stripe = new Stripe(functions.config().stripe.key);
+//         const description: string = `Payment football camp: ${session.campId} | ${session.id} | ${registrationId}`
+//
+//         return stripe.charges.create(
+//           {
+//             amount: price,
+//             currency: 'EUR',
+//             source: paymentInProgress.stripeTokenId,
+//             description: description,
+//           },
+//           {
+//             idempotency_key: idempotencyKey
+//           }
+//         );
+//       })
+//       .then(() => {
+//         console.log(`Payment achieved successfully`);
+//
+//         return admin.firestore()
+//           .doc(`payments/${paymentId}`)
+//           .set(
+//             {state: 'ACCEPTED'},
+//             {merge: true}
+//           )
+//       })
+//       .then(() => {
+//         console.log(`Update registration state`);
+//
+//         return admin.firestore()
+//           .doc(`registrations/${registrationId}`)
+//           .set(
+//             {state: 'WAITING_APPROVAL'},
+//             {merge: true}
+//           )
+//       });
+//   });
 
-    const paymentInProgress = snap.data();
-    console.log('paymentInProgress:');
-    console.log(paymentInProgress);
 
-    const firebaseConfig = functions.config();
-    console.log(firebaseConfig);
-    console.log('key ' + firebaseConfig.stripe.key);
-    const stripe = new Stripe(firebaseConfig.stripe.key);
-    // TODO get price from session from registration
+export const makePaymentByCard = functions.https.onRequest((request: functions.Request, response: functions.Response) => {
+  //TODO check payment is not a duplicate
+  return cors(request, response, () => {
+    console.info(`IN - makePaymentByCard(${JSON.stringify(request.body)})`);
 
-    // TODO add  idempotency_key = pid
-    // const idempotency_key = pid;
+    const payment = request.body;
+    let registration = null;
+    let session = null;
 
-    return stripe.charges.create(
-      {
-        amount: 50,
-        currency: 'eur',
-        description: 'Paiement stage de football',
-        source: paymentInProgress.stripeTokenId
-      },
-    );
+    console.info(`Storing payment ${JSON.stringify(payment)} ...`);
+
+    admin.firestore()
+      .collection(`payments`)
+      .add(payment)
+      .then((docPayment: admin.firestore.DocumentReference) => {
+        payment.id = docPayment.id;
+        console.info(`Payment ${JSON.stringify(payment)} stored.`);
+      })
+      .then(() => {
+        console.info(`Retrieving registration ${payment.registrationId} ...`);
+        return admin.firestore()
+          .doc(`registrations/${payment.registrationId}`)
+          .get();
+      })
+      .then((docRegistration: admin.firestore.DocumentData) => {
+        registration = docRegistration.data();
+        registration.id = docRegistration.id;
+        console.info(`Registration: ${JSON.stringify(registration)} retrieved.`);
+      })
+      .then(() => {
+        console.info(`Retrieving session ${registration.sessionId} ...`);
+        return admin.firestore()
+          .doc(`sessions/${registration.sessionId}`)
+          .get();
+      })
+      .then((docSession: admin.firestore.DocumentData) => {
+        session = docSession.data();
+        session.id = docSession.id;
+        console.info(`Session: ${JSON.stringify(session)} retrieved.`);
+      })
+      .then(() => {
+        const price: number = session.halfBoardRates;
+        const idempotencyKey: string = payment.id;
+        const stripe = new Stripe(functions.config().stripe.key);
+        const description: string = `Payment football camp: ${session.campId} | ${session.id} | ${registration.id}`;
+
+        const data = {
+          amount: price,
+          currency: 'EUR',
+          source: payment.stripeTokenId,
+          description: description,
+        }
+
+        const option = {
+          idempotency_key: idempotencyKey
+        }
+
+        console.info(`Doing payment ${JSON.stringify(data)} ...`);
+        return stripe.charges.create(data, option);
+      })
+      .then(() => {
+        console.info(`Payment done successfully. paymentId=${payment.id}`);
+        payment.state = 'ACCEPTED';
+      })
+      .catch((error) => {
+        console.error(`An error occured. paymentId=${payment.id}`);
+        console.error(error);
+        payment.state = 'REJECTED';
+      })
+      .then(() => {
+        console.info(`Updating payment ${payment.id} with state ${payment.state}...`);
+        return admin.firestore()
+          .doc(`payments/${payment.id}`)
+          .set(
+            {state: payment.state},
+            {merge: true}
+          )
+      })
+      .then(() => {
+        console.log(`Payment ${payment.id} updated with state ${payment.state}...`);
+        if (payment.state === 'ACCEPTED') {
+          console.info(`OUT - 200 - makePaymentByCard(${JSON.stringify(request.body)})`);
+          response.status(200).send();
+        } else {
+          console.error(`OUT - 500 - makePaymentByCard(${JSON.stringify(request.body)})`);
+          response.status(500).send();
+        }
+
+      })
+      .catch((error) => {
+        console.error(`OUT - 500 - makePaymentByCard(${JSON.stringify(request.body)})`);
+        console.error(error);
+        response.status(500).send();
+      })
+  });
+});
+
+
+export const onUpdatePaymentState = functions.firestore
+  .document('payments/{paymentId}')
+  .onUpdate((change: Change<DocumentSnapshot>, context: EventContext) => {
+    if (change.before.data() && (change.before.data().state === change.after.data().state)) {
+      console.info('Payment state has not changed');
+      return Promise.resolve(null);
+    }
+    let payment = change.after.data();
+    payment.id = change.after.id;
+
+    console.info(`IN - onUpdatePaymentState(payments/${payment.id}), payment = ${JSON.stringify(payment)}`);
+
+    switch (payment.state) {
+      case 'ACCEPTED':
+        console.info(`Updating registration ${payment.registrationId} to state 'IN_PROGRESS' ...`);
+        return admin.firestore()
+          .doc(`registrations/${payment.registrationId}`)
+          .set(
+            {state: 'IN_PROGRESS', paymentId: payment.id},
+            {merge: true}
+          ).then(() => {
+            console.info(`Registration ${payment.registrationId} updated successfully ...`);
+          }).catch((error) => {
+            console.error(`An error occured during update of registration ${payment.registrationId}`)
+          });
+
+      case 'REJECTED':
+        console.info(`Updating registration ${payment.registrationId} to state 'REJECTED' ...`);
+        return admin.firestore()
+          .doc(`registrations/${payment.registrationId}`)
+          .set(
+            {state: 'REJECTED', paymentId: payment.id},
+            {merge: true}
+          ).then(() => {
+            console.info(`Registration ${payment.registrationId} updated successfully ...`);
+          }).catch((error) => {
+            console.error(`An error occured during update of registration ${payment.registrationId}`)
+          });
+
+      default:
+        console.error('Payment state inconsistent');
+        return Promise.resolve(null);
+    }
+  });
+
+export const onUpdateRegistrationState = functions.firestore
+  .document('registrations/{registrationId}')
+  .onUpdate((change: Change<DocumentSnapshot>, context: EventContext) => {
+    if (change.before.data() && (change.before.data().state === change.after.data().state)) {
+      console.info('Registration state has not changed');
+      return Promise.resolve(null);
+    }
+
+    const registrationBefore = change.before.data();
+    registrationBefore.id = change.before.id;
+
+    const registration = change.after.data();
+    registration.id = change.after.id;
+    console.info(`IN - onUpdateRegistrationState(registrations/${registration.id}), registration = ${JSON.stringify(registration)}`);
+
+    return admin.firestore()
+      .doc(`sessions/${registration.sessionId}`)
+      .get()
+      .then((snap: DocumentSnapshot) => {
+        const session = snap.data();
+        const update = {};
+
+        switch (registrationBefore.state) {
+          case 'IN_PROGRESS':
+            update['numberOfRegistrationsInProgress'] = session.numberOfRegistrationsInProgress - 1;
+            break;
+          case 'ACCEPTED':
+            update['numberOfRegistrationsAccepted'] = session.numberOfRegistrationsAccepted - 1;
+            break;
+          case 'REJECTED':
+            update['numberOfRegistrationsRejected'] = session.numberOfRegistrationsRejected - 1;
+            break;
+        }
+
+        switch (registration.state) {
+          case 'IN_PROGRESS':
+            update['numberOfRegistrationsInProgress'] = session.numberOfRegistrationsInProgress + 1;
+            break;
+          case 'ACCEPTED':
+            update['numberOfRegistrationsAccepted'] = session.numberOfRegistrationsAccepted + 1;
+            break;
+          case 'REJECTED':
+            update['numberOfRegistrationsRejected'] = session.numberOfRegistrationsRejected + 1;
+            break;
+        }
+
+        console.info(`Updating session ${registration.sessionId}, update = ${JSON.stringify(update)}...`);
+
+        return admin.firestore()
+          .doc(`sessions/${registration.sessionId}`)
+          .set(
+            update,
+            {merge: true}
+          ).then(() => {
+            console.info(`Session ${registration.sessionId} updated successfully ...`);
+          }).catch((error) => {
+            console.error(`An error occured during update of session ${registration.sessionId}`)
+          });
+      });
   });

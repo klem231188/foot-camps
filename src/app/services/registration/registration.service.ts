@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {Registration} from '../../models/registration';
+import {RegistrationV2} from '../../models/registration-v2.model';
 
 @Injectable()
 export class RegistrationService {
@@ -10,6 +11,16 @@ export class RegistrationService {
   private registrations$: Observable<Registration[]> = null;
 
   constructor(private angularFirestore: AngularFirestore) {
+  }
+
+  save2(registration: RegistrationV2): Promise<any> {
+    return this.angularFirestore
+      .collection('registrations')
+      .add(registration)
+      .then(documentReference => {
+        registration.id = documentReference.id;
+        return registration;
+      })
   }
 
   save(registration: Registration): Promise<any> {

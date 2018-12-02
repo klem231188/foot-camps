@@ -1,5 +1,6 @@
 export enum RegistrationState {
     IN_PROGRESS = 'IN_PROGRESS',
+    WAITING_APPROVAL = 'WAITING_APPROVAL',
     ACCEPTED = 'ACCEPTED',
     REJECTED = 'REJECTED'
 }

@@ -48,6 +48,7 @@ import {FootballCampRegistrationCheckPaymentComponent} from './components/footba
 import {RouterModule} from '@angular/router';
 import {TableOfContentsModule} from './components/table-of-contents/table-of-contents.module';
 import { FootballCampRegistrationsOverviewComponent } from './components/football-camp-registrations-overview/football-camp-registrations-overview.component';
+import {HttpClientModule} from '@angular/common/http';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -60,7 +61,7 @@ registerLocaleData(localeFr, 'fr');
     AngularFireStorageModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     // @MaterialDesign

@@ -1,16 +1,8 @@
 ## Fonctionnalités en cours de développement
-1. [Indexation] Ajouter balises meta "description" et "keywords"
 1. [Ecran Inscription] Ajouter les propriétés Taille, pointure et catégorie
 1. [Ecran Inscription] Gestion du paiement via l'API stripe
-1. [Ecran Inscription][Documents] Gestion des documents
-1. [Ecran Inscription] Clean & split registration form in component
 
 ## Fonctionnalités à développer (triées par priorité)
-##### Obligatoire pour mise en prod
-1. [Ecran Voir les inscrits] Ajouter les données du responsable légal
-1. [Ecran Voir les inscrits] Ajouter les données de la mutuelle
-
-##### Facultative pour mise en prod
 1. Clean code
 1. [Ecran Inscription] Ajouter un toast après pré-inscription
 1. [Ecran Vue d'ensemble] Mettre en avant les dates / prix / indicateur nombre d'inscription
@@ -54,3 +46,6 @@
 1. [Ecran Détails] Mettre d'équerre le contenu du stage de bourg-blanc
 1. Upgrade to Angular 6
 1. [Ecran Inscription][Session] Gestion des sessions
+1. [Indexation] Ajouter balises meta "description" et "keywords"
+1. [Ecran Inscription][Documents] Gestion des documents
+1. [Ecran Inscription] Clean & split registration form in component

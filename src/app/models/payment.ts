@@ -1,6 +1,8 @@
+import {PaymentState} from './payment-state.enum';
+
 export interface Payment {
   id?: string;
   registrationId: string;
-  stripeTokenId: number;
-  // TODO status
+  stripeTokenId: string;
+  state: PaymentState;
 }

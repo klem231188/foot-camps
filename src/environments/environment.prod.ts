@@ -12,5 +12,11 @@ export const environment = {
 
   googlemaps: {
     apiKey: 'AIzaSyAjXxIVE0GpPfkrCcUX4ry_GWJKl0l74t0'
-  }
+  },
+
+  stripe: {
+    publicKey: 'pk_live_SeIBaotean3l4AaSasWlmMxG'
+  },
+
+  urlMakePaymentByCard: 'https://us-central1-footcamps-production.cloudfunctions.net/makePaymentByCard'
 };
