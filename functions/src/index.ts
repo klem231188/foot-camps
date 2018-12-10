@@ -3,6 +3,7 @@ import * as admin from 'firebase-admin';
 import * as Stripe from 'stripe';
 import {Change, EventContext} from 'firebase-functions/lib/cloud-functions';
 import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
+import {Payment} from '../../src/app/models/payment';
 // CORS Express middleware to enable CORS Requests.
 const cors = require('cors')({
   origin: true,
@@ -525,7 +526,7 @@ export const makePaymentByCard = functions.https.onRequest((request: functions.R
         console.info(`Session: ${JSON.stringify(session)} retrieved.`);
       })
       .then(() => {
-        const price: number = session.halfBoardRates;
+        const price: number = session.halfBoardRates; // TODO * 100 because it's in cents
         const idempotencyKey: string = payment.id;
         const stripe = new Stripe(functions.config().stripe.key);
         const description: string = `Payment football camp: ${session.campId} | ${session.id} | ${registration.id}`;
@@ -581,7 +582,6 @@ export const makePaymentByCard = functions.https.onRequest((request: functions.R
   });
 });
 
-
 export const onUpdatePaymentState = functions.firestore
   .document('payments/{paymentId}')
   .onUpdate((change: Change<DocumentSnapshot>, context: EventContext) => {
@@ -589,7 +589,7 @@ export const onUpdatePaymentState = functions.firestore
       console.info('Payment state has not changed');
       return Promise.resolve(null);
     }
-    let payment = change.after.data();
+    let payment: Payment = change.after.data() as Payment;
     payment.id = change.after.id;
 
     console.info(`IN - onUpdatePaymentState(payments/${payment.id}), payment = ${JSON.stringify(payment)}`);

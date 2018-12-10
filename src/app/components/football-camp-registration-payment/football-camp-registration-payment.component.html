@@ -1,9 +1,12 @@
-<br>
-<div #payElement>
-  <!-- A Stripe Element will be inserted here. -->
+<div *ngIf="!isLoading">
+  Vous avez choisi le paiement par carte.<br>
+  <div #payElement>
+    <!-- A Stripe Element will be inserted here. -->
+  </div>
+  <span class="error" #payErrorElement></span>
+  <br>
+  <button mat-stroked-button color="primary" (click)="onPay()" #payButton>Payer {{amount}} €</button>
 </div>
-<span class="error" #payErrorElement></span>
-<br>
-<button mat-stroked-button color="primary" (click)="onPay()">Payer {{amount}} €</button>
-
-{{payment | async | json}}
+<div *ngIf="isLoading" class="loading-spinner-container">
+  <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+</div>

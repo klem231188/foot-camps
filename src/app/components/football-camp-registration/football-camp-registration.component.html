@@ -54,7 +54,7 @@
       </mat-step>
 
       <!--Step 4 : Payment -->
-      <mat-step [completed]="(cardPaymentComponent.isValid | async)">
+      <mat-step>
         <ng-template matStepLabel>Paiement</ng-template>
         <mat-tab-group>
           <mat-tab label="Payer par carte">
@@ -77,7 +77,7 @@
         <ng-template matStepLabel>Récapitulatif</ng-template>
         Félicitations vous êtes <b>pré-inscrit</b> pour le stage de {{footballCamp.city}} !
         <br>
-        Vous allez recevoir un mail de confirmation à l'adresse suivante: <b>{{registration?.email}}</b>
+        Vous allez recevoir un mail de confirmation à l'adresse suivante: <b>{{registration?.trainee.email}}</b>
         <br>
         Un autre mail vous sera envoyé lorsque les documents envoyés ainsi que le paiement auront été vérifiés par
         l'organisateur.

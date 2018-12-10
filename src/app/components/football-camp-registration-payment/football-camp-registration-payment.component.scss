@@ -34,5 +34,15 @@
       color: #fa755a;
       text-align: center;
     }
+
+    .loading-spinner-container {
+      height: 180px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffffff;
+      z-index: 10;
+    }
   }
 }

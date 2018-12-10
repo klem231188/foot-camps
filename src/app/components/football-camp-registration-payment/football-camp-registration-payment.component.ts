@@ -1,16 +1,28 @@
-import {AfterViewInit, Component, Input, OnInit, OnChanges, Output, ViewChild, SimpleChanges, SimpleChange} from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChange,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {PaymentService} from '../../services/payment/payment.service';
 import {Payment} from '../../models/payment';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {PaymentState} from '../../models/payment-state.enum';
+import {MatButton, MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-football-camp-registration-payment',
   templateUrl: './football-camp-registration-payment.component.html',
   styleUrls: ['./football-camp-registration-payment.component.scss']
 })
-export class FootballCampRegistrationPaymentComponent implements AfterViewInit, OnInit, OnChanges {
+export class FootballCampRegistrationPaymentComponent implements AfterViewInit, AfterViewChecked, OnInit, OnChanges {
 
   // Fields
   @Output() isValid: BehaviorSubject<boolean>;
@@ -19,16 +31,20 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
   card: any;
   @ViewChild('payElement') payElement;
   @ViewChild('payErrorElement') payErrorElement;
+  @ViewChild('payButton') payButton: MatButton;
 
   payment: Observable<Payment>;
+  isLoading: boolean;
 
-  constructor(private paymentService: PaymentService) {
+  constructor(private paymentService: PaymentService,
+              private snackBar: MatSnackBar) {
     console.log('FootballCampRegistrationPaymentComponent.constructor');
+    this.isLoading = false;
+    this.isValid = new BehaviorSubject<boolean>(false);
   }
 
   ngOnInit(): void {
     console.log('FootballCampRegistrationPaymentComponent.ngOnInit()');
-    this.isValid = new BehaviorSubject<boolean>(false);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -72,8 +88,19 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
     });
   }
 
+  ngAfterViewChecked(): void {
+    console.log('FootballCampRegistrationPaymentComponent.ngAfterViewChecked()');
+    if (this.payButton !== undefined) {
+      if (!this.isLoading) {
+        this.payButton.disabled = false;
+      }
+    }
+  }
+
   onPay(): void {
     console.log('FootballCampRegistrationPaymentComponent.onPay()');
+
+    this.payButton.disabled = true;
     this.paymentService.stripe
       .createToken(this.card)
       .then((result) => {
@@ -82,7 +109,7 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
         } else {
           this.stripeTokenHandler(result.token.id);
         }
-      });
+      })
   }
 
   stripeTokenHandler(stripeTokenId: string): void {
@@ -93,24 +120,23 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
       state: PaymentState.IN_PROGRESS
     };
 
+    this.isLoading = true;
     this.paymentService
       .makePaymentByCard(payment)
-      .subscribe((httpResponse) => {
-        this.isValid.next(true);
-      });
-
-    // this.paymentService
-    //   .save(payment)
-    //   .then(() => this.isValid.next(true))
-    // TODO not yet valid.
-    // We should wait payment is accepted or rejected
-
-    // TOO SLOW
-    // should
-    // 1) register payment in firestore with state in_progress
-    // 2) make http call to trigger payment with stripe (knowing payment id)
-    // --> on success update payment state to approved and registration state to in_progress
-    // --> on error update payment state to rejected and registration state to rejected
-    // --> return payment response state to front ui
+      .subscribe(
+        () => {
+          this.isLoading = false;
+          this.isValid.next(true);
+          this.snackBar.open('Paiement par carte réussi', 'Close', {
+            duration: 3000,
+          });
+        },
+        () => {
+          this.isLoading = false;
+          this.isValid.next(false);
+          this.snackBar.open('Erreur lors du paiement par carte.', 'Close', {
+            duration: 3000,
+          });
+        });
   }
 }

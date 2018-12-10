@@ -14,7 +14,7 @@
   },
   "scripts": {
     "lint": "./node_modules/.bin/tslint -p tsconfig.json",
-    "build": "./node_modules/.bin/tsc",
+    "build": "rm -rf ./lib  && rm -rf ./etc && ./node_modules/.bin/tsc",
     "serve": "npm run build && firebase serve --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
@@ -24,6 +24,6 @@
   "engines": {
     "node": "8"
   },
-  "main": "lib/index.js",
+  "main": "lib/functions/src/index.js",
   "private": true
 }

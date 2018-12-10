@@ -1,5 +1,5 @@
 import {switchMap} from 'rxjs/operators';
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
@@ -23,7 +23,7 @@ import {RegistrationV2} from '../../models/registration-v2.model';
   templateUrl: './football-camp-registration.component.html',
   styleUrls: ['./football-camp-registration.component.scss']
 })
-export class FootballCampRegistrationComponent implements OnInit, AfterViewInit, OnDestroy {
+export class FootballCampRegistrationComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
   isLoading = true;
 
   // Model to save data
@@ -33,7 +33,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   @ViewChild(FootballCampRegistrationSessionsComponent) sessionComponent: FootballCampRegistrationSessionsComponent;
   @ViewChild(FootballCampRegistrationTraineeFormComponent) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
   @ViewChild(FootballCampRegistrationDocumentsComponent) documentsComponent: FootballCampRegistrationDocumentsComponent;
-  @ViewChild(FootballCampRegistrationPaymentComponent) paymentComponent: FootballCampRegistrationPaymentComponent;
+  @ViewChild(FootballCampRegistrationPaymentComponent) cardPaymentComponent: FootballCampRegistrationPaymentComponent;
   @ViewChild('stepper') stepper: MatVerticalStepper;
 
   // Payment From & Controls
@@ -43,6 +43,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   footballCamp: FootballCamp;
 
   private _subscriptions: Subscription[];
+  private cardPaymentSub: Subscription;
+  private stepperSub: Subscription;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -56,6 +58,8 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
               private meta: Meta) {
 
     this._subscriptions = [];
+    this.cardPaymentSub = null;
+    this.stepperSub = null;
   }
 
   ngOnInit(): void {
@@ -102,15 +106,34 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     this._subscriptions.push(authStateSubscription);
   }
 
+  ngAfterViewChecked(): void {
+    console.log('FootballCampRegistrationComponent.ngAfterViewChecked()');
+    if (this.cardPaymentComponent !== undefined && this.cardPaymentSub === null) {
+      this.cardPaymentSub = this.cardPaymentComponent.isValid.subscribe((valid) => {
+        console.log(`Paiement ${valid}`);
+        if (valid) {
+          this.stepper.selected.completed = true;
+          this.stepper.next();
+        }
+      });
+
+      this._subscriptions.push(this.cardPaymentSub);
+    }
+
+    if (this.stepper !== undefined && this.stepperSub === null) {
+      this.stepperSub = this.stepper.selectionChange.asObservable()
+        .subscribe((selection) => {
+          if (selection.selectedIndex === 4) {
+            this.stepper._steps.forEach((step) => step.editable = false);
+          }
+        });
+
+      this._subscriptions.push(this.stepperSub);
+    }
+  }
+
   ngAfterViewInit(): void {
     console.log('FootballCampRegistrationComponent.ngAfterViewInit()');
-
-    this.stepper.selectionChange.asObservable()
-      .subscribe((selection) => {
-        if (selection.selectedIndex === 4) {
-          this.stepper._steps.forEach((step) => step.editable = false);
-        }
-      })
   }
 
   ngOnDestroy(): void {
