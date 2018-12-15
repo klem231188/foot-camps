@@ -1,7 +1,7 @@
 import {
   AfterViewChecked,
   AfterViewInit,
-  Component,
+  Component, ElementRef,
   Input,
   OnChanges,
   OnInit,
@@ -29,7 +29,10 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
   @Input() amount: number;
   @Input() registrationId: string;
   card: any;
-  @ViewChild('payElement') payElement;
+
+  @ViewChild('payElement') set content(content: ElementRef) {
+    this.card.mount(content.nativeElement);
+  }
   @ViewChild('payErrorElement') payErrorElement;
   @ViewChild('payButton') payButton: MatButton;
 
@@ -45,20 +48,6 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
 
   ngOnInit(): void {
     console.log('FootballCampRegistrationPaymentComponent.ngOnInit()');
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('FootballCampRegistrationPaymentComponent.ngOnChanges()');
-    // Handle @Input registrationId change
-    const registrationIdChange: SimpleChange = changes.registrationId;
-    if (registrationIdChange) {
-      this.registrationId = registrationIdChange.currentValue;
-    }
-  }
-
-  ngAfterViewInit(): void {
-    console.log('FootballCampRegistrationPaymentComponent.ngAfterViewInit()');
-
     const style = {
       base: {
         color: '#009688',
@@ -77,8 +66,6 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
     };
 
     this.card = this.paymentService.stripe.elements().create('card', {style});
-    this.card.mount(this.payElement.nativeElement);
-
     this.card.addEventListener('change', ({error}) => {
       if (error) {
         this.payErrorElement.nativeElement.textContent = error.message;
@@ -86,6 +73,19 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
         this.payErrorElement.nativeElement.textContent = '';
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('FootballCampRegistrationPaymentComponent.ngOnChanges()');
+    // Handle @Input registrationId change
+    const registrationIdChange: SimpleChange = changes.registrationId;
+    if (registrationIdChange) {
+      this.registrationId = registrationIdChange.currentValue;
+    }
+  }
+
+  ngAfterViewInit(): void {
+    console.log('FootballCampRegistrationPaymentComponent.ngAfterViewInit()');
   }
 
   ngAfterViewChecked(): void {
@@ -101,7 +101,8 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
     console.log('FootballCampRegistrationPaymentComponent.onPay()');
 
     this.payButton.disabled = true;
-    this.paymentService.stripe
+    this.paymentService
+      .stripe
       .createToken(this.card)
       .then((result) => {
         if (result.error) {
@@ -109,11 +110,16 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
         } else {
           this.stripeTokenHandler(result.token.id);
         }
-      })
+      });
   }
 
   stripeTokenHandler(stripeTokenId: string): void {
     console.log(`FootballCampPaymentComponent.stripeTokenHandler(${stripeTokenId})`);
+
+    this.snackBar.open('Paiement par carte en cours', 'Close', {
+      duration: 3000,
+    });
+
     const payment: Payment = {
       registrationId: this.registrationId,
       stripeTokenId: stripeTokenId,
@@ -135,7 +141,7 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
           this.isLoading = false;
           this.isValid.next(false);
           this.snackBar.open('Erreur lors du paiement par carte.', 'Close', {
-            duration: 3000,
+            duration: 10000,
           });
         });
   }

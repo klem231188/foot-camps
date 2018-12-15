@@ -1,5 +1,12 @@
 <div *ngIf="!isLoading">
-  Vous avez choisi le paiement par carte.<br>
+  <p>
+    Vous avez choisi le paiement par carte bancaire.
+    <br>
+    Le paiement par carte bancaire est sécruisé, et utilise la technologie <a href="https://stripe.com/fr"
+                                                                              target="_blank">Stripe<sup>*</sup></a>
+    <br>
+    <br>
+  </p>
   <div #payElement>
     <!-- A Stripe Element will be inserted here. -->
   </div>
@@ -8,5 +15,7 @@
   <button mat-stroked-button color="primary" (click)="onPay()" #payButton>Payer {{amount}} €</button>
 </div>
 <div *ngIf="isLoading" class="loading-spinner-container">
+  <div>Le paiement peut prendre plusieurs secondes...</div>
+  <br>
   <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
 </div>

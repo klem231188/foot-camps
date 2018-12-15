@@ -4,6 +4,8 @@ import * as Stripe from 'stripe';
 import {Change, EventContext} from 'firebase-functions/lib/cloud-functions';
 import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
 import {Payment} from '../../src/app/models/payment';
+import {createTransport, SendMailOptions, Transporter} from 'nodemailer';
+import {RegistrationV2} from '../../src/app/models/registration-v2.model';
 // CORS Express middleware to enable CORS Requests.
 const cors = require('cors')({
   origin: true,
@@ -322,12 +324,10 @@ admin.initializeApp();
 //                                      newRegistration: Registration) {
 //   console.log(`updateNumberOfRegistrations(${JSON.stringify(previousRegistration)}, ${JSON.stringify(newRegistration)})`);
 //
-//   // TODO : assign a return type Promise<WriteResult> (error on import)
 //   return admin.firestore()
 //     .doc(`sessions/${newRegistration.sessionId}`)
 //     .get()
 //     .then((snapshot) => {
-//       // TODO : assign a return type Promise<WriteResult> (error on import)
 //       const session = snapshot.data();
 //       const patch = {};
 //
@@ -365,124 +365,91 @@ admin.initializeApp();
 //         }
 //       }
 //
-//       console.log(`patch : ${patch}`);
-//       console.log(patch);
+//       console.log(`patch : ${JSON.stringify(patch)}`);
 //
 //       return admin.firestore()
 //         .doc(`sessions/${newRegistration.sessionId}`)
-//         .update(patch)
+//         .update(patch);
 //     });
 // }
-//
-// function sendMail(registration: Registration) {
-//   // Configure the email transport using the default SMTP transport and a GMail account.
-//   // For other types of transports such as Sendgrid see https://nodemailer.com/transports/
-//   // TODO: Configure the `gmail.email` and `gmail.password` Google Cloud environment variables.
-//   console.log(`sendMail(${JSON.stringify(registration)})`);
-//
-//   const gmailEmail = functions.config().gmail.email;
-//   const gmailPassword = functions.config().gmail.password;
-//   const mailTransport: Transporter = createTransport({
-//     service: 'gmail',
-//     auth: {
-//       user: gmailEmail,
-//       pass: gmailPassword
-//     }
-//   });
-//
-//   const mailOptions: SendMailOptions = {
-//     from: '"Footcamps" <noreply@firebase.com>',
-//     to: registration.email
-//   };
-//
-//   // Building Email message.
-//   if (registration.state === 'IN_PROGRESS') {
-//     // TODO RegistrationState.IN_PROGRESS
-//     mailOptions.subject = 'Inscription à AbersFoot en cours';
-//     mailOptions.html = `Bonjour ${registration.firstname} ${registration.lastname},<br> Votre inscription au stage de football AbersFoot a bien été prise en compte.<br> Pour la valider, il faut <b>payer la somme de 130€ à Stéphane le HIR </b> par chèque ou chèque vacance avant le 09 Juin 2018.`;
-//   } else if (registration.state === 'ACCEPTED') {
-//     // TODO RegistrationState.ACCEPTED
-//     mailOptions.subject = 'Inscription à AbersFoot validée';
-//     mailOptions.html = `Bonjour ${registration.firstname} ${registration.lastname},<br> Félicitations, votre inscription au stage de football AbersFoot a été validée.<br> Bon stage !`;
-//   } else if (registration.state === 'REJECTED') {
-//     mailOptions.subject = 'Inscription à AbersFoot rejetée';
-//     mailOptions.html = `Bonjour ${registration.firstname} ${registration.lastname},<br> Hélas votre inscription au stage de football AbersFoot a été rejetée!`;
-//   }
-//
-//   return mailTransport
-//     .sendMail(mailOptions)
-//     .then((info) => console.log(`A mail has been sent to ${registration.email} with state ${registration.state}`))
-//     .catch((error) => console.error('There was an error while sending the email:', error));
-// }
 
-// export const onCreatePayment = functions.firestore
-//   .document('payments/{paymentId}')
-//   .onCreate((snap, context) => {
-//     console.log('onCreatePayment()');
-//
-//     const paymentInProgress = snap.data();
-//     console.log('paymentInProgress:', paymentInProgress);
-//
-//     const paymentId: string = context.params.paymentId;
-//     console.log('paymentId:', paymentId);
-//
-//     const registrationId: string = paymentInProgress.registrationId;
-//     console.log('registrationId:', registrationId);
-//
-//     return admin.firestore()
-//       .doc(`registrations/${registrationId}`)
-//       .get()
-//       .then((docRegistration: admin.firestore.DocumentData) => {
-//         const registration = docRegistration.data();
-//         console.log(`Retrieving registration: ${JSON.stringify(registration)}`);
-//
-//         return admin.firestore()
-//           .doc(`sessions/${registration.sessionId}`)
-//           .get();
-//         // TODO add id to session.id....
-//       })
-//       .then((docSession: admin.firestore.DocumentData) => {
-//         const session = docSession.data();
-//         console.log(`Retrieving session: ${JSON.stringify(session)}`);
-//
-//         const price: number = session.halfBoardRates;
-//         const idempotencyKey: string = paymentId;
-//         const stripe = new Stripe(functions.config().stripe.key);
-//         const description: string = `Payment football camp: ${session.campId} | ${session.id} | ${registrationId}`
-//
-//         return stripe.charges.create(
-//           {
-//             amount: price,
-//             currency: 'EUR',
-//             source: paymentInProgress.stripeTokenId,
-//             description: description,
-//           },
-//           {
-//             idempotency_key: idempotencyKey
-//           }
-//         );
-//       })
-//       .then(() => {
-//         console.log(`Payment achieved successfully`);
-//
-//         return admin.firestore()
-//           .doc(`payments/${paymentId}`)
-//           .set(
-//             {state: 'ACCEPTED'},
-//             {merge: true}
-//           )
-//       })
-//       .then(() => {
-//         console.log(`Update registration state`);
-//
-//         return admin.firestore()
-//           .doc(`registrations/${registrationId}`)
-//           .set(
-//             {state: 'WAITING_APPROVAL'},
-//             {merge: true}
-//           )
-//       });
-//   });
+function getMailTransporter(): Transporter {
+  return createTransport({
+    service: 'gmail',
+    auth: {
+      user: functions.config().gmail.email,
+      pass: functions.config().gmail.password
+    }
+  });
+}
+
+function sendMailAboutRegistration(registration: RegistrationV2): Promise<any> {
+  // Configure the email transport using the default SMTP transport and a GMail account.
+  // For other types of transports such as Sendgrid see https://nodemailer.com/transports/
+  console.log(`sendMailAboutRegistration(${JSON.stringify(registration)})`);
+
+  const mailOptions: SendMailOptions = {
+    from: '"Footcamps" <footcamps@firebase.com>',
+    to: registration.trainee.email
+  };
+
+  // Building Email message.
+  if (registration.state === 'IN_PROGRESS') {
+    // TODO RegistrationState.IN_PROGRESS
+    mailOptions.subject = 'Inscription à AbersFoot prise en compte';
+    mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Votre inscription au stage de football AbersFoot a bien été prise en compte.<br> Elle sera validée prochainement.`;
+  } else if (registration.state === 'ACCEPTED') {
+    // TODO RegistrationState.ACCEPTED
+    mailOptions.subject = 'Inscription à AbersFoot validée';
+    mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Félicitations, votre inscription au stage de football AbersFoot a été validée.<br> Bon stage !`;
+  } else if (registration.state === 'REJECTED') {
+    mailOptions.subject = 'Inscription à AbersFoot rejetée';
+    mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Hélas votre inscription au stage de football AbersFoot a été rejetée!`;
+  }
+
+  return getMailTransporter()
+    .sendMail(mailOptions)
+    .then((info) => console.log(`A mail has been sent to ${registration.trainee.email} with state ${registration.state}`))
+    .catch((error) => console.error('There was an error while sending the email:', error));
+}
+
+function sendMailAboutPayment(payment: Payment): Promise<any> {
+  // Configure the email transport using the default SMTP transport and a GMail account.
+  // For other types of transports such as Sendgrid see https://nodemailer.com/transports/
+  console.log(`sendMailAboutPayment(${JSON.stringify(payment)})`);
+  console.info(`Retrieving registration ${payment.registrationId} ...`);
+  return admin.firestore()
+    .doc(`registrations/${payment.registrationId}`)
+    .get()
+    .then((docRegistration: admin.firestore.DocumentData) => {
+      const registration: RegistrationV2 = docRegistration.data() as RegistrationV2;
+      registration.id = docRegistration.id;
+      console.info(`Registration: ${JSON.stringify(registration)} retrieved.`);
+      return registration;
+    })
+    .then((registration: RegistrationV2) => {
+      const mailOptions: SendMailOptions = {
+        from: '"Footcamps" <footcamps@firebase.com>',
+        to: registration.trainee.email
+      };
+
+      if (payment.state === 'IN_PROGRESS') {
+        return null;
+      } else if (payment.state === 'ACCEPTED') {
+        // TODO RegistrationState.ACCEPTED
+        mailOptions.subject = 'Paiement à AbersFoot validé';
+        mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br>Votre paiement au stage de football AbersFoot a été validé.`;
+      } else if (payment.state === 'REJECTED') {
+        mailOptions.subject = 'Paiement à AbersFoot rejeté';
+        mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br>Votre paiement au stage de football AbersFoot a été rejeté.`;
+      }
+
+      return getMailTransporter()
+        .sendMail(mailOptions)
+        .then((info) => console.log(`A mail has been sent to ${registration.trainee.email} with state ${registration.state}`))
+        .catch((error) => console.error('There was an error while sending the email:', error));
+    })
+}
 
 
 export const makePaymentByCard = functions.https.onRequest((request: functions.Request, response: functions.Response) => {
@@ -589,7 +556,7 @@ export const onUpdatePaymentState = functions.firestore
       console.info('Payment state has not changed');
       return Promise.resolve(null);
     }
-    let payment: Payment = change.after.data() as Payment;
+    const payment: Payment = change.after.data() as Payment;
     payment.id = change.after.id;
 
     console.info(`IN - onUpdatePaymentState(payments/${payment.id}), payment = ${JSON.stringify(payment)}`);
@@ -606,6 +573,8 @@ export const onUpdatePaymentState = functions.firestore
             console.info(`Registration ${payment.registrationId} updated successfully ...`);
           }).catch((error) => {
             console.error(`An error occured during update of registration ${payment.registrationId}`)
+          }).then(() => {
+            return sendMailAboutPayment(payment);
           });
 
       case 'REJECTED':
@@ -619,6 +588,8 @@ export const onUpdatePaymentState = functions.firestore
             console.info(`Registration ${payment.registrationId} updated successfully ...`);
           }).catch((error) => {
             console.error(`An error occured during update of registration ${payment.registrationId}`)
+          }).then(() => {
+            return sendMailAboutPayment(payment);
           });
 
       default:
@@ -635,10 +606,10 @@ export const onUpdateRegistrationState = functions.firestore
       return Promise.resolve(null);
     }
 
-    const registrationBefore = change.before.data();
+    const registrationBefore: RegistrationV2 = change.before.data() as RegistrationV2;
     registrationBefore.id = change.before.id;
 
-    const registration = change.after.data();
+    const registration: RegistrationV2 = change.after.data() as RegistrationV2;
     registration.id = change.after.id;
     console.info(`IN - onUpdateRegistrationState(registrations/${registration.id}), registration = ${JSON.stringify(registration)}`);
 
@@ -685,5 +656,8 @@ export const onUpdateRegistrationState = functions.firestore
           }).catch((error) => {
             console.error(`An error occured during update of session ${registration.sessionId}`)
           });
-      });
+      })
+      .then(() => {
+        return sendMailAboutRegistration(registration);
+      })
   });
