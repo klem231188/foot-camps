@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChan
 import {RegistrationService} from '../../services/registration/registration.service';
 import {BehaviorSubject} from 'rxjs';
 import {Registration} from '../../models/registration';
+import {RegistrationV2} from '../../models/registration-v2.model';
 
 @Component({
   selector: 'app-football-camp-registrations-overview',
@@ -13,7 +14,7 @@ export class FootballCampRegistrationsOverviewComponent implements OnInit, OnCha
   @Input()
   sessionId: string;
 
-  registrations: Registration[];
+  registrations: RegistrationV2[];
 
   loading: BehaviorSubject<boolean>;
 

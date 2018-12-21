@@ -17,6 +17,7 @@ import {FootballCampRegistrationTraineeFormComponent} from '../football-camp-reg
 import {FootballCampRegistrationDocumentsComponent} from '../football-camp-registration-documents/football-camp-registration-documents.component';
 import {FootballCampRegistrationPaymentComponent} from '../football-camp-registration-payment/football-camp-registration-payment.component';
 import {RegistrationV2} from '../../models/registration-v2.model';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'football-camp-registration',
@@ -169,7 +170,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
         firstname: this.traineeFormComponent.firstname.value,
         lastname: this.traineeFormComponent.lastname.value,
         gender: this.traineeFormComponent.gender.value,
-        birthdate: new Date(1988, 11, 23),
+        birthdate: firebase.firestore.Timestamp.fromDate(this.traineeFormComponent.birthdate.value),
         email: this.traineeFormComponent.email.value,
         club: this.traineeFormComponent.club.value,
         fieldPosition: this.traineeFormComponent.fieldPosition.value,

@@ -10,6 +10,7 @@ export class SessionService {
   private sessions$: Observable<Session[]> = null;
 
   constructor(private angularFirestore: AngularFirestore) {
+    angularFirestore.firestore.settings({ timestampsInSnapshots: true });
   }
 
   update(session: Session, data: Partial<Session>): Promise<any> {

@@ -11,6 +11,7 @@ export class RegistrationService {
   private registrations$: Observable<Registration[]> = null;
 
   constructor(private angularFirestore: AngularFirestore) {
+    angularFirestore.firestore.settings({ timestampsInSnapshots: true });
   }
 
   save2(registration: RegistrationV2): Promise<any> {
@@ -35,17 +36,17 @@ export class RegistrationService {
       .update(data);
   }
 
-  getRegistrations(sessionId: string): Observable<Registration[]> {
+  getRegistrations(sessionId: string): Observable<RegistrationV2[]> {
     return this.angularFirestore
-      .collection<Registration>('registrations', ref => {
+      .collection<RegistrationV2>('registrations', ref => {
         return ref.where('sessionId', '==', sessionId)
       })
       .snapshotChanges().pipe(
-        map<DocumentChangeAction<Registration>[], Registration[]>(actions => {
+        map<DocumentChangeAction<RegistrationV2>[], RegistrationV2[]>(actions => {
           return actions.map(action => {
-            const data = action.payload.doc.data() as Registration;
+            const data = action.payload.doc.data() as RegistrationV2;
             data.id = action.payload.doc.id;
-            return data as Registration;
+            return data as RegistrationV2;
           });
         }),
         publishReplay(1), // Latest event is buffered and will be emit to new subscriber

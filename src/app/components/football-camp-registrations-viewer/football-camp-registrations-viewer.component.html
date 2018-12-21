@@ -1,7 +1,4 @@
-<div *ngIf="user" class="role">
-  {{user.role}}
-</div>
-<div *ngIf="sessions" class="sessions">
+<div *ngIf="sessions" class="sessions-container">
   <mat-accordion>
     <mat-expansion-panel *ngFor="let session of sessions; let i = index" [expanded]="session == selectedSession"
                          (opened)="updateSelectedSession(session)">
@@ -26,18 +23,17 @@
   <button mat-stroked-button (click)="print()" color="primary">Imprimer</button>
 </div>
 
-<div>
-  <app-football-camp-registrations-overview *ngIf="selectedSession"
-                                            [sessionId]="selectedSession.id"></app-football-camp-registrations-overview>
+<div *ngIf="selectedSession" class="registrations-container">
+  <app-football-camp-registrations-overview [sessionId]="selectedSession.id"></app-football-camp-registrations-overview>
 
-  <div *ngIf="registrations" class="registrations" #elementRegistrations>
+  <div *ngIf="registrations" class="registrations-card-container" #elementRegistrations>
     <mat-card *ngFor="let registration of registrations; let i = index">
       <mat-card-header>
         <!-- TODO picture -->
         <img matCardAvatar
              src="https://lh3.googleusercontent.com/-XlV8qhXgMbs/AAAAAAAAAAI/AAAAAAAAABI/fsluBBoN5gY/photo.jpg">
-        <mat-card-title>{{registration.firstname}} {{registration.lastname}}</mat-card-title>
-        <mat-card-subtitle>{{registration.birthdate | age}} ans</mat-card-subtitle>
+        <mat-card-title>{{registration.trainee.firstname}} {{registration.trainee.lastname}}</mat-card-title>
+        <mat-card-subtitle>{{registration.trainee.birthdate.toDate() | age}} ans</mat-card-subtitle>
       </mat-card-header>
 
       <mat-divider></mat-divider>
@@ -51,18 +47,16 @@
                         </span><br>
 
         <h2>Caractéristiques générales </h2>
-        Nom: {{registration.firstname}} <br>
-        Prénom: {{registration.lastname}} <br>
-        Sexe: {{registration.gender | gender}} <br>
-        Email: {{registration.email}} <br>
-        Age: {{registration.birthdate | age}} ans <br>
-        Adresse: {{registration.address.streetAddress}} {{registration.address.zipCode}}
-        {{registration.address.city}}<br>
+        Nom: {{registration.trainee.firstname}} <br>
+        Prénom: {{registration.trainee.lastname}} <br>
+        Sexe: {{registration.trainee.gender | gender}} <br>
+        Email: {{registration.trainee.email}} <br>
+        Age: {{registration.trainee.birthdate.toDate() | age}} ans <br>
 
         <h2>Caractéristiques sportives</h2>
-        Club: {{registration.club}}<br>
-        Poste: {{registration.fieldPosition | fieldPosition}}<br>
-        Pied: {{registration.feet | feet}}<br>
+        Club: {{registration.trainee.club}}<br>
+        Poste: {{registration.trainee.fieldPosition | fieldPosition}}<br>
+        Pied: {{registration.trainee.feet | feet}}<br>
 
       </mat-card-content>
       <mat-card-actions align="center" *ngIf="registration.state === 'IN_PROGRESS'">

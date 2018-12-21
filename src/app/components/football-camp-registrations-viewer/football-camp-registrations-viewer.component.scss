@@ -5,7 +5,10 @@
   $foreground: map-get($theme, foreground);
 
   app-football-camp-registrations-viewer {
+    display: flex;
+    flex: 1;
     flex-direction: column;
+    margin-top: 15px !important;
 
     @include big-screen {
       flex-direction: row;
@@ -18,10 +21,9 @@
       z-index: -1;
     }
 
-    .sessions {
-      margin-top: 15px !important;
+    .sessions-container {
       @include big-screen {
-        margin-right:15px;
+        margin-right: 15px;
         margin-left: 15px;
 
         min-width: 375px;
@@ -29,42 +31,53 @@
       }
     }
 
-    .registrations {
+    .registrations-container {
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-      align-items: flex-start;
-      margin-top: 15px !important;
-      width: 100%;
-      @include big-screen {
-        margin-right: 15px;
-      }
+      flex-direction: column;
+      flex: 1;
 
-      mat-card {
-        width: 100%;
-
+      .registrations-card-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        margin-top: 15px !important;
         @include big-screen {
-          width: 300px;
-          margin-bottom: 10px;
+          margin-right: 15px;
         }
 
-        .accent {
-          background-color: mat-color($accent);
-          padding: 7px;
-          border-radius: 5px;
-        }
+        mat-card {
+          width: 100%;
 
-        .primary {
-          background-color: mat-color($primary);
-          padding: 7px;
-          border-radius: 5px;
-        }
+          h2 {
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 10px;
+          }
 
-        .warn {
-          background-color: mat-color($warn);
-          padding: 7px;
-          border-radius: 5px;
+          @include big-screen {
+            width: 300px;
+            margin-bottom: 10px;
+          }
+
+          .accent {
+            background-color: mat-color($accent);
+            padding: 7px;
+            border-radius: 5px;
+          }
+
+          .primary {
+            background-color: mat-color($primary);
+            padding: 7px;
+            border-radius: 5px;
+          }
+
+          .warn {
+            background-color: mat-color($warn);
+            padding: 7px;
+            border-radius: 5px;
+          }
         }
       }
     }

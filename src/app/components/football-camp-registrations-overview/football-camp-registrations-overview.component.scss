@@ -26,13 +26,11 @@
   $foreground: map-get($theme, foreground);
 
   app-football-camp-registrations-overview {
-    //width: 100%;
-
-    .container {
+    .registrations-overview-container {
       display: flex;
-      //flex: 1;
+      flex: 1;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: space-around;
 
       .overview-accepted {
         @include overview(mat-color($primary));

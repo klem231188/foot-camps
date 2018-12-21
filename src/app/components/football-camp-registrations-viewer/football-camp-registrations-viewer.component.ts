@@ -1,4 +1,3 @@
-
 import {switchMap} from 'rxjs/operators';
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
@@ -14,6 +13,7 @@ import {RegistrationState} from '../../models/registration-state.enum';
 import * as html2pdf from 'assets/js/html2pdf.bundle.min.js';
 import {Title} from '@angular/platform-browser';
 import * as firebase from 'firebase';
+import {RegistrationV2} from '../../models/registration-v2.model';
 
 @Component({
   selector: 'app-football-camp-registrations-viewer',
@@ -25,7 +25,7 @@ export class FootballCampRegistrationsViewerComponent implements OnInit {
   @ViewChild('elementRegistrations')
   private elementRegistrations: ElementRef;
 
-  registrations: Registration[] = null;
+  registrations: RegistrationV2[] = null;
 
   sessions: Session[] = null;
 
@@ -58,7 +58,7 @@ export class FootballCampRegistrationsViewerComponent implements OnInit {
           return this.sessionService.getSessionsFromCampId(user.campId);
         }
       }),
-      switchMap<Session[], Registration[]>((sessions) => {
+      switchMap<Session[], RegistrationV2[]>((sessions) => {
         this.sessions = sessions;
         this.selectedSession = (sessions != null && sessions.length > 0) ? sessions[0] : null;
         if (this.selectedSession != null) {
