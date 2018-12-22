@@ -11,6 +11,8 @@ export class StatePipe implements PipeTransform {
       return value;
     } else {
       switch (value) {
+        case RegistrationState.WAITING_APPROVAL:
+          return 'En attente d\'approbation';
         case RegistrationState.IN_PROGRESS:
           return 'En cours';
         case RegistrationState.ACCEPTED:

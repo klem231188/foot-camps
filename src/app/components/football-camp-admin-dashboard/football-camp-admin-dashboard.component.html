@@ -1,0 +1,123 @@
+<mat-card *ngIf="user">
+  <mat-card-content>
+    Bienvenue <b>{{user.email}}</b>, vous êtes sur la page d'administration de Footcamps.<br>
+    Sur cette page vous pouvez:
+    <ul>
+      <li>- Visualiser les inscriptions aux différentes sessions d'un stage de football.</li>
+      <li>- Valider / Refuser une inscription au statut 'En cours'</li>
+      <li>- Imprimer les fiches joueurs</li>
+    </ul>
+  </mat-card-content>
+</mat-card>
+
+<div class="camp-and-session-container" *ngIf="footballCamps && sessions">
+  <mat-form-field>
+    <mat-select #uiControlFootballCamp placeholder="Stage">
+      <mat-option
+        *ngFor="let footballCamp of this.footballCamps"
+        [value]="footballCamp"
+      >
+        {{footballCamp.city}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select #uiControlSession placeholder="Sessions">
+      <mat-option
+        *ngFor="let session of this.sessions"
+        [value]="session"
+      >
+        {{session.start.toDate() | date}} au {{session.end.toDate() | date}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+
+<div *ngIf="registrations && registrations.length > 0" class="registration-container">
+  <div class="registration-table-container">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z5">
+
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? uiControlRegistration.toggle(row) : null"
+                        [checked]="uiControlRegistration.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="firstname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Prénom</th>
+        <td mat-cell *matCellDef="let element"> {{element.trainee.firstname}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom</th>
+        <td mat-cell *matCellDef="let element"> {{element.trainee.lastname}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut</th>
+        <td mat-cell *matCellDef="let element" [ngClass]="{'primary': element.state === 'ACCEPTED',
+                                          'accent': element.state === 'IN_PROGRESS',
+                                          'warn': element.state === 'REJECTED'
+                                          }"> {{element.state | state}}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div class="registration-spacer"></div>
+
+  <div *ngIf="selectedRegistration as registration" class="registration-detail-container mat-elevation-z5">
+    <mat-card>
+      <mat-card-header>
+        <!-- TODO picture -->
+        <img matCardAvatar
+             src="https://lh3.googleusercontent.com/-XlV8qhXgMbs/AAAAAAAAAAI/AAAAAAAAABI/fsluBBoN5gY/photo.jpg">
+        <mat-card-title>{{registration.trainee.firstname}} {{registration.trainee.lastname}}</mat-card-title>
+        <mat-card-subtitle>{{registration.trainee.birthdate.toDate() | age}} ans</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <br>
+        <b>Etat inscription</b>: <span [ngClass]="{'primary': registration.state === 'ACCEPTED',
+                                          'accent': registration.state === 'IN_PROGRESS',
+                                          'warn': registration.state === 'REJECTED'
+                                          }">
+                          <b>{{registration.state | state}}</b>
+                        </span><br>
+
+        <h2>Caractéristiques générales </h2>
+        Prénom: {{registration.trainee.firstname}} <br>
+        Nom: {{registration.trainee.lastname}} <br>
+        Sexe: {{registration.trainee.gender | gender}} <br>
+        Email: {{registration.trainee.email}} <br>
+        Date de naissance: {{registration.trainee.birthdate.toDate() | date}}<br>
+        Age: {{registration.trainee.birthdate.toDate() | age}} ans <br>
+
+        <h2>Caractéristiques sportives</h2>
+        Club: {{registration.trainee.club}}<br>
+        Poste: {{registration.trainee.fieldPosition | fieldPosition}}<br>
+        Pied: {{registration.trainee.feet | feet}}<br>
+
+        <!-- TODO: add docs-->
+        <!-- TODO: add payment status-->
+
+      </mat-card-content>
+      <mat-card-actions align="center" *ngIf="registration.state === 'IN_PROGRESS'">
+        <button mat-stroked-button (click)="accept(registration)" color="primary">Accepter inscription</button>
+        <button mat-stroked-button (click)="reject(registration)" color="warn">Refuser inscription</button>
+      </mat-card-actions>
+      <mat-card-footer></mat-card-footer>
+    </mat-card>
+  </div>
+</div>

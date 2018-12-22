@@ -1,7 +1,6 @@
 import {BrowserModule, Title} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AppComponent} from './app.component';
 import {registerLocaleData} from '@angular/common';
@@ -32,8 +31,7 @@ import {FootballCampLoginComponent} from './components/football-camp-login/footb
 import {FootballCampShouldConnectDialogComponent} from './components/football-camp-should-connect-dialog/football-camp-should-connect-dialog.component';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireStorageModule} from '@angular/fire/storage';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {FootballCampRegistrationsViewerComponent} from './components/football-camp-registrations-viewer/football-camp-registrations-viewer.component';
 import {StatePipe} from './pipes/state.pipe';
 import {FootballCampRegistrationPaymentComponent} from './components/football-camp-registration-payment/football-camp-registration-payment.component';
@@ -47,8 +45,9 @@ import {FootballCampRegistrationTraineeFormComponent} from './components/footbal
 import {FootballCampRegistrationCheckPaymentComponent} from './components/football-camp-registration-check-payment/football-camp-registration-check-payment.component';
 import {RouterModule} from '@angular/router';
 import {TableOfContentsModule} from './components/table-of-contents/table-of-contents.module';
-import { FootballCampRegistrationsOverviewComponent } from './components/football-camp-registrations-overview/football-camp-registrations-overview.component';
+import {FootballCampRegistrationsOverviewComponent} from './components/football-camp-registrations-overview/football-camp-registrations-overview.component';
 import {HttpClientModule} from '@angular/common/http';
+import {FootballCampAdminDashboardComponent} from './components/football-camp-admin-dashboard/football-camp-admin-dashboard.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -108,7 +107,8 @@ registerLocaleData(localeFr, 'fr');
     FootballCampRegistrationSessionsComponent,
     FootballCampRegistrationTraineeFormComponent,
     FootballCampRegistrationCheckPaymentComponent,
-    FootballCampRegistrationsOverviewComponent
+    FootballCampRegistrationsOverviewComponent,
+    FootballCampAdminDashboardComponent,
   ],
   entryComponents: [
     FootballCampLoginComponent,
@@ -119,8 +119,8 @@ registerLocaleData(localeFr, 'fr');
     AngularFireAuth,
     {provide: LOCALE_ID, useValue: 'fr'},
     {provide: MAT_DATE_LOCALE, useValue: 'fr'},
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
+    // {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    // {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
   ],
   bootstrap: [AppComponent]
 })

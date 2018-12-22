@@ -1,0 +1,98 @@
+@mixin app-football-camp-admin-dashboard-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  app-football-camp-admin-dashboard {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 15px;
+
+    ul {
+      margin-left: 10px;
+    }
+
+    .camp-and-session-container {
+      display: flex;
+      flex-direction: row;
+      margin-top: 10px;
+
+      mat-form-field {
+        margin: 10px;
+      }
+    }
+
+    .registration-container {
+      display: flex;
+      flex-direction: row;
+
+      .registration-table-container {
+        flex: 1;
+        table {
+          th, td {
+            vertical-align: middle;
+          }
+          width: 100%;
+          .mat-column-select {
+            overflow: initial;
+          }
+
+          .accent {
+            background-color: mat-color($accent);
+          }
+
+          .primary {
+            background-color: mat-color($primary);
+          }
+
+          .warn {
+            background-color: mat-color($warn);
+          }
+        }
+      }
+
+      .registration-spacer {
+        width: 10px;
+      }
+
+      .registration-detail-container {
+        width: 450px;
+        margin-bottom: 10px;
+
+        mat-card {
+          width: 100%;
+          h2 {
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 10px;
+          }
+
+          mat-card-actions {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+          }
+
+          .accent {
+            background-color: mat-color($accent);
+            padding: 7px;
+            border-radius: 5px;
+          }
+
+          .primary {
+            background-color: mat-color($primary);
+            padding: 7px;
+            border-radius: 5px;
+          }
+
+          .warn {
+            background-color: mat-color($warn);
+            padding: 7px;
+            border-radius: 5px;
+          }
+        }
+      }
+    }
+  }
+}

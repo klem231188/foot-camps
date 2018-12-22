@@ -54,6 +54,6 @@ export class AppComponent {
 
   onViewRegistrationsClicked(): void {
     this.sidenav.toggle();
-    this.router.navigate(['/view-registrations']);
+    this.router.navigate(['/admin-dashboard']);
   }
 }

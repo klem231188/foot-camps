@@ -12,23 +12,25 @@ export class FootballCampService {
   private footballCamps$: Observable<FootballCamp[]> = null;
 
   constructor(private angularFirestore: AngularFirestore) {
-    angularFirestore.firestore.settings({ timestampsInSnapshots: true });
+    angularFirestore.firestore.settings({timestampsInSnapshots: true});
   }
 
   getFootballCamps(): Observable<FootballCamp[]> {
     if (this.footballCamps$ == null) {
       this.footballCamps$ = this.angularFirestore
         .collection<FootballCamp>('camps')
-        .snapshotChanges().pipe(
-        map<DocumentChangeAction<FootballCamp>[], FootballCamp[]>(actions => {
-          return actions.map(action => {
-            const data = action.payload.doc.data() as FootballCamp;
-            data.id = action.payload.doc.id;
-            return data as FootballCamp;
-          });
-        }),
-        publishReplay(1), // Latest event is buffered and will be emit to new subscriber
-        refCount(), ); // Transform ConnectableObservable to Observable and handle multiple subscription / unsubscription
+        .snapshotChanges()
+        .pipe(
+          map<DocumentChangeAction<FootballCamp>[], FootballCamp[]>(actions => {
+            return actions.map(action => {
+              const data = action.payload.doc.data() as FootballCamp;
+              data.id = action.payload.doc.id;
+              return data as FootballCamp;
+            });
+          }),
+          publishReplay(1), // Latest event is buffered and will be emit to new subscriber
+          refCount(), // Transform ConnectableObservable to Observable and handle multiple subscription / unsubscription
+        );
     }
 
     return this.footballCamps$;
