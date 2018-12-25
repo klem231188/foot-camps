@@ -29,6 +29,7 @@
 
     .registration-container {
       display: flex;
+      flex: 1;
       flex-direction: row;
 
       @include small-screen {
