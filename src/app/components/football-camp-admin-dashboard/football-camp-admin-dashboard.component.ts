@@ -7,7 +7,7 @@ import {FootballCamp} from '../../models/football-camp';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {switchMap} from 'rxjs/operators';
 import {UserService} from '../../services/user/user.service';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {MatSelect, MatSort, MatTableDataSource} from '@angular/material';
 import {SessionService} from '../../services/session/session.service';
 import {Session} from '../../models/session';
@@ -17,6 +17,8 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {SelectionChange} from '@angular/cdk/collections/typings/selection';
 import {Registration} from '../../models/registration';
 import {RegistrationState} from '../../models/registration-state.enum';
+import {PaymentService} from '../../services/payment/payment.service';
+import {Payment} from '../../models/payment';
 
 @Component({
   selector: 'app-football-camp-admin-dashboard',
@@ -42,12 +44,14 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
 
   // Registration
   registrations: RegistrationV2[];
-  selectedRegistration: RegistrationV2;
+  selectedRegistration: BehaviorSubject<RegistrationV2>;
   displayedColumns: string[] = ['select', 'firstname', 'lastname', 'state'];
   uiControlRegistration: SelectionModel<RegistrationV2>;
-
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<RegistrationV2>;
+
+  // Payment
+  payment: Observable<Payment>;
 
   constructor(
     private route: ActivatedRoute,
@@ -55,7 +59,8 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
     private userService: UserService,
     private footballCampService: FootballCampService,
     private sessionService: SessionService,
-    private registrationService: RegistrationService
+    private registrationService: RegistrationService,
+    private paymentService: PaymentService
   ) {
     this.selectedFootballCamp = new BehaviorSubject<FootballCamp>(null);
     this.uiControlFootballCampInitialized = false;
@@ -63,7 +68,7 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
     this.selectedSession = new BehaviorSubject<Session>(null);
     this.uiControlSessionInitialized = false;
 
-    this.selectedRegistration = null;
+    this.selectedRegistration = new BehaviorSubject<RegistrationV2>(null);
     const initialSelection = [];
     const allowMultiSelect = false;
     this.uiControlRegistration = new SelectionModel<RegistrationV2>(allowMultiSelect, initialSelection);
@@ -123,8 +128,8 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
 
     this.selectedSession
       .subscribe((session: Session) => {
-        this.selectedRegistration = null;
-        this.uiControlRegistration.toggle(this.selectedRegistration);
+        this.selectedRegistration.next(null);
+        this.uiControlRegistration.toggle(this.selectedRegistration.value);
 
         if (session) {
           this.registrationService
@@ -133,8 +138,8 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
               this.registrations = registrations;
               this.dataSource = new MatTableDataSource(this.registrations);
               if (this.registrations.length > 0) {
-                this.selectedRegistration = this.registrations[0];
-                this.uiControlRegistration.toggle(this.selectedRegistration);
+                this.selectedRegistration.next(this.registrations[0]);
+                this.uiControlRegistration.toggle(this.selectedRegistration.value);
               }
             });
         }
@@ -144,11 +149,18 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
       .changed
       .subscribe((value: SelectionChange<RegistrationV2>) => {
         if (value.added.length === 0) {
-          this.selectedRegistration = null;
+          this.selectedRegistration.next(null);
         } else {
-          this.selectedRegistration = value.added[0];
+          this.selectedRegistration.next(value.added[0]);
         }
-      })
+      });
+
+    this.selectedRegistration
+      .subscribe((registration: RegistrationV2) => {
+        if (registration) {
+         this.payment = this.paymentService.getPayment(registration.paymentId)
+        }
+      });
   }
 
   ngAfterViewChecked(): void {

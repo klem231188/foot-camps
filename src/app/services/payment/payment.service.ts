@@ -24,6 +24,12 @@ export class PaymentService {
         payment.id = doc.id;
         return;
       });
+  };
+
+  getPayment(paymentId: string): Observable<Payment> {
+    return this.angularFirestore
+      .doc(`payments/${paymentId}`)
+      .valueChanges() as Observable<Payment>;
   }
 
   makePaymentByCard(payment: Payment): Observable<any> {
@@ -33,5 +39,5 @@ export class PaymentService {
       .set('Content-Type', 'application/json');
 
     return this.http.post<any>(url, payment, {headers});
-  }
+  };
 }

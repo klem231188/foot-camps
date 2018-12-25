@@ -1,0 +1,13 @@
+<div class="registrations-overview-container" *ngIf="!(loading | async)">
+  <mat-card class="overview-accepted">
+    <span class="circle">{{countRegistrations('ACCEPTED')}}</span> Acceptée(s)
+  </mat-card>
+
+  <mat-card class="overview-in-progress">
+    <span class="circle">{{countRegistrations('IN_PROGRESS')}}</span> En attente(s)
+  </mat-card>
+
+  <mat-card class="overview-rejected">
+    <span class="circle">{{countRegistrations('REJECTED')}}</span> Refusée(s)
+  </mat-card>
+</div>

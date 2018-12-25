@@ -48,6 +48,7 @@ import {TableOfContentsModule} from './components/table-of-contents/table-of-con
 import {FootballCampRegistrationsOverviewComponent} from './components/football-camp-registrations-overview/football-camp-registrations-overview.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FootballCampAdminDashboardComponent} from './components/football-camp-admin-dashboard/football-camp-admin-dashboard.component';
+import {FootballCampSessionOverviewComponent} from './components/football-camp-admin-dashboard/football-camp-session-overview/football-camp-session-overview.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -109,6 +110,7 @@ registerLocaleData(localeFr, 'fr');
     FootballCampRegistrationCheckPaymentComponent,
     FootballCampRegistrationsOverviewComponent,
     FootballCampAdminDashboardComponent,
+    FootballCampSessionOverviewComponent
   ],
   entryComponents: [
     FootballCampLoginComponent,

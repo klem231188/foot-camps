@@ -18,6 +18,10 @@
       flex-direction: row;
       margin-top: 10px;
 
+      @include small-screen {
+        flex-direction: column;
+      }
+
       mat-form-field {
         margin: 10px;
       }
@@ -26,6 +30,10 @@
     .registration-container {
       display: flex;
       flex-direction: row;
+
+      @include small-screen {
+        flex-direction: column;
+      }
 
       .registration-table-container {
         flex: 1;
@@ -54,11 +62,18 @@
 
       .registration-spacer {
         width: 10px;
+        @include small-screen {
+          margin-bottom: 15px;
+        }
       }
 
       .registration-detail-container {
         width: 450px;
         margin-bottom: 10px;
+
+        @include small-screen {
+          width: 100%;
+        }
 
         mat-card {
           width: 100%;
