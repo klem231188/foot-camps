@@ -121,7 +121,7 @@
         <h2>Paiement</h2>
         <div *ngIf="(payment|async) as payment">
           <!-- TODO handle payment type -->
-          Type paiement : CARTE <br>
+          Type paiement : {{payment.type | paymentType}} <br>
           Etat paiement : {{payment.state | state}}
         </div>
         <!-- TODO: add docs-->

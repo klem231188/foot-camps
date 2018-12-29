@@ -1,7 +1,8 @@
 import {
   AfterViewChecked,
   AfterViewInit,
-  Component, ElementRef,
+  Component,
+  ElementRef,
   Input,
   OnChanges,
   OnInit,
@@ -16,6 +17,7 @@ import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {PaymentState} from '../../models/payment-state.enum';
 import {MatButton, MatSnackBar} from '@angular/material';
+import {PaymentType} from '../../models/payment-type.enum';
 
 @Component({
   selector: 'app-football-camp-registration-payment',
@@ -123,7 +125,8 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
     const payment: Payment = {
       registrationId: this.registrationId,
       stripeTokenId: stripeTokenId,
-      state: PaymentState.IN_PROGRESS
+      state: PaymentState.IN_PROGRESS,
+      type: PaymentType.CARD
     };
 
     this.isLoading = true;
