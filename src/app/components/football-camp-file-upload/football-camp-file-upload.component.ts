@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
+import {AngularFireStorage} from '@angular/fire/storage';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Subscription} from 'rxjs/Subscription';
 import {DocumentType} from '../../models/document-type.enum'
@@ -20,9 +20,9 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
   inputId: string;
   percentage: Observable<number>;
   subscriptions: Subscription[];
-  task: AngularFireUploadTask;
   title: string;
   @Input() type: DocumentType;
+  @Input() inputDocument: Document;
   uploaded: BehaviorSubject<boolean>;
 
   // ----------------------------
@@ -36,8 +36,16 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
   // ----------------------------
   ngOnInit(): void {
     this.uploaded = new BehaviorSubject(false);
-
     this.document = new BehaviorSubject(null);
+
+
+    if (this.inputDocument) {
+      this.document.next(this.inputDocument);
+      this.type = this.document.value.type;
+      this.uploaded.next(true);
+      this.percentage = Observable.of(100);
+      this.downloadURL = this.document.value.url;
+    }
 
     switch (this.type) {
       case DocumentType.ASSURANCE_SCOLAIRE :
@@ -96,13 +104,13 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
       .snapshotChanges()
       .pipe(
         finalize(() => {
-          // Say to "uploaded" status observers that file has been uploaded
-          this.uploaded.next(true);
-
           // Get downloadURL
           const downloadURLSubscription = fileRef
             .getDownloadURL()
             .subscribe(downloadURL => {
+              // Say to "uploaded" status observers that file has been uploaded
+              this.uploaded.next(true);
+
               this.downloadURL = downloadURL;
               this.document.next({
                   url: this.downloadURL,
@@ -116,55 +124,5 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
       .subscribe();
 
     this.subscriptions.push(taskSubscription);
-  }
-
-  startUpload(event: FileList) {
-    console.log('startUpload');
-    const file = event.item(0);
-
-    // No file has been selected
-    if (!file) {
-      return;
-    }
-
-    // Say to "uploaded" status observers that file is not yet uploaded
-    this.uploaded.next(false);
-
-    // Define file path
-    const path = `uploads/${new Date().getTime()}_${file.name}`;
-
-    // Create an upload task
-    this.task = this.storage.upload(path, file);
-
-    // Keep a variable on upload percentage observable for the progress bar
-    this.percentage = this.task.percentageChanges();
-
-    this.task
-      .snapshotChanges()
-      .subscribe((snap) => {
-        if (snap.bytesTransferred === snap.totalBytes) {
-          // Upload is now finished
-
-          // Say to "uploaded" status observers that file has been uploaded
-          this.uploaded.next(true);
-
-          // TODO: move following line when registration is done
-          // this.db.collection('photos').add({path, size: snap.totalBytes});
-
-          // Save upload full URL into a variable
-          const subscription = this.storage
-            .ref(path)
-            .getDownloadURL()
-            .subscribe(url => {
-              this.downloadURL = url;
-              this.document.next({
-                  url: this.downloadURL,
-                  type: this.type
-                }
-              );
-            });
-          this.subscriptions.push(subscription);
-        }
-      });
   }
 }

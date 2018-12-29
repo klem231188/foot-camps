@@ -112,6 +112,11 @@
         Poste : {{registration.trainee.fieldPosition | fieldPosition}}<br>
         Pied : {{registration.trainee.feet | feet}}<br>
 
+        <h2>Documents</h2>
+        <div *ngFor="let document of registration.documents">
+          <app-football-camp-file-upload [inputDocument]="document"></app-football-camp-file-upload>
+        </div>
+
 
         <h2>Paiement</h2>
         <div *ngIf="(payment|async) as payment">
