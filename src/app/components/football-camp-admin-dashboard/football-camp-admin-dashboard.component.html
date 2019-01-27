@@ -82,11 +82,15 @@
   <div *ngIf="(selectedRegistration | async) as registration" class="registration-detail-container mat-elevation-z5">
     <mat-card>
       <mat-card-header>
-        <!-- TODO picture -->
-        <img matCardAvatar
-             src="https://lh3.googleusercontent.com/-XlV8qhXgMbs/AAAAAAAAAAI/AAAAAAAAABI/fsluBBoN5gY/photo.jpg">
-        <mat-card-title>{{registration.trainee.firstname}} {{registration.trainee.lastname}}</mat-card-title>
-        <mat-card-subtitle>{{registration.trainee.birthdate.toDate() | age}} ans</mat-card-subtitle>
+        <div class="header-container">
+          <img class="photo" [src]="registration.documents[3].url">
+          <div class="name-age-container">
+            <span class="name">{{registration.trainee.firstname}} {{registration.trainee.lastname}}</span>
+            <div class="age">{{registration.trainee.birthdate.toDate() | age}} ans</div>
+          </div>
+        </div>
+        <!--<mat-card-title>{{registration.trainee.firstname}} {{registration.trainee.lastname}}</mat-card-title>-->
+        <!--<mat-card-subtitle>{{registration.trainee.birthdate.toDate() | age}} ans</mat-card-subtitle>-->
       </mat-card-header>
 
       <mat-divider></mat-divider>

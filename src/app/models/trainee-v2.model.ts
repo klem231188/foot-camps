@@ -7,7 +7,7 @@ export interface TraineeV2 {
   firstname: string;
   lastname: string;
   gender: Gender;
-  birthdate: firebase.firestore.Timestamp;
+  birthdate: any; // firebase.firestore.Timestamp
   email: string;
   club?: string;
   category?: Category;

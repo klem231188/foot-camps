@@ -203,13 +203,13 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
     }
   }
 
-  accept(registration: Registration): void {
+  accept(registration: RegistrationV2): void {
     this.registrationService
       .update(registration, {state: RegistrationState.ACCEPTED})
       .then(() => console.log('Registration updated with success'));
   }
 
-  reject(registration: Registration): void {
+  reject(registration: RegistrationV2): void {
     this.registrationService
       .update(registration, {state: RegistrationState.REJECTED})
       .then(() => console.log('Registration updated with success'));

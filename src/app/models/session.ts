@@ -1,7 +1,9 @@
 import * as firebase from 'firebase';
+import {PaymentType} from './payment-type.enum';
 
 export interface Session {
   id?: string;
+  acceptedPaymentTypes: PaymentType[];
   campId: string;
   enable: boolean;
   end: firebase.firestore.Timestamp;

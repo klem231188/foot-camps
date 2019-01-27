@@ -57,17 +57,23 @@
       <mat-step>
         <ng-template matStepLabel>Paiement</ng-template>
         <mat-tab-group>
-          <mat-tab label="Payer par carte">
+          <mat-tab label="Carte bancaire">
             <!-- TODO: handle fullBoardRates-->
-            <app-football-camp-registration-payment #cardPaymentComponent
-                                                    [amount]="(sessionComponent.selectedSession | async)?.halfBoardRates"
-                                                    [registrationId]="registration?.id">
-
+            <app-football-camp-registration-payment
+              #cardPaymentComponent
+              [amount]="(sessionComponent.selectedSession | async)?.halfBoardRates"
+              [registration]="registration"
+            >
             </app-football-camp-registration-payment>
           </mat-tab>
-          <mat-tab label="Payer par chèque">
-            <!--<app-football-camp-registration-check-payment [campId]="'WCG80PBOCvPxVLTuorxc'" [sessionId]="'AJn0EUihD1BaUShuxM1M'"></app-football-camp-registration-check-payment>-->
-            Not yet implemented!
+          <mat-tab label="Autre moyen de paiement">
+            <app-football-camp-registration-check-payment
+              #checkPaymentComponent
+              [campId]="footballCamp.id"
+              [sessionId]="(sessionComponent.selectedSession | async)?.id"
+              [registration]="registration"
+            >
+            </app-football-camp-registration-check-payment>
           </mat-tab>
         </mat-tab-group>
       </mat-step>

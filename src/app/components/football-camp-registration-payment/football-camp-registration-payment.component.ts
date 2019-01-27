@@ -18,6 +18,9 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {PaymentState} from '../../models/payment-state.enum';
 import {MatButton, MatSnackBar} from '@angular/material';
 import {PaymentType} from '../../models/payment-type.enum';
+import {RegistrationState} from '../../models/registration-state.enum';
+import {RegistrationService} from '../../services/registration/registration.service';
+import {RegistrationV2} from '../../models/registration-v2.model';
 
 @Component({
   selector: 'app-football-camp-registration-payment',
@@ -29,12 +32,13 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
   // Fields
   @Output() isValid: BehaviorSubject<boolean>;
   @Input() amount: number;
-  @Input() registrationId: string;
+  @Input() registration: RegistrationV2;
   card: any;
 
   @ViewChild('payElement') set content(content: ElementRef) {
     this.card.mount(content.nativeElement);
   }
+
   @ViewChild('payErrorElement') payErrorElement;
   @ViewChild('payButton') payButton: MatButton;
 
@@ -42,6 +46,7 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
   isLoading: boolean;
 
   constructor(private paymentService: PaymentService,
+              private registrationService: RegistrationService,
               private snackBar: MatSnackBar) {
     console.log('FootballCampRegistrationPaymentComponent.constructor');
     this.isLoading = false;
@@ -80,9 +85,9 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('FootballCampRegistrationPaymentComponent.ngOnChanges()');
     // Handle @Input registrationId change
-    const registrationIdChange: SimpleChange = changes.registrationId;
-    if (registrationIdChange) {
-      this.registrationId = registrationIdChange.currentValue;
+    const registrationChange: SimpleChange = changes.registration;
+    if (registrationChange) {
+      this.registration = registrationChange.currentValue;
     }
   }
 
@@ -118,12 +123,12 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
   stripeTokenHandler(stripeTokenId: string): void {
     console.log(`FootballCampPaymentComponent.stripeTokenHandler(${stripeTokenId})`);
 
-    this.snackBar.open('Paiement par carte en cours', 'Close', {
+    this.snackBar.open('Paiement par carte en cours', 'Fermer', {
       duration: 3000,
     });
 
     const payment: Payment = {
-      registrationId: this.registrationId,
+      registrationId: this.registration.id,
       stripeTokenId: stripeTokenId,
       state: PaymentState.IN_PROGRESS,
       type: PaymentType.CARD
@@ -134,16 +139,21 @@ export class FootballCampRegistrationPaymentComponent implements AfterViewInit, 
       .makePaymentByCard(payment)
       .subscribe(
         () => {
-          this.isLoading = false;
-          this.isValid.next(true);
-          this.snackBar.open('Paiement par carte réussi', 'Close', {
+          this.snackBar.open('Paiement par carte réussi', 'Fermer', {
             duration: 3000,
           });
+
+          this.registrationService
+            .update(this.registration, {state: RegistrationState.IN_PROGRESS})
+            .then(() => {
+              this.isLoading = false;
+              this.isValid.next(true);
+            });
         },
         () => {
           this.isLoading = false;
           this.isValid.next(false);
-          this.snackBar.open('Erreur lors du paiement par carte.', 'Close', {
+          this.snackBar.open('Erreur lors du paiement par carte.', 'Fermer', {
             duration: 10000,
           });
         });

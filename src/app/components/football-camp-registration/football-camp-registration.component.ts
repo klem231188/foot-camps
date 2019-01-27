@@ -18,6 +18,7 @@ import {FootballCampRegistrationDocumentsComponent} from '../football-camp-regis
 import {FootballCampRegistrationPaymentComponent} from '../football-camp-registration-payment/football-camp-registration-payment.component';
 import {RegistrationV2} from '../../models/registration-v2.model';
 import * as firebase from 'firebase';
+import {FootballCampRegistrationCheckPaymentComponent} from '../football-camp-registration-check-payment/football-camp-registration-check-payment.component';
 
 @Component({
   selector: 'football-camp-registration',
@@ -35,6 +36,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   @ViewChild(FootballCampRegistrationTraineeFormComponent) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
   @ViewChild(FootballCampRegistrationDocumentsComponent) documentsComponent: FootballCampRegistrationDocumentsComponent;
   @ViewChild(FootballCampRegistrationPaymentComponent) cardPaymentComponent: FootballCampRegistrationPaymentComponent;
+  @ViewChild(FootballCampRegistrationCheckPaymentComponent) checkPaymentComponent: FootballCampRegistrationCheckPaymentComponent;
   @ViewChild('stepper') stepper: MatVerticalStepper;
 
   // Payment From & Controls
@@ -45,6 +47,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   private _subscriptions: Subscription[];
   private cardPaymentSub: Subscription;
+  private checkPaymentSub: Subscription;
   private stepperSub: Subscription;
 
   constructor(private formBuilder: FormBuilder,
@@ -60,6 +63,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
     this._subscriptions = [];
     this.cardPaymentSub = null;
+    this.checkPaymentSub = null;
     this.stepperSub = null;
   }
 
@@ -87,8 +91,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
           content: 'Inscription au stage de football ' + this.footballCamp.city
         });
         this.meta.updateTag({name: 'keywords', content: 'footcamps, stage, football, inscription'});
-        console.log('----------- footballCamp :');
-        console.log(this.footballCamp);
         this.isLoading = false;
       });
 
@@ -110,15 +112,27 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   ngAfterViewChecked(): void {
     console.log('FootballCampRegistrationComponent.ngAfterViewChecked()');
     if (this.cardPaymentComponent !== undefined && this.cardPaymentSub === null) {
-      this.cardPaymentSub = this.cardPaymentComponent.isValid.subscribe((valid) => {
-        console.log(`Paiement ${valid}`);
-        if (valid) {
-          this.stepper.selected.completed = true;
-          this.stepper.next();
-        }
-      });
+      this.cardPaymentSub = this.cardPaymentComponent.isValid
+        .subscribe((valid) => {
+          if (valid) {
+            this.stepper.selected.completed = true;
+            this.stepper.next();
+          }
+        });
 
       this._subscriptions.push(this.cardPaymentSub);
+    }
+
+    if (this.checkPaymentComponent !== undefined && this.checkPaymentSub === null) {
+      this.checkPaymentSub = this.checkPaymentComponent.isValid
+        .subscribe((valid) => {
+          if (valid) {
+            this.stepper.selected.completed = true;
+            this.stepper.next();
+          }
+        });
+
+      this._subscriptions.push(this.checkPaymentSub);
     }
 
     if (this.stepper !== undefined && this.stepperSub === null) {
@@ -128,7 +142,6 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
             this.stepper._steps.forEach((step) => step.editable = false);
           }
         });
-
       this._subscriptions.push(this.stepperSub);
     }
   }
@@ -181,7 +194,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
       paymentId: null,
 
-      state: RegistrationState.WAITING_APPROVAL,
+      state: RegistrationState.PRE_REGISTERED,
     };
 
     this.isLoading = true;

@@ -451,9 +451,7 @@ function sendMailAboutPayment(payment: Payment): Promise<any> {
     })
 }
 
-
 export const makePaymentByCard = functions.https.onRequest((request: functions.Request, response: functions.Response) => {
-  //TODO check payment is not a duplicate
   return cors(request, response, () => {
     console.info(`IN - makePaymentByCard(${JSON.stringify(request.body)})`);
 
@@ -561,41 +559,19 @@ export const onUpdatePaymentState = functions.firestore
 
     console.info(`IN - onUpdatePaymentState(payments/${payment.id}), payment = ${JSON.stringify(payment)}`);
 
-    switch (payment.state) {
-      case 'ACCEPTED':
-        console.info(`Updating registration ${payment.registrationId} to state 'IN_PROGRESS' ...`);
-        return admin.firestore()
-          .doc(`registrations/${payment.registrationId}`)
-          .set(
-            {state: 'IN_PROGRESS', paymentId: payment.id},
-            {merge: true}
-          ).then(() => {
-            console.info(`Registration ${payment.registrationId} updated successfully ...`);
-          }).catch((error) => {
-            console.error(`An error occured during update of registration ${payment.registrationId}`)
-          }).then(() => {
-            return sendMailAboutPayment(payment);
-          });
-
-      case 'REJECTED':
-        console.info(`Updating registration ${payment.registrationId} to state 'REJECTED' ...`);
-        return admin.firestore()
-          .doc(`registrations/${payment.registrationId}`)
-          .set(
-            {state: 'REJECTED', paymentId: payment.id},
-            {merge: true}
-          ).then(() => {
-            console.info(`Registration ${payment.registrationId} updated successfully ...`);
-          }).catch((error) => {
-            console.error(`An error occured during update of registration ${payment.registrationId}`)
-          }).then(() => {
-            return sendMailAboutPayment(payment);
-          });
-
-      default:
-        console.error('Payment state inconsistent');
-        return Promise.resolve(null);
-    }
+    console.info(`Updating paymentId in registrations/${payment.registrationId}' ...`);
+    return admin.firestore()
+      .doc(`registrations/${payment.registrationId}`)
+      .set(
+        {paymentId: payment.id},
+        {merge: true}
+      ).then(() => {
+        console.info(`Registration ${payment.registrationId} updated successfully ...`);
+      }).catch((error) => {
+        console.error(`An error occured during update of registration ${payment.registrationId}`)
+      }).then(() => {
+        return sendMailAboutPayment(payment);
+      });
   });
 
 export const onUpdateRegistrationState = functions.firestore

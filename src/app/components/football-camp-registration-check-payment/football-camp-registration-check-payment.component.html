@@ -1,43 +1,44 @@
 <div *ngIf="footballCamp$ | async as footballCamp">
   <div *ngIf="session$ | async as session">
     <br>
-    En cliquant sur suivant, votre pré-inscription sera active pour le stage de {{footballCamp.city}}.
+    Allez encore un dernier effort... 😄
     <br>
-    <!-- TODO : Gérer les prix halfBoardRates/fullBoardRates-->
-    Pour confirmer votre inscription, vous devrez verser la somme de <b> {{session.halfBoardRates}} € </b> (ou
-    105 € à partir du deuxième enfant) avant le <b>{{session.endRegistrationDate?.toDate() | date :
-    'longDate'}}.</b><br>
-
-    <mat-list>
-      <mat-list-item>
-        <mat-icon matListIcon>add</mat-icon>
-        <!-- TODO  parametrized -->
-        Par chèque à l'ordre de "AS Coat Méal"
-      </mat-list-item>
-      <mat-list-item>
-        <mat-icon matListIcon>add</mat-icon>
-        <!-- TODO  parametrized -->
-        Par chèques vacances
-      </mat-list-item>
-    </mat-list>
+    En cliquant sur suivant, votre pré-inscription sera active pour <b> le stage de {{footballCamp.city}} </b>.
+    <br>
+    <!-- TODO : Gérer les prix halfBoardRates/fullBoardRates et prix deuxième enfant-->
+    Pour confirmer votre inscription, vous devrez verser la somme de <b> {{session.halfBoardRates}} € </b>
+    avant le <b>{{session.endRegistrationDate.toDate() | date : 'longDate'}}.</b>
     <br>
 
-    <!-- TODO  parametrized -->
-    En le rendant en main propre à <span *ngFor="let organizer of footballCamp.details.organizers"><b>{{organizer.firstname}} {{organizer.lastname}}</b>, </span>
-    ou en l'envoyant l'adresse suivante: <b>Stéphane Le HIR, 11 Kergongar 29860 Bourg-blanc</b><br>
-    Si vous rencontrez un problème, veuillez contacter une des personnes suivantes:
+    <div class="accepted-payment-type-container">
+      Les différents mode de paiement acceptés :
+      <div *ngFor="let paymentType of session.acceptedPaymentTypes">
+        <div *ngIf="paymentType === 'CARD'">
+          <img src='assets/img/card.jpg' class="logo">
+        </div>
+        <div *ngIf="paymentType === 'CHECK'">
+          <img src='assets/img/check.png' class="logo">
+        </div>
+        <div *ngIf="paymentType === 'HOLIDAY_CHECK'">
+          <img src='assets/img/holiday-check.png' class="logo">
+        </div>
+      </div>
+    </div>
+    Pour la paiement du stage, veuillez vous rapprocher de l'une des personnes suivantes:
     <br>
     <mat-list>
       <mat-list-item *ngFor="let organizer of footballCamp.details.organizers">
-        <!-- TODO : CSS -->
-        <img matListAvatar [src]="organizer.pathToPicture" class="contact-avatar"
-             *ngIf="organizer.manageRegistration">
-        <h3 matLine *ngIf="organizer.manageRegistration"> {{organizer.firstname}}
-          {{organizer.lastname}} </h3>
-        <p matLine *ngIf="organizer.manageRegistration">
-          <span> {{organizer.phoneNumber}} </span>
-        </p>
+        <img matListAvatar [src]="organizer.pathToPicture" class="contact-avatar" *ngIf="organizer.manageRegistration">
+        <h3 matLine *ngIf="organizer.manageRegistration"> {{organizer.firstname}} {{organizer.lastname}} </h3>
+        <p matLine *ngIf="organizer.manageRegistration"><span> {{organizer.phoneNumber}} </span></p>
       </mat-list-item>
     </mat-list>
+
+    <div class="next-button">
+      <button mat-stroked-button color="primary" (click)="onPayLater()">
+        Suivant
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
   </div>
 </div>
