@@ -8,17 +8,18 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {switchMap} from 'rxjs/operators';
 import {UserService} from '../../services/user/user.service';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {MatSelect, MatSort, MatTableDataSource} from '@angular/material';
+import {MatButton, MatSelect, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {SessionService} from '../../services/session/session.service';
 import {Session} from '../../models/session';
 import {RegistrationV2} from '../../models/registration-v2.model';
 import {RegistrationService} from '../../services/registration/registration.service';
 import {SelectionModel} from '@angular/cdk/collections';
 import {SelectionChange} from '@angular/cdk/collections/typings/selection';
-import {Registration} from '../../models/registration';
 import {RegistrationState} from '../../models/registration-state.enum';
 import {PaymentService} from '../../services/payment/payment.service';
 import {Payment} from '../../models/payment';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-football-camp-admin-dashboard',
@@ -49,6 +50,7 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
   uiControlRegistration: SelectionModel<RegistrationV2>;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<RegistrationV2>;
+  @ViewChild('exportPdfButton') exportPdfButton: MatButton;
 
   // Payment
   payment: Observable<Payment>;
@@ -60,7 +62,9 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
     private footballCampService: FootballCampService,
     private sessionService: SessionService,
     private registrationService: RegistrationService,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private http: HttpClient,
+    private snackBar: MatSnackBar
   ) {
     this.selectedFootballCamp = new BehaviorSubject<FootballCamp>(null);
     this.uiControlFootballCampInitialized = false;
@@ -158,7 +162,7 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
     this.selectedRegistration
       .subscribe((registration: RegistrationV2) => {
         if (registration) {
-         this.payment = this.paymentService.getPayment(registration.paymentId)
+          this.payment = this.paymentService.getPayment(registration.paymentId)
         }
       });
   }
@@ -213,5 +217,59 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
     this.registrationService
       .update(registration, {state: RegistrationState.REJECTED})
       .then(() => console.log('Registration updated with success'));
+  }
+
+  print(): void {
+    const url = environment.urlGeneratePdf;
+
+    const body = {
+      registrationId: this.selectedRegistration.value.id
+    }
+
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+
+    const options = {
+      headers: headers,
+      observe: 'response' as 'body', // hack for TS
+      responseType: 'blob' as 'json', // hack for TS
+    };
+
+    this.exportPdfButton.disabled = true;
+    this.http
+      .post(url, body, options)
+      .subscribe((response: HttpResponse<Blob>) => {
+          // Stop loading
+          // this.isLoadingResults = false;
+          this.exportPdfButton.disabled = false;
+          const firstname = this.selectedRegistration.value.trainee.firstname;
+          const lastname = this.selectedRegistration.value.trainee.lastname;
+          const filename = `fiche_${firstname}_${lastname}.pdf`;
+
+          // Create an anchor element, to be able to rename and download file.
+          const element: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
+          element.href = URL.createObjectURL(response.body);
+          element.download = filename;
+          document.body.appendChild(element);
+          element.click();
+          document.body.removeChild(element);
+
+          // Says to user that's everything is fine
+          this.snackBar.open(
+            'Export réussi',
+            'Fermer',
+            {duration: 5000});
+        }, (error) => {
+          // Stop loading
+          // this.isLoadingResults = false;
+          this.exportPdfButton.disabled = false;
+
+          // Says to user that's an error occured
+          this.snackBar.open(
+            'Echec lors de l\'export',
+            'Fermer',
+            {duration: 5000})
+        }
+      );
   }
 }

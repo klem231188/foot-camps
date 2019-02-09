@@ -23,5 +23,6 @@ export const environment = {
     publicKey: 'pk_test_BvSQqrD7gILIfBpT2i2x4505'
   },
 
-  urlMakePaymentByCard: 'https://us-central1-footcamps-development.cloudfunctions.net/makePaymentByCard'
+  urlMakePaymentByCard: 'https://us-central1-footcamps-development.cloudfunctions.net/makePaymentByCard',
+  urlGeneratePdf: 'https://us-central1-footcamps-development.cloudfunctions.net/generatePdf'
 };

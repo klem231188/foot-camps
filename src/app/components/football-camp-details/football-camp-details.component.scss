@@ -94,6 +94,14 @@
         mat-card {
           mat-card-content {
             font-size: 15px !important;
+            .description-container {
+              ul {
+                list-style: inside;
+              }
+              p {
+                margin-bottom: 10px;
+              }
+            }
             .program-container {
               display: flex;
               flex-direction: row;

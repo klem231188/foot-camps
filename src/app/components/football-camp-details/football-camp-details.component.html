@@ -36,7 +36,7 @@
       </mat-toolbar>
       <mat-card>
         <mat-card-content>
-          <p [innerHTML]="footballCamp.details.description | safeHtml"></p>
+          <div class="description-container" [innerHTML]="footballCamp.details.description | safeHtml"></div>
           <div class="program-container">
             <b>Programme:</b> &nbsp;
             <a href="{{footballCamp.details.pathToSchedule}}" download mat-stroked-button color="primary">Télécharger le

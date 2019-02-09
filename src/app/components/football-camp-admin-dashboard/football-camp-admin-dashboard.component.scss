@@ -71,8 +71,7 @@
       }
 
       .registration-detail-container {
-        width: 450px;
-        //margin-bottom: 10px;
+        width: 600px;
 
         @include small-screen {
           width: 100%;
@@ -93,6 +92,9 @@
 
             .photo {
               height: 100px;
+              @include small-screen {
+                height: 70px;
+              }
             }
 
             .name-age-container {
@@ -104,6 +106,14 @@
               .name {
                 font-weight: bold;
                 font-size: 20px;
+              }
+            }
+
+            .print-button-container {
+              position: absolute;
+              right: 10px;
+              @include small-screen {
+                display: none;
               }
             }
           }

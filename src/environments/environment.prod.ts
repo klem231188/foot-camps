@@ -18,5 +18,6 @@ export const environment = {
     publicKey: 'pk_live_SeIBaotean3l4AaSasWlmMxG'
   },
 
-  urlMakePaymentByCard: 'https://us-central1-footcamps-production.cloudfunctions.net/makePaymentByCard'
+  urlMakePaymentByCard: 'https://us-central1-footcamps-production.cloudfunctions.net/makePaymentByCard',
+  urlGeneratePdf: 'https://us-central1-footcamps-production.cloudfunctions.net/generatePdf'
 };

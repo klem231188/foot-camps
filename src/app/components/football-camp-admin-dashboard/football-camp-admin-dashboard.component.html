@@ -80,17 +80,22 @@
   <div class="registration-spacer"></div>
 
   <div *ngIf="(selectedRegistration | async) as registration" class="registration-detail-container mat-elevation-z5">
+
     <mat-card>
       <mat-card-header>
         <div class="header-container">
+          <div class="print-button-container">
+            <button mat-stroked-button color="primary" (click)="print()" #exportPdfButton>
+              <mat-icon>print</mat-icon>
+              Export PDF
+            </button>
+          </div>
           <img class="photo" [src]="registration.documents[3].url">
           <div class="name-age-container">
             <span class="name">{{registration.trainee.firstname}} {{registration.trainee.lastname}}</span>
             <div class="age">{{registration.trainee.birthdate.toDate() | age}} ans</div>
           </div>
         </div>
-        <!--<mat-card-title>{{registration.trainee.firstname}} {{registration.trainee.lastname}}</mat-card-title>-->
-        <!--<mat-card-subtitle>{{registration.trainee.birthdate.toDate() | age}} ans</mat-card-subtitle>-->
       </mat-card-header>
 
       <mat-divider></mat-divider>
