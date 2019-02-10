@@ -27,6 +27,7 @@ export class FootballCampRegistrationCheckPaymentComponent implements OnInit, On
 
   footballCamp$: Observable<FootballCamp>;
   session$: Observable<Session>;
+  isButtonDisabled: boolean;
 
   constructor(
     private footballCampService: FootballCampService,
@@ -39,6 +40,7 @@ export class FootballCampRegistrationCheckPaymentComponent implements OnInit, On
   ngOnInit(): void {
     console.log('FootballCampRegistrationCheckPaymentComponent.ngOnInit()');
     this.isValid = new BehaviorSubject<boolean>(false);
+    this.isButtonDisabled = false;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -61,6 +63,8 @@ export class FootballCampRegistrationCheckPaymentComponent implements OnInit, On
   onPayLater(): void {
     console.log('FootballCampRegistrationCheckPaymentComponent.onPayLater()');
 
+    this.isButtonDisabled = true;
+
     const payment: Payment = {
       registrationId: this.registration.id,
       state: PaymentState.IN_PROGRESS,
@@ -77,9 +81,11 @@ export class FootballCampRegistrationCheckPaymentComponent implements OnInit, On
       .then(() => {
         console.log('Registration updated in firestore');
         this.isValid.next(true);
+        this.isButtonDisabled = false;
       })
       .catch((error) => {
         console.log('An error occured', error);
+        this.isButtonDisabled = false;
       })
   }
 }

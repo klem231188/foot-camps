@@ -17,7 +17,7 @@ export class FootballCampRegistrationDocumentsComponent implements OnInit, After
 
   @ViewChild('ficheSanitaire') ficheSanitaire: FootballCampFileUploadComponent;
   @ViewChild('certificatMedical') certificatMedical: FootballCampFileUploadComponent;
-  @ViewChild('assuranceScolaire') assuranceScolaire: FootballCampFileUploadComponent;
+  //@ViewChild('assuranceScolaire') assuranceScolaire: FootballCampFileUploadComponent;
   @ViewChild('photoIdentite') photoIdentite: FootballCampFileUploadComponent;
 
   constructor() {
@@ -34,7 +34,7 @@ export class FootballCampRegistrationDocumentsComponent implements OnInit, After
       .combineLatest(
         this.ficheSanitaire.uploaded,
         this.certificatMedical.uploaded,
-        this.assuranceScolaire.uploaded,
+        //this.assuranceScolaire.uploaded,
         this.photoIdentite.uploaded
       )
       .subscribe((uploadStatuses) => {
@@ -49,7 +49,7 @@ export class FootballCampRegistrationDocumentsComponent implements OnInit, After
       .combineLatest(
         this.ficheSanitaire.document,
         this.certificatMedical.document,
-        this.assuranceScolaire.document,
+        //this.assuranceScolaire.document,
         this.photoIdentite.document
       )
       .subscribe((documents) => {

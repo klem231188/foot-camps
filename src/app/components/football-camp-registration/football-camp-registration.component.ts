@@ -35,7 +35,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   @ViewChild(FootballCampRegistrationSessionsComponent) sessionComponent: FootballCampRegistrationSessionsComponent;
   @ViewChild(FootballCampRegistrationTraineeFormComponent) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
   @ViewChild(FootballCampRegistrationDocumentsComponent) documentsComponent: FootballCampRegistrationDocumentsComponent;
-  @ViewChild(FootballCampRegistrationPaymentComponent) cardPaymentComponent: FootballCampRegistrationPaymentComponent;
+  //@ViewChild(FootballCampRegistrationPaymentComponent) cardPaymentComponent: FootballCampRegistrationPaymentComponent;
   @ViewChild(FootballCampRegistrationCheckPaymentComponent) checkPaymentComponent: FootballCampRegistrationCheckPaymentComponent;
   @ViewChild('stepper') stepper: MatVerticalStepper;
 
@@ -111,17 +111,17 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
   ngAfterViewChecked(): void {
     console.log('FootballCampRegistrationComponent.ngAfterViewChecked()');
-    if (this.cardPaymentComponent !== undefined && this.cardPaymentSub === null) {
-      this.cardPaymentSub = this.cardPaymentComponent.isValid
-        .subscribe((valid) => {
-          if (valid) {
-            this.stepper.selected.completed = true;
-            this.stepper.next();
-          }
-        });
-
-      this._subscriptions.push(this.cardPaymentSub);
-    }
+    // if (this.cardPaymentComponent !== undefined && this.cardPaymentSub === null) {
+    //   this.cardPaymentSub = this.cardPaymentComponent.isValid
+    //     .subscribe((valid) => {
+    //       if (valid) {
+    //         this.stepper.selected.completed = true;
+    //         this.stepper.next();
+    //       }
+    //     });
+    //
+    //   this._subscriptions.push(this.cardPaymentSub);
+    // }
 
     if (this.checkPaymentComponent !== undefined && this.checkPaymentSub === null) {
       this.checkPaymentSub = this.checkPaymentComponent.isValid

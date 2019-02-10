@@ -56,26 +56,33 @@
       <!--Step 4 : Payment -->
       <mat-step>
         <ng-template matStepLabel>Paiement</ng-template>
-        <mat-tab-group>
-          <mat-tab label="Carte bancaire">
-            <!-- TODO: handle fullBoardRates-->
-            <app-football-camp-registration-payment
-              #cardPaymentComponent
-              [amount]="(sessionComponent.selectedSession | async)?.halfBoardRates"
-              [registration]="registration"
-            >
-            </app-football-camp-registration-payment>
-          </mat-tab>
-          <mat-tab label="Autre moyen de paiement">
-            <app-football-camp-registration-check-payment
-              #checkPaymentComponent
-              [campId]="footballCamp.id"
-              [sessionId]="(sessionComponent.selectedSession | async)?.id"
-              [registration]="registration"
-            >
-            </app-football-camp-registration-check-payment>
-          </mat-tab>
-        </mat-tab-group>
+        <app-football-camp-registration-check-payment
+          #checkPaymentComponent
+          [campId]="footballCamp.id"
+          [sessionId]="(sessionComponent.selectedSession | async)?.id"
+          [registration]="registration"
+        >
+        </app-football-camp-registration-check-payment>
+        <!--<mat-tab-group>-->
+          <!--<mat-tab label="Carte bancaire">-->
+            <!--&lt;!&ndash; TODO: handle fullBoardRates&ndash;&gt;-->
+            <!--<app-football-camp-registration-payment-->
+              <!--#cardPaymentComponent-->
+              <!--[amount]="(sessionComponent.selectedSession | async)?.halfBoardRates"-->
+              <!--[registration]="registration"-->
+            <!--&gt;-->
+            <!--</app-football-camp-registration-payment>-->
+          <!--</mat-tab>-->
+          <!--<mat-tab label="Autre moyen de paiement">-->
+            <!--<app-football-camp-registration-check-payment-->
+              <!--#checkPaymentComponent-->
+              <!--[campId]="footballCamp.id"-->
+              <!--[sessionId]="(sessionComponent.selectedSession | async)?.id"-->
+              <!--[registration]="registration"-->
+            <!--&gt;-->
+            <!--</app-football-camp-registration-check-payment>-->
+          <!--</mat-tab>-->
+        <!--</mat-tab-group>-->
       </mat-step>
 
       <!-- Step 5 : Summary -->

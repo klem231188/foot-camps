@@ -282,6 +282,7 @@ function sendMailAboutRegistration(registration: RegistrationV2): Promise<any> {
   // Building Email message.
   if (registration.state === 'IN_PROGRESS') {
     // TODO RegistrationState.IN_PROGRESS
+    // TODO Make a mail parametrized with camp name +
     mailOptions.subject = 'Inscription à AbersFoot prise en compte';
     mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Votre inscription au stage de football AbersFoot a bien été prise en compte.<br> Elle sera validée prochainement.`;
   } else if (registration.state === 'ACCEPTED') {

@@ -90,7 +90,7 @@
               Export PDF
             </button>
           </div>
-          <img class="photo" [src]="registration.documents[3].url">
+          <img class="photo" [src]="getPhotoUrl(registration)">
           <div class="name-age-container">
             <span class="name">{{registration.trainee.firstname}} {{registration.trainee.lastname}}</span>
             <div class="age">{{registration.trainee.birthdate.toDate() | age}} ans</div>

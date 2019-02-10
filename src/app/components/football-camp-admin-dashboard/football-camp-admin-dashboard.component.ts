@@ -20,6 +20,7 @@ import {PaymentService} from '../../services/payment/payment.service';
 import {Payment} from '../../models/payment';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {DocumentType} from '../../models/document-type.enum';
 
 @Component({
   selector: 'app-football-camp-admin-dashboard',
@@ -271,5 +272,9 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
             {duration: 5000})
         }
       );
+  }
+
+  getPhotoUrl(registration: RegistrationV2): string {
+    return registration.documents.find((doc) => doc.type === DocumentType.PHOTO_IDENTITE).url;
   }
 }

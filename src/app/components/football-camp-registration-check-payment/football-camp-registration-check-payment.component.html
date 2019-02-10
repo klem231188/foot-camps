@@ -34,7 +34,7 @@
       </mat-list-item>
     </mat-list>
     <div class="next-button">
-      <button mat-stroked-button color="primary" (click)="onPayLater()">
+      <button mat-stroked-button color="primary" (click)="onPayLater()" [disabled]="isButtonDisabled">
         Suivant
         <mat-icon>chevron_right</mat-icon>
       </button>
