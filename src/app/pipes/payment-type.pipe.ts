@@ -13,6 +13,10 @@ export class PaymentTypePipe implements PipeTransform {
       switch (value) {
         case PaymentType.CARD:
           return 'Carte';
+        case PaymentType.CHECK:
+          return 'Chèque';
+        case PaymentType.HOLIDAY_CHECK:
+          return 'Chèque vacance';
         case PaymentType.OTHER:
           return 'Autre';
         default:

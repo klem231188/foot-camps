@@ -1,0 +1,19 @@
+[
+  {
+    "acceptedPaymentTypes": [
+      "CHECK",
+      "HOLIDAY_CHECK"
+    ],
+    "campId": "",
+    "numberOfRegistrationsAccepted": 0,
+    "numberOfRegistrationsInProgress": 0,
+    "numberOfRegistrationsRejected": 0,
+    "enable": true,
+    "end": "2019-07-12T12:00:00+01:00",
+    "endRegistrationDate": "2019-07-01T00:00:00+01:00",
+    "fullBoardRates": null,
+    "halfBoardRates": 130,
+    "maximumNumberOfRegistrations": 40,
+    "start": "2019-07-08T08:30:00+01:00"
+  }
+]

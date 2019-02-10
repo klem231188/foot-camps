@@ -37,8 +37,15 @@
       <mat-card>
         <mat-card-content>
           <div class="description-container" [innerHTML]="footballCamp.details.description | safeHtml"></div>
+          <div class="condition-container">
+            <b>Droit à l'image</b>: {{footballCamp.city}} peut être amené à prendre des photographies ou des vidéos de
+            vos enfants pendant les activités sportives et à les utiliser sur tous supports de communication sans limite
+            de temps ou de lieu. Si vous ne souhaitez pas que votre enfant soit pris en photographie ou en vidéo au
+            cours de ses activités, nous vous remercions de remettre une lettre indiquant votre refus le premier jour de
+            l’activité.
+          </div>
           <div class="program-container">
-            <b>Programme:</b> &nbsp;
+            <b>Programme complet:</b> &nbsp;
             <a href="{{footballCamp.details.pathToSchedule}}" download mat-stroked-button color="primary">Télécharger le
               programme</a>
           </div>
@@ -136,7 +143,7 @@
               <td data-label="Sessions">Session n°{{i}}</td>
               <td data-label="Dates">A partir du {{session.start.toDate() | date : 'longDate'}} jusqu'au
                 {{session.end.toDate() | date :
-                'longDate'}}
+                  'longDate'}}
               </td>
               <td data-label="Tarifs en Pension complète" *ngIf="hasFullBoardRatesSessions()">
                 {{session.fullBoardRates}}
@@ -174,8 +181,6 @@
           </div>
 
           <ng-template #redirectToRegistrationPage>
-            Les inscriptions se font sur FootCamps !
-            <br>
             <br>
             <div fxLayout="column" fxLayoutAlign="none center">
               <a [routerLink]="[ '/registration/', footballCamp.id ]" mat-stroked-button color="primary"

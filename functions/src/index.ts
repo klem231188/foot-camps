@@ -8,6 +8,7 @@ import {createTransport, SendMailOptions, Transporter} from 'nodemailer';
 import {RegistrationV2} from '../../src/app/models/registration-v2.model';
 import * as fetch from 'node-fetch';
 import {DocumentType} from '../../src/app/models/document-type.enum';
+import {addCampAberFoot} from './functions/add-camps.functions';
 // CORS Express middleware to enable CORS Requests.
 const cors = require('cors')({
   origin: true,
@@ -15,127 +16,10 @@ const cors = require('cors')({
 
 admin.initializeApp();
 
-// export const addAberCamp = functions.https.onRequest((request, response) => {
-//   const organizer1: Organizer = {
-//     firstname: 'Stéphane',
-//     lastname: 'LE HIR',
-//     manageRegistration: true,
-//     pathToPicture: './assets/img/aber/organizers/avatar/Stephane-LE-HIR.jpg',
-//     phoneNumber: '0675839337',
-//     quote: 'Je suis très heureux de participer à cette 4<sup>ème</sup> édition.<br>Cette année on va redoubler d\'activités pour le bonheur du plus grand nombre d\'enfants'
-//   };
-//
-//   const organizer2: Organizer = {
-//     firstname: 'Olivier',
-//     lastname: 'SENELLE',
-//     manageRegistration: true,
-//     pathToPicture: './assets/img/aber/organizers/avatar/Olivier-SENELLE.jpg',
-//     phoneNumber: '0660891235',
-//     quote: 'N/A'
-//   };
-//
-//   const organizer3: Organizer = {
-//     firstname: 'Ronan',
-//     lastname: 'ACH',
-//     manageRegistration: true,
-//     pathToPicture: './assets/img/aber/organizers/avatar/Ronan-ACH.jpg',
-//     phoneNumber: '0662995150',
-//     quote: 'N/A'
-//   };
-//
-//   const camp: FootballCamp = {
-//     city: 'Abers Foot',
-//     latitude: 48.514941,
-//     longitude: -4.546849,
-//     details: {
-//       address: 'Stade AS Coat Méal',
-//       description: '<div>\n' +
-//       '            <p>\n' +
-//       '              <b>Le football :</b>\n' +
-//       '              Des séances de football seront programmées chaque jour pour les stagiaires. <br>\n' +
-//       '              Les équipes alterneront entre séances techniques, des tests, des oppositions. <br>\n' +
-//       '              Les structures de football varieront: terrain en herbe , futsal … pour le plus grand plaisir des\n' +
-//       '              enfants.\n' +
-//       '            </p>\n' +
-//       '\n' +
-//       '            <div>\n' +
-//       '              <b>Les animations :</b>\n' +
-//       '              En dehors du football, le projet met l’accent sur des animations:\n' +
-//       '              <ul>\n' +
-//       '                <li>Sortie au parc des 3 curés</li>\n' +
-//       '                <li>Sortie plage</li>\n' +
-//       '                <li>Une nuit en tente</li>\n' +
-//       '                <li>Chambara</li>\n' +
-//       '                <li>...</li>\n' +
-//       '              </ul>\n' +
-//       '              Ces animations permettront à chacun de s’exprimer en dehors du football, de prendre place dans un groupe\n' +
-//       '              et d’être soudé dans un esprit d’équipe.\n' +
-//       '            </div>\n' +
-//       '\n' +
-//       '            <p>\n' +
-//       '              <b>Les infrastructures :</b>\n' +
-//       '              Les repas du midi seront pris en majeure partie au Club-House de AS Coat-méal.\n' +
-//       '              L’accueil des enfants, le matin, se déroulera au complexe sportif également de\n' +
-//       '              AS Coat-méal ainsi que l’accueil des parents à partir de 16h30 .\n' +
-//       '            </p>\n' +
-//       '            <p>\n' +
-//       '              <b>Le coût du stage et prestations :</b>\n' +
-//       '              Une participation financière de 130 €<sup><b>(1)(2)</b></sup> est demandée à chaque stagiaire afin de\n' +
-//       '              couvrir les frais que ce soit des repas, les sorties, les frais d’encadrement des\n' +
-//       '              éducateurs, les équipements.\n' +
-//       '              <br>\n' +
-//       '              <sup><b>(1)</b></sup> Les chèques vacances et coupons sport sont acceptés\n' +
-//       '              <br>\n' +
-//       '              <sup><b>(2)</b></sup> Prix dégressifs si plusieurs frères et sœurs (105 €) à partir du 2<sup>ème</sup> enfant\n' +
-//       '            </p>\n' +
-//       '          </div>',
-//       gmapsUrl: 'https://goo.gl/maps/uBizS8vZwH32',
-//       location: 'Situé à l\'extrémité de la Bretagne, le stage se déroule à Coat-Méal dans le Finistère (29)',
-//       organizerDescription: 'Les stages sont encadrés par une une équipe technique de <b>qualité</b>, <b>expérimentée</b> et <b>motivée</b>',
-//       organizers: [organizer1, organizer2, organizer3],
-//       pathToGallery: './assets/img/aber/gallery/data.json',
-//       pathToLogo: './assets/img/aber/logo.png',
-//       pathToSchedule: './assets/img/aber/programme.jpg',
-//       useOnlineRegistration: true,
-//       registrationUrl: null,
-//     },
-//     overview: {
-//       content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-//       pathToImage: './assets/img/aber/overview.jpg',
-//       title: 'Bienvenue au Foot Camps de ABERS FOOT'
-//     }
-//   };
-//
-//   const session: Session = {
-//     campId: '',
-//     numberOfRegistrationsAccepted: 0,
-//     numberOfRegistrationsInProgress: 0,
-//     numberOfRegistrationsRejected: 0,
-//     enable: true,
-//     end: firebase.firestore.Timestamp.fromDate(new Date('2018-07-13T12:00:00')),
-//     endRegistrationDate: firebase.firestore.Timestamp.fromDate(new Date('2018-06-09T00:00:00')),
-//     fullBoardRates: null,
-//     halfBoardRates: 130,
-//     maximumNumberOfRegistrations: 40,
-//     start: firebase.firestore.Timestamp.fromDate(new Date('2018-07-09T08:30:00'))
-//   };
-//
-//   // const session2: Session = {
-//   //   campId: '',
-//   //   numberOfRegistrationsAccepted: 0,
-//   //   numberOfRegistrationsInProgress: 0,
-//   //   numberOfRegistrationsRejected: 0,
-//   //   enable: true,
-//   //   end: new Date('2018-07-24T12:00:00'),
-//   //   endRegistrationDate: new Date('2018-06-09T00:00:00'),
-//   //   fullBoardRates: null,
-//   //   halfBoardRates: 130,
-//   //   maximumNumberOfRegistrations: 30,
-//   //   start: new Date('2018-07-20T08:30:00')
-//   // };
-//
-//   addCamp(request, response, camp, [session]);
-// });
+export const httpAddCampAberFoot = functions.https.onRequest((request, response) => {
+  return addCampAberFoot(request, response);
+});
+
 //
 // export const addPlabennecCamp = functions.https.onRequest((request, response) => {
 //   const organizer1: Organizer = {
@@ -503,11 +387,11 @@ export const makePaymentByCard = functions.https.onRequest((request: functions.R
           currency: 'EUR',
           source: payment.stripeTokenId,
           description: description,
-        }
+        };
 
         const option = {
           idempotency_key: idempotencyKey
-        }
+        };
 
         console.info(`Doing payment ${JSON.stringify(data)} ...`);
         return stripe.charges.create(data, option);
@@ -632,7 +516,7 @@ export const onUpdateRegistrationState = functions.firestore
           ).then(() => {
             console.info(`Session ${registration.sessionId} updated successfully ...`);
           }).catch((error) => {
-            console.error(`An error occured during update of session ${registration.sessionId}`)
+            console.error(`An error occured during update of session ${registration.sessionId}`);
           });
       })
       .then(() => {
@@ -664,12 +548,13 @@ export const generatePdf = functions.https
       const registration: RegistrationV2 = await admin.firestore().doc(`registrations/${registrationId}`).get().then((snap) => {
         return snap.data() as RegistrationV2;
       });
+      console.log('Registration : ', registration);
 
       console.log('Getting image from storage');
       const url = registration.documents.find(doc => doc.type === DocumentType.PHOTO_IDENTITE).url;
-      let split = url.split('?')[0].split('.');
+      const split = url.split('?')[0].split('.');
       const type = split[split.length - 1];
-      let profileDataURL = await fetch(url).then(r => r.buffer()).then(buf => `data:image/${type};base64,` + buf.toString('base64'));
+      const profileDataURL = await fetch(url).then(r => r.buffer()).then(buf => `data:image/${type};base64,` + buf.toString('base64'));
 
       console.log('Defining pdf content');
       const docDefinition = {
@@ -678,8 +563,8 @@ export const generatePdf = functions.https
           `Nom: ${registration.trainee.lastname}`,
           `Sexe: ${registration.trainee.gender}`,
           `Email: ${registration.trainee.email}`,
-          `Date de naissance: ${registration.trainee.birthdate.toDate().toLocaleDateString('fr-FR')}`,
-          `Age: ${_calculateAge(registration.trainee.birthdate.toDate())} ans`,
+          // `Date de naissance: ${registration.trainee.birthdate.toDate().toLocaleDateString('fr-FR')}`,
+          // `Age: ${_calculateAge(registration.trainee.birthdate.toDate())} ans`,
           `Club: ${registration.trainee.club}`,
           `Poste: ${registration.trainee.fieldPosition}`,
           `Pied: ${registration.trainee.feet}`,
@@ -693,7 +578,7 @@ export const generatePdf = functions.https
       });
       pdfDoc.on('end', () => {
         console.log('Sending pdf in HTTP response');
-        var result = Buffer.concat(chunks);
+        const result = Buffer.concat(chunks);
         response.setHeader('Content-Type', 'application/pdf');
         response.setHeader('Content-disposition', 'attachment; filename=report.pdf');
         response.send(result);
@@ -707,7 +592,7 @@ export const generatePdf = functions.https
   });
 
 function _calculateAge(birthday: Date): number {
-  let ageDifMs = Date.now() - birthday.getTime();
-  let ageDate = new Date(ageDifMs);
+  const ageDifMs = Date.now() - birthday.getTime();
+  const ageDate = new Date(ageDifMs);
   return Math.abs(ageDate.getUTCFullYear() - 1970);
 }

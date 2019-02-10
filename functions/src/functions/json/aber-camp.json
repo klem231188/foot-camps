@@ -1,0 +1,48 @@
+{
+  "city": "Abers Foot",
+  "latitude": 48.492087,
+  "longitude": -4.5085864,
+  "details": {
+    "address": "Complexe de Touroussel 29860 Bourg-blanc",
+    "description": "<div>   <div class=\"description-block\"><b>Les organisateurs :</b> Abers foot est un groupement de trois clubs: AS Coat-Méal,     SC Lannilis et GSY Bourg-Blanc.<br>     Tout les ans, à tour de rôle, un des trois club organise le stage dans son complexe sportif.   </div>   <div class=\"description-block\"><b>Le football :</b> Des séances de football seront programmées chaque jour pour les     stagiaires. <br> Les équipes alterneront entre séances techniques, des tests, des oppositions. <br> Les structures     de football varieront: terrain en herbe , futsal … pour le plus grand plaisir des enfants.   </div>   <div class=\"description-block\"><b>Les animations :</b> En dehors du football, le projet met l’accent sur des     animations:     <ul>       <li>Sortie au foot-golf à Lanrivoaré</li>       <li>Laser-Tag</li>       <li>Une nuit en tente</li>       <li>Chambara</li>       <li>...</li>     </ul>     Ces animations permettront à chacun de s’exprimer en dehors du football, de prendre place dans un groupe et d’être     soudé dans un esprit d’équipe.   </div>   <div class=\"description-block\"><b>Les infrastructures :</b> Les repas du midi seront pris en majeure partie au     Club-House des GSY Bourg-Blanc. <br> L’accueil des enfants, se déroulera le matin au complexe sportif de Bourg-Blanc     ainsi que l’accueil des parents à partir de 16h30.   </div>   <div class=\"description-block\"><b>Le coût du stage et prestations :</b> Une participation financière de 130 €<sup><b>(1)(2)</b></sup>     est demandée à chaque stagiaire afin de couvrir les frais, que ce soit les repas, les sorties, les frais     d’encadrement des éducateurs, les équipements.<br> <sup><b>(1)</b></sup> Les chèques vacances et coupons sport sont     acceptés.<br> <sup><b>(2)</b></sup> Prix dégressifs si plusieurs frères et sœurs: 105 € à partir du 2<sup>ème</sup>     enfant.   </div> </div>",
+    "gmapsUrl": "https://goo.gl/maps/ofJJaLe8Tw92",
+    "location": "Situé à l'extrémité Ouest de la Bretagne, le stage se déroule à Bourg-blanc dans le Finistère (29)",
+    "organizerDescription": "Les stages sont encadrés par une une équipe technique de <b>qualité</b>, <b>expérimentée</b> et <b>motivée</b>",
+    "organizers": [
+      {
+        "firstname": "Stéphane",
+        "lastname": "LE HIR",
+        "manageRegistration": true,
+        "pathToPicture": "./assets/img/aber/organizers/avatar/Stephane-LE-HIR.jpg",
+        "phoneNumber": "N/A",
+        "quote": "Pour cette <b>édition 2019</b>, nous avons modifié quelques activités en apportant des nouveautés qui, j'en suis sur, plairont beaucoup aux enfants !"
+      },
+      {
+        "firstname": "Olivier",
+        "lastname": "SENELLE",
+        "manageRegistration": true,
+        "pathToPicture": "./assets/img/aber/organizers/avatar/Olivier-SENELLE.jpg",
+        "phoneNumber": "N/A",
+        "quote": "N/A"
+      },
+      {
+        "firstname": "Ronan",
+        "lastname": "ACH",
+        "manageRegistration": true,
+        "pathToPicture": "./assets/img/aber/organizers/avatar/Ronan-ACH.jpg",
+        "phoneNumber": "N/A",
+        "quote": "N/A"
+      }
+    ],
+    "pathToGallery": "./assets/img/aber/gallery/data.json",
+    "pathToLogo": "./assets/img/aber/logo.png",
+    "pathToSchedule": "./assets/img/aber/programme.jpg",
+    "useOnlineRegistration": true,
+    "registrationUrl": null
+  },
+  "overview": {
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "pathToImage": "./assets/img/aber/overview.jpg",
+    "title": "Bienvenue au Foot Camps de Abers Foot"
+  }
+}

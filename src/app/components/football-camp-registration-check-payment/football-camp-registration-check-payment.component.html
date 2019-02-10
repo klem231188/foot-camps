@@ -1,7 +1,7 @@
 <div *ngIf="footballCamp$ | async as footballCamp">
   <div *ngIf="session$ | async as session">
     <br>
-    Allez encore un dernier effort... 😄
+    Allez encore un dernier effort!
     <br>
     En cliquant sur suivant, votre pré-inscription sera active pour <b> le stage de {{footballCamp.city}} </b>.
     <br>
@@ -33,7 +33,6 @@
         <p matLine *ngIf="organizer.manageRegistration"><span> {{organizer.phoneNumber}} </span></p>
       </mat-list-item>
     </mat-list>
-
     <div class="next-button">
       <button mat-stroked-button color="primary" (click)="onPayLater()">
         Suivant

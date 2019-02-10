@@ -1,7 +1,6 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
 import {RegistrationService} from '../../services/registration/registration.service';
 import {BehaviorSubject} from 'rxjs';
-import {Registration} from '../../models/registration';
 import {RegistrationV2} from '../../models/registration-v2.model';
 
 @Component({

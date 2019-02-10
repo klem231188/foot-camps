@@ -95,12 +95,18 @@
           mat-card-content {
             font-size: 15px !important;
             .description-container {
-              ul {
-                list-style: inside;
-              }
-              p {
+              .description-block {
                 margin-bottom: 10px;
+                ul {
+                  list-style: inside;
+                  li {
+                    margin-left: 20px;
+                  }
+                }
               }
+            }
+            .condition-container {
+              margin-bottom: 10px;
             }
             .program-container {
               display: flex;
