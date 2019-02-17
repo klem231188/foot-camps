@@ -9,6 +9,7 @@ import {RegistrationV2} from '../../src/app/models/registration-v2.model';
 import * as fetch from 'node-fetch';
 import {DocumentType} from '../../src/app/models/document-type.enum';
 import {addCampAberFoot} from './functions/add-camps.functions';
+import {generatePdf2} from './functions/generate-pdf.functions';
 // CORS Express middleware to enable CORS Requests.
 const cors = require('cors')({
   origin: true,
@@ -18,6 +19,22 @@ admin.initializeApp();
 
 export const httpAddCampAberFoot = functions.https.onRequest((request, response) => {
   return addCampAberFoot(request, response);
+});
+
+export const httpGeneratePdf = functions.https.onRequest((request, response) => {
+  return cors(request, response, async () => {
+    try {
+      const registrationId: string = request.body.registrationId;
+      const pdfContent: Buffer = await generatePdf2(registrationId);
+      console.log('Success while generating pdf');
+      response.setHeader('Content-Type', 'application/pdf');
+      response.setHeader('Content-disposition', 'attachment; filename=export.pdf');
+      response.send(pdfContent);
+    } catch (error) {
+      console.log('Error while generating pdf');
+      response.status(500).send(error);
+    }
+  });
 });
 
 //

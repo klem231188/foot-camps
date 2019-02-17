@@ -40,3 +40,35 @@ node /home/Clement.Treguer/.nvm/versions/node/v7.5.0/lib/node_modules/angular2-i
 cd ~/workspace-github/foot-camps/src/app/components
 ng g component football-camp-subscribe --module app
 ```
+
+
+## Set CORS for storage
+#### Development  
+```
+[
+  {
+    "origin": ["http://localhost", "https://footcamps-development.firebaseapp.com"],
+    "method": ["GET"],
+    "maxAgeSeconds": 3600
+  }
+]
+```
+
+```
+gsutil cors set cors.json gs://footcamps-development.appspot.com
+```
+
+#### Production  
+```
+[
+  {
+    "origin": ["https://www.footcamps.fr"],
+    "method": ["GET"],
+    "maxAgeSeconds": 3600
+  }
+]
+```
+
+```
+gsutil cors set cors.json gs://footcamps-production.appspot.com
+```

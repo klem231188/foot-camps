@@ -8,7 +8,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {switchMap} from 'rxjs/operators';
 import {UserService} from '../../services/user/user.service';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {MatButton, MatSelect, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
+import {MatButton, MatDialog, MatSelect, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {SessionService} from '../../services/session/session.service';
 import {Session} from '../../models/session';
 import {RegistrationV2} from '../../models/registration-v2.model';
@@ -18,9 +18,9 @@ import {SelectionChange} from '@angular/cdk/collections/typings/selection';
 import {RegistrationState} from '../../models/registration-state.enum';
 import {PaymentService} from '../../services/payment/payment.service';
 import {Payment} from '../../models/payment';
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import {HttpClient} from '@angular/common/http';
 import {DocumentType} from '../../models/document-type.enum';
+import {FootballCampRegistrationExportComponent} from '../football-camp-registration-export/football-camp-registration-export.component';
 
 @Component({
   selector: 'app-football-camp-admin-dashboard',
@@ -65,7 +65,8 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
     private registrationService: RegistrationService,
     private paymentService: PaymentService,
     private http: HttpClient,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
     this.selectedFootballCamp = new BehaviorSubject<FootballCamp>(null);
     this.uiControlFootballCampInitialized = false;
@@ -221,57 +222,80 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
   }
 
   print(): void {
-    const url = environment.urlGeneratePdf;
+    const dialogRef = this.dialog.open(FootballCampRegistrationExportComponent, {
+      disableClose: false,
+      width: '1240px',
+      data: {
+        registration: this.selectedRegistration.value,
+        session: this.selectedSession.value,
+        camp: this.selectedFootballCamp.value
+      }
+    });
 
-    const body = {
-      registrationId: this.selectedRegistration.value.id
-    }
-
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json');
-
-    const options = {
-      headers: headers,
-      observe: 'response' as 'body', // hack for TS
-      responseType: 'blob' as 'json', // hack for TS
-    };
-
-    this.exportPdfButton.disabled = true;
-    this.http
-      .post(url, body, options)
-      .subscribe((response: HttpResponse<Blob>) => {
-          // Stop loading
-          // this.isLoadingResults = false;
-          this.exportPdfButton.disabled = false;
-          const firstname = this.selectedRegistration.value.trainee.firstname;
-          const lastname = this.selectedRegistration.value.trainee.lastname;
-          const filename = `fiche_${firstname}_${lastname}.pdf`;
-
-          // Create an anchor element, to be able to rename and download file.
-          const element: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
-          element.href = URL.createObjectURL(response.body);
-          element.download = filename;
-          document.body.appendChild(element);
-          element.click();
-          document.body.removeChild(element);
-
-          // Says to user that's everything is fine
-          this.snackBar.open(
-            'Export réussi',
-            'Fermer',
-            {duration: 5000});
-        }, (error) => {
-          // Stop loading
-          // this.isLoadingResults = false;
-          this.exportPdfButton.disabled = false;
-
-          // Says to user that's an error occured
-          this.snackBar.open(
-            'Echec lors de l\'export',
-            'Fermer',
-            {duration: 5000})
-        }
-      );
+    // const node = document.getElementById('print');
+    // console.log(node);
+    // htmlToImage.toPng(node)
+    //   .then(function (dataUrl) {
+    //     const link = document.createElement('a');
+    //     link.download = 'my-image-name.png';
+    //     link.href = dataUrl;
+    //     link.click();
+    //     console.log('clicked');
+    //   })
+    //   .catch(function (error) {
+    //     console.error('oops, something went wrong!', error);
+    //   });
+    // const url = environment.urlGeneratePdf;
+    //
+    // const body = {
+    //   registrationId: this.selectedRegistration.value.id
+    // }
+    //
+    // const headers = new HttpHeaders()
+    //   .set('Content-Type', 'application/json');
+    //
+    // const options = {
+    //   headers: headers,
+    //   observe: 'response' as 'body', // hack for TS
+    //   responseType: 'blob' as 'json', // hack for TS
+    // };
+    //
+    // this.exportPdfButton.disabled = true;
+    // this.http
+    //   .post(url, body, options)
+    //   .subscribe((response: HttpResponse<Blob>) => {
+    //       // Stop loading
+    //       // this.isLoadingResults = false;
+    //       this.exportPdfButton.disabled = false;
+    //       const firstname = this.selectedRegistration.value.trainee.firstname;
+    //       const lastname = this.selectedRegistration.value.trainee.lastname;
+    //       const filename = `fiche_${firstname}_${lastname}.pdf`;
+    //
+    //       // Create an anchor element, to be able to rename and download file.
+    //       const element: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
+    //       element.href = URL.createObjectURL(response.body);
+    //       element.download = filename;
+    //       document.body.appendChild(element);
+    //       element.click();
+    //       document.body.removeChild(element);
+    //
+    //       // Says to user that's everything is fine
+    //       this.snackBar.open(
+    //         'Export réussi',
+    //         'Fermer',
+    //         {duration: 5000});
+    //     }, (error) => {
+    //       // Stop loading
+    //       // this.isLoadingResults = false;
+    //       this.exportPdfButton.disabled = false;
+    //
+    //       // Says to user that's an error occured
+    //       this.snackBar.open(
+    //         'Echec lors de l\'export',
+    //         'Fermer',
+    //         {duration: 5000})
+    //     }
+    //   );
   }
 
   getPhotoUrl(registration: RegistrationV2): string {

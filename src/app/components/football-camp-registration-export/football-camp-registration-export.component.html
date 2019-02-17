@@ -1,0 +1,18 @@
+<div class="main-container" id="print">
+  <mat-toolbar color="primary">
+      <span class="brand">F
+    <img src='assets/img/ball-white.png' class="logo" (load)="ball1Loaded.next(true)">
+    <img src='assets/img/ball-white.png' class="logo" (load)="ball2Loaded.next(true)">
+    tcamps
+  </span>
+
+    <div *ngIf="camp" class="selected-football-camp brand">
+      <img class="selected-football-camp-logo" [src]="camp.details.pathToLogo" (load)="logoLoaded.next(true)">
+      <span fxFlex=5px></span>
+      <span class="selected-football-camp-name">{{camp.city}}</span>
+    </div>
+  </mat-toolbar>
+  <!---->
+  <!--Fiche d'inscription à {{camp.city}}-->
+  <!--<img [src]="camp.details.pathToLogo" (load)="logoLoaded.next(true)">-->
+</div>

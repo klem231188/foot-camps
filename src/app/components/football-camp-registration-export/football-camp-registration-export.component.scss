@@ -1,0 +1,38 @@
+@mixin app-football-camp-registration-export-theme($theme) {
+
+
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-football-camp-registration-export {
+
+    .main-container {
+      display: flex;
+      width: 1240px;
+      height: 1754px;
+      //background: red;
+
+      .logo {
+        height: 15px;
+        margin-right: 1px;
+      }
+
+      .brand {
+        font-family: 'Milkshake', serif;
+        font-size: 30px;
+      }
+
+      .selected-football-camp {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .selected-football-camp-logo {
+          height: 50px;
+        }
+      }
+    }
+  }
+}
