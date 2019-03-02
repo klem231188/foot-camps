@@ -19,6 +19,7 @@ import {RegistrationState} from '../../models/registration-state.enum';
 import {PaymentService} from '../../services/payment/payment.service';
 import {Payment} from '../../models/payment';
 import {HttpClient} from '@angular/common/http';
+import {Document} from '../../models/document.model';
 import {DocumentType} from '../../models/document-type.enum';
 import {FootballCampRegistrationExportComponent} from '../football-camp-registration-export/football-camp-registration-export.component';
 
@@ -300,5 +301,27 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
 
   getPhotoUrl(registration: RegistrationV2): string {
     return registration.documents.find((doc) => doc.type === DocumentType.PHOTO_IDENTITE).url;
+  }
+
+  updateDocument(docUpdated: Document) {
+    if (docUpdated !== null) {
+      const docStored: Document = this.selectedRegistration.value.documents.find((aDoc) => aDoc.type === docUpdated.type);
+      if (docStored.url !== docUpdated.url) {
+        console.log(`Update ${JSON.stringify(docUpdated)} to firestore`);
+
+        // Create document array
+        const updatedDocs: Document[] = this.selectedRegistration.value.documents.filter((aDoc) => aDoc.type !== docUpdated.type);
+        updatedDocs.push(docUpdated);
+
+        // Sort document array per type
+        const documentTypeOrder = Object.keys(DocumentType).map(key => DocumentType[key]);
+        const updatedDocsSorted = updatedDocs.sort((a, b) => documentTypeOrder.indexOf(a.type) - documentTypeOrder.indexOf(b.type));
+
+        // Update document array in firestore
+        this.registrationService.update(this.selectedRegistration.value, {documents: updatedDocsSorted});
+      } else {
+        console.log(`${docStored.url} === ${docUpdated.url}`);
+      }
+    }
   }
 }

@@ -29,16 +29,14 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
   // Constructor
   // ----------------------------
   constructor(private storage: AngularFireStorage) {
+    this.uploaded = new BehaviorSubject(false);
+    this.document = new BehaviorSubject(null);
   }
 
   // ----------------------------
   // Lifecycle hooks
   // ----------------------------
   ngOnInit(): void {
-    this.uploaded = new BehaviorSubject(false);
-    this.document = new BehaviorSubject(null);
-
-
     if (this.inputDocument) {
       this.document.next(this.inputDocument);
       this.type = this.document.value.type;
@@ -113,8 +111,8 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
 
               this.downloadURL = downloadURL;
               this.document.next({
-                  url: this.downloadURL,
-                  type: this.type
+                  type: this.type,
+                  url: this.downloadURL
                 }
               );
             });
