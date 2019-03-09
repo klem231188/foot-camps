@@ -1,0 +1,80 @@
+@mixin app-football-camp-print-registration-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  app-football-camp-print-registration {
+    display: flex;
+    flex-direction: column;
+
+    .print-container {
+      display: flex;
+      flex-direction: column;
+      width: 600px;
+      min-height: 850px;
+      background-color: white;
+
+      .title-container {
+        font-family: 'Milkshake', serif;
+        font-size: 30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .content-container {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        margin: 5px;
+
+        .image-container {
+          display: flex;
+          flex-direction: column;
+          margin-right: 10px;
+          img {
+            width: 150px;
+          }
+        }
+
+        .text-container {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          padding-left: 10px;
+          border-left-color: #00796b;
+          border-left-style: solid;
+          border-left-width: 3px;
+
+          h3 {
+            font-family: 'Milkshake', serif;
+            font-size: 25px;
+            color: mat-color($primary);
+          }
+
+          .row-camp {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .logo {
+              height: 100px;
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+
+      .bottom-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-right: 5px;
+
+        font-family: 'Milkshake', serif;
+        font-size: 20px;
+        color: mat-color($primary);
+      }
+    }
+  }
+}

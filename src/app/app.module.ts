@@ -50,6 +50,7 @@ import {FootballCampAdminDashboardComponent} from './components/football-camp-ad
 import {FootballCampSessionOverviewComponent} from './components/football-camp-admin-dashboard/football-camp-session-overview/football-camp-session-overview.component';
 import {PaymentTypePipe} from './pipes/payment-type.pipe';
 import { FootballCampRegistrationExportComponent } from './components/football-camp-registration-export/football-camp-registration-export.component';
+import { FootballCampPrintRegistrationComponent } from './components/football-camp-print-registration/football-camp-print-registration.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -112,7 +113,8 @@ registerLocaleData(localeFr, 'fr');
     FootballCampRegistrationsOverviewComponent,
     FootballCampAdminDashboardComponent,
     FootballCampSessionOverviewComponent,
-    FootballCampRegistrationExportComponent
+    FootballCampRegistrationExportComponent,
+    FootballCampPrintRegistrationComponent
   ],
   entryComponents: [
     FootballCampLoginComponent,

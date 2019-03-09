@@ -8,7 +8,7 @@ import {RegistrationV2} from '../../models/registration-v2.model';
 export class RegistrationService {
 
   constructor(private angularFirestore: AngularFirestore) {
-    angularFirestore.firestore.settings({ timestampsInSnapshots: true });
+    angularFirestore.firestore.settings({timestampsInSnapshots: true});
   }
 
   save2(registration: RegistrationV2): Promise<any> {
@@ -43,5 +43,11 @@ export class RegistrationService {
         publishReplay(1), // Latest event is buffered and will be emit to new subscriber
         refCount() // Transform ConnectableObservable to Observable and handle multiple subscription / unsubscription
       )
+  }
+
+  getRegistration(registrationId: string): Observable<RegistrationV2> {
+    return this.angularFirestore
+      .doc<RegistrationV2>(`registrations/${registrationId}`)
+      .valueChanges();
   }
 }

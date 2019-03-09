@@ -1,14 +1,13 @@
-import {filter, switchMap, throttleTime} from 'rxjs/operators';
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {switchMap} from 'rxjs/operators';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
-import {ActivatedRoute, NavigationEnd, Params, Router, Scroll} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import * as _ from 'lodash';
 import {FootballCamp} from '../../models/football-camp';
 import {Session} from '../../models/session';
 import {SessionService} from '../../services/session/session.service';
 import {Meta, Title} from '@angular/platform-browser';
 import {ViewportScroller} from '@angular/common';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'football-camp-details',

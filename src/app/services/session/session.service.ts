@@ -10,7 +10,7 @@ export class SessionService {
   private sessions$: Observable<Session[]> = null;
 
   constructor(private angularFirestore: AngularFirestore) {
-    angularFirestore.firestore.settings({ timestampsInSnapshots: true });
+    angularFirestore.firestore.settings({timestampsInSnapshots: true});
   }
 
   update(session: Session, data: Partial<Session>): Promise<any> {
@@ -38,6 +38,12 @@ export class SessionService {
     }
 
     return this.sessions$;
+  }
+
+  getSession(sessionId: string): Observable<Session> {
+    return this.angularFirestore
+      .doc<Session>(`sessions/${sessionId}`)
+      .valueChanges();
   }
 
   getSessionsFromCampId(campId: string): Observable<Session[]> {

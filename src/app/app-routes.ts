@@ -5,6 +5,7 @@ import {FootballCampRegistrationComponent} from 'app/components/football-camp-re
 import {FootballCampLoginComponent} from './components/football-camp-login/football-camp-login.component';
 import {PlaygroundComponent} from './components/playground/playground.component';
 import {FootballCampAdminDashboardComponent} from './components/football-camp-admin-dashboard/football-camp-admin-dashboard.component';
+import {FootballCampPrintRegistrationComponent} from './components/football-camp-print-registration/football-camp-print-registration.component';
 
 export const AppRoutes: Routes = [
   {path: '', redirectTo: '/locate', pathMatch: 'full'},
@@ -15,5 +16,6 @@ export const AppRoutes: Routes = [
   {path: 'registration/:id', component: FootballCampRegistrationComponent},
   {path: 'login', component: FootballCampLoginComponent},
   {path: 'admin-dashboard', component: FootballCampAdminDashboardComponent},
+  {path: 'print-registration', component: FootballCampPrintRegistrationComponent},
   {path: 'playground', component: PlaygroundComponent},
 ];

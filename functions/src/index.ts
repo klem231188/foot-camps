@@ -6,10 +6,8 @@ import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
 import {Payment} from '../../src/app/models/payment';
 import {createTransport, SendMailOptions, Transporter} from 'nodemailer';
 import {RegistrationV2} from '../../src/app/models/registration-v2.model';
-import * as fetch from 'node-fetch';
-import {DocumentType} from '../../src/app/models/document-type.enum';
 import {addCampAberFoot} from './functions/add-camps.functions';
-import {generatePdf2} from './functions/generate-pdf.functions';
+import {printRegistration} from './functions/print-registration.functions';
 // CORS Express middleware to enable CORS Requests.
 const cors = require('cors')({
   origin: true,
@@ -21,23 +19,25 @@ export const httpAddCampAberFoot = functions.https.onRequest((request, response)
   return addCampAberFoot(request, response);
 });
 
-export const httpGeneratePdf = functions.https.onRequest((request, response) => {
+export const httpPrintRegistration = functions.https.onRequest((request, response) => {
   return cors(request, response, async () => {
     try {
+      const campId: string = request.body.campId;
+      const sessionId: string = request.body.sessionId;
       const registrationId: string = request.body.registrationId;
-      const pdfContent: Buffer = await generatePdf2(registrationId);
-      console.log('Success while generating pdf');
-      response.setHeader('Content-Type', 'application/pdf');
-      response.setHeader('Content-disposition', 'attachment; filename=export.pdf');
-      response.send(pdfContent);
+      const url =  functions.config().url.printregistration + `?campId=${campId}&sessionId=${sessionId}&registrationId=${registrationId}`;
+      const screenshot: Buffer = await printRegistration(url);
+      console.log('Success while rendering registration');
+      response.setHeader('Content-Type', 'image/png');
+      response.setHeader('Content-disposition', `attachment; filename=${registrationId}.png`);
+      response.send(screenshot);
     } catch (error) {
-      console.log('Error while generating pdf');
+      console.log('Error while rendering registration');
       response.status(500).send(error);
     }
   });
 });
 
-//
 // export const addPlabennecCamp = functions.https.onRequest((request, response) => {
 //   const organizer1: Organizer = {
 //     firstname: 'Steven',
@@ -541,76 +541,3 @@ export const onUpdateRegistrationState = functions.firestore
         return sendMailAboutRegistration(registration);
       })
   });
-
-
-const Printer = require('pdfmake');
-const fonts = require('pdfmake/build/vfs_fonts.js');
-
-const fontDescriptors = {
-  Roboto: {
-    normal: new Buffer(fonts.pdfMake.vfs['Roboto-Regular.ttf'], 'base64'),
-    bold: new Buffer(fonts.pdfMake.vfs['Roboto-Medium.ttf'], 'base64'),
-    italics: new Buffer(fonts.pdfMake.vfs['Roboto-Italic.ttf'], 'base64'),
-    bolditalics: new Buffer(fonts.pdfMake.vfs['Roboto-Italic.ttf'], 'base64'),
-  }
-};
-
-export const generatePdf = functions.https
-  .onRequest(async (request, response) => {
-    return cors(request, response, async () => {
-      const printer = new Printer(fontDescriptors);
-      const chunks = [];
-
-      console.log('Getting registration from firestore');
-      const registrationId: string = request.body.registrationId;
-      const registration: RegistrationV2 = await admin.firestore().doc(`registrations/${registrationId}`).get().then((snap) => {
-        return snap.data() as RegistrationV2;
-      });
-      console.log('Registration : ', registration);
-
-      console.log('Getting image from storage');
-      const url = registration.documents.find(doc => doc.type === DocumentType.PHOTO_IDENTITE).url;
-      const split = url.split('?')[0].split('.');
-      const type = split[split.length - 1];
-      const profileDataURL = await fetch(url).then(r => r.buffer()).then(buf => `data:image/${type};base64,` + buf.toString('base64'));
-
-      console.log('Defining pdf content');
-      const docDefinition = {
-        content: [
-          `Prénom: ${registration.trainee.firstname}`,
-          `Nom: ${registration.trainee.lastname}`,
-          `Sexe: ${registration.trainee.gender}`,
-          `Email: ${registration.trainee.email}`,
-          // `Date de naissance: ${registration.trainee.birthdate.toDate().toLocaleDateString('fr-FR')}`,
-          // `Age: ${_calculateAge(registration.trainee.birthdate.toDate())} ans`,
-          `Club: ${registration.trainee.club}`,
-          `Poste: ${registration.trainee.fieldPosition}`,
-          `Pied: ${registration.trainee.feet}`,
-        ]
-      };
-
-      const pdfDoc = printer.createPdfKitDocument(docDefinition);
-
-      pdfDoc.on('data', (chunk) => {
-        chunks.push(chunk);
-      });
-      pdfDoc.on('end', () => {
-        console.log('Sending pdf in HTTP response');
-        const result = Buffer.concat(chunks);
-        response.setHeader('Content-Type', 'application/pdf');
-        response.setHeader('Content-disposition', 'attachment; filename=report.pdf');
-        response.send(result);
-      });
-      pdfDoc.on('error', (err) => {
-        console.log('An error occured while creating pdf. Returning HTTP 500');
-        response.status(500).send(err);
-      });
-      pdfDoc.end();
-    })
-  });
-
-function _calculateAge(birthday: Date): number {
-  const ageDifMs = Date.now() - birthday.getTime();
-  const ageDate = new Date(ageDifMs);
-  return Math.abs(ageDate.getUTCFullYear() - 1970);
-}

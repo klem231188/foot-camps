@@ -1,12 +1,14 @@
 {
   "name": "functions",
   "dependencies": {
+    "@types/puppeteer": "^1.12.1",
     "cors": "^2.8.5",
     "firebase-admin": "~6.0.0",
     "firebase-functions": "^2.2.0",
     "node-fetch": "^2.3.0",
     "nodemailer": "~4.6.0",
     "pdfmake": "~0.1.50",
+    "puppeteer": "^1.12.2",
     "stripe": "~6.0.0"
   },
   "devDependencies": {
