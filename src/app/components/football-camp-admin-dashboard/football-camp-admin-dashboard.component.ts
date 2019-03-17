@@ -18,10 +18,10 @@ import {SelectionChange} from '@angular/cdk/collections/typings/selection';
 import {RegistrationState} from '../../models/registration-state.enum';
 import {PaymentService} from '../../services/payment/payment.service';
 import {Payment} from '../../models/payment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Document} from '../../models/document.model';
 import {DocumentType} from '../../models/document-type.enum';
-import {FootballCampRegistrationExportComponent} from '../football-camp-registration-export/football-camp-registration-export.component';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-football-camp-admin-dashboard',
@@ -57,6 +57,8 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
   // Payment
   payment: Observable<Payment>;
 
+  disablePrintButton: boolean;
+
   constructor(
     private route: ActivatedRoute,
     private angularFireAuth: AngularFireAuth,
@@ -79,6 +81,8 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
     const initialSelection = [];
     const allowMultiSelect = false;
     this.uiControlRegistration = new SelectionModel<RegistrationV2>(allowMultiSelect, initialSelection);
+
+    this.disablePrintButton = false;
   }
 
   ngOnInit() {
@@ -223,80 +227,50 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
   }
 
   print(): void {
-    const dialogRef = this.dialog.open(FootballCampRegistrationExportComponent, {
-      disableClose: false,
-      width: '1240px',
-      data: {
-        registration: this.selectedRegistration.value,
-        session: this.selectedSession.value,
-        camp: this.selectedFootballCamp.value
-      }
-    });
+    const url: string = environment.urlPrintRegistration;
 
-    // const node = document.getElementById('print');
-    // console.log(node);
-    // htmlToImage.toPng(node)
-    //   .then(function (dataUrl) {
-    //     const link = document.createElement('a');
-    //     link.download = 'my-image-name.png';
-    //     link.href = dataUrl;
-    //     link.click();
-    //     console.log('clicked');
-    //   })
-    //   .catch(function (error) {
-    //     console.error('oops, something went wrong!', error);
-    //   });
-    // const url = environment.urlGeneratePdf;
-    //
-    // const body = {
-    //   registrationId: this.selectedRegistration.value.id
-    // }
-    //
-    // const headers = new HttpHeaders()
-    //   .set('Content-Type', 'application/json');
-    //
-    // const options = {
-    //   headers: headers,
-    //   observe: 'response' as 'body', // hack for TS
-    //   responseType: 'blob' as 'json', // hack for TS
-    // };
-    //
-    // this.exportPdfButton.disabled = true;
-    // this.http
-    //   .post(url, body, options)
-    //   .subscribe((response: HttpResponse<Blob>) => {
-    //       // Stop loading
-    //       // this.isLoadingResults = false;
-    //       this.exportPdfButton.disabled = false;
-    //       const firstname = this.selectedRegistration.value.trainee.firstname;
-    //       const lastname = this.selectedRegistration.value.trainee.lastname;
-    //       const filename = `fiche_${firstname}_${lastname}.pdf`;
-    //
-    //       // Create an anchor element, to be able to rename and download file.
-    //       const element: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
-    //       element.href = URL.createObjectURL(response.body);
-    //       element.download = filename;
-    //       document.body.appendChild(element);
-    //       element.click();
-    //       document.body.removeChild(element);
-    //
-    //       // Says to user that's everything is fine
-    //       this.snackBar.open(
-    //         'Export réussi',
-    //         'Fermer',
-    //         {duration: 5000});
-    //     }, (error) => {
-    //       // Stop loading
-    //       // this.isLoadingResults = false;
-    //       this.exportPdfButton.disabled = false;
-    //
-    //       // Says to user that's an error occured
-    //       this.snackBar.open(
-    //         'Echec lors de l\'export',
-    //         'Fermer',
-    //         {duration: 5000})
-    //     }
-    //   );
+    const body = {
+      campId: this.selectedFootballCamp.value.id,
+      sessionId: this.selectedSession.value.id,
+      registrationId: this.selectedRegistration.value.id
+    };
+
+    const options = {
+      observe: 'response' as 'body', // hack for TS
+      responseType: 'blob' as 'json', // hack for TS
+    };
+
+    this.disablePrintButton = true;
+    const filename = `Fiche-Inscription-${this.selectedRegistration.value.trainee.lastname}-${this.selectedRegistration.value.trainee.firstname}.png`;
+
+    this.http
+      .post(url, body, options)
+      .subscribe((response: HttpResponse<Blob>) => {
+        this.disablePrintButton = false;
+
+        // Create an anchor element, to be able to rename and download file.
+        const element: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
+        element.href = URL.createObjectURL(response.body);
+        element.download = filename;
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+
+        // Says to user that's everything is fine
+        this.snackBar.open(
+          'Fiche d\'inscription téléchargée',
+          'Fermer',
+          {duration: 5000});
+      }, (error) => {
+        console.log(error);
+        this.disablePrintButton = false;
+
+        // Says to user that an error occured
+        this.snackBar.open(
+          'Une erreur est survenue lors du téléchargement de la fiche d\'inscription',
+          'Fermer',
+          {duration: 5000});
+      })
   }
 
   getPhotoUrl(registration: RegistrationV2): string {

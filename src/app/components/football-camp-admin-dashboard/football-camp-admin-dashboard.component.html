@@ -84,12 +84,13 @@
     <mat-card>
       <mat-card-header>
         <div class="header-container">
-          <!--<div class="print-button-container">-->
-            <!--<button mat-stroked-button color="primary" (click)="print()" #exportPdfButton>-->
-              <!--<mat-icon>print</mat-icon>-->
-              <!--Export-->
-            <!--</button>-->
-          <!--</div>-->
+          <div class="print-button-container">
+            <mat-spinner [diameter]="40" *ngIf="disablePrintButton"></mat-spinner>
+            <button [disabled]="disablePrintButton" mat-stroked-button color="primary" (click)="print()">
+              <mat-icon>print</mat-icon>
+              Fiche d'inscription
+            </button>
+          </div>
           <img class="photo" [src]="getPhotoUrl(registration)">
           <div class="name-age-container">
             <span class="name">{{registration.trainee.firstname}} {{registration.trainee.lastname}}</span>

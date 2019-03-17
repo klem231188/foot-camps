@@ -111,7 +111,16 @@
 
             .print-button-container {
               position: absolute;
+
+              display: flex;
+              flex-direction: row;
+              align-items: center;
               right: 10px;
+
+              mat-spinner {
+                margin-right: 5px;
+              }
+
               @include small-screen {
                 display: none;
               }

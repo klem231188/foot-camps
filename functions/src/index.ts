@@ -19,7 +19,8 @@ export const httpAddCampAberFoot = functions.https.onRequest((request, response)
   return addCampAberFoot(request, response);
 });
 
-export const httpPrintRegistration = functions.https.onRequest((request, response) => {
+const opts = {timeoutSeconds: 60, memory: '2GB' as '128MB' | '256MB' | '512MB' | '1GB' | '2GB'};
+export const httpPrintRegistration = functions.runWith(opts).https.onRequest((request, response) => {
   return cors(request, response, async () => {
     try {
       const campId: string = request.body.campId;
@@ -29,10 +30,10 @@ export const httpPrintRegistration = functions.https.onRequest((request, respons
       const screenshot: Buffer = await printRegistration(url);
       console.log('Success while rendering registration');
       response.setHeader('Content-Type', 'image/png');
-      response.setHeader('Content-disposition', `attachment; filename=${registrationId}.png`);
+      response.setHeader('Content-Disposition', `attachment; filename=${registrationId}.png`);
       response.send(screenshot);
     } catch (error) {
-      console.log('Error while rendering registration');
+      console.log('Error while rendering registration', error);
       response.status(500).send(error);
     }
   });

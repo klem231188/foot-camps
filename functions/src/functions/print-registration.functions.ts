@@ -12,6 +12,7 @@ export async function printRegistration(url: string): Promise<Buffer> {
     //slowMo: 250,
     args: [
       '--disable-infobars',
+      '--no-sandbox',
       `--window-size=${width},${height}`
     ],
   });
