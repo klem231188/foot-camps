@@ -8,7 +8,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {switchMap} from 'rxjs/operators';
 import {UserService} from '../../services/user/user.service';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {MatButton, MatDialog, MatSelect, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
+import {MatButton, MatDialog, MatPaginator, MatSelect, MatSnackBar, MatSort, MatSortable, MatTableDataSource} from '@angular/material';
 import {SessionService} from '../../services/session/session.service';
 import {Session} from '../../models/session';
 import {RegistrationV2} from '../../models/registration-v2.model';
@@ -53,6 +53,7 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<RegistrationV2>;
   @ViewChild('exportPdfButton') exportPdfButton: MatButton;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   // Payment
   payment: Observable<Payment>;
@@ -211,6 +212,10 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
         }
       };
       this.dataSource.sort = this.sort;
+    }
+
+    if (this.paginator && this.dataSource && !this.dataSource.paginator) {
+      this.dataSource.paginator = this.paginator;
     }
   }
 

@@ -1,5 +1,5 @@
 <div class="print-container" *ngIf="camp && session && registration">
-  <mat-toolbar color="primary" class="title-container">{{registration.trainee.firstname}}&nbsp;&nbsp;{{registration.trainee.lastname}}</mat-toolbar>
+  <mat-toolbar color="primary" class="title-container">{{registration.trainee.firstname | titlecase}}&nbsp;&nbsp;{{registration.trainee.lastname | uppercase}}</mat-toolbar>
   <div class="content-container">
     <div class="image-container">
       <img class="photo" [src]="getPhotoUrl(registration)">
@@ -23,8 +23,8 @@
 
       <div>
         <h3>Caractéristiques générales </h3>
-        Prénom : {{registration.trainee.firstname}} <br>
-        Nom : {{registration.trainee.lastname}} <br>
+        Prénom : {{registration.trainee.firstname | titlecase}} <br>
+        Nom : {{registration.trainee.lastname | uppercase}} <br>
         Sexe : {{registration.trainee.gender | gender}} <br>
         Email : {{registration.trainee.email}} <br>
         Date de naissance : {{registration.trainee.birthdate.toDate() | date}}<br>
@@ -33,7 +33,7 @@
 
       <div>
         <h3>Caractéristiques sportives</h3>
-        Club : {{registration.trainee.club}}<br>
+        Club : {{registration.trainee.club | titlecase}}<br>
         Poste : {{registration.trainee.fieldPosition | fieldPosition}}<br>
         Pied : {{registration.trainee.feet | feet}}<br>
       </div>

@@ -40,25 +40,27 @@
 
       .registration-table-container {
         flex: 1;
-        table {
-          th, td {
-            vertical-align: middle;
-          }
-          width: 100%;
-          .mat-column-select {
-            overflow: initial;
-          }
+        div {
+          table {
+            th, td {
+              vertical-align: middle;
+            }
+            width: 100%;
+            .mat-column-select {
+              overflow: initial;
+            }
 
-          .accent {
-            background-color: mat-color($accent);
-          }
+            .accent {
+              background-color: mat-color($accent);
+            }
 
-          .primary {
-            background-color: mat-color($primary);
-          }
+            .primary {
+              background-color: mat-color($primary);
+            }
 
-          .warn {
-            background-color: mat-color($warn);
+            .warn {
+              background-color: mat-color($warn);
+            }
           }
         }
       }
