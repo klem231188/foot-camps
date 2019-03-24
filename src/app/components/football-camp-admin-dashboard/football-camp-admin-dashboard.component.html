@@ -41,7 +41,7 @@
 <div *ngIf="registrations && registrations.length > 0" class="registration-container">
   <div class="registration-table-container">
     <div class="mat-elevation-z5">
-      <table mat-table [dataSource]="dataSource" matSort matSortActive="state" matSortDirection="desc">
+      <table mat-table [dataSource]="dataSource" matSort>
 
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef></th>
