@@ -1,0 +1,139 @@
+@mixin app-football-camp-home-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-football-camp-home {
+    display: flex;
+    flex-direction: column;
+    height: auto !important;
+
+    .main-container {
+      display: flex;
+      flex-direction: column;
+
+      .carousel-container {
+        position: relative;
+
+        .text {
+          position: absolute;
+          z-index: 1;
+          top: 50%;
+          -webkit-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+
+          width: 100%;
+          text-align: center;
+
+          font-family: 'Milkshake';
+          font-size: 100px;
+          @include small-screen {
+            font-size: 80px;
+          }
+          color: mat-color($accent);
+        }
+
+      }
+
+      .content-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        width: 75%;
+        align-self: center;
+        position: relative;
+
+        @include small-screen {
+          width: 95%;
+        }
+
+        .dark-button {
+          height: 50px;
+          padding: 0 35px;
+          border-radius: 50px;
+          line-height: 50px;
+          display: inline-block;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          border: 0;
+          outline: none;
+          cursor: pointer;
+          white-space: nowrap;
+          text-decoration: none;
+          text-transform: uppercase;
+          letter-spacing: .5px;
+          font-family: inherit;
+          font-size: 12px;
+          font-weight: 700;
+          -webkit-transition: background-color .2s;
+          transition: background-color .2s;
+          color: mat-color($accent);
+          background-color: #161616;
+
+          font-family: Roboto;
+          position: absolute;
+          top: -75px;
+          z-index: 30;
+        }
+
+        .dark-button:hover {
+          background-color: mat-color($accent);
+          color: #161616;
+        }
+
+        mat-card {
+          mat-card-content {
+            font-size: 13pt;
+          }
+        }
+      }
+
+      .logo-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 50px;
+        margin-bottom: 10px;
+        width: 75%;
+        align-self: center;
+
+        @include small-screen {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          flex-wrap: wrap;
+          margin-top: 1px;
+          width: 100%;
+        }
+
+        .inner-logo-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          span {
+            font-size: 15pt;
+
+            @include small-screen {
+              font-size: 9pt;
+            }
+          }
+
+          mat-icon {
+            height: 50px;
+            width: 50px;
+            font-size: 50px;
+          }
+        }
+
+        //.inner-logo-container:hover {
+        //  opacity: 0.75;
+        //}
+      }
+    }
+  }
+}

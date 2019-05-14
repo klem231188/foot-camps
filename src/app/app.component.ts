@@ -56,4 +56,9 @@ export class AppComponent {
     this.sidenav.toggle();
     this.router.navigate(['/admin-dashboard']);
   }
+
+  onHomeClicked() {
+    this.sidenav.toggle();
+    this.router.navigate(['/home']);
+  }
 }

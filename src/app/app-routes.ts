@@ -6,9 +6,11 @@ import {FootballCampLoginComponent} from './components/football-camp-login/footb
 import {PlaygroundComponent} from './components/playground/playground.component';
 import {FootballCampAdminDashboardComponent} from './components/football-camp-admin-dashboard/football-camp-admin-dashboard.component';
 import {FootballCampPrintRegistrationComponent} from './components/football-camp-print-registration/football-camp-print-registration.component';
+import {FootballCampHomeComponent} from './components/football-camp-home/football-camp-home.component';
 
 export const AppRoutes: Routes = [
-  {path: '', redirectTo: '/locate', pathMatch: 'full'},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'home', component: FootballCampHomeComponent},
   {path: 'locate/:id/details', component: FootballCampDetailsComponent},
   {path: 'locate/:id', component: FootballCampLocatorComponent},
   {path: 'locate', component: FootballCampLocatorComponent},

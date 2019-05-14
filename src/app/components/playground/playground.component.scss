@@ -16,5 +16,12 @@
   $foreground: map-get($theme, foreground);
 
   app-playground {
+    height: auto !important;
+    football-camp-overview {
+      width: 610px;
+      @include small-screen {
+        width: 100%;
+      }
+    }
   }
 }

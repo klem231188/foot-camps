@@ -22,6 +22,7 @@
 @import 'app/components/football-camp-registration-export/football-camp-registration-export.component.scss';
 @import 'app/components/football-camp-admin-dashboard/football-camp-admin-dashboard.component.scss';
 @import 'app/components/football-camp-admin-dashboard/football-camp-session-overview/football-camp-session-overview.component.scss';
+@import 'app/components/football-camp-home/football-camp-home.component.scss';
 @import url('https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css');
 
@@ -52,6 +53,7 @@ $football-camp-theme: mat-light-theme($primary, $accent, $warn);
   @include app-football-camp-session-overview-theme($theme);
   @include app-football-camp-registration-export-theme($theme);
   @include app-football-camp-print-registration-theme($theme);
+  @include app-football-camp-home-theme($theme);
 }
 
 @include angular-material-theme($football-camp-theme);
