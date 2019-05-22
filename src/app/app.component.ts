@@ -13,12 +13,22 @@ import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
 import {UploadService} from './services/upload/upload.service';
 import * as firebase from 'firebase';
 import {PaymentService} from './services/payment/payment.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['app.component.scss'],
-  providers: [FootballCampService, PaymentService, RegistrationService, UploadService, SessionService, UserService, AngularFireAuth, FirebaseAuthUiService],
+  providers: [
+    FootballCampService,
+    PaymentService,
+    RegistrationService,
+    UploadService,
+    SessionService,
+    UserService,
+    AngularFireAuth,
+    FirebaseAuthUiService
+  ],
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
@@ -33,7 +43,7 @@ export class AppComponent {
               private userService: UserService) {
 
     this.angularFireAuth.authState.pipe(
-      switchMap<firebase.User, User>((firebaseUser) => {
+      switchMap<firebase.User, Observable<User>>((firebaseUser) => {
         if (firebaseUser) {
           return userService.getUser(firebaseUser.uid);
         } else {
@@ -52,13 +62,13 @@ export class AppComponent {
     this.router.navigate(['/locate']);
   }
 
-  onViewRegistrationsClicked(): void {
-    this.sidenav.toggle();
-    this.router.navigate(['/admin-dashboard']);
-  }
-
   onHomeClicked() {
     this.sidenav.toggle();
     this.router.navigate(['/home']);
+  }
+
+  onViewRegistrationsClicked(): void {
+    this.sidenav.toggle();
+    this.router.navigate(['/admin-dashboard']);
   }
 }

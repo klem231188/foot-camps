@@ -9,7 +9,6 @@ import * as firebase from 'firebase';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {FootballCamp} from '../../models/football-camp';
-import {Event} from '@angular/router/src/events';
 
 @Component({
   selector: 'football-camp-header',
@@ -75,7 +74,7 @@ export class FootballCampHeaderComponent implements OnInit, OnDestroy {
     const subToSelectedFootballCamp = this.router.events
       .pipe(
         filter(event => event instanceof RoutesRecognized),
-        switchMap<RoutesRecognized, FootballCamp>((event) => {
+        switchMap<RoutesRecognized, Observable<FootballCamp>>((event) => {
             if (event.state.root.firstChild.params.hasOwnProperty('id')) {
               const campId: string = event.state.root.firstChild.params.id;
               return this.footballCampService.getFootballCamp(campId);

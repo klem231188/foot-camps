@@ -1,13 +1,8 @@
-
-import {switchMap, map} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
-
-
-
-
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {FootballCamp} from '../../models/football-camp';
 import {Meta, Title} from '@angular/platform-browser';
@@ -46,10 +41,10 @@ export class FootballCampLocatorComponent implements OnInit, OnDestroy, AfterVie
     );
 
     this.filteredFootballCamps$ = this.searchInput.valueChanges.pipe(
-      switchMap<any, FootballCamp[]>(value => {
+      switchMap<any, Observable<FootballCamp[]>>(value => {
         return this.footballCamps$.pipe(
           map<FootballCamp[], FootballCamp[]>(footballCamps => {
-            let city: string = '';
+            let city = '';
             if (!value) {
               city = '';
             } else if (value.city) {
@@ -64,7 +59,7 @@ export class FootballCampLocatorComponent implements OnInit, OnDestroy, AfterVie
       }));
 
     this.footballCamp$ = this.route.params.pipe(
-      switchMap<Params, FootballCamp>((params: Params) => {
+      switchMap<Params, Observable<FootballCamp>>((params: Params) => {
         return this.footballCampService.getFootballCamp(params['id']);
       }));
   }

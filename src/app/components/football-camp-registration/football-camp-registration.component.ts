@@ -6,7 +6,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {MatDialog, MatVerticalStepper} from '@angular/material';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {FootballCampShouldConnectDialogComponent} from '../football-camp-should-connect-dialog/football-camp-should-connect-dialog.component';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {FootballCamp} from '../../models/football-camp';
 import {RegistrationService} from '../../services/registration/registration.service';
 import {RegistrationState} from '../../models/registration-state.enum';
@@ -15,7 +15,6 @@ import {Meta, Title} from '@angular/platform-browser';
 import {FootballCampRegistrationSessionsComponent} from '../football-camp-registration-sessions/football-camp-registration-sessions.component';
 import {FootballCampRegistrationTraineeFormComponent} from '../football-camp-registration-trainee-form/football-camp-registration-trainee-form.component';
 import {FootballCampRegistrationDocumentsComponent} from '../football-camp-registration-documents/football-camp-registration-documents.component';
-import {FootballCampRegistrationPaymentComponent} from '../football-camp-registration-payment/football-camp-registration-payment.component';
 import {RegistrationV2} from '../../models/registration-v2.model';
 import * as firebase from 'firebase';
 import {FootballCampRegistrationCheckPaymentComponent} from '../football-camp-registration-check-payment/football-camp-registration-check-payment.component';
@@ -79,7 +78,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
     // Listening to events
     const footballCampSub = this.route
       .params.pipe(
-        switchMap<Params, FootballCamp>((params) => {
+        switchMap<Params, Observable<FootballCamp>>((params) => {
           const id: string = params['id'];
           return this.footballCampService.getFootballCamp(id);
         }))
