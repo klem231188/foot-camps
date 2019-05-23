@@ -23,8 +23,6 @@
 @import 'app/components/football-camp-admin-dashboard/football-camp-admin-dashboard.component.scss';
 @import 'app/components/football-camp-admin-dashboard/football-camp-session-overview/football-camp-session-overview.component.scss';
 @import 'app/components/football-camp-home/football-camp-home.component.scss';
-@import url('https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css');
 
 @include mat-core();
 $primary: mat-palette($mat-teal);
