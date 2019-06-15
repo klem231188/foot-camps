@@ -36,18 +36,22 @@
       </mat-toolbar>
       <mat-card>
         <mat-card-content>
-          <div class="description-container" [innerHTML]="footballCamp.details.description | safeHtml"></div>
+          <div class="description-container" [innerHTML]="footballCamp.details.description"></div>
+
           <div class="condition-container">
             <b>Droit à l'image</b>: {{footballCamp.city}} peut être amené à prendre des photographies ou des vidéos de
-            vos enfants pendant les activités sportives et à les utiliser sur tous supports de communication sans limite
+            vos enfants pendant les activités sportives et à les utiliser sur tous supports de communication sans
+            limite
             de temps ou de lieu. Si vous ne souhaitez pas que votre enfant soit pris en photographie ou en vidéo au
-            cours de ses activités, nous vous remercions de remettre une lettre indiquant votre refus le premier jour de
+            cours de ses activités, nous vous remercions de remettre une lettre indiquant votre refus le premier jour
+            de
             l’activité.
           </div>
           <div class="program-container">
             <b>Programme complet:</b> &nbsp;
-            <a href="{{footballCamp.details.pathToSchedule}}" download mat-stroked-button color="primary">Télécharger le
-              programme</a>
+            <a href="{{footballCamp.details.pathToSchedule}}" download class="download-button mat-stroked-button">
+              <i class="material-icons mat-18">file_download</i>
+              Télécharger</a>
           </div>
         </mat-card-content>
       </mat-card>
@@ -66,9 +70,10 @@
         <mat-card-content>
           <p [innerHTML]="footballCamp.details.location | safeHtml"></p>
           <div class="address-container">
-            <b>Adresse:</b> &nbsp;{{footballCamp.details.address}}
+            <b>Adresse : </b>&nbsp;<a [href]="footballCamp.details.gmapsUrl" target="_blank" mat-stroked-button
+                                      color="primary">
+            <mat-icon>location_on</mat-icon>&nbsp;{{footballCamp.details.address}}</a>
           </div>
-          <!--<a [href]="footballCamp.details.gmapsUrl" mat-stroked-button color="primary">Lien vers Maps</a>-->
         </mat-card-content>
       </mat-card>
     </div>

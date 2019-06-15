@@ -30,7 +30,7 @@ npm install -g mkdirp
 
 # Launch the command to create a gallery
 cd ~/workspace/foot-camps/
-node /home/Clement.Treguer/.nvm/versions/node/v7.5.0/lib/node_modules/angular2-image-gallery/convert.js src/assets/img/**club**/gallery --outputDir=src/assets/img/**club**/gallery --remoteBaseUrl=assets/img/**club**/gallery
+node node_modules/angular2-image-gallery/convert.js src/assets/img/plouguerneau/gallery --outputDir=src/assets/img/plouguerneau/gallery --remoteBaseUrl=assets/img/plouguerneau/gallery
 
 # Example: node node_modules/angular2-image-gallery/convert.js src/assets/img/lorient/gallery --outputDir=src/assets/img/lorient/gallery --remoteBaseUrl=assets/img/lorient/gallery
 ```

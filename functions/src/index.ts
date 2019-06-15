@@ -6,8 +6,10 @@ import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
 import {Payment} from '../../src/app/models/payment';
 import {createTransport, SendMailOptions, Transporter} from 'nodemailer';
 import {RegistrationV2} from '../../src/app/models/registration-v2.model';
-import {addCampAberFoot} from './functions/add-camps.functions';
+import {addCampAberFoot, addCampPlouguerneau} from './functions/add-camps.functions';
 import {printRegistration} from './functions/print-registration.functions';
+import {anonymize} from './functions/anonymize.functions';
+
 // CORS Express middleware to enable CORS Requests.
 const cors = require('cors')({
   origin: true,
@@ -15,8 +17,17 @@ const cors = require('cors')({
 
 admin.initializeApp();
 
+export const httpAnonymize = functions.https.onRequest(async (request, response) => {
+  await anonymize(request, response);
+  response.send('anonymize successful');
+});
+
 export const httpAddCampAberFoot = functions.https.onRequest((request, response) => {
   return addCampAberFoot(request, response);
+});
+
+export const httpAddCampPlouguerneau = functions.https.onRequest((request, response) => {
+  return addCampPlouguerneau(request, response);
 });
 
 const opts = {timeoutSeconds: 60, memory: '2GB' as '128MB' | '256MB' | '512MB' | '1GB' | '2GB'};
@@ -38,244 +49,6 @@ export const httpPrintRegistration = functions.runWith(opts).https.onRequest((re
     }
   });
 });
-
-// export const addPlabennecCamp = functions.https.onRequest((request, response) => {
-//   const organizer1: Organizer = {
-//     firstname: 'Steven',
-//     lastname: 'COAT',
-//     manageRegistration: true,
-//     pathToPicture: './assets/img/plabennec/organizers/avatar/Steven-COAT.jpg',
-//     phoneNumber: '0625253636',
-//     quote: 'Je suis très heureux de participer à cette 2<sup>ème</sup> édition.<br>Cette année on va redoubler d\'activités pour le bonheur du plus grand nombre d\'enfants'
-//   };
-//
-//   const organizer2: Organizer = {
-//     firstname: 'Florian',
-//     lastname: 'GUILLOU',
-//     manageRegistration: true,
-//     pathToPicture: './assets/img/plabennec/organizers/avatar/Florian-GUILLOU.jpg',
-//     phoneNumber: '0625253637',
-//     quote: 'N/A'
-//   };
-//
-//   const organizer3: Organizer = {
-//     firstname: 'Matthieu',
-//     lastname: 'TANGUY',
-//     manageRegistration: true,
-//     pathToPicture: './assets/img/plabennec/organizers/avatar/Matthieu-TANGUY.jpg',
-//     phoneNumber: '0625253638',
-//     quote: 'N/A'
-//   };
-//
-//   const camp: FootballCamp = {
-//     city: 'Plabennec Stage d\'été',
-//     latitude: 48.4999551,
-//     longitude: -4.4484149,
-//     details: {
-//       address: 'Stade Plabennecois Football, Complexe de Kerveguen, 29860 Plabennec',
-//       description: '<p>\n' +
-//       '      Ce stage s\'adresse à la fois à ceux voulant s\'initier au football, ainsi qu\'à ceux voulant se perfectionner.\n' +
-//       '      <ul>\n' +
-//       '       <li>Des <b>ateliers découvertes</b> sont proposés pour les plus jeunes et les non pratiquants souhaitant s\'initier</li>\n' +
-//       '       <li>Des <b>ateliers techniques</b> pour les plus expérimenté(e)s</li>\n' +
-//       '       <li>Des <b>ateliers spécifiques gardiens de but</b></li>\n' +
-//       '      </ul>\n' +
-//       '      L\'ensemble des ateliers se déroulent sous différents formats (jeux, défis, ...)\n' +
-//       '    </p>\n' +
-//       '\n' +
-//       '    <p>\n' +
-//       '      Ce stage propose aux enfants d\'autres activités extra-sportives :\n' +
-//       '      <ul>\n' +
-//       '       <li>Soccer de Guipavas, pour un tournoi disputé et inoubliable</li>\n' +
-//       '       <li>La Récré des curés, pour quitter les terrains, se détendre et s’amuser dans le parc de loisir de Milizac</li>\n' +
-//       '       <li>Un Laser Game, pour une bataille virtuelle entre l’équipe des Rouges et celle des Bleus</li>\n' +
-//       '      </ul>\n' +
-//       '    </p>\n' +
-//       '\n' +
-//       '    <b>Infrastructures sportives:</b> <ul><li>A faire</li></ul>\n' +
-//       '    <b>Infrastructures générales:</b> <ul><li>A faire</li></ul>',
-//       gmapsUrl: 'https://goo.gl/maps/5GMh35CKxnv',
-//       location: 'Situé à l\'extrémité de la Bretagne, le stage se déroule à Plabennec dans le Finistère (29).',
-//       organizerDescription: '    Les stages sont encadrés par une une équipe technique de <b>qualité</b>, <b>expérimentée</b> et <b>motivée</b> <br>\n' +
-//       '    Cinq joueurs du Stade Plabennecois, sont présents pour encadrer et proposer un programme de qualité.<br>\n' +
-//       '    Depuis 4 ans ce stage connait un succès grandissant.',
-//       organizers: [organizer1, organizer2, organizer3],
-//       pathToGallery: './assets/img/plabennec/gallery/data.json',
-//       pathToLogo: './assets/img/plabennec/logo.png',
-//       pathToSchedule: './assets/img/plabennec/programme.jpg',
-//       useOnlineRegistration: false,
-//       registrationUrl: 'http://www.plab29.com/plabete',
-//     },
-//     overview: {
-//       content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-//       pathToImage: './assets/img/plabennec/overview.jpg',
-//       title: 'Bienvenue au Foot Camps de Plabennec'
-//     }
-//   };
-//
-//   const session1: Session = {
-//     campId: '',
-//     numberOfRegistrationsAccepted: 0,
-//     numberOfRegistrationsInProgress: 0,
-//     numberOfRegistrationsRejected: 0,
-//     enable: true,
-//     end: firebase.firestore.Timestamp.fromDate(new Date('2018-07-10T12:00:00')),
-//     endRegistrationDate: firebase.firestore.Timestamp.fromDate(new Date('2018-06-09T00:00:00')),
-//     fullBoardRates: null,
-//     halfBoardRates: 230,
-//     maximumNumberOfRegistrations: 30,
-//     start: firebase.firestore.Timestamp.fromDate(new Date('2018-07-14T08:30:00'))
-//   };
-//
-//   const session2: Session = {
-//     campId: '',
-//     numberOfRegistrationsAccepted: 0,
-//     numberOfRegistrationsInProgress: 0,
-//     numberOfRegistrationsRejected: 0,
-//     enable: true,
-//     end: firebase.firestore.Timestamp.fromDate(new Date('2018-07-17T12:00:00')),
-//     endRegistrationDate: firebase.firestore.Timestamp.fromDate(new Date('2018-06-09T00:00:00')),
-//     fullBoardRates: null,
-//     halfBoardRates: 230,
-//     maximumNumberOfRegistrations: 30,
-//     start: firebase.firestore.Timestamp.fromDate(new Date('2018-07-21T08:30:00'))
-//   };
-//
-//   const session3: Session = {
-//     campId: '',
-//     numberOfRegistrationsAccepted: 0,
-//     numberOfRegistrationsInProgress: 0,
-//     numberOfRegistrationsRejected: 0,
-//     enable: true,
-//     end: firebase.firestore.Timestamp.fromDate(new Date('2018-07-24T12:00:00')),
-//     endRegistrationDate: firebase.firestore.Timestamp.fromDate(new Date('2018-06-09T00:00:00')),
-//     fullBoardRates: null,
-//     halfBoardRates: 230,
-//     maximumNumberOfRegistrations: 30,
-//     start: firebase.firestore.Timestamp.fromDate(new Date('2018-07-28T08:30:00'))
-//   };
-//
-//   addCamp(request, response, camp, [session1, session2, session3]);
-// });
-//
-// function addCamp(request, response, camp: FootballCamp, sessions: Session[]): void {
-//   const db = admin.firestore();
-//   db.collection('camps')
-//     .add(camp)
-//     .then(function (campAdded) {
-//       console.log('Camp added with ID: ', campAdded.id);
-//
-//       const sessionsColRef = db.collection('sessions');
-//
-//       // Begin a new batch
-//       const batch = db.batch();
-//
-//       // Set each document, as part of the batch
-//       sessions.forEach(session => {
-//         session.campId = campAdded.id;
-//         const sessionDocRef = sessionsColRef.doc();
-//         batch.set(sessionDocRef, session);
-//       })
-//
-//       // Commit the entire batch
-//       batch
-//         .commit()
-//         .then(function () {
-//           console.log('Sessions added successfully');
-//           response.send('Camp and sessions added successfully\n\n');
-//         })
-//         .catch(function (error) {
-//           console.error('Error adding document: ', error);
-//           response.send('An error occured adding session\n\n');
-//         });
-//     })
-//     .catch(function (error) {
-//       console.error('Error adding document: ', error);
-//       response.send('An error occured adding camp\n\n');
-//     });
-// }
-//
-// export const sendEmailOnCreateRegistration = functions.firestore
-//   .document('registrations/{rid}')
-//   .onCreate(event => {
-//     console.log(event);
-//     const registration: Registration = event.data.data();
-//     return updateNumberOfRegistrations(null, registration)
-//       .then(() => {
-//         return sendMail(registration);
-//       });
-//   });
-//
-// export const sendEmailOnUpdateRegistrationState = functions.firestore
-//   .document('registrations/{rid}')
-//   .onUpdate(event => {
-//     console.log(event);
-//     const newRegistration: Registration = event.data.data();
-//     const previousRegistration: Registration = event.data.previous.data();
-//
-//     if (newRegistration.state !== previousRegistration.state) {
-//       return updateNumberOfRegistrations(previousRegistration, newRegistration)
-//         .then(() => {
-//           return sendMail(newRegistration);
-//         });
-//     } else {
-//       console.log('RegistrationState has not changed');
-//       return null;
-//     }
-//   });
-//
-// function updateNumberOfRegistrations(previousRegistration: Registration,
-//                                      newRegistration: Registration) {
-//   console.log(`updateNumberOfRegistrations(${JSON.stringify(previousRegistration)}, ${JSON.stringify(newRegistration)})`);
-//
-//   return admin.firestore()
-//     .doc(`sessions/${newRegistration.sessionId}`)
-//     .get()
-//     .then((snapshot) => {
-//       const session = snapshot.data();
-//       const patch = {};
-//
-//       if (previousRegistration && previousRegistration.state) {
-//         switch (previousRegistration.state) {
-//           case 'ACCEPTED': {
-//             patch['numberOfRegistrationsAccepted'] = session.numberOfRegistrationsAccepted - 1;
-//             break;
-//           }
-//           case 'IN_PROGRESS': {
-//             patch['numberOfRegistrationsInProgress'] = session.numberOfRegistrationsInProgress - 1;
-//             break;
-//           }
-//           case 'REJECTED': {
-//             patch['numberOfRegistrationsRejected'] = session.numberOfRegistrationsRejected - 1;
-//             break;
-//           }
-//         }
-//       }
-//
-//       if (newRegistration && newRegistration.state) {
-//         switch (newRegistration.state) {
-//           case 'ACCEPTED': {
-//             patch['numberOfRegistrationsAccepted'] = session.numberOfRegistrationsAccepted + 1;
-//             break;
-//           }
-//           case 'IN_PROGRESS': {
-//             patch['numberOfRegistrationsInProgress'] = session.numberOfRegistrationsInProgress + 1;
-//             break;
-//           }
-//           case 'REJECTED': {
-//             patch['numberOfRegistrationsRejected'] = session.numberOfRegistrationsRejected + 1;
-//             break;
-//           }
-//         }
-//       }
-//
-//       console.log(`patch : ${JSON.stringify(patch)}`);
-//
-//       return admin.firestore()
-//         .doc(`sessions/${newRegistration.sessionId}`)
-//         .update(patch);
-//     });
-// }
 
 function getMailTransporter(): Transporter {
   return createTransport({

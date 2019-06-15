@@ -1,0 +1,32 @@
+{
+  "city": "Espérance de Plouguerneau",
+  "latitude": 48.6101376,
+  "longitude": -4.5105545,
+  "details": {
+    "address": "Complexe sportif de Kroaz Kenan",
+    "description": "<div class=\"description-container\">\n            <div class=\"description-block\">\n              <b>Le projet éducatif : </b>\n              <a href=\"./assets/img/plouguerneau/projet-educatif.pdf\" download\n                 class=\"download-button mat-stroked-button\">\n                <i class=\"material-icons mat-18\">file_download</i>\n                Télécharger\n              </a>\n            </div>\n            <div class=\"description-block\">\n              <b>Pour qui : </b>Ces stages, en bord de mer, s'adressent à tous les passionnés de football et de sport\n              filles ou garçons, âgés de 8 à 13 ans, licenciés en club ou non.\n            </div>\n            <div class=\"description-block\">\n              <b>Le football : </b>Des séances de football seront programmées chaque jour pour les stagiaires.\n              Généralement les entrainements sont prévus le matin, et les matchs l'après-midi.\n              Une variété de support est utilisé, football sur herbe, futsal, beach soccer.\n            </div>\n            <div class=\"description-block\">\n              <b>Entrainement gardien : </b>Des scéances spécifiques prévues tout au long de la semaine.\n              <ul>\n                <li>Prise de balle (mains, pieds, sol, aérien)</li>\n                <li>Plongeon (avant, arrière, latéral)</li>\n                <li>Déplacement / placement / positionnement</li>\n                <li>Duel au sol</li>\n                <li>Initiation à la préparation physique (gainage, étirements, ...)</li>\n              </ul>\n            </div>\n            <div class=\"description-block\">\n              <b>Les animations : </b>En dehors du football, le stage prévoit plusieurs animations:\n              <ul>\n                <li>Sortie à la récré des trois curés</li>\n                <li>Activités nautiques</li>\n              </ul>\n            </div>\n            <div class=\"description-block\">\n              <b>Le coût du stage et prestations : </b>Une participation financière de 170 €(1)(2) est demandée à chaque\n              stagiaire afin de couvrir les frais, que ce soit les repas, les sorties, les frais d’encadrement des\n              éducateurs, les équipements.\n              (1) Les chèques vacances et coupons sport sont acceptés.\n              (2) Prix dégressifs si plusieurs frères et sœurs: 150 € à partir du 2ème enfant.\n            </div>\n            <div class=\"description-block\">\n              <b>L'équipement : </b>\n              <a href=\"./assets/img/plouguerneau/equipement.pdf\" download class=\"download-button mat-stroked-button\">\n                <i class=\"material-icons mat-18\">file_download</i>\n                Télécharger\n              </a>\n            </div>\n          </div>",
+    "gmapsUrl": "https://goo.gl/maps/d96nuoMMSsyr7z8R6",
+    "location": "Le stage se déroule à Plouguerneau dans le Finistère (29), au complexe sportif de Kroaz Kenan",
+    "organizerDescription": "Les stages sont encadrés par une une équipe technique de <b>qualité</b>, <b>expérimentée</b> et <b>motivée</b>",
+    "organizers": [
+      {
+        "firstname": "Thomas",
+        "lastname": "TUCHEL",
+        "manageRegistration": true,
+        "pathToPicture": "./assets/img/plouguerneau/organizers/avatar/Thomas-TUCHEL.jpg",
+        "phoneNumber": "06.75.83.12.34",
+        "quote": "Pour cette <b>édition 2019</b>, les stagiaires vont avoir le niveau ligue des champions !"
+      }
+    ],
+    "pathToGallery": "./assets/img/plouguerneau/gallery/data.json",
+    "pathToLogo": "./assets/img/plouguerneau/logo.png",
+    "pathToSchedule": "./assets/img/plouguerneau/programme.pdf",
+    "useOnlineRegistration": true,
+    "registrationUrl": null
+  },
+  "overview": {
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "pathToImage": "./assets/img/plouguerneau/overview.jpg",
+    "title": "Bienvenue au Foot Camps de Plouguerneau"
+  }
+}

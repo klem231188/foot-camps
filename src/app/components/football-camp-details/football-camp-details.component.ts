@@ -46,6 +46,7 @@ export class FootballCampDetailsComponent implements OnInit, OnDestroy, AfterVie
       .subscribe((footballCamp: FootballCamp) => {
         console.log(footballCamp);
         this.footballCamp = footballCamp;
+
         this.titleService.setTitle('Footcamps - Détails du stage de football ' + this.footballCamp.city);
         this.meta.updateTag({name: 'description', content: 'Détails du stage de football ' + this.footballCamp.city});
         this.meta.updateTag({
