@@ -1,5 +1,14 @@
 {
   "city": "Espérance de Plouguerneau",
+  "categories": [
+    "U7",
+    "U8",
+    "U9",
+    "U10",
+    "U11",
+    "U12",
+    "U13"
+  ],
   "latitude": 48.6101376,
   "longitude": -4.5105545,
   "details": {

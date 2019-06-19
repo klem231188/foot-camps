@@ -14,6 +14,11 @@
       background-size: cover;
     }
 
+    .overview-image-2 {
+      height: 400px;
+      overflow-y: auto;
+    }
+
     mat-toolbar {
       @include mat-elevation(1);
       z-index: 1;
@@ -50,6 +55,73 @@
             }
           }
         }
+      }
+
+      .location-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+
+        mat-icon {
+          font-size: 35px !important;
+          margin-right: 5px;
+        }
+      }
+
+      .category-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+
+        .category {
+        }
+
+        mat-icon {
+          font-size: 35px !important;
+          margin-right: 5px;
+        }
+      }
+
+      .price-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+
+        mat-icon {
+          font-size: 35px !important;
+          margin-right: 5px;
+        }
+      }
+
+      .sessions-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+
+        mat-icon {
+          font-size: 35px !important;
+          margin-right: 5px;
+        }
+
+        .date {
+         width: 170px;
+        }
+
+        mat-progress-bar {
+          flex: 1;
+          margin-left: 5px;
+        }
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
       }
     }
   }

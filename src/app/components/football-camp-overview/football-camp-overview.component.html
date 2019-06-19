@@ -1,15 +1,51 @@
-<div>
-  <!-- <mat-toolbar class="toolbar-title">{{footballCamp.overview.title}}</mat-toolbar> -->
+<div *ngIf="footballCamp && sessions">
   <mat-card>
     <div class="fab-button-wrapper">
-      <div class="overview-image"
-           [ngStyle]="{'background-image': 'url(' + footballCamp.overview.pathToImage + ')'}"></div>
+      <div class="overview-image-2">
+        <img [src]="footballCamp.overview.pathToImage">
+      </div>
       <button (click)="onDetailsClicked()" mat-fab color="accent" class="fab-button">
         <mat-icon class="mat-24">add</mat-icon>
       </button>
     </div>
     <mat-card-content>
-      <div class="description-container" [innerHTML]="footballCamp.details.description | safeHtml"></div>
+
+      <div class="location-container" matTooltip="Lieu">
+        <mat-icon color="primary" [inline]="true">location_on</mat-icon>
+        {{footballCamp.details.address}}
+      </div>
+
+      <div class="category-container" matTooltip="Catégories">
+        <mat-icon color="primary" [inline]="true">person</mat-icon>
+        <div *ngFor="let category of footballCamp.details.categories; let last = last" class="category">{{category}}
+          <span *ngIf="!last">&nbsp;/&nbsp;</span></div>
+      </div>
+
+      <div class="price-container" matTooltip="Prix">
+        <mat-icon color="primary" [inline]="true">attach_money</mat-icon>
+        <!-- TODO payment should be on camp -->
+        {{sessions[0].halfBoardRates}} €
+      </div>
+
+      <div *ngFor="let session of sessions" class="sessions-container" [matTooltip]="tooltipAvailable(session)">
+        <mat-icon color="primary" [inline]="true">event_available</mat-icon>
+        <span class="date">Du {{session.start.toDate() | date : 'longDate'}}
+          au {{session.end.toDate() | date : 'longDate'}} </span>
+        <mat-progress-bar *ngIf="percentageOfRegistrations(session) !== 100"
+                          mode="determinate"
+                          [value]="percentageOfRegistrations(session)"
+                          matTooltip="Session">
+                          color="primary"></mat-progress-bar>
+        <mat-progress-bar *ngIf="percentageOfRegistrations(session) === 100"
+                          mode="determinate"
+                          [value]="percentageOfRegistrations(session)"
+                          color="warn"></mat-progress-bar>
+      </div>
+
+      <div class="button-container">
+        <a [routerLink]="[ '/locate/'+footballCamp.id+'/details' ]" mat-stroked-button color="primary"
+           class="link-to-maps">Détails</a>
+      </div>
     </mat-card-content>
   </mat-card>
 

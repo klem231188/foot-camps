@@ -1,4 +1,5 @@
 import {Organizer} from './organizer';
+import {Category} from './category.enum';
 
 export interface Details {
   // - Logo
@@ -26,4 +27,7 @@ export interface Details {
   // - Registration
   useOnlineRegistration: boolean;
   registrationUrl: string;
+
+  // - Categories
+  categories: Category[];
 }
