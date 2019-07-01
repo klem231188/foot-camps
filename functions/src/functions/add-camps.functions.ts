@@ -7,6 +7,7 @@ import {FootballCamp} from '../../../src/app/models/football-camp';
 import {Session} from '../../../src/app/models/session';
 
 export function addCampAberFoot(request, response): Promise<void> {
+  // @ts-ignore
   const camp: FootballCamp = AberCamp as FootballCamp;
   const sessions: Session[] = (AberSessions as Session[]);
   for (const session of sessions) {
@@ -19,6 +20,7 @@ export function addCampAberFoot(request, response): Promise<void> {
 }
 
 export function addCampPlouguerneau(request, response): Promise<void> {
+  // @ts-ignore
   const camp: FootballCamp = PlouguerneauCamp as FootballCamp;
   const sessions: Session[] = (PlouguerneauSessions as Session[]);
   for (const session of sessions) {

@@ -4,11 +4,12 @@ import * as Stripe from 'stripe';
 import {Change, EventContext} from 'firebase-functions/lib/cloud-functions';
 import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
 import {Payment} from '../../src/app/models/payment';
-import {createTransport, SendMailOptions, Transporter} from 'nodemailer';
 import {RegistrationV2} from '../../src/app/models/registration-v2.model';
 import {addCampAberFoot, addCampPlouguerneau} from './functions/add-camps.functions';
 import {printRegistration} from './functions/print-registration.functions';
 import {anonymize} from './functions/anonymize.functions';
+import {sendMailAboutPayment, sendMailAboutRegistration} from './functions/send-mail.functions';
+import {RegistrationState} from '../../src/app/models/registration-state.enum';
 
 // CORS Express middleware to enable CORS Requests.
 const cors = require('cors')({
@@ -49,85 +50,6 @@ export const httpPrintRegistration = functions.runWith(opts).https.onRequest((re
     }
   });
 });
-
-function getMailTransporter(): Transporter {
-  return createTransport({
-    service: 'gmail',
-    auth: {
-      user: functions.config().gmail.email,
-      pass: functions.config().gmail.password
-    }
-  });
-}
-
-function sendMailAboutRegistration(registration: RegistrationV2): Promise<any> {
-  // Configure the email transport using the default SMTP transport and a GMail account.
-  // For other types of transports such as Sendgrid see https://nodemailer.com/transports/
-  console.log(`sendMailAboutRegistration(${JSON.stringify(registration)})`);
-
-  const mailOptions: SendMailOptions = {
-    from: '"Footcamps" <footcamps@firebase.com>',
-    to: registration.trainee.email
-  };
-
-  // Building Email message.
-  if (registration.state === 'IN_PROGRESS') {
-    // TODO RegistrationState.IN_PROGRESS
-    // TODO Make a mail parametrized with camp name +
-    mailOptions.subject = 'Inscription à AbersFoot prise en compte';
-    mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Votre inscription au stage de football AbersFoot a bien été prise en compte.<br> Elle sera validée prochainement.`;
-  } else if (registration.state === 'ACCEPTED') {
-    // TODO RegistrationState.ACCEPTED
-    mailOptions.subject = 'Inscription à AbersFoot validée';
-    mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Félicitations, votre inscription au stage de football AbersFoot a été validée.<br> Bon stage !`;
-  } else if (registration.state === 'REJECTED') {
-    mailOptions.subject = 'Inscription à AbersFoot rejetée';
-    mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Hélas votre inscription au stage de football AbersFoot a été rejetée!`;
-  }
-
-  return getMailTransporter()
-    .sendMail(mailOptions)
-    .then((info) => console.log(`A mail has been sent to ${registration.trainee.email} with state ${registration.state}`))
-    .catch((error) => console.error('There was an error while sending the email:', error));
-}
-
-function sendMailAboutPayment(payment: Payment): Promise<any> {
-  // Configure the email transport using the default SMTP transport and a GMail account.
-  // For other types of transports such as Sendgrid see https://nodemailer.com/transports/
-  console.log(`sendMailAboutPayment(${JSON.stringify(payment)})`);
-  console.info(`Retrieving registration ${payment.registrationId} ...`);
-  return admin.firestore()
-    .doc(`registrations/${payment.registrationId}`)
-    .get()
-    .then((docRegistration: admin.firestore.DocumentData) => {
-      const registration: RegistrationV2 = docRegistration.data() as RegistrationV2;
-      registration.id = docRegistration.id;
-      console.info(`Registration: ${JSON.stringify(registration)} retrieved.`);
-      return registration;
-    })
-    .then((registration: RegistrationV2) => {
-      const mailOptions: SendMailOptions = {
-        from: '"Footcamps" <footcamps@firebase.com>',
-        to: registration.trainee.email
-      };
-
-      if (payment.state === 'IN_PROGRESS') {
-        return null;
-      } else if (payment.state === 'ACCEPTED') {
-        // TODO RegistrationState.ACCEPTED
-        mailOptions.subject = 'Paiement à AbersFoot validé';
-        mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br>Votre paiement au stage de football AbersFoot a été validé.`;
-      } else if (payment.state === 'REJECTED') {
-        mailOptions.subject = 'Paiement à AbersFoot rejeté';
-        mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br>Votre paiement au stage de football AbersFoot a été rejeté.`;
-      }
-
-      return getMailTransporter()
-        .sendMail(mailOptions)
-        .then((info) => console.log(`A mail has been sent to ${registration.trainee.email} with state ${registration.state}`))
-        .catch((error) => console.error('There was an error while sending the email:', error));
-    })
-}
 
 export const makePaymentByCard = functions.https.onRequest((request: functions.Request, response: functions.Response) => {
   return cors(request, response, () => {
@@ -223,6 +145,19 @@ export const makePaymentByCard = functions.https.onRequest((request: functions.R
         response.status(500).send();
       })
   });
+});
+
+export const httpSendMail  = functions.https.onRequest(async (request, response) => {
+  await sendMailAboutRegistration({
+    state: RegistrationState.IN_PROGRESS,
+    sessionId:'KxZ64nZ9ukgdCkl9r2Sv',
+    trainee: {
+      firstname: 'Clément',
+      lastname: 'TREGUER',
+      email: 'clemtreguer@gmail.com',
+    }
+  });
+  response.send('anonymize successful');
 });
 
 export const onUpdatePaymentState = functions.firestore

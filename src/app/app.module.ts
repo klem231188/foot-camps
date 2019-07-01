@@ -49,7 +49,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {FootballCampAdminDashboardComponent} from './components/football-camp-admin-dashboard/football-camp-admin-dashboard.component';
 import {FootballCampSessionOverviewComponent} from './components/football-camp-admin-dashboard/football-camp-session-overview/football-camp-session-overview.component';
 import {PaymentTypePipe} from './pipes/payment-type.pipe';
-import {FootballCampRegistrationExportComponent} from './components/football-camp-registration-export/football-camp-registration-export.component';
 import {FootballCampPrintRegistrationComponent} from './components/football-camp-print-registration/football-camp-print-registration.component';
 import {FootballCampHomeComponent} from './components/football-camp-home/football-camp-home.component';
 import {MatCarouselModule} from '@ngmodule/material-carousel';
@@ -116,14 +115,12 @@ registerLocaleData(localeFr, 'fr');
     FootballCampRegistrationsOverviewComponent,
     FootballCampAdminDashboardComponent,
     FootballCampSessionOverviewComponent,
-    FootballCampRegistrationExportComponent,
     FootballCampPrintRegistrationComponent,
     FootballCampHomeComponent,
   ],
   entryComponents: [
     FootballCampLoginComponent,
-    FootballCampShouldConnectDialogComponent,
-    FootballCampRegistrationExportComponent
+    FootballCampShouldConnectDialogComponent
   ],
   providers: [
     Title,

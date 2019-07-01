@@ -23,36 +23,65 @@
     </mat-carousel>
   </div>
 
-  <div class="content-container">
+  <div class="content-and-button-container">
     <a class="dark-button" [routerLink]="['/locate']">Trouve un stage</a>
-    <mat-card>
-      <mat-card-content>
-        Footcamps est une <b>plateforme d'inscriptions aux stages de football</b>.<br>
-        Elle vous permet de <b>trouver un stage</b> suivant différents critères
-        (lieu, activités proposées, catégories, dates, disponibilités, tarifs), puis de <b>s'y inscrir en ligne</b>.<br>
-        La validation de l'inscription est gérée par l'oganisateur du stage. Une fois l'inscription validée, vous recevez <b>un mail de confirmation</b>.<br>
-        Suivant les stages, <b>différents mode de paiements</b> peuvent être acceptés (chèques, chèques-vacances, espèces).<br>
-        Il est important de noter qu'une inscription pourra être invalidée dans la cas où le paiement n'a pas eu lieu avant la date butoire.
-      </mat-card-content>
-    </mat-card>
-  </div>
+    <mat-card class="content-container">
+      <div class="content-inner-container">
+        <div class="card-container">
+          <div class="card-icon">
+            <mat-icon color="primary">place</mat-icon>
+          </div>
+          <span class="card-title">Trouvez un stage</span>
+          <div class="card-content">
+            <b>Trouvez le stage</b> qui vous convient en utilisant différents critères de recherche: Lieu,
+            Activités proposées, Catégories, Dates, Disponibilités, Tarifs.
+          </div>
+        </div>
+      </div>
 
-  <div class="logo-container">
-    <div class="inner-logo-container">
-      <mat-icon color="primary">place</mat-icon>
-      <span>Trouvez un stage de football</span>
-    </div>
-    <div class="inner-logo-container">
-      <mat-icon color="primary">create</mat-icon>
-      <span>Inscrivez-vous</span>
-    </div>
-    <div class="inner-logo-container">
-      <mat-icon color="primary">attach_money</mat-icon>
-      <span>Payez plus tard <sup>*</sup></span>
-    </div>
-    <div class="inner-logo-container">
-      <mat-icon color="primary">send</mat-icon>
-      <span>Recevez une confirmation</span>
-    </div>
+      <div class="content-inner-container">
+        <div class="card-container">
+          <div class="card-icon">
+            <mat-icon color="primary">create</mat-icon>
+          </div>
+          <span class="card-title">Inscrivez-vous</span>
+          <div class="card-content">
+            <b>Inscrivez-vous</b> en remplissant un formulaire d'inscription en ligne.<br>
+            Notez que plusieurs documents seront à fournir lors de l'inscription.<br>
+            Durée de l'inscription ~ 10 min
+          </div>
+        </div>
+      </div>
+
+      <div class="content-inner-container">
+        <div class="card-container">
+          <div class="card-icon">
+            <mat-icon color="primary">attach_money</mat-icon>
+          </div>
+          <span class="card-title">Payez plus tard <sup>*</sup></span>
+          <div class="card-content">
+            Suivant les stages, <b>différents mode de paiements</b> peuvent être acceptés (chèques, chèques-vacances,
+            coupons sport,
+            espèces).<br>
+            <sup>(*)</sup> Notez qu'une inscription pourra être invalidée dans la cas où le paiement n'a pas eu lieu
+            avant la date butoire.
+          </div>
+        </div>
+      </div>
+
+      <div class="content-inner-container">
+        <div class="card-container">
+          <div class="card-icon">
+            <mat-icon color="primary">send</mat-icon>
+          </div>
+          <span class="card-title">Recevez une confirmation</span>
+          <div class="card-content">
+            Vous recevez deux e-mails.<br>
+            Le premier pour vous confirmer la prise en compte de votre inscription. <br>
+            Le second lorsque votre inscription à été validée.
+          </div>
+        </div>
+      </div>
+    </mat-card>
   </div>
 </div>
