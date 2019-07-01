@@ -34,11 +34,11 @@ export async function sendMailAboutRegistration(registration: any): Promise<any>
         mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Votre inscription au stage de football ${campSnap.data().city} a bien été prise en compte.<br> Elle sera validée prochainement.`;
         break;
       case RegistrationState.ACCEPTED :
-        mailOptions.subject = 'Inscription à AbersFoot validée';
+        mailOptions.subject = `Inscription à ${campSnap.data().city} validée`;
         mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Félicitations, votre inscription au stage de football ${campSnap.data().city} a été validée.<br> Bon stage !`;
         break;
       case RegistrationState.REJECTED :
-        mailOptions.subject = 'Inscription à AbersFoot rejetée';
+        mailOptions.subject = `Inscription à ${campSnap.data().city} rejetée`;
         mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Hélas votre inscription au stage de football ${campSnap.data().city} a été rejetée!`;
         break;
     }
