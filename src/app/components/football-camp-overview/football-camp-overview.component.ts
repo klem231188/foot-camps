@@ -61,16 +61,16 @@ export class FootballCampOverviewComponent implements OnInit, OnChanges, OnDestr
     return ((session.numberOfRegistrationsInProgress + session.numberOfRegistrationsAccepted) / session.maximumNumberOfRegistrations) * 100;
   }
 
-  nbRegistrationsAvailables(session: Session): number {
-    return session.maximumNumberOfRegistrations - (session.numberOfRegistrationsAccepted + session.numberOfRegistrationsInProgress);
-  }
-
-  tooltipAvailable(session: Session): string {
-    const nbRegistrationsAvailables = this.nbRegistrationsAvailables(session);
-    if (nbRegistrationsAvailables === 0) {
-      return `Le stage est complet !`;
-    } else {
-      return `Il y a ${nbRegistrationsAvailables} inscription(s) disponible(s).`;
-    }
-  }
+  // nbRegistrationsAvailables(session: Session): number {
+  //   return session.maximumNumberOfRegistrations - (session.numberOfRegistrationsAccepted + session.numberOfRegistrationsInProgress);
+  // }
+  //
+  // tooltipAvailable(session: Session): string {
+  //   const nbRegistrationsAvailables = this.nbRegistrationsAvailables(session);
+  //   if (nbRegistrationsAvailables === 0) {
+  //     return `Le stage est complet !`;
+  //   } else {
+  //     return `Il y a ${nbRegistrationsAvailables} inscription(s) disponible(s).`;
+  //   }
+  // }
 }

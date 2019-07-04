@@ -10,32 +10,41 @@
     </div>
     <mat-card-content>
 
-      <div class="location-container" matTooltip="Lieu">
-        <mat-icon color="primary" [inline]="true">location_on</mat-icon>
+      <div class="location-container">
+        <div class="card-icon">
+          <mat-icon color="primary" [inline]="true">location_on</mat-icon>
+        </div>
         {{footballCamp.details.address}}
       </div>
 
-      <div class="category-container" matTooltip="Catégories">
-        <mat-icon color="primary" [inline]="true">person</mat-icon>
+      <div class="category-container">
+        <div class="card-icon">
+          <mat-icon color="primary" [inline]="true">person</mat-icon>
+        </div>
         <div *ngFor="let category of footballCamp.details.categories; let last = last" class="category">{{category}}
           <span *ngIf="!last">&nbsp;/&nbsp;</span></div>
       </div>
 
-      <div class="price-container" matTooltip="Prix">
-        <mat-icon color="primary" [inline]="true">attach_money</mat-icon>
+      <div class="price-container">
+        <div class="card-icon">
+          <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
+        </div>
         <!-- TODO payment should be on camp -->
         {{sessions[0].halfBoardRates}} €
       </div>
 
-      <div *ngFor="let session of sessions" class="sessions-container" [matTooltip]="tooltipAvailable(session)">
-        <mat-icon color="primary" [inline]="true">event_available</mat-icon>
+      <div *ngFor="let session of sessions" class="sessions-container">
+        <div class="card-icon">
+          <mat-icon color="primary" [inline]="true">event_available</mat-icon>
+        </div>
         <span class="date">Du {{session.start.toDate() | date : 'longDate'}}
           au {{session.end.toDate() | date : 'longDate'}} </span>
         <mat-progress-bar *ngIf="percentageOfRegistrations(session) !== 100"
                           mode="determinate"
                           [value]="percentageOfRegistrations(session)"
                           matTooltip="Session">
-                          color="primary"></mat-progress-bar>
+          color="primary">
+        </mat-progress-bar>
         <mat-progress-bar *ngIf="percentageOfRegistrations(session) === 100"
                           mode="determinate"
                           [value]="percentageOfRegistrations(session)"
