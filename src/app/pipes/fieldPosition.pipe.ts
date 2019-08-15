@@ -6,7 +6,7 @@ import {FieldPosition} from 'app/models/field-position.enum';
 })
 export class FieldPositionPipe implements PipeTransform {
 
-  transform(value: FieldPosition, args: string[]): any {
+  transform(value: FieldPosition, ...args: any[]): any {
     if (!value) {
       return value;
     } else {

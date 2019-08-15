@@ -7,7 +7,7 @@ import {Gender} from '../models/gender.enum';
 })
 export class GenderPipe implements PipeTransform {
 
-  transform(value: Gender, args: string[]): any {
+  transform(value: Gender, ...args: any[]): any {
     if (!value) {
       return value;
     } else {

@@ -6,7 +6,7 @@ import * as moment from 'moment';
 })
 export class AgePipe implements PipeTransform {
 
-  transform(value: Date | moment.Moment, args: string[]): any {
+  transform(value: Date | moment.Moment, ...args: any[]): any {
     if (!value) {
       return value;
     } else {

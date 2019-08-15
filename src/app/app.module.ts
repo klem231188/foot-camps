@@ -52,6 +52,9 @@ import {PaymentTypePipe} from './pipes/payment-type.pipe';
 import {FootballCampPrintRegistrationComponent} from './components/football-camp-print-registration/football-camp-print-registration.component';
 import {FootballCampHomeComponent} from './components/football-camp-home/football-camp-home.component';
 import {MatCarouselModule} from '@ngmodule/material-carousel';
+import {FootballCampAdminDashboardRegistrationTableComponent} from './components/football-camp-admin-dashboard/football-camp-admin-dashboard-registration-table/football-camp-admin-dashboard-registration-table.component';
+import {FootballCampAdminDashboardRegistrationDetailsComponent} from './components/football-camp-admin-dashboard/football-camp-admin-dashboard-registration-details/football-camp-admin-dashboard-registration-details.component';
+import { PaymentStatePipe } from './pipes/payment-state.pipe';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -93,6 +96,7 @@ registerLocaleData(localeFr, 'fr');
     GenderPipe,
     SafeHtmlPipe,
     PaymentTypePipe,
+    PaymentStatePipe,
     StatePipe,
     TruncatePipe,
     DropZoneDirective,
@@ -117,6 +121,8 @@ registerLocaleData(localeFr, 'fr');
     FootballCampSessionOverviewComponent,
     FootballCampPrintRegistrationComponent,
     FootballCampHomeComponent,
+    FootballCampAdminDashboardRegistrationTableComponent,
+    FootballCampAdminDashboardRegistrationDetailsComponent,
   ],
   entryComponents: [
     FootballCampLoginComponent,

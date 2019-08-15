@@ -6,7 +6,7 @@ import {RegistrationState} from '../models/registration-state.enum';
 })
 export class StatePipe implements PipeTransform {
 
-  transform(value: RegistrationState, args: string[]): any {
+  transform(value: RegistrationState, ...args: any[]): any {
     if (!value) {
       return value;
     } else {

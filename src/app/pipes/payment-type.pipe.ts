@@ -6,7 +6,7 @@ import {PaymentType} from '../models/payment-type.enum';
 })
 export class PaymentTypePipe implements PipeTransform {
 
-  transform(value: PaymentType, args: string[]): any {
+  transform(value: PaymentType, ...args: any[]): any {
     if (!value) {
       return value;
     } else {

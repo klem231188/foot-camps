@@ -30,35 +30,31 @@ import {environment} from '../../../environments/environment';
 })
 export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChecked {
 
-  // User
-  user: User;
-
+  currentRegistration: RegistrationV2;
+  dataSource: MatTableDataSource<RegistrationV2>;
+  disablePrintButton: boolean;
+  displayedColumns: string[] = ['select', 'firstname', 'lastname', 'state'];
+  @ViewChild('exportPdfButton') exportPdfButton: MatButton;
   // FootballCamp
   footballCamps: FootballCamp[];
-  selectedFootballCamp: BehaviorSubject<FootballCamp>;
-  @ViewChild('uiControlFootballCamp') uiControlFootballCamp: MatSelect;
-  uiControlFootballCampInitialized: boolean;
-
-  // Session
-  sessions: Session[];
-  selectedSession: BehaviorSubject<Session>;
-  @ViewChild('uiControlSession') uiControlSession: MatSelect;
-  uiControlSessionInitialized: boolean;
-
-  // Registration
-  registrations: RegistrationV2[];
-  selectedRegistration: BehaviorSubject<RegistrationV2>;
-  displayedColumns: string[] = ['select', 'firstname', 'lastname', 'state'];
-  uiControlRegistration: SelectionModel<RegistrationV2>;
-  @ViewChild(MatSort) sort: MatSort;
-  dataSource: MatTableDataSource<RegistrationV2>;
-  @ViewChild('exportPdfButton') exportPdfButton: MatButton;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
   // Payment
   payment: Observable<Payment>;
-
-  disablePrintButton: boolean;
+  // Registration
+  registrations: RegistrationV2[];
+  selectedFootballCamp: BehaviorSubject<FootballCamp>;
+  selectedRegistration: BehaviorSubject<RegistrationV2>;
+  selectedSession: BehaviorSubject<Session>;
+  // Session
+  sessions: Session[];
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('uiControlFootballCamp') uiControlFootballCamp: MatSelect;
+  uiControlFootballCampInitialized: boolean;
+  uiControlRegistration: SelectionModel<RegistrationV2>;
+  @ViewChild('uiControlSession') uiControlSession: MatSelect;
+  uiControlSessionInitialized: boolean;
+  // User
+  user: User;
 
   constructor(
     private route: ActivatedRoute,
@@ -84,6 +80,62 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
     this.uiControlRegistration = new SelectionModel<RegistrationV2>(allowMultiSelect, initialSelection);
 
     this.disablePrintButton = false;
+    this.currentRegistration = null;
+  }
+
+  accept(registration: RegistrationV2): void {
+    this.registrationService
+      .update(registration, {state: RegistrationState.ACCEPTED})
+      .then(() => console.log('Registration updated with success'));
+  }
+
+  getPhotoUrl(registration: RegistrationV2): string {
+    return registration.documents.find((doc) => doc.type === DocumentType.PHOTO_IDENTITE).url;
+  }
+
+  ngAfterViewChecked(): void {
+    if (this.uiControlFootballCamp && !this.uiControlFootballCampInitialized) {
+      this.uiControlFootballCampInitialized = true;
+      this.uiControlFootballCamp.registerOnChange((footballCamp: FootballCamp) => {
+        this.selectedFootballCamp.next(footballCamp);
+      });
+
+      this.selectedFootballCamp
+        .subscribe((footballCamp: FootballCamp) => {
+          this.uiControlFootballCamp.value = footballCamp;
+        })
+    }
+
+    if (this.uiControlSession && !this.uiControlSessionInitialized) {
+      this.uiControlSessionInitialized = true;
+      this.uiControlSession.registerOnChange((session: Session) => {
+        this.selectedSession.next(session);
+        this.currentRegistration = null;
+      });
+
+      this.selectedSession
+        .subscribe((session: Session) => {
+          this.uiControlSession.value = session;
+        })
+    }
+
+    if (this.sort && this.dataSource && !this.dataSource.sort) {
+      this.dataSource.sortingDataAccessor = (item, property) => {
+        switch (property) {
+          case 'firstname':
+            return item.trainee.firstname;
+          case 'lastname':
+            return item.trainee.lastname;
+          default:
+            return item[property];
+        }
+      };
+      this.dataSource.sort = this.sort;
+    }
+
+    if (this.paginator && this.dataSource && !this.dataSource.paginator) {
+      this.dataSource.paginator = this.paginator;
+    }
   }
 
   ngOnInit() {
@@ -175,60 +227,8 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
       });
   }
 
-  ngAfterViewChecked(): void {
-    if (this.uiControlFootballCamp && !this.uiControlFootballCampInitialized) {
-      this.uiControlFootballCampInitialized = true;
-      this.uiControlFootballCamp.registerOnChange((footballCamp: FootballCamp) => {
-        this.selectedFootballCamp.next(footballCamp);
-      });
-
-      this.selectedFootballCamp
-        .subscribe((footballCamp: FootballCamp) => {
-          this.uiControlFootballCamp.value = footballCamp;
-        })
-    }
-
-    if (this.uiControlSession && !this.uiControlSessionInitialized) {
-      this.uiControlSessionInitialized = true;
-      this.uiControlSession.registerOnChange((session: Session) => {
-        this.selectedSession.next(session);
-      });
-
-      this.selectedSession
-        .subscribe((session: Session) => {
-          this.uiControlSession.value = session;
-        })
-    }
-
-    if (this.sort && this.dataSource && !this.dataSource.sort) {
-      this.dataSource.sortingDataAccessor = (item, property) => {
-        switch (property) {
-          case 'firstname':
-            return item.trainee.firstname;
-          case 'lastname':
-            return item.trainee.lastname;
-          default:
-            return item[property];
-        }
-      };
-      this.dataSource.sort = this.sort;
-    }
-
-    if (this.paginator && this.dataSource && !this.dataSource.paginator) {
-      this.dataSource.paginator = this.paginator;
-    }
-  }
-
-  accept(registration: RegistrationV2): void {
-    this.registrationService
-      .update(registration, {state: RegistrationState.ACCEPTED})
-      .then(() => console.log('Registration updated with success'));
-  }
-
-  reject(registration: RegistrationV2): void {
-    this.registrationService
-      .update(registration, {state: RegistrationState.REJECTED})
-      .then(() => console.log('Registration updated with success'));
+  onRegistrationSelected(registration: RegistrationV2) {
+    this.currentRegistration = registration;
   }
 
   print(): void {
@@ -278,8 +278,10 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
       })
   }
 
-  getPhotoUrl(registration: RegistrationV2): string {
-    return registration.documents.find((doc) => doc.type === DocumentType.PHOTO_IDENTITE).url;
+  reject(registration: RegistrationV2): void {
+    this.registrationService
+      .update(registration, {state: RegistrationState.REJECTED})
+      .then(() => console.log('Registration updated with success'));
   }
 
   updateDocument(docUpdated: Document) {

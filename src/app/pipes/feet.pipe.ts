@@ -6,7 +6,7 @@ import {Feet} from '../models/feet.enum';
 })
 export class FeetPipe implements PipeTransform {
 
-  transform(value: Feet, args: string[]): any {
+  transform(value: Feet, ...args: any[]): any {
     if (!value) {
       return value;
     } else {
