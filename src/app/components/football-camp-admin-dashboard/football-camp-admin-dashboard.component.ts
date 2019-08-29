@@ -7,21 +7,11 @@ import {FootballCamp} from '../../models/football-camp';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {switchMap} from 'rxjs/operators';
 import {UserService} from '../../services/user/user.service';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {MatButton, MatDialog, MatPaginator, MatSelect, MatSnackBar, MatSort, MatSortable, MatTableDataSource} from '@angular/material';
+import {BehaviorSubject} from 'rxjs';
+import {MatSelect} from '@angular/material';
 import {SessionService} from '../../services/session/session.service';
 import {Session} from '../../models/session';
 import {RegistrationV2} from '../../models/registration-v2.model';
-import {RegistrationService} from '../../services/registration/registration.service';
-import {SelectionModel} from '@angular/cdk/collections';
-import {SelectionChange} from '@angular/cdk/collections/typings/selection';
-import {RegistrationState} from '../../models/registration-state.enum';
-import {PaymentService} from '../../services/payment/payment.service';
-import {Payment} from '../../models/payment';
-import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Document} from '../../models/document.model';
-import {DocumentType} from '../../models/document-type.enum';
-import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-football-camp-admin-dashboard',
@@ -31,29 +21,14 @@ import {environment} from '../../../environments/environment';
 export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChecked {
 
   currentRegistration: RegistrationV2;
-  dataSource: MatTableDataSource<RegistrationV2>;
-  disablePrintButton: boolean;
-  displayedColumns: string[] = ['select', 'firstname', 'lastname', 'state'];
-  @ViewChild('exportPdfButton') exportPdfButton: MatButton;
-  // FootballCamp
   footballCamps: FootballCamp[];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  // Payment
-  payment: Observable<Payment>;
-  // Registration
-  registrations: RegistrationV2[];
   selectedFootballCamp: BehaviorSubject<FootballCamp>;
-  selectedRegistration: BehaviorSubject<RegistrationV2>;
   selectedSession: BehaviorSubject<Session>;
-  // Session
   sessions: Session[];
-  @ViewChild(MatSort) sort: MatSort;
   @ViewChild('uiControlFootballCamp') uiControlFootballCamp: MatSelect;
   uiControlFootballCampInitialized: boolean;
-  uiControlRegistration: SelectionModel<RegistrationV2>;
   @ViewChild('uiControlSession') uiControlSession: MatSelect;
   uiControlSessionInitialized: boolean;
-  // User
   user: User;
 
   constructor(
@@ -61,12 +36,7 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
     private angularFireAuth: AngularFireAuth,
     private userService: UserService,
     private footballCampService: FootballCampService,
-    private sessionService: SessionService,
-    private registrationService: RegistrationService,
-    private paymentService: PaymentService,
-    private http: HttpClient,
-    private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private sessionService: SessionService
   ) {
     this.selectedFootballCamp = new BehaviorSubject<FootballCamp>(null);
     this.uiControlFootballCampInitialized = false;
@@ -74,23 +44,7 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
     this.selectedSession = new BehaviorSubject<Session>(null);
     this.uiControlSessionInitialized = false;
 
-    this.selectedRegistration = new BehaviorSubject<RegistrationV2>(null);
-    const initialSelection = [];
-    const allowMultiSelect = false;
-    this.uiControlRegistration = new SelectionModel<RegistrationV2>(allowMultiSelect, initialSelection);
-
-    this.disablePrintButton = false;
     this.currentRegistration = null;
-  }
-
-  accept(registration: RegistrationV2): void {
-    this.registrationService
-      .update(registration, {state: RegistrationState.ACCEPTED})
-      .then(() => console.log('Registration updated with success'));
-  }
-
-  getPhotoUrl(registration: RegistrationV2): string {
-    return registration.documents.find((doc) => doc.type === DocumentType.PHOTO_IDENTITE).url;
   }
 
   ngAfterViewChecked(): void {
@@ -117,24 +71,6 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
         .subscribe((session: Session) => {
           this.uiControlSession.value = session;
         })
-    }
-
-    if (this.sort && this.dataSource && !this.dataSource.sort) {
-      this.dataSource.sortingDataAccessor = (item, property) => {
-        switch (property) {
-          case 'firstname':
-            return item.trainee.firstname;
-          case 'lastname':
-            return item.trainee.lastname;
-          default:
-            return item[property];
-        }
-      };
-      this.dataSource.sort = this.sort;
-    }
-
-    if (this.paginator && this.dataSource && !this.dataSource.paginator) {
-      this.dataSource.paginator = this.paginator;
     }
   }
 
@@ -189,120 +125,9 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
             });
         }
       });
-
-    this.selectedSession
-      .subscribe((session: Session) => {
-        this.selectedRegistration.next(null);
-        this.uiControlRegistration.toggle(this.selectedRegistration.value);
-
-        if (session) {
-          this.registrationService
-            .getRegistrations(session.id)
-            .subscribe((registrations: RegistrationV2[]) => {
-              this.registrations = registrations;
-              this.dataSource = new MatTableDataSource(this.registrations);
-              if (this.registrations.length > 0) {
-                this.selectedRegistration.next(this.registrations[0]);
-                this.uiControlRegistration.toggle(this.selectedRegistration.value);
-              }
-            });
-        }
-      });
-
-    this.uiControlRegistration
-      .changed
-      .subscribe((value: SelectionChange<RegistrationV2>) => {
-        if (value.added.length === 0) {
-          this.selectedRegistration.next(null);
-        } else {
-          this.selectedRegistration.next(value.added[0]);
-        }
-      });
-
-    this.selectedRegistration
-      .subscribe((registration: RegistrationV2) => {
-        if (registration) {
-          this.payment = this.paymentService.getPayment(registration.paymentId)
-        }
-      });
   }
 
   onRegistrationSelected(registration: RegistrationV2) {
     this.currentRegistration = registration;
-  }
-
-  print(): void {
-    const url: string = environment.urlPrintRegistration;
-
-    const body = {
-      campId: this.selectedFootballCamp.value.id,
-      sessionId: this.selectedSession.value.id,
-      registrationId: this.selectedRegistration.value.id
-    };
-
-    const options = {
-      observe: 'response' as 'body', // hack for TS
-      responseType: 'blob' as 'json', // hack for TS
-    };
-
-    this.disablePrintButton = true;
-    const filename = `Fiche-Inscription-${this.selectedRegistration.value.trainee.lastname}-${this.selectedRegistration.value.trainee.firstname}.png`;
-
-    this.http
-      .post(url, body, options)
-      .subscribe((response: HttpResponse<Blob>) => {
-        this.disablePrintButton = false;
-
-        // Create an anchor element, to be able to rename and download file.
-        const element: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
-        element.href = URL.createObjectURL(response.body);
-        element.download = filename;
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
-
-        // Says to user that's everything is fine
-        this.snackBar.open(
-          'Fiche d\'inscription téléchargée',
-          'Fermer',
-          {duration: 5000});
-      }, (error) => {
-        console.log(error);
-        this.disablePrintButton = false;
-
-        // Says to user that an error occured
-        this.snackBar.open(
-          'Une erreur est survenue lors du téléchargement de la fiche d\'inscription',
-          'Fermer',
-          {duration: 5000});
-      })
-  }
-
-  reject(registration: RegistrationV2): void {
-    this.registrationService
-      .update(registration, {state: RegistrationState.REJECTED})
-      .then(() => console.log('Registration updated with success'));
-  }
-
-  updateDocument(docUpdated: Document) {
-    if (docUpdated !== null) {
-      const docStored: Document = this.selectedRegistration.value.documents.find((aDoc) => aDoc.type === docUpdated.type);
-      if (docStored.url !== docUpdated.url) {
-        console.log(`Update ${JSON.stringify(docUpdated)} to firestore`);
-
-        // Create document array
-        const updatedDocs: Document[] = this.selectedRegistration.value.documents.filter((aDoc) => aDoc.type !== docUpdated.type);
-        updatedDocs.push(docUpdated);
-
-        // Sort document array per type
-        const documentTypeOrder = Object.keys(DocumentType).map(key => DocumentType[key]);
-        const updatedDocsSorted = updatedDocs.sort((a, b) => documentTypeOrder.indexOf(a.type) - documentTypeOrder.indexOf(b.type));
-
-        // Update document array in firestore
-        this.registrationService.update(this.selectedRegistration.value, {documents: updatedDocsSorted});
-      } else {
-        console.log(`${docStored.url} === ${docUpdated.url}`);
-      }
-    }
   }
 }
