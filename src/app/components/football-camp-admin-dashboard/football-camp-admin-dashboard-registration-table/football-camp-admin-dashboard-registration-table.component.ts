@@ -14,6 +14,8 @@ import {RegistrationService} from '../../../services/registration/registration.s
 import {RegistrationV2} from '../../../models/registration-v2.model';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {takeUntil, tap} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-football-camp-admin-dashboard-registration-table',
@@ -23,6 +25,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 export class FootballCampAdminDashboardRegistrationTableComponent implements AfterViewChecked, OnChanges, OnInit {
 
   dataSource: MatTableDataSource<RegistrationV2>;
+  destroyed: Subject<any>;
   displayedColumns: string[] = ['select', 'firstname', 'lastname', 'state'];
   loading: boolean;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -43,7 +46,6 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
   }
 
   ngAfterViewChecked(): void {
-    console.log('FootballCampAdminDashboardRegistrationTableComponent.ngAfterViewChecked()');
     if (!this.dataSource.paginator) {
       this.dataSource.paginator = this.paginator;
     }
@@ -76,20 +78,18 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
 
     const sessionIdChange: SimpleChange = changes['sessionId'];
 
-    if (sessionIdChange.previousValue !== sessionIdChange.currentValue) {
-      this.registrationService
-        .getRegistrations(this.sessionId)
-        .subscribe((registrations: RegistrationV2[]) => {
-          console.log('Registrations have changed !');
-          console.log(this.selection);
-          this.registrations = registrations;
-          this.dataSource.data = this.registrations;
-          this.selection.clear();
-          if (this.registrations.length > 0) {
-            this.selection.select(this.registrations[0]);
-          }
-          this.loading = false;
-        });
+    if (!sessionIdChange.isFirstChange() && (sessionIdChange.previousValue !== sessionIdChange.currentValue)) {
+      console.log(`Session has changed ${sessionIdChange.currentValue}`);
+      this.sessionId = sessionIdChange.currentValue;
+
+      // Unsubscribe for change on previous session
+      this.destroyed.next();
+
+      // Clear selection
+      this.selection.clear();
+
+      // Reload
+      this.reload();
     }
   }
 
@@ -107,6 +107,10 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
       .subscribe((selectionChanged) => {
         this.registrationSelected.emit(selectionChanged.added[0]);
       });
+
+    this.destroyed = new Subject();
+
+    this.reload()
   }
 
   onClickRegistration(registration: RegistrationV2): void {
@@ -115,5 +119,28 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
     } else {
       this.selection.clear();
     }
+  }
+
+  reload() {
+    this.loading = true;
+    this.registrationService
+      .getRegistrations(this.sessionId)
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((registrations: RegistrationV2[]) => {
+          console.log('Registrations have changed !');
+          this.registrations = registrations;
+          this.dataSource.data = this.registrations;
+          if (this.registrations.length > 0) {
+            if (this.selection.selected.length > 0) {
+              const registration = this.registrations.find(r => r.id === this.selection.selected[0].id);
+              this.selection.clear();
+              this.selection.select(registration);
+            } else {
+              this.selection.select(this.registrations[0]);
+            }
+          }
+          this.loading = false;
+        }
+      );
   }
 }
