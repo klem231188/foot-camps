@@ -46,11 +46,11 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
   }
 
   ngAfterViewChecked(): void {
-    if (!this.dataSource.paginator) {
+    if (this.dataSource.paginator !== this.paginator) {
       this.dataSource.paginator = this.paginator;
     }
 
-    if (!this.dataSource.sort) {
+    if (this.dataSource.sort !== this.sort) {
       this.dataSource.sort = this.sort;
 
       this.dataSource.sortingDataAccessor = (item, property) => {

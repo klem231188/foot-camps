@@ -5,14 +5,20 @@
   $foreground: map-get($theme, foreground);
 
   app-football-camp-admin-dashboard-registration-details {
-    width: 600px;
+    flex: 1;
+    display: flex;
+
+    @include big-screen {
+      margin-left: 15px;
+    }
 
     @include small-screen {
-      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 5px;
     }
 
     mat-card {
-      width: 100%;
+      flex: 1;
 
       h2 {
         font-weight: bold;
@@ -26,9 +32,9 @@
         margin-bottom: 10px;
 
         .photo {
-          height: 100px;
+          height: 150px;
           @include small-screen {
-            height: 70px;
+            height: 100px;
           }
         }
 
