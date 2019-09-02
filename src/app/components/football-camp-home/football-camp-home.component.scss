@@ -56,7 +56,7 @@
           display: inline-block;
           -webkit-box-sizing: border-box;
           box-sizing: border-box;
-          border: 0;
+          //border: 0;
           outline: none;
           cursor: pointer;
           white-space: nowrap;
@@ -68,8 +68,8 @@
           font-weight: 700;
           -webkit-transition: background-color .2s;
           transition: background-color .2s;
-          color: mat-color($accent);
-          background-color: #161616;
+          color: #161616;
+          background-color: mat-color($accent);
 
           font-family: Roboto;
           position: absolute;
@@ -78,8 +78,8 @@
         }
 
         .dark-button:hover {
-          background-color: mat-color($accent);
-          color: #161616;
+          background-color: #161616;
+          color: mat-color($accent);
         }
 
         .content-container {
