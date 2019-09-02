@@ -9,7 +9,7 @@ import {environment} from '../../../environments/environment';
 @Injectable()
 export class PaymentService {
 
-  stripe = new Stripe(environment.stripe.publicKey);
+  //stripe = new Stripe(environment.stripe.publicKey);
 
   constructor(
     private angularFirestore: AngularFirestore,

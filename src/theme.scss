@@ -12,7 +12,6 @@
 @import 'app/components/football-camp-registration-documents/football-camp-registration-documents.component.scss';
 @import 'app/components/football-camp-registration-trainee-form/football-camp-registration-trainee-form.component.scss';
 @import 'app/components/football-camp-registration-sessions/football-camp-registration-sessions.component.scss';
-@import 'app/components/football-camp-registration-payment/football-camp-registration-payment.component';
 @import 'app/components/football-camp-print-registration/football-camp-print-registration.component.scss';
 @import 'app/components/football-camp-registration-check-payment/football-camp-registration-check-payment.component';
 @import 'app/components/football-camp-file-upload/football-camp-file-upload.component.scss';
@@ -33,7 +32,6 @@ $football-camp-theme: mat-light-theme($primary, $accent, $warn);
 @mixin football-camp-theme($theme) {
   @include football-camp-login-theme($theme);
   @include football-camp-registration-theme($theme);
-  @include app-football-camp-registration-payment-theme($theme);
   @include app-football-camp-registration-check-payment($theme);
   @include app-football-camp-registration-documents($theme);
   @include app-football-camp-registration-trainee-form($theme);

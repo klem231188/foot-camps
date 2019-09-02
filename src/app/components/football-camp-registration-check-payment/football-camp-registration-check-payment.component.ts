@@ -69,7 +69,6 @@ export class FootballCampRegistrationCheckPaymentComponent implements OnInit, On
       registrationId: this.registration.id,
       state: PaymentState.IN_PROGRESS,
       type: PaymentType.OTHER,
-      stripeTokenId: null
     };
 
     this.paymentService

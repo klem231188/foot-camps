@@ -33,7 +33,6 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {StatePipe} from './pipes/state.pipe';
-import {FootballCampRegistrationPaymentComponent} from './components/football-camp-registration-payment/football-camp-registration-payment.component';
 import {PlaygroundComponent} from './components/playground/playground.component';
 import {FootballCampFileUploadComponent} from './components/football-camp-file-upload/football-camp-file-upload.component';
 import {DropZoneDirective} from './directives/drop-zone.directive';
@@ -109,7 +108,6 @@ registerLocaleData(localeFr, 'fr');
     FootballCampRegistrationComponent,
     FootballCampLoginComponent,
     FootballCampShouldConnectDialogComponent,
-    FootballCampRegistrationPaymentComponent,
     PlaygroundComponent,
     FootballCampFileUploadComponent,
     FootballCampRegistrationDocumentsComponent,

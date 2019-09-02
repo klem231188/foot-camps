@@ -1,6 +1,5 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import * as Stripe from 'stripe';
 import {Change, EventContext} from 'firebase-functions/lib/cloud-functions';
 import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
 import {Payment} from '../../src/app/models/payment';
@@ -48,102 +47,6 @@ export const httpPrintRegistration = functions.runWith(opts).https.onRequest((re
       console.log('Error while rendering registration', error);
       response.status(500).send(error);
     }
-  });
-});
-
-export const makePaymentByCard = functions.https.onRequest((request: functions.Request, response: functions.Response) => {
-  return cors(request, response, () => {
-    console.info(`IN - makePaymentByCard(${JSON.stringify(request.body)})`);
-
-    const payment = request.body;
-    let registration = null;
-    let session = null;
-
-    console.info(`Storing payment ${JSON.stringify(payment)} ...`);
-
-    admin.firestore()
-      .collection(`payments`)
-      .add(payment)
-      .then((docPayment: admin.firestore.DocumentReference) => {
-        payment.id = docPayment.id;
-        console.info(`Payment ${JSON.stringify(payment)} stored.`);
-      })
-      .then(() => {
-        console.info(`Retrieving registration ${payment.registrationId} ...`);
-        return admin.firestore()
-          .doc(`registrations/${payment.registrationId}`)
-          .get();
-      })
-      .then((docRegistration: admin.firestore.DocumentData) => {
-        registration = docRegistration.data();
-        registration.id = docRegistration.id;
-        console.info(`Registration: ${JSON.stringify(registration)} retrieved.`);
-      })
-      .then(() => {
-        console.info(`Retrieving session ${registration.sessionId} ...`);
-        return admin.firestore()
-          .doc(`sessions/${registration.sessionId}`)
-          .get();
-      })
-      .then((docSession: admin.firestore.DocumentData) => {
-        session = docSession.data();
-        session.id = docSession.id;
-        console.info(`Session: ${JSON.stringify(session)} retrieved.`);
-      })
-      .then(() => {
-        const price: number = session.halfBoardRates; // TODO * 100 because it's in cents
-        const idempotencyKey: string = payment.id;
-        const stripe = new Stripe(functions.config().stripe.key);
-        const description: string = `Payment football camp: ${session.campId} | ${session.id} | ${registration.id}`;
-
-        const data = {
-          amount: price,
-          currency: 'EUR',
-          source: payment.stripeTokenId,
-          description: description,
-        };
-
-        const option = {
-          idempotency_key: idempotencyKey
-        };
-
-        console.info(`Doing payment ${JSON.stringify(data)} ...`);
-        return stripe.charges.create(data, option);
-      })
-      .then(() => {
-        console.info(`Payment done successfully. paymentId=${payment.id}`);
-        payment.state = 'ACCEPTED';
-      })
-      .catch((error) => {
-        console.error(`An error occured. paymentId=${payment.id}`);
-        console.error(error);
-        payment.state = 'REJECTED';
-      })
-      .then(() => {
-        console.info(`Updating payment ${payment.id} with state ${payment.state}...`);
-        return admin.firestore()
-          .doc(`payments/${payment.id}`)
-          .set(
-            {state: payment.state},
-            {merge: true}
-          )
-      })
-      .then(() => {
-        console.log(`Payment ${payment.id} updated with state ${payment.state}...`);
-        if (payment.state === 'ACCEPTED') {
-          console.info(`OUT - 200 - makePaymentByCard(${JSON.stringify(request.body)})`);
-          response.status(200).send();
-        } else {
-          console.error(`OUT - 500 - makePaymentByCard(${JSON.stringify(request.body)})`);
-          response.status(500).send();
-        }
-
-      })
-      .catch((error) => {
-        console.error(`OUT - 500 - makePaymentByCard(${JSON.stringify(request.body)})`);
-        console.error(error);
-        response.status(500).send();
-      })
   });
 });
 
