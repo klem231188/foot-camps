@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.footcamps.fr</loc>
-    <lastmod>2018-04-15</lastmod>
+    <lastmod>2019-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://www.footcamps.fr/home</loc>
+    <changefreq>weekly</changefreq>
   </url>
 
   <url>
@@ -13,23 +17,19 @@
     <changefreq>weekly</changefreq>
   </url>
 
+  <!-- Abers foot -->
   <url>
-    <loc>https://www.footcamps.fr/locate/S4pSRRdx4SiFgvLMqFbC</loc>
+    <loc>https://www.footcamps.fr/locate/gIEasJlqMnucrIgfNEH4</loc>
     <changefreq>weekly</changefreq>
   </url>
 
   <url>
-    <loc>https://www.footcamps.fr/locate/S4pSRRdx4SiFgvLMqFbC/details</loc>
+    <loc>https://www.footcamps.fr/locate/gIEasJlqMnucrIgfNEH4/details</loc>
     <changefreq>weekly</changefreq>
   </url>
 
   <url>
-    <loc>https://www.footcamps.fr/registration/S4pSRRdx4SiFgvLMqFbC</loc>
-    <changefreq>weekly</changefreq>
-  </url>
-
-  <url>
-    <loc>https://www.footcamps.fr/view-registrations</loc>
+    <loc>https://www.footcamps.fr/registration/gIEasJlqMnucrIgfNEH4</loc>
     <changefreq>weekly</changefreq>
   </url>
 
