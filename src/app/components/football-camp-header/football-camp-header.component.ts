@@ -46,16 +46,16 @@ export class FootballCampHeaderComponent implements OnInit, OnDestroy {
       filter(event => event instanceof NavigationStart))
       .subscribe((event: NavigationStart) => {
         if (/^\/registration\/\w+$/i.test(event.url)) {
-          // registration/:id
+          // registration/:id --> locate/:id/details-v2
           this.backUrl = event.url.replace('registration', 'locate');
-          this.backUrl += '/details';
+          this.backUrl += '/details-v2';
           console.log(this.backUrl);
-        } else if (/^\/locate\/\w+\/details$/i.test(event.url)) {
-          // locate/:id/details
-          this.backUrl = event.url.replace('/details', '');
+        } else if (/^\/locate\/\w+\/details-v2$/i.test(event.url)) {
+          // locate/:id/details-v2 --> locate/:id
+          this.backUrl = event.url.replace('/details-v2', '');
           console.log(this.backUrl);
         } else if (/^\/locate\/\w+$/i.test(event.url)) {
-          // locate/:id
+          // locate/:id --> locate
           this.backUrl = '/locate';
           console.log(this.backUrl);
         } else if (/^\/locate$/i.test(event.url)) {

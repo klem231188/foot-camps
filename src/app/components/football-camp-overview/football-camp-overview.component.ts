@@ -14,6 +14,7 @@ import {SessionService} from '../../services/session/session.service';
 export class FootballCampOverviewComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() footballCamp: FootballCamp;
+  @Input() showDetailsButton: boolean;
   sessions: Session[];
 
   constructor(private route: ActivatedRoute,
@@ -22,7 +23,6 @@ export class FootballCampOverviewComponent implements OnInit, OnChanges, OnDestr
               private sessionService: SessionService,
               private meta: Meta) {
   }
-
 
   ngOnChanges(changes: SimpleChanges): void {
     const footballCampChange = changes['footballCamp'];
@@ -34,6 +34,10 @@ export class FootballCampOverviewComponent implements OnInit, OnChanges, OnDestr
           this.sessions = sessions
         }));
     }
+  }
+
+  ngOnDestroy(): void {
+    console.log('FootballCampOverviewComponent.ngOnDestroy()');
   }
 
   ngOnInit(): void {
@@ -49,28 +53,11 @@ export class FootballCampOverviewComponent implements OnInit, OnChanges, OnDestr
       }));
   }
 
-  ngOnDestroy(): void {
-    console.log('FootballCampOverviewComponent.ngOnDestroy()');
-  }
-
   onDetailsClicked(): void {
-    this.router.navigate(['/locate', this.footballCamp.id, 'details']);
+    this.router.navigate(['/locate', this.footballCamp.id, 'details-v2']);
   }
 
   percentageOfRegistrations(session: Session): number {
     return ((session.numberOfRegistrationsInProgress + session.numberOfRegistrationsAccepted) / session.maximumNumberOfRegistrations) * 100;
   }
-
-  // nbRegistrationsAvailables(session: Session): number {
-  //   return session.maximumNumberOfRegistrations - (session.numberOfRegistrationsAccepted + session.numberOfRegistrationsInProgress);
-  // }
-  //
-  // tooltipAvailable(session: Session): string {
-  //   const nbRegistrationsAvailables = this.nbRegistrationsAvailables(session);
-  //   if (nbRegistrationsAvailables === 0) {
-  //     return `Le stage est complet !`;
-  //   } else {
-  //     return `Il y a ${nbRegistrationsAvailables} inscription(s) disponible(s).`;
-  //   }
-  // }
 }

@@ -1,16 +1,18 @@
-<mat-card class="search-bar">
+<mat-card class="search-bar" *ngIf="routeType == 'locate' || routeType == 'overview'">
   <form>
     <mat-form-field>
       <button mat-icon-button (click)="onCloseClicked()" matPrefix>
         <mat-icon>clear</mat-icon>
       </button>
-      <input type="text" matInput placeholder="Rechercher un stage de football" [formControl]="searchInput" [matAutocomplete]="auto">
+      <input type="text" matInput placeholder="Rechercher un stage de football" [formControl]="searchInput"
+             [matAutocomplete]="auto">
       <button mat-icon-button matSuffix>
         <mat-icon>search</mat-icon>
       </button>
     </mat-form-field>
 
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onFootballCampSelected($event.option.value)">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+                      (optionSelected)="onFootballCampSelected($event.option.value)">
       <mat-option *ngFor="let footballCamp of filteredFootballCamps$ | async" [value]="footballCamp">
         {{ footballCamp.city }}
       </mat-option>
@@ -18,10 +20,24 @@
   </form>
 </mat-card>
 
-<div class="overview-and-map">
-  <football-camp-overview [footballCamp]="footballCamp$ | async" *ngIf="(footballCamp$ | async)">
-  </football-camp-overview>
+<div class="content-container">
 
-  <football-camp-map [footballCamps]="footballCamps$ | async">
-  </football-camp-map>
+  <ng-container *ngIf="routeType == 'locate'">
+    <football-camp-map [footballCamps]="footballCamps$ | async">
+    </football-camp-map>
+  </ng-container>
+
+  <ng-container *ngIf="routeType == 'overview'">
+    <ng-container *ngIf="(footballCamp$ | async) != null">
+      <football-camp-overview class="add-padding" [footballCamp]="footballCamp$ | async" [showDetailsButton]="true"></football-camp-overview>
+    </ng-container>
+    <football-camp-map [footballCamps]="footballCamps$ | async"></football-camp-map>
+  </ng-container>
+
+  <ng-container *ngIf="routeType == 'details'">
+    <ng-container *ngIf="(footballCamp$ | async) != null">
+      <football-camp-overview [footballCamp]="footballCamp$ | async" [showDetailsButton]="false"></football-camp-overview>
+      <app-football-camp-details-v2 [campId]="(footballCamp$ | async).id"></app-football-camp-details-v2>
+    </ng-container>
+  </ng-container>
 </div>

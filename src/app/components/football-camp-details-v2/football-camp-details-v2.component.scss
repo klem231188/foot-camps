@@ -1,0 +1,296 @@
+@mixin app-football-camp-details-v2-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-football-camp-details-v2 {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+
+    .loading-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .details-container {
+      flex: 1;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+
+      .fab-button-registration {
+        position: fixed;
+        right: -50px;
+        @include small-screen {
+          bottom: 10px;
+          right: 10px;
+        }
+        z-index: 10;
+      }
+
+      .header-container {
+        align-self: center;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding-top: 10px;
+        padding-bottom: 25px;
+        background-color: mat-color($primary, 1);
+        width: 100%;
+
+        .brand {
+          font-family: 'Milkshake';
+          font-size: 60px;
+          color: white;
+        }
+
+        .logo {
+          height: 100px;
+          margin-right: 20px;
+        }
+      }
+
+      .content-container {
+        display: flex;
+        flex-direction: column;
+
+        .activity-image {
+          width: 100%;
+          height: 350px;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("./assets/img/home/1.jpeg");
+        }
+
+        .vertical-spacer {
+          height: 10px;
+          width: 100%;
+        }
+
+        .title-container {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          color: mat-color($primary);
+          font-size: 25px;
+          padding-bottom: 3px;
+          width: 100%;
+
+          .card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #E7F8FF;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-left: 10px;
+            margin-right: 5px;
+
+            mat-icon {
+              width: 25px !important;
+              height: 25px !important;
+              font-size: 25px !important;
+              line-height: 1 !important;
+            }
+          }
+        }
+
+        .description-container {
+          margin-left: 20px;
+
+          .description-block {
+            margin-bottom: 10px;
+
+            ul {
+              list-style: inside;
+
+              li {
+                margin-left: 20px;
+              }
+            }
+          }
+        }
+
+        .document-container {
+          display: flex;
+          flex-direction: column;
+          margin-left: 20px;
+          align-items: flex-start;
+
+          .document {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            color: mat-color($primary);
+
+            .card-icon {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              //background-color: #E7F8FF;
+              border-radius: 50%;
+              width: 50px;
+              height: 50px;
+              margin-right: 5px;
+
+              mat-icon {
+                width: 25px !important;
+                height: 25px !important;
+                font-size: 25px !important;
+                line-height: 1 !important;
+              }
+            }
+          }
+        }
+
+        .address-container {
+          margin-left: 20px;
+
+          a {
+            color: mat-color($primary);
+            @include small-screen {
+              text-overflow: ellipsis;
+            }
+          }
+        }
+
+        .gallery-container {
+          viewer {
+            .outerContainer {
+              top: 64px;
+              height: auto;
+              width: auto;
+            }
+          }
+        }
+
+        .organizer-container {
+          margin-left: 20px;
+
+          .quote {
+            margin-bottom: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            @include big-screen {
+              flex-direction: row;
+              align-items: center;
+            }
+          }
+
+          .quote:hover * {
+            filter: brightness(80%);
+          }
+
+          .avatar {
+            border-radius: 50%;
+            height: 128px;
+            width: 128px;
+            min-width: 128px;
+            margin-right: 10px;
+            background-color: mat-color($primary);
+          }
+        }
+
+        .date-price-container {
+          margin-left: 20px;
+
+          .description-block {
+            margin-bottom: 10px;
+
+            ul {
+              list-style: inside;
+
+              li {
+                margin-left: 20px;
+              }
+            }
+          }
+
+          table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            table-layout: fixed;
+          }
+
+          table caption {
+            font-size: 1.5em;
+            margin: .5em 0 .75em;
+          }
+
+          table tr {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: .35em;
+          }
+
+          table th,
+          table td {
+            padding: .625em;
+            text-align: center;
+          }
+
+          table td * {
+            margin: auto;
+          }
+
+          table th {
+            font-size: .85em;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+          }
+
+          @media screen and (max-width: 600px) {
+            table {
+              border: 0;
+            }
+            table caption {
+              font-size: 1.3em;
+            }
+            table thead {
+              border: none;
+              clip: rect(0 0 0 0);
+              height: 1px;
+              margin: -1px;
+              overflow: hidden;
+              padding: 0;
+              position: absolute;
+              width: 1px;
+            }
+            table tr {
+              border-bottom: 3px solid #ddd;
+              display: block;
+              margin-bottom: .625em;
+            }
+            table td {
+              border-bottom: 1px solid #ddd;
+              display: block;
+              font-size: .8em;
+              text-align: right;
+            }
+            table td:before {
+              content: attr(data-label);
+              float: left;
+              font-weight: bold;
+              text-transform: uppercase;
+            }
+            table td:last-child {
+              border-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

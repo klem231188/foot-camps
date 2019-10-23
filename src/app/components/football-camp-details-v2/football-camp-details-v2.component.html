@@ -1,0 +1,149 @@
+<ng-container *ngIf="!footballCamp">
+  <div class="loading-container">
+    <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+  </div>
+</ng-container>
+<ng-container *ngIf="footballCamp">
+  <div class="details-container">
+
+    <app-football-camp-action-button class="fab-button-registration" [action]="'S\'inscrire'"
+                                     [routerLink]="[ '/registration/', footballCamp.id ]"></app-football-camp-action-button>
+
+
+    <div class="header-container">
+      <img class="logo" [src]="footballCamp.details.pathToLogo">
+      <span class="brand">{{footballCamp.city}}</span>
+    </div>
+
+    <div class="content-container">
+      <div class="activity-image">
+        <app-football-camp-badges [campId]="footballCamp.id"></app-football-camp-badges>
+      </div>
+
+      <div class="title-container">
+        <div class="card-icon">
+          <mat-icon color="primary" [inline]="true">face</mat-icon>
+        </div>
+        Organisateurs
+      </div>
+      <div class="vertical-spacer"></div>
+      <div class="organizer-container">
+        <p [innerHTML]="footballCamp.details.organizerDescription | safeHtml"></p>
+        <div *ngIf="footballCamp.details.organizers != null">
+          <div class="quote" *ngFor="let organizer of footballCamp.details.organizers">
+            <img class="avatar" src="{{organizer.pathToPicture}}">
+            <blockquote>
+              <div [innerHTML]="organizer.quote | safeHtml"></div>
+              <cite>{{organizer.firstname}} {{organizer.lastname}}</cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="vertical-spacer"></div>
+      <div class="title-container">
+        <div class="card-icon">
+          <mat-icon color="primary" [inline]="true">directions_run</mat-icon>
+        </div>
+        Programme
+      </div>
+      <div class="vertical-spacer"></div>
+      <div class="description-container" [innerHTML]="footballCamp.details.activityDescription"></div>
+
+      <div class="vertical-spacer"></div>
+      <div class="title-container">
+        <div class="card-icon">
+          <mat-icon color="primary" [inline]="true">description</mat-icon>
+        </div>
+        Documents
+      </div>
+      <div class="vertical-spacer"></div>
+      <div class="document-container">
+        <a *ngFor="let document of footballCamp.details.documents"
+           class="document"
+           [href]="document.url"
+           download>
+          <div class="card-icon">
+            <mat-icon color="primary" [inline]="true">file_download</mat-icon>
+          </div>
+          <u>{{document.name}}</u>
+        </a>
+      </div>
+
+      <div class="vertical-spacer"></div>
+      <div class="title-container">
+          <div class="card-icon">
+            <mat-icon color="primary" [inline]="true">location_on</mat-icon>
+          </div>
+          Localisation
+      </div>
+      <div class="vertical-spacer"></div>
+      <div class="address-container">
+        <div [innerHTML]="footballCamp.details.location | safeHtml"></div>
+        <b>Adresse : </b>&nbsp;
+        <a [href]="footballCamp.details.gmapsUrl" target="_blank"><u>{{footballCamp.details.address}}</u></a>
+      </div>
+
+      <div class="vertical-spacer"></div>
+      <div class="title-container">
+        <div class="card-icon">
+          <mat-icon color="primary" [inline]="true">photo</mat-icon>
+        </div>
+        Gallerie photo
+      </div>
+      <div class="gallery-container" [ngClass]="isViewerOpened() ? 'z-index11' : 'z-index2'">
+        <gallery [flexBorderSize]="3" [flexImageSize]="7" [metadataUri]="footballCamp.details.pathToGallery"
+                 (viewerChange)="onViewerChange($event)">
+        </gallery>
+      </div>
+
+
+      <div class="vertical-spacer"></div>
+      <div class="title-container">
+        <div class="card-icon">
+          <mat-icon color="primary" [inline]="true">date_range</mat-icon>
+        </div>
+        Dates et tarifs
+      </div>
+      <div class="vertical-spacer"></div>
+      <div class="date-price-container">
+        <div [innerHTML]="footballCamp.details.priceDescription"></div>
+
+        <table>
+          <thead>
+          <tr>
+            <th scope="col">Sessions</th>
+            <th scope="col">Dates</th>
+            <th scope="col" *ngIf="hasFullBoardRatesSessions()">Tarifs en Pension complète</th>
+            <th scope="col" *ngIf="hasHalfBoardRatesSessions()">Tarifs en Demi-pension</th>
+            <th scope="col">Inscriptions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let session of sessions; let i = index">
+            <td data-label="Sessions">Session n°{{i}}</td>
+            <td data-label="Dates">Du {{session.start.toDate() | date : 'longDate'}}
+              au {{session.end.toDate() | date : 'longDate'}}</td>
+            <td data-label="Tarifs en Pension complète" *ngIf="hasFullBoardRatesSessions()">
+              {{session.fullBoardRates}}
+              €
+            </td>
+            <td data-label="Tarifs en Demi-pension" *ngIf="hasHalfBoardRatesSessions()">{{session.halfBoardRates}} €
+            </td>
+            <td data-label="Inscriptions">
+              <mat-progress-bar mode="determinate" [value]="percentageOfRegistrations(session)"
+                                color="primary"></mat-progress-bar>
+              {{(session.numberOfRegistrationsInProgress +
+                session.numberOfRegistrationsAccepted)}}/{{session.maximumNumberOfRegistrations}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="vertical-spacer"></div>
+    </div>
+
+  </div>
+
+</ng-container>

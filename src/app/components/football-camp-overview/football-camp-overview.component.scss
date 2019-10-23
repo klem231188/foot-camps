@@ -5,6 +5,16 @@
   $foreground: map-get($theme, foreground);
   football-camp-overview {
     overflow: auto;
+    @include mat-elevation(2);
+    background-color: #fafafa;
+
+    .loading-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
 
     .overview-image {
       width: 100%;
@@ -33,15 +43,11 @@
       margin-bottom: 10px;
     }
 
-    .fab-button {
-      position: absolute !important;
-      right: 5px;
-      bottom: -25px;
-    }
-
     mat-card {
-      padding-top: 100px !important;
+      border-radius: 0px !important;
       z-index: 0;
+      box-shadow: none !important;
+      background-color: #fafafa !important;
 
       .description-container {
         .description-block {
@@ -113,16 +119,18 @@
          width: 170px;
         }
 
-        mat-progress-bar {
+        .sessions-inner-container {
           flex: 1;
-          margin-left: 5px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
       }
 
       .button-container {
         display: flex;
         flex-direction: row;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center;
       }
     }

@@ -1,13 +1,18 @@
 import {Organizer} from './organizer';
 import {Category} from './category.enum';
+import {Link} from './link';
 
 export interface Details {
   // - Logo
   pathToLogo: string;
 
   // - Description
+  activityDescription: string;
   description: string;
   pathToSchedule: string;
+
+  // - Documents
+  documents: Link[];
 
   // - Location
   address: string;
@@ -22,7 +27,7 @@ export interface Details {
   pathToGallery: string;
 
   // - Date and prices
-  // sessions: Session[];
+  priceDescription: string;
 
   // - Registration
   useOnlineRegistration: boolean;

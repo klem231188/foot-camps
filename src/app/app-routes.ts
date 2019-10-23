@@ -7,14 +7,17 @@ import {PlaygroundComponent} from './components/playground/playground.component'
 import {FootballCampAdminDashboardComponent} from './components/football-camp-admin-dashboard/football-camp-admin-dashboard.component';
 import {FootballCampPrintRegistrationComponent} from './components/football-camp-print-registration/football-camp-print-registration.component';
 import {FootballCampHomeComponent} from './components/football-camp-home/football-camp-home.component';
+import {FootballCampDetailsV2Component} from './components/football-camp-details-v2/football-camp-details-v2.component';
 
 export const AppRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: FootballCampHomeComponent},
+  {path: 'locate/:id/details-v2', component: FootballCampLocatorComponent, data: {type: 'details'}},
   {path: 'locate/:id/details', component: FootballCampDetailsComponent},
-  {path: 'locate/:id', component: FootballCampLocatorComponent},
-  {path: 'locate', component: FootballCampLocatorComponent},
+  {path: 'locate/:id', component: FootballCampLocatorComponent, data: {type: 'overview'}},
+  {path: 'locate', component: FootballCampLocatorComponent, data: {type: 'locate'}},
   {path: 'details/:id', component: FootballCampDetailsComponent},
+  {path: 'details-v2/:id', component: FootballCampDetailsV2Component},
   {path: 'registration/:id', component: FootballCampRegistrationComponent},
   {path: 'login', component: FootballCampLoginComponent},
   {path: 'admin-dashboard', component: FootballCampAdminDashboardComponent},

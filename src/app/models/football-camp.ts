@@ -10,6 +10,17 @@ export interface FootballCamp {
   longitude: number;
   city: string;
 
+  // - Price
+  averagePrice: number;
+
+  // - Age
+  minimumAge: number;
+  maximumAge: number;
+
+  // - Gender
+  boysAccepted: boolean;
+  girlsAccepted: boolean;
+
   // - Overview data
   overview: Overview;
 
