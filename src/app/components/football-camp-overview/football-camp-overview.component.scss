@@ -27,6 +27,12 @@
     .overview-image-2 {
       max-height: 400px;
       overflow-y: auto;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1));
+
+      img {
+        position: relative;
+        z-index: -1;
+      }
     }
 
     mat-toolbar {
@@ -116,7 +122,7 @@
         margin-bottom: 5px;
 
         .date {
-         width: 170px;
+          width: 170px;
         }
 
         .sessions-inner-container {
