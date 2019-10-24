@@ -22,17 +22,19 @@
 
       mat-form-field {
         width: 100%;
+
         mat-icon {
           font-size: 150% !important;
         }
       }
     }
+
     .content-container {
       display: flex;
       flex-direction: row;
       flex: 1;
 
-      .add-padding{
+      .add-padding {
         padding-top: 100px;
       }
 
@@ -42,12 +44,17 @@
           width: 100%;
         }
       }
+
       football-camp-map {
         flex: 1;
         height: 100%;
         @include big-screen {
           display: block !important;
         }
+      }
+
+      app-football-camp-registration-v2 {
+        flex: 1;
       }
     }
   }

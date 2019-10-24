@@ -57,6 +57,7 @@ import { PaymentStatePipe } from './pipes/payment-state.pipe';
 import { FootballCampDetailsV2Component } from './components/football-camp-details-v2/football-camp-details-v2.component';
 import { FootballCampBadgesComponent } from './components/football-camp-badges/football-camp-badges.component';
 import { FootballCampActionButtonComponent } from './components/football-camp-action-button/football-camp-action-button.component';
+import { FootballCampRegistrationV2Component } from './components/football-camp-registration-v2/football-camp-registration-v2.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -127,6 +128,7 @@ registerLocaleData(localeFr, 'fr');
     FootballCampDetailsV2Component,
     FootballCampBadgesComponent,
     FootballCampActionButtonComponent,
+    FootballCampRegistrationV2Component,
   ],
   entryComponents: [
     FootballCampLoginComponent,

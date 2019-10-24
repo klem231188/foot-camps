@@ -40,4 +40,11 @@
       <app-football-camp-details-v2 [campId]="(footballCamp$ | async).id"></app-football-camp-details-v2>
     </ng-container>
   </ng-container>
+
+  <ng-container *ngIf="routeType == 'registration'">
+    <ng-container *ngIf="(footballCamp$ | async) != null">
+      <football-camp-overview [footballCamp]="footballCamp$ | async" [showDetailsButton]="false"></football-camp-overview>
+      <app-football-camp-registration-v2 [campId]="(footballCamp$ | async).id"></app-football-camp-registration-v2>
+    </ng-container>
+  </ng-container>
 </div>

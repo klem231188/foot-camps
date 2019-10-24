@@ -12,6 +12,7 @@ import {FootballCampDetailsV2Component} from './components/football-camp-details
 export const AppRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: FootballCampHomeComponent},
+  {path: 'locate/:id/registration-v2', component: FootballCampLocatorComponent, data: {type: 'registration'}},
   {path: 'locate/:id/details-v2', component: FootballCampLocatorComponent, data: {type: 'details'}},
   {path: 'locate/:id/details', component: FootballCampDetailsComponent},
   {path: 'locate/:id', component: FootballCampLocatorComponent, data: {type: 'overview'}},

@@ -6,9 +6,10 @@
 <ng-container *ngIf="footballCamp">
   <div class="details-container">
 
-    <app-football-camp-action-button class="fab-button-registration" [action]="'S\'inscrire'"
-                                     [routerLink]="[ '/registration/', footballCamp.id ]"></app-football-camp-action-button>
-
+    <app-football-camp-action-button class="fab-button-registration"
+                                     [action]="'S\'inscrire'"
+                                     [routerLink]="'/locate/' + footballCamp.id + '/registration-v2'">
+    </app-football-camp-action-button>
 
     <div class="header-container">
       <img class="logo" [src]="footballCamp.details.pathToLogo">

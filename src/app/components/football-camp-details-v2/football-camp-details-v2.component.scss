@@ -79,6 +79,7 @@
           flex-direction: row;
           align-items: center;
           color: mat-color($primary);
+          background-color: rgb(43, 43, 43);
           font-size: 25px;
           padding-bottom: 3px;
           width: 100%;
@@ -87,7 +88,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #E7F8FF;
             border-radius: 50%;
             width: 50px;
             height: 50px;
