@@ -17,15 +17,12 @@
     }
 
     .overview-image {
-      width: 100%;
-      max-height: 400px;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-    }
+      max-height: 450px;
 
-    .overview-image-2 {
-      max-height: 400px;
+      @include small-screen{
+        max-height: 400px;
+      }
+
       overflow-y: auto;
       background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1));
 
@@ -54,6 +51,11 @@
       z-index: 0;
       box-shadow: none !important;
       background-color: #fafafa !important;
+      padding: 0px !important;
+
+      mat-card-content {
+        padding: 10px !important;
+      }
 
       .description-container {
         .description-block {
@@ -138,6 +140,12 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
+
+        @include small-screen {
+          position: fixed;
+          bottom: 10px;
+          right: -50px;
+        }
       }
     }
   }

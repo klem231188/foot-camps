@@ -5,7 +5,6 @@
   $foreground: map-get($theme, foreground);
 
   app-football-camp-details-v2 {
-    flex: 1;
     display: flex;
     flex-direction: row;
 
@@ -28,7 +27,6 @@
         right: -50px;
         @include small-screen {
           bottom: 10px;
-          right: 10px;
         }
         z-index: 10;
       }
@@ -48,11 +46,17 @@
           font-family: 'Milkshake';
           font-size: 60px;
           color: white;
+          @include small-screen {
+            font-size: 25px;
+          }
         }
 
         .logo {
           height: 100px;
           margin-right: 20px;
+          @include small-screen {
+            height: 65px;
+          }
         }
       }
 
@@ -67,6 +71,10 @@
           background-position: center;
           background-size: cover;
           background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("./assets/img/home/1.jpeg");
+
+          app-football-camp-badges {
+            overflow: auto;
+          }
         }
 
         .vertical-spacer {
@@ -104,7 +112,9 @@
         }
 
         .description-container {
-          margin-left: 20px;
+          @include big-screen {
+            margin-left: 20px;
+          }
 
           .description-block {
             margin-bottom: 10px;
@@ -122,8 +132,11 @@
         .document-container {
           display: flex;
           flex-direction: column;
-          margin-left: 20px;
           align-items: flex-start;
+
+          @include big-screen {
+            margin-left: 20px;
+          }
 
           .document {
             display: flex;
@@ -152,7 +165,9 @@
         }
 
         .address-container {
-          margin-left: 20px;
+          @include big-screen {
+            margin-left: 20px;
+          }
 
           a {
             color: mat-color($primary);
@@ -173,7 +188,9 @@
         }
 
         .organizer-container {
-          margin-left: 20px;
+          @include big-screen {
+            margin-left: 20px;
+          }
 
           .quote {
             margin-bottom: 5px;
@@ -202,7 +219,9 @@
         }
 
         .date-price-container {
-          margin-left: 20px;
+          @include big-screen {
+            margin-left: 20px;
+          }
 
           .description-block {
             margin-bottom: 10px;

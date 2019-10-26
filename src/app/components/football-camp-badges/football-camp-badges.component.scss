@@ -16,6 +16,10 @@
     align-items: center;
     height: 350px;
 
+    @include small-screen {
+      justify-content: flex-start;
+    }
+
     .loading-container {
       display: flex;
       flex-direction: row;

@@ -28,23 +28,30 @@
   </ng-container>
 
   <ng-container *ngIf="routeType == 'overview'">
-    <ng-container *ngIf="(footballCamp$ | async) != null">
-      <football-camp-overview class="add-padding" [footballCamp]="footballCamp$ | async" [showDetailsButton]="true"></football-camp-overview>
+    <ng-container *ngIf="(footballCamp$ | async) as footballCamp">
+      <football-camp-overview [footballCamp]="footballCamp"
+                              [showDetailsButton]="true"></football-camp-overview>
+      <ng-container *ngIf="!isSmallScreen()">
+        <football-camp-map [footballCamps]="footballCamp"></football-camp-map>
+      </ng-container>
     </ng-container>
-    <football-camp-map [footballCamps]="footballCamps$ | async"></football-camp-map>
   </ng-container>
 
   <ng-container *ngIf="routeType == 'details'">
-    <ng-container *ngIf="(footballCamp$ | async) != null">
-      <football-camp-overview [footballCamp]="footballCamp$ | async" [showDetailsButton]="false"></football-camp-overview>
-      <app-football-camp-details-v2 [campId]="(footballCamp$ | async).id"></app-football-camp-details-v2>
+    <ng-container *ngIf="(footballCamp$ | async) as footballCamp">
+      <ng-container *ngIf="!isSmallScreen()">
+        <football-camp-overview [footballCamp]="footballCamp" [showDetailsButton]="false"></football-camp-overview>
+      </ng-container>
+      <app-football-camp-details-v2 [campId]="footballCamp.id"></app-football-camp-details-v2>
     </ng-container>
   </ng-container>
 
   <ng-container *ngIf="routeType == 'registration'">
-    <ng-container *ngIf="(footballCamp$ | async) != null">
-      <football-camp-overview [footballCamp]="footballCamp$ | async" [showDetailsButton]="false"></football-camp-overview>
-      <app-football-camp-registration-v2 [campId]="(footballCamp$ | async).id"></app-football-camp-registration-v2>
+    <ng-container *ngIf="(footballCamp$ | async) as footballCamp">
+      <ng-container *ngIf="!isSmallScreen()">
+        <football-camp-overview [footballCamp]="footballCamp" [showDetailsButton]="false"></football-camp-overview>
+      </ng-container>
+      <app-football-camp-registration-v2 [campId]="footballCamp.id"></app-football-camp-registration-v2>
     </ng-container>
   </ng-container>
 </div>

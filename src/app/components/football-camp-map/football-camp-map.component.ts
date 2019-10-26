@@ -15,7 +15,6 @@ export class FootballCampMapComponent implements OnInit, OnDestroy {
   zoom: number;
 
   constructor(private router: Router) {
-    //this.zoom = window.screen.width > 960 ? 6 : 5;
     this.zoom = window.screen.width > 960 ? 10 : 7;
   }
 

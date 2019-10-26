@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {FootballCamp} from '../../models/football-camp';
 import {Meta, Title} from '@angular/platform-browser';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'football-camp-locator',
@@ -22,6 +23,7 @@ export class FootballCampLocatorComponent implements OnInit, OnDestroy, AfterVie
   constructor(private router: Router,
               private route: ActivatedRoute,
               private footballCampService: FootballCampService,
+              private breakpointObserver: BreakpointObserver,
               private titleService: Title,
               private meta: Meta) {
   }
@@ -83,6 +85,11 @@ export class FootballCampLocatorComponent implements OnInit, OnDestroy, AfterVie
     this.routeType = 'locate';
     this.route.data
       .subscribe(data => this.routeType = data.type);
+
+  }
+
+  isSmallScreen(): boolean {
+    return this.breakpointObserver.isMatched('(max-width: 800px)');
   }
 
   onCloseClicked(): void {

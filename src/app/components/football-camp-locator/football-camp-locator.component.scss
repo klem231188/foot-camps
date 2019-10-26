@@ -9,15 +9,21 @@
 
     .search-bar {
       position: absolute;
-      left: 22px;
       top: 15px;
       z-index: 2;
       padding: 15px 15px 0px 15px;
 
-      width: 100%;
-
       @include big-screen {
         width: 560px;
+        left: 22px;
+      }
+
+      @include small-screen {
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
       }
 
       mat-form-field {
@@ -34,8 +40,8 @@
       flex-direction: row;
       flex: 1;
 
-      .add-padding {
-        padding-top: 100px;
+      @include small-screen {
+        width: 100%;
       }
 
       football-camp-overview {
@@ -45,12 +51,17 @@
         }
       }
 
+      app-football-camp-details-v2 {
+        flex: 1;
+        @include small-screen {
+          width: 100%;
+        }
+      }
+
       football-camp-map {
         flex: 1;
         height: 100%;
-        @include big-screen {
-          display: block !important;
-        }
+        display: block !important;
       }
 
       app-football-camp-registration-v2 {

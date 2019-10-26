@@ -41,6 +41,7 @@
       display: flex;
       flex-direction: row;
       align-items: center;
+      overflow: auto;
       .selected-football-camp-logo {
         height: 50px;
       }
