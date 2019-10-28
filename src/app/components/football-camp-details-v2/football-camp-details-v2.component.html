@@ -11,7 +11,7 @@
                                      [routerLink]="'/locate/' + footballCamp.id + '/registration-v2'">
     </app-football-camp-action-button>
 
-    <div class="header-container">
+    <div class="header-container" *ngIf="!isSmallScreen()">
       <img class="logo" [src]="footballCamp.details.pathToLogo">
       <span class="brand">{{footballCamp.city}}</span>
     </div>

@@ -17,6 +17,7 @@ import {Meta, Title} from '@angular/platform-browser';
 import {FootballCampShouldConnectDialogComponent} from '../football-camp-should-connect-dialog/football-camp-should-connect-dialog.component';
 import * as firebase from 'firebase';
 import {RegistrationState} from '../../models/registration-state.enum';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-football-camp-registration-v2',
@@ -41,6 +42,7 @@ export class FootballCampRegistrationV2Component implements OnInit, AfterViewIni
   @ViewChild(FootballCampRegistrationTraineeFormComponent) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
 
   constructor(private formBuilder: FormBuilder,
+              private breakpointObserver: BreakpointObserver,
               private footballCampService: FootballCampService,
               private registrationService: RegistrationService,
               private uploadService: UploadService,
@@ -53,6 +55,10 @@ export class FootballCampRegistrationV2Component implements OnInit, AfterViewIni
     this._subscriptions = [];
     this.checkPaymentSub = null;
     this.stepperSub = null;
+  }
+
+  isSmallScreen(): boolean {
+    return this.breakpointObserver.isMatched('(max-width: 800px)');
   }
 
   ngAfterViewChecked(): void {

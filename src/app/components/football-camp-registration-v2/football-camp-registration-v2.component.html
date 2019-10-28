@@ -5,7 +5,7 @@
 <div *ngIf="footballCamp" class="registration-main-container">
 
   <!-- Header -->
-  <div class="header-container">
+  <div class="header-container" *ngIf="!isSmallScreen()">
     <img class="logo" [src]="footballCamp.details.pathToLogo">
     <span class="brand">{{footballCamp.city}}</span>
   </div>

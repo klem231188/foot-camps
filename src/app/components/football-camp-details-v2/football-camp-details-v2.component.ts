@@ -6,6 +6,7 @@ import {FootballCampService} from '../../services/football-camp/football-camp.se
 import {SessionService} from '../../services/session/session.service';
 import {Subject} from 'rxjs';
 import * as _ from 'lodash';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-football-camp-details-v2',
@@ -20,7 +21,8 @@ export class FootballCampDetailsV2Component implements OnChanges, OnInit {
   sessions: Session[] = [];
   viewerOpened = false;
 
-  constructor(private footballCampService: FootballCampService,
+  constructor(private breakpointObserver: BreakpointObserver,
+              private footballCampService: FootballCampService,
               private sessionService: SessionService) {
   }
 
@@ -38,6 +40,10 @@ export class FootballCampDetailsV2Component implements OnChanges, OnInit {
 
   hasHalfBoardRatesSessions(): boolean {
     return !_.isEmpty(this.getHalfBoardRatesSessions());
+  }
+
+  isSmallScreen(): boolean {
+    return this.breakpointObserver.isMatched('(max-width: 800px)');
   }
 
   isViewerOpened(): boolean {
