@@ -32,7 +32,7 @@
       <football-camp-overview [footballCamp]="footballCamp"
                               [showDetailsButton]="true"></football-camp-overview>
       <ng-container *ngIf="!isSmallScreen()">
-        <football-camp-map [footballCamps]="footballCamp"></football-camp-map>
+        <football-camp-map [footballCamps]="footballCamps$ | async"></football-camp-map>
       </ng-container>
     </ng-container>
   </ng-container>
