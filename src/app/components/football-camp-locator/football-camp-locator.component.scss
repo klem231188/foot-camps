@@ -4,8 +4,6 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
   football-camp-locator {
-    overflow-y: hidden;
-    overflow-x: auto;
 
     .search-bar {
       position: absolute;

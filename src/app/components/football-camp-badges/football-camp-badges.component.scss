@@ -9,19 +9,15 @@
 
 @mixin app-football-camp-badges-theme($theme) {
   app-football-camp-badges {
-
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     height: 350px;
 
-    @include small-screen {
-      justify-content: flex-start;
-    }
-
     .loading-container {
       display: flex;
+      flex: 1;
       flex-direction: row;
       justify-content: center;
       align-items: center;
@@ -29,60 +25,13 @@
 
     .badges-container {
       display: flex;
+      flex: 1;
       flex-direction: row;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
 
-      .badge {
-        position: relative;
-        width: 216px;
-        display: inline-block;
-        margin: 40px;
-
-        .title {
-          font-family: "Montserrat", sans-serif;
-          font-weight: bold;
-          font-size: 1.7em;
-          position: absolute;
-          top: -28px;
-          border-radius: 8px 8px 0 0;
-          text-align: center;
-          width: 100%;
-          background: red;
-          padding: 20px 0;
-        }
-
-        .subtitle {
-          position: absolute;
-          font-family: "Fjalla One", sans-serif;
-          font-size: 1.8em;
-          width: 100%;
-          text-align: center;
-          color: white;
-          position: absolute;
-          top: 100px;
-
-          &:after {
-            content: "★ ★ ★";
-            display: block;
-            font-size: .4em;
-            position: relative;
-            margin: 15px 0 0;
-            transition: all .3s;
-          }
-        }
-
-        &:hover .subtitle:after {
-          word-spacing: 30px;
-        }
-      }
-
-      .primary {
-        @include setColor(mat-color($primary));
-      }
-
-      .accent {
-        @include setColor(mat-color($accent));
+      @include small-screen {
+        flex-wrap: wrap;
       }
     }
   }

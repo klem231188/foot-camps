@@ -5,6 +5,7 @@ import {Session} from '../../models/session';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {SessionService} from '../../services/session/session.service';
 import {switchMap, tap} from 'rxjs/operators';
+import {SafeHtml} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-football-camp-badges',
@@ -39,6 +40,22 @@ export class FootballCampBadgesComponent implements OnChanges, OnInit {
     return countTotalAvailableRegistrations;
   }
 
+  getAgeSubtitle(): SafeHtml {
+    return this.footballCamp.minimumAge + '<small> à </small>' + this.footballCamp.maximumAge
+  }
+
+  getPriceSubtitle(): SafeHtml {
+    return '' + this.footballCamp.averagePrice + '€';
+  }
+
+  getRegistrationSubtitle(): SafeHtml {
+    return '' + this.countCurrentRegistrations() + '<small> / </small>' + this.countTotalAvailableRegistrations();
+  }
+
+  getSessionSubtitle(): SafeHtml {
+    return '' + this.sessions.length;
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     console.log('FootballCampDetailsV2Component.ngOnChanges()');
     const campIdChange = changes['campId'];
@@ -64,4 +81,6 @@ export class FootballCampBadgesComponent implements OnChanges, OnInit {
       )
       .subscribe();
   }
+
+
 }

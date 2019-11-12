@@ -7,6 +7,9 @@
   app-football-camp-details-v2 {
     display: flex;
     flex-direction: row;
+    @include big-screen {
+      overflow: auto;
+    }
 
     .loading-container {
       flex: 1;
@@ -18,7 +21,6 @@
 
     .details-container {
       flex: 1;
-      overflow: auto;
       display: flex;
       flex-direction: column;
 
@@ -116,6 +118,10 @@
             margin-left: 20px;
           }
 
+          @include small-screen {
+            padding: 0px 5px 0px 5px;
+          }
+
           .description-block {
             margin-bottom: 10px;
 
@@ -136,6 +142,10 @@
 
           @include big-screen {
             margin-left: 20px;
+          }
+
+          @include small-screen {
+            padding: 0px 5px 0px 5px;
           }
 
           .document {
@@ -169,6 +179,10 @@
             margin-left: 20px;
           }
 
+          @include small-screen {
+            padding: 0px 5px 0px 5px;
+          }
+
           a {
             color: mat-color($primary);
             @include small-screen {
@@ -190,6 +204,10 @@
         .organizer-container {
           @include big-screen {
             margin-left: 20px;
+          }
+
+          @include small-screen {
+            padding: 0px 5px 0px 5px;
           }
 
           .quote {
@@ -221,6 +239,10 @@
         .date-price-container {
           @include big-screen {
             margin-left: 20px;
+          }
+
+          @include small-screen {
+            padding: 0px 5px 0px 5px;
           }
 
           .description-block {

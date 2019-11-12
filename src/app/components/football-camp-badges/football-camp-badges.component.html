@@ -2,44 +2,8 @@
   <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
 </div>
 <div class="badges-container" *ngIf="footballCamp && sessions">
-  <div class="badge accent">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="216px" height="232px"
-         viewBox="0 0 216 232">
-      <path fill="#2B2B2B"
-            d="M207,0C171.827,0.001,43.875,0.004,9.003,0c-5.619-0.001-9,3.514-9,9c0,28.23-0.006,151.375,0,169    c0.005,13.875,94.499,54,107.999,54S216,191.57,216,178V9C216,3.298,212.732,0,207,0z"/>
-    </svg>
-    <p class="title">Stages</p>
-    <p class="subtitle">{{sessions.length}}</p>
-  </div>
-
-  <div class="badge accent">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="216px" height="232px"
-         viewBox="0 0 216 232">
-      <path fill="#2B2B2B"
-            d="M207,0C171.827,0.001,43.875,0.004,9.003,0c-5.619-0.001-9,3.514-9,9c0,28.23-0.006,151.375,0,169    c0.005,13.875,94.499,54,107.999,54S216,191.57,216,178V9C216,3.298,212.732,0,207,0z"/>
-    </svg>
-    <p class="title">Inscriptions</p>
-    <p class="subtitle">{{countCurrentRegistrations()}} <small>/</small> {{countTotalAvailableRegistrations()}}</p>
-  </div>
-
-  <div class="badge accent">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="216px" height="232px"
-         viewBox="0 0 216 232">
-      <path fill="#2B2B2B"
-            d="M207,0C171.827,0.001,43.875,0.004,9.003,0c-5.619-0.001-9,3.514-9,9c0,28.23-0.006,151.375,0,169    c0.005,13.875,94.499,54,107.999,54S216,191.57,216,178V9C216,3.298,212.732,0,207,0z"/>
-    </svg>
-    <p class="title">Âge</p>
-    <p class="subtitle">{{footballCamp.minimumAge}} <small>à</small> {{footballCamp.maximumAge}} <small>ans</small></p>
-  </div>
-
-  <div class="badge accent">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="216px" height="232px"
-         viewBox="0 0 216 232">
-      <path fill="#2B2B2B"
-            d="M207,0C171.827,0.001,43.875,0.004,9.003,0c-5.619-0.001-9,3.514-9,9c0,28.23-0.006,151.375,0,169    c0.005,13.875,94.499,54,107.999,54S216,191.57,216,178V9C216,3.298,212.732,0,207,0z"/>
-    </svg>
-    <p class="title">Tarif</p>
-    <p class="subtitle">{{footballCamp.averagePrice}} <small>€</small></p>
-  </div>
-
+  <app-football-camp-badge [title]="'Stage'" [subtitle]="getSessionSubtitle()"></app-football-camp-badge>
+  <app-football-camp-badge [title]="'Inscription'" [subtitle]="getRegistrationSubtitle()"></app-football-camp-badge>
+  <app-football-camp-badge [title]="'Âge'" [subtitle]="getAgeSubtitle()"></app-football-camp-badge>
+  <app-football-camp-badge [title]="'Tarif'" [subtitle]="getPriceSubtitle()"></app-football-camp-badge>
 </div>

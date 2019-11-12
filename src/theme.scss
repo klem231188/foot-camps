@@ -25,6 +25,7 @@
 @import 'app/components/football-camp-home/football-camp-home.component.scss';
 @import 'app/components/football-camp-details-v2/football-camp-details-v2.component.scss';
 @import 'app/components/football-camp-badges/football-camp-badges.component.scss';
+@import 'app/components/football-camp-badge/football-camp-badge.component.scss';
 @import 'app/components/football-camp-action-button/football-camp-action-button.component.scss';
 @import 'app/components/football-camp-registration-v2/football-camp-registration-v2.component.scss';
 
@@ -58,6 +59,7 @@ $football-camp-theme: mat-light-theme($primary, $accent, $warn);
   @include app-football-camp-home-theme($theme);
   @include app-football-camp-details-v2-theme($theme);
   @include app-football-camp-badges-theme($theme);
+  @include app-football-camp-badge-theme($theme);
   @include app-football-camp-action-button-theme($theme);
   @include app-football-camp-registration-v2-theme($theme);
 }
