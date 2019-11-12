@@ -41,11 +41,11 @@ export class FootballCampBadgesComponent implements OnChanges, OnInit {
   }
 
   getAgeSubtitle(): SafeHtml {
-    return this.footballCamp.minimumAge + '<small> à </small>' + this.footballCamp.maximumAge
+    return this.footballCamp.minimumAge + '<small> à </small>' + this.footballCamp.maximumAge + ' ans';
   }
 
   getPriceSubtitle(): SafeHtml {
-    return '' + this.footballCamp.averagePrice + '€';
+    return '' + this.footballCamp.averagePrice + ' €';
   }
 
   getRegistrationSubtitle(): SafeHtml {
