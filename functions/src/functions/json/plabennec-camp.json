@@ -1,0 +1,69 @@
+{
+  "city": "Plab'été",
+  "latitude": 48.4996485,
+  "longitude": -4.4363984,
+  "averagePrice": 230,
+  "minimumAge": 5,
+  "maximumAge": 14,
+  "boysAccepted": true,
+  "girlsAccepted": true,
+  "details": {
+    "activityDescription": "<div class=\"description-block\">\n          <b>Football</b>\n          <br>\n          Initiation et perfectionnement technique\n          <br>\n          <ul>\n            <li>Pendant ce stage, nous proposerons des ateliers techniques pour la progression et/ou la découverte du\n              football.\n            </li>\n            <li>Pour les plus expérimenté(e)s, ce stage sera l’occasion de se perfectionner sous la houlette de notre\n              équipe technique formée et diplômée pour encadrer les stagiaires.\n            </li>\n            <li>Des défis et autres ateliers et jeux viendront rythmer la semaine des jeunes footballeurs.</li>\n          </ul>\n          Stage pour les féminines\n          <br>\n          Stage avec séances spécifiques gardiens de but\n          <br>\n          <br>\n          <b>Les sorties animées</b>\n          <br>\n          <ul>\n            <li>Au Soccer de Guipavas, pour un tournoi disputé et inoubliable.</li>\n            <li>A l’accrobranche, pour quitter les terrains, se détendre et s’amuser dans l’écopark adventures de Penzé\n              à\n              proximité de Taulé.\n            </li>\n            <li>Au Laser Game, pour une bataille virtuelle entre l’équipe des Rouges et celle des Bleus.</li>\n          </ul>\n          Nous nous déplacerons à chaque sortie avec un car de l’entreprise « les cars Bihan » pour une sécurité\n          maximale.\n          <br>\n          <br>\n\n          <b>Surprises</b>\n          <br>\n          Chaque stagiaire recevra un équipement complet de footballeur (maillot – short et chaussettes) pendant la\n          semaine du stage.\n          D’autres surprises récompenseront nos jeunes pousses !\n        </div>",
+    "address": "Complexe Sportif Louis Goasduff, 29860 Plabennec",
+    "description": "<div class=\"description-container\">\n            <div class=\"description-block\">\n              <b>Le projet éducatif : </b>\n              <a href=\"./assets/img/plouguerneau/projet-educatif.pdf\" download\n                 class=\"download-button mat-stroked-button\">\n                <i class=\"material-icons mat-18\">file_download</i>\n                Télécharger\n              </a>\n            </div>\n            <div class=\"description-block\">\n              <b>Pour qui : </b>Ces stages, en bord de mer, s'adressent à tous les passionnés de football et de sport\n              filles ou garçons, âgés de 8 à 13 ans, licenciés en club ou non.\n            </div>\n            <div class=\"description-block\">\n              <b>Le football : </b>Des séances de football seront programmées chaque jour pour les stagiaires.\n              Généralement les entrainements sont prévus le matin, et les matchs l'après-midi.\n              Une variété de support est utilisé, football sur herbe, futsal, beach soccer.\n            </div>\n            <div class=\"description-block\">\n              <b>Entrainement gardien : </b>Des scéances spécifiques prévues tout au long de la semaine.\n              <ul>\n                <li>Prise de balle (mains, pieds, sol, aérien)</li>\n                <li>Plongeon (avant, arrière, latéral)</li>\n                <li>Déplacement / placement / positionnement</li>\n                <li>Duel au sol</li>\n                <li>Initiation à la préparation physique (gainage, étirements, ...)</li>\n              </ul>\n            </div>\n            <div class=\"description-block\">\n              <b>Les animations : </b>En dehors du football, le stage prévoit plusieurs animations:\n              <ul>\n                <li>Sortie à la récré des trois curés</li>\n                <li>Activités nautiques</li>\n              </ul>\n            </div>\n            <div class=\"description-block\">\n              <b>Le coût du stage et prestations : </b>Une participation financière de 170 €(1)(2) est demandée à chaque\n              stagiaire afin de couvrir les frais, que ce soit les repas, les sorties, les frais d’encadrement des\n              éducateurs, les équipements.\n              (1) Les chèques vacances et coupons sport sont acceptés.\n              (2) Prix dégressifs si plusieurs frères et sœurs: 150 € à partir du 2ème enfant.\n            </div>\n            <div class=\"description-block\">\n              <b>L'équipement : </b>\n              <a href=\"./assets/img/plouguerneau/equipement.pdf\" download class=\"download-button mat-stroked-button\">\n                <i class=\"material-icons mat-18\">file_download</i>\n                Télécharger\n              </a>\n            </div>\n          </div>",
+    "documents": [
+      {
+        "url": "./assets/img/plabennec/overview.jpg",
+        "name": "L'affiche"
+      }
+    ],
+    "gmapsUrl": "https://goo.gl/maps/R1uTr3hM3j2S88NB8",
+    "location": "Le stage se déroule à Plabennec dans le Finistère (29), au complexe sportif Louis Goasduff",
+    "organizerDescription": "Les stages sont encadrés par une une équipe technique de <b>qualité</b>, <b>expérimentée</b> et <b>motivée</b>",
+    "organizers": [
+      {
+        "firstname": "Steven",
+        "lastname": "COAT",
+        "manageRegistration": true,
+        "pathToPicture": "./assets/img/plabennec/organizers/avatar/Steven-COAT.jpg",
+        "phoneNumber": "06.46.58.25.60",
+        "quote": "Directeur des Stages et responsable de la préformation au Stade Plabennecois Football, joueur et capitaine de l’équipe N3"
+      },
+      {
+        "firstname": "Christophe",
+        "lastname": "LE ROUX",
+        "manageRegistration": false,
+        "pathToPicture": "./assets/img/plabennec/organizers/avatar/Christophe-LE-ROUX.jpg",
+        "phoneNumber": "NA",
+        "quote": "Educateur au Stade Plabennecois, joueur de l’équipe N3"
+      },
+      {
+        "firstname": "Loann",
+        "lastname": "GUEGAN",
+        "manageRegistration": false,
+        "pathToPicture": "./assets/img/plabennec/organizers/avatar/Loann-GUEGAN.jpg",
+        "phoneNumber": "NA",
+        "quote": "Educateur au Stade Plabennecois, joueur de l’équipe N3"
+      },
+      {
+        "firstname": "Matthieu",
+        "lastname": "KERVESTIN",
+        "manageRegistration": false,
+        "pathToPicture": "./assets/img/plabennec/organizers/avatar/Matthieu-KERVESTIN.jpg",
+        "phoneNumber": "NA",
+        "quote": "Entraineur des gardiens au Stade Plabennecois, gardien de l’équipe N3"
+      }
+    ],
+    "pathToGallery": "./assets/img/plabennec/gallery/data.json",
+    "pathToLogo": "./assets/img/plabennec/logo.png",
+    "pathToSchedule": "./assets/img/plabennec/programme.png",
+    "priceDescription": "<div class=\"description-block\">\n            <b>Le coût du stage et prestations : </b>Une participation financière de 230 €<sup>(1)(2)</sup> est demandée à\n            chaque\n            stagiaire afin de couvrir les frais, que ce soit les repas, les sorties, les frais d’encadrement des\n            éducateurs, les équipements.\n            <ul>\n              <li><sup>(1)</sup> Les chèques vacances et coupons sport sont acceptés.</li>\n              <li><sup>(2)</sup> Prix dégressifs si plusieurs frères et sœurs: 180 € à partir du 2ème enfant.</li>\n            </ul>\n          </div>",
+    "useOnlineRegistration": true,
+    "registrationUrl": null
+  },
+  "overview": {
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "pathToImage": "./assets/img/plabennec/overview.jpg",
+    "title": "Bienvenue au Foot Camps de Plabennec"
+  }
+}

@@ -3,6 +3,8 @@ import * as AberCamp from './json/aber-camp.json'
 import * as AberSessions from './json/aber-sessions.json'
 import * as PlouguerneauCamp from './json/plouguerneau-camp.json'
 import * as PlouguerneauSessions from './json/plouguerneau-sessions.json'
+import * as PlabennecCamp from './json/plabennec-camp.json'
+import * as PlabennecSessions from './json/plabennec-sessions.json'
 import {FootballCamp} from '../../../src/app/models/football-camp';
 import {Session} from '../../../src/app/models/session';
 
@@ -23,6 +25,19 @@ export function addCampPlouguerneau(request, response): Promise<void> {
   // @ts-ignore
   const camp: FootballCamp = PlouguerneauCamp as FootballCamp;
   const sessions: Session[] = (PlouguerneauSessions as Session[]);
+  for (const session of sessions) {
+    session.end = admin.firestore.Timestamp.fromDate(new Date(session.end));
+    session.endRegistrationDate = admin.firestore.Timestamp.fromDate(new Date(session.endRegistrationDate));
+    session.start = admin.firestore.Timestamp.fromDate(new Date(session.start));
+  }
+
+  return addCamp(request, response, camp, sessions);
+}
+
+export function addCampPlabennec(request, response): Promise<void> {
+  // @ts-ignore
+  const camp: FootballCamp = PlabennecCamp as FootballCamp;
+  const sessions: Session[] = (PlabennecSessions as Session[]);
   for (const session of sessions) {
     session.end = admin.firestore.Timestamp.fromDate(new Date(session.end));
     session.endRegistrationDate = admin.firestore.Timestamp.fromDate(new Date(session.endRegistrationDate));

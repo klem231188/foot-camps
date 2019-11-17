@@ -1,0 +1,53 @@
+[
+  {
+    "acceptedPaymentTypes": [
+      "CHECK",
+      "HOLIDAY_CHECK"
+    ],
+    "campId": "",
+    "numberOfRegistrationsAccepted": 0,
+    "numberOfRegistrationsInProgress": 0,
+    "numberOfRegistrationsRejected": 0,
+    "enable": true,
+    "end": "2019-07-12T12:00:00+01:00",
+    "endRegistrationDate": "2019-07-08T00:00:00+01:00",
+    "fullBoardRates": null,
+    "halfBoardRates": 230,
+    "maximumNumberOfRegistrations": 40,
+    "start": "2019-07-08T08:30:00+01:00"
+  },
+  {
+    "acceptedPaymentTypes": [
+      "CHECK",
+      "HOLIDAY_CHECK"
+    ],
+    "campId": "",
+    "numberOfRegistrationsAccepted": 0,
+    "numberOfRegistrationsInProgress": 0,
+    "numberOfRegistrationsRejected": 0,
+    "enable": true,
+    "end": "2019-07-19T12:00:00+01:00",
+    "endRegistrationDate": "2019-07-15T00:00:00+01:00",
+    "fullBoardRates": null,
+    "halfBoardRates": 230,
+    "maximumNumberOfRegistrations": 40,
+    "start": "2019-07-15T08:30:00+01:00"
+  },
+  {
+    "acceptedPaymentTypes": [
+      "CHECK",
+      "HOLIDAY_CHECK"
+    ],
+    "campId": "",
+    "numberOfRegistrationsAccepted": 0,
+    "numberOfRegistrationsInProgress": 0,
+    "numberOfRegistrationsRejected": 0,
+    "enable": true,
+    "end": "2019-07-26T12:00:00+01:00",
+    "endRegistrationDate": "2019-07-22T00:00:00+01:00",
+    "fullBoardRates": null,
+    "halfBoardRates": 230,
+    "maximumNumberOfRegistrations": 40,
+    "start": "2019-07-22T08:30:00+01:00"
+  }
+]

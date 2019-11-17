@@ -4,7 +4,7 @@ import {Change, EventContext} from 'firebase-functions/lib/cloud-functions';
 import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
 import {Payment} from '../../src/app/models/payment';
 import {RegistrationV2} from '../../src/app/models/registration-v2.model';
-import {addCampAberFoot, addCampPlouguerneau} from './functions/add-camps.functions';
+import {addCampAberFoot, addCampPlabennec, addCampPlouguerneau} from './functions/add-camps.functions';
 import {printRegistration} from './functions/print-registration.functions';
 import {anonymize} from './functions/anonymize.functions';
 import {sendMailAboutPayment, sendMailAboutRegistration} from './functions/send-mail.functions';
@@ -30,6 +30,10 @@ export const httpAddCampPlouguerneau = functions.https.onRequest((request, respo
   return addCampPlouguerneau(request, response);
 });
 
+export const httpAddCampPlabennec = functions.https.onRequest((request, response) => {
+  return addCampPlabennec(request, response);
+});
+
 const opts = {timeoutSeconds: 60, memory: '2GB' as '128MB' | '256MB' | '512MB' | '1GB' | '2GB'};
 export const httpPrintRegistration = functions.runWith(opts).https.onRequest((request, response) => {
   return cors(request, response, async () => {
@@ -37,7 +41,7 @@ export const httpPrintRegistration = functions.runWith(opts).https.onRequest((re
       const campId: string = request.body.campId;
       const sessionId: string = request.body.sessionId;
       const registrationId: string = request.body.registrationId;
-      const url =  functions.config().url.printregistration + `?campId=${campId}&sessionId=${sessionId}&registrationId=${registrationId}`;
+      const url = functions.config().url.printregistration + `?campId=${campId}&sessionId=${sessionId}&registrationId=${registrationId}`;
       const screenshot: Buffer = await printRegistration(url);
       console.log('Success while rendering registration');
       response.setHeader('Content-Type', 'image/png');
@@ -50,10 +54,10 @@ export const httpPrintRegistration = functions.runWith(opts).https.onRequest((re
   });
 });
 
-export const httpSendMail  = functions.https.onRequest(async (request, response) => {
+export const httpSendMail = functions.https.onRequest(async (request, response) => {
   await sendMailAboutRegistration({
     state: RegistrationState.IN_PROGRESS,
-    sessionId:'KxZ64nZ9ukgdCkl9r2Sv',
+    sessionId: 'KxZ64nZ9ukgdCkl9r2Sv',
     trainee: {
       firstname: 'Clément',
       lastname: 'TREGUER',
