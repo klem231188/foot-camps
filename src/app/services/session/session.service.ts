@@ -3,6 +3,8 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {Session} from '../../models/session';
+import Timestamp = firestore.Timestamp;
+import {firestore} from 'firebase';
 
 @Injectable()
 export class SessionService {
@@ -13,12 +15,11 @@ export class SessionService {
     angularFirestore.firestore.settings({timestampsInSnapshots: true});
   }
 
-  update(session: Session, data: Partial<Session>): Promise<any> {
+  getSession(sessionId: string): Observable<Session> {
     return this.angularFirestore
-      .doc(`sessions/${session.id}`)
-      .update(data);
+      .doc<Session>(`sessions/${sessionId}`)
+      .valueChanges();
   }
-
 
   getSessions(): Observable<Session[]> {
     if (this.sessions$ == null) {
@@ -40,20 +41,26 @@ export class SessionService {
     return this.sessions$;
   }
 
-  getSession(sessionId: string): Observable<Session> {
-    return this.angularFirestore
-      .doc<Session>(`sessions/${sessionId}`)
-      .valueChanges();
-  }
-
   getSessionsFromCampId(campId: string): Observable<Session[]> {
-    return this.getSessions().pipe(
-      map<Session[], Session[]>((sessions: Session[]) => {
-          return sessions.filter(session => {
-            return campId === session.campId;
-          });
-        }
-      ));
+    return this.getSessions()
+      .pipe(
+        map<Session[], Session[]>((sessions: Session[]) => {
+          return sessions
+            .filter(session => {
+              return campId === session.campId;
+            })
+            .sort((s1, s2) => {
+              const d1: Date = (s1.end as Timestamp).toDate();
+              const d2: Date = (s2.end as Timestamp).toDate();
+              return d1.getTime() - d2.getTime();
+            });
+        })
+      );
   }
 
+  update(session: Session, data: Partial<Session>): Promise<any> {
+    return this.angularFirestore
+      .doc(`sessions/${session.id}`)
+      .update(data);
+  }
 }
