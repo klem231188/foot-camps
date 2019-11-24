@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
+import {Component, OnInit} from '@angular/core';
+import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-football-camp-home',
@@ -8,9 +8,8 @@ import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/lay
 })
 export class FootballCampHomeComponent implements OnInit {
 
-  proportion = 25;
   hideArrows = false;
-
+  proportion = 25;
   slides = [
     {
       image: './assets/img/home/1.jpeg'
@@ -20,16 +19,11 @@ export class FootballCampHomeComponent implements OnInit {
     },
     {
       image: './assets/img/home/3.jpeg'
-    },
-    {
-      image: './assets/img/home/4.jpeg'
-    },
-    {
-      image: './assets/img/home/5.jpeg'
     }
   ];
 
-  constructor(public breakpointObserver: BreakpointObserver) { }
+  constructor(public breakpointObserver: BreakpointObserver) {
+  }
 
   ngOnInit() {
     this.breakpointObserver

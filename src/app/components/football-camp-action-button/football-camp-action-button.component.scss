@@ -1,6 +1,11 @@
 @mixin app-football-camp-action-button-theme($theme) {
   app-football-camp-action-button {
     transform: scale(0.5);
+    transform-origin: center center;
+    margin-left: -60px;
+    margin-right: -60px;
+    margin-top: -20px;
+    margin-bottom: -20px;
 
     * {
       box-sizing: border-box;

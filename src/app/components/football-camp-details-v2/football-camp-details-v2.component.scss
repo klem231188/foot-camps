@@ -26,9 +26,14 @@
 
       .fab-button-registration {
         position: fixed;
-        right: -50px;
+
+        @include big-screen {
+          right: 20px;
+          top: 75px;
+        }
         @include small-screen {
-          bottom: 10px;
+          bottom: 30px;
+          right: 0px;
         }
         z-index: 10;
       }
