@@ -2,8 +2,9 @@
   "name": "functions",
   "dependencies": {
     "cors": "^2.8.5",
-    "firebase-admin": "^8.2.0",
-    "firebase-functions": "^3.0.1",
+    "firebase-admin": "^8.8.0",
+    "firebase-functions": "^3.3.0",
+    "json2csv": "^4.5.4",
     "node-fetch": "^2.3.0",
     "nodemailer": "~4.6.0",
     "pdfmake": "~0.1.50",
@@ -11,6 +12,7 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.4",
+    "@types/json2csv": "^4.5.0",
     "@types/nodemailer": "^4.6.0",
     "@types/puppeteer": "^1.12.1",
     "tslint": "~5.8.0",

@@ -38,6 +38,28 @@
     <mat-error *ngIf="email.invalid">{{getEmailError()}}</mat-error>
   </mat-form-field>
 
+  <!-- shortSize  -->
+  <mat-radio-group formControlName="shortSize">
+    Taille short/maillot <sup>*</sup> :&nbsp;
+    <mat-radio-button value="XXS">XXS</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="XS">XS</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="S">S</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="M">M</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="L">L</mat-radio-button>
+  </mat-radio-group>
+  <span class="separator"></span>
+
+  <!-- shoeSize -->
+  <mat-form-field>
+    <input matInput placeholder="Pointure" formControlName="shoeSize"  type="number" required>
+    <mat-error *ngIf="shoeSize.invalid">{{getShoeSizeError()}}</mat-error>
+  </mat-form-field>
+  <span class="separator"></span>
+
   <h4>Caractéristiques sportives du stagiaire</h4>
   <!-- Club -->
   <mat-form-field>

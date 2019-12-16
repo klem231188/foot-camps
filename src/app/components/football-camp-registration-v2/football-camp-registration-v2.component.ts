@@ -51,7 +51,6 @@ export class FootballCampRegistrationV2Component implements OnInit, AfterViewIni
               private router: Router,
               private titleService: Title,
               private meta: Meta) {
-
     this._subscriptions = [];
     this.checkPaymentSub = null;
     this.stepperSub = null;
@@ -166,6 +165,8 @@ export class FootballCampRegistrationV2Component implements OnInit, AfterViewIni
         club: this.traineeFormComponent.club.value,
         fieldPosition: this.traineeFormComponent.fieldPosition.value,
         feet: this.traineeFormComponent.feet.value,
+        shoeSize: this.traineeFormComponent.shoeSize.value,
+        shortSize: this.traineeFormComponent.shortSize.value,
       },
 
       documents: this.documentsComponent.documents.value,

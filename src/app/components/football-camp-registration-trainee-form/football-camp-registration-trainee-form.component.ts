@@ -10,11 +10,6 @@ import {Observable} from 'rxjs/Observable';
 })
 export class FootballCampRegistrationTraineeFormComponent implements OnInit {
 
-  // Fields
-  @Output() isValid: Observable<boolean>;
-
-  registrationForm: FormGroup;
-
   birthdate: FormControl;
   club: FormControl;
   email: FormControl;
@@ -22,41 +17,32 @@ export class FootballCampRegistrationTraineeFormComponent implements OnInit {
   fieldPosition: FormControl;
   firstname: FormControl;
   gender: FormControl;
-
+  @Output() isValid: Observable<boolean>;
   lastname: FormControl;
+  registrationForm: FormGroup;
+  shoeSize: FormControl;
+  shortSize: FormControl;
 
   // Constructor
   constructor(private formBuilder: FormBuilder) {
   }
 
-  // Lifecycle hooks
-  ngOnInit() {
-    console.log('FootballCampRegistrationTraineeFormComponent.ngOnInit()')
-    this.birthdate = new FormControl(null, [Validators.required]);
-    this.club = new FormControl(null, []);
-    this.email = new FormControl(null, [Validators.required, Validators.email]);
-    this.fieldPosition = new FormControl(null, [Validators.required]);
-    this.feet = new FormControl(null, [Validators.required]);
-    this.firstname = new FormControl('', [Validators.required, Validators.minLength(2)]);
-    this.gender = new FormControl('', [Validators.required]);
-    this.lastname = new FormControl('', [Validators.required, Validators.minLength(2)]);
-    this.registrationForm = this.formBuilder.group({
-      'birthdate': this.birthdate,
-      'club': this.club,
-      'email': this.email,
-      'feet': this.feet,
-      'fieldPosition': this.fieldPosition,
-      'firstname': this.firstname,
-      'gender': this.gender,
-      'lastname': this.lastname
-    });
+  getBirthdateError() {
+    if (this.birthdate.hasError('required')) {
+      return 'La date de naissance est obligatoire';
+    } else {
+      return '';
+    }
+  }
 
-    this.isValid = this.registrationForm.statusChanges
-      .pipe(
-        map(status => {
-          return status === 'VALID';
-        })
-      );
+  getEmailError() {
+    if (this.email.hasError('required')) {
+      return 'L\' email est obligatoire';
+    } else if (this.email.hasError('email')) {
+      return 'L\' email est incorrect';
+    } else {
+      return '';
+    }
   }
 
   // Methods
@@ -80,22 +66,48 @@ export class FootballCampRegistrationTraineeFormComponent implements OnInit {
     }
   }
 
-  getBirthdateError() {
-    if (this.birthdate.hasError('required')) {
-      return 'La date de naissance est obligatoire';
-    } else {
+  getShoeSizeError() {
+    if (this.shoeSize.hasError('required')) {
+      return 'La pointure est obligatoire';
+    } else if (this.shoeSize.hasError('min')) {
+      return 'La pointure doit être un nombre positif';
+    }  else {
       return '';
     }
   }
 
-  getEmailError() {
-    if (this.email.hasError('required')) {
-      return 'L\' email est obligatoire';
-    } else if (this.email.hasError('email')) {
-      return 'L\' email est incorrect';
-    } else {
-      return '';
-    }
+  // Lifecycle hooks
+  ngOnInit() {
+    console.log('FootballCampRegistrationTraineeFormComponent.ngOnInit()')
+    this.birthdate = new FormControl(null, [Validators.required]);
+    this.club = new FormControl(null, []);
+    this.email = new FormControl(null, [Validators.required, Validators.email]);
+    this.fieldPosition = new FormControl(null, [Validators.required]);
+    this.feet = new FormControl(null, [Validators.required]);
+    this.firstname = new FormControl('', [Validators.required, Validators.minLength(2)]);
+    this.gender = new FormControl('', [Validators.required]);
+    this.lastname = new FormControl('', [Validators.required, Validators.minLength(2)]);
+    this.shoeSize = new FormControl('', [Validators.required, Validators.min(0)]);
+    this.shortSize = new FormControl('', [Validators.required]);
+    this.registrationForm = this.formBuilder.group({
+      'birthdate': this.birthdate,
+      'club': this.club,
+      'email': this.email,
+      'feet': this.feet,
+      'fieldPosition': this.fieldPosition,
+      'firstname': this.firstname,
+      'gender': this.gender,
+      'lastname': this.lastname,
+      'shoeSize': this.shoeSize,
+      'shortSize': this.shortSize,
+    });
+
+    this.isValid = this.registrationForm.statusChanges
+      .pipe(
+        map(status => {
+          return status === 'VALID';
+        })
+      );
   }
 
 }

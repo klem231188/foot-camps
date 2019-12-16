@@ -9,6 +9,7 @@ import {printRegistration} from './functions/print-registration.functions';
 import {anonymize} from './functions/anonymize.functions';
 import {sendMailAboutPayment, sendMailAboutRegistration} from './functions/send-mail.functions';
 import {RegistrationState} from '../../src/app/models/registration-state.enum';
+import {getShortExportAsCsvFromCamp} from './functions/export-short-csv.functions';
 
 // CORS Express middleware to enable CORS Requests.
 const cors = require('cors')({
@@ -65,6 +66,21 @@ export const httpSendMail = functions.https.onRequest(async (request, response) 
     }
   });
   response.send('anonymize successful');
+});
+
+export const httpExportShortAsCsv = functions.https.onRequest(async (request, response) => {
+  try {
+    const campId: string = request.body.campId;
+    const csv: string = await getShortExportAsCsvFromCamp(campId);
+    response.setHeader(
+      "Content-disposition",
+      "attachment; filename=export-maillot.csv"
+    );
+    response.set("Content-Type", "text/csv");
+    response.status(200).send(csv);
+  } catch (e) {
+    response.status(500).send('An error occured during csv export');
+  }
 });
 
 export const onUpdatePaymentState = functions.firestore

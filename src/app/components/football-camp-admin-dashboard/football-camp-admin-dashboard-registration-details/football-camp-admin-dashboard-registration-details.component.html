@@ -28,18 +28,25 @@
                             <b>{{registration.state | state}}</b>
                           </span><br>
 
-    <h2>Caractéristiques générales </h2>
-    Prénom : {{registration.trainee.firstname | titlecase}} <br>
-    Nom : {{registration.trainee.lastname | uppercase}} <br>
-    Sexe : {{registration.trainee.gender | gender}} <br>
-    Email : {{registration.trainee.email}} <br>
-    Date de naissance : {{registration.trainee.birthdate.toDate() | date}}<br>
-    Age : {{registration.trainee.birthdate.toDate() | age}} ans <br>
-
-    <h2>Caractéristiques sportives</h2>
-    Club : {{registration.trainee.club | titlecase}}<br>
-    Poste : {{registration.trainee.fieldPosition | fieldPosition}}<br>
-    Pied : {{registration.trainee.feet | feet}}<br>
+    <div class=caracteristic-container>
+      <div class="caracteristic-general-container">
+        <h2>Caractéristiques générales </h2>
+        Prénom : {{registration.trainee.firstname | titlecase}} <br>
+        Nom : {{registration.trainee.lastname | uppercase}} <br>
+        Sexe : {{registration.trainee.gender | gender}} <br>
+        Email : {{registration.trainee.email}} <br>
+        Date de naissance : {{registration.trainee.birthdate.toDate() | date}}<br>
+        Age : {{registration.trainee.birthdate.toDate() | age}} ans <br>
+        Pointure: {{registration.trainee.shoeSize}}<br>
+        Taille Maillot/Short : {{registration.trainee.shortSize}}
+      </div>
+      <div>
+        <h2>Caractéristiques sportives</h2>
+        Club : {{registration.trainee.club | titlecase}}<br>
+        Poste : {{registration.trainee.fieldPosition | fieldPosition}}<br>
+        Pied : {{registration.trainee.feet | feet}}<br>
+      </div>
+    </div>
 
     <h2>Documents</h2>
     <div *ngFor="let document of registration.documents">
