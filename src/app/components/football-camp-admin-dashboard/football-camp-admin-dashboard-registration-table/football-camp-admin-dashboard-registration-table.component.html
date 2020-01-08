@@ -38,7 +38,18 @@
     <tr mat-row (click)="onClickRegistration(row);" *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <div class="spacer"></div>
-  <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 20, 50]" [pageSize]="20" showFirstLastButtons></mat-paginator>
+  <div class="mat-paginator-sticky">
+    <button mat-stroked-button color="primary" (click)="exportAll()">
+      <mat-icon>save_alt</mat-icon>
+      Export global
+    </button>
+    <button mat-stroked-button color="primary" (click)="exportEquipment()">
+      <mat-icon>save_alt</mat-icon>
+      Export équipement
+    </button>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" [pageSize]="20" showFirstLastButtons></mat-paginator>
+  </div>
+
 </ng-container>
 
 <div class="loading-container" *ngIf="loading">

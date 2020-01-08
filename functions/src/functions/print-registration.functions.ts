@@ -1,26 +1,40 @@
 import {BoundingBox, ElementHandle} from 'puppeteer';
 const puppeteer = require('puppeteer');
 
+const width = 797;
+const height = 2600;
+const browserPromise = puppeteer.launch({
+  args: [
+    '--disable-infobars',
+    '--no-sandbox',
+    `--window-size=${width},${height}`
+  ],
+  // headless: false
+});
+
 export async function printRegistration(url: string): Promise<Buffer> {
   console.log(`printRegistration(${url})`);
 
-  const width = 800;
-  const height = 1200;
-
-  const browser = await puppeteer.launch({
-    //headless: false,
-    //slowMo: 250,
-    args: [
-      '--disable-infobars',
-      '--no-sandbox',
-      `--window-size=${width},${height}`
-    ],
-  });
-
+  const browser = await browserPromise;
   const page = await browser.newPage();
   await page.setViewport({width: width, height: height, deviceScaleFactor: 2});
+
+  // Wait
   await page.goto(url, {waitUntil: 'networkidle2'});
-  await page.waitFor(2000); // Wait that image loads
+
+  // Wait all images to load
+  await page.evaluate(async () => {
+    const selectors = Array.from(document.querySelectorAll('img'));
+    await Promise.all(selectors.map(img => {
+      if (img.complete) {
+        return Promise.resolve(null);
+      }
+      return new Promise((resolve, reject) => {
+        img.addEventListener('load', resolve);
+        img.addEventListener('error', reject);
+      });
+    }));
+  });
 
   const elementHandle: ElementHandle = await page.$('.print-container');
   const boundingBox: BoundingBox = await elementHandle.boundingBox();
@@ -35,7 +49,35 @@ export async function printRegistration(url: string): Promise<Buffer> {
     }
   });
 
-  await browser.close();
+  await page.close();
+  return buffer;
+}
+
+export async function printEquipment(url: string): Promise<Buffer> {
+  console.log(`printEquipment(${url})`);
+  const browser = await browserPromise;
+
+  const page = await browser.newPage();
+  await page.goto(url);
+  await page.waitForSelector('.shortSize', {visible: true});
+  await page.waitForSelector('.shoeSize', {visible: true});
+  await page.evaluate(() => {
+    const body: HTMLElement = document.querySelector('body');
+    body.style.height = 'inherit';
+    body.style.overflow = 'initial';
+
+    const appRoot: HTMLElement = document.querySelector('app-root');
+    appRoot.style.overflow = 'initial';
+    const appFootbalCampPrintEquipment: HTMLElement = document.querySelector('app-football-camp-print-equipment');
+    appRoot.innerHTML = appFootbalCampPrintEquipment.outerHTML;
+  });
+
+  const buffer = await page.pdf({
+    printBackground: true,
+    format: 'A4',
+    margin: {left: '0cm', top: '0cm', right: '0cm', bottom: '0cm'}
+  });
+  await page.close();
 
   return buffer;
 }

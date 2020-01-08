@@ -5,11 +5,10 @@ import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
 import {Payment} from '../../src/app/models/payment';
 import {RegistrationV2} from '../../src/app/models/registration-v2.model';
 import {addCampAberFoot, addCampPlabennec, addCampPlouguerneau} from './functions/add-camps.functions';
-import {printRegistration} from './functions/print-registration.functions';
+import {printEquipment, printRegistration} from './functions/print-registration.functions';
 import {anonymize} from './functions/anonymize.functions';
 import {sendMailAboutPayment, sendMailAboutRegistration} from './functions/send-mail.functions';
 import {RegistrationState} from '../../src/app/models/registration-state.enum';
-import {getShortExportAsCsvFromCamp} from './functions/export-short-csv.functions';
 
 // CORS Express middleware to enable CORS Requests.
 const cors = require('cors')({
@@ -55,6 +54,24 @@ export const httpPrintRegistration = functions.runWith(opts).https.onRequest((re
   });
 });
 
+export const httpPrintEquipment = functions.runWith(opts).https.onRequest((request, response) => {
+  return cors(request, response, async () => {
+    try {
+      const sessionId: string = request.body.sessionId;
+      const url = functions.config().url.baseurl + `/print-equipment?sessionId=${sessionId}`;
+      const exportEquipment: Buffer = await printEquipment(url);
+      console.log('Success while rendering equipment');
+      response.setHeader('Content-Type', 'application/pdf');
+      response.setHeader('Content-disposition', 'attachment; filename=rapport-equipement.pdf');
+
+      response.status(200).send(exportEquipment);
+    } catch (error) {
+      console.log('Error while rendering equipment', error);
+      response.status(500).send(error);
+    }
+  });
+});
+
 export const httpSendMail = functions.https.onRequest(async (request, response) => {
   await sendMailAboutRegistration({
     state: RegistrationState.IN_PROGRESS,
@@ -66,21 +83,6 @@ export const httpSendMail = functions.https.onRequest(async (request, response) 
     }
   });
   response.send('anonymize successful');
-});
-
-export const httpExportShortAsCsv = functions.https.onRequest(async (request, response) => {
-  try {
-    const campId: string = request.body.campId;
-    const csv: string = await getShortExportAsCsvFromCamp(campId);
-    response.setHeader(
-      "Content-disposition",
-      "attachment; filename=export-maillot.csv"
-    );
-    response.set("Content-Type", "text/csv");
-    response.status(200).send(csv);
-  } catch (e) {
-    response.status(500).send('An error occured during csv export');
-  }
 });
 
 export const onUpdatePaymentState = functions.firestore

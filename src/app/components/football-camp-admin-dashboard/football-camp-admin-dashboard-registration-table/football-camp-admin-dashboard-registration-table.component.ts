@@ -41,6 +41,13 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
     this.registrationSelected = new EventEmitter();
   }
 
+  exportEquipment(): void {
+    let data = 'a'
+    const blob = new Blob([data], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    window.open(url);
+  }
+
   isRegistrationSelected(registration: RegistrationV2) {
     return this.selection.isSelected(registration);
   }

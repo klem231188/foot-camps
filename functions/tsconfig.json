@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
     "lib": [
-      "es6",
+      "es2018",
       "dom"
     ],
     "module": "commonjs",
     "noImplicitReturns": true,
     "outDir": "lib",
     "sourceMap": true,
-    "target": "es6",
+    "target": "es2018",
     "resolveJsonModule": true,
-    "esModuleInterop": false
+    "esModuleInterop": true
   },
   "compileOnSave": true,
   "include": [

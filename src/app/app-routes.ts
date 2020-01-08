@@ -8,6 +8,7 @@ import {FootballCampAdminDashboardComponent} from './components/football-camp-ad
 import {FootballCampPrintRegistrationComponent} from './components/football-camp-print-registration/football-camp-print-registration.component';
 import {FootballCampHomeComponent} from './components/football-camp-home/football-camp-home.component';
 import {FootballCampDetailsV2Component} from './components/football-camp-details-v2/football-camp-details-v2.component';
+import {FootballCampPrintEquipmentComponent} from './components/football-camp-print-equipment/football-camp-print-equipment.component';
 
 export const AppRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -23,5 +24,6 @@ export const AppRoutes: Routes = [
   {path: 'login', component: FootballCampLoginComponent},
   {path: 'admin-dashboard', component: FootballCampAdminDashboardComponent},
   {path: 'print-registration', component: FootballCampPrintRegistrationComponent},
+  {path: 'print-equipment', component: FootballCampPrintEquipmentComponent},
   {path: 'playground', component: PlaygroundComponent},
 ];

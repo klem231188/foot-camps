@@ -1,0 +1,60 @@
+@mixin app-football-camp-print-equipment-theme($theme) {
+  app-football-camp-print-equipment {
+    display: flex;
+    flex-direction: column;
+    height: unset !important;
+
+    .page {
+      position: relative;
+      overflow: hidden;
+      padding: 1cm;
+      page-break-after: always;
+      background-color: white;
+      border: 2px solid mat-color($primary);
+
+      .title-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: mat-color($primary);
+        background-color: rgb(43, 43, 43);
+        font-size: 25px;
+        padding-bottom: 3px;
+        width: 100%;
+        margin-bottom: 10px;
+
+        .card-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          margin-left: 10px;
+          margin-right: 5px;
+
+          mat-icon {
+            width: 25px !important;
+            height: 25px !important;
+            font-size: 25px !important;
+            line-height: 1 !important;
+          }
+        }
+      }
+
+      table {
+        width: 100%;
+
+        .mat-column-trainees {
+          width: 500px;
+        }
+      }
+    }
+
+    .page.portrait {
+      width: 21cm;
+      height: 29.7cm;
+      min-height: 29.7cm;
+    }
+  }
+}

@@ -55,6 +55,25 @@
       .mat-paginator-sticky {
         bottom: 0px;
         position: sticky;
+        background: white;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        button {
+          margin-left: 10px;
+        }
+
+        mat-paginator {
+          flex: 1;
+        }
+      }
+    }
+
+    @include small-screen {
+      .mat-paginator-sticky {
+        display: flex;
+        flex-direction: column;
       }
     }
 

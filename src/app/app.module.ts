@@ -59,6 +59,7 @@ import { FootballCampBadgesComponent } from './components/football-camp-badges/f
 import { FootballCampActionButtonComponent } from './components/football-camp-action-button/football-camp-action-button.component';
 import { FootballCampRegistrationV2Component } from './components/football-camp-registration-v2/football-camp-registration-v2.component';
 import { FootballCampBadgeComponent } from './components/football-camp-badge/football-camp-badge.component';
+import { FootballCampPrintEquipmentComponent } from './components/football-camp-print-equipment/football-camp-print-equipment.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -131,6 +132,7 @@ registerLocaleData(localeFr, 'fr');
     FootballCampActionButtonComponent,
     FootballCampRegistrationV2Component,
     FootballCampBadgeComponent,
+    FootballCampPrintEquipmentComponent,
   ],
   entryComponents: [
     FootballCampLoginComponent,
