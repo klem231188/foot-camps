@@ -127,7 +127,7 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
   }
 
   printEquipment(): void {
-    const url: string = environment.urlPrintRegistration;
+    const url: string = environment.urlPrintEquipment;
 
     const body = {
       sessionId: this.sessionId,
@@ -138,13 +138,13 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
       responseType: 'blob' as 'json', // hack for TS
     };
 
-
     this.http
       .post(url, body, options)
       .subscribe((response: HttpResponse<Blob>) => {
 
         // Create an anchor element, to be able to rename and download file.
         const element: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
+        element.download = 'equipement.pdf';
         element.href = URL.createObjectURL(response.body);
         document.body.appendChild(element);
         element.click();

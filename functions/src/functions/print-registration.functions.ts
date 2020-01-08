@@ -3,17 +3,18 @@ const puppeteer = require('puppeteer');
 
 const width = 797;
 const height = 2600;
-const browserPromise = puppeteer.launch({
-  args: [
-    '--disable-infobars',
-    '--no-sandbox',
-    `--window-size=${width},${height}`
-  ],
-  // headless: false
-});
 
 export async function printRegistration(url: string): Promise<Buffer> {
   console.log(`printRegistration(${url})`);
+
+  const browserPromise = puppeteer.launch({
+    args: [
+      '--disable-infobars',
+      '--no-sandbox',
+      `--window-size=${width},${height}`
+    ],
+    // headless: false
+  });
 
   const browser = await browserPromise;
   const page = await browser.newPage();
@@ -50,13 +51,24 @@ export async function printRegistration(url: string): Promise<Buffer> {
   });
 
   await page.close();
+  await browser.close();
+
   return buffer;
 }
 
 export async function printEquipment(url: string): Promise<Buffer> {
   console.log(`printEquipment(${url})`);
-  const browser = await browserPromise;
 
+  const browserPromise = puppeteer.launch({
+    args: [
+      '--disable-infobars',
+      '--no-sandbox',
+      `--window-size=${width},${height}`
+    ],
+    // headless: false
+  });
+
+  const browser = await browserPromise;
   const page = await browser.newPage();
   await page.goto(url);
   await page.waitForSelector('.shortSize', {visible: true});
@@ -77,7 +89,9 @@ export async function printEquipment(url: string): Promise<Buffer> {
     format: 'A4',
     margin: {left: '0cm', top: '0cm', right: '0cm', bottom: '0cm'}
   });
+
   await page.close();
+  await browser.close();
 
   return buffer;
 }
