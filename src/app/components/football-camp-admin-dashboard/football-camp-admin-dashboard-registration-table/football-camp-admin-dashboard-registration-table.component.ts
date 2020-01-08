@@ -16,6 +16,9 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {takeUntil, tap} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {environment} from '../../../../environments/environment';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-football-camp-admin-dashboard-registration-table',
@@ -36,16 +39,11 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private registrationService: RegistrationService
+    private registrationService: RegistrationService,
+    private http: HttpClient,
+    private snackBar: MatSnackBar
   ) {
     this.registrationSelected = new EventEmitter();
-  }
-
-  exportEquipment(): void {
-    let data = 'a'
-    const blob = new Blob([data], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    window.open(url);
   }
 
   isRegistrationSelected(registration: RegistrationV2) {
@@ -126,6 +124,46 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
     } else {
       this.selection.clear();
     }
+  }
+
+  printEquipment(): void {
+    const url: string = environment.urlPrintRegistration;
+
+    const body = {
+      sessionId: this.sessionId,
+    };
+
+    const options = {
+      observe: 'response' as 'body', // hack for TS
+      responseType: 'blob' as 'json', // hack for TS
+    };
+
+
+    this.http
+      .post(url, body, options)
+      .subscribe((response: HttpResponse<Blob>) => {
+
+        // Create an anchor element, to be able to rename and download file.
+        const element: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
+        element.href = URL.createObjectURL(response.body);
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+
+        // Says to user that's everything is fine
+        this.snackBar.open(
+          'Rapport équipement téléchargé',
+          'Fermer',
+          {duration: 5000});
+      }, (error) => {
+        console.log(error);
+
+        // Says to user that an error occured
+        this.snackBar.open(
+          'Une erreur est survenue lors du téléchargement du rapport équipement',
+          'Fermer',
+          {duration: 5000});
+      });
   }
 
   reload() {

@@ -25,5 +25,6 @@ export const environment = {
 
   urlMakePaymentByCard: 'https://us-central1-footcamps-development.cloudfunctions.net/makePaymentByCard',
   urlGeneratePdf: 'https://us-central1-footcamps-development.cloudfunctions.net/httpGeneratePdf',
-  urlPrintRegistration: 'https://us-central1-footcamps-development.cloudfunctions.net/httpPrintRegistration'
+  urlPrintRegistration: 'https://us-central1-footcamps-development.cloudfunctions.net/httpPrintRegistration',
+  urlPrintEquipment: 'https://us-central1-footcamps-development.cloudfunctions.net/httpPrintEquipment'
 };
