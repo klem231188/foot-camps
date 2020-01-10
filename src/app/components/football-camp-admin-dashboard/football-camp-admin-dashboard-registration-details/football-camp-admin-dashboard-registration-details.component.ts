@@ -101,6 +101,12 @@ export class FootballCampAdminDashboardRegistrationDetailsComponent implements O
     this.disablePrintButton = true;
     const filename = `Fiche-Inscription-${this.registration.trainee.lastname}-${this.registration.trainee.firstname}.png`;
 
+    // Says to user to wait ( Duration ~ 10 seconds)
+    this.snackBar.open(
+      'Veuillez patentier quelques secondes',
+      'Fermer',
+      {duration: 5000});
+
     this.http
       .post(url, body, options)
       .subscribe((response: HttpResponse<Blob>) => {

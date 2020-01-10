@@ -29,6 +29,7 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
 
   dataSource: MatTableDataSource<RegistrationV2>;
   destroyed: Subject<any>;
+  disablePrintEquipmentButton: boolean;
   displayedColumns: string[] = ['select', 'firstname', 'lastname', 'state'];
   loading: boolean;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -101,6 +102,7 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
   ngOnInit() {
     console.log('FootballCampAdminDashboardRegistrationTableComponent.ngOnInit()');
     this.dataSource = new MatTableDataSource();
+    this.disablePrintEquipmentButton = false;
 
     const allowMultiSelect = false;
     const initialSelection = [];
@@ -138,6 +140,15 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
       responseType: 'blob' as 'json', // hack for TS
     };
 
+    // Disable button
+    this.disablePrintEquipmentButton = true;
+
+    // Says to user to wait ( Duration ~ 10 seconds)
+    this.snackBar.open(
+      'Veuillez patentier quelques secondes',
+      'Fermer',
+      {duration: 5000});
+
     this.http
       .post(url, body, options)
       .subscribe((response: HttpResponse<Blob>) => {
@@ -150,6 +161,9 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
         element.click();
         document.body.removeChild(element);
 
+        // Enable button again
+        this.disablePrintEquipmentButton = false;
+
         // Says to user that's everything is fine
         this.snackBar.open(
           'Rapport équipement téléchargé',
@@ -157,6 +171,9 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
           {duration: 5000});
       }, (error) => {
         console.log(error);
+
+        // Enable button again
+        this.disablePrintEquipmentButton = false;
 
         // Says to user that an error occured
         this.snackBar.open(
