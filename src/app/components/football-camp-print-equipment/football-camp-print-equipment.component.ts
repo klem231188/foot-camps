@@ -60,14 +60,6 @@ export class FootballCampPrintEquipmentComponent implements OnInit {
                   )
                 }
               }
-
-              // this.shortSizeDataSource.push(
-              //   {
-              //     shortSize: 'XS',
-              //     quantity: 10,
-              //     trainees: ['Jean ROBERT, Mickaël TERRIEN, Jacques PROVOST, Raphaël VARANE, Michel FOURNIER, Jean VENDETTA, Lucien Goplino, Killyn MBAPPE, Norbert FONTAINE, David POUCHART']
-              //   }
-              // )
             });
         }
       });

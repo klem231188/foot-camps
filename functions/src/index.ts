@@ -112,7 +112,7 @@ export const onUpdatePaymentState = functions.firestore
       });
   });
 
-export const onUpdateRegistrationState = functions.firestore
+export const onUpdateRegistrationState = functions.runWith(opts).firestore
   .document('registrations/{registrationId}')
   .onUpdate((change: Change<DocumentSnapshot>, context: EventContext) => {
     if (change.before.data() && (change.before.data().state === change.after.data().state)) {

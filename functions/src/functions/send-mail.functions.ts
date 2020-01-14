@@ -1,10 +1,11 @@
-import {createTransport, SendMailOptions, SentMessageInfo, Transporter} from 'nodemailer';
+import {createTransport, SendMailOptions, Transporter} from 'nodemailer';
 import * as functions from 'firebase-functions';
 import {RegistrationV2} from '../../../src/app/models/registration-v2.model';
 import {Payment} from '../../../src/app/models/payment';
 import * as admin from 'firebase-admin';
 import {RegistrationState} from '../../../src/app/models/registration-state.enum';
 import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
+import {printEquipment} from './print-registration.functions';
 
 function getMailTransporter(): Transporter {
   return createTransport({
@@ -19,14 +20,13 @@ function getMailTransporter(): Transporter {
 export async function sendMailAboutRegistration(registration: any): Promise<any> {
   console.log(`sendMailAboutRegistration(${JSON.stringify(registration)})`);
   try {
-    let sessionSnap : DocumentSnapshot = await admin.firestore().doc(`sessions/${registration.sessionId}`).get();
-    let campSnap : DocumentSnapshot = await admin.firestore().doc(`camps/${sessionSnap.data().campId}`).get();
+    let sessionSnap: DocumentSnapshot = await admin.firestore().doc(`sessions/${registration.sessionId}`).get();
+    let campSnap: DocumentSnapshot = await admin.firestore().doc(`camps/${sessionSnap.data().campId}`).get();
 
     const mailOptions: SendMailOptions = {
       from: '"Footcamps" <footcamps@firebase.com>',
       to: registration.trainee.email
     };
-
 
     switch (registration.state) {
       case RegistrationState.IN_PROGRESS :
@@ -36,6 +36,16 @@ export async function sendMailAboutRegistration(registration: any): Promise<any>
       case RegistrationState.ACCEPTED :
         mailOptions.subject = `Inscription à ${campSnap.data().city} validée`;
         mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Félicitations, votre inscription au stage de football ${campSnap.data().city} a été validée.<br> Bon stage !`;
+
+        const url = `${functions.config().url.baseurl}/print-receipt?registrationId=${registration.id}`;
+        const receiptPdf: Buffer = await printEquipment(url);
+        mailOptions.attachments = [
+          {
+            filename: 'reçu.pdf',
+            contentType: 'application/pdf',
+            content: receiptPdf
+          }
+        ];
         break;
       case RegistrationState.REJECTED :
         mailOptions.subject = `Inscription à ${campSnap.data().city} rejetée`;
@@ -49,7 +59,6 @@ export async function sendMailAboutRegistration(registration: any): Promise<any>
     console.error('There was an error while sending the email:', e);
   }
 }
-
 
 export function sendMailAboutPayment(payment: Payment): Promise<any> {
   // Configure the email transport using the default SMTP transport and a GMail account.
