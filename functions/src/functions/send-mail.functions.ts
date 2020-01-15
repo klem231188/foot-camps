@@ -5,7 +5,7 @@ import {Payment} from '../../../src/app/models/payment';
 import * as admin from 'firebase-admin';
 import {RegistrationState} from '../../../src/app/models/registration-state.enum';
 import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
-import {printEquipment} from './print-registration.functions';
+import {printReceipt} from './print-registration.functions';
 
 function getMailTransporter(): Transporter {
   return createTransport({
@@ -38,7 +38,7 @@ export async function sendMailAboutRegistration(registration: any): Promise<any>
         mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Félicitations, votre inscription au stage de football ${campSnap.data().city} a été validée.<br> Bon stage !`;
 
         const url = `${functions.config().url.baseurl}/print-receipt?registrationId=${registration.id}`;
-        const receiptPdf: Buffer = await printEquipment(url);
+        const receiptPdf: Buffer = await printReceipt(url);
         mailOptions.attachments = [
           {
             filename: 'reçu.pdf',
