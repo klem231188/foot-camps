@@ -12,6 +12,15 @@
   "latitude": 48.6101376,
   "longitude": -4.5105545,
   "averagePrice": 170,
+  "paymentInfo": {
+    "acceptedPaymentTypes": [
+      "CHECK",
+      "HOLIDAY_CHECK"
+    ],
+    "averagePrice": 170,
+    "paymentAddress": "Stage Espérance<br>Complexe sportif de Kroaz Kenan<br>29880 Plouguerneau",
+    "checkReceiver": "Stage Espérance"
+  },
   "minimumAge": 8,
   "maximumAge": 13,
   "boysAccepted": true,

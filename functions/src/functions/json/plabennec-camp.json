@@ -3,6 +3,15 @@
   "latitude": 48.4996485,
   "longitude": -4.4363984,
   "averagePrice": 230,
+  "paymentInfo": {
+    "acceptedPaymentTypes": [
+      "CHECK",
+      "HOLIDAY_CHECK"
+    ],
+    "averagePrice": 230,
+    "paymentAddress": "Stage Plab'été <br>\n              Complexe Sportif<br>\n              AVENUE DE KERVEGUEN<br>\n              29860 Plabennec<br>",
+    "checkReceiver": "Stage Plab'été"
+  },
   "minimumAge": 5,
   "maximumAge": 14,
   "boysAccepted": true,

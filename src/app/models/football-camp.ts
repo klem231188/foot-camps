@@ -1,5 +1,6 @@
 import {Overview} from './overview';
 import {Details} from './details';
+import {PaymentInfo} from './payment-info';
 
 export interface FootballCamp {
   // - id
@@ -12,6 +13,7 @@ export interface FootballCamp {
 
   // - Price
   averagePrice: number;
+  paymentInfo: PaymentInfo;
 
   // - Age
   minimumAge: number;

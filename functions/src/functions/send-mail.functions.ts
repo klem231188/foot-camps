@@ -6,6 +6,8 @@ import * as admin from 'firebase-admin';
 import {RegistrationState} from '../../../src/app/models/registration-state.enum';
 import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
 import {printReceipt} from './print-registration.functions';
+import {FootballCamp} from '../../../src/app/models/football-camp';
+import {Session} from '../../../src/app/models/session';
 
 function getMailTransporter(): Transporter {
   return createTransport({
@@ -31,11 +33,17 @@ export async function sendMailAboutRegistration(registration: any): Promise<any>
     switch (registration.state) {
       case RegistrationState.IN_PROGRESS :
         mailOptions.subject = `Inscription à ${campSnap.data().city} prise en compte`;
-        mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Votre inscription au stage de football ${campSnap.data().city} a bien été prise en compte.<br> Elle sera validée prochainement.`;
-        break;
-      case RegistrationState.ACCEPTED :
-        mailOptions.subject = `Inscription à ${campSnap.data().city} validée`;
-        mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Félicitations, votre inscription au stage de football ${campSnap.data().city} a été validée.<br> Bon stage !`;
+        mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br>
+                            Votre inscription au stage de football ${campSnap.data().city} a bien été prise en compte.<br>
+                            Pour que votre inscription soit validée, veuillez envoyer par <b>courrier</b>:
+                             <ul>
+                               <li>Le paiement (Si chèque, à l'ordre de ${(campSnap.data() as FootballCamp).paymentInfo.checkReceiver})</li>
+                               <li>Le reçu (cf pièce-jointe)</li>
+                             </ul>
+                            à l'addresse suivante:<br>
+                            ${(campSnap.data() as FootballCamp).paymentInfo.paymentAddress}
+                            <br>
+                           `;
 
         const url = `${functions.config().url.baseurl}/print-receipt?registrationId=${registration.id}`;
         const receiptPdf: Buffer = await printReceipt(url);
@@ -46,6 +54,11 @@ export async function sendMailAboutRegistration(registration: any): Promise<any>
             content: receiptPdf
           }
         ];
+
+        break;
+      case RegistrationState.ACCEPTED :
+        mailOptions.subject = `Inscription à ${campSnap.data().city} validée`;
+        mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br> Félicitations, votre inscription au stage de football ${campSnap.data().city} a été validée.<br> Bon stage !`;
         break;
       case RegistrationState.REJECTED :
         mailOptions.subject = `Inscription à ${campSnap.data().city} rejetée`;

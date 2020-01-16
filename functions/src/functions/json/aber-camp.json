@@ -9,6 +9,15 @@
     "U13"
   ],
   "averagePrice": 130,
+  "paymentInfo": {
+    "acceptedPaymentTypes": [
+      "CHECK",
+      "HOLIDAY_CHECK"
+    ],
+    "averagePrice": 130,
+    "paymentAddress": "Stage Aber Foot,<br>Touroussel<br>29860 Bourg-Blanc",
+    "checkReceiver": "Stage Aber Foot"
+  },
   "minimumAge": 10,
   "maximumAge": 13,
   "boysAccepted": true,

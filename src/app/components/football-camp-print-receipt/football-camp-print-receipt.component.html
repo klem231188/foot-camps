@@ -17,19 +17,12 @@
         <div>id : {{registration.id}}</div>
       </div>
       <div class="right-content-container">
-        <div>Veuillez verser la somme de <b> {{camp.averagePrice}} €<sup>*</sup> </b></div>
-        <div>avant le <b> {{session.endRegistrationDate.toDate() | date : 'longDate'}}</b> à l'adresse suivante:</div>
+        <div>Veuillez verser la somme de <b> {{camp.averagePrice}} €<sup>*</sup> </b> à l'ordre de <b>{{camp.paymentInfo.checkReceiver}}</b>
+        avant le <b> {{session.endRegistrationDate.toDate() | date : 'longDate'}}</b> à l'adresse suivante:</div>
         <div class="address-container">
-          <div>
-            <b><!-- TODO variable -->
-              STEVEN COAT <br>
-              Complexe Sportif<br>
-              AVENUE DE KERVEGUEN<br>
-              29860 Plabennec<br>
-            </b>
-          </div>
+            <b [innerHTML]="camp.paymentInfo.paymentAddress"></b>
         </div>
-        <br><br>
+        <br>
         <div>
           <sup>(*)</sup> Des remises peuvent s'appliquer dans le cas de l'inscription d'un deuxième enfant.
           Veuillez vérifier sur le site internet <a href="https://www.footcamps.fr">www.footcamps.fr</a>
