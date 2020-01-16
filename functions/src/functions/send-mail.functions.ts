@@ -35,13 +35,13 @@ export async function sendMailAboutRegistration(registration: any): Promise<any>
         mailOptions.subject = `Inscription à ${campSnap.data().city} prise en compte`;
         mailOptions.html = `Bonjour ${registration.trainee.firstname} ${registration.trainee.lastname},<br>
                             Votre inscription au stage de football ${campSnap.data().city} a bien été prise en compte.<br>
-                            Pour que votre inscription soit validée, veuillez envoyer par <b>courrier</b>:
+                            <b>Attention</b>, pour que votre inscription soit validée, veuillez envoyer par <b>courrier</b>:
                              <ul>
                                <li>Le paiement (Si chèque, à l'ordre de ${(campSnap.data() as FootballCamp).paymentInfo.checkReceiver})</li>
                                <li>Le reçu (cf pièce-jointe)</li>
                              </ul>
                             à l'addresse suivante:<br>
-                            ${(campSnap.data() as FootballCamp).paymentInfo.paymentAddress}
+                            <b>${(campSnap.data() as FootballCamp).paymentInfo.paymentAddress}</b>
                             <br>
                            `;
 
