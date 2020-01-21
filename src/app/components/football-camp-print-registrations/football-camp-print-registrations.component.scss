@@ -1,0 +1,83 @@
+@mixin app-football-camp-print-registrations-theme($theme) {
+  app-football-camp-print-registrations {
+    display: flex;
+    flex-direction: column;
+    height: unset !important;
+
+    .page {
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+
+      .header-container {
+        font-size: 30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .content-container {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        margin: 5px;
+
+        .image-container {
+          display: flex;
+          flex-direction: column;
+          margin-right: 10px;
+          img {
+            width: 150px;
+          }
+        }
+
+        .text-container {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          padding-left: 10px;
+          border-left-color: #00796b;
+          border-left-style: solid;
+          border-left-width: 3px;
+
+          h3 {
+            font-family: 'Milkshake', serif;
+            font-size: 25px;
+            color: mat-color($primary);
+          }
+
+          .row-camp {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .logo {
+              height: 100px;
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+
+      .footer-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-right: 5px;
+
+        font-family: 'Milkshake', serif;
+        font-size: 20px;
+        color: mat-color($primary);
+      }
+    }
+
+    .page.portrait {
+      width: 21cm;
+      height: 29.7cm;
+      min-height: 29.7cm;
+    }
+  }
+}

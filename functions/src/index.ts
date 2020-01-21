@@ -5,7 +5,7 @@ import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
 import {Payment} from '../../src/app/models/payment';
 import {RegistrationV2} from '../../src/app/models/registration-v2.model';
 import {addCampAberFoot, addCampPlabennec, addCampPlouguerneau} from './functions/add-camps.functions';
-import {printEquipment, printReceipt, printRegistration} from './functions/print-registration.functions';
+import {printEquipment, printReceipt, printRegistration, printRegistrations} from './functions/print-registration.functions';
 import {anonymize} from './functions/anonymize.functions';
 import {sendMailAboutPayment, sendMailAboutRegistration} from './functions/send-mail.functions';
 import {RegistrationState} from '../../src/app/models/registration-state.enum';
@@ -85,6 +85,24 @@ export const httpPrintReceipt = functions.runWith(opts).https.onRequest((request
       response.status(200).send(receipt);
     } catch (error) {
       console.log('Error while rendering receipt', error);
+      response.status(500).send(error);
+    }
+  });
+});
+
+export const httpPrintRegistrations = functions.runWith(opts).https.onRequest((request, response) => {
+  return cors(request, response, async () => {
+    try {
+      const sessionId: string = request.body.sessionId;
+      const url = functions.config().url.baseurl + `/print-registrations?sessionId=${sessionId}`;
+      const registrations: Buffer = await printRegistrations(url);
+      console.log('Success while rendering registrations');
+      response.setHeader('Content-Type', 'application/pdf');
+      response.setHeader('Content-disposition', 'attachment; filename=registrations.pdf');
+
+      response.status(200).send(registrations);
+    } catch (error) {
+      console.log('Error while rendering registrations', error);
       response.status(500).send(error);
     }
   });
