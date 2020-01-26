@@ -14,7 +14,7 @@ import {RegistrationService} from '../../../services/registration/registration.s
 import {RegistrationV2} from '../../../models/registration-v2.model';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {takeUntil, tap} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpResponse} from '@angular/common/http';
@@ -30,6 +30,7 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
   dataSource: MatTableDataSource<RegistrationV2>;
   destroyed: Subject<any>;
   disablePrintEquipmentButton: boolean;
+  disablePrintRegistrationsButton: boolean;
   displayedColumns: string[] = ['select', 'firstname', 'lastname', 'state'];
   loading: boolean;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -103,6 +104,7 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
     console.log('FootballCampAdminDashboardRegistrationTableComponent.ngOnInit()');
     this.dataSource = new MatTableDataSource();
     this.disablePrintEquipmentButton = false;
+    this.disablePrintRegistrationsButton = false;
 
     const allowMultiSelect = false;
     const initialSelection = [];
@@ -155,7 +157,7 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
 
         // Create an anchor element, to be able to rename and download file.
         const element: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
-        element.download = 'equipement.pdf';
+        element.download = 'equipements.pdf';
         element.href = URL.createObjectURL(response.body);
         document.body.appendChild(element);
         element.click();
@@ -166,7 +168,7 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
 
         // Says to user that's everything is fine
         this.snackBar.open(
-          'Rapport équipement téléchargé',
+          'Rapport équipements téléchargé',
           'Fermer',
           {duration: 5000});
       }, (error) => {
@@ -177,7 +179,62 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
 
         // Says to user that an error occured
         this.snackBar.open(
-          'Une erreur est survenue lors du téléchargement du rapport équipement',
+          'Une erreur est survenue lors du téléchargement du rapport équipements',
+          'Fermer',
+          {duration: 5000});
+      });
+  }
+
+  printRegistrations() {
+    const url: string = environment.urlPrintRegistrations;
+
+    const body = {
+      sessionId: this.sessionId,
+    };
+
+    const options = {
+      observe: 'response' as 'body', // hack for TS
+      responseType: 'blob' as 'json', // hack for TS
+    };
+
+    // Disable button
+    this.disablePrintRegistrationsButton = true;
+
+    // Says to user to wait ( Duration ~ 10 seconds)
+    this.snackBar.open(
+      'Veuillez patentier quelques secondes',
+      'Fermer',
+      {duration: 5000});
+
+    this.http
+      .post(url, body, options)
+      .subscribe((response: HttpResponse<Blob>) => {
+
+        // Create an anchor element, to be able to rename and download file.
+        const element: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
+        element.download = 'inscriptions.pdf';
+        element.href = URL.createObjectURL(response.body);
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+
+        // Enable button again
+        this.disablePrintRegistrationsButton = false;
+
+        // Says to user that's everything is fine
+        this.snackBar.open(
+          'Rapport inscriptions téléchargé',
+          'Fermer',
+          {duration: 5000});
+      }, (error) => {
+        console.log(error);
+
+        // Enable button again
+        this.disablePrintRegistrationsButton = false;
+
+        // Says to user that an error occured
+        this.snackBar.open(
+          'Une erreur est survenue lors du téléchargement du rapport inscriptions',
           'Fermer',
           {duration: 5000});
       });

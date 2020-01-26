@@ -46,7 +46,12 @@
     <mat-spinner [diameter]="40" *ngIf="disablePrintEquipmentButton"></mat-spinner>
     <button mat-stroked-button color="primary" (click)="printEquipment()" [disabled]="disablePrintEquipmentButton">
       <mat-icon>save_alt</mat-icon>
-      Export équipement
+      Rapport équipements
+    </button>
+    <mat-spinner [diameter]="40" *ngIf="disablePrintRegistrationsButton"></mat-spinner>
+    <button mat-stroked-button color="primary" (click)="printRegistrations()" [disabled]="disablePrintRegistrationsButton">
+      <mat-icon>save_alt</mat-icon>
+      Rapport inscriptions
     </button>
     <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" [pageSize]="20" showFirstLastButtons></mat-paginator>
   </div>
