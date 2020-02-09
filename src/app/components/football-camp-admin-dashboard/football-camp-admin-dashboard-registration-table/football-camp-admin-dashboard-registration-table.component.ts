@@ -31,13 +31,14 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
   destroyed: Subject<any>;
   disablePrintEquipmentButton: boolean;
   disablePrintRegistrationsButton: boolean;
-  displayedColumns: string[] = ['select', 'firstname', 'lastname', 'state'];
+  displayedColumns: string[] = [];
   loading: boolean;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Output() registrationSelected: EventEmitter<RegistrationV2>;
   registrations: RegistrationV2[];
   selection: SelectionModel<RegistrationV2>;
   @Input() sessionId: string;
+  @Input() adminMode: boolean;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
@@ -105,6 +106,12 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
     this.dataSource = new MatTableDataSource();
     this.disablePrintEquipmentButton = false;
     this.disablePrintRegistrationsButton = false;
+
+    if (this.adminMode) {
+      this.displayedColumns = ['select', 'firstname', 'lastname', 'state'];
+    } else {
+      this.displayedColumns = ['firstname', 'lastname', 'state'];
+    }
 
     const allowMultiSelect = false;
     const initialSelection = [];

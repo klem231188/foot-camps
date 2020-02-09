@@ -21,13 +21,13 @@
       position: relative;
       display: inline-block;
 
-      width: 200px;
+      width: 160px;
       @include small-screen {
         width: 150px;
       }
 
       svg  {
-        width: 200px;
+        width: 160px;
         height: auto;
         @include small-screen {
           width: 150px;

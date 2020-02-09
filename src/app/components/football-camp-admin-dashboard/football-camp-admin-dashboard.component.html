@@ -41,6 +41,7 @@
 
   <ng-container *ngIf="(selectedSession | async) as aSession">
     <app-football-camp-admin-dashboard-registration-table [sessionId]="aSession.id"
+                                                          [adminMode]="true"
                                                           (registrationSelected)="onRegistrationSelected($event)"></app-football-camp-admin-dashboard-registration-table>
   </ng-container>
 </div>

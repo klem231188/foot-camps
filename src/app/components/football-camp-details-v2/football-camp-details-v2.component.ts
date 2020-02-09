@@ -18,6 +18,7 @@ export class FootballCampDetailsV2Component implements OnChanges, OnInit {
   @Input() campId;
   footballCamp: FootballCamp = null;
   reloadSubject: Subject<void> = new Subject<void>();
+  selectedSession: Session = null;
   sessions: Session[] = [];
   viewerOpened = false;
 
@@ -79,9 +80,13 @@ export class FootballCampDetailsV2Component implements OnChanges, OnInit {
       .pipe(
         tap(footballCamp => this.footballCamp = footballCamp),
         switchMap(() => this.sessionService.getSessionsFromCampId(this.campId)),
-        tap(sessions => this.sessions = sessions)
+        tap(sessions => {
+          this.sessions = sessions;
+          if (this.sessions && this.sessions.length > 0) {
+            this.selectedSession = this.sessions[0];
+          }
+        })
       )
       .subscribe();
   }
-
 }

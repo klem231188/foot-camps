@@ -337,6 +337,16 @@
             }
           }
         }
+
+        .registrations-container {
+          @include big-screen {
+            margin-left: 20px;
+          }
+
+          @include small-screen {
+            padding: 0px 5px 0px 5px;
+          }
+        }
       }
     }
   }
