@@ -1,7 +1,6 @@
 import {Component, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {AngularFireStorage} from '@angular/fire/storage';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {Subscription} from 'rxjs/Subscription';
+import {BehaviorSubject, Observable, of, Subscription} from 'rxjs';
 import {DocumentType} from '../../models/document-type.enum'
 import {Document} from '../../models/document.model';
 import {finalize} from 'rxjs/operators';
@@ -41,7 +40,7 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
       this.document.next(this.inputDocument);
       this.type = this.document.value.type;
       this.uploaded.next(true);
-      this.percentage = Observable.of(100);
+      this.percentage = of(100);
       this.downloadURL = this.document.value.url;
     }
 

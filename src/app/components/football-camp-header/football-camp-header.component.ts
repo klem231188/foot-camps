@@ -7,7 +7,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {environment} from '../../../environments/environment';
 import * as firebase from 'firebase';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subscription} from 'rxjs';
 import {FootballCamp} from '../../models/football-camp';
 
 @Component({
@@ -83,7 +83,7 @@ export class FootballCampHeaderComponent implements OnInit, OnDestroy {
               const campId: string = event.state.root.firstChild.params.id;
               return this.footballCampService.getFootballCamp(campId);
             } else {
-              return Observable.of(null);
+              return of(null);
             }
           }
         ))

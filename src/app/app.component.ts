@@ -9,11 +9,10 @@ import {RegistrationService} from './services/registration/registration.service'
 import {SessionService} from './services/session/session.service';
 import {User} from './models/user';
 import {UserService} from './services/user/user.service';
-import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
 import {UploadService} from './services/upload/upload.service';
 import * as firebase from 'firebase';
 import {PaymentService} from './services/payment/payment.service';
-import {Observable} from 'rxjs';
+import {EMPTY, Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +34,7 @@ export class AppComponent {
 
   user: User = null;
 
-  @ViewChild(MatSidenav)
+  @ViewChild(MatSidenav, { static: true })
   private sidenav: MatSidenav;
 
   constructor(private router: Router,
@@ -47,7 +46,7 @@ export class AppComponent {
         if (firebaseUser) {
           return userService.getUser(firebaseUser.uid);
         } else {
-          return new EmptyObservable<User>();
+          return EMPTY;
         }
       }))
       .subscribe((user) => {

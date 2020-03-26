@@ -10,7 +10,8 @@ import {DocumentType} from '../../../models/document-type.enum';
 import {Document} from '../../../models/document.model';
 import {MatSnackBar} from '@angular/material';
 import {SessionService} from '../../../services/session/session.service';
-import {Observable} from 'rxjs';
+import {of} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-football-camp-admin-dashboard-registration-details',
@@ -56,19 +57,21 @@ export class FootballCampAdminDashboardRegistrationDetailsComponent implements O
 
       this.registrationService
         .getRegistration(this.registrationId)
-        .switchMap((registration) => {
-          this.registration = registration;
-          this.sessionId = this.registration.sessionId;
-          return this.paymentService.getPayment(this.registration.paymentId);
-        })
-        .switchMap((payment) => {
-          this.payment = payment;
-          return Observable.of(null);
-          // return Observable.empty();
-        })
-        .switchMap(() => {
-          return this.sessionService.getSession(this.sessionId);
-        })
+        .pipe(
+          switchMap((registration) => {
+            this.registration = registration;
+            this.sessionId = this.registration.sessionId;
+            return this.paymentService.getPayment(this.registration.paymentId);
+          }),
+          switchMap((payment) => {
+            this.payment = payment;
+            return of(null);
+            // return Observable.empty();
+          }),
+          switchMap(() => {
+            return this.sessionService.getSession(this.sessionId);
+          })
+        )
         .subscribe((session) => {
           this.campId = session.campId;
         });

@@ -31,12 +31,12 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   registration: RegistrationV2;
 
   // View Childs
-  @ViewChild(FootballCampRegistrationSessionsComponent) sessionComponent: FootballCampRegistrationSessionsComponent;
-  @ViewChild(FootballCampRegistrationTraineeFormComponent) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
-  @ViewChild(FootballCampRegistrationDocumentsComponent) documentsComponent: FootballCampRegistrationDocumentsComponent;
+  @ViewChild(FootballCampRegistrationSessionsComponent, { static: false }) sessionComponent: FootballCampRegistrationSessionsComponent;
+  @ViewChild(FootballCampRegistrationTraineeFormComponent, { static: false }) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
+  @ViewChild(FootballCampRegistrationDocumentsComponent, { static: false }) documentsComponent: FootballCampRegistrationDocumentsComponent;
   //@ViewChild(FootballCampRegistrationPaymentComponent) cardPaymentComponent: FootballCampRegistrationPaymentComponent;
-  @ViewChild(FootballCampRegistrationCheckPaymentComponent) checkPaymentComponent: FootballCampRegistrationCheckPaymentComponent;
-  @ViewChild('stepper') stepper: MatVerticalStepper;
+  @ViewChild(FootballCampRegistrationCheckPaymentComponent, { static: false }) checkPaymentComponent: FootballCampRegistrationCheckPaymentComponent;
+  @ViewChild('stepper', { static: false }) stepper: MatVerticalStepper;
 
   // Payment From & Controls
   paymentFormGroup: FormGroup;

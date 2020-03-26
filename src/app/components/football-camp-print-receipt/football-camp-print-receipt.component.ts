@@ -6,7 +6,7 @@ import {SessionService} from '../../services/session/session.service';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {Session} from '../../models/session';
 import {FootballCamp} from '../../models/football-camp';
-import {tap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-football-camp-print-receipt',
@@ -38,17 +38,13 @@ export class FootballCampPrintReceiptComponent implements OnInit {
               .getRegistration(params.registrationId)
               .pipe(
                 tap((registration) => this.registration = registration),
-              )
-              .switchMap(() => {
-                return this.sessionService.getSession(this.registration.sessionId);
-              })
-              .pipe(
+                switchMap(() => {
+                  return this.sessionService.getSession(this.registration.sessionId);
+                }),
                 tap((session) => this.session = session),
-              )
-              .switchMap(() => {
-                return this.footballCampService.getFootballCamp(this.session.campId);
-              })
-              .pipe(
+                switchMap(() => {
+                  return this.footballCampService.getFootballCamp(this.session.campId);
+                }),
                 tap((camp) => this.camp = camp),
               )
               .subscribe();
@@ -56,5 +52,4 @@ export class FootballCampPrintReceiptComponent implements OnInit {
         }
       );
   }
-
 }

@@ -17,7 +17,7 @@
     }
 
     .overview-image {
-      max-height: 450px;
+      max-height: 400px;
 
       @include small-screen{
         max-height: 300px;

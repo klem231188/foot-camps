@@ -1,8 +1,7 @@
 import {Component, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {SessionService} from '../../services/session/session.service';
 import {Session} from '../../models/session';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Subscription} from 'rxjs/Subscription';
+import {BehaviorSubject, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-football-camp-registration-sessions',
@@ -11,19 +10,23 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class FootballCampRegistrationSessionsComponent implements OnInit, OnDestroy {
 
-  // Fields
   @Input() campId: string;
+  isLoading: BehaviorSubject<boolean>;
   @Output() isValid: BehaviorSubject<boolean>;
   @Output() selectedSession: BehaviorSubject<Session>;
   sessions: Session[];
-  isLoading: BehaviorSubject<boolean>;
   subscriptions: Subscription[];
 
   // Constructor
   constructor(private sessionService: SessionService) {
   }
 
-  // Lifecycle hooks
+  ngOnDestroy(): void {
+    for (const subscription of this.subscriptions) {
+      subscription.unsubscribe();
+    }
+  }
+
   ngOnInit() {
     // Init fields
     this.sessions = [];
@@ -51,12 +54,5 @@ export class FootballCampRegistrationSessionsComponent implements OnInit, OnDest
     // Store all subscriptions
     this.subscriptions.push(sub1);
     this.subscriptions.push(sub2);
-  }
-
-
-  ngOnDestroy(): void {
-    for (const subscription of this.subscriptions) {
-      subscription.unsubscribe();
-    }
   }
 }

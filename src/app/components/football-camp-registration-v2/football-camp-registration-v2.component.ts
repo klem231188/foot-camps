@@ -28,18 +28,18 @@ export class FootballCampRegistrationV2Component implements OnInit, AfterViewIni
 
   _subscriptions: Subscription[];
   @Input() campId: string;
-  @ViewChild(FootballCampRegistrationCheckPaymentComponent) checkPaymentComponent: FootballCampRegistrationCheckPaymentComponent;
+  @ViewChild(FootballCampRegistrationCheckPaymentComponent, { static: false }) checkPaymentComponent: FootballCampRegistrationCheckPaymentComponent;
   checkPaymentSub: Subscription;
-  @ViewChild(FootballCampRegistrationDocumentsComponent) documentsComponent: FootballCampRegistrationDocumentsComponent;
+  @ViewChild(FootballCampRegistrationDocumentsComponent, { static: false }) documentsComponent: FootballCampRegistrationDocumentsComponent;
   footballCamp: FootballCamp;
   isLoading = true;
   payment: FormControl;
   paymentFormGroup: FormGroup;
   registration: RegistrationV2;
-  @ViewChild(FootballCampRegistrationSessionsComponent) sessionComponent: FootballCampRegistrationSessionsComponent;
-  @ViewChild('stepper') stepper: MatVerticalStepper;
+  @ViewChild(FootballCampRegistrationSessionsComponent, { static: false }) sessionComponent: FootballCampRegistrationSessionsComponent;
+  @ViewChild('stepper', { static: false }) stepper: MatVerticalStepper;
   stepperSub: Subscription;
-  @ViewChild(FootballCampRegistrationTraineeFormComponent) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
+  @ViewChild(FootballCampRegistrationTraineeFormComponent, { static: false }) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
 
   constructor(private formBuilder: FormBuilder,
               private breakpointObserver: BreakpointObserver,

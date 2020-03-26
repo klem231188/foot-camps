@@ -25,9 +25,9 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
   selectedFootballCamp: BehaviorSubject<FootballCamp>;
   selectedSession: BehaviorSubject<Session>;
   sessions: Session[];
-  @ViewChild('uiControlFootballCamp') uiControlFootballCamp: MatSelect;
+  @ViewChild('uiControlFootballCamp', { static: false }) uiControlFootballCamp: MatSelect;
   uiControlFootballCampInitialized: boolean;
-  @ViewChild('uiControlSession') uiControlSession: MatSelect;
+  @ViewChild('uiControlSession', { static: false }) uiControlSession: MatSelect;
   uiControlSessionInitialized: boolean;
   user: User;
 

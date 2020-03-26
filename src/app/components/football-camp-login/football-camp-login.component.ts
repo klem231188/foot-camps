@@ -41,10 +41,9 @@ export class FootballCampLoginComponent implements OnInit, AfterViewInit, OnDest
         console.log('Not yet logged');
         // FirebaseUI config.
         const uiConfig = {
-          'callbacks': {
-            signInSuccess: function (currentUser, credential, redirectUrl) {
-              console.log('CallBack : currentUser = ' + JSON.stringify(currentUser));
-
+          callbacks: {
+            signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+              const currentUser = authResult.user;
               this.userService
                 .getUser(currentUser.uid)
                 .subscribe(

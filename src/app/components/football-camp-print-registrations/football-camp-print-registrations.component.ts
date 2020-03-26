@@ -7,7 +7,7 @@ import {FootballCamp} from '../../models/football-camp';
 import {Session} from '../../models/session';
 import {RegistrationV2} from '../../models/registration-v2.model';
 import {DocumentType} from '../../models/document-type.enum';
-import {tap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-football-camp-print-registrations',
@@ -39,25 +39,15 @@ export class FootballCampPrintRegistrationsComponent implements OnInit {
         if (!params.sessionId) {
           console.log('Missing query params !');
         } else {
-          this.footballCampService.getFootballCamp(params.campId)
-            .subscribe((camp) => {
-              this.camp = camp;
-            });
-
           this.sessionService
             .getSession(params.sessionId)
             .pipe(
-              tap((session) => this.session = session)
-            )
-            .switchMap(() => this.registrationService.getRegistrations(params.sessionId))
-            .pipe(
-              tap((registrations) => this.registrations = registrations)
-            )
-            .switchMap(() => this.footballCampService.getFootballCamp(this.session.campId))
-            .pipe(
+              tap((session) => this.session = session),
+              switchMap(() => this.registrationService.getRegistrations(params.sessionId)),
+              tap((registrations) => this.registrations = registrations),
+              switchMap(() => this.footballCampService.getFootballCamp(this.session.campId)),
               tap((camp) => this.camp = camp)
-            )
-            .subscribe();
+            ).subscribe();
         }
       });
   }

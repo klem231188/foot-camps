@@ -33,13 +33,13 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
   disablePrintRegistrationsButton: boolean;
   displayedColumns: string[] = [];
   loading: boolean;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @Output() registrationSelected: EventEmitter<RegistrationV2>;
   registrations: RegistrationV2[];
   selection: SelectionModel<RegistrationV2>;
   @Input() sessionId: string;
   @Input() adminMode: boolean;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(
     private registrationService: RegistrationService,
