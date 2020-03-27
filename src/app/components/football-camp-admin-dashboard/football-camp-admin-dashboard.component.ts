@@ -8,7 +8,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {switchMap} from 'rxjs/operators';
 import {UserService} from '../../services/user/user.service';
 import {BehaviorSubject} from 'rxjs';
-import {MatSelect} from '@angular/material';
+import {MatSelect} from '@angular/material/select';
 import {SessionService} from '../../services/session/session.service';
 import {Session} from '../../models/session';
 import {RegistrationV2} from '../../models/registration-v2.model';
@@ -25,9 +25,9 @@ export class FootballCampAdminDashboardComponent implements OnInit, AfterViewChe
   selectedFootballCamp: BehaviorSubject<FootballCamp>;
   selectedSession: BehaviorSubject<Session>;
   sessions: Session[];
-  @ViewChild('uiControlFootballCamp', { static: false }) uiControlFootballCamp: MatSelect;
+  @ViewChild('uiControlFootballCamp') uiControlFootballCamp: MatSelect;
   uiControlFootballCampInitialized: boolean;
-  @ViewChild('uiControlSession', { static: false }) uiControlSession: MatSelect;
+  @ViewChild('uiControlSession') uiControlSession: MatSelect;
   uiControlSessionInitialized: boolean;
   user: User;
 

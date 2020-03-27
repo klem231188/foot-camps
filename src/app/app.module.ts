@@ -1,4 +1,4 @@
-import {BrowserModule, Title} from '@angular/platform-browser';
+import {BrowserModule, HammerModule, Title} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -15,7 +15,7 @@ import {FootballCampHeaderComponent} from './components/football-camp-header/foo
 import {FootballCampDetailsComponent} from './components/football-camp-details/football-camp-details.component';
 import {FootballCampMapComponent} from './components/football-camp-map/football-camp-map.component';
 import {FootballCampOverviewComponent} from './components/football-camp-overview/football-camp-overview.component';
-import {CarouselModule} from 'ngx-bootstrap/carousel';
+// import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {Angular2ImageGalleryModule} from './components/angular2-image-gallery';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
@@ -53,15 +53,15 @@ import {FootballCampHomeComponent} from './components/football-camp-home/footbal
 import {MatCarouselModule} from '@ngmodule/material-carousel';
 import {FootballCampAdminDashboardRegistrationTableComponent} from './components/football-camp-admin-dashboard/football-camp-admin-dashboard-registration-table/football-camp-admin-dashboard-registration-table.component';
 import {FootballCampAdminDashboardRegistrationDetailsComponent} from './components/football-camp-admin-dashboard/football-camp-admin-dashboard-registration-details/football-camp-admin-dashboard-registration-details.component';
-import { PaymentStatePipe } from './pipes/payment-state.pipe';
-import { FootballCampDetailsV2Component } from './components/football-camp-details-v2/football-camp-details-v2.component';
-import { FootballCampBadgesComponent } from './components/football-camp-badges/football-camp-badges.component';
-import { FootballCampActionButtonComponent } from './components/football-camp-action-button/football-camp-action-button.component';
-import { FootballCampRegistrationV2Component } from './components/football-camp-registration-v2/football-camp-registration-v2.component';
-import { FootballCampBadgeComponent } from './components/football-camp-badge/football-camp-badge.component';
-import { FootballCampPrintEquipmentComponent } from './components/football-camp-print-equipment/football-camp-print-equipment.component';
-import { FootballCampPrintReceiptComponent } from './components/football-camp-print-receipt/football-camp-print-receipt.component';
-import { FootballCampPrintRegistrationsComponent } from './components/football-camp-print-registrations/football-camp-print-registrations.component';
+import {PaymentStatePipe} from './pipes/payment-state.pipe';
+import {FootballCampDetailsV2Component} from './components/football-camp-details-v2/football-camp-details-v2.component';
+import {FootballCampBadgesComponent} from './components/football-camp-badges/football-camp-badges.component';
+import {FootballCampActionButtonComponent} from './components/football-camp-action-button/football-camp-action-button.component';
+import {FootballCampRegistrationV2Component} from './components/football-camp-registration-v2/football-camp-registration-v2.component';
+import {FootballCampBadgeComponent} from './components/football-camp-badge/football-camp-badge.component';
+import {FootballCampPrintEquipmentComponent} from './components/football-camp-print-equipment/football-camp-print-equipment.component';
+import {FootballCampPrintReceiptComponent} from './components/football-camp-print-receipt/football-camp-print-receipt.component';
+import {FootballCampPrintRegistrationsComponent} from './components/football-camp-print-registrations/football-camp-print-registrations.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -84,7 +84,7 @@ registerLocaleData(localeFr, 'fr');
     Angular2ImageGalleryModule,
     TableOfContentsModule,
     // @Bootstrap
-    CarouselModule.forRoot(),
+    // CarouselModule.forRoot(),
     // @GoogleMaps
     AgmCoreModule.forRoot({
       apiKey: environment.googlemaps.apiKey
@@ -93,7 +93,8 @@ registerLocaleData(localeFr, 'fr');
     RouterModule.forRoot(AppRoutes, {
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
-    })
+    }),
+    HammerModule
   ],
   declarations: [
     AgePipe,

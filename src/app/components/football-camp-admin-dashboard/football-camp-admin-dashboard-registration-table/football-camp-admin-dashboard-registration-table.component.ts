@@ -13,7 +13,9 @@ import {
 import {RegistrationService} from '../../../services/registration/registration.service';
 import {RegistrationV2} from '../../../models/registration-v2.model';
 import {SelectionModel} from '@angular/cdk/collections';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {environment} from '../../../../environments/environment';
@@ -33,13 +35,13 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
   disablePrintRegistrationsButton: boolean;
   displayedColumns: string[] = [];
   loading: boolean;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @Output() registrationSelected: EventEmitter<RegistrationV2>;
   registrations: RegistrationV2[];
   selection: SelectionModel<RegistrationV2>;
   @Input() sessionId: string;
   @Input() adminMode: boolean;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private registrationService: RegistrationService,

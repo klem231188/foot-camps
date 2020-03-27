@@ -8,7 +8,7 @@ import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {DocumentType} from '../../../models/document-type.enum';
 import {Document} from '../../../models/document.model';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {SessionService} from '../../../services/session/session.service';
 import {of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';

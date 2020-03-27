@@ -3,7 +3,8 @@ import {AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit, ViewChild
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {MatDialog, MatVerticalStepper} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
+import {MatVerticalStepper} from '@angular/material/stepper';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {FootballCampShouldConnectDialogComponent} from '../football-camp-should-connect-dialog/football-camp-should-connect-dialog.component';
 import {Observable, Subscription} from 'rxjs';
@@ -31,12 +32,12 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
   registration: RegistrationV2;
 
   // View Childs
-  @ViewChild(FootballCampRegistrationSessionsComponent, { static: false }) sessionComponent: FootballCampRegistrationSessionsComponent;
-  @ViewChild(FootballCampRegistrationTraineeFormComponent, { static: false }) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
-  @ViewChild(FootballCampRegistrationDocumentsComponent, { static: false }) documentsComponent: FootballCampRegistrationDocumentsComponent;
+  @ViewChild(FootballCampRegistrationSessionsComponent) sessionComponent: FootballCampRegistrationSessionsComponent;
+  @ViewChild(FootballCampRegistrationTraineeFormComponent) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
+  @ViewChild(FootballCampRegistrationDocumentsComponent) documentsComponent: FootballCampRegistrationDocumentsComponent;
   //@ViewChild(FootballCampRegistrationPaymentComponent) cardPaymentComponent: FootballCampRegistrationPaymentComponent;
-  @ViewChild(FootballCampRegistrationCheckPaymentComponent, { static: false }) checkPaymentComponent: FootballCampRegistrationCheckPaymentComponent;
-  @ViewChild('stepper', { static: false }) stepper: MatVerticalStepper;
+  @ViewChild(FootballCampRegistrationCheckPaymentComponent) checkPaymentComponent: FootballCampRegistrationCheckPaymentComponent;
+  @ViewChild('stepper') stepper: MatVerticalStepper;
 
   // Payment From & Controls
   paymentFormGroup: FormGroup;

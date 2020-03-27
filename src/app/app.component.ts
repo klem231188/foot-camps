@@ -2,7 +2,7 @@ import {switchMap} from 'rxjs/operators';
 import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FootballCampService} from './services/football-camp/football-camp.service';
 import {FirebaseAuthUiService} from './services/firebase-auth-ui/firebase-auth-ui.service';
-import {MatSidenav} from '@angular/material';
+import {MatSidenav} from '@angular/material/sidenav';
 import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {RegistrationService} from './services/registration/registration.service';

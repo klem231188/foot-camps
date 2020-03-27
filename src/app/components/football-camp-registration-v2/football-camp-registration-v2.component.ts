@@ -4,7 +4,8 @@ import {FootballCampRegistrationSessionsComponent} from '../football-camp-regist
 import {FootballCampRegistrationTraineeFormComponent} from '../football-camp-registration-trainee-form/football-camp-registration-trainee-form.component';
 import {FootballCampRegistrationDocumentsComponent} from '../football-camp-registration-documents/football-camp-registration-documents.component';
 import {FootballCampRegistrationCheckPaymentComponent} from '../football-camp-registration-check-payment/football-camp-registration-check-payment.component';
-import {MatDialog, MatVerticalStepper} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
+import {MatVerticalStepper} from '@angular/material/stepper';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FootballCamp} from '../../models/football-camp';
 import {Subscription} from 'rxjs';
@@ -28,18 +29,18 @@ export class FootballCampRegistrationV2Component implements OnInit, AfterViewIni
 
   _subscriptions: Subscription[];
   @Input() campId: string;
-  @ViewChild(FootballCampRegistrationCheckPaymentComponent, { static: false }) checkPaymentComponent: FootballCampRegistrationCheckPaymentComponent;
+  @ViewChild(FootballCampRegistrationCheckPaymentComponent) checkPaymentComponent: FootballCampRegistrationCheckPaymentComponent;
   checkPaymentSub: Subscription;
-  @ViewChild(FootballCampRegistrationDocumentsComponent, { static: false }) documentsComponent: FootballCampRegistrationDocumentsComponent;
+  @ViewChild(FootballCampRegistrationDocumentsComponent) documentsComponent: FootballCampRegistrationDocumentsComponent;
   footballCamp: FootballCamp;
   isLoading = true;
   payment: FormControl;
   paymentFormGroup: FormGroup;
   registration: RegistrationV2;
-  @ViewChild(FootballCampRegistrationSessionsComponent, { static: false }) sessionComponent: FootballCampRegistrationSessionsComponent;
-  @ViewChild('stepper', { static: false }) stepper: MatVerticalStepper;
+  @ViewChild(FootballCampRegistrationSessionsComponent) sessionComponent: FootballCampRegistrationSessionsComponent;
+  @ViewChild('stepper') stepper: MatVerticalStepper;
   stepperSub: Subscription;
-  @ViewChild(FootballCampRegistrationTraineeFormComponent, { static: false }) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
+  @ViewChild(FootballCampRegistrationTraineeFormComponent) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
 
   constructor(private formBuilder: FormBuilder,
               private breakpointObserver: BreakpointObserver,

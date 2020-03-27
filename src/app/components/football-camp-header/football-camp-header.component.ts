@@ -2,7 +2,7 @@ import {filter, switchMap} from 'rxjs/operators';
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, NavigationStart, Router, RoutesRecognized} from '@angular/router';
 
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {environment} from '../../../environments/environment';
 import * as firebase from 'firebase';
