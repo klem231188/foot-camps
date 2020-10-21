@@ -111,6 +111,6 @@ export class FootballCampHeaderComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    this.angularFireAuth.auth.signOut();
+    this.angularFireAuth.signOut();
   }
 }
