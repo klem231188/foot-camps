@@ -4,84 +4,128 @@
     <div class="text">
       Footcamps
     </div>
-
-    <mat-carousel
-      [hideArrows]="hideArrows"
-      [hideIndicators]="true"
-      [slides]="slides"
-      [proportion]="proportion"
-      [loop]="true"
-      [interval]="7500"
-      color="accent"
-    >
-      <mat-carousel-slide
-        *ngFor="let slide of slides; let i = index"
-        image={{slide.image}}
-      >
-
-      </mat-carousel-slide>
-    </mat-carousel>
   </div>
 
-  <div class="content-and-button-container">
-    <a class="dark-button" [routerLink]="['/locate']">Trouvez un stage</a>
-    <mat-card class="content-container">
-      <div class="content-inner-container">
-        <div class="card-container">
-          <div class="card-icon">
-            <mat-icon color="primary">place</mat-icon>
-          </div>
-          <span class="card-title">Trouvez un stage</span>
-          <div class="card-content">
-            <b>Trouvez le stage</b> qui vous convient en utilisant différents critères de recherche: Lieu,
-            Activités proposées, Catégories, Dates, Disponibilités, Tarifs.
-          </div>
-        </div>
-      </div>
-
-      <div class="content-inner-container">
-        <div class="card-container">
-          <div class="card-icon">
-            <mat-icon color="primary">create</mat-icon>
-          </div>
-          <span class="card-title">Inscrivez-vous</span>
-          <div class="card-content">
-            <b>Inscrivez-vous</b> en remplissant un formulaire d'inscription en ligne.<br>
-            Notez que plusieurs documents seront à fournir lors de l'inscription.<br>
-            Durée de l'inscription ~ 10 min
-          </div>
-        </div>
-      </div>
-
-      <div class="content-inner-container">
-        <div class="card-container">
-          <div class="card-icon">
-            <mat-icon color="primary">attach_money</mat-icon>
-          </div>
-          <span class="card-title">Payez plus tard <sup>*</sup></span>
-          <div class="card-content">
-            Suivant les stages, <b>différents mode de paiements</b> peuvent être acceptés (chèques, chèques-vacances,
-            coupons sport,
-            espèces).<br>
-            <sup>(*)</sup> Notez qu'une inscription pourra être invalidée dans la cas où le paiement n'a pas eu lieu
-            avant la date butoire.
-          </div>
-        </div>
-      </div>
-
-      <div class="content-inner-container">
-        <div class="card-container">
-          <div class="card-icon">
-            <mat-icon color="primary">send</mat-icon>
-          </div>
-          <span class="card-title">Recevez une confirmation</span>
-          <div class="card-content">
-            Vous recevez deux e-mails.<br>
-            Le premier pour vous confirmer la prise en compte de votre inscription. <br>
-            Le second lorsque votre inscription à été validée.
-          </div>
-        </div>
-      </div>
-    </mat-card>
+  <div class="action-button-container">
+    <a class="action-button" [routerLink]='"."' (click)="scroll(footcampsContainer)">Trouvez un stage</a>
   </div>
+
+  <div class="flow-container">
+    <div class="content-inner-container">
+      <div class="card-container">
+        <div class="card-icon">
+          <mat-icon color="primary">place</mat-icon>
+        </div>
+        <span class="card-title">Trouvez un stage</span>
+        <div class="card-content">
+          <b>Trouvez le stage</b> qui vous convient en utilisant différents critères de recherche: Lieu,
+          date, tarif, ...
+        </div>
+      </div>
+    </div>
+
+    <div class="content-inner-container">
+      <div class="card-container">
+        <div class="card-icon">
+          <mat-icon color="primary">create</mat-icon>
+        </div>
+        <span class="card-title">Inscrivez-vous</span>
+        <div class="card-content">
+          <b>Inscrivez-vous</b> en remplissant un formulaire.<br>
+          Attention une <b>photo</b> et un <b>certificat médical (ou licence FFF)</b> vous seront demandés.<br>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-inner-container">
+      <div class="card-container">
+        <div class="card-icon">
+          <mat-icon color="primary">attach_money</mat-icon>
+        </div>
+        <span class="card-title">Payez en ligne</span>
+        <div class="card-content">
+          Suivant les stages, <b>différents modes de paiements</b> peuvent être acceptés (CB, chèque, chèque-vacance,
+          ...)
+        </div>
+      </div>
+    </div>
+
+    <div class="content-inner-container">
+      <div class="card-container">
+        <div class="card-icon">
+          <mat-icon color="primary">send</mat-icon>
+        </div>
+        <span class="card-title">Recevez une confirmation</span>
+        <div class="card-content">
+          <b>Recevez deux e-mails</b>.
+          Le premier pour vous informer de la prise en compte de votre inscription,
+          le second lorsque celle-ci a été validée par l'organisateur.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!footballCamps">
+    <div class="loading-container">
+      <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+    </div>
+  </div>
+
+  <div class="footcamps-outer-container" #footcampsContainer>
+    <div class="footcamps-container" *ngIf="footballCamps">
+      <div class="footcamp-container" *ngFor="let footCamp of this.footballCamps">
+        <div class="header-container">
+          <img class="logo" [src]="footCamp.details.pathToLogo">
+          <span class="brand">{{footCamp.city}}</span>
+        </div>
+
+        <div class="background-image" [ngStyle]="{'background-image': getFootballCampOverviewImage(footCamp)}"></div>
+        <div class="action-button-container">
+          <a class="action-button" [routerLink]="['/locate/'+footCamp.id+'/details-v2']">Détails</a>
+        </div>
+        <div class="content-container">
+
+          <div class="location-container">
+            <div class="card-icon">
+              <mat-icon color="primary" [inline]="true">location_on</mat-icon>
+            </div>
+            {{footCamp.details.address}}
+          </div>
+          <div class="category-container">
+            <div class="card-icon">
+              <mat-icon color="primary" [inline]="true">person</mat-icon>
+            </div>
+            <div class="category">De {{footCamp.minimumAge}} à {{footCamp.maximumAge}} ans inclus</div>
+          </div>
+
+          <div class="price-container">
+            <div class="card-icon">
+              <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
+            </div>
+            {{footCamp.averagePrice}} €
+          </div>
+
+          <div class="sessions-container" *ngFor="let session of sessionService.getSessionsFromCampId(footCamp.id) | async">
+            <div class="card-icon">
+              <mat-icon color="primary" [inline]="true">event_available</mat-icon>
+            </div>
+            <span class="date">Du {{session.start.toDate() | date : 'shortDate'}}
+              au {{session.end.toDate() | date : 'shortDate'}}</span>
+            <div class="sessions-inner-container">
+              <mat-progress-bar mode="determinate"
+                                [value]="percentageOfRegistrations(session)"
+                                color="primary">
+              </mat-progress-bar>
+              <div>
+                <span *ngIf="percentageOfAvailability(session) !== 0">{{availableRegistrations(session)}} Disponible(s)</span>
+                <span *ngIf="percentageOfAvailability(session) === 0">(Complet)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

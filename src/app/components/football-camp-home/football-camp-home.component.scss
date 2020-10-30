@@ -8,13 +8,57 @@
     display: flex;
     flex-direction: column;
     height: auto !important;
+    color: #4A4A4A;
 
     .main-container {
       display: flex;
       flex-direction: column;
 
+      .action-button-container {
+        position: relative;
+        top: -25px;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 25px;
+
+        .action-button {
+          height: 50px;
+          padding: 0 35px;
+          border-radius: 50px;
+          border: 1px solid rgba(0, 0, 0, 0.125);
+          line-height: 50px;
+          display: inline-block;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          outline: none;
+          cursor: pointer;
+          white-space: nowrap;
+          text-decoration: none;
+          text-transform: uppercase;
+          letter-spacing: .5px;
+          font-size: 12px;
+          font-weight: 700;
+          -webkit-transition: background-color .2s;
+          transition: background-color .2s;
+          color: #4A4A4A;
+          background-color: white;
+          font-family: Roboto;
+          position: absolute;
+        }
+
+        .action-button:hover {
+          color: mat-color($primary);
+        }
+      }
+
       .carousel-container {
         position: relative;
+        width: 100%;
+        height: 400px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url(/assets/img/home/1.jpeg);
 
         .text {
           position: absolute;
@@ -32,126 +76,239 @@
           @include small-screen {
             font-size: 80px;
           }
-          color: mat-color($accent);
+          color: mat-color($primary);
         }
-
       }
 
-      .content-and-button-container {
+      .flow-container {
+        width: 90%;
+        margin-top: 20px;
+        align-self: center;
+        min-width: 300px;
+
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        align-items: center;
-        margin-top: 50px;
-        margin-bottom: 10px;
-        width: 95%;
-        align-self: center;
-        position: relative;
+        align-items: flex-start;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        padding: 25px;
+        background-color: white;
 
-        .dark-button {
-          height: 50px;
-          padding: 0 35px;
-          border-radius: 50px;
-          line-height: 50px;
-          display: inline-block;
-          -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-          //border: 0;
-          outline: none;
-          cursor: pointer;
-          white-space: nowrap;
-          text-decoration: none;
-          text-transform: uppercase;
-          letter-spacing: .5px;
-          font-family: inherit;
-          font-size: 12px;
-          font-weight: 700;
-          -webkit-transition: background-color .2s;
-          transition: background-color .2s;
-          color: #161616;
-          background-color: mat-color($accent);
-
-          font-family: Roboto;
-          position: absolute;
-          top: -75px;
-          z-index: 30;
+        @include small-screen {
+          flex-direction: column;
+          align-items: center;
         }
 
-        .dark-button:hover {
-          background-color: #161616;
-          color: mat-color($accent);
-        }
+        .content-inner-container {
+          flex: 1;
+          max-width: 400px;
 
-        .content-container {
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          align-items: flex-start;
-
-          @include small-screen {
+          .card-container {
+            display: flex;
             flex-direction: column;
             align-items: center;
-          }
+            justify-content: center;
 
-          .content-inner-container {
-            flex: 1;
-            max-width: 400px;
-
-            .card-container {
+            .card-icon {
               display: flex;
-              flex-direction: column;
               align-items: center;
               justify-content: center;
+              background-color: #E7F8FF;
+              border-radius: 50%;
+              width: 60px;
+              height: 60px;
 
-              .card-icon {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background-color: #E7F8FF;
-                border-radius: 50%;
-                width: 60px;
-                height: 60px;
-
-                mat-icon {
-                  width: 35px;
-                  height: 35px;
-                  font-size: 35px;
-                }
-              }
-
-              .card-title {
-                color:  mat-color($primary);
-                font-size: 22px;
-                padding-bottom: 7px;
-              }
-
-              .card-content {
-                padding-top: 7px;
-                font-size: 17px;
-                text-align: center;
+              mat-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 35px;
               }
             }
 
-            mat-card-content {
-              font-size: 13pt;
-            }
-
-            .card-header-container {
-              display: flex;
-              flex-direction: row;
-              align-items: center;
-              justify-content: flex-start;
-
-              color:  mat-color($primary);
+            .card-title {
+              color: #4A4A4A;
               font-size: 22px;
-
               padding-bottom: 7px;
             }
 
-            .card-content-container {
+            .card-content {
               padding-top: 7px;
               font-size: 17px;
+              text-align: center;
+              color: #4A4A4A;
+            }
+          }
+
+          mat-card-content {
+            font-size: 13pt;
+          }
+
+          .card-header-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+
+            color: mat-color($primary);
+            font-size: 22px;
+
+            padding-bottom: 7px;
+          }
+
+          .card-content-container {
+            padding-top: 7px;
+            font-size: 17px;
+          }
+        }
+      }
+
+      .loading-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .footcamps-outer-container {
+        align-self: center;
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+      }
+
+      .footcamps-container {
+        width: 90%;
+        margin-top: 20px;
+        margin-bottom: -20px;
+        align-self: center;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+
+        @include small-screen {
+          justify-content: center;
+        }
+
+        .footcamp-container {
+          min-width: 300px;
+          width: 450px;
+          max-width: 450px;
+          align-self: stretch;
+          border: 1px solid rgba(0, 0, 0, 0.125);
+          background-color: white;
+          margin-bottom: 20px;
+
+          .header-container {
+            align-self: center;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+            .brand {
+              font-size: 25px;
+            }
+
+            .logo {
+              height: 45px;
+              margin-right: 20px;
+            }
+          }
+
+          .background-image {
+            height: 200px;
+            background-repeat: no-repeat;
+            background-size: cover;
+           // background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url(/assets/img/plabennec/overview.jpg);
+          }
+          .background-image-abers {
+            height: 200px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url(/assets/img/aber/overview.jpg);
+          }
+          .background-image-plouguerneau {
+            height: 200px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url(/assets/img/plouguerneau/overview.jpg);
+          }
+
+          .content-container {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+
+            .card-icon {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-color: #E7F8FF;
+              border-radius: 50%;
+              width: 50px;
+              height: 50px;
+              margin-right: 5px;
+
+              mat-icon {
+                width: 25px !important;
+                height: 25px !important;
+                font-size: 25px !important;
+                line-height: 1 !important;
+              }
+            }
+
+            .location-container {
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-start;
+              align-items: center;
+              margin-bottom: 5px;
+            }
+
+            .category-container {
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-start;
+              align-items: center;
+              margin-bottom: 5px;
+
+              .category {
+              }
+            }
+
+            .price-container {
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-start;
+              align-items: center;
+              margin-bottom: 5px;
+            }
+
+            .sessions-container {
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-start;
+              align-items: center;
+              margin-bottom: 5px;
+
+              .date {
+                width: 170px;
+              }
+
+              .sessions-inner-container {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              }
             }
           }
         }
@@ -162,7 +319,6 @@
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
-        margin-top: 50px;
         margin-bottom: 10px;
         width: 75%;
         align-self: center;

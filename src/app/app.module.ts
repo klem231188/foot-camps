@@ -92,7 +92,7 @@ registerLocaleData(localeFr, 'fr');
     // @Routing
     RouterModule.forRoot(AppRoutes, {
       scrollPositionRestoration: 'enabled',
-      anchorScrolling: 'enabled',
+      anchorScrolling: 'enabled'
     }),
     HammerModule
   ],

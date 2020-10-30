@@ -6,14 +6,12 @@
 <ng-container *ngIf="footballCamp && sessions">
   <div class="details-container">
 
-    <app-football-camp-action-button class="fab-button-registration"
-                                     [action]="'S\'inscrire'"
-                                     [routerLink]="'/locate/' + footballCamp.id + '/registration-v2'">
-    </app-football-camp-action-button>
-
-    <div class="header-container" *ngIf="!isSmallScreen()">
-      <img class="logo" [src]="footballCamp.details.pathToLogo">
-      <span class="brand">{{footballCamp.city}}</span>
+    <div class="register-button-container">
+      <button class="register-button mdc-fab mdc-fab--extended" [routerLink]="'/locate/' + footballCamp.id + '/registration-v2'">
+        <div class="mdc-fab__ripple"></div>
+        <span class="material-icons mdc-fab__icon">add</span>
+        <span class="mdc-fab__label">S'inscrire</span>
+      </button>
     </div>
 
     <div class="content-container">

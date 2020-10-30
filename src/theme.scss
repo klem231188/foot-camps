@@ -1,3 +1,4 @@
+@use '@material/fab';
 @import '~@angular/material/theming';
 @import 'flex-mixin.scss';
 @import 'media-queries.scss';
@@ -68,6 +69,7 @@ $football-camp-theme: mat-light-theme($primary, $accent, $warn);
   @include app-football-camp-print-equipment-theme($theme);
   @include app-football-camp-print-receipt-theme($theme);
   @include app-football-camp-print-registrations-theme($theme);
+  @include fab.core-styles;
 }
 
 @include angular-material-theme($football-camp-theme);

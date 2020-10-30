@@ -7,9 +7,6 @@
   app-football-camp-details-v2 {
     display: flex;
     flex-direction: row;
-    @include big-screen {
-      overflow: auto;
-    }
 
     .loading-container {
       flex: 1;
@@ -23,6 +20,7 @@
       flex: 1;
       display: flex;
       flex-direction: column;
+      position: relative;
 
       .fab-button-registration {
         position: fixed;
@@ -38,38 +36,26 @@
         z-index: 10;
       }
 
-      .header-container {
-        align-self: center;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        padding-top: 10px;
-        padding-bottom: 25px;
-        background-color: mat-color($primary, 1);
-        width: 100%;
+      .register-button-container {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 11;
 
-        .brand {
-          font-family: 'Milkshake';
-          font-size: 60px;
-          color: white;
-          @include small-screen {
-            font-size: 25px;
-          }
-        }
-
-        .logo {
-          height: 100px;
-          margin-right: 20px;
-          @include small-screen {
-            height: 65px;
-          }
+        .register-button {
+          background-color: mat-color($accent, 1) !important;
+          color: #4A4A4A;
         }
       }
 
       .content-container {
         display: flex;
         flex-direction: column;
+
+        @include big-screen {
+          overflow: auto;
+        }
 
         .activity-image {
           width: 100%;
@@ -339,6 +325,11 @@
         }
 
         .registrations-container {
+
+          table {
+            z-index: 10;
+          }
+
           @include big-screen {
             margin-left: 20px;
           }
