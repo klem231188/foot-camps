@@ -25,7 +25,6 @@
         </div>
         Organisateurs
       </div>
-      <div class="vertical-spacer"></div>
       <div class="organizer-container">
         <p [innerHTML]="footballCamp.details.organizerDescription | safeHtml"></p>
         <div *ngIf="footballCamp.details.organizers != null">
@@ -39,25 +38,20 @@
         </div>
       </div>
 
-
-      <div class="vertical-spacer"></div>
       <div class="title-container">
         <div class="card-icon">
           <mat-icon color="primary" [inline]="true">directions_run</mat-icon>
         </div>
         Programme
       </div>
-      <div class="vertical-spacer"></div>
       <div class="description-container" [innerHTML]="footballCamp.details.activityDescription"></div>
 
-      <div class="vertical-spacer"></div>
       <div class="title-container">
         <div class="card-icon">
           <mat-icon color="primary" [inline]="true">description</mat-icon>
         </div>
         Documents
       </div>
-      <div class="vertical-spacer"></div>
       <div class="document-container">
         <a *ngFor="let document of footballCamp.details.documents"
            class="document"
@@ -70,21 +64,18 @@
         </a>
       </div>
 
-      <div class="vertical-spacer"></div>
       <div class="title-container">
         <div class="card-icon">
           <mat-icon color="primary" [inline]="true">location_on</mat-icon>
         </div>
         Localisation
       </div>
-      <div class="vertical-spacer"></div>
       <div class="address-container">
         <div [innerHTML]="footballCamp.details.location | safeHtml"></div>
         <b>Adresse : </b>&nbsp;
         <a [href]="footballCamp.details.gmapsUrl" target="_blank"><u>{{footballCamp.details.address}}</u></a>
       </div>
 
-      <div class="vertical-spacer"></div>
       <div class="title-container">
         <div class="card-icon">
           <mat-icon color="primary" [inline]="true">photo</mat-icon>
@@ -97,15 +88,12 @@
         </gallery>
       </div>
 
-
-      <div class="vertical-spacer"></div>
       <div class="title-container">
         <div class="card-icon">
           <mat-icon color="primary" [inline]="true">date_range</mat-icon>
         </div>
         Dates et tarifs
       </div>
-      <div class="vertical-spacer"></div>
       <div class="date-price-container">
         <div [innerHTML]="footballCamp.details.priceDescription"></div>
 
@@ -141,14 +129,12 @@
         </table>
       </div>
 
-      <div class="vertical-spacer"></div>
       <div class="title-container">
         <div class="card-icon">
           <mat-icon color="primary" [inline]="true">visibility</mat-icon>
         </div>
         Liste des inscrits
       </div>
-      <div class="vertical-spacer"></div>
       <div class="registrations-container">
         <mat-form-field>
           <mat-select [(value)]="selectedSession" placeholder="Sessions">
@@ -167,8 +153,6 @@
           </app-football-camp-admin-dashboard-registration-table>
         </ng-container>
       </div>
-
-      <div class="vertical-spacer"></div>
     </div>
 
   </div>

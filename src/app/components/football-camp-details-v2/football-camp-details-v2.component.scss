@@ -43,6 +43,11 @@
         transform: translateX(-50%);
         z-index: 11;
 
+        @include small-screen {
+          position: fixed;
+          bottom: 15px;
+        }
+
         .register-button {
           background-color: mat-color($accent, 1) !important;
           color: #4A4A4A;
@@ -71,7 +76,7 @@
         }
 
         .vertical-spacer {
-          height: 10px;
+          margin-bottom: 10px;
           width: 100%;
         }
 
@@ -105,13 +110,7 @@
         }
 
         .description-container {
-          @include big-screen {
-            margin-left: 20px;
-          }
-
-          @include small-screen {
-            padding: 0px 5px 0px 5px;
-          }
+          padding: 10px;
 
           .description-block {
             margin-bottom: 10px;
@@ -131,13 +130,7 @@
           flex-direction: column;
           align-items: flex-start;
 
-          @include big-screen {
-            margin-left: 20px;
-          }
-
-          @include small-screen {
-            padding: 0px 5px 0px 5px;
-          }
+          padding: 10px;
 
           .document {
             display: flex;
@@ -166,13 +159,7 @@
         }
 
         .address-container {
-          @include big-screen {
-            margin-left: 20px;
-          }
-
-          @include small-screen {
-            padding: 0px 5px 0px 5px;
-          }
+          padding: 10px;
 
           a {
             color: mat-color($primary);
@@ -183,6 +170,8 @@
         }
 
         .gallery-container {
+          padding: 10px;
+
           viewer {
             .outerContainer {
               top: 64px;
@@ -193,13 +182,7 @@
         }
 
         .organizer-container {
-          @include big-screen {
-            margin-left: 20px;
-          }
-
-          @include small-screen {
-            padding: 0px 5px 0px 5px;
-          }
+          padding: 10px;
 
           .quote {
             margin-bottom: 5px;
@@ -228,13 +211,7 @@
         }
 
         .date-price-container {
-          @include big-screen {
-            margin-left: 20px;
-          }
-
-          @include small-screen {
-            padding: 0px 5px 0px 5px;
-          }
+          padding: 10px;
 
           .description-block {
             margin-bottom: 10px;
@@ -325,17 +302,10 @@
         }
 
         .registrations-container {
+          padding: 10px;
 
           table {
             z-index: 10;
-          }
-
-          @include big-screen {
-            margin-left: 20px;
-          }
-
-          @include small-screen {
-            padding: 0px 5px 0px 5px;
           }
         }
       }

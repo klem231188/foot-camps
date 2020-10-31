@@ -6,10 +6,10 @@
       <mat-icon>home</mat-icon>&nbsp;
       <span>Accueil</span>
     </button>
-    <button (click)="onFindFootballCampsClicked()" mat-button>
-      <mat-icon>location_on</mat-icon>&nbsp;
-      <span>Trouver un stage</span>
-    </button>
+<!--    <button (click)="onFindFootballCampsClicked()" mat-button>-->
+<!--      <mat-icon>location_on</mat-icon>&nbsp;-->
+<!--      <span>Trouver un stage</span>-->
+<!--    </button>-->
     <button mat-button *ngIf="user && ((user.role === 'ADMIN') || (user.role === 'ORGANIZER'))" (click)="onViewRegistrationsClicked()">
       <mat-icon>visibility</mat-icon>&nbsp;
       <span>Voir les inscrits</span>
@@ -18,8 +18,8 @@
   <router-outlet></router-outlet>
 </mat-sidenav-container>
 
-<footer>
-  <mat-toolbar color="primary">
-    <span class="brand">Cherchez, trouvez, inscrivez-vous</span>
-  </mat-toolbar>
-</footer>
+<!--<footer>-->
+<!--  <mat-toolbar color="primary">-->
+<!--    <span class="brand">Cherchez, trouvez, inscrivez-vous</span>-->
+<!--  </mat-toolbar>-->
+<!--</footer>-->

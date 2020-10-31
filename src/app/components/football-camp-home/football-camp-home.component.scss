@@ -210,8 +210,7 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            margin-top: 10px;
-            margin-bottom: 10px;
+            padding: 10px;
 
             .brand {
               font-size: 25px;
@@ -227,19 +226,6 @@
             height: 200px;
             background-repeat: no-repeat;
             background-size: cover;
-           // background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url(/assets/img/plabennec/overview.jpg);
-          }
-          .background-image-abers {
-            height: 200px;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url(/assets/img/aber/overview.jpg);
-          }
-          .background-image-plouguerneau {
-            height: 200px;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url(/assets/img/plouguerneau/overview.jpg);
           }
 
           .content-container {

@@ -17,6 +17,10 @@
     .brand {
       font-family: 'Milkshake';
       font-size: 30px;
+
+      @include small-screen {
+        font-size: unset;
+      }
     }
     mat-icon {
       font-size: 35px !important;
@@ -45,11 +49,6 @@
       .selected-football-camp-logo {
         height: 50px;
       }
-      //.selected-football-camp-name {
-      //  display: flex;
-      //  flex-direction: column;
-      //  justify-content: center;
-      //}
     }
 
   }

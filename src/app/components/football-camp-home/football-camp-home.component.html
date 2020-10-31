@@ -109,7 +109,7 @@
             <div class="card-icon">
               <mat-icon color="primary" [inline]="true">event_available</mat-icon>
             </div>
-            <span class="date">Du {{session.start.toDate() | date : 'shortDate'}}
+            <span class="date">{{session.start.toDate() | date : 'shortDate'}}
               au {{session.end.toDate() | date : 'shortDate'}}</span>
             <div class="sessions-inner-container">
               <mat-progress-bar mode="determinate"

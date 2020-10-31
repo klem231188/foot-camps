@@ -45,25 +45,15 @@ export class FootballCampHeaderComponent implements OnInit, OnDestroy {
     const subToRouter = this.router.events.pipe(
       filter(event => event instanceof NavigationStart))
       .subscribe((event: NavigationStart) => {
-        if (/^\/registration\/\w+$/i.test(event.url)) {
-          // registration/:id --> locate/:id/details-v2
-          this.backUrl = event.url.replace('registration', 'locate');
-          this.backUrl += '/details-v2';
-          console.log(this.backUrl);
-        } else if (/^\/locate\/\w+\/registration-v2$/i.test(event.url)) {
-          // locate/:id/registration --> locate/:id/details-v2
+        if (/^\/locate\/\w+\/registration-v2$/i.test(event.url)) {
+          // locate/:id/registration-v2 --> locate/:id/details-v2
           this.backUrl = event.url.replace('/registration-v2', '/details-v2');
           console.log(this.backUrl);
         } else if (/^\/locate\/\w+\/details-v2$/i.test(event.url)) {
-          // locate/:id/details-v2 --> locate/:id
-          this.backUrl = event.url.replace('/details-v2', '');
+          // locate/:id/details-v2 --> home
+          this.backUrl = event.url = '/home';
           console.log(this.backUrl);
-        } else if (/^\/locate\/\w+$/i.test(event.url)) {
-          // locate/:id --> locate
-          this.backUrl = '/locate';
-          console.log(this.backUrl);
-        } else if (/^\/locate$/i.test(event.url)) {
-          // locate
+        } else {
           this.backUrl = null;
           console.log(this.backUrl);
         }
@@ -72,7 +62,6 @@ export class FootballCampHeaderComponent implements OnInit, OnDestroy {
     const subToAuthState = this.angularFireAuth.authState
       .subscribe((firebaseUser) => {
         this.userInfo = firebaseUser;
-        console.log('firebase.userInfo : ' + JSON.stringify(this.userInfo));
       });
 
     const subToSelectedFootballCamp = this.router.events

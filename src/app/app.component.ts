@@ -50,8 +50,6 @@ export class AppComponent {
         }
       }))
       .subscribe((user) => {
-        console.log('user = ' + JSON.stringify(user));
-        console.log(user);
         this.user = user;
       })
   }
