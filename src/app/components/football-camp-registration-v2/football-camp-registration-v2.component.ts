@@ -182,6 +182,10 @@ export class FootballCampRegistrationV2Component implements OnInit, AfterViewIni
       .save2(this.registration)
       .then(() => this.isLoading = false)
       .catch(() => this.isLoading = false)
+
+    console.log(this.footballCamp.id);
+    console.log(this.sessionComponent.selectedSession.getValue().id);
+    console.log(this.registration);
   }
 
 }

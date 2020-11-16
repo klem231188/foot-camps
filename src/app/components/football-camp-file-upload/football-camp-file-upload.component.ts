@@ -11,30 +11,27 @@ import {finalize} from 'rxjs/operators';
   styleUrls: ['./football-camp-file-upload.component.scss']
 })
 export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
-  // ----------------------------
-  // Fields
-  // ----------------------------
-  downloadURL: string;
   @Output() document: BehaviorSubject<Document>;
+  downloadURL: string;
+  @Input() inputDocument: Document;
   inputId: string;
   percentage: Observable<number>;
   subscriptions: Subscription[];
   title: string;
   @Input() type: DocumentType;
-  @Input() inputDocument: Document;
   uploaded: BehaviorSubject<boolean>;
 
-  // ----------------------------
-  // Constructor
-  // ----------------------------
   constructor(private storage: AngularFireStorage) {
     this.uploaded = new BehaviorSubject(false);
     this.document = new BehaviorSubject(null);
   }
 
-  // ----------------------------
-  // Lifecycle hooks
-  // ----------------------------
+  ngOnDestroy(): void {
+    for (const subscription of this.subscriptions) {
+      subscription.unsubscribe();
+    }
+  }
+
   ngOnInit(): void {
     if (this.inputDocument) {
       this.document.next(this.inputDocument);
@@ -58,7 +55,7 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
         this.inputId = 'fiche_sanitaire_id';
         break;
       case DocumentType.PHOTO_IDENTITE :
-        this.title = 'Photo d\'identité';
+        this.title = 'Photo de votre enfant';
         this.inputId = 'photo_identite_id';
         break;
     }
@@ -66,15 +63,6 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
     this.subscriptions = [];
   }
 
-  ngOnDestroy(): void {
-    for (const subscription of this.subscriptions) {
-      subscription.unsubscribe();
-    }
-  }
-
-  // ----------------------------
-  // Methods
-  // ----------------------------
   uploadFile(event: FileList) {
     const file = event.item(0);
 

@@ -1,4 +1,5 @@
 import {BoundingBox, ElementHandle} from 'puppeteer';
+
 const puppeteer = require('puppeteer');
 
 const width = 797;
@@ -95,7 +96,6 @@ export async function printEquipment(url: string): Promise<Buffer> {
 
   return buffer;
 }
-
 
 export async function printReceipt(url: string): Promise<Buffer> {
   console.log(`printReceipt(${url})`);
