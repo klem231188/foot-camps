@@ -44,7 +44,7 @@ export class RegistrationService {
       )
   }
 
-  save2(registration: RegistrationV2): Promise<any> {
+  save(registration: RegistrationV2): Promise<any> {
     return this.angularFirestore
       .collection('registrations')
       .add(registration)

@@ -41,6 +41,10 @@
       {
         "url": "./assets/img/plouguerneau/equipement.pdf",
         "name": "L'équipement"
+      },
+      {
+        "url": "./assets/img/plouguerneau/overview.jpg",
+        "name": "L'affiche"
       }
     ],
     "gmapsUrl": "https://goo.gl/maps/d96nuoMMSsyr7z8R6",
@@ -66,6 +70,8 @@
   "overview": {
     "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     "pathToImage": "./assets/img/plouguerneau/overview.jpg",
+    "pathToImage200px": "./assets/img/plouguerneau/overview_200px.jpg",
+    "pathToImage400px": "./assets/img/plouguerneau/overview_400px.jpg",
     "title": "Bienvenue au Foot Camps de Plouguerneau"
   }
 }

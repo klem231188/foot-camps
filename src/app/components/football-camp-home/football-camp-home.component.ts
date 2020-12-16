@@ -19,7 +19,7 @@ export class FootballCampHomeComponent implements OnInit {
   }
 
   getFootballCampOverviewImage(footCamp: FootballCamp): string {
-    return `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url('${footCamp.overview.pathToImage})`;
+    return `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url('${footCamp.overview.pathToImage200px})`;
   }
 
   ngOnInit(): void {

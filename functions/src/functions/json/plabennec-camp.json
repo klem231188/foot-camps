@@ -73,6 +73,8 @@
   "overview": {
     "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     "pathToImage": "./assets/img/plabennec/overview.jpg",
+    "pathToImage200px": "./assets/img/plabennec/overview_200px.jpg",
+    "pathToImage400px": "./assets/img/plabennec/overview_400px.jpg",
     "title": "Bienvenue au Foot Camps de Plabennec"
   }
 }

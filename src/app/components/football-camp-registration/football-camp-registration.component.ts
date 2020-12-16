@@ -199,7 +199,7 @@ export class FootballCampRegistrationComponent implements OnInit, AfterViewInit,
 
     this.isLoading = true;
     this.registrationService
-      .save2(this.registration)
+      .save(this.registration)
       .then(() => this.isLoading = false)
       .catch(() => this.isLoading = false)
   }

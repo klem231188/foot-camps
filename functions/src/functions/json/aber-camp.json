@@ -30,6 +30,10 @@
       {
         "url": "./assets/img/aber/programme.jpg",
         "name": "Le programme"
+      },
+      {
+        "url": "./assets/img/aber/overview.jpg",
+        "name": "L'affiche"
       }
     ],
     "gmapsUrl": "https://goo.gl/maps/ofJJaLe8Tw92",
@@ -71,6 +75,8 @@
   "overview": {
     "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     "pathToImage": "./assets/img/aber/overview.jpg",
+    "pathToImage200px": "./assets/img/aber/overview_200px.jpg",
+    "pathToImage400px": "./assets/img/aber/overview_400px.jpg",
     "title": "Bienvenue au Foot Camps de Abers Foot"
   }
 }
