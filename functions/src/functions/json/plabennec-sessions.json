@@ -4,7 +4,7 @@
       "CHECK",
       "HOLIDAY_CHECK"
     ],
-    "campId": "",
+    "campId": "8zG6SI08QsVCeWSZ0IpE",
     "numberOfRegistrationsAccepted": 0,
     "numberOfRegistrationsInProgress": 0,
     "numberOfRegistrationsRejected": 0,
@@ -13,6 +13,7 @@
     "endRegistrationDate": "2019-07-08T00:00:00+01:00",
     "fullBoardRates": null,
     "halfBoardRates": 230,
+    "id": "POMd3zzzZQbCfJYFdpE8",
     "maximumNumberOfRegistrations": 40,
     "start": "2019-07-08T08:30:00+01:00"
   },
@@ -21,7 +22,7 @@
       "CHECK",
       "HOLIDAY_CHECK"
     ],
-    "campId": "",
+    "campId": "8zG6SI08QsVCeWSZ0IpE",
     "numberOfRegistrationsAccepted": 0,
     "numberOfRegistrationsInProgress": 0,
     "numberOfRegistrationsRejected": 0,
@@ -30,6 +31,7 @@
     "endRegistrationDate": "2019-07-15T00:00:00+01:00",
     "fullBoardRates": null,
     "halfBoardRates": 230,
+    "id": "2OaKNnFUDJkc9kg2RaTS",
     "maximumNumberOfRegistrations": 40,
     "start": "2019-07-15T08:30:00+01:00"
   },
@@ -38,7 +40,7 @@
       "CHECK",
       "HOLIDAY_CHECK"
     ],
-    "campId": "",
+    "campId": "8zG6SI08QsVCeWSZ0IpE",
     "numberOfRegistrationsAccepted": 0,
     "numberOfRegistrationsInProgress": 0,
     "numberOfRegistrationsRejected": 0,
@@ -47,6 +49,7 @@
     "endRegistrationDate": "2019-07-22T00:00:00+01:00",
     "fullBoardRates": null,
     "halfBoardRates": 230,
+    "id": "W2J3gvN6jIPc6OjdQydN",
     "maximumNumberOfRegistrations": 40,
     "start": "2019-07-22T08:30:00+01:00"
   }

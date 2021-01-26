@@ -4,7 +4,7 @@ import {Change, EventContext} from 'firebase-functions/lib/cloud-functions';
 import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
 import {Payment} from '../../src/app/models/payment';
 import {RegistrationV2} from '../../src/app/models/registration-v2.model';
-import {addCampAberFoot, addCampPlabennec, addCampPlouguerneau} from './functions/add-camps.functions';
+import {setCampAber, setCampPlabennec, setCampPlouguerneau} from './functions/add-camps.functions';
 import {printEquipment, printReceipt, printRegistration, printRegistrations} from './functions/print-registration.functions';
 import {anonymize} from './functions/anonymize.functions';
 import {sendMailAboutPayment, sendMailAboutRegistration} from './functions/send-mail.functions';
@@ -22,17 +22,93 @@ export const httpAnonymize = functions.https.onRequest(async (request, response)
   response.send('anonymize successful');
 });
 
-export const httpAddCampAberFoot = functions.https.onRequest((request, response) => {
-  return addCampAberFoot(request, response);
+export const httpSetCampPlouguerneau = functions.https.onRequest((request, response) => {
+  return cors(request, response, async () => {
+      try {
+        await setCampPlouguerneau();
+        response.send('httpSetCampPlouguerneau successful');
+      } catch (e) {
+        console.log(e);
+        response.status(500).send('httpSetCampPlouguerneau unsuccessful');
+      }
+    }
+  )
 });
 
-export const httpAddCampPlouguerneau = functions.https.onRequest((request, response) => {
-  return addCampPlouguerneau(request, response);
+export const httpSetCampPlabennec = functions.https.onRequest((request, response) => {
+  return cors(request, response, async () => {
+      try {
+        await setCampPlabennec();
+        response.send('httpSetCampPlabennec successful');
+      } catch (e) {
+        response.status(500).send('httpSetCampPlabennec unsuccessful');
+      }
+    }
+  )
 });
 
-export const httpAddCampPlabennec = functions.https.onRequest((request, response) => {
-  return addCampPlabennec(request, response);
+export const httpSetCampAber = functions.https.onRequest((request, response) => {
+  return cors(request, response, async () => {
+      try {
+        await setCampAber();
+        response.send('httpSetCampAber successful');
+      } catch (e) {
+        response.status(500).send('httpSetCampAber unsuccessful');
+      }
+    }
+  )
 });
+
+// export const httpPaymentIntent = functions.https.onRequest((request, response) => {
+//   return cors(request, response, async () => {
+//     try {
+//       const stripe = new Stripe(functions.config().stripe.key, {
+//         apiVersion: '2020-08-27',
+//       });
+//       const paymentId: string = request.body.paymentId;
+//       const isHalfBoard: boolean = request.body.isHalfBoard;
+//       const isNormalPrice: boolean = request.body.isNormalPrice;
+//
+//       let paymentSnap = await admin.firestore().doc(`payments/${paymentId}`).get();
+//       let registrationId = (paymentSnap.data() as Payment).registrationId;
+//       let registrationSnap = await admin.firestore().doc(`registrations/${registrationId}`).get();
+//       let sessionId = (registrationSnap.data() as RegistrationV2).sessionId;
+//       let sessionSnap = await admin.firestore().doc(`sessions/${sessionId}`).get();
+//       let session = (sessionSnap.data() as Session)
+//       let price = 0;
+//       if (isHalfBoard) {
+//         if(isNormalPrice) {
+//           price = session.
+//         } else {
+//
+//         }
+//       } else {
+//         if(isNormalPrice) {
+//
+//         } else {
+//
+//         }
+//       }
+//
+//       // Create a PaymentIntent with the order amount and currency
+//       const paymentIntent = await stripe.paymentIntents.create({
+//         amount: calculateOrderAmount(items),
+//         currency: 'usd'
+//       });
+//       res.send({
+//         clientSecret: paymentIntent.client_secret
+//       });
+//       const url = functions.config().url.printregistration + `?campId=${campId}&sessionId=${sessionId}&registrationId=${registrationId}`;
+//       console.log('Success while rendering registration');
+//       response.setHeader('Content-Type', 'image/png');
+//       response.setHeader('Content-Disposition', `attachment; filename=${registrationId}.png`);
+//       response.send(screenshot);
+//     } catch (error) {
+//       console.log('Error while rendering registration', error);
+//       response.status(500).send(error);
+//     }
+//   });
+// });
 
 const opts = {timeoutSeconds: 60, memory: '2GB' as '128MB' | '256MB' | '512MB' | '1GB' | '2GB'};
 export const httpPrintRegistration = functions.runWith(opts).https.onRequest((request, response) => {

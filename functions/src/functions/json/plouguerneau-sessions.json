@@ -4,7 +4,7 @@
       "CHECK",
       "HOLIDAY_CHECK"
     ],
-    "campId": "",
+    "campId": "rQeQFO7IawINlqVO7CoJ",
     "numberOfRegistrationsAccepted": 0,
     "numberOfRegistrationsInProgress": 0,
     "numberOfRegistrationsRejected": 0,
@@ -13,6 +13,7 @@
     "endRegistrationDate": "2019-07-01T00:00:00+01:00",
     "fullBoardRates": null,
     "halfBoardRates": 170,
+    "id": "KxZ64nZ9ukgdCkl9r2Sv",
     "maximumNumberOfRegistrations": 40,
     "start": "2019-07-15T08:30:00+01:00"
   }

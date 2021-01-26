@@ -1,85 +1,61 @@
 import * as admin from 'firebase-admin';
-import * as AberCamp from './json/aber-camp.json'
-import * as AberSessions from './json/aber-sessions.json'
-import * as PlouguerneauCamp from './json/plouguerneau-camp.json'
-import * as PlouguerneauSessions from './json/plouguerneau-sessions.json'
-import * as PlabennecCamp from './json/plabennec-camp.json'
-import * as PlabennecSessions from './json/plabennec-sessions.json'
+import PlouguerneauCamp from './json/plouguerneau-camp.json';
+import PlouguerneauSessions from './json/plouguerneau-sessions.json';
+import AberCamp from './json/aber-camp.json';
+import AberSessions from './json/aber-sessions.json';
+import PlabennecCamp from './json/plabennec-camp.json';
+import PlabennecSessions from './json/plabennec-sessions.json';
 import {FootballCamp} from '../../../src/app/models/football-camp';
 import {Session} from '../../../src/app/models/session';
+import {RegistrationV2} from '../../../src/app/models/registration-v2.model';
+import {RegistrationState} from '../../../src/app/models/registration-state.enum';
 
-export function addCampAberFoot(request, response): Promise<void> {
-  // @ts-ignore
-  const camp: FootballCamp = AberCamp as FootballCamp;
-  const sessions: Session[] = (AberSessions as Session[]);
+async function setCamp(
+  camp: FootballCamp,
+  sessions: Session[]
+) {
+// Create camp
+  await admin.firestore().collection('camps').doc(camp.id).set(camp);
+
+  // Create sessions
   for (const session of sessions) {
+    console.log(`Create or Update session ${session.id}`);
     session.end = admin.firestore.Timestamp.fromDate(new Date(session.end));
     session.endRegistrationDate = admin.firestore.Timestamp.fromDate(new Date(session.endRegistrationDate));
     session.start = admin.firestore.Timestamp.fromDate(new Date(session.start));
-  }
+    await admin.firestore().collection('sessions').doc(session.id).set(session);
 
-  return addCamp(request, response, camp, sessions);
+    console.log(`Update session numberOfRegistrations`);
+    const registrationsSnap = await admin.firestore().collection('registrations').where('sessionId', '==', session.id).get();
+    console.log(`${registrationsSnap.docs.length} registration documents found`);
+    const numberOfRegistrationsAccepted = registrationsSnap.docs.filter(registrationSnap => (registrationSnap.data() as RegistrationV2).state === RegistrationState.ACCEPTED).length;
+    const numberOfRegistrationsRejected = registrationsSnap.docs.filter(registrationSnap => (registrationSnap.data() as RegistrationV2).state === RegistrationState.REJECTED).length;
+    const numberOfRegistrationsInProgress = registrationsSnap.docs.filter(registrationSnap => (registrationSnap.data() as RegistrationV2).state === RegistrationState.IN_PROGRESS).length;
+
+    const partialSessionUpdate: Partial<Session> = {
+      numberOfRegistrationsAccepted: numberOfRegistrationsAccepted,
+      numberOfRegistrationsInProgress: numberOfRegistrationsInProgress,
+      numberOfRegistrationsRejected: numberOfRegistrationsRejected
+    }
+
+    await admin.firestore().collection('sessions').doc(session.id).set(partialSessionUpdate, {merge: true});
+  }
 }
 
-export function addCampPlouguerneau(request, response): Promise<void> {
-  // @ts-ignore
+export async function setCampPlouguerneau() {
   const camp: FootballCamp = PlouguerneauCamp as FootballCamp;
-  const sessions: Session[] = (PlouguerneauSessions as Session[]);
-  for (const session of sessions) {
-    session.end = admin.firestore.Timestamp.fromDate(new Date(session.end));
-    session.endRegistrationDate = admin.firestore.Timestamp.fromDate(new Date(session.endRegistrationDate));
-    session.start = admin.firestore.Timestamp.fromDate(new Date(session.start));
-  }
-
-  return addCamp(request, response, camp, sessions);
+  const sessions: Session[] = PlouguerneauSessions as Session[];
+  await setCamp(camp, sessions);
 }
 
-export function addCampPlabennec(request, response): Promise<void> {
-  // @ts-ignore
+export async function setCampPlabennec() {
   const camp: FootballCamp = PlabennecCamp as FootballCamp;
-  const sessions: Session[] = (PlabennecSessions as Session[]);
-  for (const session of sessions) {
-    session.end = admin.firestore.Timestamp.fromDate(new Date(session.end));
-    session.endRegistrationDate = admin.firestore.Timestamp.fromDate(new Date(session.endRegistrationDate));
-    session.start = admin.firestore.Timestamp.fromDate(new Date(session.start));
-  }
-
-  return addCamp(request, response, camp, sessions);
+  const sessions: Session[] = PlabennecSessions as Session[];
+  await setCamp(camp, sessions);
 }
 
-function addCamp(request, response, camp: FootballCamp, sessions: Session[]): Promise<void> {
-  const db = admin.firestore();
-
-  return db.collection('camps')
-    .add(camp)
-    .then((snap) => {
-      console.log('Camp added with ID: ', snap.id);
-      const sessionsColRef = db.collection('sessions');
-
-      // Begin a new batch
-      const batch = db.batch();
-
-      // Set each document, as part of the batch
-      sessions.forEach(session => {
-        session.campId = snap.id;
-        const sessionDocRef = sessionsColRef.doc();
-        batch.set(sessionDocRef, session);
-      });
-
-      // Commit the entire batch
-      return batch
-        .commit()
-        .then(function () {
-          console.log('Sessions added successfully');
-          response.send('Camp and sessions added successfully\n\n');
-        })
-        .catch(function (error) {
-          console.error('Error adding document: ', error);
-          response.send('An error occured adding session\n\n');
-        });
-    })
-    .catch(function (error) {
-      console.error('Error adding document: ', error);
-      response.send('An error occured adding camp\n\n');
-    });
+export async function setCampAber() {
+  const camp: FootballCamp = AberCamp as FootballCamp;
+  const sessions: Session[] = AberSessions as Session[];
+  await setCamp(camp, sessions);
 }

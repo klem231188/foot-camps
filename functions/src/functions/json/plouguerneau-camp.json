@@ -1,14 +1,6 @@
 {
   "city": "Espérance de Plouguerneau",
-  "categories": [
-    "U7",
-    "U8",
-    "U9",
-    "U10",
-    "U11",
-    "U12",
-    "U13"
-  ],
+  "id": "rQeQFO7IawINlqVO7CoJ",
   "latitude": 48.6101376,
   "longitude": -4.5105545,
   "averagePrice": 170,
@@ -17,9 +9,19 @@
       "CHECK",
       "HOLIDAY_CHECK"
     ],
+    "acceptedPaymentModes": [
+      "ONLINE",
+      "BY_MAIL"
+    ],
     "averagePrice": 170,
     "paymentAddress": "Stage Espérance<br>Complexe sportif de Kroaz Kenan<br>29880 Plouguerneau",
-    "checkReceiver": "Stage Espérance"
+    "checkReceiver": "Stage Espérance",
+    "prices": {
+      "halfBoardPrice": 170,
+      "halfBoardReducedPrice": 150,
+      "fullBoardPrice": null,
+      "fullBoardReducedPrice": null
+    }
   },
   "minimumAge": 8,
   "maximumAge": 13,

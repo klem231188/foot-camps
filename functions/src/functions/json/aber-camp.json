@@ -1,22 +1,27 @@
 {
   "city": "Abers Foot",
+  "id": "gIEasJlqMnucrIgfNEH4",
   "latitude": 48.492087,
   "longitude": -4.5085864,
-  "categories": [
-    "U10",
-    "U11",
-    "U12",
-    "U13"
-  ],
   "averagePrice": 130,
   "paymentInfo": {
     "acceptedPaymentTypes": [
       "CHECK",
       "HOLIDAY_CHECK"
     ],
+    "acceptedPaymentModes": [
+      "ONLINE",
+      "IN_PERSON"
+    ],
     "averagePrice": 130,
     "paymentAddress": "Stage Aber Foot,<br>Touroussel<br>29860 Bourg-Blanc",
-    "checkReceiver": "Stage Aber Foot"
+    "checkReceiver": "Stage Aber Foot",
+    "prices": {
+      "fullBoardPrice": null,
+      "fullBoardReducedPrice": null,
+      "halfBoardPrice": 130,
+      "halfBoardReducedPrice": 115
+    }
   },
   "minimumAge": 10,
   "maximumAge": 13,

@@ -7,7 +7,6 @@ import {RegistrationState} from '../../../src/app/models/registration-state.enum
 import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
 import {printReceipt} from './print-registration.functions';
 import {FootballCamp} from '../../../src/app/models/football-camp';
-import {Session} from '../../../src/app/models/session';
 
 function getMailTransporter(): Transporter {
   return createTransport({
@@ -22,8 +21,8 @@ function getMailTransporter(): Transporter {
 export async function sendMailAboutRegistration(registration: any): Promise<any> {
   console.log(`sendMailAboutRegistration(${JSON.stringify(registration)})`);
   try {
-    let sessionSnap: DocumentSnapshot = await admin.firestore().doc(`sessions/${registration.sessionId}`).get();
-    let campSnap: DocumentSnapshot = await admin.firestore().doc(`camps/${sessionSnap.data().campId}`).get();
+    const sessionSnap: DocumentSnapshot = await admin.firestore().doc(`sessions/${registration.sessionId}`).get();
+    const campSnap: DocumentSnapshot = await admin.firestore().doc(`camps/${sessionSnap.data().campId}`).get();
 
     const mailOptions: SendMailOptions = {
       from: '"Footcamps" <footcamps@firebase.com>',

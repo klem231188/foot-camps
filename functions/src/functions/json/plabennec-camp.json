@@ -1,5 +1,6 @@
 {
   "city": "Plab'été",
+  "id": "8zG6SI08QsVCeWSZ0IpE",
   "latitude": 48.4996485,
   "longitude": -4.4363984,
   "averagePrice": 230,
@@ -8,9 +9,19 @@
       "CHECK",
       "HOLIDAY_CHECK"
     ],
+    "acceptedPaymentModes": [
+      "ONLINE",
+      "IN_PERSON"
+    ],
     "averagePrice": 230,
     "paymentAddress": "Stage Plab'été <br>\n              Complexe Sportif<br>\n              AVENUE DE KERVEGUEN<br>\n              29860 Plabennec<br>",
-    "checkReceiver": "Stage Plab'été"
+    "checkReceiver": "Stage Plab'été",
+    "prices": {
+      "fullBoardPrice": null,
+      "fullBoardReducedPrice": null,
+      "halfBoardPrice": 230,
+      "halfBoardReducedPrice": 210
+    }
   },
   "minimumAge": 5,
   "maximumAge": 14,
