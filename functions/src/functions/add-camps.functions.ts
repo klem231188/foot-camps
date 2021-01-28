@@ -14,7 +14,7 @@ async function setCamp(
   camp: FootballCamp,
   sessions: Session[]
 ) {
-// Create camp
+  // Create camp
   await admin.firestore().collection('camps').doc(camp.id).set(camp);
 
   // Create sessions

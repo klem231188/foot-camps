@@ -7,15 +7,17 @@ import {RegistrationV2} from '../../src/app/models/registration-v2.model';
 import {setCampAber, setCampPlabennec, setCampPlouguerneau} from './functions/add-camps.functions';
 import {printEquipment, printReceipt, printRegistration, printRegistrations} from './functions/print-registration.functions';
 import {anonymize} from './functions/anonymize.functions';
+import {createPaymentIntent} from './functions/stripe.functions';
 import {sendMailAboutPayment, sendMailAboutRegistration} from './functions/send-mail.functions';
 import {RegistrationState} from '../../src/app/models/registration-state.enum';
+
+// Initialize firebase-admin
+admin.initializeApp();
 
 // CORS Express middleware to enable CORS Requests.
 const cors = require('cors')({
   origin: true,
 });
-
-admin.initializeApp();
 
 export const httpAnonymize = functions.https.onRequest(async (request, response) => {
   await anonymize(request, response);
@@ -59,56 +61,18 @@ export const httpSetCampAber = functions.https.onRequest((request, response) => 
   )
 });
 
-// export const httpPaymentIntent = functions.https.onRequest((request, response) => {
-//   return cors(request, response, async () => {
-//     try {
-//       const stripe = new Stripe(functions.config().stripe.key, {
-//         apiVersion: '2020-08-27',
-//       });
-//       const paymentId: string = request.body.paymentId;
-//       const isHalfBoard: boolean = request.body.isHalfBoard;
-//       const isNormalPrice: boolean = request.body.isNormalPrice;
-//
-//       let paymentSnap = await admin.firestore().doc(`payments/${paymentId}`).get();
-//       let registrationId = (paymentSnap.data() as Payment).registrationId;
-//       let registrationSnap = await admin.firestore().doc(`registrations/${registrationId}`).get();
-//       let sessionId = (registrationSnap.data() as RegistrationV2).sessionId;
-//       let sessionSnap = await admin.firestore().doc(`sessions/${sessionId}`).get();
-//       let session = (sessionSnap.data() as Session)
-//       let price = 0;
-//       if (isHalfBoard) {
-//         if(isNormalPrice) {
-//           price = session.
-//         } else {
-//
-//         }
-//       } else {
-//         if(isNormalPrice) {
-//
-//         } else {
-//
-//         }
-//       }
-//
-//       // Create a PaymentIntent with the order amount and currency
-//       const paymentIntent = await stripe.paymentIntents.create({
-//         amount: calculateOrderAmount(items),
-//         currency: 'usd'
-//       });
-//       res.send({
-//         clientSecret: paymentIntent.client_secret
-//       });
-//       const url = functions.config().url.printregistration + `?campId=${campId}&sessionId=${sessionId}&registrationId=${registrationId}`;
-//       console.log('Success while rendering registration');
-//       response.setHeader('Content-Type', 'image/png');
-//       response.setHeader('Content-Disposition', `attachment; filename=${registrationId}.png`);
-//       response.send(screenshot);
-//     } catch (error) {
-//       console.log('Error while rendering registration', error);
-//       response.status(500).send(error);
-//     }
-//   });
-// });
+export const httpPaymentIntent = functions.https.onRequest((request, response) => {
+  return cors(request, response, async () => {
+    try {
+      const paymentId: string = request.body.paymentId;
+      const paymentIntent = await createPaymentIntent(paymentId);
+      response.send(paymentIntent);
+    } catch (error) {
+      console.log('Error while creating payment intent', error);
+      response.status(500).send(error);
+    }
+  });
+});
 
 const opts = {timeoutSeconds: 60, memory: '2GB' as '128MB' | '256MB' | '512MB' | '1GB' | '2GB'};
 export const httpPrintRegistration = functions.runWith(opts).https.onRequest((request, response) => {
