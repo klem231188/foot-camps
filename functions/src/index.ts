@@ -10,6 +10,8 @@ import {anonymize} from './functions/anonymize.functions';
 import {createPaymentIntent} from './functions/stripe.functions';
 import {sendMailAboutPayment, sendMailAboutRegistration} from './functions/send-mail.functions';
 import {RegistrationState} from '../../src/app/models/registration-state.enum';
+import {purgePayments} from './functions/purge-payments.functions';
+import {purgeRegistrations} from './functions/purge-registrations.functions';
 
 // Initialize firebase-admin
 admin.initializeApp();
@@ -69,6 +71,30 @@ export const httpPaymentIntent = functions.https.onRequest((request, response) =
       response.send(paymentIntent);
     } catch (error) {
       console.log('Error while creating payment intent', error);
+      response.status(500).send(error);
+    }
+  });
+});
+
+export const httpPurgePayments = functions.https.onRequest((request, response) => {
+  return cors(request, response, async () => {
+    try {
+      await purgePayments();
+      response.status(200).send('Payments purged');
+    } catch (error) {
+      console.log('Error while purging payments', error);
+      response.status(500).send(error);
+    }
+  });
+});
+
+export const httpPurgeRegistrations = functions.https.onRequest((request, response) => {
+  return cors(request, response, async () => {
+    try {
+      await purgeRegistrations();
+      response.status(200).send('Registrations purged');
+    } catch (error) {
+      console.log('Error while purging registrations', error);
       response.status(500).send(error);
     }
   });

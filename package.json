@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --ssl true --ssl-key 'ssl/local.key' --ssl-cert 'ssl/local.crt'",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -40,7 +40,7 @@
     "lodash": "^4.17.20",
     "mkdirp": "^0.5.1",
     "moment": "latest",
-    "ngx-stripe": "^10.1.2",
+    "ngx-stripe": "10.0.6",
     "onecolor": "^3.1.0",
     "rxjs": "^6.6.2",
     "stripe": "^8.119.0",
