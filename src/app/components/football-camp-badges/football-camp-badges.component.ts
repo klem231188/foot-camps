@@ -45,7 +45,7 @@ export class FootballCampBadgesComponent implements OnChanges, OnInit {
   }
 
   getPriceSubtitle(): SafeHtml {
-    return '' + this.footballCamp.averagePrice + ' €';
+    return '' + this.footballCamp.paymentInfo.prices.halfBoardPrice + ' €';
   }
 
   getRegistrationSubtitle(): SafeHtml {

@@ -14,7 +14,7 @@
     <div class="card-icon">
       <mat-icon color="primary" [inline]="true">create</mat-icon>
     </div>
-    Inscription (5 à 10 min)
+    Inscription (~ 10 min)
   </div>
 
     <!-- Stepper -->
@@ -39,7 +39,7 @@
         <mat-step [completed]="(traineeFormComponent.isValid | async)">
           <ng-template matStepLabel>Remplir formulaire</ng-template>
           <app-football-camp-registration-trainee-form
-              #traineeFormComponent></app-football-camp-registration-trainee-form>
+            #traineeFormComponent></app-football-camp-registration-trainee-form>
 
           <div class="separator"></div>
           <div class="next-button">
@@ -58,7 +58,7 @@
           <div class="separator"></div>
           <div class="next-button">
             <button mat-stroked-button matStepperNext mat-stroked-button color="primary"
-                    [disabled]="!(documents.valid | async)" (click)="saveRegistration()">Suivant
+                    [disabled]="!(documents.valid | async)">Suivant
               <mat-icon>chevron_right</mat-icon>
             </button>
           </div>
@@ -67,24 +67,24 @@
         <!--Step 4 : Payment -->
         <mat-step>
           <ng-template matStepLabel>Paiement</ng-template>
-          <app-football-camp-registration-check-payment
-              #checkPaymentComponent
-              [campId]="footballCamp.id"
-              [sessionId]="(sessionComponent.selectedSession | async)?.id"
-              [registration]="registration"
-          >
-          </app-football-camp-registration-check-payment>
+          <app-football-camp-registration-payment-mode
+            [campId]="footballCamp.id"
+            [sessionId]="(sessionComponent.selectedSession | async)?.id"
+            [registration]="registration">
+          </app-football-camp-registration-payment-mode>
         </mat-step>
 
         <!-- Step 5 : Summary -->
         <mat-step [editable]="false">
           <ng-template matStepLabel>Récapitulatif</ng-template>
-          Félicitations vous êtes <b>pré-inscrit</b> pour le stage de {{footballCamp.city}} !
+          Félicitations vous êtes inscrit pour le stage de {{footballCamp.city}}
           <br>
-          Vous allez recevoir un mail de confirmation à l'adresse suivante: <b>{{registration?.trainee.email}}</b>
+          Vous allez recevoir un mail de confirmation à l'adresse suivante: <b>{{traineeFormComponent.email.value}}</b>
           <br>
-          Un autre mail vous sera envoyé lorsque les documents envoyés ainsi que le paiement auront été vérifiés par
-          l'organisateur.
+          Un administrateur du stage <b>validera</b> votre inscription prochainement
+          <br>
+          <br>
+          <a [routerLink]="[ '/home/']" mat-stroked-button color="primary">Revenir à la page d'accueil</a>
         </mat-step>
       </mat-vertical-stepper>
     </div>

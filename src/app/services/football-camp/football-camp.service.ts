@@ -12,7 +12,7 @@ export class FootballCampService {
   private footballCamps$: Observable<FootballCamp[]> = null;
 
   constructor(private angularFirestore: AngularFirestore) {
-    angularFirestore.firestore.settings({timestampsInSnapshots: true});
+    // angularFirestore.firestore.settings({timestampsInSnapshots: true});
   }
 
   getFootballCamps(): Observable<FootballCamp[]> {

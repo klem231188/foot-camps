@@ -1,4 +1,3 @@
-import * as firebase from 'firebase';
 import {PaymentType} from './payment-type.enum';
 
 export interface Session {
@@ -10,6 +9,8 @@ export interface Session {
   endRegistrationDate: any; // firebase.firestore.Timestamp
   fullBoardRates: number;
   halfBoardRates: number;
+  fullBoardReducedRates: number;
+  halfBoardReducedRates: number;
   numberOfRegistrationsInProgress: number;
   numberOfRegistrationsAccepted: number;
   numberOfRegistrationsRejected: number;

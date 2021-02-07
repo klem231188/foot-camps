@@ -1,0 +1,34 @@
+<ng-container *ngIf="footballCamp$ | async as footballCamp">
+  <ng-container *ngIf="session$ | async as session">
+    <p>Vous êtes sur le point de vous inscrire au stage <b>{{footballCamp.city}}</b> qui aura lieu du
+      <b>{{session.start.toDate() | date}}</b> au <b>{{session.end.toDate() | date}}</b></p>
+    <mat-tab-group>
+      <mat-tab *ngFor="let paymentMode of footballCamp.paymentInfo.acceptedPaymentModes">
+        <ng-template mat-tab-label>{{paymentMode | paymentMode}}</ng-template>
+        <ng-container [ngSwitch]="paymentMode">
+          <app-football-camp-registration-payment-mode-online *ngSwitchCase="PaymentMode.ONLINE"
+                                                              [campId]="campId"
+                                                              [sessionId]="sessionId"
+                                                              [registration]="registration"
+                                                              (isValid)="onIsValid($event)"
+          >
+          </app-football-camp-registration-payment-mode-online>
+          <app-football-camp-registration-payment-mode-in-person *ngSwitchCase="PaymentMode.IN_PERSON"
+                                                                 [campId]="campId"
+                                                                 [sessionId]="sessionId"
+                                                                 [registration]="registration"
+                                                                 (isValid)="onIsValid($event)"
+          >
+          </app-football-camp-registration-payment-mode-in-person>
+          <app-football-camp-registration-payment-mode-by-mail *ngSwitchCase="PaymentMode.BY_MAIL"
+                                                               [campId]="campId"
+                                                               [sessionId]="sessionId"
+                                                               [registration]="registration"
+                                                               (isValid)="onIsValid($event)"
+          >
+          </app-football-camp-registration-payment-mode-by-mail>
+        </ng-container>
+      </mat-tab>
+    </mat-tab-group>
+  </ng-container>
+</ng-container>

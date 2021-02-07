@@ -5,15 +5,28 @@ import {DocumentReference} from '@angular/fire/firestore/interfaces';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {PaymentIntent} from '@stripe/stripe-js';
+import {RegistrationV2} from '../../models/registration-v2.model';
 
 @Injectable()
 export class PaymentService {
 
-  //stripe = new Stripe(environment.stripe.publicKey);
-
   constructor(
     private angularFirestore: AngularFirestore,
     private http: HttpClient) {
+  }
+
+  createPaymentIntent(paymentId: string): Observable<any> {
+    return this.http.post<PaymentIntent>(
+      environment.urlPaymentIntent,
+      {paymentId: paymentId}
+    );
+  }
+
+  getPayment(paymentId: string): Observable<Payment> {
+    return this.angularFirestore
+      .doc(`payments/${paymentId}`)
+      .valueChanges() as Observable<Payment>;
   }
 
   save(payment: Payment): Promise<any> {
@@ -22,22 +35,12 @@ export class PaymentService {
       .add(payment)
       .then((doc: DocumentReference) => {
         payment.id = doc.id;
-        return;
       });
   };
 
-  getPayment(paymentId: string): Observable<Payment> {
+  update(paymentId: string, data: Partial<Payment>): Promise<any> {
     return this.angularFirestore
       .doc(`payments/${paymentId}`)
-      .valueChanges() as Observable<Payment>;
+      .update(data);
   }
-
-  makePaymentByCard(payment: Payment): Observable<any> {
-    const url = environment.urlMakePaymentByCard;
-
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json');
-
-    return this.http.post<any>(url, payment, {headers});
-  };
 }

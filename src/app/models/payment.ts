@@ -6,4 +6,6 @@ export interface Payment {
   registrationId: string;
   state: PaymentState;
   type: PaymentType;
+  reducedPrice: boolean;
+  halfBoard: boolean;
 }

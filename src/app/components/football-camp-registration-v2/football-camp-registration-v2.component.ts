@@ -3,7 +3,6 @@ import {RegistrationV2} from '../../models/registration-v2.model';
 import {FootballCampRegistrationSessionsComponent} from '../football-camp-registration-sessions/football-camp-registration-sessions.component';
 import {FootballCampRegistrationTraineeFormComponent} from '../football-camp-registration-trainee-form/football-camp-registration-trainee-form.component';
 import {FootballCampRegistrationDocumentsComponent} from '../football-camp-registration-documents/football-camp-registration-documents.component';
-import {FootballCampRegistrationCheckPaymentComponent} from '../football-camp-registration-check-payment/football-camp-registration-check-payment.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatVerticalStepper} from '@angular/material/stepper';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -19,6 +18,7 @@ import {FootballCampShouldConnectDialogComponent} from '../football-camp-should-
 import * as firebase from 'firebase';
 import {RegistrationState} from '../../models/registration-state.enum';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {FootballCampRegistrationPaymentModeComponent} from '../football-camp-registration-payment-mode/football-camp-registration-payment-mode.component';
 
 @Component({
   selector: 'app-football-camp-registration-v2',
@@ -29,13 +29,11 @@ export class FootballCampRegistrationV2Component implements OnInit, AfterViewIni
 
   _subscriptions: Subscription[];
   @Input() campId: string;
-  @ViewChild(FootballCampRegistrationCheckPaymentComponent) checkPaymentComponent: FootballCampRegistrationCheckPaymentComponent;
-  checkPaymentSub: Subscription;
   @ViewChild(FootballCampRegistrationDocumentsComponent) documentsComponent: FootballCampRegistrationDocumentsComponent;
   footballCamp: FootballCamp;
   isLoading = true;
-  payment: FormControl;
-  paymentFormGroup: FormGroup;
+  @ViewChild(FootballCampRegistrationPaymentModeComponent) paymentComponent: FootballCampRegistrationPaymentModeComponent;
+  paymentSub: Subscription;
   registration: RegistrationV2;
   @ViewChild(FootballCampRegistrationSessionsComponent) sessionComponent: FootballCampRegistrationSessionsComponent;
   @ViewChild('stepper') stepper: MatVerticalStepper;
@@ -53,8 +51,31 @@ export class FootballCampRegistrationV2Component implements OnInit, AfterViewIni
               private titleService: Title,
               private meta: Meta) {
     this._subscriptions = [];
-    this.checkPaymentSub = null;
+    this.paymentSub = null;
     this.stepperSub = null;
+  }
+
+  buildRegistration(): RegistrationV2 {
+    return {
+      sessionId: this.sessionComponent.selectedSession.value.id,
+      trainee: {
+        firstname: this.traineeFormComponent.firstname.value,
+        lastname: this.traineeFormComponent.lastname.value,
+        gender: this.traineeFormComponent.gender.value,
+        birthdate: firebase.firestore.Timestamp.fromDate(this.traineeFormComponent.birthdate.value),
+        email: this.traineeFormComponent.email.value,
+        club: this.traineeFormComponent.club.value,
+        fieldPosition: this.traineeFormComponent.fieldPosition.value,
+        feet: this.traineeFormComponent.feet.value,
+        shoeSize: this.traineeFormComponent.shoeSize.value,
+        shortSize: this.traineeFormComponent.shortSize.value,
+      },
+
+      documents: this.documentsComponent.documents.value,
+      paymentId: null,
+
+      state: RegistrationState.PRE_REGISTERED,
+    };
   }
 
   isSmallScreen(): boolean {
@@ -63,8 +84,8 @@ export class FootballCampRegistrationV2Component implements OnInit, AfterViewIni
 
   ngAfterViewChecked(): void {
     console.log('FootballCampRegistrationV2Component.ngAfterViewChecked()');
-    if (this.checkPaymentComponent !== undefined && this.checkPaymentSub === null) {
-      this.checkPaymentSub = this.checkPaymentComponent.isValid
+    if (this.paymentComponent !== undefined && this.paymentSub === null) {
+      this.paymentSub = this.paymentComponent.isValid
         .subscribe((valid) => {
           if (valid) {
             this.stepper.selected.completed = true;
@@ -72,12 +93,19 @@ export class FootballCampRegistrationV2Component implements OnInit, AfterViewIni
           }
         });
 
-      this._subscriptions.push(this.checkPaymentSub);
+      this._subscriptions.push(this.paymentSub);
     }
 
     if (this.stepper !== undefined && this.stepperSub === null) {
       this.stepperSub = this.stepper.selectionChange.asObservable()
         .subscribe((selection) => {
+          if (selection.selectedIndex === 3) {
+            if (this.registration) {
+              this.updateRegistration();
+            } else {
+              this.saveRegistration();
+            }
+          }
           if (selection.selectedIndex === 4) {
             this.stepper._steps.forEach((step) => step.editable = false);
           }
@@ -99,13 +127,6 @@ export class FootballCampRegistrationV2Component implements OnInit, AfterViewIni
 
   ngOnInit(): void {
     console.log('FootballCampRegistrationV2Component.ngOnInit()');
-
-    // Payment From & Controls
-    this.payment = new FormControl('', [Validators.required]);
-    this.paymentFormGroup = this.formBuilder.group({
-      'payment': this.payment
-    });
-
     // Listening to events
     const footballCampSub = this.footballCampService
       .getFootballCamp(this.campId)
@@ -150,42 +171,34 @@ export class FootballCampRegistrationV2Component implements OnInit, AfterViewIni
     });
   }
 
-  saveRegistration(): void {
-    if (this.registration && this.registration.id) {
-      return;
+  async saveRegistration() {
+    try {
+      this.registration = this.buildRegistration();
+      this.isLoading = true;
+      console.log('Saving Registration', this.registration);
+      await this.registrationService.save(this.registration);
+      console.log('Registration saved', this.registration);
+      this.isLoading = false;
+    } catch (e) {
+      console.log('An error occured while saving registration');
+      this.isLoading = false;
     }
-
-    this.registration = {
-      sessionId: this.sessionComponent.selectedSession.value.id,
-      trainee: {
-        firstname: this.traineeFormComponent.firstname.value,
-        lastname: this.traineeFormComponent.lastname.value,
-        gender: this.traineeFormComponent.gender.value,
-        birthdate: firebase.firestore.Timestamp.fromDate(this.traineeFormComponent.birthdate.value),
-        email: this.traineeFormComponent.email.value,
-        club: this.traineeFormComponent.club.value,
-        fieldPosition: this.traineeFormComponent.fieldPosition.value,
-        feet: this.traineeFormComponent.feet.value,
-        shoeSize: this.traineeFormComponent.shoeSize.value,
-        shortSize: this.traineeFormComponent.shortSize.value,
-      },
-
-      documents: this.documentsComponent.documents.value,
-
-      paymentId: null,
-
-      state: RegistrationState.PRE_REGISTERED,
-    };
-
-    this.isLoading = true;
-    this.registrationService
-      .save(this.registration)
-      .then(() => this.isLoading = false)
-      .catch(() => this.isLoading = false)
-
-    console.log(this.footballCamp.id);
-    console.log(this.sessionComponent.selectedSession.getValue().id);
-    console.log(this.registration);
   }
 
+  async updateRegistration() {
+    try {
+      const registrationId = this.registration.id;
+      this.registration = this.buildRegistration();
+      this.registration.id = registrationId;
+
+      this.isLoading = true;
+      console.log('Updating Registration', this.registration);
+      await this.registrationService.update(this.registration.id, this.registration);
+      console.log('Registration updated');
+      this.isLoading = false;
+    } catch (e) {
+      console.log('An error occured while updating registration');
+      this.isLoading = false;
+    }
+  }
 }

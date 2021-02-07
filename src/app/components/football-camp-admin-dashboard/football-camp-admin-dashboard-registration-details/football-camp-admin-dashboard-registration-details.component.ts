@@ -40,7 +40,7 @@ export class FootballCampAdminDashboardRegistrationDetailsComponent implements O
 
   accept(registration: RegistrationV2): void {
     this.registrationService
-      .update(registration, {state: RegistrationState.ACCEPTED})
+      .update(registration.id, {state: RegistrationState.ACCEPTED})
       .then(() => console.log('Registration updated with success'));
   }
 
@@ -142,7 +142,7 @@ export class FootballCampAdminDashboardRegistrationDetailsComponent implements O
 
   reject(registration: RegistrationV2): void {
     this.registrationService
-      .update(registration, {state: RegistrationState.REJECTED})
+      .update(registration.id, {state: RegistrationState.REJECTED})
       .then(() => console.log('Registration updated with success'));
   }
 
@@ -161,7 +161,7 @@ export class FootballCampAdminDashboardRegistrationDetailsComponent implements O
         const updatedDocsSorted = updatedDocs.sort((a, b) => documentTypeOrder.indexOf(a.type) - documentTypeOrder.indexOf(b.type));
 
         // Update document array in firestore
-        this.registrationService.update(this.registration, {documents: updatedDocsSorted});
+        this.registrationService.update(this.registration.id, {documents: updatedDocsSorted});
       } else {
         console.log(`${docStored.url} === ${docUpdated.url}`);
       }

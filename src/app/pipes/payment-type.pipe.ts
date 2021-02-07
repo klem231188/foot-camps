@@ -17,6 +17,8 @@ export class PaymentTypePipe implements PipeTransform {
           return 'Chèque';
         case PaymentType.HOLIDAY_CHECK:
           return 'Chèque vacance';
+        case PaymentType.CASH:
+          return 'Espèce';
         case PaymentType.OTHER:
           return 'Autre';
         default:

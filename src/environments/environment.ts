@@ -27,5 +27,6 @@ export const environment = {
   urlGeneratePdf: 'https://us-central1-footcamps-development.cloudfunctions.net/httpGeneratePdf',
   urlPrintRegistration: 'https://us-central1-footcamps-development.cloudfunctions.net/httpPrintRegistration',
   urlPrintRegistrations: 'https://us-central1-footcamps-development.cloudfunctions.net/httpPrintRegistrations',
-  urlPrintEquipment: 'https://us-central1-footcamps-development.cloudfunctions.net/httpPrintEquipment'
+  urlPrintEquipment: 'https://us-central1-footcamps-development.cloudfunctions.net/httpPrintEquipment',
+  urlPaymentIntent: 'https://us-central1-footcamps-development.cloudfunctions.net/httpPaymentIntent'
 };

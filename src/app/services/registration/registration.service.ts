@@ -3,12 +3,12 @@ import {Injectable} from '@angular/core';
 import {Action, AngularFirestore, DocumentChangeAction, DocumentSnapshot} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {RegistrationV2} from '../../models/registration-v2.model';
+import {RegistrationState} from '../../models/registration-state.enum';
 
 @Injectable()
 export class RegistrationService {
 
   constructor(private angularFirestore: AngularFirestore) {
-    angularFirestore.firestore.settings({timestampsInSnapshots: true});
   }
 
   getRegistration(registrationId: string): Observable<RegistrationV2> {
@@ -29,7 +29,9 @@ export class RegistrationService {
   getRegistrations(sessionId: string): Observable<RegistrationV2[]> {
     return this.angularFirestore
       .collection<RegistrationV2>('registrations', ref => {
-        return ref.where('sessionId', '==', sessionId)
+        return ref
+          .where('sessionId', '==', sessionId)
+          .where('state', 'in', [RegistrationState.ACCEPTED, RegistrationState.REJECTED, RegistrationState.IN_PROGRESS])
       })
       .snapshotChanges().pipe(
         map<DocumentChangeAction<RegistrationV2>[], RegistrationV2[]>(actions => {
@@ -54,9 +56,9 @@ export class RegistrationService {
       });
   }
 
-  update(registration: RegistrationV2, data: Partial<RegistrationV2>): Promise<any> {
+  update(registrationId: string, data: Partial<RegistrationV2>): Promise<any> {
     return this.angularFirestore
-      .doc(`registrations/${registration.id}`)
+      .doc(`registrations/${registrationId}`)
       .update(data);
   }
 }

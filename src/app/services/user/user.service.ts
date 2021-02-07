@@ -10,7 +10,7 @@ export class UserService {
   private user$: Observable<User> = null;
 
   constructor(private angularFirestore: AngularFirestore) {
-    angularFirestore.firestore.settings({ timestampsInSnapshots: true });
+    // angularFirestore.firestore.settings({ timestampsInSnapshots: true });
   }
 
   getUser(uid): Observable<User> {

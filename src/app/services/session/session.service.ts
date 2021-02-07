@@ -12,7 +12,7 @@ export class SessionService {
   private sessions$: Observable<Session[]> = null;
 
   constructor(private angularFirestore: AngularFirestore) {
-    angularFirestore.firestore.settings({timestampsInSnapshots: true});
+    // angularFirestore.firestore.settings({timestampsInSnapshots: true});
   }
 
   getSession(sessionId: string): Observable<Session> {

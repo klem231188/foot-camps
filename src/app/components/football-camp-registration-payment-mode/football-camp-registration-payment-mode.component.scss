@@ -1,0 +1,17 @@
+@mixin app-football-camp-registration-payment-mode($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-football-camp-registration-payment-mode {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+
+    mat-tab-group {
+      margin-top: 10px;
+    }
+  }
+}

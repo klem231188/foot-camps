@@ -15,7 +15,6 @@ import {FootballCampHeaderComponent} from './components/football-camp-header/foo
 import {FootballCampDetailsComponent} from './components/football-camp-details/football-camp-details.component';
 import {FootballCampMapComponent} from './components/football-camp-map/football-camp-map.component';
 import {FootballCampOverviewComponent} from './components/football-camp-overview/football-camp-overview.component';
-// import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {Angular2ImageGalleryModule} from './components/angular2-image-gallery';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
@@ -35,7 +34,6 @@ import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {StatePipe} from './pipes/state.pipe';
 import {PlaygroundComponent} from './components/playground/playground.component';
 import {FootballCampFileUploadComponent} from './components/football-camp-file-upload/football-camp-file-upload.component';
-import {DropZoneDirective} from './directives/drop-zone.directive';
 import {FileSizePipe} from './pipes/file-size.pipe';
 import {FootballCampRegistrationDocumentsComponent} from './components/football-camp-registration-documents/football-camp-registration-documents.component';
 import {FootballCampRegistrationSessionsComponent} from './components/football-camp-registration-sessions/football-camp-registration-sessions.component';
@@ -50,7 +48,7 @@ import {FootballCampSessionOverviewComponent} from './components/football-camp-a
 import {PaymentTypePipe} from './pipes/payment-type.pipe';
 import {FootballCampPrintRegistrationComponent} from './components/football-camp-print-registration/football-camp-print-registration.component';
 import {FootballCampHomeComponent} from './components/football-camp-home/football-camp-home.component';
-import {MatCarouselModule} from '@ngmodule/material-carousel';
+import {MatCarouselModule} from '@ngbmodule/material-carousel';
 import {FootballCampAdminDashboardRegistrationTableComponent} from './components/football-camp-admin-dashboard/football-camp-admin-dashboard-registration-table/football-camp-admin-dashboard-registration-table.component';
 import {FootballCampAdminDashboardRegistrationDetailsComponent} from './components/football-camp-admin-dashboard/football-camp-admin-dashboard-registration-details/football-camp-admin-dashboard-registration-details.component';
 import {PaymentStatePipe} from './pipes/payment-state.pipe';
@@ -64,6 +62,12 @@ import {FootballCampPrintReceiptComponent} from './components/football-camp-prin
 import {FootballCampPrintRegistrationsComponent} from './components/football-camp-print-registrations/football-camp-print-registrations.component';
 import {FootballCampRegistrationCardPaymentComponent} from './components/football-camp-registration-card-payment/football-camp-registration-card-payment.component';
 import {FootballCampRegistrationPaymentComponent} from './components/football-camp-registration-payment/football-camp-registration-payment.component';
+import {FootballCampRegistrationPaymentModeComponent} from './components/football-camp-registration-payment-mode/football-camp-registration-payment-mode.component';
+import {PaymentModePipe} from './pipes/payment-mode.pipe';
+import {FootballCampRegistrationPaymentModeInPersonComponent} from './components/football-camp-registration-payment-mode-in-person/football-camp-registration-payment-mode-in-person.component';
+import {FootballCampRegistrationPaymentModeByMailComponent} from './components/football-camp-registration-payment-mode-by-mail/football-camp-registration-payment-mode-by-mail.component';
+import {FootballCampRegistrationPaymentModeOnlineComponent} from './components/football-camp-registration-payment-mode-online/football-camp-registration-payment-mode-online.component';
+import {NgxStripeModule} from 'ngx-stripe';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -79,14 +83,14 @@ registerLocaleData(localeFr, 'fr');
     HttpClientModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    // Stripe
+    NgxStripeModule.forRoot(environment.stripe.publicKey),
     // @MaterialDesign
     AppMaterialModule,
     MatCarouselModule,
     // ImageGallery
     Angular2ImageGalleryModule,
     TableOfContentsModule,
-    // @Bootstrap
-    // CarouselModule.forRoot(),
     // @GoogleMaps
     AgmCoreModule.forRoot({
       apiKey: environment.googlemaps.apiKey
@@ -105,11 +109,11 @@ registerLocaleData(localeFr, 'fr');
     FeetPipe,
     GenderPipe,
     SafeHtmlPipe,
+    PaymentModePipe,
     PaymentTypePipe,
     PaymentStatePipe,
     StatePipe,
     TruncatePipe,
-    DropZoneDirective,
     AppComponent,
     FootballCampLocatorComponent,
     FootballCampMapComponent,
@@ -142,6 +146,10 @@ registerLocaleData(localeFr, 'fr');
     FootballCampPrintRegistrationsComponent,
     FootballCampRegistrationCardPaymentComponent,
     FootballCampRegistrationPaymentComponent,
+    FootballCampRegistrationPaymentModeComponent,
+    FootballCampRegistrationPaymentModeInPersonComponent,
+    FootballCampRegistrationPaymentModeByMailComponent,
+    FootballCampRegistrationPaymentModeOnlineComponent
   ],
   entryComponents: [
     FootballCampLoginComponent,

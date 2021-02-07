@@ -32,7 +32,4 @@ export interface Details {
   // - Registration
   useOnlineRegistration: boolean;
   registrationUrl: string;
-
-  // - Categories
-  categories: Category[];
 }

@@ -69,13 +69,15 @@ export class FootballCampRegistrationCheckPaymentComponent implements OnInit, On
       registrationId: this.registration.id,
       state: PaymentState.IN_PROGRESS,
       type: PaymentType.OTHER,
+      halfBoard: true,
+      reducedPrice: false
     };
 
     this.paymentService
       .save(payment)
       .then(() => {
         console.log('Payment created in firestore');
-        return this.registrationService.update(this.registration, {paymentId: payment.id, state: RegistrationState.IN_PROGRESS})
+        return this.registrationService.update(this.registration.id, {paymentId: payment.id, state: RegistrationState.IN_PROGRESS})
       })
       .then(() => {
         console.log('Registration updated in firestore');

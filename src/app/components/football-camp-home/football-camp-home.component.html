@@ -102,7 +102,7 @@
             <div class="card-icon">
               <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
             </div>
-            {{footCamp.averagePrice}} €
+            {{footCamp.paymentInfo.prices.halfBoardPrice}} €
           </div>
 
           <div class="sessions-container" *ngFor="let session of sessionService.getSessionsFromCampId(footCamp.id) | async">
