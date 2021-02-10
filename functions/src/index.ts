@@ -12,6 +12,7 @@ import {sendMailAboutPayment, sendMailAboutRegistration} from './functions/send-
 import {RegistrationState} from '../../src/app/models/registration-state.enum';
 import {purgePayments} from './functions/purge-payments.functions';
 import {purgeRegistrations} from './functions/purge-registrations.functions';
+import {sendMailRegistrationInProgress} from './functions/mailjet.functions';
 
 // Initialize firebase-admin
 admin.initializeApp();
@@ -83,6 +84,18 @@ export const httpPurgePayments = functions.https.onRequest((request, response) =
       response.status(200).send('Payments purged');
     } catch (error) {
       console.log('Error while purging payments', error);
+      response.status(500).send(error);
+    }
+  });
+});
+
+export const httpSendMailJet = functions.https.onRequest((request, response) => {
+  return cors(request, response, async () => {
+    try {
+      await sendMailRegistrationInProgress();
+      response.status(200).send('Mail sent');
+    } catch (error) {
+      console.log('Error while sending mail', error);
       response.status(500).send(error);
     }
   });

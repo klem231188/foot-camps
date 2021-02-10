@@ -72,3 +72,27 @@ gsutil cors set cors.json gs://footcamps-development.appspot.com
 ```
 gsutil cors set cors.json gs://footcamps-production.appspot.com
 ```
+
+### Backup firestore
+```
+firebase login
+gcloud auth login
+
+firebase projects:list
+firebase use footcamps-development
+
+gcloud projects list
+gcloud config set project footcamps-development
+
+gcloud firestore export gs://footcamps-development.appspot.com/your-choosen-folder-name
+
+cd functions
+gsutil -m cp -r gs://footcamps-development.appspot.com/your-choosen-folder-name .
+
+firebase emulators:start --import ./your-choosen-folder-name
+```
+
+### Run emulator
+```
+firebase emulators:start --import ./2021-02-01
+```
