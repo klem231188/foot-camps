@@ -29,6 +29,6 @@ export async function purgePayments() {
 
   // Purge
   for (const paymentIdToPurge of paymentIdsToPurge) {
-    await db.collection('/payments').doc(paymentIdToPurge).delete()
+    await db.collection('/payments').doc(paymentIdToPurge).delete();
   }
 }

@@ -2,17 +2,17 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import {Change, EventContext} from 'firebase-functions/lib/cloud-functions';
 import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
-import {Payment} from '../../src/app/models/payment';
 import {RegistrationV2} from '../../src/app/models/registration-v2.model';
+import {Session} from '../../src/app/models/session';
 import {setCampAber, setCampPlabennec, setCampPlouguerneau} from './functions/add-camps.functions';
 import {printEquipment, printReceipt, printRegistration, printRegistrations} from './functions/print-registration.functions';
 import {anonymize} from './functions/anonymize.functions';
 import {createPaymentIntent} from './functions/stripe.functions';
-import {sendMailAboutPayment, sendMailAboutRegistration} from './functions/send-mail.functions';
-import {RegistrationState} from '../../src/app/models/registration-state.enum';
 import {purgePayments} from './functions/purge-payments.functions';
 import {purgeRegistrations} from './functions/purge-registrations.functions';
 import {sendMailRegistrationInProgress} from './functions/mailjet.functions';
+import {Payment} from '../../src/app/models/payment';
+import {FootballCamp} from '../../src/app/models/football-camp';
 
 // Initialize firebase-admin
 admin.initializeApp();
@@ -84,18 +84,6 @@ export const httpPurgePayments = functions.https.onRequest((request, response) =
       response.status(200).send('Payments purged');
     } catch (error) {
       console.log('Error while purging payments', error);
-      response.status(500).send(error);
-    }
-  });
-});
-
-export const httpSendMailJet = functions.https.onRequest((request, response) => {
-  return cors(request, response, async () => {
-    try {
-      await sendMailRegistrationInProgress();
-      response.status(200).send('Mail sent');
-    } catch (error) {
-      console.log('Error while sending mail', error);
       response.status(500).send(error);
     }
   });
@@ -187,106 +175,91 @@ export const httpPrintRegistrations = functions.runWith(opts).https.onRequest((r
   });
 });
 
-export const httpSendMail = functions.https.onRequest(async (request, response) => {
-  await sendMailAboutRegistration({
-    state: RegistrationState.IN_PROGRESS,
-    sessionId: 'KxZ64nZ9ukgdCkl9r2Sv',
-    trainee: {
-      firstname: 'Clément',
-      lastname: 'TREGUER',
-      email: 'clemtreguer@gmail.com',
-    }
-  });
-  response.send('anonymize successful');
-});
-
-export const onUpdatePaymentState = functions.firestore
-  .document('payments/{paymentId}')
-  .onUpdate((change: Change<DocumentSnapshot>, context: EventContext) => {
-    if (change.before.data() && (change.before.data().state === change.after.data().state)) {
-      console.info('Payment state has not changed');
-      return Promise.resolve(null);
-    }
-    const payment: Payment = change.after.data() as Payment;
-    payment.id = change.after.id;
-
-    console.info(`IN - onUpdatePaymentState(payments/${payment.id}), payment = ${JSON.stringify(payment)}`);
-
-    console.info(`Updating paymentId in registrations/${payment.registrationId}' ...`);
-    return admin.firestore()
-      .doc(`registrations/${payment.registrationId}`)
-      .set(
-        {paymentId: payment.id},
-        {merge: true}
-      ).then(() => {
-        console.info(`Registration ${payment.registrationId} updated successfully ...`);
-      }).catch((error) => {
-        console.error(`An error occured during update of registration ${payment.registrationId}`)
-      }).then(() => {
-        return sendMailAboutPayment(payment);
-      });
-  });
+// export const onUpdatePaymentState = functions.firestore
+//   .document('payments/{paymentId}')
+//   .onUpdate((change: Change<DocumentSnapshot>, context: EventContext) => {
+//     if (change.before.data() && (change.before.data().state === change.after.data().state)) {
+//       console.info('Payment state has not changed');
+//       return Promise.resolve(null);
+//     }
+//     const payment: Payment = change.after.data() as Payment;
+//     payment.id = change.after.id;
+//
+//     console.info(`IN - onUpdatePaymentState(payments/${payment.id}), payment = ${JSON.stringify(payment)}`);
+//
+//     console.info(`Updating paymentId in registrations/${payment.registrationId}' ...`);
+//     return admin.firestore()
+//       .doc(`registrations/${payment.registrationId}`)
+//       .set(
+//         {paymentId: payment.id},
+//         {merge: true}
+//       ).then(() => {
+//         console.info(`Registration ${payment.registrationId} updated successfully ...`);
+//       }).catch((error) => {
+//         console.error(`An error occured during update of registration ${payment.registrationId}`)
+//       }).then(() => {
+//         return sendMailAboutPayment(payment);
+//       });
+//   });
 
 export const onUpdateRegistrationState = functions.runWith(opts).firestore
   .document('registrations/{registrationId}')
-  .onUpdate((change: Change<DocumentSnapshot>, context: EventContext) => {
-    if (change.before.data() && (change.before.data().state === change.after.data().state)) {
-      console.info('Registration state has not changed');
-      return Promise.resolve(null);
+  .onUpdate(async (change: Change<DocumentSnapshot>, context: EventContext) => {
+    try {
+      if (change.before.data() && (change.before.data().state === change.after.data().state)) {
+        console.info('Registration state has not changed');
+        return;
+      }
+
+      const registrationBefore: RegistrationV2 = change.before.data() as RegistrationV2;
+      registrationBefore.id = change.before.id;
+
+      const registration: RegistrationV2 = change.after.data() as RegistrationV2;
+      registration.id = change.after.id;
+      console.info(`IN - onUpdateRegistrationState(registrations/${registration.id}), registration = ${JSON.stringify(registration)}`);
+
+      const sessionSnapshot = await admin.firestore().doc(`sessions/${registration.sessionId}`).get();
+      const session = sessionSnapshot.data() as Session;
+      const update = {};
+
+      switch (registrationBefore.state) {
+        case 'IN_PROGRESS':
+          update['numberOfRegistrationsInProgress'] = session.numberOfRegistrationsInProgress - 1;
+          break;
+        case 'ACCEPTED':
+          update['numberOfRegistrationsAccepted'] = session.numberOfRegistrationsAccepted - 1;
+          break;
+        case 'REJECTED':
+          update['numberOfRegistrationsRejected'] = session.numberOfRegistrationsRejected - 1;
+          break;
+      }
+
+      switch (registration.state) {
+        case 'IN_PROGRESS':
+          update['numberOfRegistrationsInProgress'] = session.numberOfRegistrationsInProgress + 1;
+          break;
+        case 'ACCEPTED':
+          update['numberOfRegistrationsAccepted'] = session.numberOfRegistrationsAccepted + 1;
+          break;
+        case 'REJECTED':
+          update['numberOfRegistrationsRejected'] = session.numberOfRegistrationsRejected + 1;
+          break;
+      }
+
+      console.info(`Updating session ${registration.sessionId}, update = ${JSON.stringify(update)}...`);
+      await admin.firestore().doc(`sessions/${registration.sessionId}`).set(update, {merge: true});
+      console.info(`Session ${registration.sessionId} updated successfully ...`);
+
+      if (registration.state === 'IN_PROGRESS') {
+        const paymentSnap = await admin.firestore().doc(`payments/${registration.paymentId}`).get();
+        const payment = paymentSnap.data() as Payment;
+
+        const campSnap = await admin.firestore().doc(`camps/${session.campId}`).get();
+        const camp = campSnap.data() as FootballCamp;
+
+        await sendMailRegistrationInProgress(registration, payment, session, camp);
+      }
+    } catch (e) {
+      console.error(`An error occured during onUpdateRegistration ${change.after.data()}`, e);
     }
-
-    const registrationBefore: RegistrationV2 = change.before.data() as RegistrationV2;
-    registrationBefore.id = change.before.id;
-
-    const registration: RegistrationV2 = change.after.data() as RegistrationV2;
-    registration.id = change.after.id;
-    console.info(`IN - onUpdateRegistrationState(registrations/${registration.id}), registration = ${JSON.stringify(registration)}`);
-
-    return admin.firestore()
-      .doc(`sessions/${registration.sessionId}`)
-      .get()
-      .then((snap: DocumentSnapshot) => {
-        const session = snap.data();
-        const update = {};
-
-        switch (registrationBefore.state) {
-          case 'IN_PROGRESS':
-            update['numberOfRegistrationsInProgress'] = session.numberOfRegistrationsInProgress - 1;
-            break;
-          case 'ACCEPTED':
-            update['numberOfRegistrationsAccepted'] = session.numberOfRegistrationsAccepted - 1;
-            break;
-          case 'REJECTED':
-            update['numberOfRegistrationsRejected'] = session.numberOfRegistrationsRejected - 1;
-            break;
-        }
-
-        switch (registration.state) {
-          case 'IN_PROGRESS':
-            update['numberOfRegistrationsInProgress'] = session.numberOfRegistrationsInProgress + 1;
-            break;
-          case 'ACCEPTED':
-            update['numberOfRegistrationsAccepted'] = session.numberOfRegistrationsAccepted + 1;
-            break;
-          case 'REJECTED':
-            update['numberOfRegistrationsRejected'] = session.numberOfRegistrationsRejected + 1;
-            break;
-        }
-
-        console.info(`Updating session ${registration.sessionId}, update = ${JSON.stringify(update)}...`);
-
-        return admin.firestore()
-          .doc(`sessions/${registration.sessionId}`)
-          .set(
-            update,
-            {merge: true}
-          ).then(() => {
-            console.info(`Session ${registration.sessionId} updated successfully ...`);
-          }).catch((error) => {
-            console.error(`An error occured during update of session ${registration.sessionId}`);
-          });
-      })
-      .then(() => {
-        return sendMailAboutRegistration(registration);
-      })
   });

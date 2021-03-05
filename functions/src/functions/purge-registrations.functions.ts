@@ -17,6 +17,6 @@ export async function purgeRegistrations() {
 
   // Purge
   for (const registrationIdToPurge of registrationIdsToPurge) {
-    await db.collection('/registrations').doc(registrationIdToPurge).delete()
+    await db.collection('/registrations').doc(registrationIdToPurge).delete();
   }
 }
