@@ -1,7 +1,6 @@
 import {Routes} from '@angular/router';
 import {FootballCampDetailsComponent} from './components/football-camp-details/football-camp-details.component';
 import {FootballCampLocatorComponent} from './components/football-camp-locator/football-camp-locator.component';
-import {FootballCampRegistrationComponent} from 'app/components/football-camp-registration/football-camp-registration.component';
 import {FootballCampLoginComponent} from './components/football-camp-login/football-camp-login.component';
 import {PlaygroundComponent} from './components/playground/playground.component';
 import {FootballCampAdminDashboardComponent} from './components/football-camp-admin-dashboard/football-camp-admin-dashboard.component';
@@ -22,7 +21,6 @@ export const AppRoutes: Routes = [
   // {path: 'locate', component: FootballCampLocatorComponent, data: {type: 'locate'}},
   {path: 'details/:id', component: FootballCampDetailsComponent},
   {path: 'details-v2/:id', component: FootballCampDetailsV2Component},
-  {path: 'registration/:id', component: FootballCampRegistrationComponent},
   {path: 'login', component: FootballCampLoginComponent},
   {path: 'admin-dashboard', component: FootballCampAdminDashboardComponent},
   {path: 'print-registration', component: FootballCampPrintRegistrationComponent},

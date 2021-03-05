@@ -24,7 +24,6 @@ import {FeetPipe} from './pipes/feet.pipe';
 import {GenderPipe} from './pipes/gender.pipe';
 import {SafeHtmlPipe} from './pipes/safe-html.pipe';
 import {TruncatePipe} from './pipes/truncate.pipe';
-import {FootballCampRegistrationComponent} from './components/football-camp-registration/football-camp-registration.component';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {FootballCampLoginComponent} from './components/football-camp-login/football-camp-login.component';
 import {FootballCampShouldConnectDialogComponent} from './components/football-camp-should-connect-dialog/football-camp-should-connect-dialog.component';
@@ -38,7 +37,6 @@ import {FileSizePipe} from './pipes/file-size.pipe';
 import {FootballCampRegistrationDocumentsComponent} from './components/football-camp-registration-documents/football-camp-registration-documents.component';
 import {FootballCampRegistrationSessionsComponent} from './components/football-camp-registration-sessions/football-camp-registration-sessions.component';
 import {FootballCampRegistrationTraineeFormComponent} from './components/football-camp-registration-trainee-form/football-camp-registration-trainee-form.component';
-import {FootballCampRegistrationCheckPaymentComponent} from './components/football-camp-registration-check-payment/football-camp-registration-check-payment.component';
 import {RouterModule} from '@angular/router';
 import {TableOfContentsModule} from './components/table-of-contents/table-of-contents.module';
 import {FootballCampRegistrationsOverviewComponent} from './components/football-camp-registrations-overview/football-camp-registrations-overview.component';
@@ -60,7 +58,6 @@ import {FootballCampBadgeComponent} from './components/football-camp-badge/footb
 import {FootballCampPrintEquipmentComponent} from './components/football-camp-print-equipment/football-camp-print-equipment.component';
 import {FootballCampPrintReceiptComponent} from './components/football-camp-print-receipt/football-camp-print-receipt.component';
 import {FootballCampPrintRegistrationsComponent} from './components/football-camp-print-registrations/football-camp-print-registrations.component';
-import {FootballCampRegistrationCardPaymentComponent} from './components/football-camp-registration-card-payment/football-camp-registration-card-payment.component';
 import {FootballCampRegistrationPaymentComponent} from './components/football-camp-registration-payment/football-camp-registration-payment.component';
 import {FootballCampRegistrationPaymentModeComponent} from './components/football-camp-registration-payment-mode/football-camp-registration-payment-mode.component';
 import {PaymentModePipe} from './pipes/payment-mode.pipe';
@@ -120,7 +117,6 @@ registerLocaleData(localeFr, 'fr');
     FootballCampOverviewComponent,
     FootballCampDetailsComponent,
     FootballCampHeaderComponent,
-    FootballCampRegistrationComponent,
     FootballCampLoginComponent,
     FootballCampShouldConnectDialogComponent,
     PlaygroundComponent,
@@ -128,7 +124,6 @@ registerLocaleData(localeFr, 'fr');
     FootballCampRegistrationDocumentsComponent,
     FootballCampRegistrationSessionsComponent,
     FootballCampRegistrationTraineeFormComponent,
-    FootballCampRegistrationCheckPaymentComponent,
     FootballCampRegistrationsOverviewComponent,
     FootballCampAdminDashboardComponent,
     FootballCampSessionOverviewComponent,
@@ -144,7 +139,6 @@ registerLocaleData(localeFr, 'fr');
     FootballCampPrintEquipmentComponent,
     FootballCampPrintReceiptComponent,
     FootballCampPrintRegistrationsComponent,
-    FootballCampRegistrationCardPaymentComponent,
     FootballCampRegistrationPaymentComponent,
     FootballCampRegistrationPaymentModeComponent,
     FootballCampRegistrationPaymentModeInPersonComponent,

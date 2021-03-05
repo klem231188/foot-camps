@@ -17,6 +17,7 @@ import {PaymentService} from '../../services/payment/payment.service';
 import {RegistrationService} from '../../services/registration/registration.service';
 import {StripeCardComponent, StripeService} from 'ngx-stripe';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {PaymentMode} from '../../models/payment-mode.enum';
 
 @Component({
   selector: 'app-football-camp-registration-payment-mode-online',
@@ -101,6 +102,7 @@ export class FootballCampRegistrationPaymentModeOnlineComponent implements OnIni
         registrationId: this.registration.id,
         state: PaymentState.IN_PROGRESS,
         type: PaymentType.CARD,
+        mode: PaymentMode.ONLINE,
         halfBoard: true,
         reducedPrice: false
       };
