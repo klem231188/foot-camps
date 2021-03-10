@@ -23,5 +23,5 @@ export const environment = {
   urlPrintRegistration: 'https://us-central1-footcamps-production.cloudfunctions.net/httpPrintRegistration',
   urlPrintRegistrations: 'https://us-central1-footcamps-production.cloudfunctions.net/httpPrintRegistrations',
   urlPrintEquipment: 'https://us-central1-footcamps-production.cloudfunctions.net/httpPrintEquipment',
-  urlPaymentIntent: 'https://us-central1-footcamps-development.cloudfunctions.net/httpPaymentIntent'
+  urlPaymentIntent: 'https://us-central1-footcamps-production.cloudfunctions.net/httpPaymentIntent'
 };

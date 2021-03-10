@@ -4,17 +4,35 @@
       "CHECK",
       "HOLIDAY_CHECK"
     ],
-    "campId": "gIEasJlqMnucrIgfNEH4",
+    "campId": "AbersFoot2021",
     "numberOfRegistrationsAccepted": 0,
     "numberOfRegistrationsInProgress": 0,
     "numberOfRegistrationsRejected": 0,
     "enable": true,
-    "end": "2019-07-12T12:00:00+01:00",
-    "endRegistrationDate": "2019-07-01T00:00:00+01:00",
+    "end": "2021-07-10T17:00:00+01:00",
+    "endRegistrationDate": "2021-07-07T08:30:00+01:00",
     "fullBoardRates": null,
-    "halfBoardRates": 130,
-    "id": "Q0tmkBl4nk2dDUbVYsFy",
+    "halfBoardRates": 135,
+    "id": "AbersFoot2021Session1",
     "maximumNumberOfRegistrations": 40,
-    "start": "2019-07-08T08:30:00+01:00"
+    "start": "2021-07-07T08:30:00+01:00"
+  },
+  {
+    "acceptedPaymentTypes": [
+      "CHECK",
+      "HOLIDAY_CHECK"
+    ],
+    "campId": "AbersFoot2021",
+    "numberOfRegistrationsAccepted": 0,
+    "numberOfRegistrationsInProgress": 0,
+    "numberOfRegistrationsRejected": 0,
+    "enable": true,
+    "end": "2021-07-16T17:00:00+01:00",
+    "endRegistrationDate": "2021-07-12T08:30:00+01:00",
+    "fullBoardRates": null,
+    "halfBoardRates": 135,
+    "id": "AbersFoot2021Session2",
+    "maximumNumberOfRegistrations": 40,
+    "start": "2021-07-12T08:30:00+01:00"
   }
 ]
