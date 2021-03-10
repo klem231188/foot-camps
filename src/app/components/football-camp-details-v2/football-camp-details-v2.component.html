@@ -72,8 +72,8 @@
       </div>
       <div class="address-container">
         <div [innerHTML]="footballCamp.details.location | safeHtml"></div>
-        <b>Adresse : </b>&nbsp;
-        <a [href]="footballCamp.details.gmapsUrl" target="_blank"><u>{{footballCamp.details.address}}</u></a>
+<!--        <b>Adresse : </b>&nbsp;-->
+<!--        <a [href]="footballCamp.details.gmapsUrl" target="_blank"><u>{{footballCamp.details.address}}</u></a>-->
       </div>
 
       <div class="title-container">
@@ -109,7 +109,7 @@
           </thead>
           <tbody>
           <tr *ngFor="let session of sessions; let i = index">
-            <td data-label="Sessions">Session n°{{i}}</td>
+            <td data-label="Sessions">Session n°{{i+1}}</td>
             <td data-label="Dates">Du {{session.start.toDate() | date : 'longDate'}}
               au {{session.end.toDate() | date : 'longDate'}}</td>
             <td data-label="Tarifs en Pension complète" *ngIf="hasFullBoardRatesSessions()">

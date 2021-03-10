@@ -167,6 +167,11 @@
               text-overflow: ellipsis;
             }
           }
+
+          a[target="_blank"]::after {
+            content: url("/assets/img/external-link.svg");
+            margin: 0 3px 0 3px;
+          }
         }
 
         .gallery-container {
