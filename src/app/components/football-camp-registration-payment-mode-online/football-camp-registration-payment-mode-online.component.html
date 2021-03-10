@@ -8,6 +8,7 @@
       <li>Un e-mail confirmant votre inscription</li>
     </ul>
 
+    <mat-checkbox [(ngModel)]="isReducedPrice">Tarif réduit: {{footballCamp.paymentInfo.reducedPriceCondition}}</mat-checkbox>
     <!-- Display a payment form -->
     <form id="payment-form">
       <div id="card-element">
@@ -19,7 +20,8 @@
       </div>
       <button id="submit" (click)="pay()" [disabled]="isButtonDisabled">
         <div class="spinner" id="spinner" *ngIf="isProcessingPayment"></div>
-        <span id="button-text">Payer {{footballCamp.paymentInfo.prices.halfBoardPrice}}€</span>
+        <span id="button-text" *ngIf="!isReducedPrice">Payer {{footballCamp.paymentInfo.prices.halfBoardPrice}} €</span>
+        <span id="button-text" *ngIf="isReducedPrice">Payer {{footballCamp.paymentInfo.prices.halfBoardReducedPrice}} €</span>
       </button>
       <p id="card-error" role="alert">{{errorMessage}}</p>
     </form>

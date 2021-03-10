@@ -19,7 +19,8 @@
       "fullBoardReducedPrice": null,
       "halfBoardPrice": 135,
       "halfBoardReducedPrice": 85
-    }
+    },
+    "reducedPriceCondition": "85 € si déjà inscrit à une autre session"
   },
   "minimumAge": 10,
   "maximumAge": 13,

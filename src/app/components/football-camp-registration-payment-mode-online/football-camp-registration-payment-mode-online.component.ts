@@ -48,6 +48,7 @@ export class FootballCampRegistrationPaymentModeOnlineComponent implements OnIni
   errorMessage: string;
   footballCamp$: Observable<FootballCamp>;
   isButtonDisabled: boolean;
+  isReducedPrice: boolean;
   isProcessingPayment: boolean;
   @Output() isValid: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   @Input() registration: RegistrationV2;
@@ -86,6 +87,7 @@ export class FootballCampRegistrationPaymentModeOnlineComponent implements OnIni
   ngOnInit(): void {
     this.isButtonDisabled = true;
     this.isProcessingPayment = false;
+    this.isReducedPrice = false;
   }
 
   onChange(event: StripeCardElementChangeEvent) {
@@ -104,7 +106,7 @@ export class FootballCampRegistrationPaymentModeOnlineComponent implements OnIni
         type: PaymentType.CARD,
         mode: PaymentMode.ONLINE,
         halfBoard: true,
-        reducedPrice: false
+        reducedPrice: this.isReducedPrice
       };
 
       console.log('Creating payment in firestore');

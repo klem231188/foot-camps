@@ -9,4 +9,5 @@ export interface PaymentInfo {
   checkReceiver: string;
   prices: PriceInfo;
   paymentAddress: string;
+  reducedPriceCondition: string;
 }
