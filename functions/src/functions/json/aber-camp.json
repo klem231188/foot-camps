@@ -18,9 +18,9 @@
       "fullBoardPrice": null,
       "fullBoardReducedPrice": null,
       "halfBoardPrice": 135,
-      "halfBoardReducedPrice": 85
+      "halfBoardReducedPrice": 110
     },
-    "reducedPriceCondition": "85 € si déjà inscrit à une autre session"
+    "reducedPriceCondition": "110 € à partir du deuxième enfant inscrit"
   },
   "minimumAge": 10,
   "maximumAge": 13,
@@ -65,16 +65,40 @@
       },
       {
         "firstname": "Julien",
-        "lastname": "LE REST",
+        "lastname": "PRETET",
         "manageRegistration": true,
-        "pathToPicture": "./assets/img/aber/organizers/avatar/Julien-LE-REST.jpg",
+        "pathToPicture": "./assets/img/aber/organizers/avatar/Julien-PRETET.jpg",
+        "phoneNumber": "N/A",
+        "quote": "Etude en sport. Dirigeants à SC Lannilis. Joueur R2 à Plouguerneau."
+      },
+      {
+        "firstname": "Germain",
+        "lastname": "BIANNIC",
+        "manageRegistration": true,
+        "pathToPicture": "./assets/img/aber/organizers/avatar/Germain-BIANNIC.jpg",
+        "phoneNumber": "N/A",
+        "quote": ""
+      },
+      {
+        "firstname": "Lucas",
+        "lastname": "PALLIER",
+        "manageRegistration": true,
+        "pathToPicture": "./assets/img/aber/organizers/avatar/Lucas-PALLIER.jpg",
+        "phoneNumber": "N/A",
+        "quote": ""
+      },
+      {
+        "firstname": "Pascal",
+        "lastname": "SALIOU",
+        "manageRegistration": true,
+        "pathToPicture": "./assets/img/aber/organizers/avatar/Pascal-SALIOU.jpg",
         "phoneNumber": "N/A",
         "quote": "Etude en sport. Dirigeants à SC Lannilis. Joueur R2 à Plouguerneau."
       }
     ],
     "pathToGallery": "./assets/img/aber/gallery/data.json",
     "pathToLogo": "./assets/img/aber/logo.png",
-    "priceDescription": "<div class=\"description-block\">\n          <b>Le coût du stage et prestations : </b>Une participation financière de 135 €<sup>(1)(2)</sup> est demandée à\n          chaque\n          stagiaire afin de couvrir les frais, que ce soit les repas, les sorties, les frais d’encadrement des\n          éducateurs, les équipements.\n          <ul>\n            <li><sup>(1)</sup> Les chèques vacances et coupons sport sont acceptés.</li>\n            <li><sup>(2)</sup> Prix dégressifs: 85 € la deuxième session au lieu de 135 €.</li>\n          </ul>\n        </div>"
+    "priceDescription": "<div class=\"description-block\">\n          <b>Le coût du stage et prestations : </b>Une participation financière de 135 €<sup>(1)(2)</sup> est demandée à\n          chaque\n          stagiaire afin de couvrir les frais, que ce soit les repas, les sorties, les frais d’encadrement des\n          éducateurs, les équipements.\n          <ul>\n            <li><sup>(1)</sup> Les chèques vacances et coupons sport sont acceptés.</li>\n            <li><sup>(2)</sup> Prix dégressifs: 110 € à partir du deuxième enfant au lieu de 135 €.</li>\n          </ul>\n        </div>"
   },
   "overview": {
     "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
