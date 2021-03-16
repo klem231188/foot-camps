@@ -10,7 +10,7 @@ import {anonymize} from './functions/anonymize.functions';
 import {createPaymentIntent} from './functions/stripe.functions';
 import {purgePayments} from './functions/purge-payments.functions';
 import {purgeRegistrations} from './functions/purge-registrations.functions';
-import {sendMailRegistrationInProgress} from './functions/mailjet.functions';
+import {sendMailRegistrationAccepted, sendMailRegistrationInProgress, sendMailRegistrationRejected} from './functions/mailjet.functions';
 import {Payment} from '../../src/app/models/payment';
 import {FootballCamp} from '../../src/app/models/football-camp';
 
@@ -250,14 +250,17 @@ export const onUpdateRegistrationState = functions.runWith(opts).firestore
       await admin.firestore().doc(`sessions/${registration.sessionId}`).set(update, {merge: true});
       console.info(`Session ${registration.sessionId} updated successfully ...`);
 
+      const campSnap = await admin.firestore().doc(`camps/${session.campId}`).get();
+      const camp = campSnap.data() as FootballCamp;
+
       if (registration.state === 'IN_PROGRESS') {
         const paymentSnap = await admin.firestore().doc(`payments/${registration.paymentId}`).get();
         const payment = paymentSnap.data() as Payment;
-
-        const campSnap = await admin.firestore().doc(`camps/${session.campId}`).get();
-        const camp = campSnap.data() as FootballCamp;
-
         await sendMailRegistrationInProgress(registration, payment, session, camp);
+      } else if (registration.state === 'ACCEPTED') {
+        await sendMailRegistrationAccepted(registration, session, camp);
+      } else if (registration.state === 'REJECTED') {
+        await sendMailRegistrationRejected(registration, session, camp);
       }
     } catch (e) {
       console.error(`An error occured during onUpdateRegistration ${change.after.data()}`, e);

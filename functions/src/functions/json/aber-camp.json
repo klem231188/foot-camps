@@ -77,7 +77,7 @@
         "manageRegistration": true,
         "pathToPicture": "./assets/img/aber/organizers/avatar/Germain-BIANNIC.jpg",
         "phoneNumber": "N/A",
-        "quote": ""
+        "quote": "Initiateur 1er niveau. Responsable de U6 à U9 au GSY Bourg-blanc."
       },
       {
         "firstname": "Lucas",
@@ -85,7 +85,7 @@
         "manageRegistration": true,
         "pathToPicture": "./assets/img/aber/organizers/avatar/Lucas-PALLIER.jpg",
         "phoneNumber": "N/A",
-        "quote": ""
+        "quote": "Service civique. Joueur senior au SC Lannilis."
       },
       {
         "firstname": "Pascal",
@@ -93,7 +93,7 @@
         "manageRegistration": true,
         "pathToPicture": "./assets/img/aber/organizers/avatar/Pascal-SALIOU.jpg",
         "phoneNumber": "N/A",
-        "quote": "Etude en sport. Dirigeants à SC Lannilis. Joueur R2 à Plouguerneau."
+        "quote": "Educateur des entraînements spécifiques gardiens au SC Lannilis."
       }
     ],
     "pathToGallery": "./assets/img/aber/gallery/data.json",
