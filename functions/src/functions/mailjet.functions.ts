@@ -67,7 +67,7 @@ export async function sendMailRegistrationInProgress(
     ]
   };
 
-  console.log(request);
+  console.log(JSON.stringify(request));
 
   return mailjet
     .connect(functions.config().mailjet.public_key, functions.config().mailjet.secret_key)
@@ -108,7 +108,7 @@ export async function sendMailRegistrationAccepted(
     ]
   };
 
-  console.log(request);
+  console.log(JSON.stringify(request));
 
   return mailjet
     .connect(functions.config().mailjet.public_key, functions.config().mailjet.secret_key)
@@ -149,7 +149,7 @@ export async function sendMailRegistrationRejected(
     ]
   };
 
-  console.log(request);
+  console.log(JSON.stringify(request));
 
   return mailjet
     .connect(functions.config().mailjet.public_key, functions.config().mailjet.secret_key)
