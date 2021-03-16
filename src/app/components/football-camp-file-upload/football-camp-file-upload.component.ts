@@ -11,14 +11,15 @@ import {finalize} from 'rxjs/operators';
   styleUrls: ['./football-camp-file-upload.component.scss']
 })
 export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
-  @Output() document: BehaviorSubject<Document>;
-  downloadURL: string;
   @Input() inputDocument: Document;
+  @Input() type: DocumentType;
+  @Output() document: BehaviorSubject<Document>;
+
+  downloadURL: string;
   inputId: string;
   percentage: Observable<number>;
   subscriptions: Subscription[];
   title: string;
-  @Input() type: DocumentType;
   uploaded: BehaviorSubject<boolean>;
 
   constructor(private storage: AngularFireStorage) {

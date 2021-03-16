@@ -11,6 +11,8 @@ import {Payment} from '../../models/payment';
 import {PaymentState} from '../../models/payment-state.enum';
 import {PaymentMode} from '../../models/payment-mode.enum';
 import {PaymentService} from '../../services/payment/payment.service';
+import {RegistrationState} from '../../models/registration-state.enum';
+import {RegistrationService} from '../../services/registration/registration.service';
 
 @Component({
   selector: 'app-football-camp-registration-payment-mode-in-person',
@@ -31,7 +33,8 @@ export class FootballCampRegistrationPaymentModeInPersonComponent implements OnI
   constructor(
     private footballCampService: FootballCampService,
     private sessionService: SessionService,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private registrationService: RegistrationService
   ) {
   }
 
@@ -72,6 +75,10 @@ export class FootballCampRegistrationPaymentModeInPersonComponent implements OnI
     console.log('Creating payment in firestore');
     await this.paymentService.save(payment);
     console.log('Payment created in firestore');
+
+    console.log('Updating registration status in firestore');
+    await this.registrationService.update(this.registration.id, {paymentId: payment.id, state: RegistrationState.IN_PROGRESS});
+    console.log('Registration status updated in firestore');
 
     this.isValid.next(true);
   }

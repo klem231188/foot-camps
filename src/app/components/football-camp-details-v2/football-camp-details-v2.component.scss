@@ -189,29 +189,42 @@
         .organizer-container {
           padding: 10px;
 
-          .quote {
-            margin-bottom: 5px;
+          .organizer-inner-container {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            justify-content: center;
+
             @include big-screen {
               flex-direction: row;
-              align-items: center;
+              flex-wrap: wrap;
+              justify-content: space-around;
             }
-          }
 
-          .quote:hover * {
-            filter: brightness(80%);
-          }
+            .quote {
+              margin-bottom: 5px;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              @include big-screen {
+                flex-direction: row;
+                align-items: center;
+                width: 600px;
+              }
+            }
 
-          .avatar {
-            border-radius: 50%;
-            border: #009688 2px solid;
-            height: 128px;
-            width: 128px;
-            min-width: 128px;
-            margin-right: 10px;
-            background-color: mat-color($primary);
+            .quote:hover * {
+              filter: brightness(80%);
+            }
+
+            .avatar {
+              border-radius: 50%;
+              border: #009688 2px solid;
+              height: 128px;
+              width: 128px;
+              min-width: 128px;
+              margin-right: 10px;
+              background-color: mat-color($primary);
+            }
           }
         }
 

@@ -27,7 +27,7 @@
       </div>
       <div class="organizer-container">
         <p [innerHTML]="footballCamp.details.organizerDescription | safeHtml"></p>
-        <div *ngIf="footballCamp.details.organizers != null">
+        <div  class="organizer-inner-container" *ngIf="footballCamp.details.organizers != null">
           <div class="quote" *ngFor="let organizer of footballCamp.details.organizers">
             <img class="avatar" src="{{organizer.pathToPicture}}">
             <blockquote>

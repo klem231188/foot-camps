@@ -10,10 +10,10 @@ import {Document} from '../../models/document.model';
 })
 export class FootballCampRegistrationDocumentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild('certificatMedical', { static: true }) certificatMedical: FootballCampFileUploadComponent;
+  // @ViewChild('certificatMedical', {static: true}) certificatMedical: FootballCampFileUploadComponent;
   @Output() documents: BehaviorSubject<Document[]>;
-  @ViewChild('ficheSanitaire', { static: true }) ficheSanitaire: FootballCampFileUploadComponent;
-  @ViewChild('photoIdentite', { static: true }) photoIdentite: FootballCampFileUploadComponent;
+  @ViewChild('ficheSanitaire', {static: true}) ficheSanitaire: FootballCampFileUploadComponent;
+  @ViewChild('photoIdentite', {static: true}) photoIdentite: FootballCampFileUploadComponent;
   subscription: Subscription;
   subscription2: Subscription;
   @Output() valid: BehaviorSubject<boolean>;
@@ -24,26 +24,24 @@ export class FootballCampRegistrationDocumentsComponent implements OnInit, After
   ngAfterViewInit(): void {
     this.subscription = combineLatest([
         this.ficheSanitaire.uploaded,
-        this.certificatMedical.uploaded,
-        this.photoIdentite.uploaded
+        this.photoIdentite.uploaded,
+        // this.certificatMedical.uploaded
       ]
-    )
-      .subscribe((uploadStatuses) => {
-        console.log(uploadStatuses);
-        this.valid.next(uploadStatuses.reduce((accumulator, currentValue) => {
-          return accumulator && currentValue;
-        }));
-      });
-
+    ).subscribe((uploadStatuses) => {
+      console.log(uploadStatuses);
+      this.valid.next(uploadStatuses.reduce((accumulator, currentValue) => {
+        return accumulator && currentValue;
+      }));
+    });
 
     this.subscription2 = combineLatest([
         this.ficheSanitaire.document,
-        this.certificatMedical.document,
+        // this.certificatMedical.document,
         this.photoIdentite.document
       ]
     ).subscribe((documents) => {
-        this.documents.next(documents);
-      });
+      this.documents.next(documents);
+    });
   }
 
   ngOnDestroy(): void {
@@ -51,7 +49,6 @@ export class FootballCampRegistrationDocumentsComponent implements OnInit, After
     this.subscription2.unsubscribe();
   }
 
-  // Lifecycle hooks
   ngOnInit(): void {
     this.valid = new BehaviorSubject<boolean>(false);
     this.documents = new BehaviorSubject<Document[]>(null);

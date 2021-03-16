@@ -1,17 +1,17 @@
 <h4>Documents à fournir</h4>
 <div class="mandatory-container">
   <mat-icon color="warn">warning</mat-icon>
-  <b>L'import des 3 documents est obligatoire pour passer à l'étape suivante.</b>
+  <b>Importez les documents pour passer à l'étape suivante.</b>
+</div>
+<div>
+  <br>
+  <sup>(1)</sup> La fiche sanitaire à renseigner est téléchargeable <a download href="./assets/img/fiche-sanitaire.pdf">ici</a>
+  <br>
 </div>
 <mat-list>
   <mat-divider></mat-divider>
   <mat-list-item>
     <app-football-camp-file-upload [type]="'FICHE_SANITAIRE'" #ficheSanitaire>
-    </app-football-camp-file-upload>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-list-item>
-    <app-football-camp-file-upload [type]="'CERTIFICAT_MEDICAL'" #certificatMedical>
     </app-football-camp-file-upload>
   </mat-list-item>
   <mat-divider></mat-divider>
@@ -25,10 +25,9 @@
     </app-football-camp-file-upload>
   </mat-list-item>
   <mat-divider></mat-divider>
+<!--  <mat-list-item>-->
+<!--    <app-football-camp-file-upload [type]="'CERTIFICAT_MEDICAL'" #certificatMedical>-->
+<!--    </app-football-camp-file-upload><span>(facultatif)</span>-->
+<!--  </mat-list-item>-->
+<!--  <mat-divider></mat-divider>-->
 </mat-list>
-
-<div>
-  <br>
-  <sup>(1)</sup> La fiche sanitaire à renseigner est téléchargeable <a download href="./assets/img/fiche-sanitaire.pdf">ici</a>
-  <br>
-</div>
