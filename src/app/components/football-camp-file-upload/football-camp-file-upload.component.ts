@@ -21,6 +21,7 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[];
   title: string;
   uploaded: BehaviorSubject<boolean>;
+  acceptedTypes: string;
 
   constructor(private storage: AngularFireStorage) {
     this.uploaded = new BehaviorSubject(false);
@@ -46,18 +47,22 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
       case DocumentType.ASSURANCE_SCOLAIRE :
         this.title = 'Attestation assurance scolaire';
         this.inputId = 'attestation_assurance_id';
+        this.acceptedTypes = 'image/*,application/pdf';
         break;
       case DocumentType.CERTIFICAT_MEDICAL :
         this.title = 'Certificat médical de moins de 3 mois ou license';
         this.inputId = 'certificat_medical_id';
+        this.acceptedTypes = 'image/*,application/pdf';
         break;
       case DocumentType.FICHE_SANITAIRE :
         this.title = 'Fiche sanitaire <sup>(1)</sup>';
         this.inputId = 'fiche_sanitaire_id';
+        this.acceptedTypes = 'image/*,application/pdf';
         break;
       case DocumentType.PHOTO_IDENTITE :
         this.title = 'Photo de votre enfant';
         this.inputId = 'photo_identite_id';
+        this.acceptedTypes = 'image/*';
         break;
     }
 
@@ -76,7 +81,7 @@ export class FootballCampFileUploadComponent implements OnInit, OnDestroy {
     this.uploaded.next(false);
 
     // Define file path
-    const filePath = `uploads/${new Date().getTime()}_${file.name}`;
+    const filePath = `uploads/${this.type}/${new Date().getTime()}_${file.name}`;
 
     // Create a task
     const fileRef = this.storage.ref(filePath);

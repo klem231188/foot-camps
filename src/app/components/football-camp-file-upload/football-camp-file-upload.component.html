@@ -7,7 +7,7 @@
     <mat-icon class="mat-18" color="primary">file_download</mat-icon>
   </a>
   <span class="text" [innerHTML]="title"></span>
-  <input [hidden]="true" id="{{inputId}}" type="file" accept="image/*,application/pdf" (change)="uploadFile($event.target.files)"/>
+  <input [hidden]="true" id="{{inputId}}" type="file" [accept]="acceptedTypes" (change)="uploadFile($event.target.files)"/>
   <label for="{{inputId}}" class="mat-stroked-button mat-primary import">
     <mat-icon class="mat-18">file_upload</mat-icon>
     Importer
