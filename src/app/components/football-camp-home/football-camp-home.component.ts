@@ -13,9 +13,10 @@ import {Session} from '../../models/session';
 export class FootballCampHomeComponent implements OnInit {
 
   footballCamps: FootballCamp[];
+  sessions: Session[];
 
-  constructor(private footballCampService: FootballCampService,
-              private sessionService: SessionService) {
+  constructor(public footballCampService: FootballCampService,
+              public sessionService: SessionService) {
   }
 
   getFootballCampOverviewImage(footCamp: FootballCamp): string {
@@ -23,10 +24,18 @@ export class FootballCampHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('FootballCampHomeComponent.ngOnInit');
     this.footballCampService
       .getFootballCamps()
       .pipe(
-        tap(value => this.footballCamps = value),
+        tap(value => this.footballCamps = value)
+      )
+      .subscribe();
+
+    this.sessionService
+      .getSessions()
+      .pipe(
+        tap(value => this.sessions = value)
       )
       .subscribe();
   }

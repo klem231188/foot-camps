@@ -65,14 +65,14 @@
     </div>
   </div>
 
-  <div *ngIf="!footballCamps">
+  <div *ngIf="! (footballCamps && sessions)">
     <div class="loading-container">
       <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
     </div>
   </div>
 
   <div class="footcamps-outer-container" #footcampsContainer>
-    <div class="footcamps-container" *ngIf="footballCamps">
+    <div class="footcamps-container" *ngIf="footballCamps && sessions">
       <div class="footcamp-container" *ngFor="let footCamp of this.footballCamps">
         <div class="header-container">
           <img class="logo" [src]="footCamp.details.pathToLogo">
@@ -105,27 +105,29 @@
             {{footCamp.paymentInfo.prices.halfBoardPrice}} €
           </div>
 
-          <div class="sessions-container" *ngFor="let session of sessionService.getSessionsFromCampId(footCamp.id) | async">
-            <div class="card-icon">
-              <mat-icon color="primary" [inline]="true">event_available</mat-icon>
-            </div>
-            <span class="date">{{session.start.toDate() | date : 'shortDate'}}
-              au {{session.end.toDate() | date : 'shortDate'}}</span>
-            <div class="sessions-inner-container">
-              <mat-progress-bar mode="determinate"
-                                [value]="percentageOfRegistrations(session)"
-                                color="primary">
-              </mat-progress-bar>
-              <div>
-                <span *ngIf="percentageOfAvailability(session) !== 0">{{availableRegistrations(session)}} Disponible(s)</span>
-                <span *ngIf="percentageOfAvailability(session) === 0">(Complet)</span>
+          <div class="sessions-container" *ngFor="let session of sessions">
+            <ng-container *ngIf="session.campId == footCamp.id">
+              <div class="card-icon">
+                <mat-icon color="primary" [inline]="true">event_available</mat-icon>
               </div>
-            </div>
+              <span class="date">{{session.start.toDate() | date : 'shortDate'}}
+                au {{session.end.toDate() | date : 'shortDate'}}</span>
+              <div class="sessions-inner-container">
+                <mat-progress-bar mode="determinate"
+                                  [value]="percentageOfRegistrations(session)"
+                                  color="primary">
+                </mat-progress-bar>
+                <div>
+                <span *ngIf="percentageOfAvailability(session) !== 0">{{availableRegistrations(session)}}
+                  Disponible(s)</span>
+                  <span *ngIf="percentageOfAvailability(session) === 0">(Complet)</span>
+                </div>
+              </div>
+            </ng-container>
           </div>
 
         </div>
       </div>
     </div>
   </div>
-
 </div>

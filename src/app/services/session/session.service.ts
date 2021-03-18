@@ -1,4 +1,4 @@
-import {map, publishReplay, refCount} from 'rxjs/operators';
+import {map, publishReplay, refCount, tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
@@ -22,10 +22,13 @@ export class SessionService {
   }
 
   getSessions(): Observable<Session[]> {
+    console.log('getSessions()');
+
     if (this.sessions$ == null) {
       this.sessions$ = this.angularFirestore
         .collection<Session>('sessions')
-        .snapshotChanges().pipe(
+        .snapshotChanges()
+        .pipe(
           map<DocumentChangeAction<Session>[], Session[]>(actions => {
             return actions.map(action => {
               const data = action.payload.doc.data() as Session;
@@ -42,13 +45,12 @@ export class SessionService {
   }
 
   getSessionsFromCampId(campId: string): Observable<Session[]> {
+    console.log(`getSessionsFromCampId(${campId})`);
     return this.getSessions()
       .pipe(
         map<Session[], Session[]>((sessions: Session[]) => {
           return sessions
-            .filter(session => {
-              return campId === session.campId;
-            })
+            .filter(session => campId === session.campId)
             .sort((s1, s2) => {
               const d1: Date = (s1.end as Timestamp).toDate();
               const d2: Date = (s2.end as Timestamp).toDate();
