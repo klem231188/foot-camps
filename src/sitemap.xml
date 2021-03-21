@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.footcamps.fr</loc>
-    <lastmod>2019-09-04</lastmod>
+    <lastmod>2021-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -13,23 +13,7 @@
   </url>
 
   <url>
-    <loc>https://www.footcamps.fr/locate</loc>
-    <changefreq>weekly</changefreq>
-  </url>
-
-  <!-- Abers foot -->
-  <url>
-    <loc>https://www.footcamps.fr/locate/gIEasJlqMnucrIgfNEH4</loc>
-    <changefreq>weekly</changefreq>
-  </url>
-
-  <url>
-    <loc>https://www.footcamps.fr/locate/gIEasJlqMnucrIgfNEH4/details</loc>
-    <changefreq>weekly</changefreq>
-  </url>
-
-  <url>
-    <loc>https://www.footcamps.fr/registration/gIEasJlqMnucrIgfNEH4</loc>
+    <loc>https://www.footcamps.fr/locate/AbersFoot2021/details-v2</loc>
     <changefreq>weekly</changefreq>
   </url>
 
