@@ -9,7 +9,7 @@ export class PaymentModePipe implements PipeTransform {
 
   transform(value: PaymentMode, ...args: any[]): any {
     if (!value) {
-      return value;
+      return 'Inconnu';
     } else {
       switch (value) {
         case PaymentMode.ONLINE:

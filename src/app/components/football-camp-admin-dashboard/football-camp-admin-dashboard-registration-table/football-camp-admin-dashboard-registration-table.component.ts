@@ -21,6 +21,8 @@ import {Subject} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Payment} from '../../../models/payment';
+import {PaymentService} from '../../../services/payment/payment.service';
 
 @Component({
   selector: 'app-football-camp-admin-dashboard-registration-table',
@@ -38,6 +40,7 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Output() registrationSelected: EventEmitter<RegistrationV2>;
   registrations: RegistrationV2[];
+  payments: Payment[] = [];
   selection: SelectionModel<RegistrationV2>;
   @Input() sessionId: string;
   @Input() adminMode: boolean;
@@ -45,10 +48,15 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
 
   constructor(
     private registrationService: RegistrationService,
+    private paymentService: PaymentService,
     private http: HttpClient,
     private snackBar: MatSnackBar
   ) {
     this.registrationSelected = new EventEmitter();
+  }
+
+  getPayment(registrationId: string): Payment {
+    return this.payments.find(p => p.registrationId === registrationId)
   }
 
   isRegistrationSelected(registration: RegistrationV2) {
@@ -67,11 +75,17 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
         let data = '';
 
         switch (property) {
+          case 'id':
+            data = item.id;
+            break;
           case 'firstname':
             data = item.trainee.firstname;
             break;
           case 'lastname':
             data = item.trainee.lastname;
+            break;
+          case 'state':
+            data = item.state;
             break;
           default:
             data = item[property];
@@ -110,7 +124,7 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
     this.disablePrintRegistrationsButton = false;
 
     if (this.adminMode) {
-      this.displayedColumns = ['select', 'firstname', 'lastname', 'state'];
+      this.displayedColumns = ['select', 'firstname', 'lastname', 'id', 'state', 'payment-state'];
     } else {
       this.displayedColumns = ['firstname', 'lastname', 'state'];
     }
@@ -127,6 +141,13 @@ export class FootballCampAdminDashboardRegistrationTableComponent implements Aft
       });
 
     this.destroyed = new Subject();
+
+    this.paymentService
+      .getPayments()
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(
+        (payments) => this.payments = payments
+      );
 
     this.reload()
   }

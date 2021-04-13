@@ -8,7 +8,7 @@ export class PaymentTypePipe implements PipeTransform {
 
   transform(value: PaymentType, ...args: any[]): any {
     if (!value) {
-      return value;
+      return 'Inconnu';
     } else {
       switch (value) {
         case PaymentType.CARD:

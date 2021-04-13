@@ -94,6 +94,14 @@
         "pathToPicture": "./assets/img/aber/organizers/avatar/Pascal-SALIOU.jpg",
         "phoneNumber": "N/A",
         "quote": "Educateur des entraînements spécifiques gardiens au SC Lannilis."
+      },
+      {
+        "firstname": "Théo",
+        "lastname": "MARTIN",
+        "manageRegistration": true,
+        "pathToPicture": "./assets/img/aber/organizers/avatar/Theo-MARTIN.jpg",
+        "phoneNumber": "N/A",
+        "quote": "N/A"
       }
     ],
     "pathToGallery": "./assets/img/aber/gallery/data.json",

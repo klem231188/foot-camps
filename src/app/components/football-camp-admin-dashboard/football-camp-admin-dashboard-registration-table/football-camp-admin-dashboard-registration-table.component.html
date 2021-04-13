@@ -14,17 +14,22 @@
     </ng-container>
 
     <ng-container matColumnDef="firstname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Prénom</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Prénom</th>
       <td mat-cell *matCellDef="let registration"> {{registration.trainee.firstname | titlecase}}</td>
     </ng-container>
 
     <ng-container matColumnDef="lastname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
       <td mat-cell *matCellDef="let registration"> {{registration.trainee.lastname | uppercase}}</td>
     </ng-container>
 
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let registration"> {{registration.id}}</td>
+    </ng-container>
+
     <ng-container matColumnDef="state">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Inscription</th>
       <td mat-cell *matCellDef="let registration" [ngClass]="{
         'primary': registration.state === 'ACCEPTED',
         'accent': registration.state === 'IN_PROGRESS',
@@ -32,6 +37,11 @@
         }">
         {{registration.state | state}}
       </td>
+    </ng-container>
+
+    <ng-container matColumnDef="payment-state">
+      <th mat-header-cell *matHeaderCellDef>Paiement</th>
+      <td mat-cell *matCellDef="let registration">{{getPayment(registration.id)?.state | paymentState}}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

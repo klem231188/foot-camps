@@ -12,10 +12,19 @@
     @include mat-elevation(2);
 
     @include small-screen {
-      overflow: visible;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     table {
+      @include small-screen {
+        display: block;
+        max-width: fit-content;
+        margin: 0 auto;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
       th, td {
         vertical-align: middle;
       }
