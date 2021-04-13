@@ -197,7 +197,8 @@
             @include big-screen {
               flex-direction: row;
               flex-wrap: wrap;
-              justify-content: space-around;
+              justify-content: space-between;
+              padding: 0 10px 0 10px;
             }
 
             .quote {
