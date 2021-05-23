@@ -12,7 +12,6 @@ import {AppMaterialModule} from './app.material.module';
 import {AgmCoreModule} from '@agm/core';
 import {FootballCampLocatorComponent} from './components/football-camp-locator/football-camp-locator.component';
 import {FootballCampHeaderComponent} from './components/football-camp-header/football-camp-header.component';
-import {FootballCampDetailsComponent} from './components/football-camp-details/football-camp-details.component';
 import {FootballCampMapComponent} from './components/football-camp-map/football-camp-map.component';
 import {FootballCampOverviewComponent} from './components/football-camp-overview/football-camp-overview.component';
 import {Angular2ImageGalleryModule} from './components/angular2-image-gallery';
@@ -38,7 +37,6 @@ import {FootballCampRegistrationDocumentsComponent} from './components/football-
 import {FootballCampRegistrationSessionsComponent} from './components/football-camp-registration-sessions/football-camp-registration-sessions.component';
 import {FootballCampRegistrationTraineeFormComponent} from './components/football-camp-registration-trainee-form/football-camp-registration-trainee-form.component';
 import {RouterModule} from '@angular/router';
-import {TableOfContentsModule} from './components/table-of-contents/table-of-contents.module';
 import {FootballCampRegistrationsOverviewComponent} from './components/football-camp-registrations-overview/football-camp-registrations-overview.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FootballCampAdminDashboardComponent} from './components/football-camp-admin-dashboard/football-camp-admin-dashboard.component';
@@ -87,7 +85,6 @@ registerLocaleData(localeFr, 'fr');
     MatCarouselModule,
     // ImageGallery
     Angular2ImageGalleryModule,
-    TableOfContentsModule,
     // @GoogleMaps
     AgmCoreModule.forRoot({
       apiKey: environment.googlemaps.apiKey
@@ -115,7 +112,6 @@ registerLocaleData(localeFr, 'fr');
     FootballCampLocatorComponent,
     FootballCampMapComponent,
     FootballCampOverviewComponent,
-    FootballCampDetailsComponent,
     FootballCampHeaderComponent,
     FootballCampLoginComponent,
     FootballCampShouldConnectDialogComponent,
