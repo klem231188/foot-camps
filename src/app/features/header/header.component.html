@@ -1,0 +1,44 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="onMenuClicked()" *ngIf="!backUrl">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <button mat-icon-button (click)="onBackClicked()" *ngIf="backUrl">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <span class="spacer-width-5px"></span>
+
+  <span *ngIf="!(selectedFootballCamp | async)" class="brand">F
+    <img src='assets/img/ball-white.png' class="logo">
+    <img src='assets/img/ball-white.png' class="logo">
+    tcamps
+  </span>
+
+  <div *ngIf="(selectedFootballCamp | async)" class="selected-football-camp brand">
+    <img  class="selected-football-camp-logo" [src]="(selectedFootballCamp | async)?.details.pathToLogo">
+    <span class="spacer-width-5px"></span>
+    <span class="selected-football-camp-name">{{(selectedFootballCamp | async)?.city}}</span>
+  </div>
+
+  <span *ngIf="!environment.production">&nbsp;(dev)</span>
+
+  <span class="spacer-flex-1"></span>
+
+  <button *ngIf="!(userInfo  && userInfo.uid)" mat-stroked-button (click)="login()">
+    <span style="color:white">Connexion</span>
+  </button>
+
+  <!-- Disconnection  -->
+  <button *ngIf="(userInfo  && userInfo.uid)" mat-icon-button mat-button [matMenuTriggerFor]="menuLogout">
+    <img *ngIf="(userInfo  && userInfo.photoURL)" src="{{userInfo.photoURL}}" class="user-avatar"
+         alt="Photo du profil"/>
+    <mat-icon *ngIf="!(userInfo  && userInfo.photoURL)">account_circle</mat-icon>
+  </button>
+  <mat-menu #menuLogout="matMenu" [overlapTrigger]="false">
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>power_settings_new</mat-icon>
+      <span style="color:#00796b;">Déconnexion</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

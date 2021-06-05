@@ -1,0 +1,71 @@
+@mixin app-header-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  app-header {
+    @include mat-elevation(2);
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+
+    mat-toolbar {
+      display: flex;
+      flex-direction: row;
+
+      .logo {
+        height: 15px;
+        margin-right: 1px;
+      }
+
+      .spacer-flex-1 {
+        flex: 1;
+      }
+
+      .spacer-width-5px {
+        width: 5px;
+      }
+
+      .brand {
+        font-family: 'Milkshake';
+        font-size: 30px;
+
+        @include small-screen {
+          font-size: unset;
+        }
+      }
+
+      mat-icon {
+        font-size: 35px !important;
+        height: 35px !important;
+        width: 35px !important;
+        line-height: 35px !important;
+      }
+
+      .user-avatar {
+        font-size: 35px !important;
+        height: 35px !important;
+        width: 35px !important;
+        line-height: 35px !important;
+        border-radius: 50%;
+      }
+
+      .connection-button {
+        color: #00796b !important;
+      }
+
+      .selected-football-camp {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        overflow: auto;
+
+        .selected-football-camp-logo {
+          height: 50px;
+        }
+      }
+    }
+  }
+}

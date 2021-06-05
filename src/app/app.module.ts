@@ -7,7 +7,6 @@ import {registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'hammerjs';
-import {AppRoutes} from './app-routes';
 import {AppMaterialModule} from './app.material.module';
 import {AgmCoreModule} from '@agm/core';
 import {FootballCampLocatorComponent} from './components/football-camp-locator/football-camp-locator.component';
@@ -63,6 +62,8 @@ import {FootballCampRegistrationPaymentModeInPersonComponent} from './components
 import {FootballCampRegistrationPaymentModeByMailComponent} from './components/football-camp-registration-payment-mode-by-mail/football-camp-registration-payment-mode-by-mail.component';
 import {FootballCampRegistrationPaymentModeOnlineComponent} from './components/football-camp-registration-payment-mode-online/football-camp-registration-payment-mode-online.component';
 import {NgxStripeModule} from 'ngx-stripe';
+import {AppRoutingModule} from './app-routing.module';
+import {HeaderModule} from './features/header/header.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -89,12 +90,9 @@ registerLocaleData(localeFr, 'fr');
     AgmCoreModule.forRoot({
       apiKey: environment.googlemaps.apiKey
     }),
-    // @Routing
-    RouterModule.forRoot(AppRoutes, {
-      scrollPositionRestoration: 'enabled',
-      anchorScrolling: 'enabled'
-    }),
-    HammerModule
+    AppRoutingModule,
+    HammerModule,
+    HeaderModule
   ],
   declarations: [
     AgePipe,
