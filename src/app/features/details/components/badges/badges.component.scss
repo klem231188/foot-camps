@@ -1,0 +1,39 @@
+@mixin setColor($color) {
+  .title {
+    background: $color;
+  }
+  .subtitle:after {
+    color: $color;
+  }
+}
+
+@mixin app-badges-theme($theme) {
+  app-badges {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 260px;
+    margin-top: 30px;
+
+    .loading-container {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .badges-container {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      @include small-screen {
+        flex-wrap: wrap;
+      }
+    }
+  }
+}

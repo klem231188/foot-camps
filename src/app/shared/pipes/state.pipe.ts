@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {RegistrationState} from '../models/registration-state.enum';
+import {RegistrationState} from '../../models/registration-state.enum';
 
 @Pipe({
   name: 'state'

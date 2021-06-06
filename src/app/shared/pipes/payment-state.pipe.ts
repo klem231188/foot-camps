@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {PaymentState} from '../models/payment-state.enum';
+import {PaymentState} from '../../models/payment-state.enum';
 
 @Pipe({
   name: 'paymentState'

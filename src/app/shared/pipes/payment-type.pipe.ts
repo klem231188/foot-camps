@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {PaymentType} from '../models/payment-type.enum';
+import {PaymentType} from '../../models/payment-type.enum';
 
 @Pipe({
   name: 'paymentType'

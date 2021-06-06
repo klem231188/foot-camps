@@ -25,6 +25,7 @@ export const routes: Routes = [
   {path: 'print-equipment', component: FootballCampPrintEquipmentComponent},
   {path: 'playground', component: PlaygroundComponent},
   {path: 'v2/home', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)},
+  {path: 'v2/stages/:id/details', loadChildren: () => import('./features/details/details.module').then(m => m.DetailsModule) },
 ];
 
 @NgModule({

@@ -31,6 +31,7 @@
     "@material/fab": "^7.0.0",
     "@ngbmodule/material-carousel": "^0.7.1",
     "@stripe/stripe-js": "^1.11.0",
+    "@thisissoon/angular-inviewport": "^4.2.2",
     "bootstrap": "3.3.7",
     "core-js": "^2.4.1",
     "firebaseui": "^4.6.1",

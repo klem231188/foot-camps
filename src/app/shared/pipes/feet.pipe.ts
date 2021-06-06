@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Feet} from '../models/feet.enum';
+import {Feet} from '../../models/feet.enum';
 
 @Pipe({
   name: 'feet'
