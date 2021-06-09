@@ -1,6 +1,6 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FootballCamp} from '../../models/football-camp';
-import {Observable, Subject} from 'rxjs';
+import {Subject} from 'rxjs';
 import {Session} from '../../models/session';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {SessionService} from '../../services/session/session.service';
@@ -23,8 +23,13 @@ export class DetailsComponent implements OnInit {
 
   constructor(private footballCampService: FootballCampService,
               private route: ActivatedRoute,
-              private sessionService: SessionService) {
+              private sessionService: SessionService
+  ) {
   }
+
+  // @ViewChild('top') set content(content: ElementRef) {
+  //   setTimeout(() => content.nativeElement.scrollIntoView({behavior: 'smooth'}), 0);
+  // }
 
   ngOnInit(): void {
     console.log('FootballCampDetailsV2Component.ngOnInit()');

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {FootballCampHomeComponent} from './components/football-camp-home/football-camp-home.component';
 import {FootballCampLocatorComponent} from './components/football-camp-locator/football-camp-locator.component';
 import {FootballCampDetailsV2Component} from './components/football-camp-details-v2/football-camp-details-v2.component';
@@ -24,13 +24,13 @@ export const routes: Routes = [
   {path: 'print-receipt', component: FootballCampPrintReceiptComponent},
   {path: 'print-equipment', component: FootballCampPrintEquipmentComponent},
   {path: 'playground', component: PlaygroundComponent},
-  {path: 'v2/home', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)},
-  {path: 'v2/stages/:id/details', loadChildren: () => import('./features/details/details.module').then(m => m.DetailsModule) },
+  {path: 'accueil', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)},
+  {path: 'stages/:id/details', loadChildren: () => import('./features/details/details.module').then(m => m.DetailsModule)},
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})
   ],
   exports: [RouterModule],
   providers: []

@@ -10,7 +10,7 @@
 @mixin app-badge-theme($theme) {
   app-badge {
 
-    margin: 0 20px 0 20px;
+    margin: 20px;
 
     .loading-container {
       display: flex;
@@ -40,7 +40,7 @@
       .title {
         font-family: "Montserrat", sans-serif;
         font-weight: bold;
-        font-size: 1.7em;
+        font-size: 1.2em;
         position: absolute;
         top: -28px;
         border-radius: 8px 8px 0 0;
@@ -48,42 +48,30 @@
         width: 100%;
         background: red;
         padding: 20px 0;
-
-        @include small-screen {
-          top: 0px;
-          font-size: 1.5em;
-          padding: 10px 0;
-        }
       }
 
       .subtitle {
         position: absolute;
         font-family: "Fjalla One", sans-serif;
-        font-size: 1.8em;
+        font-size: 1.5em;
         width: 100%;
         text-align: center;
         color: white;
         position: absolute;
-        top: 100px;
-        @include small-screen {
-          top: 90px;
-        }
+        top: 55px;
 
         &:after {
           content: "★ ★ ★";
           display: block;
           font-size: .4em;
           position: relative;
-          margin: 15px 0 0;
+          margin: 20px 0 0;
           transition: all .3s;
         }
       }
 
       &:hover .subtitle:after {
-        word-spacing: 30px;
-        @include small-screen {
-          word-spacing: 10px;
-        }
+        word-spacing: 5px;
       }
     }
 

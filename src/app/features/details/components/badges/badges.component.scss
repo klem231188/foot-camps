@@ -13,8 +13,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 260px;
-    margin-top: 30px;
 
     .loading-container {
       display: flex;
@@ -30,6 +28,7 @@
       flex-direction: row;
       justify-content: center;
       align-items: center;
+      margin-top: 10px;
 
       @include small-screen {
         flex-wrap: wrap;
