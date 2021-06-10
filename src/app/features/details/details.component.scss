@@ -13,6 +13,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-bottom: 70px;
 
       .carousel-container {
         position: relative;
@@ -85,7 +86,8 @@
         position: fixed;
         background-color: #fafafa;
         bottom: 0;
-        width: 90%;
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.125);
 
         .action-button-container {
           top: 0 !important;
@@ -110,7 +112,7 @@
       }
 
       .flow-container {
-        width: 90%;
+        width: 75%;
         margin-top: 20px;
         align-self: center;
         min-width: 300px;
@@ -128,73 +130,94 @@
           align-items: center;
         }
 
-        .content-inner-container {
-          flex: 1;
-          max-width: 400px;
-
-          .card-container {
+        .organizer-container {
+          .organizer-inner-container {
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
 
-            .card-icon {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              background-color: #E7F8FF;
-              border-radius: 50%;
-              width: 60px;
-              height: 60px;
+            @include big-screen {
+              flex-direction: row;
+              flex-wrap: wrap;
+              justify-content: space-between;
+              padding: 0 10px 0 10px;
+            }
 
-              mat-icon {
-                width: 35px;
-                height: 35px;
-                font-size: 35px;
+            .quote {
+              margin-bottom: 5px;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              @include big-screen {
+                flex-direction: row;
+                align-items: center;
+                width: 600px;
               }
             }
 
-            .card-title {
-              color: #4A4A4A;
-              font-size: 22px;
-              padding-bottom: 7px;
+            .quote:hover * {
+              filter: brightness(80%);
             }
 
-            .card-content {
-              padding-top: 7px;
-              font-size: 17px;
-              text-align: center;
-              color: #4A4A4A;
+            .avatar {
+              border-radius: 50%;
+              border: rgba(0, 0, 0, 0.125) 1px solid;
+              height: 128px;
+              width: 128px;
+              min-width: 128px;
+              margin-right: 10px;
+              background-color: rgba(0, 0, 0, 0.125);
             }
-          }
-
-          mat-card-content {
-            font-size: 13pt;
-          }
-
-          .card-header-container {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
-
-            color: mat-color($primary);
-            font-size: 22px;
-
-            padding-bottom: 7px;
-          }
-
-          .card-content-container {
-            padding-top: 7px;
-            font-size: 17px;
           }
         }
       }
 
-      .test {
-        width: 90%;
-        height: 1200px;
-        background-color: red;
+      .description-container {
+        width: 75%;
+        margin-top: 20px;
+        align-self: center;
+        min-width: 300px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        padding: 25px;
+        background-color: white;
+
+        @include small-screen {
+          flex-direction: column;
+        }
+
+        .text-container {
+          margin-left: 20px;
+
+          @include small-screen {
+            margin-left: 0;
+          }
+
+          .description-block {
+            margin-bottom: 10px;
+
+            ul {
+              padding-inline-start: 20px;
+
+              li {
+                margin-left: 15px;
+              }
+            }
+          }
+        }
+
+        .image-container {
+          min-width: 400px;
+          max-width: 400px;
+
+          img {
+            max-width: 100%;
+          }
+        }
       }
     }
   }

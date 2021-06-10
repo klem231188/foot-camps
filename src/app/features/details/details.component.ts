@@ -27,10 +27,6 @@ export class DetailsComponent implements OnInit {
   ) {
   }
 
-  // @ViewChild('top') set content(content: ElementRef) {
-  //   setTimeout(() => content.nativeElement.scrollIntoView({behavior: 'smooth'}), 0);
-  // }
-
   ngOnInit(): void {
     console.log('FootballCampDetailsV2Component.ngOnInit()');
     this.reloadSubject.subscribe(() => this.reload());

@@ -1,4 +1,3 @@
-<div #top></div>
 <div class="main-container">
   <ng-container *ngIf="footballCamp">
     <div class="carousel-container">
@@ -24,62 +23,27 @@
     </div>
 
     <div class="flow-container">
-      <div class="content-inner-container">
-        <div class="card-container">
-          <div class="card-icon">
-            <mat-icon color="primary">place</mat-icon>
-          </div>
-          <span class="card-title">Trouvez un stage</span>
-          <div class="card-content">
-            <b>Trouvez le stage</b> qui vous convient en utilisant différents critères de recherche: Lieu,
-            date, tarif, ...
-          </div>
-        </div>
-      </div>
-
-      <div class="content-inner-container">
-        <div class="card-container">
-          <div class="card-icon">
-            <mat-icon color="primary">create</mat-icon>
-          </div>
-          <span class="card-title">Inscrivez-vous</span>
-          <div class="card-content">
-            <b>Inscrivez-vous</b> en remplissant un formulaire.<br>
-            Attention une <b>photo</b> et un <b>certificat médical (ou licence FFF)</b> vous seront demandés.<br>
-          </div>
-        </div>
-      </div>
-
-      <div class="content-inner-container">
-        <div class="card-container">
-          <div class="card-icon">
-            <mat-icon color="primary">attach_money</mat-icon>
-          </div>
-          <span class="card-title">Payez en ligne</span>
-          <div class="card-content">
-            Suivant les stages, <b>différents modes de paiements</b> peuvent être acceptés (CB, chèque, chèque-vacance,
-            ...)
-          </div>
-        </div>
-      </div>
-
-      <div class="content-inner-container">
-        <div class="card-container">
-          <div class="card-icon">
-            <mat-icon color="primary">send</mat-icon>
-          </div>
-          <span class="card-title">Recevez une confirmation</span>
-          <div class="card-content">
-            <b>Recevez deux e-mails</b>.
-            Le premier pour vous informer de la prise en compte de votre inscription,
-            le second lorsque celle-ci a été validée par l'organisateur.
+      <div class="organizer-container">
+        <p [innerHTML]="footballCamp.details.organizerDescription | safeHtml"></p>
+        <div class="organizer-inner-container" *ngIf="footballCamp.details.organizers != null">
+          <div class="quote" *ngFor="let organizer of footballCamp.details.organizers">
+            <img class="avatar" src="{{organizer.pathToPicture}}">
+            <blockquote>
+              <div [innerHTML]="organizer.quote | safeHtml"></div>
+              <cite>{{organizer.firstname}} {{organizer.lastname}}</cite>
+            </blockquote>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="test">
-
+    <div class="description-container">
+      <div class="image-container">
+        <img [src]="footballCamp.overview.pathToImage400px">
+      </div>
+      <div class="text-container" [innerHTML]="footballCamp.details.activityDescription"></div>
     </div>
+
+    <!--    <div class="test"/>-->
   </ng-container>
 </div>
