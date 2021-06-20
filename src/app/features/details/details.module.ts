@@ -6,6 +6,7 @@ import {InViewportModule} from '@thisissoon/angular-inviewport';
 import {BadgesComponent} from './components/badges/badges.component';
 import {SharedModule} from '../../shared/shared.module';
 import {BadgeComponent} from './components/badge/badge.component';
+import {Angular2ImageGalleryModule} from '../../components/angular2-image-gallery';
 
 @NgModule({
   declarations: [
@@ -13,11 +14,12 @@ import {BadgeComponent} from './components/badge/badge.component';
     BadgesComponent,
     BadgeComponent
   ],
-  imports: [
-    SharedModule,
-    DetailsRoutingModule,
-    InViewportModule
-  ]
+    imports: [
+        SharedModule,
+        DetailsRoutingModule,
+        InViewportModule,
+        Angular2ImageGalleryModule
+    ]
 })
 export class DetailsModule {
 

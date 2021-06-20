@@ -13,7 +13,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 70px;
+      margin-bottom: 85px;
+      position: relative;
 
       .carousel-container {
         position: relative;
@@ -88,6 +89,7 @@
         bottom: 0;
         width: 100%;
         border: 1px solid rgba(0, 0, 0, 0.125);
+        z-index: 3;
 
         .action-button-container {
           top: 0 !important;
@@ -97,7 +99,7 @@
         }
       }
 
-      .content-container {
+      .badges-outer-container {
         display: flex;
         flex-direction: column;
         width: 90%;
@@ -122,7 +124,6 @@
         justify-content: space-around;
         align-items: flex-start;
         border: 1px solid rgba(0, 0, 0, 0.125);
-        padding: 25px;
         background-color: white;
 
         @include small-screen {
@@ -131,6 +132,8 @@
         }
 
         .organizer-container {
+          padding: 25px;
+
           .organizer-inner-container {
             display: flex;
             flex-direction: column;
@@ -172,7 +175,7 @@
         }
       }
 
-      .description-container {
+      .image-description-container {
         width: 75%;
         margin-top: 20px;
         align-self: center;
@@ -181,17 +184,28 @@
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        align-items: flex-start;
-        border: 1px solid rgba(0, 0, 0, 0.125);
-        padding: 25px;
-        background-color: white;
 
-        @include small-screen {
-          flex-direction: column;
+        .image-container {
+          max-width: 600px;
+          border: 1px solid rgba(0, 0, 0, 0.125);
+          padding: 25px;
+          background-color: white;
+          align-self: flex-start;
+
+          @include small-screen {
+            min-width: 200px;
+          }
+
+          img {
+            max-width: 100%;
+          }
         }
 
-        .text-container {
+        .description-container {
           margin-left: 20px;
+          border: 1px solid rgba(0, 0, 0, 0.125);
+          padding: 25px;
+          background-color: white;
 
           @include small-screen {
             margin-left: 0;
@@ -209,14 +223,214 @@
             }
           }
         }
+      }
 
-        .image-container {
-          min-width: 400px;
-          max-width: 400px;
+      .address-document-date-price-container {
+        width: 75%;
+        margin-top: 20px;
+        align-self: center;
 
-          img {
-            max-width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+
+        @include small-screen {
+          flex-direction: column;
+        }
+
+        .address-document-container {
+          display: flex;
+          flex-direction: column;
+          min-width: 480px;
+          justify-content: space-between;
+
+          .document-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            padding: 25px;
+            background-color: white;
+
+            .document {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              color: mat-color($primary);
+              text-decoration: none;
+              margin-bottom: 5px;
+
+              .card-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #E7F8FF;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                margin-right: 5px;
+
+                mat-icon {
+                  width: 25px !important;
+                  height: 25px !important;
+                  font-size: 25px !important;
+                  line-height: 1 !important;
+                }
+              }
+            }
+
+            .document:last-child {
+              margin-bottom: 0;
+            }
           }
+
+          .address-container {
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            padding: 25px;
+            background-color: white;
+            margin-top: 10px;
+            flex: 1;
+
+            a {
+              color: mat-color($primary);
+              @include small-screen {
+                text-overflow: ellipsis;
+              }
+            }
+
+            a[target="_blank"]::after {
+              content: url("/assets/img/external-link.svg");
+              margin: 0 3px 0 3px;
+            }
+          }
+        }
+
+        .date-price-container {
+          border: 1px solid rgba(0, 0, 0, 0.125);
+          padding: 25px;
+          background-color: white;
+          margin-right: 20px;
+
+          .description-block {
+            margin-bottom: 10px;
+
+            ul {
+              list-style: inside;
+
+              li {
+                margin-left: 20px;
+              }
+            }
+          }
+
+          table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            table-layout: fixed;
+          }
+
+          table caption {
+            font-size: 1.5em;
+            margin: .5em 0 .75em;
+          }
+
+          table tr {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: .35em;
+          }
+
+          table th,
+          table td {
+            padding: .625em;
+            text-align: center;
+          }
+
+          table td * {
+            margin: auto;
+          }
+
+          table th {
+            font-size: .85em;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+          }
+
+          @media screen and (max-width: 600px) {
+            table {
+              border: 0;
+            }
+            table caption {
+              font-size: 1.3em;
+            }
+            table thead {
+              border: none;
+              clip: rect(0 0 0 0);
+              height: 1px;
+              margin: -1px;
+              overflow: hidden;
+              padding: 0;
+              position: absolute;
+              width: 1px;
+            }
+            table tr {
+              border-bottom: 3px solid #ddd;
+              display: block;
+              margin-bottom: .625em;
+            }
+            table td {
+              border-bottom: 1px solid #ddd;
+              display: block;
+              font-size: .8em;
+              text-align: right;
+            }
+            table td:before {
+              content: attr(data-label);
+              float: left;
+              font-weight: bold;
+              text-transform: uppercase;
+            }
+            table td:last-child {
+              border-bottom: 0;
+            }
+          }
+        }
+      }
+
+      .gallery-container {
+        width: 75%;
+        margin-top: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        background-color: white;
+
+        .gallery-inner-container {
+          padding: 25px;
+
+          app-gallery {
+          }
+
+          viewer {
+            .outerContainer {
+              top: 64px;
+              height: auto;
+              width: auto;
+            }
+          }
+        }
+      }
+
+      .registrations-grid-container {
+        width: 75%;
+        margin-top: 20px;
+        min-width: 300px;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        background-color: white;
+
+        .registrations-grid-inner-container {
+          padding: 25px;
         }
       }
     }

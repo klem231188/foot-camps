@@ -19,7 +19,7 @@ import {Subscription} from 'rxjs'
 import {HttpClient} from '@angular/common/http'
 
 @Component({
-  selector: 'gallery',
+  selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.css']
 })

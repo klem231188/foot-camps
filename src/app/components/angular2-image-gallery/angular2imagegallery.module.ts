@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ImageService} from './services/image.service';
 import {GalleryComponent} from './gallery/gallery.component';
 import {ViewerComponent} from './viewer/viewer.component';
@@ -19,7 +18,7 @@ import {HttpClientModule} from '@angular/common/http';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    // BrowserAnimationsModule
   ],
   providers: [
     ImageService

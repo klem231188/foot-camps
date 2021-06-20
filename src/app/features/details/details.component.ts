@@ -6,6 +6,8 @@ import {FootballCampService} from '../../services/football-camp/football-camp.se
 import {SessionService} from '../../services/session/session.service';
 import {switchMap, tap} from 'rxjs/operators';
 import {ActivatedRoute, Params} from '@angular/router';
+import * as _ from 'lodash';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-details',
@@ -20,11 +22,34 @@ export class DetailsComponent implements OnInit {
   selectedSession: Session = null;
   sessions: Session[] = [];
   showRegistrationBar = false;
+  viewerOpened = false;
 
-  constructor(private footballCampService: FootballCampService,
+  constructor(
+              private dialog: MatDialog,
+              private footballCampService: FootballCampService,
               private route: ActivatedRoute,
               private sessionService: SessionService
   ) {
+  }
+
+  getFullBoardRatesSessions(): Session[] {
+    return _.reject(this.sessions, ['fullBoardRates', null]);
+  }
+
+  getHalfBoardRatesSessions(): Session[] {
+    return _.reject(this.sessions, ['halfBoardRates', null]);
+  }
+
+  hasFullBoardRatesSessions(): boolean {
+    return !_.isEmpty(this.getFullBoardRatesSessions());
+  }
+
+  hasHalfBoardRatesSessions(): boolean {
+    return !_.isEmpty(this.getHalfBoardRatesSessions());
+  }
+
+  isViewerOpened(): boolean {
+    return this.viewerOpened;
   }
 
   ngOnInit(): void {
@@ -39,6 +64,14 @@ export class DetailsComponent implements OnInit {
   onInViewportChange(inViewport: boolean) {
     console.log('onInViewportChange' + inViewport);
     this.showRegistrationBar = !inViewport;
+  }
+
+  onViewerChange(viewerOpened: boolean) {
+    this.viewerOpened = viewerOpened;
+  }
+
+  percentageOfRegistrations(session: Session): number {
+    return ((session.numberOfRegistrationsInProgress + session.numberOfRegistrationsAccepted) / session.maximumNumberOfRegistrations) * 100;
   }
 
   reload() {

@@ -83,9 +83,9 @@
         Gallerie photo
       </div>
       <div class="gallery-container" [ngClass]="isViewerOpened() ? 'z-index11' : 'z-index2'">
-        <gallery [flexBorderSize]="3" [flexImageSize]="7" [metadataUri]="footballCamp.details.pathToGallery"
+        <app-gallery [flexBorderSize]="3" [flexImageSize]="7" [metadataUri]="footballCamp.details.pathToGallery"
                  (viewerChange)="onViewerChange($event)">
-        </gallery>
+        </app-gallery>
       </div>
 
       <div class="title-container">

@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div class="content-container">
+    <div class="badges-outer-container">
       <app-badges [campId]="footballCamp.id"></app-badges>
     </div>
 
@@ -37,13 +37,95 @@
       </div>
     </div>
 
-    <div class="description-container">
+    <div class="image-description-container">
       <div class="image-container">
-        <img [src]="footballCamp.overview.pathToImage400px">
+        <a [href]="footballCamp.overview.pathToImage" target="_blank"><img [src]="footballCamp.overview.pathToImage400px"></a>
       </div>
-      <div class="text-container" [innerHTML]="footballCamp.details.activityDescription"></div>
+      <div class="description-container" [innerHTML]="footballCamp.details.activityDescription"></div>
     </div>
 
-    <!--    <div class="test"/>-->
+    <div class="address-document-date-price-container">
+      <div class="date-price-container">
+        <div [innerHTML]="footballCamp.details.priceDescription"></div>
+
+        <table>
+          <thead>
+          <tr>
+            <th scope="col">Sessions</th>
+            <th scope="col">Dates</th>
+            <th scope="col" *ngIf="hasFullBoardRatesSessions()">Tarifs en Pension complète</th>
+            <th scope="col" *ngIf="hasHalfBoardRatesSessions()">Tarifs en Demi-pension</th>
+            <th scope="col">Inscriptions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let session of sessions; let i = index">
+            <td data-label="Sessions">Session n°{{i + 1}}</td>
+            <td data-label="Dates">Du {{session.start.toDate() | date : 'longDate'}}
+              au {{session.end.toDate() | date : 'longDate'}}</td>
+            <td data-label="Tarifs en Pension complète" *ngIf="hasFullBoardRatesSessions()">
+              {{session.fullBoardRates}}
+              €
+            </td>
+            <td data-label="Tarifs en Demi-pension" *ngIf="hasHalfBoardRatesSessions()">{{session.halfBoardRates}} €
+            </td>
+            <td data-label="Inscriptions">
+              <mat-progress-bar mode="determinate" [value]="percentageOfRegistrations(session)"
+                                color="primary"></mat-progress-bar>
+              {{(session.numberOfRegistrationsInProgress +
+              session.numberOfRegistrationsAccepted)}}/{{session.maximumNumberOfRegistrations}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="address-document-container">
+        <div class="document-container">
+          <a *ngFor="let document of footballCamp.details.documents"
+             class="document"
+             [href]="document.url"
+             download>
+            <div class="card-icon">
+              <mat-icon color="primary" [inline]="true">file_download</mat-icon>
+            </div>
+            <u>{{document.name}}</u>
+          </a>
+        </div>
+        <div class="address-container">
+          <div [innerHTML]="footballCamp.details.location | safeHtml"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-container" [ngClass]="isViewerOpened() ? 'z-index11' : 'z-index2'">
+      <div class="gallery-inner-container">
+        <app-gallery [flexBorderSize]="3" [flexImageSize]="7" [metadataUri]="footballCamp.details.pathToGallery"
+                     (viewerChange)="onViewerChange($event)">
+        </app-gallery>
+      </div>
+    </div>
+
+    <div class="registrations-grid-container">
+      <div class="registrations-grid-inner-container">
+        <mat-form-field>
+          <mat-select [(value)]="selectedSession" placeholder="Sessions">
+            <mat-option
+              *ngFor="let session of this.sessions"
+              [value]="session"
+            >
+              {{session.start.toDate() | date}} au {{session.end.toDate() | date}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ng-container *ngIf="selectedSession">
+          <app-registrations-grid
+            [sessionId]="selectedSession.id"
+            [adminMode]="false">
+          </app-registrations-grid>
+        </ng-container>
+      </div>
+    </div>
+
   </ng-container>
 </div>

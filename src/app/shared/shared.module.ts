@@ -12,6 +12,7 @@ import {PaymentTypePipe} from './pipes/payment-type.pipe';
 import {PaymentStatePipe} from './pipes/payment-state.pipe';
 import {StatePipe} from './pipes/state.pipe';
 import {TruncatePipe} from './pipes/truncate.pipe';
+import {RegistrationsGridComponent} from './components/registrations-grid/registrations-grid.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {TruncatePipe} from './pipes/truncate.pipe';
     PaymentStatePipe,
     StatePipe,
     TruncatePipe,
+    RegistrationsGridComponent
   ],
   exports: [
     CommonModule,
@@ -41,6 +43,7 @@ import {TruncatePipe} from './pipes/truncate.pipe';
     PaymentStatePipe,
     StatePipe,
     TruncatePipe,
+    RegistrationsGridComponent
   ],
   imports: [
     CommonModule,
