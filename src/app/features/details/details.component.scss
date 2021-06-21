@@ -13,8 +13,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 85px;
+      margin-bottom: 60px;
       position: relative;
+      background-image: url(/assets/img/background-detail.svg);
+      background-attachment: fixed;
+      background-size: cover;
 
       .carousel-container {
         position: relative;
@@ -129,6 +132,8 @@
         @include small-screen {
           flex-direction: column;
           align-items: center;
+          width: 95%;
+          margin-top: 10px;
         }
 
         .organizer-container {
@@ -185,16 +190,18 @@
         flex-direction: row;
         justify-content: space-around;
 
+        @include small-screen {
+          flex-direction: column;
+          width: 95%;
+          margin-top: 10px;
+        }
+
         .image-container {
           max-width: 600px;
           border: 1px solid rgba(0, 0, 0, 0.125);
           padding: 25px;
           background-color: white;
           align-self: flex-start;
-
-          @include small-screen {
-            min-width: 200px;
-          }
 
           img {
             max-width: 100%;
@@ -209,6 +216,7 @@
 
           @include small-screen {
             margin-left: 0;
+            margin-top: 10px;
           }
 
           .description-block {
@@ -236,6 +244,8 @@
 
         @include small-screen {
           flex-direction: column;
+          width: 95%;
+          margin-top: 10px;
         }
 
         .address-document-container {
@@ -243,6 +253,11 @@
           flex-direction: column;
           min-width: 480px;
           justify-content: space-between;
+
+          @include small-screen {
+            margin-top: 10px;
+            min-width: 0;
+          }
 
           .document-container {
             display: flex;
@@ -259,6 +274,10 @@
               color: mat-color($primary);
               text-decoration: none;
               margin-bottom: 5px;
+
+              @include small-screen {
+                margin-bottom: 10px;
+              }
 
               .card-icon {
                 display: flex;
@@ -310,6 +329,10 @@
           padding: 25px;
           background-color: white;
           margin-right: 20px;
+
+          @include small-screen {
+            margin-right: 0;
+          }
 
           .description-block {
             margin-bottom: 10px;
@@ -406,6 +429,11 @@
         border: 1px solid rgba(0, 0, 0, 0.125);
         background-color: white;
 
+        @include small-screen {
+          width: 95%;
+          margin-top: 10px;
+        }
+
         .gallery-inner-container {
           padding: 25px;
 
@@ -428,6 +456,11 @@
         min-width: 300px;
         border: 1px solid rgba(0, 0, 0, 0.125);
         background-color: white;
+
+        @include small-screen {
+          width: 95%;
+          margin-top: 10px;
+        }
 
         .registrations-grid-inner-container {
           padding: 25px;
