@@ -1,0 +1,96 @@
+<form [formGroup]="registrationForm"
+      class="registration-form-group-container"
+      novalidate>
+  <h4>Informations du stagiaire</h4>
+
+  <!-- firstname -->
+  <mat-form-field>
+    <mat-label>Prénom</mat-label>
+    <input matInput placeholder="Ex: Marco" formControlName="firstname" required>
+    <mat-error *ngIf="firstname.invalid">{{getFirstnameError()}}</mat-error>
+  </mat-form-field>
+
+  <!-- lastname -->
+  <mat-form-field>
+    <mat-label>Nom</mat-label>
+    <input matInput placeholder="Ex: Verratti" formControlName="lastname" required>
+    <mat-error *ngIf="lastname.invalid">{{getLastnameError()}}</mat-error>
+  </mat-form-field>
+
+  <!-- gender -->
+  <mat-radio-group formControlName="gender">
+    Sexe <sup>*</sup> :&nbsp;
+    <mat-radio-button value="MALE">Garçon</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="FEMALE">Fille</mat-radio-button>
+  </mat-radio-group>
+  <span class="separator"></span>
+
+  <!-- birthdate -->
+  <mat-form-field>
+    <mat-label>Date de naissance</mat-label>
+    <input matInput [matDatepicker]="picker" placeholder="23/11/2010" formControlName="birthdate" required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker disabled="false"></mat-datepicker>
+    <mat-error *ngIf="birthdate.invalid">{{getBirthdateError()}}</mat-error>
+  </mat-form-field>
+
+  <!-- Contact email -->
+  <mat-form-field>
+    <mat-label>E-mail</mat-label>
+    <input matInput type="mon-email@gmail.com" placeholder="Email du parent" formControlName="email" required>
+    <mat-error *ngIf="email.invalid">{{getEmailError()}}</mat-error>
+  </mat-form-field>
+
+  <!-- shortSize  -->
+  <mat-radio-group formControlName="shortSize">
+    Taille short/maillot <sup>*</sup> :&nbsp;
+    <mat-radio-button value="XXS">XXS</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="XS">XS</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="S">S</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="M">M</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="L">L</mat-radio-button>
+  </mat-radio-group>
+  <span class="separator"></span>
+
+  <!-- shoeSize -->
+  <mat-form-field>
+    <mat-label>Pointure</mat-label>
+    <input matInput placeholder="30" formControlName="shoeSize" type="number" required>
+    <mat-error *ngIf="shoeSize.invalid">{{getShoeSizeError()}}</mat-error>
+  </mat-form-field>
+  <span class="separator"></span>
+
+  <h4>Caractéristiques sportives du stagiaire</h4>
+  <!-- Club -->
+  <mat-form-field>
+    <mat-label>Club actuel</mat-label>
+    <input matInput placeholder="Stade Brestois 29" formControlName="club">
+  </mat-form-field>
+
+  <!-- Poste préféré : Gardien / Défenseur / Milieu / Attaquant -->
+  <mat-radio-group formControlName="fieldPosition">
+    Poste préférentiel <sup>*</sup> :&nbsp;
+    <mat-radio-button value="GOALKEEPER">Gardien</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="DEFENDER">Défenseur</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="MIDFIELDER">Milieu</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="STRIKER">Attaquant</mat-radio-button>
+  </mat-radio-group>
+  <span class="separator"></span>
+
+  <!-- Pied Gauche / Droit -->
+  <mat-radio-group formControlName="feet">
+    Pied préférentiel <sup>*</sup> :&nbsp;
+    <mat-radio-button value="LEFT_FOOTED">Droitier</mat-radio-button>
+    &nbsp;
+    <mat-radio-button value="RIGHT_FOOTED">Gaucher</mat-radio-button>
+  </mat-radio-group>
+  <span class="separator"></span>
+</form>

@@ -1,0 +1,45 @@
+<div class="loading-container" *ngIf="!footballCamp">
+  <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+</div>
+
+<div *ngIf="footballCamp" class="main-container">
+  <div class="carousel-container">
+    <div class="text">
+      Footcamps
+    </div>
+  </div>
+
+  <!-- Stepper -->
+  <div class="registration-stepper-container">
+    <mat-vertical-stepper [linear]="true" #stepper>
+
+      <!-- Step 1 : Choose a session-->
+      <mat-step [completed]="(sessionComponent.isValid | async)">
+        <ng-template matStepLabel>Choix session</ng-template>
+        <app-step-sessions #sessionComponent [campId]="footballCamp.id"></app-step-sessions>
+        <div class="separator"></div>
+        <div class="next-button">
+          <button matStepperNext mat-stroked-button color="primary"
+                  [disabled]="!(sessionComponent.isValid | async)">Suivant
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      </mat-step>
+
+      <!-- Step 2 : Fill in trainee form -->
+      <mat-step [completed]="(traineeFormComponent.isValid | async)">
+        <ng-template matStepLabel>Remplir formulaire</ng-template>
+        <app-step-trainee-form #traineeFormComponent></app-step-trainee-form>
+
+        <div class="separator"></div>
+        <div class="next-button">
+          <button mat-stroked-button matStepperNext color="primary"
+                  [disabled]="!(traineeFormComponent.isValid | async)">Suivant
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      </mat-step>
+
+    </mat-vertical-stepper>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+@mixin app-step-sessions-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-step-sessions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .session-card {
+      margin-right: 10px;
+      margin-top: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+
+      @include big-screen {
+        min-width: 340px;
+      }
+
+      .card-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.04);
+        border-radius: 50%;
+        min-width: 50px;
+        min-height: 50px;
+        margin-right: 5px;
+
+        mat-icon {
+          width: 25px !important;
+          height: 25px !important;
+          font-size: 25px !important;
+          line-height: 1 !important;
+          color: #b0b0b0;
+        }
+      }
+
+      .header {
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.04);
+        text-align: center;
+        font-weight: bold;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+      }
+
+      .content {
+        padding: 15px;
+
+        .icon-date-container {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+
+        .icon-rates-container {
+          margin-top: 5px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+
+        .icon-availability-container {
+          margin-top: 5px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+    }
+
+    .session-card:hover {
+      cursor: pointer;
+    }
+
+    .session-selected {
+      .header {
+        background-color: mat-color($primary);
+        color: white;
+      }
+
+      .card-icon {
+        background-color: #E7F8FF;
+
+        mat-icon {
+          color: mat-color($primary);
+        }
+      }
+
+      border: 1px solid mat-color($primary);
+    }
+
+    .loading {
+      background-color: #ffffff;
+      z-index: 10;
+    }
+  }
+}

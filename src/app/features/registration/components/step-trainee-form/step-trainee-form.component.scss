@@ -1,0 +1,30 @@
+@mixin app-step-trainee-form-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-step-trainee-form {
+    width: 100%;
+
+    h4 {
+      color: mat-color($primary);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      margin-left: 10px;
+
+      mat-form-field {
+        width: 100%;
+      }
+
+      .separator {
+        margin-top: 5px;
+      }
+    }
+  }
+}

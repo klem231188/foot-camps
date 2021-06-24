@@ -26,6 +26,10 @@ export const routes: Routes = [
   {path: 'playground', component: PlaygroundComponent},
   {path: 'accueil', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)},
   {path: 'stages/:id/details', loadChildren: () => import('./features/details/details.module').then(m => m.DetailsModule)},
+  {
+    path: 'stages/:id/inscription',
+    loadChildren: () => import('./features/registration/registration.module').then(m => m.RegistrationModule)
+  },
 ];
 
 @NgModule({
