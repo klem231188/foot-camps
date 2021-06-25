@@ -1,7 +1,7 @@
 <form [formGroup]="registrationForm"
       class="registration-form-group-container"
       novalidate>
-  <h4>Informations du stagiaire</h4>
+  <h4>Informations générales du stagiaire</h4>
 
   <!-- firstname -->
   <mat-form-field>
@@ -31,13 +31,13 @@
     <mat-label>Date de naissance</mat-label>
     <input matInput [matDatepicker]="picker" placeholder="23/11/2010" formControlName="birthdate" required>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker disabled="false"></mat-datepicker>
+    <mat-datepicker #picker></mat-datepicker>
     <mat-error *ngIf="birthdate.invalid">{{getBirthdateError()}}</mat-error>
   </mat-form-field>
 
   <!-- Contact email -->
   <mat-form-field>
-    <mat-label>E-mail</mat-label>
+    <mat-label>E-mail du représentant légal</mat-label>
     <input matInput type="mon-email@gmail.com" placeholder="Email du parent" formControlName="email" required>
     <mat-error *ngIf="email.invalid">{{getEmailError()}}</mat-error>
   </mat-form-field>
@@ -65,7 +65,7 @@
   </mat-form-field>
   <span class="separator"></span>
 
-  <h4>Caractéristiques sportives du stagiaire</h4>
+  <h4>Informations sportives du stagiaire</h4>
   <!-- Club -->
   <mat-form-field>
     <mat-label>Club actuel</mat-label>

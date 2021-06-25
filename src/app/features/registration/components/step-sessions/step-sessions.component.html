@@ -2,6 +2,7 @@
      *ngFor="let session of sessions; let i = index"
      [ngClass]="{'session-selected': (selectedSession | async) === session}"
      (click)="onSessionSelected(session)"
+     matRipple
 >
   <div class="header">Session n°{{i + 1}}</div>
   <div class="content">
@@ -30,7 +31,7 @@
         <mat-icon color="primary" [inline]="true">event_available</mat-icon>
       </div>
       <div class="availability" *ngIf="(session.maximumNumberOfRegistrations - (session.numberOfRegistrationsInProgress +
-        session.numberOfRegistrationsAccepted)) >= 0">
+        session.numberOfRegistrationsAccepted)) > 0">
         Places disponibles
         : {{session.maximumNumberOfRegistrations - (session.numberOfRegistrationsInProgress +
         session.numberOfRegistrationsAccepted)}}

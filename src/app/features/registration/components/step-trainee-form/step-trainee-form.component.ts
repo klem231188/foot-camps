@@ -23,7 +23,6 @@ export class StepTraineeFormComponent implements OnInit {
   shoeSize: FormControl;
   shortSize: FormControl;
 
-  // Constructor
   constructor(private formBuilder: FormBuilder) {
   }
 
@@ -71,7 +70,7 @@ export class StepTraineeFormComponent implements OnInit {
       return 'La pointure est obligatoire';
     } else if (this.shoeSize.hasError('min')) {
       return 'La pointure doit être un nombre positif';
-    }  else {
+    } else {
       return '';
     }
   }
