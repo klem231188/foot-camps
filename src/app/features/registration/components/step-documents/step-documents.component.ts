@@ -11,12 +11,12 @@ import {Document} from '../../../../models/document.model';
 export class StepDocumentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // @ViewChild('certificatMedical', {static: true}) certificatMedical: FootballCampFileUploadComponent;
-  @Output() documents: BehaviorSubject<Document[]>;
+  @Output() documents: BehaviorSubject<Document[]> = new BehaviorSubject<Document[]>(null);
   @ViewChild('ficheSanitaire', {static: true}) ficheSanitaire: FootballCampFileUploadComponent;
   @ViewChild('photoIdentite', {static: true}) photoIdentite: FootballCampFileUploadComponent;
   subscription: Subscription;
   subscription2: Subscription;
-  @Output() valid: BehaviorSubject<boolean>;
+  @Output() isValid: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() {
   }
@@ -28,14 +28,14 @@ export class StepDocumentsComponent implements OnInit, AfterViewInit, OnDestroy 
         // this.certificatMedical.uploaded
       ]
     ).subscribe((uploadStatuses) => {
-      const uploadedDocumentsValid = uploadStatuses.reduce((acc, cur) => acc && cur);
-      this.valid.next(uploadedDocumentsValid);
+      const areUploadedDocumentsValid = uploadStatuses.reduce((acc, cur) => acc && cur);
+      this.isValid.next(areUploadedDocumentsValid);
     });
 
     this.subscription2 = combineLatest([
         this.ficheSanitaire.document,
-        // this.certificatMedical.document,
         this.photoIdentite.document
+        // this.certificatMedical.document,
       ]
     ).subscribe((documents) => {
       this.documents.next(documents);
@@ -48,7 +48,5 @@ export class StepDocumentsComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngOnInit(): void {
-    this.valid = new BehaviorSubject<boolean>(false);
-    this.documents = new BehaviorSubject<Document[]>(null);
   }
 }

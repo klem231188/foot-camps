@@ -10,6 +10,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {StepDocumentsComponent} from './components/step-documents/step-documents.component';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import {StepPaymentComponent} from './components/step-payment/step-payment.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
     StepSessionsComponent,
     StepTraineeFormComponent,
     StepDocumentsComponent,
+    StepPaymentComponent
   ],
   imports: [
     SharedModule,

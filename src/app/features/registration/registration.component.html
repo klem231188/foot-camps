@@ -1,4 +1,4 @@
-<div class="loading-container" *ngIf="!footballCamp">
+<div class="loading-container" *ngIf="isLoading">
   <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
 </div>
 
@@ -16,7 +16,7 @@
       <!-- Step 1 : Choose a session-->
       <mat-step [completed]="isStepSessionValid">
         <ng-template matStepLabel>Choix session</ng-template>
-        <app-step-sessions (isValid)="isStepSessionValid = $event;" [campId]="footballCamp.id"></app-step-sessions>
+        <app-step-sessions #sessionComponent (isValid)="isStepSessionValid = $event;" [campId]="footballCamp.id"></app-step-sessions>
         <div class="separator"></div>
         <div class="next-button">
           <button matStepperNext mat-stroked-button color="primary"
@@ -40,17 +40,28 @@
       </mat-step>
 
       <!--Step 3 : Document to supply -->
-      <mat-step [completed]="(documents.valid | async)">
+      <mat-step [completed]="(isStepDocumentsValid)">
         <ng-template matStepLabel>Documents à fournir</ng-template>
-        <app-step-documents #documents></app-step-documents>
+        <app-step-documents (isValid)="isStepDocumentsValid = $event;"></app-step-documents>
         <div class="separator"></div>
         <div class="next-button">
           <button mat-stroked-button matStepperNext color="primary"
-                  [disabled]="!(documents.valid | async)">Suivant
+                  [disabled]="!isStepDocumentsValid">Suivant
             <mat-icon>chevron_right</mat-icon>
           </button>
         </div>
       </mat-step>
+
+      <!--Step 4 : Payment -->
+      <mat-step>
+        <ng-template matStepLabel>Paiement</ng-template>
+        <app-step-payment
+          [campId]="footballCamp.id"
+          [sessionId]="(sessionComponent.selectedSession | async)?.id"
+          [registration]="registration">
+        </app-step-payment>
+      </mat-step>
+
 
     </mat-vertical-stepper>
   </div>
