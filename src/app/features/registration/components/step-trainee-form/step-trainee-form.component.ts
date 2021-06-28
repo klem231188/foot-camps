@@ -1,7 +1,7 @@
 import {Component, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-step-trainee-form',
@@ -10,6 +10,8 @@ import {Observable} from 'rxjs';
 })
 export class StepTraineeFormComponent implements OnInit {
 
+  @Output() isValid: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   birthdate: FormControl;
   club: FormControl;
   email: FormControl;
@@ -17,7 +19,6 @@ export class StepTraineeFormComponent implements OnInit {
   fieldPosition: FormControl;
   firstname: FormControl;
   gender: FormControl;
-  @Output() isValid: Observable<boolean>;
   lastname: FormControl;
   registrationForm: FormGroup;
   shoeSize: FormControl;
@@ -44,7 +45,6 @@ export class StepTraineeFormComponent implements OnInit {
     }
   }
 
-  // Methods
   getFirstnameError() {
     if (this.firstname.hasError('required')) {
       return 'Le prénom est obligatoire';
@@ -75,7 +75,6 @@ export class StepTraineeFormComponent implements OnInit {
     }
   }
 
-  // Lifecycle hooks
   ngOnInit() {
     console.log('FootballCampRegistrationTraineeFormComponent.ngOnInit()')
     this.birthdate = new FormControl(null, [Validators.required]);
@@ -101,12 +100,12 @@ export class StepTraineeFormComponent implements OnInit {
       'shortSize': this.shortSize,
     });
 
-    this.isValid = this.registrationForm.statusChanges
+    this.registrationForm.statusChanges
       .pipe(
         map(status => {
-          return status === 'VALID';
+          this.isValid.next(status === 'VALID');
         })
-      );
+      ).subscribe();
   }
 
 }

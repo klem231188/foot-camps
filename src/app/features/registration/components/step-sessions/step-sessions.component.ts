@@ -11,11 +11,11 @@ import {BehaviorSubject, Subscription} from 'rxjs';
 export class StepSessionsComponent implements OnInit, OnDestroy {
 
   @Input() campId: string;
-  isLoading: BehaviorSubject<boolean>;
-  @Output() isValid: BehaviorSubject<boolean>;
-  @Output() selectedSession: BehaviorSubject<Session>;
-  sessions: Session[];
-  subscriptions: Subscription[];
+  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  @Output() isValid: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  @Output() selectedSession: BehaviorSubject<Session> = new BehaviorSubject<Session>(null);
+  sessions: Session[] = [];
+  subscriptions: Subscription[] = [];
 
   // Constructor
   constructor(private sessionService: SessionService) {
@@ -28,13 +28,6 @@ export class StepSessionsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Init fields
-    this.sessions = [];
-    this.subscriptions = [];
-    this.isLoading = new BehaviorSubject<boolean>(true);
-    this.selectedSession = new BehaviorSubject<Session>(null);
-    this.isValid = new BehaviorSubject<boolean>(false);
-
     // React on sessions retrieved
     const sub1 = this.sessionService
       .getSessionsFromCampId(this.campId)

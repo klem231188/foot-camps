@@ -8,12 +8,15 @@ import {StepTraineeFormComponent} from './components/step-trainee-form/step-trai
 import {ReactiveFormsModule} from '@angular/forms';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {StepDocumentsComponent} from './components/step-documents/step-documents.component';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
     RegistrationComponent,
     StepSessionsComponent,
-    StepTraineeFormComponent
+    StepTraineeFormComponent,
+    StepDocumentsComponent,
   ],
   imports: [
     SharedModule,
@@ -21,6 +24,7 @@ import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdap
     ReactiveFormsModule
   ],
   providers: [
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
     {provide: MAT_DATE_LOCALE, useValue: 'fr'},
     {
       provide: DateAdapter,

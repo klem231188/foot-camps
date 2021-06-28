@@ -1,0 +1,36 @@
+@mixin app-step-documents-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-step-documents {
+    width: 100%;
+    h4 {
+      color: mat-color($primary);
+    }
+    .mandatory-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      mat-icon {
+        margin-right: 5px;
+      }
+    }
+    mat-list {
+      width: 100%;
+      mat-list-item {
+        min-height: 48px;
+        height: unset !important;
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        .mat-list-item-content {
+          flex: 1;
+        }
+      }
+    }
+  }
+}

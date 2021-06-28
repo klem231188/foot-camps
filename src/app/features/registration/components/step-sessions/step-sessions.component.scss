@@ -94,7 +94,13 @@
     }
 
     .session-not-selectable {
-      background-color: whitesmoke;
+      background: repeating-linear-gradient(
+          45deg,
+          rgba(0, 0, 0, 0.04),
+          rgba(0, 0, 0, 0.04) 10px,
+          #fafafa 10px,
+          #fafafa 20px
+      );
     }
 
     .session-not-selectable:hover {

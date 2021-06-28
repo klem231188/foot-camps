@@ -13,6 +13,7 @@ import {PaymentStatePipe} from './pipes/payment-state.pipe';
 import {StatePipe} from './pipes/state.pipe';
 import {TruncatePipe} from './pipes/truncate.pipe';
 import {RegistrationsGridComponent} from './components/registrations-grid/registrations-grid.component';
+import {FileUploadComponent} from './components/file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {RegistrationsGridComponent} from './components/registrations-grid/regist
     PaymentStatePipe,
     StatePipe,
     TruncatePipe,
-    RegistrationsGridComponent
+    RegistrationsGridComponent,
+    FileUploadComponent
   ],
   exports: [
     CommonModule,
@@ -43,7 +45,8 @@ import {RegistrationsGridComponent} from './components/registrations-grid/regist
     PaymentStatePipe,
     StatePipe,
     TruncatePipe,
-    RegistrationsGridComponent
+    RegistrationsGridComponent,
+    FileUploadComponent
   ],
   imports: [
     CommonModule,

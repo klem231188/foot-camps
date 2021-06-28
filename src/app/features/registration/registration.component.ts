@@ -20,6 +20,8 @@ export class RegistrationComponent implements OnInit {
   footballCamp: FootballCamp = null;
   reloadSubject: Subject<void> = new Subject<void>();
   sessions: Session[] = [];
+  isStepSessionValid = false;
+  isStepTraineeFormValid = false;
 
   @ViewChild('stepper') stepper: MatVerticalStepper;
   @ViewChild(FootballCampRegistrationTraineeFormComponent) traineeFormComponent: FootballCampRegistrationTraineeFormComponent;
@@ -52,5 +54,4 @@ export class RegistrationComponent implements OnInit {
       )
       .subscribe();
   }
-
 }

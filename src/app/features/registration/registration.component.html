@@ -14,27 +14,39 @@
     <mat-vertical-stepper [linear]="true" #stepper>
 
       <!-- Step 1 : Choose a session-->
-      <mat-step [completed]="(sessionComponent.isValid | async)">
+      <mat-step [completed]="isStepSessionValid">
         <ng-template matStepLabel>Choix session</ng-template>
-        <app-step-sessions #sessionComponent [campId]="footballCamp.id"></app-step-sessions>
+        <app-step-sessions (isValid)="isStepSessionValid = $event;" [campId]="footballCamp.id"></app-step-sessions>
         <div class="separator"></div>
         <div class="next-button">
           <button matStepperNext mat-stroked-button color="primary"
-                  [disabled]="!(sessionComponent.isValid | async)">Suivant
+                  [disabled]="!isStepSessionValid">Suivant
             <mat-icon>chevron_right</mat-icon>
           </button>
         </div>
       </mat-step>
 
       <!-- Step 2 : Fill in trainee form -->
-      <mat-step [completed]="(traineeFormComponent.isValid | async)">
+      <mat-step [completed]="isStepTraineeFormValid">
         <ng-template matStepLabel>Remplir formulaire</ng-template>
-        <app-step-trainee-form #traineeFormComponent></app-step-trainee-form>
-
+        <app-step-trainee-form (isValid)="isStepTraineeFormValid = $event;"></app-step-trainee-form>
         <div class="separator"></div>
         <div class="next-button">
           <button mat-stroked-button matStepperNext color="primary"
-                  [disabled]="!(traineeFormComponent.isValid | async)">Suivant
+                  [disabled]="!isStepTraineeFormValid">Suivant
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      </mat-step>
+
+      <!--Step 3 : Document to supply -->
+      <mat-step [completed]="(documents.valid | async)">
+        <ng-template matStepLabel>Documents à fournir</ng-template>
+        <app-step-documents #documents></app-step-documents>
+        <div class="separator"></div>
+        <div class="next-button">
+          <button mat-stroked-button matStepperNext color="primary"
+                  [disabled]="!(documents.valid | async)">Suivant
             <mat-icon>chevron_right</mat-icon>
           </button>
         </div>
