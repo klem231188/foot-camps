@@ -93,6 +93,14 @@
       border: 1px solid mat-color($primary);
     }
 
+    .session-not-selectable {
+      background-color: whitesmoke;
+    }
+
+    .session-not-selectable:hover {
+      cursor: unset !important;
+    }
+
     .loading {
       background-color: #ffffff;
       z-index: 10;

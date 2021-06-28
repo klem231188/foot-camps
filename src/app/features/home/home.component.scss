@@ -7,8 +7,14 @@
   app-home {
     display: flex;
     flex-direction: column;
-    //height: auto !important;
     color: #4A4A4A;
+    background: url(/assets/img/background-detail.svg) no-repeat center center fixed;
+    background-size: 100% auto;
+
+    min-height: calc(100vh - 64px);
+    @include small-screen {
+      min-height: calc(100vh - 56px);
+    }
 
     .main-container {
       display: flex;

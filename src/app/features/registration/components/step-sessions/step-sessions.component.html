@@ -1,48 +1,57 @@
-<div class="session-card"
-     *ngFor="let session of sessions; let i = index"
-     [ngClass]="{'session-selected': (selectedSession | async) === session}"
-     (click)="onSessionSelected(session)"
-     matRipple
+<ng-container
+  *ngFor="let session of sessions; let i = index"
 >
-  <div class="header">Session n°{{i + 1}}</div>
-  <div class="content">
-    <div class="icon-date-container">
-      <div class="card-icon">
-        <mat-icon color="primary" [inline]="true">event_available</mat-icon>
-      </div>
-      <div class="date">
-        Du {{session.start.toDate() | date : 'longDate'}} au {{session.end.toDate() | date : 'longDate'}}
+  <ng-template let-sessionFull
+               [ngTemplateOutletContext]="{ $implicit: (session.maximumNumberOfRegistrations - (session.numberOfRegistrationsInProgress + session.numberOfRegistrationsAccepted)) <= 0 }"
+               [ngTemplateOutlet]="t"
+               #t>
+    <div class="session-card"
+         [ngClass]="{
+     'session-selected': (selectedSession | async) === session,
+     'session-not-selectable': sessionFull
+     }"
+         (click)="onSessionSelected(session)"
+         matRipple
+         [matRippleDisabled]="sessionFull">
+      <div class="header">Session n°{{i + 1}}</div>
+      <div class="content">
+        <div class="icon-date-container">
+          <div class="card-icon">
+            <mat-icon color="primary" [inline]="true">event_available</mat-icon>
+          </div>
+          <div class="date">
+            Du {{session.start.toDate() | date : 'longDate'}} au {{session.end.toDate() | date : 'longDate'}}
+          </div>
+        </div>
+        <div class="icon-rates-container" *ngIf="session.halfBoardRates">
+          <div class="card-icon">
+            <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
+          </div>
+          <div class="half-board-rates">Prix demi-pension : {{session.halfBoardRates}} €</div>
+        </div>
+        <div class="icon-rates-container" *ngIf="session.fullBoardRates">
+          <div class="card-icon">
+            <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
+          </div>
+          <div class="full-board-rates">Prix pension complète: {{session.fullBoardRates}} €</div>
+        </div>
+        <div class="icon-availability-container">
+          <div class="card-icon">
+            <mat-icon color="primary" [inline]="true">event_available</mat-icon>
+          </div>
+          <div class="availability" *ngIf="!sessionFull">
+            Places disponibles
+            : {{session.maximumNumberOfRegistrations - (session.numberOfRegistrationsInProgress +
+            session.numberOfRegistrationsAccepted)}}
+          </div>
+          <div class="availability" *ngIf="sessionFull">
+            Complet
+          </div>
+        </div>
       </div>
     </div>
-    <div class="icon-rates-container" *ngIf="session.halfBoardRates">
-      <div class="card-icon">
-        <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
-      </div>
-      <div class="half-board-rates">Prix demi-pension : {{session.halfBoardRates}} €</div>
-    </div>
-    <div class="icon-rates-container" *ngIf="session.fullBoardRates">
-      <div class="card-icon">
-        <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
-      </div>
-      <div class="full-board-rates">Prix pension complète: {{session.fullBoardRates}} €</div>
-    </div>
-    <div class="icon-availability-container">
-      <div class="card-icon">
-        <mat-icon color="primary" [inline]="true">event_available</mat-icon>
-      </div>
-      <div class="availability" *ngIf="(session.maximumNumberOfRegistrations - (session.numberOfRegistrationsInProgress +
-        session.numberOfRegistrationsAccepted)) > 0">
-        Places disponibles
-        : {{session.maximumNumberOfRegistrations - (session.numberOfRegistrationsInProgress +
-        session.numberOfRegistrationsAccepted)}}
-      </div>
-      <div class="availability" *ngIf="(session.maximumNumberOfRegistrations - (session.numberOfRegistrationsInProgress +
-        session.numberOfRegistrationsAccepted)) <= 0">
-        Complet
-      </div>
-    </div>
-  </div>
-</div>
+  </ng-template>
+</ng-container>
 <div *ngIf="isLoading | async" class="loading">
   <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
 </div>

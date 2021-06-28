@@ -17,9 +17,8 @@
       align-items: center;
       margin-bottom: 60px;
       position: relative;
-      background-image: url(/assets/img/background-detail.svg);
-      background-size: cover;
-      background-color: #fafafa;
+      background: url(/assets/img/background-detail.svg) no-repeat center center fixed;
+      background-size: 100% auto;
 
       .carousel-container {
         position: relative;
