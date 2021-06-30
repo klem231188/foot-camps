@@ -1,7 +1,12 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {map} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
+import {FieldPosition} from '../../../../models/field-position.enum';
+import * as moment from 'moment';
+import {Feet} from '../../../../models/feet.enum';
+import {Gender} from '../../../../models/gender.enum';
+import {ShortSize} from '../../../../models/short-size.enum';
 
 @Component({
   selector: 'app-step-trainee-form',
@@ -10,6 +15,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class StepTraineeFormComponent implements OnInit {
 
+  @Input() mocked = false;
   @Output() isValid: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   birthdate: FormControl;
@@ -76,17 +82,29 @@ export class StepTraineeFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('FootballCampRegistrationTraineeFormComponent.ngOnInit()')
-    this.birthdate = new FormControl(null, [Validators.required]);
-    this.club = new FormControl(null, []);
-    this.email = new FormControl(null, [Validators.required, Validators.email]);
-    this.fieldPosition = new FormControl(null, [Validators.required]);
-    this.feet = new FormControl(null, [Validators.required]);
-    this.firstname = new FormControl('', [Validators.required, Validators.minLength(2)]);
-    this.gender = new FormControl('', [Validators.required]);
-    this.lastname = new FormControl('', [Validators.required, Validators.minLength(2)]);
-    this.shoeSize = new FormControl('', [Validators.required, Validators.min(0)]);
-    this.shortSize = new FormControl('', [Validators.required]);
+    console.log('StepTraineeFormComponent.ngOnInit()')
+
+    const vBirthdate = (this.mocked) ? moment('2010-11-23') : null;
+    const vClub = (this.mocked) ? 'Stade Brestois 29' : null;
+    const vEmail = (this.mocked) ? 'my@mail.com' : null;
+    const vFieldPosition = (this.mocked) ? FieldPosition.MIDFIELDER : null;
+    const vFeet = (this.mocked) ? Feet.RIGHT_FOOTED : null;
+    const vFirstname = (this.mocked) ? 'Patrik' : null;
+    const vGender = (this.mocked) ? Gender.MALE : null;
+    const vLastname = (this.mocked) ? 'Schick' : null;
+    const vShoeSize = (this.mocked) ? 35 : null;
+    const vShortSize = (this.mocked) ? ShortSize.M : null;
+
+    this.birthdate = new FormControl(vBirthdate, [Validators.required]);
+    this.club = new FormControl(vClub, []);
+    this.email = new FormControl(vEmail, [Validators.required, Validators.email]);
+    this.fieldPosition = new FormControl(vFieldPosition, [Validators.required]);
+    this.feet = new FormControl(vFeet, [Validators.required]);
+    this.firstname = new FormControl(vFirstname, [Validators.required, Validators.minLength(2)]);
+    this.gender = new FormControl(vGender, [Validators.required]);
+    this.lastname = new FormControl(vLastname, [Validators.required, Validators.minLength(2)]);
+    this.shoeSize = new FormControl(vShoeSize, [Validators.required, Validators.min(0)]);
+    this.shortSize = new FormControl(vShortSize, [Validators.required]);
     this.registrationForm = this.formBuilder.group({
       'birthdate': this.birthdate,
       'club': this.club,

@@ -29,6 +29,7 @@ export class RegistrationComponent implements AfterViewChecked, OnInit {
     isStepSessionValid = false;
     isStepTraineeFormValid = false;
     isStepDocumentsValid = false;
+    isStepPaymentValid = false;
     isLoading = true;
     registration: RegistrationV2 = null;
     subscriptions: Subscription[] = [];

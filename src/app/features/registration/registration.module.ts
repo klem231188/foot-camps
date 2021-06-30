@@ -5,12 +5,15 @@ import {RegistrationComponent} from './registration.component';
 import {SharedModule} from '../../shared/shared.module';
 import {StepSessionsComponent} from './components/step-sessions/step-sessions.component';
 import {StepTraineeFormComponent} from './components/step-trainee-form/step-trainee-form.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {StepDocumentsComponent} from './components/step-documents/step-documents.component';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {StepPaymentComponent} from './components/step-payment/step-payment.component';
+import {PaymentModeInPersonComponent} from './components/step-payment/components/payment-mode-in-person/payment-mode-in-person.component';
+import {PaymentModeOnlineComponent} from './components/step-payment/components/payment-mode-online/payment-mode-online.component';
+import {NgxStripeModule} from 'ngx-stripe';
 
 @NgModule({
   declarations: [
@@ -18,12 +21,16 @@ import {StepPaymentComponent} from './components/step-payment/step-payment.compo
     StepSessionsComponent,
     StepTraineeFormComponent,
     StepDocumentsComponent,
-    StepPaymentComponent
+    StepPaymentComponent,
+    PaymentModeInPersonComponent,
+    PaymentModeOnlineComponent
   ],
   imports: [
     SharedModule,
     RegistrationRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    NgxStripeModule
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},

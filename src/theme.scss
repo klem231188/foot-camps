@@ -13,6 +13,9 @@
 @import 'app/features/registration/components/step-sessions/step-sessions.component.scss';
 @import 'app/features/registration/components/step-trainee-form/step-trainee-form.component.scss';
 @import 'app/features/registration/components/step-documents/step-documents.component.scss';
+@import 'app/features/registration/components/step-payment/step-payment.component.scss';
+@import 'app/features/registration/components/step-payment/components/payment-mode-in-person/payment-mode-in-person.component.scss';
+@import 'app/features/registration/components/step-payment/components/payment-mode-online/payment-mode-online.component.scss';
 @import 'app/shared/components/registrations-grid/registrations-grid.component.scss';
 @import 'app/shared/components/file-upload/file-upload.component.scss';
 
@@ -66,6 +69,10 @@ $football-camp-theme: mat-light-theme($primary, $accent, $warn);
   @include app-step-sessions-theme($theme);
   @include app-step-trainee-form-theme($theme);
   @include app-step-documents-theme($theme);
+  @include app-step-payment-theme($theme);
+  @include app-payment-mode-in-person-theme($theme);
+  @include app-payment-mode-online-theme($theme);
+
   // shared
   @include app-registrations-grid-theme($theme);
   @include app-file-upload-theme($theme);
