@@ -9,7 +9,6 @@
     flex-direction: column;
     color: #4A4A4A;
     min-height: 100%;
-    background-color: #fafafa;
 
     .main-container {
       display: flex;
@@ -17,8 +16,30 @@
       align-items: center;
       margin-bottom: 60px;
       position: relative;
-      background: url(/assets/img/background-detail.svg) no-repeat center center fixed;
-      background-size: 100% auto;
+
+      .background-container {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        z-index: -1;
+
+        &::before {
+          background-image: url(/assets/img/background-detail.svg) ;
+          background-repeat: no-repeat;
+          background-position: center top;
+          background-size: cover;
+          content: '';
+          height: 100%;
+          left: 0;
+          position: fixed;
+          top: 0;
+          width: 100%;
+          will-change: transform;
+          z-index: -1;
+        }
+      }
 
       .carousel-container {
         position: relative;

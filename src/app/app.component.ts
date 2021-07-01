@@ -61,7 +61,7 @@ export class AppComponent {
 
   onHomeClicked() {
     this.sidenav.toggle();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/accueil']);
   }
 
   onViewRegistrationsClicked(): void {

@@ -12,7 +12,7 @@ import {FootballCampPrintEquipmentComponent} from './components/football-camp-pr
 import {PlaygroundComponent} from './components/playground/playground.component';
 
 export const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: '', redirectTo: '/accueil', pathMatch: 'full'},
   {path: 'home', component: FootballCampHomeComponent},
   {path: 'locate/:id/registration-v2', component: FootballCampLocatorComponent, data: {type: 'registration'}},
   {path: 'locate/:id/details-v2', component: FootballCampLocatorComponent, data: {type: 'details'}},
