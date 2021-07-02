@@ -27,6 +27,7 @@
 
       th, td {
         vertical-align: middle;
+        z-index: 0 !important;
       }
 
       width: 100%;
@@ -85,14 +86,6 @@
         flex-direction: column;
       }
     }
-
-    //@include big-screen {
-    //  mat-paginator {
-    //    position: sticky;
-    //    bottom: 0;
-    //    right: 0;
-    //  }
-    //}
 
     .loading-container {
       flex: 1;

@@ -7,6 +7,7 @@ import {BadgesComponent} from './components/badges/badges.component';
 import {SharedModule} from '../../shared/shared.module';
 import {BadgeComponent} from './components/badge/badge.component';
 import {Angular2ImageGalleryModule} from '../../components/angular2-image-gallery';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -14,12 +15,15 @@ import {Angular2ImageGalleryModule} from '../../components/angular2-image-galler
     BadgesComponent,
     BadgeComponent
   ],
-    imports: [
-        SharedModule,
-        DetailsRoutingModule,
-        InViewportModule,
-        Angular2ImageGalleryModule
-    ]
+  imports: [
+    SharedModule,
+    DetailsRoutingModule,
+    InViewportModule,
+    Angular2ImageGalleryModule
+  ],
+  providers: [
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
+  ]
 })
 export class DetailsModule {
 
