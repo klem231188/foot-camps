@@ -35,6 +35,7 @@
         flex-wrap: wrap;
 
         @include small-screen {
+          width: 100%;
           justify-content: center;
         }
 
