@@ -81,7 +81,7 @@
           height: 50px;
           padding: 0 35px;
           border-radius: 50px;
-          border: 1px solid rgba(0, 0, 0, 0.125);
+          border: 1px solid rgba(0, 0, 0, 0.25);
           line-height: 50px;
           display: inline-block;
           -webkit-box-sizing: border-box;
@@ -113,7 +113,7 @@
         background-color: #fafafa;
         bottom: 0;
         width: 100%;
-        border: 1px solid rgba(0, 0, 0, 0.125);
+        border: 1px solid rgba(0, 0, 0, 0.25);
         z-index: 3;
 
         .action-button-container {
@@ -148,7 +148,7 @@
         flex-direction: row;
         justify-content: space-around;
         align-items: flex-start;
-        border: 1px solid rgba(0, 0, 0, 0.125);
+        border: 1px solid rgba(0, 0, 0, 0.25);
         background-color: white;
 
         @include small-screen {
@@ -220,7 +220,7 @@
 
         .image-container {
           max-width: 600px;
-          border: 1px solid rgba(0, 0, 0, 0.125);
+          border: 1px solid rgba(0, 0, 0, 0.25);
           padding: 25px;
           background-color: white;
           align-self: flex-start;
@@ -232,7 +232,7 @@
 
         .description-container {
           margin-left: 20px;
-          border: 1px solid rgba(0, 0, 0, 0.125);
+          border: 1px solid rgba(0, 0, 0, 0.25);
           padding: 25px;
           background-color: white;
 
@@ -285,7 +285,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            border: 1px solid rgba(0, 0, 0, 0.125);
+            border: 1px solid rgba(0, 0, 0, 0.25);
             padding: 25px;
             background-color: white;
 
@@ -326,7 +326,7 @@
           }
 
           .address-container {
-            border: 1px solid rgba(0, 0, 0, 0.125);
+            border: 1px solid rgba(0, 0, 0, 0.25);
             padding: 25px;
             background-color: white;
             margin-top: 10px;
@@ -347,7 +347,7 @@
         }
 
         .date-price-container {
-          border: 1px solid rgba(0, 0, 0, 0.125);
+          border: 1px solid rgba(0, 0, 0, 0.25);
           padding: 25px;
           background-color: white;
           margin-right: 20px;
@@ -448,7 +448,7 @@
       .gallery-container {
         width: 75%;
         margin-top: 20px;
-        border: 1px solid rgba(0, 0, 0, 0.125);
+        border: 1px solid rgba(0, 0, 0, 0.25);
         background-color: white;
 
         @include small-screen {
@@ -476,7 +476,7 @@
         width: 75%;
         margin-top: 20px;
         min-width: 300px;
-        border: 1px solid rgba(0, 0, 0, 0.125);
+        border: 1px solid rgba(0, 0, 0, 0.25);
         background-color: white;
 
         @include small-screen {

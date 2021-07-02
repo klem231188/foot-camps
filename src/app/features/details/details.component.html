@@ -9,14 +9,14 @@
   </div>
 
   <div class="action-button-container">
-    <a class="action-button" [routerLink]="['/stages/' + footballCamp.id + '/inscription']">Inscription</a>
+    <a class="action-button" matRipple [routerLink]="['/stages/' + footballCamp.id + '/inscription']">Inscription</a>
   </div>
 
-  <div snInViewport (inViewportChange)="onInViewportChange($event)"></div>
+  <div snInViewport [inViewportOptions]="{rootMargin: '-60px'}" (inViewportChange)="onInViewportChange($event)"></div>
 
   <div *ngIf="showRegistrationBar" class="registration-bar-sticky-container">
     <div class="action-button-container">
-      <a class="action-button" [routerLink]="['/stages/' + footballCamp.id + '/inscription']">Inscription</a>
+      <a class="action-button" matRipple [routerLink]="['/stages/' + footballCamp.id + '/inscription']">Inscription</a>
     </div>
   </div>
 
