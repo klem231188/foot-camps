@@ -29,7 +29,6 @@ export class RegistrationComponent implements AfterViewChecked, OnInit {
     isStepSessionValid = false;
     isStepTraineeFormValid = false;
     isStepDocumentsValid = false;
-    isStepPaymentValid = false;
     isLoading = true;
     registration: RegistrationV2 = null;
     subscriptions: Subscription[] = [];
@@ -77,6 +76,7 @@ export class RegistrationComponent implements AfterViewChecked, OnInit {
             this.stepperSub = this.stepper
                 .selectionChange
                 .subscribe((selection) => {
+                    console.log('selection.selectedIndex = ' + selection.selectedIndex);
                     if (selection.selectedIndex === 3) {
                         if (this.registration) {
                             this.updateRegistration();
@@ -111,6 +111,14 @@ export class RegistrationComponent implements AfterViewChecked, OnInit {
             tap((params: Params) => this.campId = params['id']),
             tap(() => this.reloadSubject.next())
         ).subscribe();
+    }
+
+    onPaymentValid(isValid: boolean) {
+        console.log('onPaymentValid' + isValid);
+        if (isValid) {
+            this.stepper.selected.completed = true;
+            this.stepper.next();
+        }
     }
 
     reload() {

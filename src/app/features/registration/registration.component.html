@@ -17,7 +17,7 @@
     <mat-vertical-stepper [linear]="true" #stepper>
 
       <!-- Step 1 : Choose a session-->
-      <mat-step [completed]="isStepSessionValid" [editable]="!isStepPaymentValid">
+      <mat-step [completed]="isStepSessionValid">
         <ng-template matStepLabel>Choix session</ng-template>
         <app-step-sessions #sessionComponent (isValid)="isStepSessionValid = $event;"
                            [campId]="footballCamp.id"></app-step-sessions>
@@ -31,7 +31,7 @@
       </mat-step>
 
       <!-- Step 2 : Fill in trainee form -->
-      <mat-step [completed]="isStepTraineeFormValid" [editable]="!isStepPaymentValid">
+      <mat-step [completed]="isStepTraineeFormValid">
         <ng-template matStepLabel>Remplir formulaire</ng-template>
         <app-step-trainee-form [mocked]="true" (isValid)="isStepTraineeFormValid = $event;"></app-step-trainee-form>
         <div class="separator"></div>
@@ -44,7 +44,7 @@
       </mat-step>
 
       <!--Step 3 : Document to supply -->
-      <mat-step [completed]="isStepDocumentsValid" [editable]="!isStepPaymentValid">
+      <mat-step [completed]="isStepDocumentsValid">
         <ng-template matStepLabel>Documents à fournir</ng-template>
         <app-step-documents (isValid)="isStepDocumentsValid = $event;"></app-step-documents>
         <div class="separator"></div>
@@ -57,16 +57,24 @@
       </mat-step>
 
       <!--Step 4 : Payment -->
-      <mat-step [completed]="isStepPaymentValid" [editable]="!isStepPaymentValid">
+      <mat-step>
         <ng-template matStepLabel>Paiement</ng-template>
         <app-step-payment
-          (isValid)="isStepPaymentValid = $event;"
+          (isValid)="onPaymentValid($event)"
           [campId]="footballCamp.id"
           [sessionId]="(sessionComponent.selectedSession | async)?.id"
           [registration]="registration">
         </app-step-payment>
       </mat-step>
 
+      <mat-step>
+        <ng-template matStepLabel>Récapitulatif</ng-template>
+        <div>Félicitations vous êtes inscrit pour le stage de <b>{{footballCamp.city}}</b>.</div>
+        <div>Un mail récapitulatif a été envoyé à l'adresse: <b>{{registration?.trainee?.email}}</b></div>
+        <div>Un administrateur du stage <b>validera</b> votre inscription prochainement 😉 <br></div>
+        <br>
+        <a [routerLink]="[ '/accueil/']" mat-stroked-button color="primary">Revenir à la page d'accueil</a>
+      </mat-step>
 
     </mat-vertical-stepper>
   </div>
