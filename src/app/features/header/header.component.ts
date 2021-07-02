@@ -52,13 +52,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const subToRouter = this.router.events.pipe(
       filter(event => event instanceof NavigationStart))
       .subscribe((event: NavigationStart) => {
-        if (/^\/locate\/\w+\/registration-v2$/i.test(event.url)) {
-          // locate/:id/registration-v2 --> locate/:id/details-v2
-          this.backUrl = event.url.replace('/registration-v2', '/details-v2');
+        if (/^\/stages\/\w+\/inscription$/i.test(event.url)) {
+          // stages/:id/inscription --> stages/:id/details
+          this.backUrl = event.url.replace('/inscription', '/details');
           console.log(this.backUrl);
-        } else if (/^\/locate\/\w+\/details-v2$/i.test(event.url)) {
-          // locate/:id/details-v2 --> home
-          this.backUrl = event.url = 'v2/home';
+        } else if (/^\/stages\/\w+\/details$/i.test(event.url)) {
+          // stages/:id/details --> accueil
+          this.backUrl = event.url = 'accueil';
           console.log(this.backUrl);
         } else {
           this.backUrl = null;

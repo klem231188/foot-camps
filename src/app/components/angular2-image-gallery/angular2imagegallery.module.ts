@@ -17,8 +17,7 @@ import {HttpClientModule} from '@angular/common/http';
   imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule,
-    // BrowserAnimationsModule
+    HttpClientModule
   ],
   providers: [
     ImageService
