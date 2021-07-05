@@ -1,0 +1,52 @@
+<div class="background-container"></div>
+
+<ng-container *ngIf="user && user.role !== 'USER' else loading">
+  <ng-container *ngIf="footballCamps && sessions else loading">
+    <div class="main-container">
+      <div class="overview-container">
+
+        <div class="welcome-container">
+          Bienvenue <b>{{user.email}}</b>, vous êtes sur la page d'administration de Footcamps.<br>
+          Sur cette page vous pouvez:
+          <ul>
+            <li>Visualiser les inscriptions</li>
+            <li>Valider/Refuser une inscription</li>
+            <li>Imprimer les rapports</li>
+          </ul>
+        </div>
+
+        <div class="camp-and-session-container">
+          <mat-form-field>
+            <mat-select placeholder="Stage">
+              <mat-option
+                *ngFor="let footballCamp of this.footballCamps"
+                [value]="footballCamp"
+              >
+                {{footballCamp.city}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Sessions">
+              <mat-option
+                *ngFor="let session of this.sessions"
+                [value]="session"
+              >
+                {{session.start.toDate() | date}} au {{session.end.toDate() | date}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="details-container">
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+<ng-template #loading>
+  <div class="loading-container">
+    <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+  </div>
+</ng-template>

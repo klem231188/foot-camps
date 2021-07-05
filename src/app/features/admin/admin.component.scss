@@ -1,0 +1,75 @@
+@mixin app-admin-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-admin {
+    display: flex;
+    flex-direction: column;
+    color: #4A4A4A;
+    min-height: calc(100vh - 64px);
+    max-height: calc(100vh - 64px);
+    @include small-screen {
+      min-height: calc(100vh - 56px);
+      max-height: calc(100vh - 56px);
+    }
+
+    .background-container {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      z-index: -1;
+
+      &::before {
+        background-image: url(/assets/img/background-detail.svg);
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-size: cover;
+        content: '';
+        height: 100%;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        will-change: transform;
+        z-index: -1;
+      }
+    }
+
+    .main-container {
+      padding: 15px;
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      @include small-screen {
+        flex-direction: column;
+      }
+
+      .overview-container {
+        flex: 0.6;
+        background-color: blue;
+        .welcome-container {
+          border: 1px solid rgba(0, 0, 0, 0.25);
+          background-color: white;
+          padding: 10px;
+        }
+      }
+
+      .details-container {
+        flex: 0.4;
+        background-color: red;
+      }
+    }
+
+    .loading-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
