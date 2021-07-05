@@ -25,14 +25,14 @@
 
       width: 180px;
       @include small-screen {
-        width: 150px;
+        width: 90px;
       }
 
       svg {
         width: 180px;
         height: auto;
         @include small-screen {
-          width: 150px;
+          width: 90px;
           height: auto;
         }
       }
@@ -48,6 +48,12 @@
         width: 100%;
         background: red;
         padding: 20px 0;
+
+        @include small-screen {
+          font-size: 0.9em;
+          top: -30px;
+          padding: 10px 0;
+        }
       }
 
       .subtitle {
@@ -60,13 +66,22 @@
         position: absolute;
         top: 55px;
 
+        @include small-screen {
+          font-size: 0.9em;
+          top: 28px;
+        }
+
         &:after {
           content: "★ ★ ★";
           display: block;
-          font-size: .4em;
+          font-size: 0.7em;
           position: relative;
           margin: 20px 0 0;
           transition: all .3s;
+
+          @include small-screen {
+            margin: 5px 0 0;
+          }
         }
       }
 
