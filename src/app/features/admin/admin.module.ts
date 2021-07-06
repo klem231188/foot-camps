@@ -4,9 +4,13 @@ import {AdminRoutingModule} from './admin-routing.module';
 import {AdminComponent} from './admin.component';
 import {SharedModule} from '../../shared/shared.module';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import {SessionOverviewComponent} from './components/session-overview/session-overview.component';
 
 @NgModule({
-  declarations: [AdminComponent],
+  declarations: [
+    AdminComponent,
+    SessionOverviewComponent
+  ],
   imports: [
     AdminRoutingModule,
     SharedModule

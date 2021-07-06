@@ -17,6 +17,7 @@
 @import 'app/features/registration/components/step-payment/components/payment-mode-in-person/payment-mode-in-person.component.scss';
 @import 'app/features/registration/components/step-payment/components/payment-mode-online/payment-mode-online.component.scss';
 @import 'app/features/admin/admin.component.scss';
+@import 'app/features/admin/components/session-overview/session-overview.component.scss';
 @import 'app/shared/components/registrations-grid/registrations-grid.component.scss';
 @import 'app/shared/components/file-upload/file-upload.component.scss';
 
@@ -58,6 +59,7 @@ $football-camp-theme: mat-light-theme($primary, $accent, $warn);
 @mixin football-camp-theme($theme) {
   // features > admin
   @include app-admin-theme($theme);
+  @include app-session-overview-theme($theme);
   // features > details
   @include app-details-theme($theme);
   @include app-badge-theme($theme);

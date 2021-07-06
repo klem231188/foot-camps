@@ -1,0 +1,71 @@
+@mixin session-overview-card($color) {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@mixin session-overview-circle($color) {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+  background-color: $color;
+  font-size: x-large;
+}
+
+@mixin app-session-overview-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-session-overview {
+    .registrations-overview-container {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+
+      @include small-screen {
+        flex-direction: column;
+        margin-bottom: 15px;
+      }
+
+      mat-card {
+        margin-left: 15px;
+
+        @include small-screen {
+          margin-left: 0;
+        }
+      }
+
+      .overview-accepted {
+        @include session-overview-card(mat-color($primary));
+
+        .circle {
+          @include session-overview-circle(mat-color($primary));
+        }
+      }
+
+      .overview-in-progress {
+        @include session-overview-card(mat-color($accent));
+
+        .circle {
+          @include session-overview-circle(mat-color($accent));
+        }
+      }
+
+      .overview-rejected {
+        @include session-overview-card(mat-color($warn));
+
+        .circle {
+          @include session-overview-circle(mat-color($warn));
+        }
+      }
+    }
+  }
+}

@@ -3,44 +3,55 @@
 <ng-container *ngIf="user && user.role !== 'USER' else loading">
   <ng-container *ngIf="footballCamps && sessions else loading">
     <div class="main-container">
-      <div class="overview-container">
+      <div class="main-inner-container">
+        <div class="overview-container">
 
-        <div class="welcome-container">
-          Bienvenue <b>{{user.email}}</b>, vous êtes sur la page d'administration de Footcamps.<br>
-          Sur cette page vous pouvez:
-          <ul>
-            <li>Visualiser les inscriptions</li>
-            <li>Valider/Refuser une inscription</li>
-            <li>Imprimer les rapports</li>
-          </ul>
+          <div class="welcome-container">
+            Bienvenue <b>{{user.email}}</b>, vous êtes sur la page d'administration de Footcamps.<br>
+            Sur cette page vous pouvez:
+            <ul>
+              <li>Visualiser les inscriptions</li>
+              <li>Valider/Refuser une inscription</li>
+              <li>Imprimer les rapports</li>
+            </ul>
+          </div>
+
+          <div class="camp-and-session-container">
+            <mat-form-field>
+              <mat-select (valueChange)="onCampSelected($event)" [value]="selectedCamp$.value" placeholder="Stage">
+                <mat-option
+                  *ngFor="let footballCamp of footballCamps"
+                  [value]="footballCamp"
+                >
+                  {{footballCamp.city}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="session-select">
+              <mat-select (valueChange)="onSessionSelected($event)" [value]="selectedSession$.value"
+                          placeholder="Sessions">
+                <mat-option
+                  *ngFor="let session of sessions"
+                  [value]="session"
+                >
+                  {{session.start.toDate() | date}} au {{session.end.toDate() | date}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <app-session-overview [sessionId]="selectedSession$.value?.id"></app-session-overview>
+          </div>
+
+            <ng-container *ngIf="selectedSession$.value as session">
+              <app-registrations-grid [sessionId]="session.id"
+                                      [adminMode]="true"
+                                      (registrationSelected)="onRegistrationSelected($event)"></app-registrations-grid>
+            </ng-container>
         </div>
 
-        <div class="camp-and-session-container">
-          <mat-form-field>
-            <mat-select placeholder="Stage">
-              <mat-option
-                *ngFor="let footballCamp of this.footballCamps"
-                [value]="footballCamp"
-              >
-                {{footballCamp.city}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-select placeholder="Sessions">
-              <mat-option
-                *ngFor="let session of this.sessions"
-                [value]="session"
-              >
-                {{session.start.toDate() | date}} au {{session.end.toDate() | date}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <div class="details-container">
         </div>
-      </div>
-
-      <div class="details-container">
       </div>
     </div>
   </ng-container>

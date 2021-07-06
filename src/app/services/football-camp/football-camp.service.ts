@@ -15,6 +15,17 @@ export class FootballCampService {
     // angularFirestore.firestore.settings({timestampsInSnapshots: true});
   }
 
+  getFootballCamp(campId: string): Observable<FootballCamp> {
+    return this.getFootballCamps()
+      .pipe(
+        map<FootballCamp[], FootballCamp>((footballCamps: FootballCamp[]) => {
+            return footballCamps.find(footballCamp => {
+              return campId === footballCamp.id;
+            });
+          }
+        ));
+  }
+
   getFootballCamps(): Observable<FootballCamp[]> {
     if (this.footballCamps$ == null) {
       this.footballCamps$ = this.angularFirestore
@@ -34,15 +45,5 @@ export class FootballCampService {
     }
 
     return this.footballCamps$;
-  }
-
-  getFootballCamp(campId: string): Observable<FootballCamp> {
-    return this.getFootballCamps().pipe(
-      map<FootballCamp[], FootballCamp>((footballCamps: FootballCamp[]) => {
-          return footballCamps.find(footballCamp => {
-            return campId === footballCamp.id;
-          });
-        }
-      ));
   }
 }
