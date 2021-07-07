@@ -49,7 +49,7 @@ export class RegistrationDetailsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('FootballCampAdminDashboardRegistrationDetailsComponent.ngOnChanges()');
+    console.log('RegistrationDetailsComponent.ngOnChanges()');
     const registrationIdChange: SimpleChange = changes['registrationId'];
     console.log(registrationIdChange);
     if (registrationIdChange.currentValue && registrationIdChange.currentValue !== registrationIdChange.previousValue) {

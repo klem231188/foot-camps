@@ -8,8 +8,10 @@
           Fiche d'inscription
         </button>
       </div>
-      <mat-spinner *ngIf="loading" [diameter]="40"></mat-spinner>
-      <img class="photo" [hidden]="loading" [src]="getPhotoUrl(registration)" (load)="onLoad()">
+      <div class="photo-container">
+        <mat-spinner *ngIf="loading" [diameter]="40"></mat-spinner>
+        <img class="photo" [hidden]="loading" [src]="getPhotoUrl(registration)" (load)="onLoad()">
+      </div>
       <div class="name-age-container">
         <span
           class="name">{{registration.trainee.firstname | titlecase}} {{registration.trainee.lastname | uppercase}}</span>
