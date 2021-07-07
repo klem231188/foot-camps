@@ -21,6 +21,7 @@ export class AdminComponent implements OnInit {
   footballCamps: FootballCamp[] = [];
   selectedCamp$: BehaviorSubject<FootballCamp> = new BehaviorSubject<FootballCamp>(null);
   selectedSession$: BehaviorSubject<Session> = new BehaviorSubject<Session>(null);
+  selectedRegistration$: BehaviorSubject<RegistrationV2> = new BehaviorSubject<RegistrationV2>(null);
   sessions: Session[] = [];
   user: User = null;
 
@@ -77,7 +78,7 @@ export class AdminComponent implements OnInit {
   }
 
   onRegistrationSelected(registration: RegistrationV2) {
-    console.log('onRegistrationSelected');
+    this.selectedRegistration$.next(registration);
   }
 
   onSessionSelected(session: any) {

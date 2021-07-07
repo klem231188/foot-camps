@@ -5,11 +5,13 @@ import {AdminComponent} from './admin.component';
 import {SharedModule} from '../../shared/shared.module';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {SessionOverviewComponent} from './components/session-overview/session-overview.component';
+import {RegistrationDetailsComponent} from './components/registration-details/registration-details.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
-    SessionOverviewComponent
+    SessionOverviewComponent,
+    RegistrationDetailsComponent
   ],
   imports: [
     AdminRoutingModule,
