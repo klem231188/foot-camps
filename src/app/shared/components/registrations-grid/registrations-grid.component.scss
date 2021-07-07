@@ -10,50 +10,48 @@
     flex: 1;
     overflow: auto;
     min-height: 200px;
+    background-color: white;
 
     @include small-screen {
       overflow-y: auto;
       overflow-x: hidden;
     }
 
-    table {
-      @include small-screen {
-        display: block;
-        max-width: fit-content;
-        margin: 0 auto;
-        overflow-x: auto;
-        white-space: nowrap;
-      }
+    .table-container {
+      overflow-x: auto;
 
-      th, td {
-        vertical-align: middle;
-        z-index: 0 !important;
-      }
+      table {
+        width: 100%;
+        max-width: 100%;
 
-      width: 100%;
+        th, td {
+          vertical-align: middle;
+          z-index: 0 !important;
+        }
 
-      .mat-row {
-        cursor: pointer;
-      }
+        .mat-row {
+          cursor: pointer;
+        }
 
-      .mat-row:hover {
-        background: whitesmoke;
-      }
+        .mat-row:hover {
+          background: whitesmoke;
+        }
 
-      .mat-column-select {
-        overflow: initial;
-      }
+        .mat-column-select {
+          overflow: initial;
+        }
 
-      .accent {
-        background-color: mat-color($accent);
-      }
+        .accent {
+          background-color: mat-color($accent);
+        }
 
-      .primary {
-        background-color: mat-color($primary);
-      }
+        .primary {
+          background-color: mat-color($primary);
+        }
 
-      .warn {
-        background-color: mat-color($warn);
+        .warn {
+          background-color: mat-color($warn);
+        }
       }
     }
 
@@ -63,7 +61,7 @@
       }
 
       .mat-paginator-sticky {
-        bottom: 0px;
+        bottom: 0;
         position: sticky;
         background: white;
         display: flex;
