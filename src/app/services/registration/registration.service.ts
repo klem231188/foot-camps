@@ -5,7 +5,9 @@ import {Observable} from 'rxjs';
 import {RegistrationV2} from '../../models/registration-v2.model';
 import {RegistrationState} from '../../models/registration-state.enum';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RegistrationService {
 
   constructor(private angularFirestore: AngularFirestore) {

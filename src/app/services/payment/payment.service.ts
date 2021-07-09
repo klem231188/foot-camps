@@ -8,7 +8,9 @@ import {environment} from '../../../environments/environment';
 import {PaymentIntent} from '@stripe/stripe-js';
 import {map, publishReplay, refCount} from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PaymentService {
 
   private payments$: Observable<Payment[]> = null;

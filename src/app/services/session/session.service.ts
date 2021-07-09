@@ -1,12 +1,14 @@
-import {map, publishReplay, refCount, tap} from 'rxjs/operators';
+import {map, publishReplay, refCount} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {Session} from '../../models/session';
-import Timestamp = firestore.Timestamp;
 import {firestore} from 'firebase';
+import Timestamp = firestore.Timestamp;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SessionService {
 
   private sessions$: Observable<Session[]> = null;

@@ -4,7 +4,9 @@ import {Observable} from 'rxjs';
 import {User} from '../../models/user';
 import {publishReplay, refCount} from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserService {
 
   private user$: Observable<User> = null;

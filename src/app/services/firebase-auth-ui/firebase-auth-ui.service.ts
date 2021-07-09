@@ -2,7 +2,9 @@ import {Inject, Injectable, NgZone, Optional} from '@angular/core';
 import * as firebaseui from 'firebaseui/dist/npm__fr.js';
 import {FIREBASE_APP_NAME, FIREBASE_OPTIONS, FirebaseApp, FirebaseAppConfig, FirebaseOptions, ɵfirebaseAppFactory} from '@angular/fire';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class FirebaseAuthUiService {
 
   private firebaseUiInstance: firebaseui.auth.AuthUI = null;

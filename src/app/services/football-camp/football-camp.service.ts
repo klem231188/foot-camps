@@ -6,7 +6,9 @@ import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 
 import {FootballCamp} from '../../models/football-camp';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class FootballCampService {
 
   private footballCamps$: Observable<FootballCamp[]> = null;
