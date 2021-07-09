@@ -30,5 +30,5 @@ import {HttpClientModule} from '@angular/common/http';
     ViewerComponent
   ]
 })
-export class Angular2ImageGalleryModule {
+export class ImageGalleryModule {
 }

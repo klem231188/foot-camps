@@ -1,10 +1,4 @@
-import {
-    trigger,
-    state,
-    style,
-    transition,
-    animate
-} from '@angular/animations'
+import {animate, state, style, transition, trigger} from '@angular/animations'
 import {ImageService} from '../services/image.service'
 import {Component} from '@angular/core';
 

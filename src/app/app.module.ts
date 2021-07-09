@@ -8,7 +8,6 @@ import localeFr from '@angular/common/locales/fr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'hammerjs';
 import {AgmCoreModule} from '@agm/core';
-import {Angular2ImageGalleryModule} from './components/angular2-image-gallery';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFireAuth} from '@angular/fire/auth';
@@ -26,6 +25,7 @@ import {NgxStripeModule} from 'ngx-stripe';
 import {AppRoutingModule} from './app-routing.module';
 import {HeaderModule} from './features/header/header.module';
 import {SharedModule} from './shared/shared.module';
+import {ImageGalleryModule} from './shared/components/image-gallery';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -45,15 +45,14 @@ registerLocaleData(localeFr, 'fr');
     NgxStripeModule.forRoot(environment.stripe.publicKey),
     SharedModule,
     MatCarouselModule,
-    // ImageGallery
-    Angular2ImageGalleryModule,
     // @GoogleMaps
     AgmCoreModule.forRoot({
       apiKey: environment.googlemaps.apiKey
     }),
     AppRoutingModule,
     HammerModule,
-    HeaderModule
+    HeaderModule,
+    ImageGalleryModule
   ],
   declarations: [
     AppComponent,

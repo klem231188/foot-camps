@@ -15,6 +15,7 @@ import {TruncatePipe} from './pipes/truncate.pipe';
 import {RegistrationsGridComponent} from './components/registrations-grid/registrations-grid.component';
 import {FileUploadComponent} from './components/file-upload/file-upload.component';
 import {LoginComponent} from './components/login/login.component';
+import {ImageGalleryModule} from './components/image-gallery';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {LoginComponent} from './components/login/login.component';
   exports: [
     CommonModule,
     AppMaterialModule,
+    ImageGalleryModule,
     AgePipe,
     FieldPositionPipe,
     FileSizePipe,
@@ -53,7 +55,8 @@ import {LoginComponent} from './components/login/login.component';
   ],
   imports: [
     CommonModule,
-    AppMaterialModule
+    AppMaterialModule,
+    ImageGalleryModule
   ]
 })
 export class SharedModule {
