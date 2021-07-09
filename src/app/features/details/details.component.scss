@@ -488,6 +488,10 @@
               top: 64px;
               height: auto;
               width: auto;
+
+              @include small-screen {
+                top: 56px;
+              }
             }
           }
         }

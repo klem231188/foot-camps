@@ -51,8 +51,10 @@
         </div>
 
         <div class="details-container">
-          <ng-container *ngIf="selectedRegistration$.value as registration">
-            <app-registration-details [registrationId]="registration.id"></app-registration-details>
+          <ng-container *ngIf="selectedSession$.value">
+            <ng-container *ngIf="selectedRegistration$.value as registration">
+              <app-registration-details [registrationId]="registration.id"></app-registration-details>
+            </ng-container>
           </ng-container>
         </div>
       </div>
