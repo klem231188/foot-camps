@@ -33,7 +33,7 @@
       <!-- Step 2 : Fill in trainee form -->
       <mat-step [completed]="isStepTraineeFormValid">
         <ng-template matStepLabel>Remplir formulaire</ng-template>
-        <app-step-trainee-form [mocked]="true" (isValid)="isStepTraineeFormValid = $event;"></app-step-trainee-form>
+        <app-step-trainee-form [mocked]="mocked" (isValid)="isStepTraineeFormValid = $event;"></app-step-trainee-form>
         <div class="separator"></div>
         <div class="next-button">
           <button mat-stroked-button matStepperNext color="primary"
