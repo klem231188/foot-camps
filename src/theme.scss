@@ -1,4 +1,3 @@
-@use '@material/fab';
 @import '~@angular/material/theming';
 @import 'flex-mixin.scss';
 @import 'media-queries.scss';
@@ -23,35 +22,11 @@
 @import 'app/shared/components/registrations-grid/registrations-grid.component.scss';
 @import 'app/shared/components/file-upload/file-upload.component.scss';
 
-@import 'app/components/football-camp-overview/football-camp-overview.component.scss';
-@import 'app/components/football-camp-locator/football-camp-locator.component.scss';
-@import 'app/components/football-camp-map/football-camp-map.component.scss';
-@import 'app/components/football-camp-header/football-camp-header.component.scss';
-@import 'app/components/football-camp-login/football-camp-login.component.scss';
-@import 'app/components/football-camp-registration-documents/football-camp-registration-documents.component.scss';
-@import 'app/components/football-camp-registration-trainee-form/football-camp-registration-trainee-form.component.scss';
-@import 'app/components/football-camp-registration-sessions/football-camp-registration-sessions.component.scss';
 @import 'app/components/football-camp-print-registration/football-camp-print-registration.component.scss';
-@import 'app/components/football-camp-file-upload/football-camp-file-upload.component.scss';
-@import 'app/components/football-camp-registrations-overview/football-camp-registrations-overview.component.scss';
 @import 'app/components/playground/playground.component.scss';
-@import 'app/components/football-camp-admin-dashboard/football-camp-admin-dashboard.component.scss';
-@import 'app/components/football-camp-admin-dashboard/football-camp-admin-dashboard-registration-table/football-camp-admin-dashboard-registration-table.component';
-@import 'app/components/football-camp-admin-dashboard/football-camp-admin-dashboard-registration-details/football-camp-admin-dashboard-registration-details.component';
-@import 'app/components/football-camp-admin-dashboard/football-camp-session-overview/football-camp-session-overview.component.scss';
-@import 'app/components/football-camp-home/football-camp-home.component.scss';
-@import 'app/components/football-camp-details-v2/football-camp-details-v2.component.scss';
-@import 'app/components/football-camp-badges/football-camp-badges.component.scss';
-@import 'app/components/football-camp-badge/football-camp-badge.component.scss';
-@import 'app/components/football-camp-action-button/football-camp-action-button.component.scss';
-@import 'app/components/football-camp-registration-v2/football-camp-registration-v2.component.scss';
 @import 'app/components/football-camp-print-equipment/football-camp-print-equipment.component.scss';
 @import 'app/components/football-camp-print-receipt/football-camp-print-receipt.component.scss';
 @import 'app/components/football-camp-print-registrations/football-camp-print-registrations.component.scss';
-@import 'app/components/football-camp-registration-payment-mode/football-camp-registration-payment-mode.component.scss';
-@import 'app/components/football-camp-registration-payment-mode-in-person/football-camp-registration-payment-mode-in-person.component.scss';
-@import 'app/components/football-camp-registration-payment-mode-by-mail/football-camp-registration-payment-mode-by-mail.component.scss';
-@import 'app/components/football-camp-registration-payment-mode-online/football-camp-registration-payment-mode-online.component.scss';
 
 @include mat-core();
 $primary: mat-palette($mat-teal);
@@ -85,37 +60,12 @@ $football-camp-theme: mat-light-theme($primary, $accent, $warn);
   @include app-login-theme($theme);
   @include app-registrations-grid-theme($theme);
 
-  @include football-camp-login-theme($theme);
-  @include app-football-camp-registration-documents($theme);
-  @include app-football-camp-registration-trainee-form($theme);
-  @include app-football-camp-registration-sessions($theme);
-  @include football-camp-overview-theme($theme);
-  @include football-camp-locator-theme($theme);
-  @include football-camp-map-theme($theme);
-  @include football-camp-header-theme($theme);
   @include football-camp-app-theme($theme);
-  @include football-camp-file-upload-theme($theme);
-  @include app-football-camp-registrations-overview-theme($theme);
   @include app-playground-theme($theme);
-  @include app-football-camp-admin-dashboard-theme($theme);
-  @include app-football-camp-admin-dashboard-registration-table-theme($theme);
-  @include app-football-camp-admin-dashboard-registration-details-theme($theme);
-  @include app-football-camp-session-overview-theme($theme);
   @include app-football-camp-print-registration-theme($theme);
-  @include app-football-camp-home-theme($theme);
-  @include app-football-camp-details-v2-theme($theme);
-  @include app-football-camp-badges-theme($theme);
-  @include app-football-camp-badge-theme($theme);
-  @include app-football-camp-action-button-theme($theme);
-  @include app-football-camp-registration-v2-theme($theme);
   @include app-football-camp-print-equipment-theme($theme);
   @include app-football-camp-print-receipt-theme($theme);
   @include app-football-camp-print-registrations-theme($theme);
-  @include app-football-camp-registration-payment-mode($theme);
-  @include app-football-camp-registration-payment-mode-in-person($theme);
-  @include app-football-camp-registration-payment-mode-by-mail($theme);
-  @include app-football-camp-registration-payment-mode-online($theme);
-  @include fab.core-styles;
 }
 
 @include angular-material-theme($football-camp-theme);

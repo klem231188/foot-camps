@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
-import {FootballCampFileUploadComponent} from '../../../../components/football-camp-file-upload/football-camp-file-upload.component';
 import {Document} from '../../../../models/document.model';
+import {FileUploadComponent} from '../../../../shared/components/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-step-documents',
@@ -12,8 +12,8 @@ export class StepDocumentsComponent implements OnInit, AfterViewInit, OnDestroy 
 
   // @ViewChild('certificatMedical', {static: true}) certificatMedical: FootballCampFileUploadComponent;
   @Output() documents: BehaviorSubject<Document[]> = new BehaviorSubject<Document[]>(null);
-  @ViewChild('ficheSanitaire', {static: true}) ficheSanitaire: FootballCampFileUploadComponent;
-  @ViewChild('photoIdentite', {static: true}) photoIdentite: FootballCampFileUploadComponent;
+  @ViewChild('ficheSanitaire', {static: true}) ficheSanitaire: FileUploadComponent;
+  @ViewChild('photoIdentite', {static: true}) photoIdentite: FileUploadComponent;
   subscription: Subscription;
   subscription2: Subscription;
   @Output() isValid: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
