@@ -1,0 +1,23 @@
+@mixin app-playground-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  app-playground {
+    position: relative;
+
+    .gallery-container {
+      width: 100%;
+      padding: 10px;
+
+      viewer {
+        .outerContainer {
+          top: 64px;
+          height: auto;
+          width: auto;
+        }
+      }
+    }
+  }
+}

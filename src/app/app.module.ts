@@ -14,7 +14,6 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
-import {PlaygroundComponent} from './components/playground/playground.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FootballCampPrintRegistrationComponent} from './components/football-camp-print-registration/football-camp-print-registration.component';
 import {MatCarouselModule} from '@ngbmodule/material-carousel';
@@ -56,7 +55,6 @@ registerLocaleData(localeFr, 'fr');
   ],
   declarations: [
     AppComponent,
-    PlaygroundComponent,
     FootballCampPrintRegistrationComponent,
     FootballCampPrintEquipmentComponent,
     FootballCampPrintReceiptComponent,

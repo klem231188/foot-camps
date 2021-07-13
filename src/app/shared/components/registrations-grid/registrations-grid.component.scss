@@ -30,6 +30,10 @@
           z-index: 1 !important;
         }
 
+        tbody tr:last-child td {
+          border-bottom-color: transparent;
+        }
+
         .mat-row {
           cursor: pointer;
         }

@@ -4,7 +4,6 @@ import {FootballCampPrintRegistrationComponent} from './components/football-camp
 import {FootballCampPrintRegistrationsComponent} from './components/football-camp-print-registrations/football-camp-print-registrations.component';
 import {FootballCampPrintReceiptComponent} from './components/football-camp-print-receipt/football-camp-print-receipt.component';
 import {FootballCampPrintEquipmentComponent} from './components/football-camp-print-equipment/football-camp-print-equipment.component';
-import {PlaygroundComponent} from './components/playground/playground.component';
 import {LoginComponent} from './shared/components/login/login.component';
 import {IsSignedInGuard} from './shared/guards/is-signed-in.guard';
 import {IsAdminGuard} from './shared/guards/is-admin.guard';
@@ -15,7 +14,6 @@ export const routes: Routes = [
   {path: 'print-registrations', component: FootballCampPrintRegistrationsComponent},
   {path: 'print-receipt', component: FootballCampPrintReceiptComponent},
   {path: 'print-equipment', component: FootballCampPrintEquipmentComponent},
-  {path: 'playground', component: PlaygroundComponent},
   {
     path: 'accueil',
     loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)
@@ -28,6 +26,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'playground',
+    loadChildren: () => import('./features/playground/playground.module').then(m => m.PlaygroundModule)
   },
   {
     path: 'stages/:id/details',
