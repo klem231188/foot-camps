@@ -24,6 +24,7 @@
             ],
             "styles": [
               "src/styles-app-loading.scss",
+              "src/print.scss",
               "src/theme.scss",
               "src/styles.scss"
             ],
@@ -100,6 +101,7 @@
             "scripts": [],
             "styles": [
               "src/styles-app-loading.scss",
+              "src/print.scss",
               "src/theme.scss",
               "src/styles.scss"
             ],

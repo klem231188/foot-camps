@@ -1,0 +1,109 @@
+@mixin app-print-equipment-theme($theme) {
+  app-print-equipment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: unset !important;
+
+    .page {
+      background: white;
+      min-width: 29.7cm;
+      max-width: 29.7cm;
+      min-height: 20.9cm;
+      max-height: 20.9cm;
+      display: flex;
+      break-after: always;
+      page-break-after: always;
+
+      .page-inner-container {
+        flex: 1;
+        padding: 0.5cm;
+
+        .title-container {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          color: mat-color($primary);
+          background-color: rgb(43, 43, 43);
+          font-size: 25px;
+          padding-bottom: 3px;
+          width: 100%;
+          margin-bottom: 10px;
+
+          .card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-left: 10px;
+            margin-right: 5px;
+
+            mat-icon {
+              width: 25px !important;
+              height: 25px !important;
+              font-size: 25px !important;
+              line-height: 1 !important;
+            }
+          }
+        }
+
+        table {
+          width: 100%;
+
+          .mat-column-trainees {
+            width: 500px;
+          }
+        }
+      }
+    }
+
+    .print-bar-sticky-container {
+      height: 60px;
+      position: fixed;
+      background-color: #fafafa;
+      bottom: 0;
+      width: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      z-index: 3;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      @media print {
+        display: none;
+      }
+
+      .action-button {
+        height: 50px;
+        padding: 0 35px;
+        border-radius: 50px;
+        border: 1px solid rgba(0, 0, 0, 0.25);
+        line-height: 50px;
+        display: inline-block;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        outline: none;
+        cursor: pointer;
+        white-space: nowrap;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        font-size: 12px;
+        font-weight: 700;
+        -webkit-transition: background-color .2s;
+        transition: background-color .2s;
+        color: #4A4A4A;
+        background-color: white;
+        font-family: Roboto;
+        position: absolute;
+      }
+
+      .action-button:hover {
+        color: mat-color($primary);
+      }
+    }
+  }
+}

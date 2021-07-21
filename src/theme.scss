@@ -12,6 +12,8 @@
 @import 'app/features/home/home.component.scss';
 @import 'app/features/home/components/footcamps-list-overview/footcamps-list-overview.component.scss';
 @import 'app/features/playground/playground.component.scss';
+@import 'app/features/print/components/print-equipment/print-equipment.component.scss';
+@import 'app/features/print/components/print-registrations/print-registrations.component.scss';
 @import 'app/features/registration/registration.component.scss';
 @import 'app/features/registration/components/step-sessions/step-sessions.component.scss';
 @import 'app/features/registration/components/step-trainee-form/step-trainee-form.component.scss';
@@ -47,6 +49,9 @@ $football-camp-theme: mat-light-theme($primary, $accent, $warn);
   // features > home
   @include app-footcamps-list-overview-theme($theme);
   @include app-home-theme($theme);
+  // features > print
+  @include app-print-equipment-theme($theme);
+  @include app-print-registrations-theme($theme);
   // features > playground
   @include app-playground-theme($theme);
   // features > registration

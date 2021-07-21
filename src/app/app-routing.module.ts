@@ -28,6 +28,10 @@ export const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'print',
+    loadChildren: () => import('./features/print/print.module').then(m => m.PrintModule)
+  },
+  {
     path: 'playground',
     loadChildren: () => import('./features/playground/playground.module').then(m => m.PlaygroundModule)
   },

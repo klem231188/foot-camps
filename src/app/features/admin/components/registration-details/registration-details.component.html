@@ -1,13 +1,6 @@
 <mat-card class="card-container" *ngIf="registration">
   <mat-card-header>
     <div class="header-container">
-      <div class="print-button-container">
-        <mat-spinner [diameter]="40" *ngIf="disablePrintButton"></mat-spinner>
-        <button [disabled]="disablePrintButton" mat-stroked-button color="primary" (click)="print()">
-          <mat-icon>print</mat-icon>
-          Fiche d'inscription
-        </button>
-      </div>
       <div class="photo-container">
         <mat-spinner *ngIf="loading" [diameter]="40"></mat-spinner>
         <img class="photo" [hidden]="loading" [src]="getPhotoUrl(registration)" (load)="onLoad()">

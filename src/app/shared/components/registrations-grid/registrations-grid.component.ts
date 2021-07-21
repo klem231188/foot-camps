@@ -18,11 +18,11 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
-import {environment} from '../../../../environments/environment';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Payment} from '../../../models/payment';
 import {PaymentService} from '../../../services/payment/payment.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-registrations-grid',
@@ -50,7 +50,8 @@ export class RegistrationsGridComponent implements AfterViewChecked, OnChanges, 
     private registrationService: RegistrationService,
     private paymentService: PaymentService,
     private http: HttpClient,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.registrationSelected = new EventEmitter();
   }
@@ -161,113 +162,19 @@ export class RegistrationsGridComponent implements AfterViewChecked, OnChanges, 
   }
 
   printEquipment(): void {
-    const url: string = environment.urlPrintEquipment;
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree([`/print/equipment`], {queryParams: {sessionId: this.sessionId}})
+    );
 
-    const body = {
-      sessionId: this.sessionId,
-    };
-
-    const options = {
-      observe: 'response' as 'body', // hack for TS
-      responseType: 'blob' as 'json', // hack for TS
-    };
-
-    // Disable button
-    this.disablePrintEquipmentButton = true;
-
-    // Says to user to wait ( Duration ~ 10 seconds)
-    this.snackBar.open(
-      'Veuillez patentier quelques secondes',
-      'Fermer',
-      {duration: 5000});
-
-    this.http
-      .post(url, body, options)
-      .subscribe((response: HttpResponse<Blob>) => {
-
-        // Create an anchor element, to be able to rename and download file.
-        const element: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
-        element.download = 'equipements.pdf';
-        element.href = URL.createObjectURL(response.body);
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
-
-        // Enable button again
-        this.disablePrintEquipmentButton = false;
-
-        // Says to user that's everything is fine
-        this.snackBar.open(
-          'Rapport équipements téléchargé',
-          'Fermer',
-          {duration: 5000});
-      }, (error) => {
-        console.log(error);
-
-        // Enable button again
-        this.disablePrintEquipmentButton = false;
-
-        // Says to user that an error occured
-        this.snackBar.open(
-          'Une erreur est survenue lors du téléchargement du rapport équipements',
-          'Fermer',
-          {duration: 5000});
-      });
+    window.open(url, '_blank');
   }
 
   printRegistrations() {
-    const url: string = environment.urlPrintRegistrations;
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree([`/print/registrations`], {queryParams: {sessionId: this.sessionId}})
+    );
 
-    const body = {
-      sessionId: this.sessionId,
-    };
-
-    const options = {
-      observe: 'response' as 'body', // hack for TS
-      responseType: 'blob' as 'json', // hack for TS
-    };
-
-    // Disable button
-    this.disablePrintRegistrationsButton = true;
-
-    // Says to user to wait ( Duration ~ 10 seconds)
-    this.snackBar.open(
-      'Veuillez patentier quelques secondes',
-      'Fermer',
-      {duration: 5000});
-
-    this.http
-      .post(url, body, options)
-      .subscribe((response: HttpResponse<Blob>) => {
-
-        // Create an anchor element, to be able to rename and download file.
-        const element: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
-        element.download = 'inscriptions.pdf';
-        element.href = URL.createObjectURL(response.body);
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
-
-        // Enable button again
-        this.disablePrintRegistrationsButton = false;
-
-        // Says to user that's everything is fine
-        this.snackBar.open(
-          'Rapport inscriptions téléchargé',
-          'Fermer',
-          {duration: 5000});
-      }, (error) => {
-        console.log(error);
-
-        // Enable button again
-        this.disablePrintRegistrationsButton = false;
-
-        // Says to user that an error occured
-        this.snackBar.open(
-          'Une erreur est survenue lors du téléchargement du rapport inscriptions',
-          'Fermer',
-          {duration: 5000});
-      });
+    window.open(url, '_blank');
   }
 
   reload() {

@@ -4,8 +4,7 @@ import {RegistrationV2} from '../../../../models/registration-v2.model';
 import {PaymentService} from '../../../../services/payment/payment.service';
 import {Payment} from '../../../../models/payment';
 import {RegistrationState} from '../../../../models/registration-state.enum';
-import {environment} from '../../../../../environments/environment';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {DocumentType} from '../../../../models/document-type.enum';
 import {Document} from '../../../../models/document.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -21,7 +20,6 @@ import {switchMap} from 'rxjs/operators';
 export class RegistrationDetailsComponent implements OnInit, OnChanges {
 
   campId: string;
-  disablePrintButton: boolean;
   loading: boolean;
   payment: Payment;
   registration: RegistrationV2;
@@ -79,65 +77,11 @@ export class RegistrationDetailsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.disablePrintButton = false;
     this.loading = true;
   }
 
   onLoad(): void {
     this.loading = false;
-  }
-
-  print(): void {
-    const url: string = environment.urlPrintRegistration;
-
-    const body = {
-      campId: this.campId,
-      sessionId: this.sessionId,
-      registrationId: this.registrationId
-    };
-
-    const options = {
-      observe: 'response' as 'body', // hack for TS
-      responseType: 'blob' as 'json', // hack for TS
-    };
-
-    this.disablePrintButton = true;
-    const filename = `Fiche-Inscription-${this.registration.trainee.lastname}-${this.registration.trainee.firstname}.png`;
-
-    // Says to user to wait ( Duration ~ 10 seconds)
-    this.snackBar.open(
-      'Veuillez patentier quelques secondes',
-      'Fermer',
-      {duration: 5000});
-
-    this.http
-      .post(url, body, options)
-      .subscribe((response: HttpResponse<Blob>) => {
-        this.disablePrintButton = false;
-
-        // Create an anchor element, to be able to rename and download file.
-        const element: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
-        element.href = URL.createObjectURL(response.body);
-        element.download = filename;
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
-
-        // Says to user that's everything is fine
-        this.snackBar.open(
-          'Fiche d\'inscription téléchargée',
-          'Fermer',
-          {duration: 5000});
-      }, (error) => {
-        console.log(error);
-        this.disablePrintButton = false;
-
-        // Says to user that an error occured
-        this.snackBar.open(
-          'Une erreur est survenue lors du téléchargement de la fiche d\'inscription',
-          'Fermer',
-          {duration: 5000});
-      })
   }
 
   reject(registration: RegistrationV2): void {

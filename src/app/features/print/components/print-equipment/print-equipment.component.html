@@ -1,0 +1,72 @@
+<div class="print-bar-sticky-container">
+  <button class="action-button" matRipple (click)="onPrint()">Imprimer</button>
+</div>
+
+<div class="print-container">
+
+  <div class="page portrait shoeSize break-after" *ngIf="shoeSizeDataSource && shoeSizeDataSource.length > 0">
+    <div class="page-inner-container">
+      <div class="title-container">
+        <div class="card-icon">
+          <mat-icon color="primary" [inline]="true">sports_soccer</mat-icon>
+        </div>
+        Chaussettes
+      </div>
+      <table mat-table [dataSource]="shoeSizeDataSource">
+        <!-- shoeSize Column -->
+        <ng-container matColumnDef="shoeSize">
+          <th mat-header-cell *matHeaderCellDef> Pointure</th>
+          <td mat-cell *matCellDef="let row"> {{row.shoeSize}} </td>
+        </ng-container>
+
+        <!-- quantity Column -->
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef> Quantité</th>
+          <td mat-cell *matCellDef="let row"> {{row.quantity}} </td>
+        </ng-container>
+
+        <!-- trainees Column -->
+        <ng-container matColumnDef="trainees">
+          <th mat-header-cell *matHeaderCellDef> Stagiaires</th>
+          <td mat-cell *matCellDef="let row"> {{row.trainees}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedShoeSizeColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedShoeSizeColumns;"></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="page portrait shortSize" *ngIf="shortSizeDataSource && shortSizeDataSource.length > 0">
+    <div class="page-inner-container">
+      <div class="title-container">
+        <div class="card-icon">
+          <mat-icon color="primary" [inline]="true">sports_soccer</mat-icon>
+        </div>
+        Maillot / Short
+      </div>
+      <table mat-table [dataSource]="shortSizeDataSource">
+        <!-- shortSize Column -->
+        <ng-container matColumnDef="shortSize">
+          <th mat-header-cell *matHeaderCellDef> Taille</th>
+          <td mat-cell *matCellDef="let row"> {{row.shortSize}} </td>
+        </ng-container>
+
+        <!-- quantity Column -->
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef> Quantité</th>
+          <td mat-cell *matCellDef="let row"> {{row.quantity}} </td>
+        </ng-container>
+
+        <!-- trainees Column -->
+        <ng-container matColumnDef="trainees">
+          <th mat-header-cell *matHeaderCellDef> Stagiaires</th>
+          <td mat-cell *matCellDef="let row"> {{row.trainees}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedShortSizeColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedShortSizeColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</div>
