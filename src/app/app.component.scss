@@ -8,16 +8,25 @@
     flex-direction: column;
     mat-sidenav-container {
       flex: 1;
-      margin-top: 56px;
-      @include big-screen {
-        margin-top: 64px;
+      margin-top: 64px;
+
+      @include small-screen {
+        margin-top: 56px;
       }
+
       mat-sidenav {
         display: flex !important;
         flex-direction: column;
         width: 250px;
         background-color: #19212b !important;
         color: white !important;
+        position: fixed !important;
+        top: 64px !important;
+
+        @include small-screen {
+          top: 56px !important;
+        }
+
         button {
           padding: 10px !important;
           width: 100% !important;

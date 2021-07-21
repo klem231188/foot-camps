@@ -4,7 +4,8 @@
 
 <div class="print-container">
 
-  <div class="page portrait shoeSize break-after" *ngIf="shoeSizeDataSource && shoeSizeDataSource.length > 0">
+  <div class="page shoeSize" [ngClass]="{'firefox': isFirefox, 'chrome': !isFirefox}"
+       *ngIf="shoeSizeDataSource && shoeSizeDataSource.length > 0">
     <div class="page-inner-container">
       <div class="title-container">
         <div class="card-icon">
@@ -37,7 +38,8 @@
     </div>
   </div>
 
-  <div class="page portrait shortSize" *ngIf="shortSizeDataSource && shortSizeDataSource.length > 0">
+  <div class="page shortSize" [ngClass]="{'firefox': isFirefox, 'chrome': !isFirefox}"
+       *ngIf="shortSizeDataSource && shortSizeDataSource.length > 0">
     <div class="page-inner-container">
       <div class="title-container">
         <div class="card-icon">

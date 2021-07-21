@@ -3,7 +3,7 @@
 </div>
 
 <div class="print-container" *ngIf="camp && session && registrations">
-  <div class="page" *ngFor="let registration of registrations">
+  <div class="page" [ngClass]="{'firefox': isFirefox, 'chrome': !isFirefox}" *ngFor="let registration of registrations">
     <div class="page-inner-container">
       <mat-toolbar color="primary" class="header-container">{{registration.trainee.firstname | titlecase}}&nbsp;&nbsp;{{registration.trainee.lastname | uppercase}}</mat-toolbar>
       <div class="content-container">

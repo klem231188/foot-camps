@@ -19,6 +19,7 @@ export class PrintRegistrationsComponent implements OnInit {
   camp: FootballCamp;
   registrations: RegistrationV2[];
   session: Session;
+  isFirefox = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +34,8 @@ export class PrintRegistrationsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+
     this.route
       .queryParams
       .subscribe(params => {

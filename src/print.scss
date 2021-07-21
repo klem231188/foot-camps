@@ -1,4 +1,9 @@
 @media print {
+  @page {
+    margin: 0;
+    size: A4;
+  }
+
   body {
     app-root {
       app-header {
@@ -13,8 +18,4 @@
       color-adjust: exact !important; /*Firefox*/
     }
   }
-}
-
-@page {
-  margin: 0;
 }

@@ -13,6 +13,7 @@ export class PrintEquipmentComponent implements OnInit {
 
   displayedShoeSizeColumns: string[] = ['shoeSize', 'quantity', 'trainees'];
   displayedShortSizeColumns: string[] = ['shortSize', 'quantity', 'trainees'];
+  isFirefox = false;
   shoeSizeDataSource: any[] = [];
   shortSizeDataSource: any[] = [];
 
@@ -25,6 +26,8 @@ export class PrintEquipmentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+
     this.route
       .queryParams
       .subscribe(params => {
