@@ -9,7 +9,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {StepDocumentsComponent} from './components/step-documents/step-documents.component';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {StepPaymentComponent} from './components/step-payment/step-payment.component';
 import {PaymentModeInPersonComponent} from './components/step-payment/components/payment-mode-in-person/payment-mode-in-person.component';
 import {PaymentModeOnlineComponent} from './components/step-payment/components/payment-mode-online/payment-mode-online.component';
@@ -33,7 +32,6 @@ import {NgxStripeModule} from 'ngx-stripe';
     NgxStripeModule
   ],
   providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
     {provide: MAT_DATE_LOCALE, useValue: 'fr'},
     {
       provide: DateAdapter,

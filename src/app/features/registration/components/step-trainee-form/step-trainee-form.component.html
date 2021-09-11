@@ -4,14 +4,14 @@
   <h4>Informations générales du stagiaire</h4>
 
   <!-- firstname -->
-  <mat-form-field>
+  <mat-form-field [appearance]="'outline'">
     <mat-label>Prénom</mat-label>
     <input matInput placeholder="Ex: Marco" formControlName="firstname" required>
     <mat-error *ngIf="firstname.invalid">{{getFirstnameError()}}</mat-error>
   </mat-form-field>
 
   <!-- lastname -->
-  <mat-form-field>
+  <mat-form-field [appearance]="'outline'">
     <mat-label>Nom</mat-label>
     <input matInput placeholder="Ex: Verratti" formControlName="lastname" required>
     <mat-error *ngIf="lastname.invalid">{{getLastnameError()}}</mat-error>
@@ -27,7 +27,7 @@
   <span class="separator"></span>
 
   <!-- birthdate -->
-  <mat-form-field>
+  <mat-form-field [appearance]="'outline'">
     <mat-label>Date de naissance</mat-label>
     <input matInput [matDatepicker]="picker" placeholder="23/11/2010" formControlName="birthdate" required>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -36,7 +36,7 @@
   </mat-form-field>
 
   <!-- Contact email -->
-  <mat-form-field>
+  <mat-form-field [appearance]="'outline'">
     <mat-label>E-mail du représentant légal</mat-label>
     <input matInput type="mon-email@gmail.com" placeholder="Email du parent" formControlName="email" required>
     <mat-error *ngIf="email.invalid">{{getEmailError()}}</mat-error>
@@ -58,7 +58,7 @@
   <span class="separator"></span>
 
   <!-- shoeSize -->
-  <mat-form-field>
+  <mat-form-field [appearance]="'outline'">
     <mat-label>Pointure</mat-label>
     <input matInput placeholder="30" formControlName="shoeSize" type="number" required>
     <mat-error *ngIf="shoeSize.invalid">{{getShoeSizeError()}}</mat-error>
@@ -67,7 +67,7 @@
 
   <h4>Informations sportives du stagiaire</h4>
   <!-- Club -->
-  <mat-form-field>
+  <mat-form-field [appearance]="'outline'">
     <mat-label>Club actuel</mat-label>
     <input matInput placeholder="Stade Brestois 29" formControlName="club">
   </mat-form-field>

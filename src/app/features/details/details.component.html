@@ -110,7 +110,7 @@
 
   <div class="registrations-grid-container">
     <div class="registrations-grid-inner-container">
-      <mat-form-field>
+      <mat-form-field [appearance]="'outline'">
         <mat-select [(value)]="selectedSession" placeholder="Sessions">
           <mat-option
             *ngFor="let session of this.sessions"

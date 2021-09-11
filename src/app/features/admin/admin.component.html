@@ -17,7 +17,8 @@
           </div>
 
           <div class="camp-and-session-container">
-            <mat-form-field>
+            <mat-form-field [appearance]="'outline'">
+              <mat-label>Stage</mat-label>
               <mat-select (valueChange)="onCampSelected($event)" [value]="selectedCamp$.value" placeholder="Stage">
                 <mat-option
                   *ngFor="let footballCamp of footballCamps"
@@ -28,7 +29,8 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="session-select">
+            <mat-form-field class="session-select" [appearance]="'outline'">
+              <mat-label>Session</mat-label>
               <mat-select (valueChange)="onSessionSelected($event)" [value]="selectedSession$.value"
                           placeholder="Sessions">
                 <mat-option
@@ -39,6 +41,8 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
+
+            <span class="spacer"></span>
 
             <app-session-overview [sessionId]="selectedSession$.value?.id"></app-session-overview>
           </div>

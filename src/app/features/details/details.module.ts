@@ -6,7 +6,6 @@ import {InViewportModule} from '@thisissoon/angular-inviewport';
 import {BadgesComponent} from './components/badges/badges.component';
 import {SharedModule} from '../../shared/shared.module';
 import {BadgeComponent} from './components/badge/badge.component';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
     InViewportModule
   ],
   providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
   ]
 })
 export class DetailsModule {
