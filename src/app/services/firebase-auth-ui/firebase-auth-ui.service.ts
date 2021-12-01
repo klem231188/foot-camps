@@ -1,5 +1,5 @@
 import {Inject, Injectable, NgZone, Optional} from '@angular/core';
-import * as firebaseui from 'firebaseui/dist/npm__fr.js';
+import * as firebaseui from 'firebaseui';
 import {FIREBASE_APP_NAME, FIREBASE_OPTIONS, FirebaseApp, FirebaseAppConfig, FirebaseOptions, ɵfirebaseAppFactory} from '@angular/fire';
 
 @Injectable({
