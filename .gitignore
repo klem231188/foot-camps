@@ -47,3 +47,6 @@ testem.log
 .DS_Store
 Thumbs.db
 /functions/firebase-debug.log
+/functions/.runtimeconfig.json
+/functions/firestore-debug.log
+/functions/ui-debug.log
