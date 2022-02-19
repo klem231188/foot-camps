@@ -14,8 +14,10 @@
       "BY_MAIL"
     ],
     "averagePrice": 170,
+    "accountId": "acct_1KUB344EEqOFOOUw",
     "paymentAddress": "Stage Espérance<br>Complexe sportif de Kroaz Kenan<br>29880 Plouguerneau",
     "checkReceiver": "Stage Espérance",
+    "feeAmount": 8,
     "prices": {
       "halfBoardPrice": 170,
       "halfBoardReducedPrice": 150,

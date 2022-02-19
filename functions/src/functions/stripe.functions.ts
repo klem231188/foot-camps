@@ -54,7 +54,11 @@ export async function createPaymentIntent(
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
       amount: price,
-      currency: 'EUR'
+      currency: 'EUR',
+      application_fee_amount: footballCamp.paymentInfo.feeAmount * 100,
+      transfer_data: {
+        destination: footballCamp.paymentInfo.accountId,
+      }
     });
 
     // Return PaymentIntent

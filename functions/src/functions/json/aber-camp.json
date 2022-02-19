@@ -12,8 +12,10 @@
       "ONLINE",
       "IN_PERSON"
     ],
+    "accountId": "acct_1KUB344EEqOFOOUw",
     "paymentAddress": "Stage Abers Foot,<br>Touroussel<br>29860 Bourg-Blanc",
     "checkReceiver": "Stage Abers Foot",
+    "feeAmount": 6,
     "prices": {
       "fullBoardPrice": null,
       "fullBoardReducedPrice": null,
