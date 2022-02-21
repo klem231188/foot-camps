@@ -109,27 +109,44 @@
       }
 
       .flow-container {
-        width: 90%;
+        width: 85%;
         margin-top: 20px;
         align-self: center;
         min-width: 300px;
 
         display: flex;
+        justify-content: center;
+        align-items: center;
         flex-direction: row;
-        justify-content: space-around;
-        align-items: flex-start;
         border: 1px solid rgba(0, 0, 0, 0.25);
-        padding: 25px;
         background-color: white;
 
         @include small-screen {
-          flex-direction: column;
-          align-items: center;
+          width: 100%;
+        }
+
+        .flow-inner-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          align-items: flex-start;
+          padding: 25px;
+
+          @include small-screen {
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+          }
         }
 
         .content-inner-container {
           flex: 1;
           max-width: 400px;
+          margin: 0 5px 0 5px;
+
+          @include small-screen {
+            margin: 10px 0 10px 0;
+          }
 
           .card-container {
             display: flex;
