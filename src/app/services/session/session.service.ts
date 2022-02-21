@@ -20,7 +20,7 @@ export class SessionService {
   getSession(sessionId: string): Observable<Session> {
     return this.angularFirestore
       .doc<Session>(`sessions/${sessionId}`)
-      .valueChanges();
+      .valueChanges({ idField: 'id' })
   }
 
   getSessions(): Observable<Session[]> {
@@ -29,15 +29,8 @@ export class SessionService {
     if (this.sessions$ == null) {
       this.sessions$ = this.angularFirestore
         .collection<Session>('sessions')
-        .snapshotChanges()
+        .valueChanges({ idField: 'id' })
         .pipe(
-          map<DocumentChangeAction<Session>[], Session[]>(actions => {
-            return actions.map(action => {
-              const data = action.payload.doc.data() as Session;
-              data.id = action.payload.doc.id;
-              return data as Session;
-            });
-          }),
           publishReplay(1), // Latest event is buffered and will be emit to new subscriber
           refCount() // Transform ConnectableObservable to Observable and handle multiple subscription / unsubscription
         )

@@ -19,7 +19,7 @@ export class UserService {
     if (this.user$ == null) {
       this.user$ = this.angularFirestore
         .doc<User>(`users/${uid}`)
-        .valueChanges()
+        .valueChanges({ idField: 'id' })
         .pipe(
           publishReplay(1), // Latest event is buffered and will be emit to new subscriber
           refCount() // Transform ConnectableObservable to Observable and handle multiple subscription / unsubscription

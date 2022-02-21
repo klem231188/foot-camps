@@ -16,13 +16,8 @@ export class RegistrationService {
   getRegistration(registrationId: string): Observable<RegistrationV2> {
     return this.angularFirestore
       .doc<RegistrationV2>(`registrations/${registrationId}`)
-      .snapshotChanges()
+      .valueChanges({ idField: 'id' })
       .pipe(
-        map<Action<DocumentSnapshot<RegistrationV2>>, RegistrationV2>(action => {
-          const data = action.payload.data();
-          data.id = action.payload.id;
-          return data;
-        }),
         publishReplay(1), // Latest event is buffered and will be emit to new subscriber
         refCount()
       )
@@ -35,14 +30,8 @@ export class RegistrationService {
           .where('sessionId', '==', sessionId)
           .where('state', 'in', [RegistrationState.ACCEPTED, RegistrationState.REJECTED, RegistrationState.IN_PROGRESS])
       })
-      .snapshotChanges().pipe(
-        map<DocumentChangeAction<RegistrationV2>[], RegistrationV2[]>(actions => {
-          return actions.map(action => {
-            const data = action.payload.doc.data() as RegistrationV2;
-            data.id = action.payload.doc.id;
-            return data as RegistrationV2;
-          });
-        }),
+      .valueChanges({ idField: 'id' })
+      .pipe(
         publishReplay(1), // Latest event is buffered and will be emit to new subscriber
         refCount() // Transform ConnectableObservable to Observable and handle multiple subscription / unsubscription
       )

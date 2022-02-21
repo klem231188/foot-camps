@@ -30,14 +30,7 @@ export class PaymentService {
   getPayment(paymentId: string): Observable<Payment> {
     return this.angularFirestore
       .doc<Payment>(`payments/${paymentId}`)
-      .snapshotChanges()
-      .pipe(
-        map<Action<DocumentSnapshot<Payment>>, Payment>(action => {
-          const data = action.payload.data();
-          data.id = action.payload.id;
-          return data;
-        })
-      );
+      .valueChanges({ idField: 'id' })
   }
 
   getPayments(): Observable<Payment[]> {
@@ -46,15 +39,8 @@ export class PaymentService {
     if (this.payments$ == null) {
       this.payments$ = this.angularFirestore
         .collection<Payment>('payments')
-        .snapshotChanges()
+        .valueChanges({ idField: 'id' })
         .pipe(
-          map<DocumentChangeAction<Payment>[], Payment[]>(actions => {
-            return actions.map(action => {
-              const data = action.payload.doc.data() as Payment;
-              data.id = action.payload.doc.id;
-              return data as Payment;
-            });
-          }),
           publishReplay(1), // Latest event is buffered and will be emit to new subscriber
           refCount() // Transform ConnectableObservable to Observable and handle multiple subscription / unsubscription
         )
