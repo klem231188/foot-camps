@@ -66,10 +66,10 @@
           <td data-label="Dates">Du {{session.start.toDate() | date : 'longDate'}}
             au {{session.end.toDate() | date : 'longDate'}}</td>
           <td data-label="Tarifs en Pension complète" *ngIf="hasFullBoardRatesSessions()">
-            {{session.fullBoardRates}}
+            {{session.prices.fullBoardPrice}}
             €
           </td>
-          <td data-label="Tarifs en Demi-pension" *ngIf="hasHalfBoardRatesSessions()">{{session.halfBoardRates}} €
+          <td data-label="Tarifs en Demi-pension" *ngIf="hasHalfBoardRatesSessions()">{{session.prices.halfBoardPrice}} €
           </td>
           <td data-label="Inscriptions">
             <mat-progress-bar mode="determinate" [value]="percentageOfRegistrations(session)"

@@ -1,6 +1,6 @@
 <ng-container *ngIf="footballCamp$ | async as footballCamp">
   <ng-container *ngIf="session$ | async as session">
-    Vous devez vous acquitter de la somme de <b> {{session.halfBoardRates}} €<sup>(*)</sup> </b>
+    Vous devez vous acquitter de la somme de <b> {{session.prices.halfBoardPrice}} €<sup>(*)</sup> </b>
     avant le <b>{{session.endRegistrationDate.toDate() | date : 'longDate'}}.</b>
     <br>
     <div class="accepted-payment-type-container">

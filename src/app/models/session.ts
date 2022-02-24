@@ -1,4 +1,5 @@
 import {PaymentType} from './payment-type.enum';
+import {PriceInfo} from './price-info';
 
 export interface Session {
   id?: string;
@@ -11,9 +12,10 @@ export interface Session {
   halfBoardRates: number;
   fullBoardReducedRates: number;
   halfBoardReducedRates: number;
+  maximumNumberOfRegistrations: number;
   numberOfRegistrationsInProgress: number;
   numberOfRegistrationsAccepted: number;
   numberOfRegistrationsRejected: number;
-  maximumNumberOfRegistrations: number;
+  prices: PriceInfo;
   start: any; // firebase.firestore.Timestamp
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FootballCamp} from '../../../../models/football-camp';
 import {Session} from '../../../../models/session';
 import {FootballCampService} from '../../../../services/football-camp/football-camp.service';
@@ -53,4 +53,15 @@ export class FootcampsListOverviewComponent implements OnInit {
     return ((session.numberOfRegistrationsInProgress + session.numberOfRegistrationsAccepted) / session.maximumNumberOfRegistrations) * 100;
   }
 
+  getPrice(footCamp: FootballCamp): string {
+    const halfBoardPrices: number[] = this.sessions.filter(s => s.campId === footCamp.id).map(s => s.prices.halfBoardPrice);
+    const minPrice = Math.min(...halfBoardPrices);
+    const maxPrice = Math.max(...halfBoardPrices);
+
+    if (minPrice < maxPrice) {
+      return '' + minPrice + '<small> à </small>' + maxPrice + ' €';
+    } else {
+      return '' + maxPrice + ' €';
+    }
+  }
 }

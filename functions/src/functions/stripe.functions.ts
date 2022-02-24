@@ -31,16 +31,16 @@ export async function createPaymentIntent(
 
   let price = null;
   if (payment.reducedPrice && payment.halfBoard) {
-    price = footballCamp.paymentInfo.prices.halfBoardReducedPrice;
+    price = session.prices.halfBoardReducedPrice;
   }
   else if (payment.reducedPrice && !payment.halfBoard) {
-    price = footballCamp.paymentInfo.prices.fullBoardReducedPrice;
+    price = session.prices.fullBoardReducedPrice;
   }
   else if (!payment.reducedPrice && payment.halfBoard) {
-    price = footballCamp.paymentInfo.prices.halfBoardPrice;
+    price = session.prices.halfBoardPrice;
   }
   else if (!payment.reducedPrice && !payment.halfBoard) {
-    price = footballCamp.paymentInfo.prices.fullBoardPrice;
+    price = session.prices.fullBoardPrice;
   }
 
   if (price !== null) {
@@ -55,7 +55,7 @@ export async function createPaymentIntent(
     const paymentIntent = await stripe.paymentIntents.create({
       amount: price,
       currency: 'EUR',
-      application_fee_amount: footballCamp.paymentInfo.feeAmount * 100,
+      application_fee_amount: session.prices.feeAmount * 100,
       transfer_data: {
         destination: footballCamp.paymentInfo.accountId,
       }

@@ -15,6 +15,13 @@
     "halfBoardRates": 170,
     "id": "KxZ64nZ9ukgdCkl9r2Sv",
     "maximumNumberOfRegistrations": 40,
+    "prices": {
+      "feeAmount": 8,
+      "halfBoardPrice": 170,
+      "halfBoardReducedPrice": 150,
+      "fullBoardPrice": null,
+      "fullBoardReducedPrice": null
+    },
     "start": "2019-07-15T08:30:00+01:00"
   }
 ]

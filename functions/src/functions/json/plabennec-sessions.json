@@ -15,6 +15,13 @@
     "halfBoardRates": 230,
     "id": "POMd3zzzZQbCfJYFdpE8",
     "maximumNumberOfRegistrations": 40,
+    "prices": {
+      "feeAmount": 11,
+      "fullBoardPrice": null,
+      "fullBoardReducedPrice": null,
+      "halfBoardPrice": 230,
+      "halfBoardReducedPrice": 210
+    },
     "start": "2019-07-08T08:30:00+01:00"
   },
   {
@@ -33,6 +40,13 @@
     "halfBoardRates": 230,
     "id": "2OaKNnFUDJkc9kg2RaTS",
     "maximumNumberOfRegistrations": 40,
+    "prices": {
+      "feeAmount": 11,
+      "fullBoardPrice": null,
+      "fullBoardReducedPrice": null,
+      "halfBoardPrice": 230,
+      "halfBoardReducedPrice": 210
+    },
     "start": "2019-07-15T08:30:00+01:00"
   },
   {
@@ -51,6 +65,13 @@
     "halfBoardRates": 230,
     "id": "W2J3gvN6jIPc6OjdQydN",
     "maximumNumberOfRegistrations": 40,
+    "prices": {
+      "feeAmount": 11,
+      "fullBoardPrice": null,
+      "fullBoardReducedPrice": null,
+      "halfBoardPrice": 230,
+      "halfBoardReducedPrice": 210
+    },
     "start": "2019-07-22T08:30:00+01:00"
   }
 ]

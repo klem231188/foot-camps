@@ -33,11 +33,11 @@ export class DetailsComponent implements OnInit {
   }
 
   getFullBoardRatesSessions(): Session[] {
-    return _.reject(this.sessions, ['fullBoardRates', null]);
+    return _.reject(this.sessions, ['prices.fullBoardPrice', null]);
   }
 
   getHalfBoardRatesSessions(): Session[] {
-    return _.reject(this.sessions, ['halfBoardRates', null]);
+    return _.reject(this.sessions, ['prices.halfBoardPrice', null]);
   }
 
   hasFullBoardRatesSessions(): boolean {

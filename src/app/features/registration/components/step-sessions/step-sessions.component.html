@@ -23,17 +23,17 @@
             Du {{session.start.toDate() | date : 'longDate'}} au {{session.end.toDate() | date : 'longDate'}}
           </div>
         </div>
-        <div class="icon-rates-container" *ngIf="session.halfBoardRates">
+        <div class="icon-rates-container" *ngIf="session.prices.halfBoardPrice">
           <div class="card-icon">
             <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
           </div>
-          <div class="half-board-rates">Prix demi-pension : {{session.halfBoardRates}} €</div>
+          <div class="half-board-rates">Prix demi-pension : {{session.prices.halfBoardPrice}} €</div>
         </div>
-        <div class="icon-rates-container" *ngIf="session.fullBoardRates">
+        <div class="icon-rates-container" *ngIf="session.prices.fullBoardPrice">
           <div class="card-icon">
             <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
           </div>
-          <div class="full-board-rates">Prix pension complète: {{session.fullBoardRates}} €</div>
+          <div class="full-board-rates">Prix pension complète: {{session.prices.fullBoardPrice}} €</div>
         </div>
         <div class="icon-availability-container">
           <div class="card-icon">

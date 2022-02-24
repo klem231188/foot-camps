@@ -19,8 +19,8 @@
       </div>
       <button id="submit" (click)="pay()" [disabled]="isButtonDisabled">
         <div class="spinner" id="spinner" *ngIf="isProcessingPayment"></div>
-        <span id="button-text" *ngIf="!isReducedPrice">Payer {{footballCamp.paymentInfo.prices.halfBoardPrice}} €</span>
-        <span id="button-text" *ngIf="isReducedPrice">Payer {{footballCamp.paymentInfo.prices.halfBoardReducedPrice}} €</span>
+        <span id="button-text" *ngIf="!isReducedPrice">Payer {{session.prices.halfBoardPrice}} €</span>
+        <span id="button-text" *ngIf="isReducedPrice">Payer {{session.prices.halfBoardReducedPrice}} €</span>
       </button>
       <p id="card-error" role="alert">{{errorMessage}}</p>
     </form>

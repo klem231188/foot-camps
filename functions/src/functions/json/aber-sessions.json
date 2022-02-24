@@ -15,6 +15,13 @@
     "halfBoardRates": 135,
     "id": "AbersFoot2021Session1",
     "maximumNumberOfRegistrations": 40,
+    "prices": {
+      "feeAmount": 6,
+      "fullBoardPrice": null,
+      "fullBoardReducedPrice": null,
+      "halfBoardPrice": 135,
+      "halfBoardReducedPrice": 110
+    },
     "start": "2021-07-07T08:30:00+01:00"
   },
   {
@@ -33,6 +40,13 @@
     "halfBoardRates": 135,
     "id": "AbersFoot2021Session2",
     "maximumNumberOfRegistrations": 40,
+    "prices": {
+      "feeAmount": 6,
+      "fullBoardPrice": null,
+      "fullBoardReducedPrice": null,
+      "halfBoardPrice": 135,
+      "halfBoardReducedPrice": 110
+    },
     "start": "2021-07-12T08:30:00+01:00"
   }
 ]

@@ -3,7 +3,6 @@ import {Subject} from 'rxjs';
 import {FootballCampService} from '../../../../services/football-camp/football-camp.service';
 import {SessionService} from '../../../../services/session/session.service';
 import {switchMap, tap} from 'rxjs/operators';
-import {SafeHtml} from '@angular/platform-browser';
 import {FootballCamp} from '../../../../models/football-camp';
 import {Session} from '../../../../models/session';
 
@@ -44,7 +43,15 @@ export class BadgesComponent implements OnChanges, OnInit {
   }
 
   getPriceSubtitle(): string {
-    return '' + this.footballCamp.paymentInfo.prices.halfBoardPrice + ' €';
+    const halfBoardPrices: number[] = this.sessions.map(s => s.prices.halfBoardPrice);
+    const minPrice = Math.min(...halfBoardPrices);
+    const maxPrice = Math.max(...halfBoardPrices);
+
+    if (minPrice < maxPrice) {
+      return  '' + minPrice + '<small> à </small>' + maxPrice + ' €';
+    } else {
+      return  '' + maxPrice + ' €';
+    }
   }
 
   getRegistrationSubtitle(): string {

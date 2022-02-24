@@ -17,7 +17,7 @@
         <div>id : {{registration.id}}</div>
       </div>
       <div class="right-content-container">
-        <div>Veuillez verser la somme de <b> {{camp.paymentInfo.prices.halfBoardPrice}} €<sup>*</sup> </b> à l'ordre de <b>{{camp.paymentInfo.checkReceiver}}</b>
+        <div>Veuillez verser la somme de <b> {{session.prices.halfBoardPrice}} €<sup>*</sup> </b> à l'ordre de <b>{{camp.paymentInfo.checkReceiver}}</b>
         avant le <b> {{session.endRegistrationDate.toDate() | date : 'longDate'}}</b> à l'adresse suivante:</div>
         <div class="address-container">
             <b [innerHTML]="camp.paymentInfo.paymentAddress"></b>

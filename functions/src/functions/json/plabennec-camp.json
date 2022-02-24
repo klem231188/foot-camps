@@ -16,14 +16,7 @@
     "averagePrice": 230,
     "accountId": "acct_1KUB344EEqOFOOUw",
     "paymentAddress": "Stage Plab'été <br>\n              Complexe Sportif<br>\n              AVENUE DE KERVEGUEN<br>\n              29860 Plabennec<br>",
-    "checkReceiver": "Stage Plab'été",
-    "feeAmount": 11,
-    "prices": {
-      "fullBoardPrice": null,
-      "fullBoardReducedPrice": null,
-      "halfBoardPrice": 230,
-      "halfBoardReducedPrice": 210
-    }
+    "checkReceiver": "Stage Plab'été"
   },
   "minimumAge": 5,
   "maximumAge": 14,
