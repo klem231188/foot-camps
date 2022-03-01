@@ -82,5 +82,6 @@
     "pathToImage200px": "./assets/img/plabennec/overview_200px.jpg",
     "pathToImage400px": "./assets/img/plabennec/overview_400px.jpg",
     "title": "Bienvenue au Foot Camps de Plabennec"
-  }
+  },
+  "registrationDocuments": ["FICHE_SANITAIRE", "CERTIFICAT_MEDICAL", "ASSURANCE_SCOLAIRE", "PHOTO_IDENTITE"]
 }

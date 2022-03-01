@@ -70,5 +70,6 @@
     "pathToImage200px": "./assets/img/plouguerneau/overview_200px.jpg",
     "pathToImage400px": "./assets/img/plouguerneau/overview_400px.jpg",
     "title": "Bienvenue au Foot Camps de Plouguerneau"
-  }
+  },
+  "registrationDocuments": ["FICHE_SANITAIRE", "CERTIFICAT_MEDICAL", "PHOTO_IDENTITE"]
 }

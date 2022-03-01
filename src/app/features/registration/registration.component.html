@@ -46,7 +46,10 @@
       <!--Step 3 : Document to supply -->
       <mat-step [completed]="isStepDocumentsValid">
         <ng-template matStepLabel>Documents à fournir</ng-template>
-        <app-step-documents (isValid)="isStepDocumentsValid = $event;"></app-step-documents>
+        <app-step-documents (isValid)="isStepDocumentsValid = $event;"
+                            [campId]="footballCamp.id"
+        >
+        </app-step-documents>
         <div class="separator"></div>
         <div class="next-button">
           <button mat-stroked-button matStepperNext color="primary"

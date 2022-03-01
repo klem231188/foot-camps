@@ -1,6 +1,7 @@
 import {Overview} from './overview';
 import {Details} from './details';
 import {PaymentInfo} from './payment-info';
+import {DocumentType} from './document-type.enum';
 
 export interface FootballCamp {
   // - id
@@ -28,6 +29,9 @@ export interface FootballCamp {
 
   // - Details data
   details: Details;
+
+  // - Registration documents
+  registrationDocuments: DocumentType[];
 
   // - Contacts data
   // contacts: Contact[];

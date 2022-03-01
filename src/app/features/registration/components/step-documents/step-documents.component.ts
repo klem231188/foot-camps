@@ -1,7 +1,10 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
+import {BehaviorSubject, combineLatest, of, Subject} from 'rxjs';
 import {Document} from '../../../../models/document.model';
 import {FileUploadComponent} from '../../../../shared/components/file-upload/file-upload.component';
+import {FootballCampService} from '../../../../services/football-camp/football-camp.service';
+import {catchError, switchMap, takeUntil, tap} from 'rxjs/operators';
+import {DocumentType} from '../../../../models/document-type.enum';
 
 @Component({
   selector: 'app-step-documents',
@@ -10,43 +13,59 @@ import {FileUploadComponent} from '../../../../shared/components/file-upload/fil
 })
 export class StepDocumentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  // @ViewChild('certificatMedical', {static: true}) certificatMedical: FootballCampFileUploadComponent;
+  @Input() campId: string;
   @Output() documents: BehaviorSubject<Document[]> = new BehaviorSubject<Document[]>(null);
-  @ViewChild('ficheSanitaire', {static: true}) ficheSanitaire: FileUploadComponent;
-  @ViewChild('photoIdentite', {static: true}) photoIdentite: FileUploadComponent;
-  subscription: Subscription;
-  subscription2: Subscription;
   @Output() isValid: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  @ViewChildren(FileUploadComponent) fileUploadComponents!: QueryList<FileUploadComponent>;
+  reloadSubject$: Subject<void> = new Subject();
+  unsubscribe$: Subject<void> = new Subject();
+  isLoading = false;
+  documentTypes: DocumentType[];
 
-  constructor() {
+  constructor(
+    private footballCampService: FootballCampService
+  ) {
   }
 
   ngAfterViewInit(): void {
-    this.subscription = combineLatest([
-        this.ficheSanitaire.uploaded,
-        this.photoIdentite.uploaded,
-        // this.certificatMedical.uploaded
-      ]
+
+    combineLatest(
+      this.fileUploadComponents.map(fuc => fuc.uploaded)
     ).subscribe((uploadStatuses) => {
       const areUploadedDocumentsValid = uploadStatuses.reduce((acc, cur) => acc && cur);
       this.isValid.next(areUploadedDocumentsValid);
     });
 
-    this.subscription2 = combineLatest([
-        this.ficheSanitaire.document,
-        this.photoIdentite.document
-        // this.certificatMedical.document,
-      ]
+    combineLatest(
+      this.fileUploadComponents.map(fuc => fuc.document)
     ).subscribe((documents) => {
       this.documents.next(documents);
     });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-    this.subscription2.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   ngOnInit(): void {
+    this.reloadSubject$
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        tap(() => this.isLoading = true),
+        switchMap(() => this.footballCampService.getFootballCamp(this.campId)),
+        tap(camp => {
+          this.documentTypes = camp.registrationDocuments;
+        }),
+        tap(() => this.isLoading = false),
+        catchError((err) => {
+          console.error(err);
+          this.isLoading = false
+          return of(null);
+        })
+      )
+      .subscribe()
+
+    this.reloadSubject$.next();
   }
 }

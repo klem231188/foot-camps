@@ -109,5 +109,6 @@
     "pathToImage200px": "./assets/img/aber/overview_200px.jpg",
     "pathToImage400px": "./assets/img/aber/overview_400px.jpg",
     "title": "Bienvenue au Foot Camps de Abers Foot"
-  }
+  },
+  "registrationDocuments": ["FICHE_SANITAIRE", "PHOTO_IDENTITE"]
 }
