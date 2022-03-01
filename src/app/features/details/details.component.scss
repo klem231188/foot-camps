@@ -29,7 +29,7 @@
         z-index: -1;
 
         &::before {
-          background-image: url(/assets/img/background-detail.svg) ;
+          background-image: url(/assets/img/background-detail.svg);
           background-repeat: no-repeat;
           background-position: center top;
           background-size: cover;
@@ -192,18 +192,19 @@
               }
             }
 
-            .quote:hover * {
-              filter: brightness(80%);
-            }
-
             .avatar {
-              border-radius: 50%;
-              border: rgba(0, 0, 0, 0.125) 1px solid;
               height: 128px;
               width: 128px;
               min-width: 128px;
               margin-right: 10px;
-              background-color: rgba(0, 0, 0, 0.125);
+              padding: 0.35em;
+              border-radius: 50%;
+              background: radial-Gradient(circle at calc(50% + (50% - 0.625em) * 1) calc(50% + (50% - 0.625em) * 0), #009688 calc(0.625em - 1px), transparent 0.625em), radial-Gradient(circle at calc(50% + (50% - 0.625em) * 0) calc(50% + (50% - 0.625em) * 1), #424242 calc(0.625em - 1px), transparent 0.625em), radial-Gradient(circle at calc(50% + (50% - 0.625em) * -1) calc(50% + (50% - 0.625em) * 0), #009688 calc(0.625em - 1px), transparent 0.625em), radial-Gradient(circle at calc(50% + (50% - 0.625em) * 0) calc(50% + (50% - 0.625em) * -1), #424242 calc(0.625em - 1px), transparent 0.625em), conic-Gradient(#009688 0% 90deg, #424242 0% 180deg, #009688 0% 270deg, #424242 0% 360deg);
+              background-origin: border-box;
+            }
+
+            .avatar:hover {
+              filter: brightness(95%);
             }
           }
         }
@@ -513,7 +514,7 @@
           padding: 25px;
 
           @include small-screen {
-           padding: 10px;
+            padding: 10px;
           }
         }
       }
