@@ -23,18 +23,34 @@
             Du {{session.start.toDate() | date : 'longDate'}} au {{session.end.toDate() | date : 'longDate'}}
           </div>
         </div>
-        <div class="icon-rates-container" *ngIf="session.prices.halfBoardPrice">
+        <div class="category-container">
           <div class="card-icon">
-            <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
+            <mat-icon color="primary" [inline]="true">person</mat-icon>
           </div>
-          <div class="half-board-rates">Prix demi-pension : {{session.prices.halfBoardPrice}} €</div>
+          <div class="category">De {{session.minimumAge}} à {{session.maximumAge}} ans inclus</div>
         </div>
-        <div class="icon-rates-container" *ngIf="session.prices.fullBoardPrice">
-          <div class="card-icon">
-            <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
+        <ng-container *ngIf="session.prices.free">
+          <div class="icon-rates-container">
+            <div class="card-icon">
+              <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
+            </div>
+            <div>Gratuit</div>
           </div>
-          <div class="full-board-rates">Prix pension complète: {{session.prices.fullBoardPrice}} €</div>
-        </div>
+        </ng-container>
+        <ng-container *ngIf="!session.prices.free">
+          <div class="icon-rates-container" *ngIf="session.prices.halfBoardPrice">
+            <div class="card-icon">
+              <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
+            </div>
+            <div class="half-board-rates">Prix demi-pension : {{session.prices.halfBoardPrice}} €</div>
+          </div>
+          <div class="icon-rates-container" *ngIf="session.prices.fullBoardPrice">
+            <div class="card-icon">
+              <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
+            </div>
+            <div class="full-board-rates">Prix pension complète: {{session.prices.fullBoardPrice}} €</div>
+          </div>
+        </ng-container>
         <div class="icon-availability-container">
           <div class="card-icon">
             <mat-icon color="primary" [inline]="true">event_available</mat-icon>

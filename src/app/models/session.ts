@@ -12,6 +12,8 @@ export interface Session {
   halfBoardRates: number;
   fullBoardReducedRates: number;
   halfBoardReducedRates: number;
+  minimumAge: number;
+  maximumAge: number;
   maximumNumberOfRegistrations: number;
   numberOfRegistrationsInProgress: number;
   numberOfRegistrationsAccepted: number;

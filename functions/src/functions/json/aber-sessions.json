@@ -14,6 +14,8 @@
     "fullBoardRates": null,
     "halfBoardRates": 135,
     "id": "AbersFoot2021Session1",
+    "minimumAge": 10,
+    "maximumAge": 13,
     "maximumNumberOfRegistrations": 40,
     "prices": {
       "feeAmount": 6,
@@ -40,6 +42,8 @@
     "fullBoardRates": null,
     "halfBoardRates": 135,
     "id": "AbersFoot2021Session2",
+    "minimumAge": 10,
+    "maximumAge": 13,
     "maximumNumberOfRegistrations": 40,
     "prices": {
       "feeAmount": 6,

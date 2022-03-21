@@ -55,8 +55,8 @@
         <tr>
           <th scope="col">Sessions</th>
           <th scope="col">Dates</th>
-          <th scope="col" *ngIf="hasFullBoardRatesSessions()">Tarifs en Pension complète</th>
-          <th scope="col" *ngIf="hasHalfBoardRatesSessions()">Tarifs en Demi-pension</th>
+          <th scope="col">Tarifs</th>
+          <th scope="col">Ages</th>
           <th scope="col">Inscriptions</th>
         </tr>
         </thead>
@@ -65,11 +65,16 @@
           <td data-label="Sessions">Session n°{{i + 1}}</td>
           <td data-label="Dates">Du {{session.start.toDate() | date : 'longDate'}}
             au {{session.end.toDate() | date : 'longDate'}}</td>
-          <td data-label="Tarifs en Pension complète" *ngIf="hasFullBoardRatesSessions()">
-            {{session.prices.fullBoardPrice}}
-            €
+          <td data-label="Tarifs">
+            <ng-container *ngIf="session.prices.free">Gratuit</ng-container>
+            <ng-container *ngIf="!session.prices.free">
+              <ng-container *ngIf="hasFullBoardRatesSessions()">pension complète: {{session.prices.fullBoardPrice}} €</ng-container>
+              <ng-container *ngIf="hasHalfBoardRatesSessions()">demi-pension: {{session.prices.halfBoardPrice}} €</ng-container>
+            </ng-container>
           </td>
-          <td data-label="Tarifs en Demi-pension" *ngIf="hasHalfBoardRatesSessions()">{{session.prices.halfBoardPrice}} €
+          <td data-label="Ages">
+            <ng-container *ngIf="session.maximumAge > session.minimumAge">{{session.minimumAge}} à {{session.maximumAge}} ans</ng-container>
+            <ng-container *ngIf="session.maximumAge === session.minimumAge">{{session.minimumAge}} ans</ng-container>
           </td>
           <td data-label="Inscriptions">
             <mat-progress-bar mode="determinate" [value]="percentageOfRegistrations(session)"

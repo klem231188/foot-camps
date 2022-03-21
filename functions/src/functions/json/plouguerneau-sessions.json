@@ -14,6 +14,8 @@
     "fullBoardRates": null,
     "halfBoardRates": 170,
     "id": "KxZ64nZ9ukgdCkl9r2Sv",
+    "minimumAge": 5,
+    "maximumAge": 14,
     "maximumNumberOfRegistrations": 40,
     "prices": {
       "feeAmount": 8,

@@ -32,7 +32,4 @@ export interface FootballCamp {
 
   // - Registration documents
   registrationDocuments: DocumentType[];
-
-  // - Contacts data
-  // contacts: Contact[];
 }
