@@ -55,6 +55,7 @@ export async function sendMailRegistrationInProgress(
           'traineeFirstname': registration.trainee.firstname,
           'traineeLastname': registration.trainee.lastname,
           'footballcampName': camp.city,
+          'isFootballcampFree': session.prices.free,
           'paymentModeOnline': payment.mode === PaymentMode.ONLINE,
           'paymentModeInPerson': payment.mode === PaymentMode.IN_PERSON,
           'paymentModeByMail': payment.mode === PaymentMode.BY_MAIL,

@@ -17,6 +17,7 @@
     "maximumNumberOfRegistrations": 40,
     "prices": {
       "feeAmount": 8,
+      "free": false,
       "halfBoardPrice": 170,
       "halfBoardReducedPrice": 150,
       "fullBoardPrice": null,

@@ -60,7 +60,7 @@
       </mat-step>
 
       <!--Step 4 : Payment -->
-      <mat-step>
+      <mat-step [completed]="isStepPaymentValid">
         <ng-template matStepLabel>Paiement</ng-template>
         <app-step-payment
           (isValid)="onPaymentValid($event)"

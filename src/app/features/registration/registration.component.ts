@@ -29,6 +29,7 @@ export class RegistrationComponent implements AfterViewChecked, OnInit {
   isStepSessionValid = false;
   isStepTraineeFormValid = false;
   isStepDocumentsValid = false;
+  isStepPaymentValid = false;
   isLoading = true;
   mocked = false;
   registration: RegistrationV2 = null;
@@ -121,8 +122,11 @@ export class RegistrationComponent implements AfterViewChecked, OnInit {
   onPaymentValid(isValid: boolean) {
     console.log('onPaymentValid' + isValid);
     if (isValid) {
+      this.isStepPaymentValid = true;
       this.stepper.selected.completed = true;
       this.stepper.next();
+    } else {
+      this.isStepPaymentValid = false;
     }
   }
 

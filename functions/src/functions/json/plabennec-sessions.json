@@ -17,6 +17,7 @@
     "maximumNumberOfRegistrations": 40,
     "prices": {
       "feeAmount": 11,
+      "free": false,
       "fullBoardPrice": null,
       "fullBoardReducedPrice": null,
       "halfBoardPrice": 230,
@@ -42,6 +43,7 @@
     "maximumNumberOfRegistrations": 40,
     "prices": {
       "feeAmount": 11,
+      "free": false,
       "fullBoardPrice": null,
       "fullBoardReducedPrice": null,
       "halfBoardPrice": 230,
@@ -67,6 +69,7 @@
     "maximumNumberOfRegistrations": 40,
     "prices": {
       "feeAmount": 11,
+      "free": false,
       "fullBoardPrice": null,
       "fullBoardReducedPrice": null,
       "halfBoardPrice": 230,

@@ -1,6 +1,7 @@
 <ng-container *ngIf="footballCamp$ | async as footballCamp">
   <ng-container *ngIf="session$ | async as session">
-    <div>Pour finaliser votre inscription au stage <b>{{footballCamp.city}}</b>, veuillez choisir votre mode de paiement.
+    <div>Pour finaliser votre inscription au stage <b>{{footballCamp.city}}</b>, veuillez choisir votre mode de
+      paiement.
     </div>
     <mat-tab-group>
       <mat-tab *ngFor="let paymentMode of footballCamp.paymentInfo.acceptedPaymentModes">
