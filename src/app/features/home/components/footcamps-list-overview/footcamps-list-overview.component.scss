@@ -55,15 +55,17 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            padding: 10px;
+            height: 55px;
+            position: relative;
 
             .brand {
               font-size: 25px;
             }
 
             .logo {
-              height: 45px;
-              margin-right: 20px;
+              height: 40px;
+              left: 15px;
+              position: absolute;
             }
           }
 
@@ -86,7 +88,7 @@
               border-radius: 50%;
               width: 50px;
               height: 50px;
-              margin-right: 5px;
+              margin-right: 10px;
 
               mat-icon {
                 width: 25px !important;
@@ -131,14 +133,15 @@
               margin-bottom: 5px;
 
               .date {
-                width: 170px;
+                width: 230px;
               }
 
               .sessions-inner-container {
                 flex: 1;
                 display: flex;
                 flex-direction: column;
-                align-items: center;
+                justify-content: center;
+                align-self: stretch;
               }
             }
           }

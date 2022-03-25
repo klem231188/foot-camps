@@ -68,4 +68,12 @@ export class FootcampsListOverviewComponent implements OnInit {
       }
     }
   }
+
+  getTooltipAvailability(session: Session): string {
+    if (this.percentageOfAvailability(session) !== 0) {
+      return this.availableRegistrations(session) + ' Disponible(s)';
+    } else {
+      return 'Complet';
+    }
+  }
 }
