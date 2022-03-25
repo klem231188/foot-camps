@@ -109,7 +109,7 @@
       }
 
       .flow-container {
-        width: 85%;
+        width: 80%;
         margin-top: 20px;
         align-self: center;
         min-width: 300px;
@@ -126,11 +126,12 @@
         }
 
         .flow-inner-container {
+          flex: 1;
           display: flex;
           flex-direction: row;
           justify-content: space-around;
           align-items: flex-start;
-          padding: 25px;
+          padding: 20px;
 
           @include small-screen {
             flex-direction: column;
@@ -172,12 +173,12 @@
 
             .card-title {
               color: #4A4A4A;
-              font-size: 22px;
-              padding-bottom: 7px;
+              font-size: 27px;
+              padding-top: 10px;
+              padding-bottom: 10px;
             }
 
             .card-content {
-              padding-top: 7px;
               font-size: 17px;
               text-align: center;
               color: #4A4A4A;

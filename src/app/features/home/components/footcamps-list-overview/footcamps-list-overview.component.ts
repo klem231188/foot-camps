@@ -61,7 +61,11 @@ export class FootcampsListOverviewComponent implements OnInit {
     if (minPrice < maxPrice) {
       return '' + minPrice + '<small> à </small>' + maxPrice + ' €';
     } else {
-      return '' + maxPrice + ' €';
+      if (maxPrice === 0) {
+        return 'Gratuit';
+      } else {
+        return '' + maxPrice + ' €';
+      }
     }
   }
 }
