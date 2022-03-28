@@ -8,6 +8,8 @@ import {UserService} from '../../../services/user/user.service';
 import {User} from '../../../models/user';
 import {Role} from '../../../models/role.enum';
 import {Meta, Title} from '@angular/platform-browser';
+import * as firebaseui from 'firebaseui';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private angularFireAuth: AngularFireAuth,
               private firebaseAuthUiService: FirebaseAuthUiService,
               private userService: UserService,
+              private snackBar: MatSnackBar,
               private router: Router,
               private location: Location,
               private titleService: Title,
@@ -78,8 +81,12 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
                   }
                 );
 
+              this.snackBar.open('Vous êtes désormais authentifié', 'Ok', {
+                duration: 5000,
+              });
+
               // go back
-              this.router.navigateByUrl('/accueil');
+              this.location.back();
 
               // Do not redirect.
               return false;
@@ -87,7 +94,8 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
           },
           signInOptions: [
             firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-            firebase.auth.EmailAuthProvider.PROVIDER_ID
+            firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
           ],
           signInFlow: 'popup',
           // Terms of service url.

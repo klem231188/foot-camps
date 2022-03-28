@@ -1,0 +1,27 @@
+[
+  {
+    "acceptedPaymentTypes": [],
+    "campId": "sc-lannilis-futsal-avril-2022",
+    "numberOfRegistrationsAccepted": 0,
+    "numberOfRegistrationsInProgress": 0,
+    "numberOfRegistrationsRejected": 0,
+    "enable": true,
+    "end": "2022-04-18T16:30:00+01:00",
+    "endRegistrationDate": "2022-04-18T10:00:00+01:00",
+    "fullBoardRates": null,
+    "halfBoardRates": null,
+    "id": "sc-lannilis-futsal-avril-2022-session-u16-u17",
+    "minimumAge": 16,
+    "maximumAge": 17,
+    "maximumNumberOfRegistrations": 30,
+    "prices": {
+      "feeAmount": null,
+      "free": true,
+      "fullBoardPrice": null,
+      "fullBoardReducedPrice": null,
+      "halfBoardPrice": null,
+      "halfBoardReducedPrice": null
+    },
+    "start": "2022-04-18T10:00:00+01:00"
+  }
+]

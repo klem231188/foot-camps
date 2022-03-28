@@ -5,6 +5,8 @@ import AberCamp from './json/aber-camp.json';
 import AberSessions from './json/aber-sessions.json';
 import PlabennecCamp from './json/plabennec-camp.json';
 import PlabennecSessions from './json/plabennec-sessions.json';
+import ScLannilisFutsalCamp from './json/2022-04-sc-lannilis-futsal-camp.json';
+import ScLannilisFutsalSessions from './json/2022-04-sc-lannilis-futsal-sessions.json';
 import {FootballCamp} from '../../../src/app/models/football-camp';
 import {Session} from '../../../src/app/models/session';
 import {RegistrationV2} from '../../../src/app/models/registration-v2.model';
@@ -57,5 +59,11 @@ export async function setCampPlabennec() {
 export async function setCampAber() {
   const camp: FootballCamp = AberCamp as FootballCamp;
   const sessions: Session[] = AberSessions as Session[];
+  await setCamp(camp, sessions);
+}
+
+export async function setCampScLannilisFutsal() {
+  const camp: FootballCamp = ScLannilisFutsalCamp as FootballCamp;
+  const sessions: Session[] = ScLannilisFutsalSessions as Session[];
   await setCamp(camp, sessions);
 }

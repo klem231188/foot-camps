@@ -21,7 +21,7 @@ export const routes: Routes = [
   {
     path: 'administration',
     loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule),
-    canActivate: [IsAdminGuard]
+    canActivate: [IsAdminGuard, IsSignedInGuard]
   },
   {
     path: 'login',

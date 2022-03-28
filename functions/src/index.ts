@@ -4,7 +4,7 @@ import {Change, EventContext} from 'firebase-functions/lib/cloud-functions';
 import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
 import {RegistrationV2} from '../../src/app/models/registration-v2.model';
 import {Session} from '../../src/app/models/session';
-import {setCampAber, setCampPlabennec, setCampPlouguerneau} from './functions/add-camps.functions';
+import {setCampAber, setCampPlabennec, setCampPlouguerneau, setCampScLannilisFutsal} from './functions/add-camps.functions';
 import {printEquipment, printReceipt, printRegistration, printRegistrations} from './functions/print-registration.functions';
 import {anonymize} from './functions/anonymize.functions';
 import {createPaymentIntent} from './functions/stripe.functions';
@@ -59,6 +59,18 @@ export const httpSetCampAber = functions.https.onRequest((request, response) => 
         response.send('httpSetCampAber successful');
       } catch (e) {
         response.status(500).send('httpSetCampAber unsuccessful');
+      }
+    }
+  )
+});
+
+export const httpSetCampScLannilisFutsal = functions.https.onRequest((request, response) => {
+  return cors(request, response, async () => {
+      try {
+        await setCampScLannilisFutsal();
+        response.send('httpSetCampScLannilisFutsal successful');
+      } catch (e) {
+        response.status(500).send('httpSetCampScLannilisFutsal unsuccessful');
       }
     }
   )

@@ -16,23 +16,26 @@ export async function sendMailRegistrationInProgress(
   console.log('sendMailRegistrationInProgress()');
 
   let paymentTypesAccepted = [];
-  for (const acceptedPaymentType of camp.paymentInfo.acceptedPaymentTypes) {
-    switch (acceptedPaymentType) {
-      case PaymentType.CARD:
-        paymentTypesAccepted.push('Carte Bancaire');
-        break;
-      case PaymentType.CASH:
-        paymentTypesAccepted.push('Espèce');
-        break;
-      case PaymentType.CHECK:
-        paymentTypesAccepted.push('Chèque');
-        break;
-      case PaymentType.HOLIDAY_CHECK:
-        paymentTypesAccepted.push('Chèque vacance');
-        break;
-      case PaymentType.OTHER:
-        paymentTypesAccepted.push('Autre');
-        break;
+
+  if (camp.paymentInfo.acceptedPaymentTypes) {
+    for (const acceptedPaymentType of camp.paymentInfo.acceptedPaymentTypes) {
+      switch (acceptedPaymentType) {
+        case PaymentType.CARD:
+          paymentTypesAccepted.push('Carte Bancaire');
+          break;
+        case PaymentType.CASH:
+          paymentTypesAccepted.push('Espèce');
+          break;
+        case PaymentType.CHECK:
+          paymentTypesAccepted.push('Chèque');
+          break;
+        case PaymentType.HOLIDAY_CHECK:
+          paymentTypesAccepted.push('Chèque vacance');
+          break;
+        case PaymentType.OTHER:
+          paymentTypesAccepted.push('Autre');
+          break;
+      }
     }
   }
 
@@ -102,8 +105,8 @@ export async function sendMailRegistrationAccepted(
           'footballcampName': camp.city,
           'traineeFirstname': registration.trainee.firstname,
           'traineeLastname': registration.trainee.lastname,
-          "sessionStartDate": session.start.toDate().toLocaleDateString('fr'),
-          "sessionEndDate": session.end.toDate().toLocaleDateString('fr')
+          'sessionStartDate': session.start.toDate().toLocaleDateString('fr'),
+          'sessionEndDate': session.end.toDate().toLocaleDateString('fr')
         }
       }
     ]
@@ -143,8 +146,8 @@ export async function sendMailRegistrationRejected(
           'footballcampName': camp.city,
           'traineeFirstname': registration.trainee.firstname,
           'traineeLastname': registration.trainee.lastname,
-          "sessionStartDate": session.start.toDate().toLocaleDateString('fr'),
-          "sessionEndDate": session.end.toDate().toLocaleDateString('fr')
+          'sessionStartDate': session.start.toDate().toLocaleDateString('fr'),
+          'sessionEndDate': session.end.toDate().toLocaleDateString('fr')
         }
       }
     ]
