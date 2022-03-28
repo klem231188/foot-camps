@@ -1,40 +1,28 @@
 {
   "city": "Sc Lannilis - Futsal",
   "id": "sc-lannilis-futsal-avril-2022",
-  "latitude": 42.8834816,
-  "longitude": -8.51968,
+  "latitude": 48.568235,
+  "longitude": -4.5155335,
   "paymentInfo": {
     "acceptedPaymentModes": [
       "IN_PERSON"
     ]
   },
-  "minimumAge": 10,
+  "minimumAge": 9,
   "maximumAge": 17,
   "boysAccepted": true,
   "girlsAccepted": true,
   "details": {
-    "activityDescription": "<div class=\"description-block\"><u><b>Les organisateurs</b></u><br>\n    Julien Pretet et le club du SC Lannilis organise un stage d'arbitrage et de futsal pendant les vacances de Pâques. <br>\n    Le stage est programmé sur 4 jours avec une catégorie différente par jour.<br>\n    Le tout gratuitement avec un maximum de 30 places par jour. <br>\n    Une inscription au préalable sur footcamps est obligatoire.\n</div>\n<br>\n<div class=\"description-block\"><u><b>Le programme sportif</b></u><br>\n    La journée commencera par l’apprentissage des règles et la découverte de l’arbitrage.<br>\n    Puis le déjeuner sera pris en commun, chacun apportera son pique-nique.<br>\n    Dans l'après-midi, découverte du futsal à l’aide de jeux et de matchs.<br>\n    Le programme complet par session est téléchargeable ci-dessous.\n</div>\n<br>\n<div class=\"description-block\"><u><b>Les horaires</b></u><br>\n    De 10h00 à 16h30\n</div>\n\n",
-    "address": "Salle Gorrekear, 29870 Lannilis, France",
+    "activityDescription": "<div class=\"description-block\"><u><b>Le stage</b></u><br>\n    Le club de foot de Lannilis organise une semaine de découverte du <b>foot en salle</b> et sur la continuation\n    de <b>l’apprentissage de l’arbitrage</b> pendant les vacances d’Avril qui débutera du Lundi 11 Avril au\n    Vendredi 15 Avril.<br>\n    La semaine sera découpée en 4 journées par tranche d’âges:\n    <ul>\n        <li>Le Lundi 11 Avril sera ouvert pour les joueurs et joueuses né en 2012 et 2011</li>\n        <li>Le Mercredi 13 Avril sera ouvert pour les joueurs et joueuses né en 2010 et 2009</li>\n        <li>Le Jeudi 14 Avril sera ouvert pour les joueurs et joueuses né en 2008 et 2007</li>\n        <li>Le Vendredi 15 Avril sera ouvert pour les joueurs et joueuses né en 2006 et 2005</li>\n    </ul>\n</div>\n<br>\n<div class=\"description-block\"><u><b>Le programme de la journée</b></u><br>\n    Les journées commenceront à 10h et elles se termineront à 16h30 à la salle de Kergroas à Lannilis.<br>\n    Le rdv se fera au club house a Kergroas. La journée débutera par l’apprentissage de l’arbitrage et de ses\n    règles jusqu’à la pause de midi, puis l’après-midi nous passerons à la découverte du foot en salle à\n    l’aide de jeux et matchs dans la salle de Kergroas.\n</div>\n<br>\n<div class=\"description-block\"><u><b>A prévoir</b></u><br>\n    Pour la journée, prévoir une tenue de foot habituelles et des baskets de sport ainsi que son pique-\n    nique pour le midi.\n</div>\n",
+    "address": "Complexe sportif de Kergroas, 29870 Lannilis, France",
     "documents": [
       {
-        "url": "./assets/img/2022-04-sc-lannilis-futsal/programme-session-u16-u17.pdf",
-        "name": "Le programme de la session U16-17"
-      },
-      {
-        "url": "./assets/img/2022-04-sc-lannilis-futsal/programme-session-14-u15.pdf",
-        "name": "Le programme de la session U14-U15"
-      },
-      {
-        "url": "./assets/img/2022-04-sc-lannilis-futsal/programme-session-u12-u13.pdf",
-        "name": "Le programme de la session U12-U13"
-      },
-      {
-        "url": "./assets/img/2022-04-sc-lannilis-futsal/programme-session-u10-u11.pdf",
-        "name": "Le programme de la session U10-U11"
+        "url": "./assets/img/2022-04-sc-lannilis-futsal/programme-stage.pdf",
+        "name": "Le programme du stage"
       }
     ],
-    "gmapsUrl": "https://goo.gl/maps/nGuxT9BCiP3419Br5",
-    "location": "Le stage se déroulera à la <a href=\"https://goo.gl/maps/nGuxT9BCiP3419Br5\" target=\"_blank\"><u>salle Gorrekear de Lannilis</u></a>",
+    "gmapsUrl": "https://goo.gl/maps/1fvyehRLk17HaDEL8",
+    "location": "Le stage se déroulera au <a href=\"https://goo.gl/maps/1fvyehRLk17HaDEL8\" target=\"_blank\"><u>complexe sportif de Kergroas de Lannilis</u></a>",
     "organizerDescription": "Les stages sont encadrés par une une équipe technique de <b>qualité</b>, <b>expérimentée</b> et <b>motivée</b>",
     "organizers": [
       {
@@ -48,7 +36,7 @@
     ],
     "pathToGallery": "./assets/img/2022-04-sc-lannilis-futsal/gallery/data.json",
     "pathToLogo": "./assets/img/2022-04-sc-lannilis-futsal/logo.jpg",
-    "priceDescription": "<div class=\"description-block\">\n    Le stage est <b>gratuit</b>.<br>\n    Il faudra apporter un piqe-nique pour le midi.<br>\n    Le goûter est offert pas le club.\n</div>\n"
+    "priceDescription": "<div class=\"description-block\">\n Le stage est <b>gratuit</b></div>"
   },
   "overview": {
     "content": "",

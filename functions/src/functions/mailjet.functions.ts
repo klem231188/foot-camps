@@ -65,7 +65,7 @@ export async function sendMailRegistrationInProgress(
           'paymentTypesAccepted': paymentTypesAccepted,
           'checkAddress': camp.paymentInfo.paymentAddress,
           'endPaymentDate': session.endRegistrationDate,
-          'footballcampPrice': payment.reducedPrice ? session.prices.halfBoardReducedPrice : session.prices.halfBoardPrice
+          'footballcampPrice': session.prices.free ? 0 : payment.reducedPrice ? session.prices.halfBoardReducedPrice : session.prices.halfBoardPrice
         }
       }
     ]
