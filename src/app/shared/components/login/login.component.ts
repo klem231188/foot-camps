@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
                   }
                 );
 
-              this.snackBar.open('Vous êtes désormais authentifié', 'Ok', {
+              this.snackBar.open('Vous pouvez désormais vous inscrire', 'J\'ai compris', {
                 duration: 5000,
               });
 

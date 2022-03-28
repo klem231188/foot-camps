@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           // stages/:id/inscription --> stages/:id/details
           this.backUrl = event.url.replace('/inscription', '/details');
           console.log(this.backUrl);
-        } else if (/^\/stages\/\w+\/details$/i.test(event.url)) {
+        } else if (/^\/stages\/\w+|-\/details$/i.test(event.url)) {
           // stages/:id/details --> accueil
           this.backUrl = event.url = 'accueil';
           console.log(this.backUrl);
