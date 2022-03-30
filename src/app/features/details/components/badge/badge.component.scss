@@ -25,14 +25,14 @@
 
       width: 180px;
       @include small-screen {
-        width: 90px;
+        width: 100px;
       }
 
       svg {
         width: 180px;
         height: auto;
         @include small-screen {
-          width: 90px;
+          width: 100px;
           height: auto;
         }
       }

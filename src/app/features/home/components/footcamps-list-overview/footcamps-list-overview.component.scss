@@ -48,6 +48,12 @@
           background-color: white;
           margin-bottom: 20px;
 
+          @include small-screen {
+            border: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+            border-top: 1px solid rgba(0, 0, 0, 0.25);
+          }
+
           .header-container {
             align-self: center;
             display: flex;
@@ -86,7 +92,9 @@
               justify-content: center;
               background-color: #E7F8FF;
               border-radius: 50%;
+              min-width: 50px;
               width: 50px;
+              min-height: 50px;
               height: 50px;
               margin-right: 10px;
 

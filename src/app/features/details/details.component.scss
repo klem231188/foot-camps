@@ -159,6 +159,9 @@
           align-items: center;
           width: 100%;
           margin-top: 10px;
+          border: none;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+          border-top: 1px solid rgba(0, 0, 0, 0.25);
         }
 
         .organizer-container {
@@ -235,6 +238,9 @@
 
           @include small-screen {
             padding: 10px;
+            border: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+            border-top: 1px solid rgba(0, 0, 0, 0.25);
           }
 
           img {
@@ -253,6 +259,9 @@
             margin-left: 0;
             margin-top: 10px;
             padding: 10px;
+            border: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+            border-top: 1px solid rgba(0, 0, 0, 0.25);
           }
 
           .description-block {
@@ -305,6 +314,9 @@
 
             @include small-screen {
               padding: 10px;
+              border: none;
+              border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+              border-top: 1px solid rgba(0, 0, 0, 0.25);
             }
 
             .document {
@@ -350,6 +362,12 @@
             margin-top: 10px;
             flex: 1;
 
+            @include small-screen {
+              border: none;
+              border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+              border-top: 1px solid rgba(0, 0, 0, 0.25);
+            }
+
             a {
               color: mat-color($primary);
               @include small-screen {
@@ -373,6 +391,9 @@
           @include small-screen {
             margin-right: 0;
             padding: 10px;
+            border: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+            border-top: 1px solid rgba(0, 0, 0, 0.25);
           }
 
           .description-block {
@@ -473,6 +494,9 @@
         @include small-screen {
           width: 100%;
           margin-top: 10px;
+          border: none;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+          border-top: 1px solid rgba(0, 0, 0, 0.25);
         }
 
         .gallery-inner-container {
@@ -509,6 +533,9 @@
         @include small-screen {
           width: 100%;
           margin-top: 10px;
+          border: none;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+          border-top: 1px solid rgba(0, 0, 0, 0.25);
         }
 
         .registrations-grid-inner-container {
