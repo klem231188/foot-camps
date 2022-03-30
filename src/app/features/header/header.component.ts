@@ -8,6 +8,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {FootballCampService} from '../../services/football-camp/football-camp.service';
 import {filter, switchMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -28,7 +29,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private dialog: MatDialog,
               private angularFireAuth: AngularFireAuth,
               private activatedRoute: ActivatedRoute,
-              private footballCampService: FootballCampService) {
+              private footballCampService: FootballCampService,
+              private location: Location) {
     this.subscriptions = [];
     this.selectedFootballCamp = new BehaviorSubject(null);
     this.environment = environment;
@@ -52,13 +54,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const subToRouter = this.router.events.pipe(
       filter(event => event instanceof NavigationStart))
       .subscribe((event: NavigationStart) => {
-        if (/^\/stages\/\w+\/inscription$/i.test(event.url)) {
+        console.log('event.url =' + event.url);
+        if (/^\/stages\/[a-zA-Z0-9_-]+\/inscription$/i.test(event.url)) {
           // stages/:id/inscription --> stages/:id/details
           this.backUrl = event.url.replace('/inscription', '/details');
           console.log(this.backUrl);
-        } else if (/^\/stages\/\w+|-\/details$/i.test(event.url)) {
+        } else if (/^\/stages\/[a-zA-Z0-9_-]+\/details$/i.test(event.url)) {
           // stages/:id/details --> accueil
-          this.backUrl = event.url = 'accueil';
+          this.backUrl = 'accueil';
+          console.log(this.backUrl);
+        } else if (/^\/login$/i.test(event.url)) {
+          // login --> back to previous url
+          this.backUrl = this.location.path() === '/login' ? null : this.location.path();
           console.log(this.backUrl);
         } else {
           this.backUrl = null;
