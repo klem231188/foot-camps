@@ -10,6 +10,8 @@ import {Role} from '../../../models/role.enum';
 import {Meta, Title} from '@angular/platform-browser';
 import * as firebaseui from 'firebaseui';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {take, takeUntil, tap} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +20,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}]
 })
 export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   constructor(private angularFireAuth: AngularFireAuth,
               private firebaseAuthUiService: FirebaseAuthUiService,
               private userService: UserService,
@@ -29,10 +34,12 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-
   }
 
   ngOnDestroy(): void {
+    console.log('LoginComponent.destroy()');
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -40,7 +47,10 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.meta.updateTag({name: 'description', content: 'Se connecter à footcamps'});
     this.meta.updateTag({name: 'keywords', content: 'footcamps, stage, football, connexion, se connecter'});
 
-    this.angularFireAuth.authState.subscribe((firebaseUser) => {
+    this.angularFireAuth
+      .authState
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((firebaseUser) => {
       if (firebaseUser && firebaseUser.uid) {
         // Logged
         console.log('Logged');
@@ -56,10 +66,11 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
               const currentUser = authResult.user;
               this.userService
                 .getUser(currentUser.uid)
-                .subscribe(
-                  (user: User) => {
+                .pipe(
+                  take(1),
+                  tap(async (user: User) => {
                     console.log('getUser() returns : ' + JSON.stringify(user));
-                    if (user) {
+                    if (user.email) {
                       console.log('User already in database');
                     } else {
                       console.log('User not yet in database');
@@ -76,17 +87,19 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
                       };
 
                       // Store user in database
-                      this.userService.addUser(userToStore);
+                      await this.userService.addUser(userToStore);
                     }
-                  }
-                );
+                  }),
+                  tap(() => {
+                    this.snackBar.open('Vous pouvez désormais vous inscrire', 'J\'ai compris', {
+                      duration: 5000,
+                    });
 
-              this.snackBar.open('Vous pouvez désormais vous inscrire', 'J\'ai compris', {
-                duration: 5000,
-              });
-
-              // go back
-              this.location.back();
+                    // go back
+                    this.location.back();
+                  })
+                )
+                .subscribe();
 
               // Do not redirect.
               return false;
