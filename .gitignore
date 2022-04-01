@@ -50,3 +50,6 @@ Thumbs.db
 /functions/.runtimeconfig.json
 /functions/firestore-debug.log
 /functions/ui-debug.log
+/functions/.runtimeconfig-dev.json
+/functions/.runtimeconfig-prod.json
+/.firebase/hosting.ZGlzdA.cache
