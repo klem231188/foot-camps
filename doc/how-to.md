@@ -30,9 +30,10 @@ npm install -g mkdirp
 
 # Launch the command to create a gallery
 cd ~/workspace/foot-camps/
-node node_modules/angular2-image-gallery/convert.js src/assets/img/plouguerneau/gallery --outputDir=src/assets/img/plouguerneau/gallery --remoteBaseUrl=assets/img/plouguerneau/gallery
+node ~/.nvm/versions/node/v12.22.7/lib/node_modules/angular2-image-gallery/angular2-image-gallery/convert.js src/assets/img/plouguerneau/gallery --outputDir=src/assets/img/plouguerneau/gallery --remoteBaseUrl=assets/img/plouguerneau/gallery
 
-# Example: node node_modules/angular2-image-gallery/convert.js src/assets/img/lorient/gallery --outputDir=src/assets/img/lorient/gallery --remoteBaseUrl=assets/img/lorient/gallery
+# Now, remove all the generated folders preview_*/ and raw/
+# Rename in data.json. See 2022-07-aber-foot as an example
 ```
 
 ## Create a new component
