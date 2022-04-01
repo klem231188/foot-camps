@@ -55,7 +55,7 @@ export async function createPaymentIntent(
     const paymentIntent = await stripe.paymentIntents.create({
       amount: price,
       currency: 'EUR',
-      application_fee_amount: session.prices.feeAmount * 100,
+      // application_fee_amount: session.prices.feeAmount * 100,
       transfer_data: {
         destination: footballCamp.paymentInfo.accountId,
       }

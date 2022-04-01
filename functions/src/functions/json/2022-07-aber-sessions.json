@@ -1,0 +1,30 @@
+[
+  {
+    "acceptedPaymentTypes": [
+      "CHECK",
+      "HOLIDAY_CHECK"
+    ],
+    "campId": "2022-07-aber-camp",
+    "numberOfRegistrationsAccepted": 0,
+    "numberOfRegistrationsInProgress": 0,
+    "numberOfRegistrationsRejected": 0,
+    "enable": true,
+    "end": "2022-07-13T17:00:00+01:00",
+    "endRegistrationDate": "2022-07-08T08:30:00+01:00",
+    "fullBoardRates": null,
+    "halfBoardRates": 160,
+    "id": "2022-07-aber-camp-session1",
+    "minimumAge": 9,
+    "maximumAge": 13,
+    "maximumNumberOfRegistrations": 40,
+    "prices": {
+      "feeAmount": 0,
+      "free": false,
+      "fullBoardPrice": null,
+      "fullBoardReducedPrice": null,
+      "halfBoardPrice": 160,
+      "halfBoardReducedPrice": null
+    },
+    "start": "2022-07-08T08:30:00+01:00"
+  }
+]

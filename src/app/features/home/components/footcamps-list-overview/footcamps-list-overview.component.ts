@@ -24,7 +24,7 @@ export class FootcampsListOverviewComponent implements OnInit {
   }
 
   getFootballCampOverviewImage(footCamp: FootballCamp): string {
-    return `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url('${footCamp.overview.pathToImage200px}')`;
+    return `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url('${footCamp.overview.pathToImage200px}')`;
   }
 
   ngOnInit(): void {
