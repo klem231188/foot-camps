@@ -25,6 +25,18 @@
       .separator {
         margin-top: 5px;
       }
+
+      a {
+        color: mat-color($primary);
+        @include small-screen {
+          text-overflow: ellipsis;
+        }
+      }
+
+      a[target="_blank"]::after {
+        content: url("/assets/img/external-link.svg");
+        margin: 0 3px 0 3px;
+      }
     }
   }
 }
