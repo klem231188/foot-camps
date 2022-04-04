@@ -64,8 +64,15 @@ export class AdminComponent implements OnInit {
               return of([]);
           }
         }),
-        tap((camps: FootballCamp[]) => {
-            this.footballCamps = camps != null ? camps : [];
+        tap((camps: FootballCamp[] | FootballCamp) => {
+            this.footballCamps = [];
+            if (camps != null) {
+              if (Array.isArray(camps)) {
+                this.footballCamps.push(...camps);
+              } else {
+                this.footballCamps.push(camps);
+              }
+            }
             this.selectedCamp$.next(this.footballCamps.length > 0 ? this.footballCamps[0] : null);
           }
         )
