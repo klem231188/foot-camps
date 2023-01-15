@@ -8,6 +8,8 @@
     flex: 1;
     display: flex;
     border: 1px solid rgba(0, 0, 0, 0.25);
+    background-color: #2b2d30;
+    font-family: Roboto;
 
     @include small-screen {
       margin-top: 5px;
@@ -18,6 +20,7 @@
       flex: 1;
       box-shadow: none !important;
       border-radius: 0;
+      background-color: #2b2d30;
 
       h2 {
         font-weight: bold;
@@ -37,12 +40,12 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          border: 1px solid rgba(0, 0, 0, 0.25);
 
           @include small-screen {
             height: 100px;
             width: 100px;
           }
+
           .photo {
             width: 100%;
             height: 100%;
@@ -82,18 +85,21 @@
 
       .accent {
         background-color: mat-color($accent);
+        color: #2b2d30;
         padding: 7px;
         border-radius: 5px;
       }
 
       .primary {
         background-color: mat-color($primary);
+        color: #2b2d30;
         padding: 7px;
         border-radius: 5px;
       }
 
       .warn {
         background-color: mat-color($warn);
+        color: #2b2d30;
         padding: 7px;
         border-radius: 5px;
       }

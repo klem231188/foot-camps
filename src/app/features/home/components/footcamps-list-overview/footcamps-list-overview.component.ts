@@ -4,6 +4,7 @@ import {Session} from '../../../../models/session';
 import {FootballCampService} from '../../../../services/football-camp/football-camp.service';
 import {SessionService} from '../../../../services/session/session.service';
 import {tap} from 'rxjs/operators';
+import {Gender} from '../../../../models/gender.enum';
 
 @Component({
   selector: 'app-footcamps-list-overview',
@@ -13,6 +14,7 @@ import {tap} from 'rxjs/operators';
 export class FootcampsListOverviewComponent implements OnInit {
 
   footballCamps: FootballCamp[];
+  Gender = Gender;
   sessions: Session[];
 
   constructor(public footballCampService: FootballCampService,
@@ -24,7 +26,7 @@ export class FootcampsListOverviewComponent implements OnInit {
   }
 
   getFootballCampOverviewImage(footCamp: FootballCamp): string {
-    return `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url('${footCamp.overview.pathToImage200px}')`;
+    return `url('${footCamp.overview.pathToImage200px}')`;
   }
 
   ngOnInit(): void {
@@ -44,15 +46,6 @@ export class FootcampsListOverviewComponent implements OnInit {
       .subscribe();
   }
 
-  percentageOfAvailability(session: Session): number {
-    const availableRegistrations = this.availableRegistrations(session);
-    return (availableRegistrations / session.maximumNumberOfRegistrations) * 100;
-  }
-
-  percentageOfRegistrations(session: Session): number {
-    return ((session.numberOfRegistrationsInProgress + session.numberOfRegistrationsAccepted) / session.maximumNumberOfRegistrations) * 100;
-  }
-
   getPrice(footCamp: FootballCamp): string {
     const halfBoardPrices: number[] = this.sessions.filter(s => s.campId === footCamp.id).map(s => s.prices.halfBoardPrice);
     const minPrice = Math.min(...halfBoardPrices);
@@ -69,11 +62,58 @@ export class FootcampsListOverviewComponent implements OnInit {
     }
   }
 
-  getTooltipAvailability(session: Session): string {
-    if (this.percentageOfAvailability(session) !== 0) {
-      return this.availableRegistrations(session) + ' Disponible(s)';
-    } else {
-      return 'Complet';
+  getGenders(footCamp: FootballCamp): Gender[] {
+    return this.sessions
+      .filter(s => s.campId === footCamp.id)
+      .map(s => Array.isArray(s.genders) ? s.genders : [])
+      .reduce((previous, current) => previous.concat(current));
+  }
+
+  getNumberOfSessions(footCamp: FootballCamp): string {
+    const sessions = this.sessions.filter(s => s.campId === footCamp.id);
+    return sessions.length > 1 ? `${sessions.length} Sessions` : `${sessions.length} Session`;
+  }
+
+  getSessionDates(footCamp: FootballCamp): string {
+    const sessions: Session[] = this.sessions.filter(s => s.campId === footCamp.id);
+
+    const dates: Date[] = sessions
+      .map(s => [s.start.toDate(), s.end.toDate()])
+      .reduce((acc, val) => acc.concat(val), [])
+      .sort((a, b) => a.getTime() - b.getTime());
+
+    let minMonth, maxMonth, year;
+
+    if (dates != null) {
+      if (dates.length > 0) {
+        minMonth = dates[0].toLocaleString('fr', {month: 'long'});
+        year = dates[0].toLocaleString('fr', {year: 'numeric'});
+      }
+      if (dates.length > 1) {
+        maxMonth = dates[dates.length - 1].toLocaleString('fr', {month: 'long'});
+      }
     }
+
+    if (minMonth !== maxMonth) {
+      return `${minMonth} | ${maxMonth} ${year}`;
+    } else {
+      return `${minMonth} ${year}`;
+    }
+  }
+
+  getAvailableRegistrations(footCamp: FootballCamp): string {
+    const sessions = this.sessions.filter(s => s.campId === footCamp.id);
+
+    const nbActiveRegistrations = sessions
+      .map(s => s.numberOfRegistrationsInProgress + s.numberOfRegistrationsAccepted)
+      .reduce((previous, current) => previous + current);
+
+    const nbMaxRegistrations = sessions
+      .map(s => s.maximumNumberOfRegistrations)
+      .reduce((previous, current) => previous + current);
+
+    const nbAvailableRegistrations = nbMaxRegistrations - nbActiveRegistrations;
+
+    return nbAvailableRegistrations === 0 ? 'Complet' : nbAvailableRegistrations === 1 ? '1 inscription disponible' : `${nbAvailableRegistrations} inscriptions disponibles`;
   }
 }

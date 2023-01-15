@@ -39,7 +39,7 @@ export class BadgesComponent implements OnChanges, OnInit {
   }
 
   getAgeSubtitle(): string {
-    return this.footballCamp.minimumAge + '<small> à </small>' + this.footballCamp.maximumAge + ' ans';
+    return this.footballCamp.minimumAge + '<small> - </small>' + this.footballCamp.maximumAge + ' ans';
   }
 
   getPriceSubtitle(): string {

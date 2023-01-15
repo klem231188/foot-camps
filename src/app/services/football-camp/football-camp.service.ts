@@ -1,10 +1,11 @@
 import {map, publishReplay, refCount} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 
 import {FootballCamp} from '../../models/football-camp';
+import _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,8 @@ export class FootballCampService {
         .collection<FootballCamp>('camps')
         .valueChanges({ idField: 'id' })
         .pipe(
-          publishReplay(1), // Latest event is buffered and will be emit to new subscriber
+          map(footballCamps => _.orderBy(footballCamps, [fc => fc.id.toLowerCase()], ['desc'])),
+          publishReplay(1), // Latest event is buffered and will be emitted to new subscriber
           refCount(), // Transform ConnectableObservable to Observable and handle multiple subscription / unsubscription
         );
     }

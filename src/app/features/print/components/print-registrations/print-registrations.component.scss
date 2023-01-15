@@ -23,6 +23,10 @@
       display: flex;
       break-after: always;
       page-break-after: always;
+      color: $brown;
+      border-top: 1px solid $brown;
+      border-left: 1px solid $brown;
+      border-right: 1px solid $brown;
 
       .page-inner-container {
         padding: 0.3cm;
@@ -65,12 +69,12 @@
           flex-direction: column;
           flex: 1;
           padding-left: 10px;
-          border-left-color: #00796b;
+          border-left-color: $green;
           border-left-style: solid;
           border-left-width: 3px;
 
           h3 {
-            font-family: 'Milkshake', serif;
+            font-family: 'cubano';
             font-size: 25px;
             color: mat-color($primary);
           }
@@ -103,10 +107,10 @@
     .print-bar-sticky-container {
       height: 60px;
       position: fixed;
-      background-color: #fafafa;
+      background-color: $brown;
       bottom: 0;
       width: 100%;
-      border: 1px solid rgba(0, 0, 0, 0.25);
+      border-top: 2px solid $green;
       z-index: 3;
       display: flex;
       flex-direction: row;
@@ -121,7 +125,7 @@
         height: 50px;
         padding: 0 35px;
         border-radius: 50px;
-        border: 1px solid rgba(0, 0, 0, 0.25);
+        border: 2px solid $green;
         line-height: 50px;
         display: inline-block;
         -webkit-box-sizing: border-box;
@@ -136,14 +140,17 @@
         font-weight: 700;
         -webkit-transition: background-color .2s;
         transition: background-color .2s;
-        color: #4A4A4A;
-        background-color: white;
+        color: $green;
+        background-color: $brown;
         font-family: Roboto;
         position: absolute;
       }
 
       .action-button:hover {
-        color: mat-color($primary);
+        border: 2px solid $brown;
+        background-color: $green;
+        color: $brown;
+        transition: background .7s ease, color .7s ease, border 1.5s ease;
       }
     }
   }

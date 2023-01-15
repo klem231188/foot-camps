@@ -18,18 +18,19 @@
   </mat-form-field>
 
   <!-- gender -->
-  <mat-radio-group formControlName="gender">
-    Sexe <sup>*</sup> :&nbsp;
-    <mat-radio-button value="MALE">Garçon</mat-radio-button>
-    &nbsp;
-    <mat-radio-button value="FEMALE">Fille</mat-radio-button>
-  </mat-radio-group>
-  <span class="separator"></span>
+  <mat-form-field [appearance]="'outline'">
+    <mat-label>Genre</mat-label>
+    <mat-select formControlName="gender" required>
+      <mat-option [value]="'MALE'">Garçon</mat-option>
+      <mat-option [value]="'FEMALE'">Fille</mat-option>
+    </mat-select>
+    <mat-error *ngIf="gender.invalid">{{getGenderError()}}</mat-error>
+  </mat-form-field>
 
   <!-- birthdate -->
   <mat-form-field [appearance]="'outline'">
     <mat-label>Date de naissance</mat-label>
-    <input matInput [matDatepicker]="picker" placeholder="23/11/2010" formControlName="birthdate" required>
+    <input matInput [matDatepicker]="picker" placeholder="Ex: 23/11/2010" formControlName="birthdate" required>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
     <mat-error *ngIf="birthdate.invalid">{{getBirthdateError()}}</mat-error>
@@ -38,29 +39,27 @@
   <!-- Contact email -->
   <mat-form-field [appearance]="'outline'">
     <mat-label>E-mail du représentant légal</mat-label>
-    <input matInput type="mon-email@gmail.com" placeholder="Email du parent" formControlName="email" required>
+    <input matInput type="mon-email@gmail.com" placeholder="Ex: me@gmail.com" formControlName="email" required>
     <mat-error *ngIf="email.invalid">{{getEmailError()}}</mat-error>
   </mat-form-field>
 
   <!-- shortSize  -->
-  <mat-radio-group formControlName="shortSize">
-    Taille short/maillot <sup>*</sup> (<a href="https://www.unisportstore.fr/faq/produits/guide-des-tailles-pour-les-maillots-de-foot/" target="_blank">Tableau des tailles</a>) :&nbsp;
-    <mat-radio-button value="XXS">XXS</mat-radio-button>
-    &nbsp;
-    <mat-radio-button value="XS">XS</mat-radio-button>
-    &nbsp;
-    <mat-radio-button value="S">S</mat-radio-button>
-    &nbsp;
-    <mat-radio-button value="M">M</mat-radio-button>
-    &nbsp;
-    <mat-radio-button value="L">L</mat-radio-button>
-  </mat-radio-group>
-  <span class="separator"></span>
+  <mat-form-field [appearance]="'outline'">
+    <mat-label>Taille maillot</mat-label>
+    <mat-select formControlName="shortSize" required>
+      <mat-option [value]="'XXS'">XXS | 122-128 cm	| 6-8 ans</mat-option>
+      <mat-option [value]="'XS'">XS | 128-137 cm	| 8-10 ans</mat-option>
+      <mat-option [value]="'S'">S | 137-147 cm	| 10-12 ans</mat-option>
+      <mat-option [value]="'M'">M | 147-158 cm	| 12-14 ans</mat-option>
+      <mat-option [value]="'L'">L | 158-170 cm	| 14-16 ans</mat-option>
+    </mat-select>
+    <mat-error *ngIf="shortSize.invalid">{{getShortSizeError()}}</mat-error>
+  </mat-form-field>
 
   <!-- shoeSize -->
   <mat-form-field [appearance]="'outline'">
     <mat-label>Pointure</mat-label>
-    <input matInput placeholder="30" formControlName="shoeSize" type="number" required>
+    <input matInput placeholder="Ex: 30" formControlName="shoeSize" type="number" required>
     <mat-error *ngIf="shoeSize.invalid">{{getShoeSizeError()}}</mat-error>
   </mat-form-field>
   <span class="separator"></span>
@@ -69,27 +68,28 @@
   <!-- Club -->
   <mat-form-field [appearance]="'outline'">
     <mat-label>Club actuel</mat-label>
-    <input matInput placeholder="Stade Brestois 29" formControlName="club">
+    <input matInput placeholder="Ex: Stade Brestois 29" formControlName="club">
   </mat-form-field>
 
   <!-- Poste préféré : Gardien / Défenseur / Milieu / Attaquant -->
-  <mat-radio-group formControlName="fieldPosition">
-    Poste préférentiel <sup>*</sup> :&nbsp;
-    <mat-radio-button value="GOALKEEPER">Gardien</mat-radio-button>
-    &nbsp;
-    <mat-radio-button value="DEFENDER">Défenseur</mat-radio-button>
-    &nbsp;
-    <mat-radio-button value="MIDFIELDER">Milieu</mat-radio-button>
-    &nbsp;
-    <mat-radio-button value="STRIKER">Attaquant</mat-radio-button>
-  </mat-radio-group>
-  <span class="separator"></span>
+  <mat-form-field [appearance]="'outline'">
+    <mat-label>Poste préférentiel</mat-label>
+    <mat-select formControlName="fieldPosition" required>
+      <mat-option [value]="'GOALKEEPER'">Gardien</mat-option>
+      <mat-option [value]="'DEFENDER'">Défenseur</mat-option>
+      <mat-option [value]="'MIDFIELDER'">Milieu</mat-option>
+      <mat-option [value]="'STRIKER'">Attaquant</mat-option>
+    </mat-select>
+    <mat-error *ngIf="fieldPosition.invalid">{{getFieldPositionError()}}</mat-error>
+  </mat-form-field>
 
   <!-- Pied Gauche / Droit -->
-  <mat-radio-group formControlName="feet">
-    Pied préférentiel <sup>*</sup> :&nbsp;
-    <mat-radio-button value="LEFT_FOOTED">Gaucher</mat-radio-button>
-    <mat-radio-button value="RIGHT_FOOTED">Droitier</mat-radio-button>
-  </mat-radio-group>
-  <span class="separator"></span>
+  <mat-form-field [appearance]="'outline'">
+    <mat-label>Pied préférentiel</mat-label>
+    <mat-select formControlName="feet" required>
+      <mat-option [value]="'LEFT_FOOTED'">Gaucher</mat-option>
+      <mat-option [value]="'RIGHT_FOOTED'">Droitier</mat-option>
+    </mat-select>
+    <mat-error *ngIf="fieldPosition.invalid">{{getFeetError()}}</mat-error>
+  </mat-form-field>
 </form>

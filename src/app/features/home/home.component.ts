@@ -15,6 +15,14 @@ export class HomeComponent {
       `events`,
       this.domSanitizer.bypassSecurityTrustResourceUrl(`../../../assets/icons/emoji_events.svg`)
     );
+    this.matIconRegistry.addSvgIcon(
+      `male`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(`../../../assets/icons/male.svg`)
+    );
+    this.matIconRegistry.addSvgIcon(
+      `female`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(`../../../assets/icons/female.svg`)
+    );
   }
 
   scroll(el: HTMLElement) {

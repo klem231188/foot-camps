@@ -71,11 +71,43 @@ export class StepTraineeFormComponent implements OnInit {
     }
   }
 
+  getFieldPositionError() {
+    if (this.fieldPosition.hasError('required')) {
+      return 'Le poste est obligatoire';
+    } else {
+      return '';
+    }
+  }
+
+  getFeetError() {
+    if (this.feet.hasError('required')) {
+      return 'Le pied est obligatoire';
+    } else {
+      return '';
+    }
+  }
+
+  getGenderError() {
+    if (this.gender.hasError('required')) {
+      return 'Le genre est obligatoire';
+    } else {
+      return '';
+    }
+  }
+
   getShoeSizeError() {
     if (this.shoeSize.hasError('required')) {
       return 'La pointure est obligatoire';
     } else if (this.shoeSize.hasError('min')) {
       return 'La pointure doit être un nombre positif';
+    } else {
+      return '';
+    }
+  }
+
+  getShortSizeError() {
+    if (this.shortSize.hasError('required')) {
+      return 'La taille du maillot est obligatoire';
     } else {
       return '';
     }

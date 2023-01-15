@@ -12,6 +12,7 @@
     "end": "2019-07-21T12:00:00+01:00",
     "endRegistrationDate": "2019-07-01T00:00:00+01:00",
     "fullBoardRates": null,
+    "genders": ["MALE", "FEMALE"],
     "halfBoardRates": 170,
     "id": "KxZ64nZ9ukgdCkl9r2Sv",
     "minimumAge": 5,

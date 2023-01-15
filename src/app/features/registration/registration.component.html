@@ -4,11 +4,17 @@
 
 <div *ngIf="footballCamp" class="main-container">
 
-  <div class="background-container"></div>
+  <div class="background-container">
+  </div>
 
   <div class="carousel-container">
-    <div class="text">
-      Footcamps
+    <div class="love"></div>
+    <div class='foot'></div>
+    <div class='camps'></div>
+    <div class="custom-shape-divider-bottom-1657462287">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="xMidYMid slice">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+      </svg>
     </div>
   </div>
 
@@ -18,7 +24,7 @@
 
       <!-- Step 1 : Choose a session-->
       <mat-step [completed]="isStepSessionValid">
-        <ng-template matStepLabel>Choix session</ng-template>
+        <ng-template matStepLabel>Session</ng-template>
         <app-step-sessions #sessionComponent (isValid)="isStepSessionValid = $event;"
                            [campId]="footballCamp.id"></app-step-sessions>
         <div class="separator"></div>
@@ -32,7 +38,7 @@
 
       <!-- Step 2 : Fill in trainee form -->
       <mat-step [completed]="isStepTraineeFormValid">
-        <ng-template matStepLabel>Remplir formulaire</ng-template>
+        <ng-template matStepLabel>Formulaire</ng-template>
         <app-step-trainee-form [mocked]="mocked" (isValid)="isStepTraineeFormValid = $event;"></app-step-trainee-form>
         <div class="separator"></div>
         <div class="next-button">
@@ -45,7 +51,7 @@
 
       <!--Step 3 : Document to supply -->
       <mat-step [completed]="isStepDocumentsValid">
-        <ng-template matStepLabel>Documents à fournir</ng-template>
+        <ng-template matStepLabel>Documents</ng-template>
         <app-step-documents (isValid)="isStepDocumentsValid = $event;"
                             [campId]="footballCamp.id"
         >

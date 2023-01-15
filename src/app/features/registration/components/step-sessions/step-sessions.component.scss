@@ -14,7 +14,8 @@
     .session-card {
       margin-right: 10px;
       margin-top: 10px;
-      border: 1px solid rgba(0, 0, 0, 0.25);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 5px;
 
       @include big-screen {
         min-width: 340px;
@@ -24,7 +25,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: rgba(0, 0, 0, 0.04);
+        background-color: $green;
         border-radius: 50%;
         min-width: 50px;
         min-height: 50px;
@@ -35,20 +36,23 @@
           height: 25px !important;
           font-size: 25px !important;
           line-height: 1 !important;
-          color: #b0b0b0;
+          color: $brown;
         }
       }
 
       .header {
         padding: 10px;
-        background-color: rgba(0, 0, 0, 0.04);
         text-align: center;
         font-weight: bold;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        font-family: Cubano;
       }
 
       .content {
         padding: 15px;
+        color: white;
+        font-weight: bold;
 
         .icon-date-container {
           display: flex;
@@ -57,6 +61,7 @@
         }
 
         .category-container {
+          margin-top: 5px;
           display: flex;
           flex-direction: row;
           align-items: center;
@@ -84,28 +89,20 @@
 
     .session-selected {
       .header {
-        background-color: mat-color($primary);
-        color: white;
+        background-color: $green;
+        color: $brown;
       }
 
-      .card-icon {
-        background-color: #E7F8FF;
-
-        mat-icon {
-          color: mat-color($primary);
-        }
-      }
-
-      border: 1px solid mat-color($primary);
+      border: 2px solid mat-color($primary);
     }
 
     .session-not-selectable {
       background: repeating-linear-gradient(
           45deg,
-          rgba(0, 0, 0, 0.04),
-          rgba(0, 0, 0, 0.04) 10px,
-          #fafafa 10px,
-          #fafafa 20px
+          transparent,
+          transparent 10px,
+          $brown 10px,
+          $brown 20px
       );
     }
 
@@ -114,7 +111,6 @@
     }
 
     .loading {
-      background-color: #ffffff;
       z-index: 10;
     }
   }

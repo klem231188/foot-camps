@@ -55,7 +55,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
       filter(event => event instanceof NavigationStart))
       .subscribe((event: NavigationStart) => {
         console.log('event.url =' + event.url);
-        if (/^\/stages\/[a-zA-Z0-9_-]+\/inscription$/i.test(event.url)) {
+        if (/^\/print\/registrations?.*$/i.test(event.url)) {
+          // print/registrations?... --> administration
+          this.backUrl = 'administration';
+          console.log(this.backUrl);
+        } else if (/^\/print\/equipment?.*$/i.test(event.url)) {
+          // print/equipment?... --> administration
+          this.backUrl = 'administration';
+          console.log(this.backUrl);
+        } else if (/^\/stages\/[a-zA-Z0-9_-]+\/inscription$/i.test(event.url)) {
           // stages/:id/inscription --> stages/:id/details
           this.backUrl = event.url.replace('/inscription', '/details');
           console.log(this.backUrl);

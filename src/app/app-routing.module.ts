@@ -42,7 +42,6 @@ export const routes: Routes = [
   {
     path: 'stages/:id/inscription',
     loadChildren: () => import('./features/registration/registration.module').then(m => m.RegistrationModule),
-    canActivate: [IsSignedInGuard]
   }
 ];
 

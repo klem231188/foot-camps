@@ -26,12 +26,10 @@
         justify-content: center;
         position: relative;
         overflow: hidden;
-        z-index: -1;
+
 
         &::before {
-          background-image: url(/assets/img/background-detail.svg);
-          background-repeat: no-repeat;
-          background-position: center top;
+          background-color: $brown;
           background-size: cover;
           content: '';
           height: 100%;
@@ -47,29 +45,253 @@
       .carousel-container {
         position: relative;
         width: 100%;
-        height: 400px;
+        height: 530px;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url(/assets/img/home/1.jpeg);
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)), url(/assets/img/home/1.jpeg);
 
-        .text {
-          position: absolute;
-          z-index: 1;
-          top: 50%;
-          -webkit-transform: translateY(-50%);
-          -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
-
+        .love {
+          top: 51px;
+          left: 250px;
           width: 100%;
-          text-align: center;
+          font-size: 75px;
 
-          font-family: 'Milkshake';
-          font-size: 100px;
-          @include small-screen {
-            font-size: 80px;
+          $random-text: 'We love';
+          position: relative;
+          color: transparent;
+          font-weight: 900;
+          font-family: 'Catamaran', sans-serif;
+          font-style: italic;
+
+          &:after {
+            content: $random-text;
+            position: absolute;
+            left: -10px;
+            top: -2px;
+            color: white;
+            $path: polygon(0 25%, 100% 65%, 100% 100%, 0% 100%);
+            -webkit-clip-path: $path;
+            clip-path: $path;
           }
-          color: mat-color($primary);
+
+          &:before {
+            content: $random-text;
+            position: absolute;
+            color: white;
+            $path: polygon(0 0, 110% 0, 100% 65%, 0 25%);
+            -webkit-clip-path: $path;
+            clip-path: $path;
+          }
+
+          @include small-screen {
+            top: 10px;
+            left: 25px;
+            width: 100%;
+            font-size: 75px;
+          }
+        }
+
+        .foot {
+          top: 135px;
+          left: 170px;
+          width: 100%;
+
+          position: relative;
+          $random-text: 'foot';
+          $stroke-width: 110px * 0.05;
+          font-size: 110px;
+          text-transform: uppercase;
+          font-weight: 900;
+          font-family: 'Catamaran', sans-serif;
+          font-style: italic;
+
+          &:after {
+            position: absolute;
+            left: 0;
+            content: $random-text;
+            $stripe-size: 20px;
+            background: -webkit-repeating-linear-gradient(
+                135deg,
+                $green,
+                $green $stripe-size,
+                $yellow $stripe-size,
+                $yellow $stripe-size * 2,
+                $brown $stripe-size * 2,
+                $brown $stripe-size * 3,
+                $green $stripe-size * 3,
+                $green $stripe-size * 4
+            );
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-stroke-width: $stroke-width;
+            -webkit-text-stroke-color: white;
+          }
+
+          &:before {
+            z-index: -1;
+            position: absolute;
+            content: $random-text;
+            color: $pink;
+            top: 0px;
+            left: 0px;
+            $x: 5px;
+            $y: 0px;
+            $step: 1px;
+            text-shadow: $x $y $pink,
+            $x + $step $y + $step $pink,
+            $x + $step * 2 $y + $step * 2 $pink,
+            $x + $step * 3 $y + $step * 3 $pink,
+            $x + $step * 4 $y + $step * 4 $pink,
+            $x + $step * 5 $y + $step * 5 $pink,
+            $x + $step * 6 $y + $step * 6 $pink,
+            $x + $step * 7 $y + $step * 7 $pink,
+            $x + $step * 8 $y + $step * 8 $pink,
+            $x + $step * 9 $y + $step * 9 $pink,
+            $x + $step * 10 $y + $step * 10 $pink,
+          }
+
+          @include small-screen {
+            top: 100px;
+            left: 50px;
+            font-size: 95px;
+          }
+        }
+
+        .camps {
+          top: 240px;
+          width: 100%;
+          left: 315px;
+
+          position: relative;
+          $random-text: 'camps';
+          $stroke-width: 110px * 0.05;
+          font-size: 110px;
+          text-transform: uppercase;
+          font-weight: 900;
+          font-family: 'Catamaran', sans-serif;
+          font-style: italic;
+
+          &:after {
+            position: absolute;
+            left: 0;
+            content: $random-text;
+            $stripe-size: 20px;
+            background: -webkit-repeating-linear-gradient(
+                135deg,
+                $green,
+                $green $stripe-size,
+                $yellow $stripe-size,
+                $yellow $stripe-size * 2,
+                $brown $stripe-size * 2,
+                $brown $stripe-size * 3,
+                $green $stripe-size * 3,
+                $green $stripe-size * 4
+            );
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-stroke-width: $stroke-width;
+            -webkit-text-stroke-color: white;
+          }
+
+          &:before {
+            z-index: -1;
+            position: absolute;
+            content: $random-text;
+            color: $pink;
+            top: 0px;
+            left: 0px;
+            $x: 5px;
+            $y: 0px;
+            $step: 1px;
+            text-shadow: $x $y $pink,
+            $x + $step $y + $step $pink,
+            $x + $step * 2 $y + $step * 2 $pink,
+            $x + $step * 3 $y + $step * 3 $pink,
+            $x + $step * 4 $y + $step * 4 $pink,
+            $x + $step * 5 $y + $step * 5 $pink,
+            $x + $step * 6 $y + $step * 6 $pink,
+            $x + $step * 7 $y + $step * 7 $pink,
+            $x + $step * 8 $y + $step * 8 $pink,
+            $x + $step * 9 $y + $step * 9 $pink,
+            $x + $step * 10 $y + $step * 10 $pink,
+          }
+
+          @include small-screen {
+            top: 210px;
+            left: 0;
+            font-size: 95px;
+          }
+        }
+
+        .big-wave {
+          position: absolute;
+          bottom: -1px;
+          left: 0;
+          width: 100%;
+          overflow: hidden;
+          line-height: 0;
+          transform: rotate(180deg);
+
+          svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 175px;
+          }
+
+          .shape-fill {
+            fill: $brown;
+          }
+        }
+      }
+
+      .divider-container {
+        position: relative;
+        width: 80%;
+
+        .divider-top {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          overflow: hidden;
+          line-height: 0;
+          transform: rotate(180deg);
+
+          svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 7px;
+          }
+
+          .shape-fill {
+            fill: #39DBC2;
+          }
+        }
+
+        .divider-bottom {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          overflow: hidden;
+          line-height: 0;
+          transform: rotate(180deg);
+
+          svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 7px;
+          }
+
+          .shape-fill {
+            fill: #39DBC2;
+          }
         }
       }
 
@@ -79,12 +301,13 @@
         display: flex;
         justify-content: center;
         margin-bottom: 25px;
+        background-color: $brown;
 
         .action-button {
           height: 50px;
           padding: 0 35px;
           border-radius: 50px;
-          border: 1px solid rgba(0, 0, 0, 0.25);
+          border: 2px solid $green;
           line-height: 50px;
           display: inline-block;
           -webkit-box-sizing: border-box;
@@ -99,24 +322,27 @@
           font-weight: 700;
           -webkit-transition: background-color .2s;
           transition: background-color .2s;
-          color: #4A4A4A;
-          background-color: white;
+          color: $green;
+          background-color: $brown;
           font-family: Roboto;
           position: absolute;
         }
 
         .action-button:hover {
-          color: mat-color($primary);
+          border: 2px solid $brown;
+          background: $green;
+          color: $brown;
+          transition: background .7s ease, color .7s ease, border 1.5s ease;
         }
       }
 
       .registration-bar-sticky-container {
         height: 60px;
         position: fixed;
-        background-color: #fafafa;
+        background-color: $brown;
         bottom: 0;
         width: 100%;
-        border: 1px solid rgba(0, 0, 0, 0.25);
+        border-top: 2px solid $green;
         z-index: 3;
 
         .action-button-container {
@@ -151,8 +377,13 @@
         flex-direction: row;
         justify-content: space-around;
         align-items: flex-start;
-        border: 1px solid rgba(0, 0, 0, 0.25);
-        background-color: white;
+        color: white;
+        font-weight: bold;
+
+        b {
+          color: $green;
+          font-family: 'Cubano';
+        }
 
         @include small-screen {
           flex-direction: column;
@@ -186,8 +417,11 @@
             .quote {
               margin-bottom: 5px;
               display: flex;
-              flex-direction: column;
+              flex-direction: row;
               align-items: flex-start;
+              background-color: #2b2d30;
+              border-radius: 70px;
+
               @include big-screen {
                 flex-direction: row;
                 align-items: center;
@@ -202,12 +436,17 @@
               margin-right: 10px;
               padding: 0.35em;
               border-radius: 50%;
-              background: radial-Gradient(circle at calc(50% + (50% - 0.625em) * 1) calc(50% + (50% - 0.625em) * 0), #009688 calc(0.625em - 1px), transparent 0.625em), radial-Gradient(circle at calc(50% + (50% - 0.625em) * 0) calc(50% + (50% - 0.625em) * 1), #424242 calc(0.625em - 1px), transparent 0.625em), radial-Gradient(circle at calc(50% + (50% - 0.625em) * -1) calc(50% + (50% - 0.625em) * 0), #009688 calc(0.625em - 1px), transparent 0.625em), radial-Gradient(circle at calc(50% + (50% - 0.625em) * 0) calc(50% + (50% - 0.625em) * -1), #424242 calc(0.625em - 1px), transparent 0.625em), conic-Gradient(#009688 0% 90deg, #424242 0% 180deg, #009688 0% 270deg, #424242 0% 360deg);
+              background: white;
               background-origin: border-box;
             }
 
             .avatar:hover {
               filter: brightness(95%);
+            }
+
+            cite {
+              color: $green;
+              font-family: 'Cubano';
             }
           }
         }
@@ -215,7 +454,6 @@
 
       .image-description-container {
         width: 75%;
-        margin-top: 20px;
         align-self: center;
         min-width: 300px;
 
@@ -230,11 +468,10 @@
         }
 
         .image-container {
-          max-width: 600px;
-          border: 1px solid rgba(0, 0, 0, 0.25);
-          padding: 25px;
-          background-color: white;
-          align-self: flex-start;
+          max-width: 450px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
           @include small-screen {
             padding: 10px;
@@ -243,17 +480,22 @@
             border-top: 1px solid rgba(0, 0, 0, 0.25);
           }
 
-          img {
-            max-width: 100%;
+          a {
+            img {
+              max-width: 100%;
+              border-radius: 20px;
+            }
           }
         }
 
         .description-container {
           margin-left: 20px;
-          border: 1px solid rgba(0, 0, 0, 0.25);
           padding: 25px;
-          background-color: white;
+          color: white;
+          font-weight: bold;
           flex: 1;
+          background-color: #2b2d30;
+          border-radius: 20px;
 
           @include small-screen {
             margin-left: 0;
@@ -265,6 +507,11 @@
           }
 
           .description-block {
+            b {
+              color: $green;
+              font-family: 'Cubano';
+            }
+
             margin-bottom: 10px;
 
             ul {
@@ -308,9 +555,18 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            border: 1px solid rgba(0, 0, 0, 0.25);
             padding: 25px;
-            background-color: white;
+            color: white;
+            font-family: 'Cubano';
+            background-color: #2b2d30;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+
+            .title {
+              color: $green;
+              font-family: Cubano;
+              margin-bottom: 10px;
+            }
 
             @include small-screen {
               padding: 10px;
@@ -323,7 +579,7 @@
               display: flex;
               flex-direction: row;
               align-items: center;
-              color: mat-color($primary);
+              color: $green;
               text-decoration: none;
               margin-bottom: 5px;
 
@@ -335,10 +591,12 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: #E7F8FF;
+                background-color: $green;
                 border-radius: 50%;
-                width: 50px;
-                height: 50px;
+                min-width: 45px;
+                width: 45px;
+                min-height: 45px;
+                height: 45px;
                 margin-right: 5px;
 
                 mat-icon {
@@ -346,6 +604,7 @@
                   height: 25px !important;
                   font-size: 25px !important;
                   line-height: 1 !important;
+                  color: $brown;
                 }
               }
             }
@@ -356,11 +615,19 @@
           }
 
           .address-container {
-            border: 1px solid rgba(0, 0, 0, 0.25);
+            color: white;
+            font-weight: bold;
             padding: 25px;
-            background-color: white;
-            margin-top: 10px;
             flex: 1;
+            background-color: #2b2d30;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+
+            .title {
+              color: $green;
+              font-family: Cubano;
+              margin-bottom: 10px;
+            }
 
             @include small-screen {
               border: none;
@@ -369,7 +636,8 @@
             }
 
             a {
-              color: mat-color($primary);
+              color: $green;
+              font-family: 'Cubano';
               @include small-screen {
                 text-overflow: ellipsis;
               }
@@ -383,10 +651,12 @@
         }
 
         .date-price-container {
-          border: 1px solid rgba(0, 0, 0, 0.25);
           padding: 25px;
-          background-color: white;
+          color: white;
           margin-right: 20px;
+          font-weight: bold;
+          background-color: #2b2d30;
+          border-radius: 20px;
 
           @include small-screen {
             margin-right: 0;
@@ -399,6 +669,11 @@
           .description-block {
             margin-bottom: 10px;
 
+            b {
+              color: $green;
+              font-family: 'Cubano';
+            }
+
             ul {
               list-style: inside;
 
@@ -408,8 +683,12 @@
             }
           }
 
+          .mat-progress-bar-buffer {
+            background-color: white;
+          }
+
           table {
-            border: 1px solid #ccc;
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-collapse: collapse;
             margin: 0;
             padding: 0;
@@ -423,8 +702,6 @@
           }
 
           table tr {
-            background: #f8f8f8;
-            border: 1px solid #ddd;
             padding: .35em;
           }
 
@@ -442,6 +719,7 @@
             font-size: .85em;
             letter-spacing: .1em;
             text-transform: uppercase;
+            font-family: 'Cubano';
           }
 
           @media screen and (max-width: 600px) {
@@ -488,8 +766,10 @@
       .gallery-container {
         width: 75%;
         margin-top: 20px;
-        border: 1px solid rgba(0, 0, 0, 0.25);
-        background-color: white;
+        font-family: 'Cubano';
+        color: white;
+        background-color: #2b2d30;
+        border-radius: 20px;
 
         @include small-screen {
           width: 100%;
@@ -501,6 +781,12 @@
 
         .gallery-inner-container {
           padding: 25px;
+
+          .title {
+            color: $green;
+            font-family: Cubano;
+            margin-bottom: 10px;
+          }
 
           @include small-screen {
             padding: 10px;
@@ -526,9 +812,10 @@
       .registrations-grid-container {
         width: 75%;
         margin-top: 20px;
+        margin-bottom: 20px;
         min-width: 300px;
-        border: 1px solid rgba(0, 0, 0, 0.25);
-        background-color: white;
+        background-color: #2b2d30;
+        border-radius: 20px;
 
         @include small-screen {
           width: 100%;
@@ -540,6 +827,12 @@
 
         .registrations-grid-inner-container {
           padding: 25px;
+
+          .title {
+            color: $green;
+            font-family: Cubano;
+            margin-bottom: 10px;
+          }
 
           @include small-screen {
             padding: 10px;

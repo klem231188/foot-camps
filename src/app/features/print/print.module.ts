@@ -5,13 +5,15 @@ import {PrintEquipmentComponent} from './components/print-equipment/print-equipm
 import {SharedModule} from '../../shared/shared.module';
 import {PrintRegistrationsComponent} from './components/print-registrations/print-registrations.component';
 import {PrintResumeComponent} from './components/print-resume/print-resume.component';
+import {PrintResumeEnglishComponent} from './components/print-resume-en/print-resume-english.component';
 
 
 @NgModule({
   declarations: [
     PrintEquipmentComponent,
     PrintRegistrationsComponent,
-    PrintResumeComponent
+    PrintResumeComponent,
+    PrintResumeEnglishComponent
   ],
   imports: [
     SharedModule,

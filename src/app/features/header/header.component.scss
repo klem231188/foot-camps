@@ -11,9 +11,11 @@
     left: 0;
     width: 100% !important;
 
-    mat-toolbar {
+    .mat-toolbar {
       display: flex;
       flex-direction: row;
+      background-color: #39dbc2;
+      color: #2b2520;
 
       .logo {
         height: 15px;

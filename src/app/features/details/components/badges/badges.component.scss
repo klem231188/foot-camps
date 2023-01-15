@@ -2,9 +2,6 @@
   .title {
     background: $color;
   }
-  .subtitle:after {
-    color: $color;
-  }
 }
 
 @mixin app-badges-theme($theme) {

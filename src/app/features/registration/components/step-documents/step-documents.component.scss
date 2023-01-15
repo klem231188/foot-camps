@@ -6,6 +6,7 @@
 
   app-step-documents {
     width: 100%;
+    color: white;
     h4 {
       color: mat-color($primary);
     }
@@ -18,6 +19,9 @@
       mat-icon {
         margin-right: 5px;
       }
+    }
+    a {
+      color: $green;
     }
     mat-list {
       width: 100%;

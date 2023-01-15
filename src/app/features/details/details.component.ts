@@ -62,7 +62,7 @@ export class DetailsComponent implements OnInit {
   }
 
   onInViewportChange(inViewport: boolean) {
-    console.log('onInViewportChange' + inViewport);
+    console.log('onInViewportChange = ' + inViewport);
     this.showRegistrationBar = !inViewport;
   }
 

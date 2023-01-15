@@ -12,6 +12,7 @@
     "end": "2022-07-13T17:00:00+01:00",
     "endRegistrationDate": "2022-07-08T08:30:00+01:00",
     "fullBoardRates": null,
+    "genders": ["MALE", "FEMALE"],
     "halfBoardRates": 160,
     "id": "2022-07-aber-camp-session1",
     "minimumAge": 9,

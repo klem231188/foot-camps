@@ -91,10 +91,6 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
                     }
                   }),
                   tap(() => {
-                    this.snackBar.open('Vous pouvez désormais vous inscrire', 'J\'ai compris', {
-                      duration: 5000,
-                    });
-
                     // go back
                     this.location.back();
                   })

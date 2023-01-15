@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
   <button mat-icon-button (click)="onMenuClicked()" *ngIf="!backUrl">
     <mat-icon>menu</mat-icon>
   </button>
@@ -10,8 +10,8 @@
   <span class="spacer-width-5px"></span>
 
   <span *ngIf="!(selectedFootballCamp | async)" class="brand">F
-    <img src='assets/img/ball-white.png' class="logo">
-    <img src='assets/img/ball-white.png' class="logo">
+    <img src='assets/img/ball-brown.png' class="logo">
+    <img src='assets/img/ball-brown.png' class="logo">
     tcamps
   </span>
 
@@ -26,13 +26,12 @@
   <span class="spacer-flex-1"></span>
 
   <button *ngIf="!(userInfo  && userInfo.uid)" mat-stroked-button (click)="login()">
-    <span style="color:white">Connexion</span>
+    <span style="color:#2b2520">Connexion</span>
   </button>
 
   <!-- Disconnection  -->
   <button *ngIf="(userInfo  && userInfo.uid)" mat-icon-button mat-button [matMenuTriggerFor]="menuLogout">
-    <img *ngIf="(userInfo  && userInfo.photoURL)" src="{{userInfo.photoURL}}" class="user-avatar"
-         alt="Photo du profil"/>
+    <img *ngIf="(userInfo  && userInfo.photoURL)" src="{{userInfo.photoURL}}" class="user-avatar"/>
     <mat-icon *ngIf="!(userInfo  && userInfo.photoURL)">account_circle</mat-icon>
   </button>
   <mat-menu #menuLogout="matMenu" [overlapTrigger]="false">

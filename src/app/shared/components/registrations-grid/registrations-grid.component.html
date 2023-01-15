@@ -24,6 +24,14 @@
         <td mat-cell *matCellDef="let registration"> {{registration.trainee.lastname | uppercase}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Genre</th>
+        <td mat-cell *matCellDef="let registration">
+          <mat-icon *ngIf="registration.trainee.gender === 'FEMALE'" [matTooltip]="'fille'" [svgIcon]="'female_icon'" class="pink"></mat-icon>
+          <mat-icon *ngIf="registration.trainee.gender === 'MALE'" [matTooltip]="'garçon'" [svgIcon]="'male_icon'" class="blue"></mat-icon>
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
         <td mat-cell *matCellDef="let registration"> {{registration.id}}</td>
@@ -31,12 +39,12 @@
 
       <ng-container matColumnDef="state">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Inscription</th>
-        <td mat-cell *matCellDef="let registration" [ngClass]="{
-        'primary': registration.state === 'ACCEPTED',
-        'accent': registration.state === 'IN_PROGRESS',
-        'warn': registration.state === 'REJECTED'
-        }">
-          {{registration.state | state}}
+        <td mat-cell *matCellDef="let registration">
+          <mat-chip-list>
+            <mat-chip *ngIf="registration.state === 'ACCEPTED'" color="primary" selected>{{registration.state | state}}</mat-chip>
+            <mat-chip *ngIf="registration.state === 'IN_PROGRESS'" color="accent" selected>{{registration.state | state}}</mat-chip>
+            <mat-chip *ngIf="registration.state === 'REJECTED'" color="warn" selected>{{registration.state | state}}</mat-chip>
+          </mat-chip-list>
         </td>
       </ng-container>
 

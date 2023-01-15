@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import 'colors.scss';
 @import 'flex-mixin.scss';
 @import 'media-queries.scss';
 @import 'app/app.component.scss';
@@ -15,6 +16,7 @@
 @import 'app/features/print/components/print-equipment/print-equipment.component.scss';
 @import 'app/features/print/components/print-registrations/print-registrations.component.scss';
 @import 'app/features/print/components/print-resume/print-resume.component.scss';
+@import 'src/app/features/print/components/print-resume-en/print-resume-english.component';
 @import 'app/features/registration/registration.component.scss';
 @import 'app/features/registration/components/step-sessions/step-sessions.component.scss';
 @import 'app/features/registration/components/step-trainee-form/step-trainee-form.component.scss';
@@ -32,10 +34,15 @@
 @import 'app/components/football-camp-print-registrations/football-camp-print-registrations.component.scss';
 
 @include mat-core();
-$primary: mat-palette($mat-teal);
-$accent: mat-palette($mat-amber, A200, A100, A400);
-$warn: mat-palette($mat-red);
-$football-camp-theme: mat-light-theme($primary, $accent, $warn);
+$primary: mat-palette($mat-teal, A200, 100, 700);
+$accent: mat-palette($mat-yellow, A200, A100, A400);
+$warn: mat-palette($mat-red, 200);
+$football-camp-theme: mat-dark-theme($primary, $accent, $warn);
+
+//$primary: mat-palette($mat-teal);
+//$accent: mat-palette($mat-amber, A200, A100, A400);
+//$warn: mat-palette($mat-red);
+//$football-camp-theme: mat-light-theme($primary, $accent, $warn);
 @mixin football-camp-theme($theme) {
   // features > admin
   @include app-admin-theme($theme);
@@ -54,6 +61,7 @@ $football-camp-theme: mat-light-theme($primary, $accent, $warn);
   @include app-print-equipment-theme($theme);
   @include app-print-registrations-theme($theme);
   @include app-print-resume-theme($theme);
+  @include app-print-resume-english-theme($theme);
   // features > playground
   @include app-playground-theme($theme);
   // features > registration

@@ -1,5 +1,6 @@
 import {PaymentType} from './payment-type.enum';
 import {PriceInfo} from './price-info';
+import {Gender} from './gender.enum';
 
 export interface Session {
   id?: string;
@@ -12,6 +13,7 @@ export interface Session {
   halfBoardRates: number;
   fullBoardReducedRates: number;
   halfBoardReducedRates: number;
+  genders: Gender[];
   minimumAge: number;
   maximumAge: number;
   maximumNumberOfRegistrations: number;

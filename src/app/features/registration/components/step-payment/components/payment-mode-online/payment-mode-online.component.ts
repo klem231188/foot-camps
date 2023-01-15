@@ -31,8 +31,8 @@ export class PaymentModeOnlineComponent implements OnInit, OnChanges {
   cardOptions: StripeCardElementOptions = {
     style: {
       base: {
-        iconColor: '#009688',
-        color: '#009688',
+        iconColor: '#64ffda',
+        color: '#64ffda',
         fontWeight: '300',
         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
         fontSize: '18px',

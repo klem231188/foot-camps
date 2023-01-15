@@ -7,51 +7,62 @@
 <div class="footcamps-outer-container">
   <div class="footcamps-container" *ngIf="footballCamps && sessions">
     <div class="footcamp-container" *ngFor="let footCamp of this.footballCamps">
-      <div class="header-container">
-        <img class="logo" [src]="footCamp.details.pathToLogo">
-        <span class="brand">{{footCamp.city}}</span>
+      <div class="background-image-container">
+        <div class="background-image" [ngStyle]="{'background-image': getFootballCampOverviewImage(footCamp)}">
+        </div>
+        <div *ngIf="getAvailableRegistrations(footCamp) === 'Complet'" class="ribbon ribbon-top-left">
+          <span>Complet</span>
+        </div>
+        <mat-divider></mat-divider>
       </div>
-      <div class="background-image" [ngStyle]="{'background-image': getFootballCampOverviewImage(footCamp)}"></div>
-      <div class="action-button-container">
-        <a class="action-button" matRipple [routerLink]="['/stages/' + footCamp.id + '/details']">Détails</a>
+      <div class="header-container">
+        <div class="logo-container"><img class="logo" [src]="footCamp.details.pathToLogo"></div>
+        <span class="brand">{{footCamp.city}}</span>
       </div>
       <div class="content-container">
         <div class="location-container">
           <div class="card-icon">
-            <mat-icon color="primary" [inline]="true">location_on</mat-icon>
+            <mat-icon [inline]="true">location_on</mat-icon>
           </div>
           {{footCamp.details.address}}
         </div>
         <div class="category-container">
           <div class="card-icon">
-            <mat-icon color="primary" [inline]="true">person</mat-icon>
+            <mat-icon [inline]="true">person</mat-icon>
           </div>
-          <div class="category">De {{footCamp.minimumAge}} à {{footCamp.maximumAge}} ans inclus</div>
+          <div class="category">De {{footCamp.minimumAge}} à {{footCamp.maximumAge}} ans</div>
+          <ng-container *ngIf="getGenders(footCamp); let genders">
+            <ng-container *ngIf="genders.includes(Gender.FEMALE) && genders.includes(Gender.MALE)">
+              &nbsp;
+              <mat-icon [matTooltip]="'garçon'" class="blue" svgIcon="male"></mat-icon>
+              <mat-icon [matTooltip]="'fille'" class="pink" svgIcon="female"></mat-icon>
+            </ng-container>
+            <ng-container *ngIf="genders.includes(Gender.FEMALE) && !genders.includes(Gender.MALE)">
+              &nbsp;
+              <mat-icon [matTooltip]="'fille'" class="pink" svgIcon="female"></mat-icon>
+            </ng-container>
+            <ng-container *ngIf="!genders.includes(Gender.FEMALE) && genders.includes(Gender.MALE)">
+              &nbsp;
+              <mat-icon [matTooltip]="'garçon'" class="blue" svgIcon="male"></mat-icon>
+            </ng-container>
+          </ng-container>
         </div>
         <div class="price-container">
           <div class="card-icon">
-            <mat-icon color="primary" [inline]="true">euro_symbol</mat-icon>
+            <mat-icon [inline]="true">payment</mat-icon>
           </div>
           <span [innerHTML]="getPrice(footCamp)"></span>
         </div>
-        <ng-container *ngFor="let session of sessions">
-          <ng-container *ngIf="session.campId == footCamp.id">
-            <div class="sessions-container">
-              <div class="card-icon">
-                <mat-icon color="primary" [inline]="true">event_available</mat-icon>
-              </div>
-              <span class="date">{{session.start.toDate() | date : 'shortDate'}}
-                au {{session.end.toDate() | date : 'shortDate'}}</span>
-              <div class="sessions-inner-container" [matTooltip]="getTooltipAvailability(session)">
-                <mat-progress-bar mode="determinate"
-                                  [value]="percentageOfRegistrations(session)"
-                                  color="primary"
-                >
-                </mat-progress-bar>
-              </div>
-            </div>
-          </ng-container>
-        </ng-container>
+        <div class="session-container">
+          <div class="card-icon">
+            <mat-icon color="primary" svgIcon="events"></mat-icon>
+          </div>
+          <div [innerHTML]="getNumberOfSessions(footCamp)"></div>
+        </div>
+      </div>
+      <div class="action-button-container-2">
+        <div class="date-container" [innerHTML]="getSessionDates(footCamp)"></div>
+        <a class="action-button" matRipple [routerLink]="['/stages/' + footCamp.id + '/details']">Détails</a>
       </div>
     </div>
   </div>

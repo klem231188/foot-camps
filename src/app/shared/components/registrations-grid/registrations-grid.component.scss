@@ -10,8 +10,8 @@
     flex: 1;
     overflow: auto;
     min-height: 200px;
-    background-color: white;
-    border: 1px solid rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background-color: #2b2d30;
 
     @include small-screen {
       overflow-y: auto;
@@ -24,6 +24,15 @@
       table {
         width: 100%;
         max-width: 100%;
+        background: transparent;
+
+        thead {
+          font-family: 'Cubano';
+        }
+
+        tbody {
+          font-weight: bold;
+        }
 
         th, td {
           vertical-align: middle;
@@ -39,7 +48,7 @@
         }
 
         .mat-row:hover {
-          background: whitesmoke;
+          background: rgba(0, 0, 0, 0.1);
         }
 
         .mat-column-select {
@@ -47,15 +56,32 @@
         }
 
         .accent {
-          background-color: mat-color($accent);
+          color: mat-color($accent);
         }
 
         .primary {
-          background-color: mat-color($primary);
+          color: mat-color($primary);
         }
 
         .warn {
-          background-color: mat-color($warn);
+          color: mat-color($warn);
+        }
+
+        .pink {
+          color: deeppink;
+
+          svg {
+            fill: deeppink;
+          }
+        }
+
+        .blue {
+          fill: deepskyblue;
+          color: deepskyblue;
+
+          svg {
+            fill: deepskyblue;
+          }
         }
       }
     }
@@ -68,11 +94,11 @@
       .mat-paginator-sticky {
         bottom: 0;
         position: sticky;
-        background: white;
         display: flex;
         flex-direction: row;
         align-items: center;
-        border-top: 1px solid rgba(0, 0, 0, 0.12);
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        background: transparent;
 
         button {
           margin-left: 10px;
@@ -80,6 +106,7 @@
 
         mat-paginator {
           flex: 1;
+          background: transparent;
         }
       }
     }
@@ -88,7 +115,7 @@
       .mat-paginator-sticky {
         display: flex;
         flex-direction: column;
-        border-top: 1px solid rgba(0, 0, 0, 0.12);
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
       }
     }
 

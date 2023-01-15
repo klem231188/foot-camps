@@ -12,6 +12,7 @@
     "end": "2021-07-10T17:00:00+01:00",
     "endRegistrationDate": "2021-07-07T08:30:00+01:00",
     "fullBoardRates": null,
+    "genders": ["MALE", "FEMALE"],
     "halfBoardRates": 135,
     "id": "AbersFoot2021Session1",
     "minimumAge": 10,

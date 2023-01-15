@@ -3,8 +3,13 @@
   <div class="background-container"></div>
 
   <div class="carousel-container">
-    <div class="text">
-      Footcamps
+    <div class="love"></div>
+    <div class='foot'></div>
+    <div class='camps'></div>
+    <div class="big-wave">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="xMidYMid slice">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+      </svg>
     </div>
   </div>
 
@@ -12,7 +17,7 @@
     <a class="action-button" matRipple [routerLink]="['/stages/' + footballCamp.id + '/inscription']">Inscription</a>
   </div>
 
-  <div snInViewport [inViewportOptions]="{rootMargin: '-60px'}" (inViewportChange)="onInViewportChange($event)"></div>
+  <div snInViewport [inViewportOptions]="{rootMargin: '-56px'}" (inViewportChange)="onInViewportChange($event)"></div>
 
   <div *ngIf="showRegistrationBar" class="registration-bar-sticky-container">
     <div class="action-button-container">
@@ -88,25 +93,28 @@
     </div>
 
     <div class="address-document-container">
+      <div class="address-container">
+        <div class="title">Le lieu</div>
+        <div [innerHTML]="footballCamp.details.location | safeHtml"></div>
+      </div>
       <div class="document-container">
+        <div class="title">Les documents</div>
         <a *ngFor="let document of footballCamp.details.documents"
            class="document"
            [href]="document.url"
            download>
           <div class="card-icon">
-            <mat-icon color="primary" [inline]="true">file_download</mat-icon>
+            <mat-icon [inline]="true">file_download</mat-icon>
           </div>
           <u>{{document.name}}</u>
         </a>
-      </div>
-      <div class="address-container">
-        <div [innerHTML]="footballCamp.details.location | safeHtml"></div>
       </div>
     </div>
   </div>
 
   <div class="gallery-container" [ngClass]="isViewerOpened() ? 'z-index11' : 'z-index2'">
     <div class="gallery-inner-container">
+      <div class="title">La gallerie photo</div>
       <app-gallery [flexBorderSize]="3" [flexImageSize]="7" [metadataUri]="footballCamp.details.pathToGallery"
                    (viewerChange)="onViewerChange($event)">
       </app-gallery>
@@ -115,6 +123,7 @@
 
   <div class="registrations-grid-container">
     <div class="registrations-grid-inner-container">
+      <div class="title">Les inscriptions</div>
       <mat-form-field [appearance]="'outline'">
         <mat-select [(value)]="selectedSession" placeholder="Sessions">
           <mat-option

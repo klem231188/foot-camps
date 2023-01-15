@@ -1,15 +1,4 @@
-import {
-  AfterViewChecked,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChange,
-  SimpleChanges,
-  ViewChild
-} from '@angular/core';
+import {AfterViewChecked, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges, ViewChild} from '@angular/core';
 import {RegistrationService} from '../../../services/registration/registration.service';
 import {RegistrationV2} from '../../../models/registration-v2.model';
 import {SelectionModel} from '@angular/cdk/collections';
@@ -23,6 +12,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Payment} from '../../../models/payment';
 import {PaymentService} from '../../../services/payment/payment.service';
 import {Router} from '@angular/router';
+import {MatIconRegistry} from '@angular/material/icon';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-registrations-grid',
@@ -51,9 +42,19 @@ export class RegistrationsGridComponent implements AfterViewChecked, OnChanges, 
     private paymentService: PaymentService,
     private http: HttpClient,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
   ) {
     this.registrationSelected = new EventEmitter();
+    this.matIconRegistry.addSvgIcon(
+      `male_icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(`../../../assets/icons/male.svg`)
+    );
+    this.matIconRegistry.addSvgIcon(
+      `female_icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(`../../../assets/icons/female.svg`)
+    );
   }
 
   getPayment(registrationId: string): Payment {
@@ -84,6 +85,9 @@ export class RegistrationsGridComponent implements AfterViewChecked, OnChanges, 
             break;
           case 'lastname':
             data = item.trainee.lastname;
+            break;
+          case 'gender':
+            data = item.trainee.gender;
             break;
           case 'state':
             data = item.state;
@@ -125,9 +129,9 @@ export class RegistrationsGridComponent implements AfterViewChecked, OnChanges, 
     this.disablePrintRegistrationsButton = false;
 
     if (this.adminMode) {
-      this.displayedColumns = ['select', 'firstname', 'lastname', 'id', 'state', 'payment-state'];
+      this.displayedColumns = ['select', 'firstname', 'lastname', 'gender', 'id', 'state', 'payment-state'];
     } else {
-      this.displayedColumns = ['firstname', 'lastname', 'state'];
+      this.displayedColumns = ['firstname', 'lastname', 'gender', 'state'];
     }
 
     const allowMultiSelect = false;
@@ -165,16 +169,14 @@ export class RegistrationsGridComponent implements AfterViewChecked, OnChanges, 
     const url = this.router.serializeUrl(
       this.router.createUrlTree([`/print/equipment`], {queryParams: {sessionId: this.sessionId}})
     );
-
-    window.open(url, '_blank');
+    this.router.navigateByUrl(url);
   }
 
   printRegistrations() {
     const url = this.router.serializeUrl(
       this.router.createUrlTree([`/print/registrations`], {queryParams: {sessionId: this.sessionId}})
     );
-
-    window.open(url, '_blank');
+    this.router.navigateByUrl(url);
   }
 
   reload() {
