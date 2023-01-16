@@ -8,7 +8,6 @@ import {UserService} from '../../../services/user/user.service';
 import {User} from '../../../models/user';
 import {Role} from '../../../models/role.enum';
 import {Meta, Title} from '@angular/platform-browser';
-import * as firebaseui from 'firebaseui';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {take, takeUntil, tap} from 'rxjs/operators';
 import {Subject} from 'rxjs';
@@ -103,8 +102,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
           },
           signInOptions: [
             firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-            firebase.auth.EmailAuthProvider.PROVIDER_ID,
-            firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+            firebase.auth.EmailAuthProvider.PROVIDER_ID
           ],
           signInFlow: 'popup',
           // Terms of service url.

@@ -46,8 +46,7 @@
           width: 350px;
           max-width: 370px;
           align-self: stretch;
-          border: 3px solid #39dbc2;
-          background-color: $brown;
+          background-color: #2b2d30;
           color: white;
           border-radius: 15px;
           margin-bottom: 20px;
@@ -119,7 +118,7 @@
               z-index: -1;
               content: '';
               display: block;
-              border: 5px solid $brown;
+              border: 5px solid #2b2d30;
             }
 
             .ribbon span {
@@ -127,10 +126,9 @@
               display: block;
               width: 225px;
               padding: 15px 0;
-              background-color: $brown;
+              background-color: #2b2d30;
               box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
               color: $green;
-              //font: 700 18px/1 'Lato', sans-serif;
               font-size: 17px;
               font-family: 'cubano';
               text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
@@ -252,27 +250,6 @@
               align-items: center;
               margin-bottom: 7px;
             }
-
-            //.sessions-container {
-            //  display: flex;
-            //  flex-direction: row;
-            //  justify-content: flex-start;
-            //  align-items: center;
-            //  margin-bottom: 7px;
-            //
-            //  .sessions-inner-container {
-            //    flex: 1;
-            //    display: flex;
-            //    flex-direction: column;
-            //    justify-content: center;
-            //    align-self: stretch;
-            //    margin-left: 15px;
-            //
-            //    .mat-progress-bar-fill::after {
-            //      background-color: #39dbc2;
-            //    }
-            //  }
-            //}
           }
 
           .action-button-container-2 {
@@ -282,7 +259,7 @@
             margin-bottom: 10px;
 
             .date-container {
-              color: $brown;
+              color: #2b2d30;
               position: absolute;
               left: 0;
               bottom: 0;
@@ -293,7 +270,7 @@
               background-color: $green;
               font-family: Roboto;
               border-top-right-radius: 20px;
-              border-bottom-left-radius: 10px;
+              border-bottom-left-radius: 12px;
               text-transform: uppercase;
               font-size: 12px;
             }
@@ -318,14 +295,14 @@
               -webkit-transition: background-color .2s;
               transition: background-color .2s;
               color: #39dbc2;
-              background-color: $brown;
+              background-color: #2b2d30;
               font-family: Roboto;
             }
 
             .action-button:hover {
-              border: 2px solid $brown;
+              border: 2px solid #2b2d30;
               background: #39dbc2;
-              color: $brown;
+              color: #2b2d30;
               transition: background .7s ease, color .7s ease, border 1.5s ease;
             }
           }
