@@ -6,7 +6,7 @@
 
 <div class="footcamps-outer-container">
   <div class="footcamps-container" *ngIf="footballCamps && sessions">
-    <div class="footcamp-container" *ngFor="let footCamp of this.footballCamps">
+    <div class="footcamp-container" hover-class="active-footcamp" *ngFor="let footCamp of this.footballCamps">
       <div class="background-image-container">
         <div class="background-image" [ngStyle]="{'background-image': getFootballCampOverviewImage(footCamp)}">
         </div>

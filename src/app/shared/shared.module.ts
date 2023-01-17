@@ -16,6 +16,7 @@ import {RegistrationsGridComponent} from './components/registrations-grid/regist
 import {FileUploadComponent} from './components/file-upload/file-upload.component';
 import {LoginComponent} from './components/login/login.component';
 import {ImageGalleryModule} from './components/image-gallery';
+import {HoverClassDirective} from './directives/hover-class.directive';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {ImageGalleryModule} from './components/image-gallery';
     TruncatePipe,
     RegistrationsGridComponent,
     FileUploadComponent,
-    LoginComponent
+    LoginComponent,
+    HoverClassDirective
   ],
   exports: [
     CommonModule,
@@ -51,7 +53,8 @@ import {ImageGalleryModule} from './components/image-gallery';
     TruncatePipe,
     RegistrationsGridComponent,
     FileUploadComponent,
-    LoginComponent
+    LoginComponent,
+    HoverClassDirective
   ],
   imports: [
     CommonModule,
